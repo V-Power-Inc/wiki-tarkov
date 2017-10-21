@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.eft-locations.kfc-it.ru$ [NC]
+RewriteRule ^(.*)$ https://eft-locations.kfc-it.ru/$1 [R=301,L]
+
+RewriteCond %{HTTPS} !=on
+# This checks to make sure the connection is not already HTTPS
+RewriteRule ^/?(.*) https://eft-locations.kfc-it.ru/$1 [R=301,L]
+
+
+
+
+
+</IfModule>
