@@ -1,0 +1,257 @@
+/*** ���� ������ ��������� Escape from Tarkov ***/
+
+body {
+    background: #edeef0;
+    /*background: url(/img/eft-bg.jpg);*/
+    /*background-size: cover;*/
+}
+
+.content-style {
+}
+
+.fixed-navigatsiya {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index:9999;
+}
+
+/* ��� ���������� ������� */
+.h-52 {
+    max-height: 52px;
+    height: 52px;
+}
+
+.navbar-default {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.navbar {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid #c3392c;
+    box-shadow: 0px 1px 4px;
+}
+
+.relative {
+    position: relative;
+}
+
+.logo-img {
+    position: absolute;
+    top: 5px;
+    left: -80px;
+    width: 100px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #edeef0;
+    font-size: 18px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #edeef0;
+    background-color: rgba(255, 152, 0, 0.47);
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: rgb(0, 0, 0);
+    background-color: rgb(237, 238, 240);
+    font-weight: bold;
+}
+
+/*** ������ ������ ����� ��������� ***/
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 14.7px 5px;
+    width: 200px;
+    text-align: center;
+}
+
+footer {
+    background-color: #272727;
+    color: #fff;
+    height: 60px;
+    border-top: 2px solid #c3392c;
+    box-shadow: 0px 1px 4px;
+}
+
+footer h5 {
+    padding: 0 0 5px;
+    color: #c3392c;
+    font-family: "Roboto",sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+footer .list-unstyled li a {
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+    letter-spacing: 0.6px;
+}
+
+footer .list-unstyled li a:hover {
+    color: #c74f27;
+}
+
+.footer-bottom {
+    background: #1F1F1F;
+    margin-top: 30px;
+}
+
+.pay {
+    margin-bottom: 15px;
+}
+
+.copyright {
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+.copyright a {
+    color: yellow;
+    text-decoration: none;
+}
+
+.main-link, .main-inter-link {
+    color: #fff;
+    font-size: 16px;
+    background: #272727;
+    border: 2px solid #c3392c;
+    transition: .5s;
+}
+
+.main-link:hover, .main-inter-link:hover {
+    color: black;
+    background: white;
+    border-color: #5cb85c;
+    transition: .5s;
+}
+
+.size-16 {
+    font-size: 16px;
+}
+
+.mobile-brand {
+    display: none;
+}
+
+.interback-grey {
+    padding: 50px;
+    background: #eaeaea;
+}
+
+.interback-white {
+    padding: 50px;
+    background: white;
+}
+
+.traders-desc {
+    font-size: 16px;
+}
+
+.float-right {
+    float: right;
+}
+
+.grey-line {
+    border-bottom: 1px solid #ccc;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.trader-heading {
+    color: #c3392c;
+}
+
+.heading-class {
+    padding: 50px 0 10px 0;
+    background: white;
+}
+
+.image-trader {
+    max-width: 100%;
+    box-shadow: 1px 1px 20px 3px;
+    margin: 25px 0 0 0;
+}
+
+.wrap > .container.padding-top-0 {
+    padding-top: 0;
+}
+
+.jumbotron-main {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: -10px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    width: 15px;
+    height: 15px;
+    margin: 5px 7px;
+    background: #D6D6D6;
+    display: block;
+    border: 1px solid #c3392c;
+    -webkit-backface-visibility: visible;
+    transition: opacity .2s ease;
+    border-radius: 30px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #3F51B5;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+    color: #c3392c;
+    font-size: 6px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: #D6D6D6;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.owl-carousel .owl-buttons .owl-prev {
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 13px;
+    position: absolute;
+}
+
+.owl-carousel .owl-buttons .owl-next {
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 15px;
+    position: absolute;
+}
+
+.owl-carousel .owl-buttons div i {
+    font-size: 34px;
+    margin: -20px 0 0;
+    color: #FF5722;
+}
+
+.owl-carousel .owl-buttons div i:hover {
+    cursor: pointer;
+}
+
+.owl-buttons {
+    position: absolute;
+    top: 40%;
+    max-width: 100%;
+    width: 100%;
+}

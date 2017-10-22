@@ -43,14 +43,15 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'quests-of-traders' => 'site/quests',
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

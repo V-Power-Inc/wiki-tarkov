@@ -1,53 +1,70 @@
 <?php
 
 /* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
+$this->registerJsFile('js/owl-init.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->title = 'База знаний Escape from Tarkov. Карты локаций, ключи от дверей, разбор квестов торговцев';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+<div class="owl-carousel owl-theme">
+    <div class="owl-item">
+        <img src="/img/slider/eft-1.jpg">
     </div>
 
-    <div class="body-content">
+    <div class="owl-item">
+        <img src="/img/slider/eft-2.jpg">
+    </div>
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+    <div class="owl-item">
+        <img src="/img/slider/eft-3.jpg">
+    </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+    <div class="owl-item">
+        <img src="/img/slider/eft-4.jpg">
+    </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+    <div class="owl-item">
+        <img src="/img/slider/eft-5.jpg">
+    </div>
+</div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<div class="container padding-top-0">
+    <div class="site-index">
+    
+        <div class="jumbotron jumbotron-main">
+            <h1 class="margin-top-10">База знаний Escape from Tarkov</h1>
+    
+            <p class="lead">Здесь вы найдете информацию о важных аспектах внутриигрового процесса игры Escape from Tarkov. На сайте вы можете найти информацию о квестах торговцев, ключах от дверей и найти рекомендации по прохождению рейдов.</p>
+    
+            <p><a class="btn btn-lg btn-success main-inter-link mobile-display-none" href="#">Перейти к интерактивным картам Escape from Tarkov</a></p>
         </div>
-
+    
+        <div class="body-content">
+    
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2>Задачи у торговцев</h2>
+    
+                    <p class="size-16">В этом разделе вы можете найти информацию о всех доступных квестах торговцев в Escape from Tarkov. Здесь собраны рекомендации по прохождению квестов, описания квестов, а также важные нюансы, которые являются неочевидными в процессе прохождения квестов Escape from Tarkov.</p>
+    
+                    <p><a class="btn btn-default main-link" href="/quests-of-traders">Перейти в раздел квестов EFT</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Ключи от дверей</h2>
+    
+                    <p class="size-16">В данном разделе - вы сможете найти информацию о любом ключе открывающим двери и помещения в Escape from Tarkov. Вы сможете увидеть где можно найти тот или иной ключ, как выглядят открываемые двери а также увидеть что находится внутри открытых вами помещений.</p>
+    
+                    <p><a class="btn btn-default main-link" href="#">Перейти в раздел ключей EFT</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Карты локаций</h2>
+    
+                    <p class="size-16">Здесь вы сможете воспользоваться интерактивными картами локаций Escape from Tarkov - воспользоваться поиском ключей, посмотреть как выглядят карты локаций, сделать пометки по прохождению рейда. Очень полезный инструмент, который пригодится всем игрокам Escape from Tarkov.</p>
+    
+                    <p><a class="btn btn-default main-link" href="#">Перейти к интерактивным картам EFT</a></p>
+                </div>
+    
+            </div>
+    
+        </div>
     </div>
 </div>

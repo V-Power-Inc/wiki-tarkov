@@ -1,0 +1,61 @@
+
+
+
+/*** col-sm screen size (991px) ***/
+@media (max-width: 991px) {
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 15px;
+        width: auto;
+        text-align: center;
+    }
+
+}
+
+/*** col-xs screen size (767px) ***/
+@media (max-width: 767px) {
+
+    .navbar-brand {
+        padding: 0;
+    }
+
+    .logo-img {
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 200px;
+    }
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        color: rgb(220, 55, 55);
+        background-color: rgba(237, 238, 240, 0);
+        font-weight: bold;
+    }
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border-color: rgba(231, 231, 231, 0);
+    }
+
+    .mobile-brand {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 10px;
+        font-size: 16px;
+        color: #edeef0;
+        font-weight: bold;
+    }
+
+    .mobile-brand:hover {
+        color: #edeef0;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .mobile-display-none {
+        display: none;
+    }
+
+}
