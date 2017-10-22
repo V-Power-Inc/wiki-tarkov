@@ -255,3 +255,26 @@ footer .list-unstyled li a:hover {
     max-width: 100%;
     width: 100%;
 }
+
+a.scup i {
+    margin-top: 10px;
+    color: #c74f27;
+    font-size: 47px;
+}
+
+.scup {
+    position: fixed;
+    z-index: 1010;
+    bottom: 80px;
+    right: 10px;
+}
+
+a.scup {
+    outline: 0;
+    text-align: center;
+}
+
+a.scup i:hover {
+    text-decoration: none;
+    color: #919191;
+}
