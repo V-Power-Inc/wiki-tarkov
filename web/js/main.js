@@ -16,4 +16,18 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: 0 }, 900);
         return false;
     });
+    
+/** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
+
+    $('.nav.nav-list.bs-docs-sidenav.affix li').click(function() {
+       $('#info-alert-prapor').fadeOut();
+    });
+
+    if(window.location.hash !== '') {
+        $('#info-alert-prapor').remove();
+    }
 });
+
+
+
+

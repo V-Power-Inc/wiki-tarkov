@@ -176,10 +176,11 @@ footer .list-unstyled li a:hover {
     background: white;
 }
 
-.image-trader {
+a .image-trader, .image-trader a:hover {
     max-width: 100%;
     box-shadow: 1px 1px 20px 3px;
     margin: 25px 0 0 0;
+    color: #000000;
 }
 
 .wrap > .container.padding-top-0 {
@@ -267,6 +268,7 @@ a.scup i {
     z-index: 1010;
     bottom: 80px;
     right: 10px;
+    display: none;
 }
 
 a.scup {
@@ -277,4 +279,82 @@ a.scup {
 a.scup i:hover {
     text-decoration: none;
     color: #919191;
+}
+
+h2 a {
+    color: #000000;
+    text-decoration: none
+}
+
+h2 a:hover {
+    color: #c3392c;
+    text-decoration: none
+}
+
+.mobile-small-logo {
+    display: none;
+}
+
+.bs-docs-sidenav {
+    width: 258px;
+}
+
+.bs-docs-sidenav > li:first-child > a {
+    -webkit-border-radius: 6px 6px 0 0;
+    -moz-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.bs-docs-sidenav > li:last-child > a {
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+}
+
+.bs-docs-sidenav > li > a {
+    display: block;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+    border: 1px solid #e5e5e5;
+}
+
+.bs-docs-sidenav .icon-chevron-right {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+    opacity: .25;
+}
+
+.nav.nav-list.bs-docs-sidenav.affix li a, .nav.nav-list.bs-docs-sidenav li a {
+    background: white;
+}
+
+.nav.nav-list.bs-docs-sidenav.affix li.active a, .nav.nav-list.bs-docs-sidenav li.active a {
+    background: rgb(216, 216, 216);
+    color: #c3392c;
+    font-weight: bold;
+}
+
+.nav.nav-list.bs-docs-sidenav.affix > li > a, .nav.nav-list.bs-docs-sidenav > li > a {
+    text-align: left;
+    color: rgba(0, 0, 0, 0.68);
+    width: 100%;
+    font-size: 15px;
+}
+
+ul li a.relative i {
+    position: absolute;
+    right: 5px;
+    top: 12px;
+}
+
+.fixed-nav-top-145 {
+    top: 145px;
+}
+
+.torgovec-info-quest-image {
+    max-width: 100%;
+    margin: 5px;
+    box-shadow: 1px 1px 20px 3px;
+    border: 1px solid #9E9E9E;
 }

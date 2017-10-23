@@ -3,11 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use app\components\MenuComponent;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -40,33 +37,8 @@ AppAsset::register($this);
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
 
-    <!-- Классы navbar и navbar-default (базовые классы меню) -->
-    <nav class="navbar navbar-default fixed-navigatsiya">
-        <div class="container">
-            <!-- Заголовок -->
-            <div class="navbar-header">
-                <a class="mobile-brand" href="/">База знаний Escape from Tarkov</a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
-            <div class="collapse navbar-collapse" id="navbar-main">
-                <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://eft-locations.kfc-it.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип eft-locations.kfc-it.ru"></a>
-
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Главная</a></li>
-                    <li><a href="/quests-of-traders">Справочник квестов</a></li>
-                    <li><a href="#">Карты локаций</a></li>
-                    <li><a href="#">YouTube материалы</a></li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
+    <!-- Горизонатльное меню - вызываемое компонентом -->
+    <?= MenuComponent::showMenu() ?>
 
 
         <?= $content ?>
@@ -79,7 +51,7 @@ AppAsset::register($this);
     
         <div class="container nobackground">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-12">
 <!--                    <div class="footerbottomlink">-->
 <!--                        <a href="#">Линк 1</a>-->
 <!--                        <a href="#">Линк 2</a>-->
@@ -88,7 +60,7 @@ AppAsset::register($this);
 <!--                        <a href="#">Линк 5</a>-->
 <!--                        <a href="#">Линк 6</a>	-->
 <!--                    </div>-->
-                    <p class="copyright">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
+                    <p class="copyright text-right">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">
 </span>

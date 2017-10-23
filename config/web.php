@@ -49,6 +49,11 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'quests-of-traders' => 'site/quests',
+                'quests-of-traders/prapor-quests' => 'site/praporpage',
+                'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
+                'quests-of-traders/skypchik-quests' => 'site/skypchikpage',
+                'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
+                'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
             ],
         ],
 

@@ -1,4 +1,16 @@
 
+/*** col-sm screen size (1199px) ***/
+@media (max-width: 1199px) {
+
+    .interback-white, .interback-grey {
+        padding: 20px 0;
+    }
+
+    .bs-docs-sidenav {
+        width: 218px;
+    }
+
+}
 
 
 /*** col-sm screen size (991px) ***/
@@ -10,6 +22,22 @@
         padding: 15px;
         width: auto;
         text-align: center;
+    }
+
+    .mobile-text-center {
+        text-align: center;
+    }
+
+    a .image-trader, .image-trader a:hover {
+        margin: 0;
+    }
+
+    .bs-docs-sidenav {
+        width: 100%;
+    }
+
+    .sm-vertical-margin-20 {
+        margin: 20px 0;
     }
 
 }
@@ -58,4 +86,30 @@
         display: none;
     }
 
+    .mobile-brand {
+        left: 80px;
+    }
+
+    .mobile-small-logo {
+        display: block;
+        width: 70px;
+        position: absolute;
+        top: 16px;
+        left: 5px;
+    }
+
+    .navbar-default .navbar-brand {
+        color: #777;
+        display: none;
+    }
+
+    a .image-trader, .image-trader a:hover {
+        margin: 10px 0 35px 0;
+    }
+
+    .float-right {
+        float: initial;
+    }
+
 }
+
