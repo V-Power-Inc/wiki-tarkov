@@ -24,8 +24,11 @@ $model = new Admins();
 
     <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, 'passwd')->passwordInput() ?>
-    
+    <?= $form->field($model, 'password')->passwordInput() ?>
+
+    <?= $form->field($model, 'remember_me')->checkbox([
+        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+    ]) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
