@@ -41,7 +41,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Скупщика **/
     public function actionSkypchikpage() {
-        return $this->render('quests/skyp-quests.php');
+        // Пока нет квестов - редирект
+        $this->goHome();
+      //  return $this->render('quests/skyp-quests.php');
     }
 
     /** Рендер страницы квестов Лыжника **/
@@ -51,7 +53,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
-        return $this->render('quests/mirotvorec-quests.php');
+        // Пока нет квестов - редирект
+        $this->goHome();
+      //  return $this->render('quests/mirotvorec-quests.php');
     }
 
 }

@@ -358,3 +358,9 @@ ul li a.relative i {
     box-shadow: 1px 1px 20px 3px;
     border: 1px solid #9E9E9E;
 }
+
+.quests-content {
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+}

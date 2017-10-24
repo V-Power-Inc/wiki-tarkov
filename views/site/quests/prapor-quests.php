@@ -22,19 +22,18 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
             <ul class="nav nav-list bs-docs-sidenav">
-                <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Квесты</a></li>
-                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Группы кнопок</a></li>
-                <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Выпадающие списки кнопок</a></li>
-                <li><a data-toggle="tab" href="#4" class="relative"><i class="fa fa-chevron-right"></i> Навигация</a></li>
-                <li><a data-toggle="tab" href="#5" class="relative"><i class="fa fa-chevron-right"></i> Панель навигации</a></li>
-                <li><a data-toggle="tab" href="#6" class="relative"><i class="fa fa-chevron-right"></i> Навигационные цепочки («Хлебные крошки»)</a></li>
-                <li><a data-toggle="tab" href="#7" class="relative"><i class="fa fa-chevron-right"></i> Разбиение на страницы</a></li>
-                <li><a data-toggle="tab" href="#8" class="relative"><i class="fa fa-chevron-right"></i> Ярлыки и бейджи</a></li>
-                <li><a data-toggle="tab" href="#9" class="relative"><i class="fa fa-chevron-right"></i> Оформление</a></li>
-                <li><a data-toggle="tab" href="#10" class="relative"><i class="fa fa-chevron-right"></i> Миниатюры</a></li>
-                <li><a data-toggle="tab" href="#11" class="relative"><i class="fa fa-chevron-right"></i> Сообщения</a></li>
-                <li><a data-toggle="tab" href="#12" class="relative"><i class="fa fa-chevron-right"></i> Индикатор процесса</a></li>
-                <li><a data-toggle="tab" href="#13" class="relative"><i class="fa fa-chevron-right"></i> Дополнительно</a></li>
+                <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Проба пера</a></li>
+                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Проверка на вшивость</a></li>
+                <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Пикник со стрельбой</a></li>
+                <li><a data-toggle="tab" href="#4" class="relative"><i class="fa fa-chevron-right"></i> Посылка из прошлого</a></li>
+                <li><a data-toggle="tab" href="#5" class="relative"><i class="fa fa-chevron-right"></i> Компромат</a></li>
+                <li><a data-toggle="tab" href="#6" class="relative"><i class="fa fa-chevron-right"></i> Рожки для мороженого</a></li>
+                <li><a data-toggle="tab" href="#7" class="relative"><i class="fa fa-chevron-right"></i> Почтальон Печкин</a></li>
+                <li><a data-toggle="tab" href="#8" class="relative"><i class="fa fa-chevron-right"></i> Тряхнуть кассира</a></li>
+                <li><a data-toggle="tab" href="#9" class="relative"><i class="fa fa-chevron-right"></i> Бомж с Полихима</a></li>
+                <li><a data-toggle="tab" href="#10" class="relative"><i class="fa fa-chevron-right"></i> Нефтянка</a></li>
+                <li><a data-toggle="tab" href="#11" class="relative"><i class="fa fa-chevron-right"></i> Большой заказчик</a></li>
+                <li><a data-toggle="tab" href="#12" class="relative"><i class="fa fa-chevron-right"></i> Каратель (Все части)</a></li>
             </ul>
             
             
@@ -43,7 +42,7 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
 
 
         <!-- Основное содержимое страницы -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Прапора вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
                 <img class="torgovec-info-quest-image" src="/img/torgovcy/prapor-quests/prapor-full.jpg">
