@@ -3,20 +3,17 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
-use yii\helpers\Security;
-use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "admins".
  *
  * @property int $id
  * @property string $login 
- * @property string $real_name
+ * @property string $real_name 
  * @property string $passwd 
  * @property string $confirm
  */
-class Admins extends ActiveRecord
+class Admins extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -32,9 +29,9 @@ class Admins extends ActiveRecord
     public function rules()
     {
         return [
-            [['login', 'passwd'], 'required'],
-            [['login', 'passwd'], 'string', 'max' => 100],
-            ['passwd', 'validatePassword'],
+            [['login', 'real_name', 'passwd', 'confirm'], 'required'],
+            [['login', 'real_name', 'passwd'], 'string', 'max' => 45],
+            [['confirm'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,13 +42,10 @@ class Admins extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Логин',
+            'login' => 'Login',
             'real_name' => 'Real Name',
-            'passwd' => 'Пароль',
+            'passwd' => 'Passwd',
             'confirm' => 'Confirm',
         ];
     }
-
-    /******** Тут надо будет сделать IdentityInterface *********/
-    
 }
