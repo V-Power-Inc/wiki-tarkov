@@ -64,17 +64,6 @@ AdminAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <ul class="nav nav-list bs-docs-sidenav">
-                        <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Квесты Прапора</a></li>
-                        <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Квесты Терапевта</a></li>
-                        <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Квесты Лыжника</a></li>
-<!--                        <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Проба пера</a></li>-->
-<!--                        <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Проверка на вшивость</a></li>-->
-<!--                        <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Пикник со стрельбой</a></li>-->
-                    </ul>
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                      <?= $content ?>
                 </div>
             </div>

@@ -2,16 +2,20 @@
 
 ?>
 
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <ul class="nav nav-list bs-docs-sidenav">
+        <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Квесты Прапора</a></li>
+        <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Квесты Терапевта</a></li>
+        <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Квесты Лыжника</a></li>
+        <!--                        <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Проба пера</a></li>-->
+        <!--                        <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Проверка на вшивость</a></li>-->
+        <!--                        <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Пикник со стрельбой</a></li>-->
+    </ul>
+</div>
 
-<div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+
+
+
+<div class="col-lg-12">
+    <h1>Главная админская страница</h1>
 </div>
