@@ -386,7 +386,7 @@ ul li a.relative i {
 .nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus {
     cursor: no-drop;
     background: grey;
-    color: rgb(195, 57, 44)!important;
+    color: rgb(255, 255, 255)!important;
     font-size: 14px;
     font-weight: bold;
 }
