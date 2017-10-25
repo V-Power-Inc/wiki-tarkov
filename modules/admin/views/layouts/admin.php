@@ -13,6 +13,7 @@ use app\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+
 AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -46,9 +47,10 @@ AdminAsset::register($this);
                 ['label' => 'Contact', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
-                ) : (
+                ) : 
+                    (
                     '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::beginForm(['default/logout'], 'post')
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'btn btn-link logout']

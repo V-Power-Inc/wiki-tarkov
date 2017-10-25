@@ -36,7 +36,7 @@ class DefaultController extends Controller
     public function actionLogin()
     {
         if(!Yii::$app->user->isGuest){
-            return $this->goHome();
+            return self::actionIndex();
         }
         $model = new Login();
         if(Yii::$app->request->post('Login')){
@@ -45,8 +45,17 @@ class DefaultController extends Controller
             if($model->validate()){
                 \Yii::$app->user->login($model->getUser());
             }
+            return $this->redirect('/admin');
         }
         return $this->render('login', [ 'model' => $model,]);
     }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return self::actionLogin();
+    }
+    
+    
     
 }

@@ -25,8 +25,8 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\Admin',
-            'enableAutoLogin' => false,
+            'identityClass' => 'app\models\Admins',
+            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -53,7 +53,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'admin/login' => 'admin/default/login',
+                'admin/login' => 'admin/default/logout',
                 'quests-of-traders' => 'site/quests',
                 'quests-of-traders/prapor-quests' => 'site/praporpage',
                 'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
