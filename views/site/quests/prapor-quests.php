@@ -22,18 +22,11 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
             <ul class="nav nav-list bs-docs-sidenav">
-                <li><a data-toggle="tab" href="#1" class="relative"><i class="fa fa-chevron-right"></i> Проба пера</a></li>
-                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i> Проверка на вшивость</a></li>
-                <li><a data-toggle="tab" href="#3" class="relative"><i class="fa fa-chevron-right"></i> Пикник со стрельбой</a></li>
-                <li><a data-toggle="tab" href="#4" class="relative"><i class="fa fa-chevron-right"></i> Посылка из прошлого</a></li>
-                <li><a data-toggle="tab" href="#5" class="relative"><i class="fa fa-chevron-right"></i> Компромат</a></li>
-                <li><a data-toggle="tab" href="#6" class="relative"><i class="fa fa-chevron-right"></i> Рожки для мороженого</a></li>
-                <li><a data-toggle="tab" href="#7" class="relative"><i class="fa fa-chevron-right"></i> Почтальон Печкин</a></li>
-                <li><a data-toggle="tab" href="#8" class="relative"><i class="fa fa-chevron-right"></i> Тряхнуть кассира</a></li>
-                <li><a data-toggle="tab" href="#9" class="relative"><i class="fa fa-chevron-right"></i> Бомж с Полихима</a></li>
-                <li><a data-toggle="tab" href="#10" class="relative"><i class="fa fa-chevron-right"></i> Нефтянка</a></li>
-                <li><a data-toggle="tab" href="#11" class="relative"><i class="fa fa-chevron-right"></i> Большой заказчик</a></li>
-                <li><a data-toggle="tab" href="#12" class="relative"><i class="fa fa-chevron-right"></i> Каратель (Все части)</a></li>
+                <?php foreach ($prapor as $item): ?>
+                <li><a data-toggle="tab" href="#<?=$item['id']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
+                <?php endforeach; ?>
+
+              
             </ul>
             
             
@@ -48,57 +41,11 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
                 <img class="torgovec-info-quest-image" src="/img/torgovcy/prapor-quests/prapor-full.jpg">
             </div>
                 <div class="tab-content">
-                    <div id="1" class="tab-pane fade">
-                        <p>1</p>
+                    <?php foreach ($prapor as $item): ?>
+                    <div id="<?=$item['id']?>" class="tab-pane fade">
+                        <?=$item['content']?>
                     </div>
-        
-                    <div id="2" class="tab-pane fade">
-                        <p>2</p>
-                    </div>
-        
-                    <div id="3" class="tab-pane fade">
-                        <p>3</p>
-                    </div>
-        
-                    <div id="4" class="tab-pane fade">
-                        <p>4</p>
-                    </div>
-        
-                    <div id="5" class="tab-pane fade">
-                        <p>5</p>
-                    </div>
-        
-                    <div id="6" class="tab-pane fade">
-                        <p>6</p>
-                    </div>
-        
-                    <div id="7" class="tab-pane fade">
-                        <p>7</p>
-                    </div>
-        
-                    <div id="8" class="tab-pane fade">
-                        <p>8</p>
-                    </div>
-        
-                    <div id="9" class="tab-pane fade">
-                        <p>9</p>
-                    </div>
-        
-                    <div id="10" class="tab-pane fade">
-                        <p>10</p>
-                    </div>
-        
-                    <div id="11" class="tab-pane fade">
-                        <p>11</p>
-                    </div>
-        
-                    <div id="12" class="tab-pane fade">
-                        <p>12</p>
-                    </div>
-        
-                    <div id="13" class="tab-pane fade">
-                        <p>13</p>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
 

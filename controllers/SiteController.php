@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Prapor;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -31,8 +32,12 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Прапора **/
     public function actionPraporpage() {
-        return $this->render('quests/prapor-quests.php');
+        $request = \Yii::$app->request;
+        $query =  Prapor::find();
+        $prapor = $query->orderby(['id'=>SORT_ASC])->all();
+        return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
+
 
     /** Рендер страницы квестов Терапевта **/
     public function actionTerapevtpage() {
