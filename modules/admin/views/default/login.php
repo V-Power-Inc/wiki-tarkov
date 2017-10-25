@@ -2,11 +2,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\models\Admins;
-
 $this->title = 'Авторизация';
 
-$model = new Admins();
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -22,11 +19,11 @@ $model = new Admins();
         ],
     ]); ?>
 
-    <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput() ?>
 
-    <?= $form->field($model, 'remember_me')->checkbox([
+    <?= $form->field($model, 'rememberMe')->checkbox([
         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
     ]) ?>
 

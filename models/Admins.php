@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-
+use \yii\db\ActiveRecord;
+use \yii\web\IdentityInterface;
 /**
  * This is the model class for table "admins".
  *
@@ -13,7 +14,7 @@ use Yii;
  * @property string $captcha Гугл капча
  * @property int $remember_me Галочка - запомнить
  */
-class Admins extends \yii\db\ActiveRecord
+class Admins extends ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -29,8 +30,9 @@ class Admins extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user', 'password', 'captcha', 'remember_me'], 'required'],
+            [['user', 'password', 'remember_me'], 'required'],
             [['remember_me'], 'integer'],
+            [['captcha'], 'safe'],
             [['user', 'password'], 'string', 'max' => 45],
             [['captcha'], 'string', 'max' => 255],
         ];
@@ -48,5 +50,39 @@ class Admins extends \yii\db\ActiveRecord
             'captcha' => 'Captcha',
             'remember_me' => 'Remember Me',
         ];
+    }
+
+    /**
+     * валидируем пароль
+     * @param $password
+     * @return bool
+     */
+    public function validatePassword($password){
+        return $this->password == md5($password);
+    }
+
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        //return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        //return $this->authKey;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        //return $this->authKey === $authKey;
     }
 }

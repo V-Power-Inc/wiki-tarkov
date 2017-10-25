@@ -5,7 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Admins;
-
+use app\models\Login;
 /**
  * Default controller for the `admin` module
  */
@@ -35,15 +35,18 @@ class DefaultController extends Controller
 
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if(!Yii::$app->user->isGuest){
             return $this->goHome();
         }
+        $model = new Login();
+        if(Yii::$app->request->post('Login')){
+            $model->attributes = Yii::$app->request->post('Login');
 
-        $model = new Admins();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if($model->validate()){
+                \Yii::$app->user->login($model->getUser());
+            }
         }
-        return $this->render('login', ['model' => $model,]);
+        return $this->render('login', [ 'model' => $model,]);
     }
     
 }
