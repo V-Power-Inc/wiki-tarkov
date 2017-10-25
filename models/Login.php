@@ -25,6 +25,15 @@ class Login extends Model
             ['password', 'validatePassword'],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'E-mail',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня'
+        ];
+    }
     /**
      * Logs in a user using the provided username and password.
      * @return bool whether the user is logged in successfully

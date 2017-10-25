@@ -23,6 +23,7 @@ AdminAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://eft-locations.kfc-it.ru/favicon.png">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
@@ -42,9 +43,9 @@ AdminAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Открыть сайт', 'url' => ['/site/index'], 'linkOptions' => ['target' => '_blank']],
+                ['label' => 'Справочник квестов', 'url' => ['/site/quests'], 'linkOptions' => ['target' => '_blank']],
+                ['label' => 'База ключей', 'url' => ['/site/contact'] , 'linkOptions' => ['target' => '_blank']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : 
@@ -52,7 +53,7 @@ AdminAsset::register($this);
                     '<li>'
                     . Html::beginForm(['default/logout'], 'post')
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->user . ')',
+                        'Выход (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'btn btn-link logout']
                     )
                     . Html::endForm()
@@ -63,7 +64,7 @@ AdminAsset::register($this);
         NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container padding-top-200">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                      <?= $content ?>
@@ -72,11 +73,16 @@ AdminAsset::register($this);
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+    <footer>
 
-            <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="container nobackground">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="copyright text-right">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
+                </div>
+<span class="col-sm-12 counter-footer">
+</span>
+            </div>
         </div>
     </footer>
 

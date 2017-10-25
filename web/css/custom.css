@@ -364,3 +364,38 @@ ul li a.relative i {
     border-radius: 5px;
     padding: 20px;
 }
+
+.padding-top-200 {
+    padding-top: 200px!important;
+}
+
+.admin-tabs, .nav > li > a.admin-tabs, .nav > li > a.admin-tabs:active, .nav > li > a.admin-tabs:focus {
+    background: rgba(128, 128, 128, 0.29);
+    font-weight: bold;
+    text-align: center;
+    color: #337ab7;
+}
+
+.nav > li > a.admin-tabs:hover {
+    background: cornflowerblue;
+    font-weight: 100;
+    color: black;
+    font-size: 18px;
+}
+
+.nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus {
+    cursor: no-drop;
+    background: grey;
+    color: rgb(195, 57, 44)!important;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.w-100-important {
+    width: 100%!important;
+    max-width: 100%!important;
+}
+
+.w-200 {
+    width: 200px;
+}
