@@ -9,9 +9,9 @@ $this->title = 'Админка EFT-Locations';
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Квесты торговцев</h2>
-        <li><a href="/admin/prapor/index" class="admin-tabs w-100-important">Квесты Прапора</a></li>
-        <li><a href="/admin/terapevt/index" class="admin-tabs w-100-important">Квесты Терапевта</a></li>
-        <li><a href="#" class="admin-tabs w-100-important">Квесты Лыжника</a></li>
+        <li><a href="/admin/prapor/" class="admin-tabs w-100-important">Квесты Прапора</a></li>
+        <li><a href="/admin/terapevt/" class="admin-tabs w-100-important">Квесты Терапевта</a></li>
+        <li><a href="/admin/lyjnic/" class="admin-tabs w-100-important">Квесты Лыжника</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Скупщика</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Миротворца</a></li>
 

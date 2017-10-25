@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
 use Yii;
@@ -51,7 +52,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Лыжника **/
     public function actionLyjnicpage() {
-        return $this->render('quests/lyjnic-quests.php');
+        $query =  Lyjnic::find();
+        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
     }
 
     /** Рендер страницы квестов Миротворца **/
