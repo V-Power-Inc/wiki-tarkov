@@ -24,8 +24,8 @@ $this->title = 'Админка EFT-Locations';
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Улиц Таркова</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Пригорода</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Развязки</a></li>
-        <li><a href="#" class="admin-tabs w-100-important">База ключей от Таможни</a></li>
-        <li><a href="#" class="admin-tabs w-100-important">База ключей от Завода</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Таможни</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Завода</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Леса</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Поселка</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Маяка</a></li>
