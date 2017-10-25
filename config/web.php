@@ -81,7 +81,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         // Менять нон-стоп на актуальный адрес IP Нет-бай-нета
-        'allowedIPs' => ['95.221.176.198', '::1'],
+        'allowedIPs' => ['95.221.174.21', '::1'],
     ];
 }
 

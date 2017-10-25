@@ -405,3 +405,11 @@ ul li a.relative i {
     color: #c3392c;
     font-weight: 500;
 }
+
+.glyphicon.glyphicon-eye-open, .glyphicon.glyphicon-pencil, .glyphicon.glyphicon-trash {
+    margin: 0 10px;
+}
+
+.table.table-striped.table-bordered {
+    text-align: center;
+}
