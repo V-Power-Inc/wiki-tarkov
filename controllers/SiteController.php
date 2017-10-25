@@ -2,14 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Terapevt;
 use app\models\Prapor;
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -32,7 +29,6 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Прапора **/
     public function actionPraporpage() {
-        $request = \Yii::$app->request;
         $query =  Prapor::find();
         $prapor = $query->orderby(['date_edit'=>SORT_ASC])->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
@@ -41,7 +37,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Терапевта **/
     public function actionTerapevtpage() {
-        return $this->render('quests/terapevt-quests.php');
+        $query =  Terapevt::find();
+        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
     }
 
     /** Рендер страницы квестов Скупщика **/
