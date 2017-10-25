@@ -10,6 +10,7 @@ class Login extends Model
     public $password;
     public $rememberMe;
     private $_user = false;
+    public $reCaptcha = false;
     /**
      * @return array the validation rules.
      */
