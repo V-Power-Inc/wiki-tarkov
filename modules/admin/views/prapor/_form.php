@@ -10,7 +10,7 @@ use mihaildev\elfinder\ElFinder;
 ?>
 
 <div class="prapor-form">
-
+    
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -20,9 +20,9 @@ use mihaildev\elfinder\ElFinder;
            ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create]) ?>
+    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()+ 3*3600):$model->date_create]) ?>
 
-    <?= $form->field($model, 'date_edit')->textInput(['maxlength' => true, 'value'=>($model->date_edit == Null)?date("Y-m-d H:i:s",time()):NULL]) ?>
+    <?= $form->field($model, 'date_edit')->textInput(['maxlength' => true, 'value'=>date("Y-m-d H:i:s",time()+ 3*3600)]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить квест', ['class' => 'btn btn-success']) ?>    
