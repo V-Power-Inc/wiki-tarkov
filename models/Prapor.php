@@ -7,9 +7,10 @@ use Yii;
 /**
  * This is the model class for table "prapor".
  *
- * @property int $id
+ * @property integer $id
  * @property string $title
  * @property string $content
+ * @property integer $tab_number
  * @property string $date_create
  * @property string $date_edit
  */
@@ -29,9 +30,10 @@ class Prapor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['content'], 'string'],
+            [['tab_number'], 'integer'],
             [['date_create', 'date_edit'], 'safe'],
             [['title'], 'string', 'max' => 100],
-            [['content'], 'string'],
         ];
     }
 
@@ -43,9 +45,10 @@ class Prapor extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Название квеста',
-            'content' => 'Содержание квеста',
+            'content' => 'Содержимое квеста',
+            'tab_number' => 'Сортировка',
             'date_create' => 'Дата создания',
-            'date_edit' => 'Дата редактирования (Старые записи идут выше)',
+            'date_edit' => 'Дата последнего редактирования',
         ];
     }
 }

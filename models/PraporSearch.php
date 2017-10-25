@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Prapor;
 
 /**
- * PraporSearch represents the model behind the search form of `app\models\Prapor`.
+ * PraporSearch represents the model behind the search form about `app\models\Prapor`.
  */
 class PraporSearch extends Prapor
 {
@@ -18,7 +18,7 @@ class PraporSearch extends Prapor
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'tab_number'], 'integer'],
             [['title', 'content', 'date_create', 'date_edit'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class PraporSearch extends Prapor
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'tab_number' => $this->tab_number,
             'date_create' => $this->date_create,
             'date_edit' => $this->date_edit,
         ]);

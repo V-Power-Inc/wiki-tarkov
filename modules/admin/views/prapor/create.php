@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prapor */
 
-$this->title = 'Создание нового квеста Прапора';
+$this->title = 'Создать новый квест';
 $this->params['breadcrumbs'][] = ['label' => 'Prapors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

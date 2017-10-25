@@ -12,14 +12,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="prapor-view">
 
-    <h1>Квест Прапора: <?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить квест', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить покупателя', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Вы точно хотите удалить этот квест?',
+                'confirm' => 'Вы уверены что хотите удалить квест?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,11 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'content',
+            'content:ntext',
+            'tab_number',
             'date_create',
             'date_edit',
         ],
     ]) ?>
-
-    <a class="btn btn-primary" href="/admin/prapor">Вернуться в список квестов Прапора</a>
+    <a class="btn btn-primary" href="/admin/prapor/">Вернуться в список квестов Прапора</a>
 </div>

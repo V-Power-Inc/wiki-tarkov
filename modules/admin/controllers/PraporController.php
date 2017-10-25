@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\admin\controllers;
+
 use Yii;
 use app\models\Prapor;
 use app\models\PraporSearch;
@@ -26,6 +27,7 @@ class PraporController extends Controller
             return self::actionIndex();
         }
     }
+    
     
     /**
      * @inheritdoc
@@ -80,11 +82,11 @@ class PraporController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -99,11 +101,11 @@ class PraporController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -130,8 +132,8 @@ class PraporController extends Controller
     {
         if (($model = Prapor::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

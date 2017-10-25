@@ -16,11 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Добавить новый квест', ['create'], ['class' => 'btn btn-success']) ?>
-
+        <?= Html::a('Создать новый квест', ['create'], ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,9 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'title',
-            'content',
+            'content:ntext',
+            'tab_number',
             'date_create',
-//            'date_edit',
+            // 'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

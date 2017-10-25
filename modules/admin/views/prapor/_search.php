@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content') ?>
 
+    <?= $form->field($model, 'tab_number') ?>
+
     <?= $form->field($model, 'date_create') ?>
 
-    <?= $form->field($model, 'date_edit') ?>
+    <?php // echo $form->field($model, 'date_edit') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
