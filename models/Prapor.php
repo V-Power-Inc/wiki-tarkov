@@ -31,7 +31,7 @@ class Prapor extends \yii\db\ActiveRecord
         return [
             [['date_create', 'date_edit'], 'safe'],
             [['title'], 'string', 'max' => 100],
-            [['content'], 'string', 'max' => 50],
+            [['content'], 'string'],
         ];
     }
 

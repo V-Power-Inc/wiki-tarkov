@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\admin\controllers;
-
 use Yii;
 use app\models\Prapor;
 use app\models\PraporSearch;

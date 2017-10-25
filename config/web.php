@@ -16,6 +16,32 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'roots' => [
+                [
+                    'baseUrl'=>'@web',
+                    'basePath'=>'@webroot',
+                    'path' => 'img/upload',
+                    'name' => 'Upload'
+                ],
+            ],
+//                'watermark' => [
+//                    'source'         => __DIR__.'/logo.png', // Path to Water mark image
+//                    'marginRight'    => 5,          // Margin right pixel
+//                    'marginBottom'   => 5,          // Margin bottom pixel
+//                    'quality'        => 95,         // JPEG image save quality
+//                    'transparency'   => 70,         // Water mark image transparency ( other than PNG )
+//                    'targetType'     => IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP, // Target image formats ( bit-field )
+//                    'targetMinPixel' => 200         // Target image minimum pixel size
+//                ]
+        ]
+    ],
+    
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
