@@ -20,9 +20,9 @@ use mihaildev\elfinder\ElFinder;
            ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()+ 3*3600):$model->date_create]) ?>
+    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create]) ?>
 
-    <?= $form->field($model, 'date_edit')->textInput(['maxlength' => true, 'value'=>date("Y-m-d H:i:s",time()+ 3*3600)]) ?>
+    <?= $form->field($model, 'date_edit')->textInput(['maxlength' => true, 'value'=>date("Y-m-d H:i:s",time())]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить квест', ['class' => 'btn btn-success']) ?>    
