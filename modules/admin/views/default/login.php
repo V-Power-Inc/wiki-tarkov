@@ -23,9 +23,9 @@ $this->title = 'Авторизация';
 
     <?= $form->field($model, 'password')->passwordInput() ?>
 
-    <?= $form->field($model, 'rememberMe')->checkbox([
-        'template' => "<div class=\"col-lg-offset-4 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-3\">{error}</div>",
-    ]) ?>
+<!--    --><?//= $form->field($model, 'rememberMe')->checkbox([
+//        'template' => "<div class=\"col-lg-offset-4 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-3\">{error}</div>",
+//    ]) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-4 col-lg-11">

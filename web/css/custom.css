@@ -365,8 +365,8 @@ ul li a.relative i {
     padding: 20px;
 }
 
-.padding-top-200 {
-    padding-top: 200px!important;
+.padding-top-110 {
+    padding-top: 110px!important;
 }
 
 .admin-tabs, .nav > li > a.admin-tabs, .nav > li > a.admin-tabs:active, .nav > li > a.admin-tabs:focus {
@@ -398,4 +398,10 @@ ul li a.relative i {
 
 .w-200 {
     width: 200px;
+}
+
+.admin-title-main {
+    padding-bottom: 40px;
+    color: #c3392c;
+    font-weight: 500;
 }

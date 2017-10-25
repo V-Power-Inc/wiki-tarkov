@@ -111,5 +111,9 @@
         float: initial;
     }
 
+    .nav li > form > button.logout {
+        text-align: center;
+    }
+
 }
 

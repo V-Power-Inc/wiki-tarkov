@@ -64,7 +64,7 @@ AdminAsset::register($this);
         NavBar::end();
         ?>
 
-        <div class="container padding-top-200">
+        <div class="container padding-top-110">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                      <?= $content ?>
