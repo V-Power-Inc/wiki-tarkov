@@ -34,7 +34,7 @@ class SiteController extends Controller
     public function actionPraporpage() {
         $request = \Yii::$app->request;
         $query =  Prapor::find();
-        $prapor = $query->orderby(['id'=>SORT_ASC])->all();
+        $prapor = $query->orderby(['date_edit'=>SORT_ASC])->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
 

@@ -45,7 +45,7 @@ class Prapor extends \yii\db\ActiveRecord
             'title' => 'Название квеста',
             'content' => 'Содержание квеста',
             'date_create' => 'Дата создания',
-            'date_edit' => 'Дата редактирования',
+            'date_edit' => 'Дата редактирования (Старые записи идут выше)',
         ];
     }
 }
