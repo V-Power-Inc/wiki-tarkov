@@ -26,7 +26,7 @@ $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Лыжника вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
-<!--                <img class="torgovec-info-quest-image" src="/img/torgovcy/terapevt-quests/terapevt_full.png">-->
+                <img class="torgovec-info-quest-image" src="/img/torgovcy/lyjnic-quests/lyjnic_full.png" alt="Квесты торговца Лыжника из Escape from Tarkov">
             </div>
             <div class="tab-content">
                 <?php foreach ($lyjnic as $item): ?>
