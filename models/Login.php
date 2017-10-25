@@ -23,6 +23,7 @@ class Login extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
         ];
     }
 
@@ -31,7 +32,8 @@ class Login extends Model
         return [
             'email' => 'E-mail',
             'password' => 'Пароль',
-            'rememberMe' => 'Запомнить меня'
+            'rememberMe' => 'Запомнить меня',
+            'reCaptcha' => 'От ботов'
         ];
     }
     /**

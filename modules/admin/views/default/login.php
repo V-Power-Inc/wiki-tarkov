@@ -27,6 +27,11 @@ $this->title = 'Авторизация';
 //        'template' => "<div class=\"col-lg-offset-4 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-3\">{error}</div>",
 //    ]) ?>
 
+    <?= $form->field($model, 'reCaptcha')->widget(
+        \himiklab\yii2\recaptcha\ReCaptcha::className(),
+        ['siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5']
+    ) ?>
+
     <div class="form-group">
         <div class="col-lg-offset-4 col-lg-11">
             <?= Html::submitButton('Войти', ['class' => 'btn btn-primary w-200', 'name' => 'login-button']) ?>

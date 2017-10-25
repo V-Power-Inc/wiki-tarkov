@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Admin',
@@ -88,7 +89,12 @@ $config = [
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
             ],
         ],
-
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5',
+            'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_',
+        ],
     ],
     'params' => $params,
 ];
