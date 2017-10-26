@@ -13,7 +13,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0px;
-    z-index: 1;
+    z-index: 1000;
 }
 
 /* ��� ���������� ������� */
@@ -167,7 +167,7 @@ footer .list-unstyled li a:hover {
     margin-bottom: 0;
 }
 
-.trader-heading {
+.main-site-heading {
     color: #c3392c;
 }
 
@@ -439,4 +439,19 @@ a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
 
 .map__full {
     max-width: 100%;
+}
+
+.white-content {
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.map-heading {
+    color: #c3392c;
+}
+
+.maps__small {
+    max-width: 100%;
+    margin-top: 10px;
 }

@@ -11,7 +11,7 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
 
 <div class="heading-class">
     <div class="container">
-        <h1 class="trader-heading">Карта локации завод</h1>
+        <h1 class="main-site-heading">Карта локации завод</h1>
     </div>
 </div>
 

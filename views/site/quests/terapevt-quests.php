@@ -5,7 +5,7 @@ $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::
 
 <div class="heading-class">
     <div class="container">
-        <h1 class="trader-heading">Квесты Терапевта</h1>
+        <h1 class="main-site-heading">Квесты Терапевта</h1>
     </div>
 </div>
 

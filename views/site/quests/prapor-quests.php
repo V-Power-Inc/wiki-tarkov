@@ -10,7 +10,7 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
 ?>
 <div class="heading-class">
     <div class="container">
-        <h1 class="trader-heading">Квесты Прапора</h1>
+        <h1 class="main-site-heading">Квесты Прапора</h1>
     </div>
 </div>
 
