@@ -455,3 +455,19 @@ a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
     max-width: 100%;
     margin-top: 10px;
 }
+
+.right__content {
+    width: 500px;
+    height: 748px;
+    background: black;
+    z-index: 9999;
+    position: relative;
+    right:0;
+    float: right;
+    border-left: 2px solid #c3392c;
+}
+
+h2.white {
+    color: white;
+    text-align: center;
+}
