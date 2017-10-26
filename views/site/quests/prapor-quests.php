@@ -23,7 +23,7 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
 
             <ul class="nav nav-list bs-docs-sidenav">
                 <?php foreach ($prapor as $item): ?>
-                <li><a data-toggle="tab" href="#<?=$item['id']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
+                <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
 
               
@@ -42,7 +42,7 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
             </div>
                 <div class="tab-content">
                     <?php foreach ($prapor as $item): ?>
-                    <div id="<?=$item['id']?>" class="tab-pane fade">
+                    <div id="<?=$item['tab_number']?>" class="tab-pane fade">
                         <?=$item['content']?>
                     </div>
                     <?php endforeach; ?>
