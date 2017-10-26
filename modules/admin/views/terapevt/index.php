@@ -29,9 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'id',
             'tab_number',
             'title',
-            'content:ntext',
+//            'content:ntext',
             'date_create',
-            // 'date_edit',
+            'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
