@@ -13,7 +13,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0px;
-    z-index:9999;
+    z-index: 1;
 }
 
 /* ��� ���������� ������� */
@@ -417,4 +417,14 @@ ul li a.relative i {
 .tab-pane.active p {
     font-size: 16px;
     padding-bottom: 10px;
+}
+
+.image-link img {
+    border: 1px solid white;
+    box-shadow: 1px 1px 6px 2px;
+}
+
+a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
+    color: black;
+    outline: none;
 }

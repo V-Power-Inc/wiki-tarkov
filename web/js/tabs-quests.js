@@ -5,6 +5,13 @@
 
 $(document).ready(function() {
 
+    /** Попап для увеличения картинок в квестах **/
+    $('.image-link').magnificPopup(
+        {
+        type:'image',
+        showCloseBtn: true,
+        });
+
     /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
     if (window.location.hash !== '') {
         $('#info-alert-prapor').remove();
