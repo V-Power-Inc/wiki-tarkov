@@ -31,7 +31,7 @@ class SiteController extends Controller
     /** Рендер страницы квестов Прапора **/
     public function actionPraporpage() {
         $query =  Prapor::find();
-        $prapor = $query->orderby(['date_edit'=>SORT_ASC])->all();
+        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
 
