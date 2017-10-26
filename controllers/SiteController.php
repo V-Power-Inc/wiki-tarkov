@@ -64,6 +64,17 @@ class SiteController extends Controller
       //  return $this->render('quests/mirotvorec-quests.php');
     }
 
+    /** Рендер страницы со списком интерактивных карт **/
+    public function actionLocations() {
+          return $this->render('maps/maps.php');
+    }
+
+    /** Рендер страницы со списком интерактивных карт **/
+    public function actionZavod() {
+        return $this->render('maps/zavod-location.php');
+    }
+    
+
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
     {

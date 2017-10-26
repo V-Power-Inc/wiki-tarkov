@@ -428,3 +428,15 @@ a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
     color: black;
     outline: none;
 }
+
+.container-1920 {
+    width: 1920px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.map__full {
+    max-width: 100%;
+}

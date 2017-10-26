@@ -32,7 +32,6 @@ class MenuComponent
             case 'index': self::$index = 'class="active"'; break;
             case 'quests': self::$quests = 'class="active"'; break;
             case 'locations': self::$locations = 'class="active"'; break;
-            case 'keys': self::$keys = 'class="active"'; break;
         }
     }
     /**
@@ -72,8 +71,7 @@ class MenuComponent
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
-                    <li '.self::$locations.'><a href="#">Карты локаций</a></li>
-                    <li '.self::$keys.'><a href="#">Ключи от помещений</a></li>
+                    <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                 </ul>
 
             </div>
