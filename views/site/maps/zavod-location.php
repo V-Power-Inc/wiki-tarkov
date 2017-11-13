@@ -5,6 +5,9 @@
  * Date: 26.10.2017
  * Time: 15:05
  */
+$this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
+$this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/zavod-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Карта локации Завод в Escape from Tarkov - интерактивная карта Завода с просмотром ключей от помещений';
 ?>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -13,4 +16,27 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
         <h1 class="main-site-heading">Карта локации завод</h1>
     </div>
 </div>
+
+<!--<div class="right__content">-->
+<!--    <div class="col-lg-12">-->
+<!--        <h2 class="white">title - Заголовок</h2>-->
+<!--        <p></p>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Инициализация карты -->
+            <div id="map" class="map">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
 
