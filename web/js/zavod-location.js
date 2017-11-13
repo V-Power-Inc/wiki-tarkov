@@ -3,8 +3,14 @@
  */
 
 /** Вызов карты и указание центра координат **/
-var map = L.map('map').setView([0, 0], 4);
+const map = L.map('map', {
+    center: [2145, 1516],
+    zoom: 2,
+    maxzoom: 4,
+});
 
+L.tileLayer('http://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
+}).addTo(map);
 
 
 

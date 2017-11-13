@@ -471,3 +471,8 @@ h2.white {
     color: white;
     text-align: center;
 }
+
+.map#map {
+    width: 100%;
+    height: 500px;
+}
