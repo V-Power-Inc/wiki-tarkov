@@ -4,16 +4,20 @@
 
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
-    center: [2145, 1516],
-    zoom: 2,
+    center: [67, -40],
+    zoom: 3,
     maxzoom: 4,
+    minzoom: 2,
 });
 
+/** Обращаемся к слоям зума интерактивной карты **/
 L.tileLayer('http://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
 }).addTo(map);
 
-
-
+/** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
+map.setZoom(3);
+map.setMaxZoom(4);
+map.setMinZoom(2);
 
 
 
