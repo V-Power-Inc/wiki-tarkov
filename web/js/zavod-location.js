@@ -22,11 +22,3 @@ map.setMinZoom(2);
 
 
 /** ќграничение на перет€гивание карты, если в экране есть кра€ карты **/
-// var bounds = L.latLngBounds([[0, -0], [51.45, 0]]);
-// map.setMaxBounds(bounds);
-// map.on('drag', function() {
-//     map.panInsideBounds(bounds, { animate: false });
-// });
-
-
-
