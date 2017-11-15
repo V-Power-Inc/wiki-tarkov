@@ -12,12 +12,21 @@ const map = L.map('map', {
 
 /** ќбращаемс€ к сло€м зума интерактивной карты **/
 L.tileLayer('http://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
+    noWrap: true,
 }).addTo(map);
 
 /** ”станавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setZoom(3);
 map.setMaxZoom(4);
 map.setMinZoom(2);
+
+
+/** ќграничение на перет€гивание карты, если в экране есть кра€ карты **/
+// var bounds = L.latLngBounds([[0, -0], [51.45, 0]]);
+// map.setMaxBounds(bounds);
+// map.on('drag', function() {
+//     map.panInsideBounds(bounds, { animate: false });
+// });
 
 
 
