@@ -31,3 +31,9 @@ map.setMaxBounds(bounds);
 map.on('drag', function() {
     map.panInsideBounds(bounds, { animate: false });
 });
+
+/** Получаем текщие координаты по местонахождению мышки **/
+function onMouseMove(e) {
+   $('#mapCoords').text(Math.round(e.latlng.lat) + ", " + Math.round(e.latlng.lng));
+}
+map.on('mousemove', onMouseMove);
