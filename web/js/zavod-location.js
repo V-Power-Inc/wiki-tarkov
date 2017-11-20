@@ -11,7 +11,7 @@ const map = L.map('map', {
 });
 
 /** ќбращаемс€ к сло€м зума интерактивной карты **/
-L.tileLayer('http://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
+L.tileLayer('https://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
@@ -20,11 +20,9 @@ map.setMaxZoom(4);
 map.setMinZoom(2);
 map.setZoom(2);
 
-
-
 /** ќграничение на перет€гивание карты, если в экране есть кра€ карты **/
 var southWest = L.latLng(85, -181),
-    northEast = L.latLng(0, 74);
+    northEast = L.latLng(0, 100);
 var bounds = L.latLngBounds(southWest, northEast);
 
 map.setMaxBounds(bounds);

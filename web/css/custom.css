@@ -473,26 +473,28 @@ h2.white {
 }
 
 .map#map {
-    width: 78%;
-    height: 500px;
+    width: 1920px;
+    height: 706px;
+    position: relative;
 }
 
 .optins_layerstability {
     width: 300px;
     position: absolute;
     right: 0;
-    top: 181px;
-    height: 500px;
+    top: 183px;
+    height: 706px;
     background: black;
     display: block;
     z-index: 9999;
+    border-left: 2px solid #c3392c;
 }
 
 #mapCoords {
     z-index: 1000;
     position: absolute;
     bottom: 10px;
-    left: 37%;
+    left: 900px;
     width: 80px;
     height: 20px;
     line-height: 20px;
@@ -505,3 +507,39 @@ h2.white {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
 }
+
+.option-buttons {
+    padding: 30px 3px;
+    margin: 0;
+    display: inline-block;
+}
+
+.option-buttons .btn {
+    width:120px;
+    text-align: center;
+    padding: 6px;
+    margin: 0px 3px;
+}
+
+h1.map-title {
+    color: white;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.heading-class.mappage {
+    border-bottom: 2px solid #c3392c;
+}
+
+.btn-yellow {
+    color: black;
+    font-weight: bold;
+    background-color: #fff000;
+    border-color: #dad546;
+}
+
+.btn-yellow.w-100 {
+    width: 100%;
+}
+
+
