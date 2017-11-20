@@ -40,6 +40,16 @@ AdminAsset::register($this);
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
         ]);
+        if (Yii::$app->user->isGuest) {
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => [
+                    ['label' => 'Авторизация', 'url' => ['/site/login']]
+                ],
+            ]);
+            NavBar::end();
+            
+    } elseif(!Yii::$app->user->isGuest) {
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
@@ -62,6 +72,7 @@ AdminAsset::register($this);
             ],
         ]);
         NavBar::end();
+    }
         ?>
 
         <div class="container padding-top-110">
