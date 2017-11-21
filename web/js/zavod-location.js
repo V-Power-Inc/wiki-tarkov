@@ -35,3 +35,37 @@ function onMouseMove(e) {
    $('#mapCoords').text(Math.round(e.latlng.lat) + ", " + Math.round(e.latlng.lng));
 }
 map.on('mousemove', onMouseMove);
+
+/** Ссылки на маркеры иконок **/
+var ArmyIcon = L.icon({
+    iconUrl: '/img/mapicons/voen-yaj.png',
+    iconSize: [30, 30]
+});
+var ChkafIcon = L.icon({
+    iconUrl: '/img/mapicons/chkaf.png',
+    iconSize: [30, 30]
+});
+var DikieIcon = L.icon({
+    iconUrl: '/img/mapicons/dikie.png',
+    iconSize: [60, 60]
+});
+var ShortsIcon = L.icon({
+    iconUrl: '/img/mapicons/kurtki.png',
+    iconSize: [30, 30]
+});
+var SeifIcon = L.icon({
+    iconUrl: '/img/mapicons/seif.png',
+    iconSize: [30, 30]
+});
+var SumkiIcon = L.icon({
+    iconUrl: '/img/mapicons/sumki.png',
+    iconSize: [30, 30]
+});
+
+/** Координаты маркеров с военными ящиками **/
+
+var voenloot = [[41,-93], [63, -109], [81, -115], [69.5, -118]];
+
+var voenmarkers = voenloot.map(function(e){
+    return L.marker(e, {icon: ArmyIcon}).addTo(map);
+});
