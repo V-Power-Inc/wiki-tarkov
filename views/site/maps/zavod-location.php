@@ -26,11 +26,13 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
 
 
     <!-- Инициализация карты -->
-
+<div class="w-77">
     <div id="map" class="map">
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>
     </div>
+</div>
+    <div style="width: 300px;"></div>
     <!-- Опции карты -->
     <div class="optins_layerstability">
         <div class="col-lg-12">

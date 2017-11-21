@@ -69,7 +69,7 @@ class SiteController extends Controller
           return $this->render('maps/maps.php');
     }
 
-    /** Рендер страницы со списком интерактивных карт **/
+    /** Рендер страницы с картой завода **/
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
     }

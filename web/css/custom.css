@@ -473,20 +473,20 @@ h2.white {
 }
 
 .map#map {
-    width: 1920px;
-    height: 706px;
+    width: 100%;
+    height: 731px;
     position: relative;
 }
 
 .optins_layerstability {
-    width: 300px;
+    width: 23%;
     position: absolute;
     right: 0;
     top: 183px;
-    height: 706px;
+    height: 731px;
     background: black;
     display: block;
-    z-index: 9999;
+    z-index: 999;
     border-left: 2px solid #c3392c;
 }
 
@@ -494,7 +494,7 @@ h2.white {
     z-index: 1000;
     position: absolute;
     bottom: 10px;
-    left: 900px;
+    left: 50%;
     width: 80px;
     height: 20px;
     line-height: 20px;
@@ -509,16 +509,15 @@ h2.white {
 }
 
 .option-buttons {
-    padding: 30px 3px;
+    padding: 30px 5px;
     margin: 0;
     display: inline-block;
+    width: 100%;
 }
 
 .option-buttons .btn {
-    width:120px;
+    width: 197px;
     text-align: center;
-    padding: 6px;
-    margin: 0px 3px;
 }
 
 h1.map-title {
@@ -540,6 +539,10 @@ h1.map-title {
 
 .btn-yellow.w-100 {
     width: 100%;
+}
+
+.w-77 {
+    width: 77%;
 }
 
 

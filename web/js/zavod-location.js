@@ -4,7 +4,7 @@
 
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
-    center: [67, -40],
+    center: [67, -70],
     maxzoom: 4,
     minzoom: 2,
     zoom: 2
@@ -22,7 +22,7 @@ map.setZoom(2);
 
 /** Ограничение на перетягивание карты, если в экране есть края карты **/
 var southWest = L.latLng(85, -181),
-    northEast = L.latLng(0, 100);
+    northEast = L.latLng(-1, 74);
 var bounds = L.latLngBounds(southWest, northEast);
 
 map.setMaxBounds(bounds);
