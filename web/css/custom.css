@@ -556,4 +556,17 @@ h1.map-title {
     max-width: 100%;
 }
 
+.voenka-b.active {
+    color: #fff;
+    background-color: #5c8e5c;
+    border-color: #5c8e5c;
+    box-shadow: inset 0px 0px 2px 2px;
+}
+
+button:active, button:focus {
+    outline: none!important;
+}
+button::-moz-focus-inner {
+    border: 0!important;
+}
 

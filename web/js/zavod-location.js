@@ -2,7 +2,7 @@
  * Created by DIR300NRU-ADMIN on 13.11.2017.
  */
 
-/** Вызов карты и указание центра координат **/
+/** Р’С‹Р·РѕРІ РєР°СЂС‚С‹ Рё СѓРєР°Р·Р°РЅРёРµ С†РµРЅС‚СЂР° РєРѕРѕСЂРґРёРЅР°С‚ **/
 const map = L.map('map', {
     center: [67, -70],
     maxzoom: 4,
@@ -10,17 +10,17 @@ const map = L.map('map', {
     zoom: 2
 });
 
-/** Обращаемся к слоям зума интерактивной карты **/
+/** РћР±СЂР°С‰Р°РµРјСЃСЏ Рє СЃР»РѕСЏРј Р·СѓРјР° РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕР№ РєР°СЂС‚С‹ **/
 L.tileLayer('https://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
-/** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
+/** РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·СѓРј РєР°СЂС‚С‹ РЅР° 2 С‚Р°РєР¶Рµ СѓРєР°Р·С‹РІР°РµРј С‡С‚Рѕ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ Р·СѓРј 2 Р° РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ 4 **/
 map.setMaxZoom(4);
 map.setMinZoom(2);
 map.setZoom(2);
 
-/** Ограничение на перетягивание карты, если в экране есть края карты **/
+/** РћРіСЂР°РЅРёС‡РµРЅРёРµ РЅР° РїРµСЂРµС‚СЏРіРёРІР°РЅРёРµ РєР°СЂС‚С‹, РµСЃР»Рё РІ СЌРєСЂР°РЅРµ РµСЃС‚СЊ РєСЂР°СЏ РєР°СЂС‚С‹ **/
 var southWest = L.latLng(85, -181),
     northEast = L.latLng(-1, 74);
 var bounds = L.latLngBounds(southWest, northEast);
@@ -30,16 +30,16 @@ map.on('drag', function() {
     map.panInsideBounds(bounds, { animate: false });
 });
 
-/** Получаем текщие координаты по местонахождению мышки **/
+/** РџРѕР»СѓС‡Р°РµРј С‚РµРєС‰РёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РїРѕ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёСЋ РјС‹С€РєРё **/
 function onMouseMove(e) {
    $('#mapCoords').text(Math.round(e.latlng.lat) + ", " + Math.round(e.latlng.lng));
 }
 map.on('mousemove', onMouseMove);
 
-/** Ссылки на маркеры иконок **/
+/** РЎСЃС‹Р»РєРё РЅР° РјР°СЂРєРµСЂС‹ РёРєРѕРЅРѕРє **/
 var ArmyIcon = L.icon({
     iconUrl: '/img/mapicons/voen-yaj.png',
-    iconSize: [30, 30]
+    iconSize: [30, 30],
 });
 var ChkafIcon = L.icon({
     iconUrl: '/img/mapicons/chkaf.png',
@@ -62,12 +62,20 @@ var SumkiIcon = L.icon({
     iconSize: [30, 30]
 });
 
-/** Координаты маркеров с военными ящиками **/
-// Координаты в переменную ниже должны прийти по ajax
-var voenloot = [[41,-93], [63, -109], [81, -115], [69.5, -118]];
-
-var voenmarkers = voenloot.map(function(e){
-    return L.marker(e, {icon: ArmyIcon}).addTo(map);
+/** РћР±СЂР°Р±РѕС‚РєР° РєР»РёРєР° РїРѕ РєРЅРѕРїРєРµ РІС‹Р±РѕСЂР° РјР°СЂРєРµСЂРѕРІ РІРѕРµРЅРЅРѕРіРѕ СЏС‰РёРєР° **/
+// РњРµС‚РѕРґ СѓР±РёСЂР°РµС‚ РјР°СЂРєРµСЂС‹ - РіСЂСѓРїРїС‹ РІРѕРµРЅРЅС‹С… СЏС‰РёРєРѕРІ   map.removeLayer(voenloot);
+$(".voenka-b").click(function() {
+    var voenloot = L.layerGroup().addTo(map);
+    // Р”Р°РЅРЅС‹Рµ РЅРёР¶Рµ, Р±СѓРґСѓС‚ РїСЂРёР»РµС‚Р°С‚СЊ РїРѕ ajax
+    L.marker([41,-93], {icon: ArmyIcon}).addTo(voenloot);
+    L.marker([63, -109], {icon: ArmyIcon}).addTo(voenloot);
+    L.marker([81, -115], {icon: ArmyIcon}).addTo(voenloot);
+    L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
+    $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds">Р’РѕРµРЅРЅС‹Рµ СЏС‰РёРєРё</button>');
+    $(this).remove();
 });
 
-/** Обработка клика по кнопке выбора маркеров военного ящика **/
+
+
+
+
