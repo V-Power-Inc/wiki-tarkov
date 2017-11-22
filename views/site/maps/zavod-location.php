@@ -40,14 +40,13 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
         <div class="col-lg-12">
             <div class="option-buttons">
                 <h1 class="map-title">Маркеры</h1>
-                <!-- Todo: Ниже кнопок расположить контентную область для описания выбранного маркера -->
                 <button class="btn btn-success voenka-b">Военные ящики</button>
                 <button class="btn btn-danger dikie-b">Спавны диких</button>
                 <button class="btn btn-primary seifs-b">Сейфы и полки</button>
                 <button class="btn btn-default exits-b">Выходы с карты</button>
                 <button class="btn btn-yellow w-100 keys-b">Двери и ключи от них</button>
             </div>
-
+            <!-- Контент страницы -->
             <div class="col-lg-12">
                 <div id="voenniymarker"></div>
                 <div id="polkiimarker"></div>

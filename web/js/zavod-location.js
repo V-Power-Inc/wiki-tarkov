@@ -62,17 +62,28 @@ var SumkiIcon = L.icon({
     iconSize: [30, 30]
 });
 
+
+$(document).ready(function() {
+/** Объявляем группы маркеров всех возможных слоев **/
+    var voenloot = L.layerGroup();
+
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
-// Метод убирает маркеры - группы военных ящиков   map.removeLayer(voenloot);
-$(".voenka-b").click(function() {
-    var voenloot = L.layerGroup().addTo(map);
-    // Данные ниже, будут прилетать по ajax
-    L.marker([41,-93], {icon: ArmyIcon}).addTo(voenloot);
-    L.marker([63, -109], {icon: ArmyIcon}).addTo(voenloot);
-    L.marker([81, -115], {icon: ArmyIcon}).addTo(voenloot);
-    L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
-    $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds">Военные ящики</button>');
-    $(this).remove();
+    $('body').on('click','.voenka-b', function(){
+        voenloot.addTo(map);
+        // Данные ниже, будут прилетать по ajax
+        L.marker([41,-93], {icon: ArmyIcon}).addTo(voenloot);
+        L.marker([63, -109], {icon: ArmyIcon}).addTo(voenloot);
+        L.marker([81, -115], {icon: ArmyIcon}).addTo(voenloot);
+        L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
+        $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds">Военные ящики</button>');
+        $(this).remove();
+    });
+
+    $('body').on('click','#active-bounds', function(){
+        map.removeLayer(voenloot);
+        $('#active-bounds').before('<button class="btn btn-success voenka-b">Военные ящики</button>');
+        $('#active-bounds').remove();
+    });
 });
 
 
