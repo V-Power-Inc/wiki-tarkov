@@ -516,8 +516,9 @@ h2.white {
 }
 
 .option-buttons .btn {
-    width: 197px;
+    width: 100%;
     text-align: center;
+    margin: 5px 0;
 }
 
 h1.map-title {
@@ -543,6 +544,16 @@ h1.map-title {
 
 .w-77 {
     width: 77%;
+}
+
+#voenniymarker, #polkiimarker, #keysmarker, #exitsmarker {
+    display: none;
+    font-size: 14px;
+    color: white;
+}
+
+#voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img {
+    max-width: 100%;
 }
 
 

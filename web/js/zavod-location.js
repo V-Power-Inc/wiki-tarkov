@@ -63,9 +63,11 @@ var SumkiIcon = L.icon({
 });
 
 /**  оординаты маркеров с военными €щиками **/
-
+//  оординаты в переменную ниже должны прийти по ajax
 var voenloot = [[41,-93], [63, -109], [81, -115], [69.5, -118]];
 
 var voenmarkers = voenloot.map(function(e){
     return L.marker(e, {icon: ArmyIcon}).addTo(map);
 });
+
+/** ќбработка клика по кнопке выбора маркеров военного €щика **/

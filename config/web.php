@@ -113,9 +113,8 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        // Менять нон-стоп на актуальный адрес IP Нет-бай-нета
-        'allowedIPs' => ['95.221.174.21', '::1'],
+        // Доуступно с любого хоста
+        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 

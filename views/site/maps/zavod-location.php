@@ -5,6 +5,8 @@
  * Date: 26.10.2017
  * Time: 15:05
  */
+use app\models\Zavod;
+
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/zavod-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -41,13 +43,17 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
                 <!-- Todo: Ниже кнопок расположить контентную область для описания выбранного маркера -->
                 <button class="btn btn-success">Военные ящики</button>
                 <button class="btn btn-danger">Спавны диких</button>
-                <br>
-                <br>
                 <button class="btn btn-primary">Сейфы и полки</button>
                 <button class="btn btn-default">Выходы с карты</button>
-                <br>
-                <br>
                 <button class="btn btn-yellow w-100">Двери и ключи от них</button>
+            </div>
+
+            <div class="col-lg-12">
+                <div id="voenniymarker"></div>
+                <div id="polkiimarker"></div>
+                <div id="dikiymarker"></div>
+                <div id="exitsmarker"></div>
+                <div id="keysmarker"></div>
             </div>
         </div>
     </div>
