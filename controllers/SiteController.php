@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
+use app\models\Zavod;
 use Yii;
 use yii\web\Controller;
 
@@ -71,6 +72,8 @@ class SiteController extends Controller
 
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
+        $query = Zavod::find()->where('marker_group like "Военные ящики"' )->andWhere('enabled = 1')->asArray();
+      //  echo json_encode($query);
         return $this->render('maps/zavod-location.php');
     }
     
