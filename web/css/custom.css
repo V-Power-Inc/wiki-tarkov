@@ -583,3 +583,7 @@ button::-moz-focus-inner {
     border: 0!important;
 }
 
+.leaflet-popup-content img {
+    max-width: 100%;
+}
+
