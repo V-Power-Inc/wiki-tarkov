@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zavod */
 
-$this->title = 'Create Zavod';
+$this->title = 'Создать новый маркер для интерактивной карты Завода';
 $this->params['breadcrumbs'][] = ['label' => 'Zavods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,5 +17,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+    
 </div>

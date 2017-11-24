@@ -88,6 +88,10 @@ $(document).ready(function() {
         $('#active-bounds').before('<button class="btn btn-success voenka-b">Военные ящики</button>');
         $('#active-bounds').remove();
         $('#voenniymarker').fadeOut();
+        $('#polkiimarker').fadeOut();
+        $('#dikiymarker').fadeOut();
+        $('#exitsmarker').fadeOut();
+        $('#keysmarker').fadeOut();
     });
 });
 

@@ -14,6 +14,10 @@ use yii\filters\VerbFilter;
  */
 class ZavodController extends Controller
 {
+
+    /** Подключаем отдельный layout для CRUD моделей **/
+    public $layout = 'admin';
+    
     /**
      * @inheritdoc
      */

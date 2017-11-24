@@ -20,17 +20,11 @@ $this->title = 'Админка EFT-Locations';
 
 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
     <ul class="nav nav-pills nav-stacked">
-        <h2 class="text-center">Ключи от помещений</h2>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Улиц Таркова</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Пригорода</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Развязки</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Таможни</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Завода</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Леса</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Поселка</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Маяка</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Берега</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">База ключей от Терминала</a></li>
+        <h2 class="text-center">Маркеры на картах</h2>
+        <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Таможня</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Лес</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Берег</a></li>
     </ul>
 </div>
 

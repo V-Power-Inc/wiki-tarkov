@@ -47,12 +47,12 @@ class Zavod extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'marker_group' => 'Marker Group',
-            'coords_x' => 'Coords X',
-            'coords_y' => 'Coords Y',
-            'content' => 'Content',
-            'enabled' => 'Enabled',
+            'name' => 'Имя маркера',
+            'marker_group' => 'Группа маркера',
+            'coords_x' => 'Координаты по оси X',
+            'coords_y' => 'Координаты по оси Y',
+            'content' => 'Содержание',
+            'enabled' => 'Включен',
         ];
     }
 }
