@@ -69,12 +69,14 @@ $(document).ready(function() {
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
     $('body').on('click','.voenka-b', function(){
+        // Ниже штука, добавляет popup к каждому маркеру 
+        var popupContent = 'fhfhfhefef';
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
         // Данные ниже, будут прилетать по ajax
         L.marker([41,-93], {icon: ArmyIcon}).addTo(voenloot);
         L.marker([63, -109], {icon: ArmyIcon}).addTo(voenloot);
-        L.marker([81, -115], {icon: ArmyIcon}).addTo(voenloot);
+        L.marker([81, -115], {icon: ArmyIcon}).bindPopup(popupContent).openPopup().addTo(voenloot);
         L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
         L.marker([51, -88], {icon: ArmyIcon}).addTo(voenloot);
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds">Военные ящики</button>');
