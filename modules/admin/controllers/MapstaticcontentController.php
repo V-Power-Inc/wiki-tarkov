@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Zavod;
-use app\models\ZavodSearch;
+use app\models\Mapstaticcontent;
+use app\models\MapstaticcontentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ZavodController implements the CRUD actions for Zavod model.
+ * MapstaticcontentController implements the CRUD actions for Mapstaticcontent model.
  */
-class ZavodController extends Controller
+class MapstaticcontentController extends Controller
 {
 
     /** Подключаем отдельный layout для CRUD моделей **/
@@ -28,28 +28,27 @@ class ZavodController extends Controller
         }
     }
     
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
                 ],
             ],
         ];
+        
+        
     }
 
+    
     /**
-     * Lists all Zavod models.
+     * Lists all Mapstaticcontent models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ZavodSearch();
+        $searchModel = new MapstaticcontentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,7 +58,7 @@ class ZavodController extends Controller
     }
 
     /**
-     * Displays a single Zavod model.
+     * Displays a single Mapstaticcontent model.
      * @param integer $id
      * @return mixed
      */
@@ -71,13 +70,13 @@ class ZavodController extends Controller
     }
 
     /**
-     * Creates a new Zavod model.
+     * Creates a new Mapstaticcontent model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Zavod();
+        $model = new Mapstaticcontent();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,7 +88,7 @@ class ZavodController extends Controller
     }
 
     /**
-     * Updates an existing Zavod model.
+     * Updates an existing Mapstaticcontent model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,12 +97,9 @@ class ZavodController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            json_encode($model);
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            json_decode(json_encode($model), true);
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -111,28 +107,15 @@ class ZavodController extends Controller
     }
 
     /**
-     * Deletes an existing Zavod model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Zavod model based on its primary key value.
+     * Finds the Mapstaticcontent model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Zavod the loaded model
+     * @return Mapstaticcontent the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Zavod::findOne($id)) !== null) {
+        if (($model = Mapstaticcontent::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

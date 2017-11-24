@@ -30,7 +30,7 @@ $this->title = 'Админка EFT-Locations';
 
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
     <ul class="nav nav-pills nav-stacked">
-        <h2 class="text-center">Новый раздел</h2>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Заготовка</a></li>
+        <h2 class="text-center">Дополнительно</h2>
+        <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
     </ul>
 </div>
