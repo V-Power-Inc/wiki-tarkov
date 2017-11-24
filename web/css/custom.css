@@ -524,7 +524,9 @@ h2.white {
 h1.map-title {
     color: white;
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .heading-class.mappage {
@@ -548,12 +550,23 @@ h1.map-title {
 
 #voenniymarker, #polkiimarker, #keysmarker, #exitsmarker {
     display: none;
-    font-size: 14px;
+    font-size: 12px;
     color: white;
+}
+
+#voenniymarker h2, #polkiimarker h2, #keysmarker h2, #exitsmarker h2 {
+    margin-top: 0;
+    padding-top: 5px;
 }
 
 #voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img {
     max-width: 100%;
+    box-shadow: 0px 0px 2px 1px;
+    border: 1px solid #ffffff;
+}
+
+.red {
+    color: #c74f27;
 }
 
 .voenka-b.active {
