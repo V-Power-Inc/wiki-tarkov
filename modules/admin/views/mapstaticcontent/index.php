@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
+        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
         <?// Html::a('Create Mapstaticcontent', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([

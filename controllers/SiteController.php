@@ -6,7 +6,9 @@ use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Zavod;
+use app\models\Mapstaticcontent;
 use Yii;
+use yii\helpers\Json;
 use yii\web\Controller;
 
 
@@ -70,10 +72,24 @@ class SiteController extends Controller
           return $this->render('maps/maps.php');
     }
 
+    /** Прилетают данные о статичном контенте описаний маркеров **/
+    public function actionStatic() {
+        $staticcontent = Mapstaticcontent::find()->asArray()->all();
+        return Json::encode($staticcontent);
+    }
+
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
-        $query = Zavod::find()->where('marker_group like "Военные ящики"' )->andWhere('enabled = 1')->asArray();
-      //  echo json_encode($query);
+        $voen = Zavod::find()->andWhere(['marker_group'=>"Военные ящики"])->all();
+        $dikie = Zavod::find()->andWhere(['marker_group'=>"Спавны диких"])->all();
+        $seifs = Zavod::find()->andWhere(['marker_group'=>"Полки и сейфы"])->all();
+        $exits = Zavod::find()->andWhere(['marker_group'=>"Вызоды с карты"])->all();
+        $keys = Zavod::find()->andWhere(['marker_group'=>"Ключи от дверей"])->all();
+        json_encode($voen);
+        json_encode($dikie);
+        json_encode($seifs);
+        json_encode($exits);
+        json_encode($keys);
         return $this->render('maps/zavod-location.php');
     }
     

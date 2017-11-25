@@ -2,6 +2,11 @@
  * Created by DIR300NRU-ADMIN on 13.11.2017.
  */
 
+$(function () {
+    var param = $('meta[name=csrf-param]').attr("content");
+    var token = $('meta[name=csrf-token]').attr("content");
+});
+
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
     center: [67, -70],
@@ -64,12 +69,25 @@ var SumkiIcon = L.icon({
 
 
 $(document).ready(function() {
+/** По прогрузке документа получаем данные по ajax со статическим контентом маркеров **/
+    $.ajax({
+        url: '/site/static',
+        dataType: 'json',
+        success: function(result) {
+            globalData = result;
+            console.log(result);
+        }
+    });
+    
+/** Отключаем на минимальном зуме кнопку минуса **/
+    $('a.leaflet-control-zoom-out').addClass('leaflet-disabled');
+    
 /** Объявляем группы маркеров всех возможных слоев **/
     var voenloot = L.layerGroup();
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
-    $('body').on('click','.voenka-b', function(){
-        // Ниже штука, добавляет popup к каждому маркеру 
+    $('body').on('click','.voenka-b', function(global){
+        
         var popupContent = 'fhfhfhefef';
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
@@ -80,6 +98,7 @@ $(document).ready(function() {
         L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
         L.marker([51, -88], {icon: ArmyIcon}).addTo(voenloot);
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds">Военные ящики</button>');
+        $('#voenniymarker').html(globalData[1].content);
         $(this).remove();
     });
 

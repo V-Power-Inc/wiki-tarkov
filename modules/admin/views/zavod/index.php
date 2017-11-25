@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Создать новый маркер', ['create'], ['class' => 'btn btn-success']) ?>
+        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
