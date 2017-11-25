@@ -26,14 +26,14 @@ map.setMinZoom(2);
 map.setZoom(2);
 
 /** Ограничение на перетягивание карты, если в экране есть края карты **/
-var southWest = L.latLng(85, -181),
-    northEast = L.latLng(-1, 74);
-var bounds = L.latLngBounds(southWest, northEast);
-
-map.setMaxBounds(bounds);
-map.on('drag', function() {
-    map.panInsideBounds(bounds, { animate: false });
-});
+// var southWest = L.latLng(90, -532),
+//     northEast = L.latLng(-90, 681);
+// var bounds = L.latLngBounds(southWest, northEast);
+//
+// map.setMaxBounds(bounds);
+// map.on('drag', function() {
+//     map.panInsideBounds(bounds, { animate: false });
+// });
 
 /** Получаем текщие координаты по местонахождению мышки **/
 function onMouseMove(e) {
@@ -245,6 +245,11 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+    });
+    
+    /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/
+    $('body').on('click','.mapcenter', function(){
+    map.panTo(new L.LatLng(67, -70));
     });
 });
 

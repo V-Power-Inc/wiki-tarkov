@@ -32,6 +32,8 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
     <div id="map" class="map">
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>
+        <!-- Кнопка вернуться к центру -->
+        <p class="mapcenter"><a class="btn btn-default main-link">Вернуться к центру карты</a></p>
     </div>
 </div>
     <!-- Опции карты -->
