@@ -92,6 +92,7 @@ $(document).ready(function() {
     var polki = L.layerGroup();
     var exits = L.layerGroup();
     var keys = L.layerGroup();
+    
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
     $('body').on('click','.voenka-b', function(){
@@ -107,7 +108,6 @@ $(document).ready(function() {
                 L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
             }
         });
-       
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Военные ящики</button>');
         $('#voenniymarker').html(staticData[1].content);
         $(this).remove();
@@ -251,7 +251,19 @@ $(document).ready(function() {
     $('body').on('click','.mapcenter', function(){
     map.panTo(new L.LatLng(67, -70));
     });
+
+    /** Инициализация OpenPopup **/
+    $('body').on('click','.leaflet-marker-icon', function(){
+        $('.image-link').magnificPopup(
+            {
+                type: 'image',
+                showCloseBtn: true,
+                mainClass: 'image-link'
+            });
+    });
 });
+
+
 
 
 
