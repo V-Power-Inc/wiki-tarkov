@@ -420,12 +420,12 @@ ul li a.relative i {
 }
 
 .image-link img {
-    border: 1px solid white;
-    box-shadow: 1px 1px 6px 2px;
+    border: 1px solid white!important;
+    box-shadow: 1px 1px 6px 2px!important;
 }
 
 a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
-    color: black;
+    color: black!important;
     outline: none;
 }
 
@@ -634,4 +634,3 @@ button::-moz-focus-inner {
     color: black;
     transition: .5s;
 }
-

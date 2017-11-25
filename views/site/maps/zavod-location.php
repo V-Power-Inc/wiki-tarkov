@@ -5,7 +5,6 @@
  * Date: 26.10.2017
  * Time: 15:05
  */
-use app\models\Zavod;
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
