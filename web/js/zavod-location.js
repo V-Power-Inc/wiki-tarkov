@@ -134,8 +134,10 @@ $(document).ready(function() {
         dikiy.addTo(map);
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Спавны диких") {
+            if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
                 L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
+            } else if(markersData[i].marker_group == "Спавны диких" && markersData[i].content == ""){
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).addTo(dikiy);
             }
         });
         $(".dikie-b").before('<button class="btn btn-danger dikie-b active" id="active-dikie-v">Спавны диких</button>');
