@@ -14,14 +14,14 @@ use mihaildev\elfinder\ElFinder;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <? $form->field($model, 'id')->textInput(['disabled' => true]) ?>
 
+    <?= $form->field($model, 'markername')->textInput(['maxlength' => true, 'disabled' => true]) ?>
+    
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
-
-    <?= $form->field($model, 'markername')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Обновить описание', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

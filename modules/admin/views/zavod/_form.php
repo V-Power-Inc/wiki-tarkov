@@ -16,8 +16,15 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'marker_group')->textInput(['maxlength' => true]) ?>
-
+   <?= $form->field($model, 'marker_group')
+    ->dropDownList([
+    '1' => 'Военные ящики',
+    '2' => 'Спавны диких',
+    '3' => 'Сейфы и шкафы',
+    '4' => 'Маркеры выходов',
+    '5' => 'Маркеры ключей',
+    ])
+        ?>
     <?= $form->field($model, 'coords_x')->textInput() ?>
 
     <?= $form->field($model, 'coords_y')->textInput() ?>

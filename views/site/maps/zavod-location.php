@@ -10,7 +10,7 @@ use app\models\Zavod;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/zavod-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Карта локации Завод в Escape from Tarkov - интерактивная карта Завода с просмотром ключей от помещений';
+$this->title = 'Карта локации Завод в Escape from Tarkov - интерактивная карта Завода с маркерами';
 ?>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
@@ -41,14 +41,13 @@ $this->title = 'Карта локации Завод в Escape from Tarkov - и�
                 <h1 class="map-title">Маркеры</h1>
                 <button class="btn btn-success voenka-b">Военные ящики</button>
                 <button class="btn btn-danger dikie-b">Спавны диких</button>
-                <button class="btn btn-primary seifs-b">Сейфы и полки</button>
+                <button class="btn btn-primary polki-b">Офисные ящики</button>
                 <button class="btn btn-default exits-b">Выходы с карты</button>
-                <button class="btn btn-yellow w-100 keys-b">Двери и ключи от них</button>
+                <button class="btn btn-yellow w-100 keys-b">Двери открываемые ключами</button>
             </div>
             <!-- Контент страницы -->
             <div class="col-lg-12">
-                <div id="voenniymarker">
-                </div>
+                <div id="voenniymarker"></div>
                 <div id="polkiimarker"></div>
                 <div id="dikiymarker"></div>
                 <div id="exitsmarker"></div>
