@@ -78,18 +78,13 @@ class SiteController extends Controller
         return Json::encode($staticcontent);
     }
 
+    public function actionZavodmarkers() {
+        $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+        return Json::encode($markers);
+    }
+
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
-        $voen = Zavod::find()->andWhere(['marker_group'=>"Военные ящики"])->all();
-        $dikie = Zavod::find()->andWhere(['marker_group'=>"Спавны диких"])->all();
-        $seifs = Zavod::find()->andWhere(['marker_group'=>"Полки и сейфы"])->all();
-        $exits = Zavod::find()->andWhere(['marker_group'=>"Вызоды с карты"])->all();
-        $keys = Zavod::find()->andWhere(['marker_group'=>"Ключи от дверей"])->all();
-        json_encode($voen);
-        json_encode($dikie);
-        json_encode($seifs);
-        json_encode($exits);
-        json_encode($keys);
         return $this->render('maps/zavod-location.php');
     }
     

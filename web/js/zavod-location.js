@@ -55,11 +55,11 @@ var DikieIcon = L.icon({
     iconSize: [30, 30]
 });
 var KeysIcon = L.icon({
-    iconUrl: '/img/mapicons/kurtki.png',
+    iconUrl: '/img/mapicons/keys.png',
     iconSize: [30, 30]
 });
 var ExitsIcon = L.icon({
-    iconUrl: '/img/mapicons/kurtki.png',
+    iconUrl: '/img/mapicons/exits.png',
     iconSize: [30, 30]
 });
 
@@ -71,7 +71,15 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(result) {
             staticData = result;
-            console.log(result);
+        }
+    });
+
+/** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
+    $.ajax({
+        url: '/site/zavodmarkers',
+        dataType: 'json',
+        success: function(markers) {
+            markersData = markers;
         }
     });
     
@@ -87,20 +95,19 @@ $(document).ready(function() {
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
     $('body').on('click','.voenka-b', function(){
-        
-        var popupContent = 'fhfhfhefef';
         $('#polkiimarker').hide();
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
-        // Данные ниже, будут прилетать по ajax
-        L.marker([41,-93], {icon: ArmyIcon}).addTo(voenloot);
-        L.marker([63, -109], {icon: ArmyIcon}).addTo(voenloot);
-        L.marker([81, -115], {icon: ArmyIcon}).bindPopup(popupContent).openPopup().addTo(voenloot);
-        L.marker([69.5, -118], {icon: ArmyIcon}).addTo(voenloot);
-        L.marker([51, -88], {icon: ArmyIcon}).addTo(voenloot);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Военные ящики") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
+            }
+        });
+       
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Военные ящики</button>');
         $('#voenniymarker').html(staticData[1].content);
         $(this).remove();
@@ -119,20 +126,18 @@ $(document).ready(function() {
 
     /** Обработка клика по кнопке выбора маркеров диких **/
     $('body').on('click','.dikie-b', function(){
-
-        var popupContent = 'fhfhfhefef';
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#dikiymarker').fadeIn();
         dikiy.addTo(map);
-        // Данные ниже, будут прилетать по ajax
-        L.marker([41,-93], {icon: DikieIcon}).addTo(dikiy);
-        L.marker([63, -109], {icon: DikieIcon}).addTo(dikiy);
-        L.marker([81, -115], {icon: DikieIcon}).bindPopup(popupContent).openPopup().addTo(dikiy);
-        L.marker([69.5, -118], {icon: DikieIcon}).addTo(dikiy);
-        L.marker([51, -88], {icon: DikieIcon}).addTo(dikiy);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Спавны диких") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
+            }
+        });
         $(".dikie-b").before('<button class="btn btn-danger dikie-b active" id="active-dikie-v">Спавны диких</button>');
         $('#dikiymarker').html(staticData[0].content);
         $(this).remove();
@@ -151,8 +156,6 @@ $(document).ready(function() {
 
     /** Обработка клика по кнопке выбора маркеров офисных полок **/
     $('body').on('click','.polki-b', function(){
-
-        var popupContent = 'fhfhfhefef';
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#exitsmarker').hide();
@@ -160,12 +163,12 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#polkiimarker').fadeIn();
         polki.addTo(map);
-        // Данные ниже, будут прилетать по ajax
-        L.marker([41,-93], {icon: PolkiIcon}).addTo(polki);
-        L.marker([63, -109], {icon: PolkiIcon}).addTo(polki);
-        L.marker([81, -115], {icon: PolkiIcon}).bindPopup(popupContent).openPopup().addTo(polki);
-        L.marker([69.5, -118], {icon: PolkiIcon}).addTo(polki);
-        L.marker([51, -88], {icon: PolkiIcon}).addTo(polki);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Офисные полки") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).openPopup().addTo(polki);
+            }
+        });
         $(".polki-b").before('<button class="btn btn-primary polki-b active" id="active-polki-v">Офисные ящики</button>');
         $('#polkiimarker').html(staticData[2].content);
         $(this).remove();
@@ -184,8 +187,6 @@ $(document).ready(function() {
 
     /** Обработка клика по кнопке выбора маркеров выходов с карты **/
     $('body').on('click','.exits-b', function(){
-
-        var popupContent = 'fhfhfhefef';
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#keysmarker').hide();
@@ -193,10 +194,12 @@ $(document).ready(function() {
         $('#polkiimarker').hide();
         $('#exitsmarker').fadeIn();
         exits.addTo(map);
-        // Данные ниже, будут прилетать по ajax
-        L.marker([41,-93], {icon: ExitsIcon}).addTo(exits);
-        L.marker([63, -109], {icon: ExitsIcon}).addTo(exits);
-        L.marker([81, -115], {icon: ExitsIcon}).bindPopup(popupContent).openPopup().addTo(exits);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Маркеры выходов") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
+            }
+        });
         $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();
@@ -215,8 +218,6 @@ $(document).ready(function() {
 
     /** Обработка клика по кнопке выбора маркеров дверей открываемых ключами **/
     $('body').on('click','.keys-b', function(){
-
-        var popupContent = 'fhfhfhefef';
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#dikiymarker').hide();
@@ -224,10 +225,12 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').fadeIn();
         keys.addTo(map);
-        // Данные ниже, будут прилетать по ajax
-        L.marker([41,-93], {icon: KeysIcon}).addTo(keys);
-        L.marker([63, -109], {icon: KeysIcon}).addTo(keys);
-        L.marker([81, -115], {icon: KeysIcon}).bindPopup(popupContent).openPopup().addTo(keys);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Маркеры ключей") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
+            }
+        });
         $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Двери открываемые ключами</button>');
         $('#keysmarker').html(staticData[4].content);
         $(this).remove();
