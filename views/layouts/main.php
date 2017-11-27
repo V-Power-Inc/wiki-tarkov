@@ -51,15 +51,11 @@ AppAsset::register($this);
     
         <div class="container nobackground">
             <div class="row">
-                <div class="col-sm-12">
-<!--                    <div class="footerbottomlink">-->
-<!--                        <a href="#">Линк 1</a>-->
-<!--                        <a href="#">Линк 2</a>-->
-<!--                        <a href="#">Линк 3</a>-->
-<!--                        <a href="#">Линк 4</a>-->
-<!--                        <a href="#">Линк 5</a>-->
-<!--                        <a href="#">Линк 6</a>	-->
-<!--                    </div>-->
+                <div class="col-sm-4">
+                    <p style="padding-top: 15px;">eft-locations.kfc-it.ru - база знаний(не является официальной) по онлайн шутеру для ПК Escape from Tarkov. Все права на Escape from Tarkov принадлежат Battlestate Games Limited - <a href="https://www.escapefromtarkov.com">Официальный сайт</a></p>
+                </div>
+
+                <div class="col-sm-4 col-sm-offset-4">
                     <p class="copyright text-right">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">
