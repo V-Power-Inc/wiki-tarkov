@@ -62,6 +62,10 @@ var ExitsIcon = L.icon({
     iconUrl: '/img/mapicons/exits.png',
     iconSize: [30, 30]
 });
+var ChvkIcon = L.icon({
+    iconUrl: '/img/mapicons/chvk.png',
+    iconSize: [30, 30]
+});
 
 
 $(document).ready(function() {
@@ -92,14 +96,18 @@ $(document).ready(function() {
     var polki = L.layerGroup();
     var exits = L.layerGroup();
     var keys = L.layerGroup();
+    var chvk = L.layerGroup();
     
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
     $('body').on('click','.voenka-b', function(){
+        $('.static-description').hide();
+        $('#polkiimarker').hide();
         $('#polkiimarker').hide();
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
         // Принимаем координаты по ajax
@@ -122,14 +130,17 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров диких **/
     $('body').on('click','.dikie-b', function(){
+        $('.static-description').hide();
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
         $('#dikiymarker').fadeIn();
         dikiy.addTo(map);
         // Принимаем координаты по ajax
@@ -154,15 +165,18 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров офисных полок **/
     $('body').on('click','.polki-b', function(){
+        $('.static-description').hide();
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#dikiymarker').hide();
+        $('#playermarker').hide();
         $('#polkiimarker').fadeIn();
         polki.addTo(map);
         // Принимаем координаты по ajax
@@ -185,15 +199,18 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров выходов с карты **/
     $('body').on('click','.exits-b', function(){
+        $('.static-description').hide();
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#keysmarker').hide();
         $('#dikiymarker').hide();
         $('#polkiimarker').hide();
+        $('#playermarker').hide();
         $('#exitsmarker').fadeIn();
         exits.addTo(map);
         // Принимаем координаты по ajax
@@ -216,15 +233,18 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров дверей открываемых ключами **/
     $('body').on('click','.keys-b', function(){
+        $('.static-description').hide();
         $('#polkiimarker').hide();
         $('#voenniymarker').hide();
         $('#dikiymarker').hide();
         $('#polkiimarker').hide();
         $('#exitsmarker').hide();
+        $('#playermarker').hide();
         $('#keysmarker').fadeIn();
         keys.addTo(map);
         // Принимаем координаты по ajax
@@ -247,6 +267,41 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#playermarker').hide();
+    });
+
+    /** Обработка клика по кнопке выбора маркеров спавнов ЧВК BEAR и USEC **/
+    $('body').on('click','.gamers-b', function(){
+        $('.static-description').hide();
+        $('#polkiimarker').hide();
+        $('#voenniymarker').hide();
+        $('#dikiymarker').hide();
+        $('#polkiimarker').hide();
+        $('#exitsmarker').hide();
+        $('#keysmarker').hide();
+        $('#playermarker').fadeIn();
+        chvk.addTo(map);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].marker_group == "Спавны игроков ЧВК") {
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).openPopup().addTo(chvk);
+            }
+        });
+        $(".gamers-b").before('<button class="btn btn-gamers gamers-b active" id="active-players-v">Спавны ЧВК</button>');
+        $('#playermarker').html(staticData[5].content);
+        $(this).remove();
+    });
+
+    $('body').on('click','#active-players-v', function(){
+        map.removeLayer(chvk);
+        $('#active-players-v').before('<button class="btn btn-gamers gamers-b">Спавны ЧВК</button>');
+        $('#active-players-v').remove();
+        $('#voenniymarker').hide();
+        $('#polkiimarker').hide();
+        $('#dikiymarker').hide();
+        $('#exitsmarker').hide();
+        $('#keysmarker').hide();
+        $('#playermarker').hide();
     });
     
     /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/

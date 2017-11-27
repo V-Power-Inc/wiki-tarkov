@@ -1,5 +1,5 @@
 
-/*** col-sm screen size (1199px) ***/
+/*** col-md screen size (1199px) ***/
 @media (max-width: 1199px) {
 
     .interback-white, .interback-grey {
@@ -46,6 +46,10 @@
 
     .quests-content {
         margin-top: 20px;
+    }
+
+    footer {
+        height: auto;
     }
 
 }

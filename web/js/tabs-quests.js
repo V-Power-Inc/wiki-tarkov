@@ -6,7 +6,7 @@
 $(document).ready(function() {
 
     /** Попап для увеличения картинок в квестах **/
-    $('.image-link').magnificPopup(
+    $('.image-quests').magnificPopup(
         {
         type:'image',
         showCloseBtn: true,
@@ -46,6 +46,10 @@ $(document).ready(function() {
                 $('.nav.nav-list.bs-docs-sidenav.affix').removeClass("affix");
             }
         });
+        /** При клике на таб - скроллим к верху экрана **/
+            // $('a[data-toggle="tab"]').on('click', function() {
+            //     $("html, body").animate({ scrollTop: 0 }, 1);
+            // });
     }
 
 

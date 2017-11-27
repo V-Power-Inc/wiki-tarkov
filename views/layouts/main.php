@@ -51,11 +51,11 @@ AppAsset::register($this);
     
         <div class="container nobackground">
             <div class="row">
-                <div class="col-sm-4">
-                    <p style="padding-top: 15px;">eft-locations.kfc-it.ru - база знаний(не является официальной) по онлайн шутеру для ПК Escape from Tarkov. Все права на Escape from Tarkov принадлежат Battlestate Games Limited - <a href="https://www.escapefromtarkov.com">Официальный сайт</a></p>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <p class="marks">Все права на Escape from Tarkov принадлежат Battlestate Games Limited <br> <a href="https://www.escapefromtarkov.com">Официальный сайт разработчиков</a></p>
                 </div>
 
-                <div class="col-sm-4 col-sm-offset-4">
+                <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
                     <p class="copyright text-right">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">

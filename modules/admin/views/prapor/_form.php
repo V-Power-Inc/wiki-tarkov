@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
+// Надо сделать upload файлов с ресайзом - use yii\imagine;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Prapor */

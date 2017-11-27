@@ -13,6 +13,7 @@ use Yii;
  * @property integer $tab_number
  * @property string $date_create
  * @property string $date_edit
+ * @property string  $preview
  */
 class Prapor extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class Prapor extends \yii\db\ActiveRecord
         return [
             [['content'], 'string'],
             [['tab_number'], 'integer'],
-            [['date_create', 'date_edit'], 'safe'],
+            [['date_create', 'date_edit', 'preview'], 'safe'],
             [['title'], 'string', 'max' => 100],
         ];
     }
@@ -49,6 +50,7 @@ class Prapor extends \yii\db\ActiveRecord
             'tab_number' => 'Сортировка',
             'date_create' => 'Дата создания',
             'date_edit' => 'Дата последнего редактирования',
+            'preview' => 'Превью картинка квеста',
         ];
     }
 }
