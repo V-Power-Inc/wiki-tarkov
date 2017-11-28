@@ -29,8 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'tab_number',
             'title',
 //            'content:ntext',
-            'preview',
-            'date_create',
+            'preview' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return  $data->preview;
+                },
+                ],
+                'date_create',
  //           'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],

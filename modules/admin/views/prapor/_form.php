@@ -21,6 +21,15 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
+    <?php if($model->preview) {
+        echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
+        echo '<img src='. $model->preview .' ?>';
+    }; 
+    ?>
+    
+    <br>
+    <br>
+    
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
