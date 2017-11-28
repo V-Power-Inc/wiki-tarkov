@@ -675,13 +675,13 @@ button::-moz-focus-inner {
 
 .outer-button {
     position: absolute;
-    top: 420px;
+    top: 373px;
     left: -36px;
 }
 
 .inner-button {
     position: absolute;
-    top: 420px;
+    top: 373px;
     left: -36px;
     display: none;
 }
