@@ -69,7 +69,11 @@ var ChvkIcon = L.icon({
 
 
 $(document).ready(function() {
+/** Устанавлиеваем новый центр карты **/
     map.panTo(new L.LatLng(67, 10));
+
+/** Делаем бэкграунд черным **/
+    $('body').css({'background':'black'});
     
 /** По прогрузке документа получаем данные по ajax со статическим контентом маркеров **/
     $.ajax({
