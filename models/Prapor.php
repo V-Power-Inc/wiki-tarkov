@@ -38,7 +38,8 @@ class Prapor extends \yii\db\ActiveRecord
         return [
             [['content'], 'string'],
             [['tab_number'], 'integer'],
-            [['date_create', 'date_edit', 'preview', 'file'], 'safe'],
+            [['date_create', 'date_edit', 'preview'], 'safe'],
+            [['file'], 'image'],
             [['title'], 'string', 'max' => 100],
         ];
     }

@@ -19,7 +19,7 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'tab_number')->textInput() ?>
 
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
