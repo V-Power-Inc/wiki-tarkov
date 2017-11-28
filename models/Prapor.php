@@ -52,6 +52,7 @@ class Prapor extends \yii\db\ActiveRecord
             'date_create' => 'Дата создания',
             'date_edit' => 'Дата последнего редактирования',
             'preview' => 'Превью картинка квеста',
+            'file' => 'Файл превьюшки',
         ];
     }
 }

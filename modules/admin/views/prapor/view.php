@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
+            'file',
             'content:ntext',
             'tab_number',
             'date_create',
