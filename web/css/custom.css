@@ -677,6 +677,7 @@ button::-moz-focus-inner {
     position: absolute;
     top: 373px;
     left: -36px;
+    cursor: pointer;
 }
 
 .inner-button {
@@ -684,6 +685,7 @@ button::-moz-focus-inner {
     top: 373px;
     left: -36px;
     display: none;
+    cursor: pointer;
 }
 
 .preview-small-image {
