@@ -13,11 +13,13 @@ use mihaildev\elfinder\ElFinder;
 
 <div class="prapor-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tab_number')->textInput() ?>
+
+    <?= $form->field($model, 'file')->fileInput() ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),

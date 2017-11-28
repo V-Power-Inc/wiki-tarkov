@@ -13,10 +13,11 @@ use Yii;
  * @property integer $tab_number
  * @property string $date_create
  * @property string $date_edit
- * @property string  $preview
+ * @property string $preview
  */
 class Prapor extends \yii\db\ActiveRecord
 {
+    public $file=null;
     /**
      * @inheritdoc
      */
@@ -33,7 +34,7 @@ class Prapor extends \yii\db\ActiveRecord
         return [
             [['content'], 'string'],
             [['tab_number'], 'integer'],
-            [['date_create', 'date_edit', 'preview'], 'safe'],
+            [['date_create', 'date_edit', 'preview', 'file'], 'safe'],
             [['title'], 'string', 'max' => 100],
         ];
     }
