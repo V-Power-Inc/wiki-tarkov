@@ -83,29 +83,14 @@ class PraporController extends Controller
     public function actionCreate()
     {
         $model = new Prapor();
-        $fileImg = UploadedFile::getInstance($model, 'file');
-        if ($model->load(\Yii::$app->request->post())) {
-            if ($fileImg !== null) {
-                $catalog = 'img/admin/' . $fileImg->baseName . '.' . $fileImg->extension;
-                // Путь до отресайзенной картинки **/
-                $middle = 'img/admin/' . $fileImg->baseName . '_min.' . $fileImg->extension;
-                $fileImg->saveAs($catalog);
-                $model->preview = '/' . $catalog;
-                Image::getImagine()->open($catalog)->thumbnail(new Box(300, 150))->save($middle, ['quality' => 90]);
-                if (!$model->save()) {
-                    echo "<pre>";
-                    print_r($model->getErrors());
-                    echo "</pre>";
-                    exit();
-                } else {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            }
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $model->uploadPreview();
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -117,6 +102,7 @@ class PraporController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tab_number',
             'title',
 //            'content:ntext',
-            'file',
+            'preview',
             'date_create',
  //           'date_edit',
 
