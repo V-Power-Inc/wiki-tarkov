@@ -693,3 +693,13 @@ button::-moz-focus-inner {
     border: 1px solid #9E9E9E;
     margin-right: 15px;
 }
+
+/*** Классы таблицы админки ***/
+.customed tbody tr td {
+    vertical-align: middle;
+}
+
+.customed tbody tr td img {
+    max-width: 120px;
+}
+/*** Окончание админских классов ***/
