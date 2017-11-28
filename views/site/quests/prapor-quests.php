@@ -20,20 +20,13 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
     <div class="row">
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-
             <ul class="nav nav-list bs-docs-sidenav">
                 <?php foreach ($prapor as $item): ?>
                 <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
-
-              
             </ul>
-            
-            
         </div>
-
-
-
+        
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
@@ -43,6 +36,7 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
                 <div class="tab-content">
                     <?php foreach ($prapor as $item): ?>
                     <div id="<?=$item['tab_number']?>" class="tab-pane fade">
+                        <?php if ($item['preview']):?> <img class="preview-small-image" src="<?= $item['preview'] ?>" alt="<?= $item['title'] ?>"> <?php endif; ?>
                         <?=$item['content']?>
                     </div>
                     <?php endforeach; ?>

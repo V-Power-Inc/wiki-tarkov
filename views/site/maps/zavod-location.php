@@ -22,16 +22,8 @@ $this->registerMetaTag([
     </div>
 </div>
 
-<!--<div class="right__content">-->
-<!--    <div class="col-lg-12">-->
-<!--        <h2 class="white">title - Заголовок</h2>-->
-<!--        <p></p>-->
-<!--    </div>-->
-<!--</div>-->
-
-
     <!-- Инициализация карты -->
-<div class="w-77">
+<div class="w-100">
     <div id="map" class="map">
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>
@@ -41,6 +33,8 @@ $this->registerMetaTag([
 </div>
     <!-- Опции карты -->
     <div class="optins_layerstability">
+        <div class="outer-button"><img src="/img/maps/button_outer.png"></div>
+        <div class="inner-button"><img src="/img/maps/button_inner.png"></div>
         <div class="col-lg-12">
             <div class="option-buttons">
                 <h1 class="map-title">Маркеры</h1>
@@ -49,7 +43,7 @@ $this->registerMetaTag([
                 <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
                 <button class="btn btn-primary polki-b">Офисные ящики</button>
                 <button class="btn btn-default exits-b">Выходы с карты</button>
-                <button class="btn btn-yellow w-100 keys-b">Двери открываемые ключами</button>
+                <button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>
             </div>
             <!-- Контент страницы -->
             <div class="col-lg-12">

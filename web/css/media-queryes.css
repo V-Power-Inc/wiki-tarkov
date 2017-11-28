@@ -100,6 +100,7 @@
 
     .mobile-brand {
         left: 80px;
+        font-size: 13px;
     }
 
     .mobile-small-logo {
@@ -125,6 +126,19 @@
 
     .nav li > form > button.logout {
         text-align: center;
+    }
+
+    .optins_layerstability {
+        right: -327px;
+        width: 327px;
+    }
+
+    .outer-button {
+        display: none;
+    }
+
+    .inner-button {
+        display: block;
     }
 
 }

@@ -47,9 +47,9 @@ $(document).ready(function() {
             }
         });
         /** При клике на таб - скроллим к верху экрана **/
-            // $('a[data-toggle="tab"]').on('click', function() {
-            //     $("html, body").animate({ scrollTop: 0 }, 1);
-            // });
+            $('a[data-toggle="tab"]').on('click', function() {
+                $("html, body").animate({ scrollTop: 0 }, 1);
+            });
     }
 
 

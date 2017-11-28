@@ -2,8 +2,9 @@
 
 body {
     background: #edeef0;
-    /*background: url(/img/eft-bg.jpg);*/
-    /*background-size: cover;*/
+    overflow-x: hidden;
+    width: 100%;
+    max-width:100%;
 }
 
 .content-style {
@@ -486,16 +487,16 @@ h2.white {
 
 .map#map {
     width: 100%;
-    height: 1000px;
+    height: 710px;
     position: relative;
 }
 
 .optins_layerstability {
-    width: 23%;
+    width: 437px;
     position: absolute;
     right: 0;
     top: 183px;
-    height: 1000px;
+    height: 710px;
     background: black;
     display: block;
     z-index: 999;
@@ -528,7 +529,7 @@ h2.white {
 }
 
 .option-buttons .btn {
-    width: 100%;
+    width: 195px;
     text-align: center;
     margin: 5px 0;
 }
@@ -553,7 +554,7 @@ h1.map-title {
 }
 
 .btn-yellow.w-100 {
-    width: 100%;
+    width: 195px;
 }
 
 .w-77 {
@@ -670,4 +671,25 @@ button::-moz-focus-inner {
 
 .static-description {
     color: white;
+}
+
+.outer-button {
+    position: absolute;
+    top: 420px;
+    left: -36px;
+}
+
+.inner-button {
+    position: absolute;
+    top: 420px;
+    left: -36px;
+    display: none;
+}
+
+.preview-small-image {
+    max-width: 100%;
+    float: left;
+    box-shadow: 1px 1px 5px 1px;
+    border: 1px solid #9E9E9E;
+    margin-right: 15px;
 }

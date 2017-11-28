@@ -69,6 +69,8 @@ var ChvkIcon = L.icon({
 
 
 $(document).ready(function() {
+    map.panTo(new L.LatLng(67, 10));
+    
 /** По прогрузке документа получаем данные по ajax со статическим контентом маркеров **/
     $.ajax({
         url: '/site/static',
@@ -253,14 +255,14 @@ $(document).ready(function() {
                 L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
             }
         });
-        $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Двери открываемые ключами</button>');
+        $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Отпираемые двери</button>');
         $('#keysmarker').html(staticData[4].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-keys-v', function(){
         map.removeLayer(keys);
-        $('#active-keys-v').before('<button class="btn btn-yellow w-100 keys-b">Двери открываемые ключами</button>');
+        $('#active-keys-v').before('<button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>');
         $('#active-keys-v').remove();
         $('#voenniymarker').hide();
         $('#polkiimarker').hide();
@@ -318,6 +320,31 @@ $(document).ready(function() {
                 mainClass: 'image-link'
             });
     });
+
+    /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
+    $.wait = function( callback, seconds){
+        return window.setTimeout(callback, seconds * 800 );
+    };
+    
+    $('.outer-button').click(function () {
+        $(".optins_layerstability").animate({ right: -437}, 800);
+        $.wait(function(){$(".outer-button").hide()} ,1);
+        $.wait(function(){$(".inner-button").show()} ,1);
+    });
+
+    $('.inner-button').click(function () {
+        $(".optins_layerstability").animate({ right: 0 }, 800);
+        $.wait(function(){$(".inner-button").hide()} ,1);
+        $.wait(function(){$(".outer-button").show()} ,1);
+    });
+
+    if (document.body.clientWidth <= '768')  {
+        $('.outer-button').click(function () {
+            $(".optins_layerstability").animate({ right: -327}, 800);
+            $.wait(function(){$(".outer-button").hide()} ,1);
+            $.wait(function(){$(".inner-button").show()} ,1);
+        });
+    }
 });
 
 
