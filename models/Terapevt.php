@@ -21,6 +21,7 @@ use Imagine\Image\Box;
  */
 class Terapevt extends \yii\db\ActiveRecord
 {
+    public $file=null;
     /**
      * @inheritdoc
      */
