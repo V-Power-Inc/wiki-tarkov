@@ -3,16 +3,18 @@ Options +FollowSymLinks
 IndexIgnore */*
 RewriteEngine on
 
-RewriteCond %{HTTP_HOST} ^www.eft-locations.kfc-it.ru$ [NC]
-RewriteRule ^(.*)$ https://eft-locations.kfc-it.ru/$1 [R=301,L]
 
 RewriteCond %{HTTPS} !=on
 # This checks to make sure the connection is not already HTTPS
-RewriteRule ^/?(.*) https://eft-locations.kfc-it.ru/$1 [R=301,L]
+RewriteRule ^/?(.*) https://dev.kfc-it.ru/$1 [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php
+
+Order Deny,Allow
+Deny from all
+Allow from 95.221.141.180
 
 # Оптимизация по отдаче контента - включили gzip сжатие
 <IfModule mod_deflate.c>
