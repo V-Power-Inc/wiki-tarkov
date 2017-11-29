@@ -38,8 +38,6 @@ AppAsset::register($this);
 
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
-    <p class="text center red">sdsdsdsdssd</p><p class="text center red">sdsdsdsdssd</p><p class="text center red">sdsdsdsdssd</p>
-
         <?= $content ?>
 
     
