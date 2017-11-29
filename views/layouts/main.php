@@ -30,7 +30,6 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <div class="wrap">
 
 
@@ -39,7 +38,7 @@ AppAsset::register($this);
 
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
-
+    <p class="text center red">sdsdsdsdssd</p><p class="text center red">sdsdsdsdssd</p><p class="text center red">sdsdsdsdssd</p>
 
         <?= $content ?>
 
