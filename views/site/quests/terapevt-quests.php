@@ -1,6 +1,7 @@
 <?php
 
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->title = 'Квесты Терапевта в Escape from Tarkov. Разбор и прохождение квестов Терапевта.';
 ?>
 
 <div class="heading-class">
