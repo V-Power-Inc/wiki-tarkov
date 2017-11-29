@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
 
 /**
  * This is the model class for table "lyjnic".
@@ -13,9 +17,11 @@ use Yii;
  * @property string $content
  * @property string $date_create
  * @property string $date_edit
+ * @property string $preview
  */
 class Lyjnic extends \yii\db\ActiveRecord
 {
+    public $file=null;
     /**
      * @inheritdoc
      */
@@ -33,6 +39,7 @@ class Lyjnic extends \yii\db\ActiveRecord
             [['tab_number'], 'integer'],
             [['content'], 'string'],
             [['date_create', 'date_edit'], 'safe'],
+            [['file'], 'image'],
             [['title'], 'string', 'max' => 100],
         ];
     }
@@ -49,6 +56,18 @@ class Lyjnic extends \yii\db\ActiveRecord
             'content' => 'Содержание квеста',
             'date_create' => 'Дата создания',
             'date_edit' => 'Дата последнего редактирования',
+            'file' => 'Файл превьюшки',
         ];
+    }
+
+    /*** Загрузка и сохранение превьюшек квеста ***/
+    public function uploadPreview() {
+        $fileImg = UploadedFile::getInstance($this, 'file');
+        if($fileImg !== null) {
+            $catalog = 'img/admin/resized/' . $fileImg->baseName . '.' . $fileImg->extension;
+            $fileImg->saveAs($catalog);
+            $this->preview = '/' . $catalog;
+            Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
+        }
     }
 }

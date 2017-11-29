@@ -29,10 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'tab_number',
             'title',
 //            'content:ntext',
+            'preview' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return  $data->preview;
+                },
+            ],
             'date_create',
-            'date_edit',
+//            'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
         ],
     ]); ?>
 </div>

@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class TerapevtController extends Controller
 {
-
+    public $file=null;
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -79,6 +79,7 @@ class TerapevtController extends Controller
     public function actionCreate()
     {
         $model = new Terapevt();
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -98,6 +99,7 @@ class TerapevtController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

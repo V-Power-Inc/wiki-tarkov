@@ -31,6 +31,7 @@ $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::
             <div class="tab-content">
                 <?php foreach ($terapevt as $item): ?>
                     <div id="<?=$item['tab_number']?>" class="tab-pane fade">
+                        <?php if ($item['preview']):?> <img class="preview-small-image" src="<?= $item['preview'] ?>" alt="<?= $item['title'] ?>"> <?php endif; ?>
                         <?=$item['content']?>
                     </div>
                 <?php endforeach; ?>
