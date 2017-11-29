@@ -16,10 +16,10 @@ Thumbs.db
 /vendor
 
 # ignore htaaccess by dev-prod
-#.htaccess
+.htaccess
 
 # ignore robots by dev-prod
-#robots.txt
+robots.txt
 # composer itself is not needed
 composer.phar
 
