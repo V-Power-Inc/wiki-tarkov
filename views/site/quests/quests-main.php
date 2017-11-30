@@ -78,10 +78,10 @@ $this->title = 'Торговцы в Escape from Tarkov - описания тор
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block; z-index: 100">
-                <h2 class="mobile-text-center"><a href="https://eft-locations.kfc-it.ru/quests-of-traders/lyjnic-quests">Лыжник</a></h2>
+                <h2 class="mobile-text-center"><a href="/quests-of-traders/lyjnic-quests">Лыжник</a></h2>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 mobile-text-center">
-                <a href="https://eft-locations.kfc-it.ru/quests-of-traders/lyjnic-quests"><img class="image-trader" src="/img/torgovcy/lyjnic.jpg" style="max-width:100%;" alt="Лыжник"></a>
+                <a href="/quests-of-traders/lyjnic-quests"><img class="image-trader" src="/img/torgovcy/lyjnic.jpg" style="max-width:100%;" alt="Лыжник"></a>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10">
                 <p class="traders-desc">Лыжник продает различные предметы из экипировки - это обвесы, рюкзаки, головные уборы, бронежилеты. Также у него можно купить любые виды дробовиков, и охотничьи ружья. На последнем уровне репутации с Лыжником вы сможете купить у него снайперскую винтовку ДВЛ-10.</p>
