@@ -36,3 +36,6 @@ tests/_support/_generated
 
 # no db
 config/db.php
+
+# ignore images
+web/img
