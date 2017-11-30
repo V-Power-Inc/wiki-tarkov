@@ -38,4 +38,4 @@ tests/_support/_generated
 config/db.php
 
 # ignore images
-web/img
+web/img/upload
