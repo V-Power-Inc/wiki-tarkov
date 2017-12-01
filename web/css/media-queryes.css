@@ -129,8 +129,11 @@
     }
 
     .optins_layerstability {
-        right: -327px;
-        width: 327px;
+        top: 174px;
+        right: -321px;
+        width: 325px;
+        height: 100%;
+        z-index: 9999;
     }
 
     .outer-button {
@@ -141,5 +144,25 @@
         display: block;
     }
 
+    h1 {
+        font-size: 28px;
+    }
+
 }
 
+/*** Стили интерактивных карт - ДЛЯ АНДРОЙДОВ ***/
+@media (max-width: 460px) {
+
+    .optins_layerstability {
+        top: 174px;
+        right: -295px;
+        width: 325px;
+        height: 1000px;
+        z-index: 999;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+}
