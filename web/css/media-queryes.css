@@ -132,8 +132,8 @@
         top: 174px;
         right: -321px;
         width: 325px;
-        height: 100%;
-        z-index: 9999;
+        height: auto;
+        z-index: 9991;
     }
 
     .outer-button {
