@@ -161,6 +161,22 @@
         z-index: 999;
     }
 
+    .mapcenter a.btn.btn-default.main-link, #mapCoords {
+        z-index: 999;
+    }
+
+    .map#map {
+        height: 356px;
+    }
+
+    .inner-button, .outer-button {
+        top: 73px;
+    }
+
+    .leaflet-top.leaflet-left {
+        display: none;
+    }
+
     h1 {
         font-size: 28px;
     }
