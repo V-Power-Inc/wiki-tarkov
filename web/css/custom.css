@@ -716,3 +716,7 @@ button::-moz-focus-inner {
     line-height: 18px;
     white-space: nowrap;
 }
+
+.disqs-comments {
+    margin-top: 50px;
+}
