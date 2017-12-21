@@ -23,6 +23,9 @@ robots.txt
 # composer itself is not needed
 composer.phar
 
+#ignore-auth model
+models/Login.php
+
 # Mac DS_Store Files
 .DS_Store
 
