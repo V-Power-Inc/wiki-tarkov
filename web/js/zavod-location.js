@@ -16,7 +16,7 @@ const map = L.map('map', {
 });
 
 /** Обращаемся к слоям зума интерактивной карты **/
-L.tileLayer('https://tarkov-wiki.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
+L.tileLayer('https://.ru/img/zavod/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
