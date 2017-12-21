@@ -66,7 +66,7 @@ class MenuComponent
             <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
             <div class="collapse navbar-collapse" id="navbar-main">
                 <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://eft-locations.kfc-it.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип eft-locations.kfc-it.ru"></a>
+                <a class="navbar-brand relative" href="https://tarkov-wiki.kfc-it.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.kfc-it.ru"></a>
 
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>

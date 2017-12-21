@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Админка EFT-Locations';
+$this->title = 'Админка tarkov-wiki';
 ?>
 <div class="col-lg-12 text-center">
     <h1 class="admin-title-main">Главная админская страница</h1>

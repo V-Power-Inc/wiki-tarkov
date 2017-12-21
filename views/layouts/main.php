@@ -16,13 +16,13 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="https://eft-locations.kfc-it.ru/favicon.png">
+    <link rel="icon" type="image/png" href="https://tarkov-wiki.kfc-it.ru/favicon.png">
     <meta name="yandex-verification" content="b2f2fdda03223b53" />
     <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
     <meta property="og:description" content="Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений">
-    <meta property="og:url" content="https://eft-locations.kfc-it.ru">
+    <meta property="og:url" content="https://tarkov-wiki.kfc-it.ru">
     <meta property="og:image" content="/img/logo-full.png">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
