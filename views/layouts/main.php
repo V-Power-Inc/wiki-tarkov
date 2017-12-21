@@ -17,7 +17,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://tarkov-wiki.kfc-it.ru/favicon.png">
-    <meta name="yandex-verification" content="b2f2fdda03223b53" />
+    <meta name="yandex-verification" content="43485f66dfa368e2" />
     <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
