@@ -16,7 +16,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="https://eft-locations.kfc-it.ru/favicon.png">
+    <link rel="icon" type="image/png" href="https://eft-locations.kfc-it.ru/favicon.png">
     <meta name="yandex-verification" content="b2f2fdda03223b53" />
     <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:type" content="website">
