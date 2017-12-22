@@ -49,7 +49,6 @@ $this->title = 'Карты локаций Escape from Tarkov - интеракт�
             <a href="/maps/forest-location"><img class="maps__small" src="/img/maps/forest_small.jpg"></a>
             <br>
             <br>
-            <p class="alert alert-danger"><b>В разработке</b></p>
             <a class="btn btn-default main-link" href="/maps/forest-location">Перейти к карте Леса</a>
         </div>
         
