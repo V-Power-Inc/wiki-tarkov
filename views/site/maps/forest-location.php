@@ -8,7 +8,7 @@
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-//$this->registerJsFile('js/zavod-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/forest-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Карта локации Лес в Escape from Tarkov - интерактивная карта Леса с маркерами';
 $this->registerMetaTag([
     'name' => 'description',
