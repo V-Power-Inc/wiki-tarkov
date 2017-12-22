@@ -12,6 +12,15 @@ $(document).ready(function() {
         showCloseBtn: true,
         });
 
+    $('.parent-container').magnificPopup({
+        delegate: 'a', // child items selector, by clicking on it popup will open
+        type: 'image',
+        gallery: {
+            enabled: true
+        },
+        // other options
+    });
+
     /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
     if (window.location.hash !== '') {
         $('#info-alert-prapor').remove();
