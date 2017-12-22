@@ -33,6 +33,7 @@ body {
     border: 0;
     border-bottom: 2px solid #c3392c;
     box-shadow: 0px 1px 4px;
+    z-index: 9999;
 }
 
 .relative {
@@ -714,4 +715,8 @@ button::-moz-focus-inner {
     font-size: 18px;
     line-height: 18px;
     white-space: nowrap;
+}
+
+.disqs-comments {
+    margin-top: 50px;
 }

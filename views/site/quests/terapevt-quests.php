@@ -1,6 +1,7 @@
 <?php
 
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Квесты Терапевта в Escape from Tarkov. Разбор и прохождение квестов Терапевта.';
 ?>
 
@@ -36,6 +37,13 @@ $this->title = 'Квесты Терапевта в Escape from Tarkov. Разб�
                         <?=$item['content']?>
                     </div>
                 <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Комментарии -->
+        <div class="col-sm-12 disqs-comments">
+            <div id="disqus_thread">
+
             </div>
         </div>
     </div>

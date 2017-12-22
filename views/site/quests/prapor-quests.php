@@ -6,6 +6,7 @@
  * Time: 15:15
  */
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор и прохождение квестов Прапора.';
 ?>
 <div class="heading-class">
@@ -41,10 +42,13 @@ $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор 
                     </div>
                     <?php endforeach; ?>
                 </div>
+        </div>
 
-
-
-
+        <!-- Комментарии -->
+        <div class="col-sm-12 disqs-comments">
+            <div id="disqus_thread">
+                
+            </div>
         </div>
     </div>
 </div>
