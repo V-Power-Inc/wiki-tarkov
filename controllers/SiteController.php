@@ -87,6 +87,11 @@ class SiteController extends Controller
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
     }
+
+    /** Рендер страницы с картой Леса **/
+    public function actionForest() {
+        return $this->render('maps/forest-location.php');
+    }
     
 
     /** Обработчик ошибок - отображает статусы ответа сервера **/
