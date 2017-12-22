@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ForestSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Forests';
+$this->title = 'Маркеры интерактивной карты локации Лес';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="forest-index">
@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Forest', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать новый маркер', ['create'], ['class' => 'btn btn-success']) ?>
+        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

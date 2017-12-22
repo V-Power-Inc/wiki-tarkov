@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Forest */
 
-$this->title = 'Create Forest';
+$this->title = 'Создать новый маркер для интерактивной карты Леса';
 $this->params['breadcrumbs'][] = ['label' => 'Forests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

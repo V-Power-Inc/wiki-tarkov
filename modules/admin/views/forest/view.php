@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить этот маркер?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -37,5 +37,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'enabled',
         ],
     ]) ?>
-
+    <a class="btn btn-primary" href="/admin/forest/">Вернуться в список маркеров Леса</a>
 </div>
