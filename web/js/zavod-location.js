@@ -317,6 +317,18 @@ $(document).ready(function() {
 
     /** Инициализация OpenPopup **/
     $('body').on('click','.leaflet-marker-icon', function(){
+        /** Указываем оборачивать все изображения в popup окнах классом JS Magnific **/
+        var MagnificImg = $('.leaflet-popup-content p img');
+        var MagnificTitle = MagnificImg.attr("alt").length > 0;
+
+        if (MagnificTitle) {
+            $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
+        } else {
+            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
+            $('.mfp-title').hide();
+        }
+        
+        /** Инициализация самого скрипта **/
         $('.image-link').magnificPopup(
             {
                 type: 'image',
@@ -324,7 +336,7 @@ $(document).ready(function() {
                 mainClass: 'image-link'
             });
     });
-
+    
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
     $.wait = function( callback, seconds){
         return window.setTimeout(callback, seconds * 800 );
@@ -350,6 +362,7 @@ $(document).ready(function() {
         });
     }
 });
+
 
 
 
