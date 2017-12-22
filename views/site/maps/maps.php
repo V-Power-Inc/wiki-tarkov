@@ -36,6 +36,14 @@ $this->title = 'Карты локаций Escape from Tarkov - интеракт�
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+            <h2 class="text-center map-heading">Карта Леса</h2>
+            <a href="/maps/forest-location"><img class="maps__small" src="/img/maps/forest_small.jpg"></a>
+            <br>
+            <br>
+            <a class="btn btn-default main-link" href="/maps/forest-location">Перейти к карте Леса</a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Таможни</h2>
             <img class="maps__small" src="/img/maps/tamojnya_small.jpg">
             <br>
@@ -43,17 +51,6 @@ $this->title = 'Карты локаций Escape from Tarkov - интеракт�
             <p class="alert alert-danger"><b>В разработке</b></p>
 <!--            <a class="btn btn-default main-link" href="#">Перейти к карте Таможни</a>-->
         </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
-            <h2 class="text-center map-heading">Карта Леса</h2>
-            <a href="/maps/forest-location"><img class="maps__small" src="/img/maps/forest_small.jpg"></a>
-            <br>
-            <br>
-            <a class="btn btn-default main-link" href="/maps/forest-location">Перейти к карте Леса</a>
-        </div>
-        
-        
-        
         
     </div>
     
