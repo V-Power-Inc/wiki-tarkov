@@ -316,25 +316,23 @@ $(document).ready(function() {
     });
 
     /** Инициализация OpenPopup **/
-    $('body').on('click','.leaflet-marker-icon', function(){
+    $('body').on('click','.leaflet-marker-icon', function() {
         /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
         try {
-        var MagnificImg = $('.leaflet-popup-content p img');
-        var MagnificTitle = MagnificImg.attr("alt").length > 0;
-        var MagnificGallery = $('.leaflet-popup-content .parent-container');
+            var MagnificImg = $('.leaflet-popup-content p img');
+            var MagnificTitle = MagnificImg.attr("alt").length > 0;
         }
-        
-        catch(error) {}
 
-        if(MagnificGallery) {}
-        
+        catch (error) {
+        }
+
         if (MagnificTitle) {
             $(MagnificImg).unwrap();
-            $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
-        } 
-        
+            $(MagnificImg).wrap('<a class="image-link" title="' + $(MagnificImg).attr('alt') + '" href=' + $(MagnificImg).attr('src') + '></a>');
+        }
+
         if (MagnificImg) {
-            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
+            $(MagnificImg).wrap('<a class="image-link" href=' + $(MagnificImg).attr('src') + '></a>');
         }
 
         /** Инициализация самого скрипта **/
@@ -345,15 +343,17 @@ $(document).ready(function() {
                 mainClass: 'image-link'
             });
 
-        $('.parent-container').magnificPopup({
-            delegate: 'a', // child items selector, by clicking on it popup will open
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            // other options
+        $('.parent-container').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
         });
     });
+            
 
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
     $.wait = function( callback, seconds){

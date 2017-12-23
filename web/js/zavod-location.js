@@ -321,12 +321,9 @@ $(document).ready(function() {
         try {
             var MagnificImg = $('.leaflet-popup-content p img');
             var MagnificTitle = MagnificImg.attr("alt").length > 0;
-            var MagnificGallery = $('.leaflet-popup-content .parent-container');
         }
 
         catch(error) {}
-
-        if(MagnificGallery) {}
 
         if (MagnificTitle) {
             $(MagnificImg).unwrap();
@@ -346,13 +343,14 @@ $(document).ready(function() {
                 mainClass: 'image-link'
             });
 
-        $('.parent-container').magnificPopup({
-            delegate: 'a', // child items selector, by clicking on it popup will open
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            // other options
+        $('.parent-container').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
         });
     });
     
