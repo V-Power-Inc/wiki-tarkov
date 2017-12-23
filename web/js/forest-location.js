@@ -329,12 +329,12 @@ $(document).ready(function() {
         if(MagnificGallery) {}
         
         if (MagnificTitle) {
+            $(MagnificImg).unwrap();
             $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
         } 
         
         if (MagnificImg) {
             $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
-            $('.mfp-title').css({"display" : "none"});
         }
 
         /** Инициализация самого скрипта **/
