@@ -6,6 +6,7 @@ use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Zavod;
+use app\models\Forest;
 use app\models\Mapstaticcontent;
 use Yii;
 use yii\helpers\Json;
@@ -78,14 +79,26 @@ class SiteController extends Controller
         return Json::encode($staticcontent);
     }
 
+    /** JSON данные с координатами маркеров Завода */
     public function actionZavodmarkers() {
         $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+        return Json::encode($markers);
+    }
+
+    /** JSON данные с координатами маркеров Завода */
+    public function actionForestmarkers() {
+        $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);
     }
 
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
+    }
+
+    /** Рендер страницы с картой Леса **/
+    public function actionForest() {
+        return $this->render('maps/forest-location.php');
     }
     
 

@@ -83,6 +83,7 @@ $config = [
                 'admin/login' => 'admin/default/logout',
                 'maps' => 'site/locations',
                 'maps/zavod-location' => 'site/zavod',
+                'maps/forest-location' => 'site/forest',
                 'quests-of-traders' => 'site/quests',
                 'quests-of-traders/prapor-quests' => 'site/praporpage',
                 'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
