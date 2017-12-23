@@ -720,3 +720,12 @@ button::-moz-focus-inner {
 .disqs-comments {
     margin-top: 50px;
 }
+
+.parent-container a {
+    color: black!important;
+    outline: none;
+}
+
+.parent-container img {
+    box-shadow: 1px 1px 6px 2px;
+}

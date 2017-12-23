@@ -152,7 +152,7 @@ button::-moz-focus-inner {
     padding-right: 6px;
     width: 100%;
     font-size: 50px;
-    margin-top: 40px; /*** Тестируется - по умолчанию не было ***/
+    margin-top: 60px; /*** Тестируется - по умолчанию не было ***/
     margin-right: 10px; /*** Тестируется - по умолчанию не было ***/
 }
 

@@ -317,17 +317,26 @@ $(document).ready(function() {
 
     /** Инициализация OpenPopup **/
     $('body').on('click','.leaflet-marker-icon', function(){
-        /** Указываем оборачивать все изображения в popup окнах классом JS Magnific **/
-        var MagnificImg = $('.leaflet-popup-content p img');
-        var MagnificTitle = MagnificImg.attr("alt").length > 0;
+        /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
+        try {
+            var MagnificImg = $('.leaflet-popup-content p img');
+            var MagnificTitle = MagnificImg.attr("alt").length > 0;
+            var MagnificGallery = $('.leaflet-popup-content .parent-container');
+        }
+
+        catch(error) {}
+
+        if(MagnificGallery) {}
 
         if (MagnificTitle) {
             $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
-        } else {
-            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
-            $('.mfp-title').hide();
         }
-        
+
+        if (MagnificImg) {
+            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
+            $('.mfp-title').css({"display" : "none"});
+        }
+
         /** Инициализация самого скрипта **/
         $('.image-link').magnificPopup(
             {
@@ -335,6 +344,15 @@ $(document).ready(function() {
                 showCloseBtn: true,
                 mainClass: 'image-link'
             });
+
+        $('.parent-container').magnificPopup({
+            delegate: 'a', // child items selector, by clicking on it popup will open
+            type: 'image',
+            gallery: {
+                enabled: true
+            },
+            // other options
+        });
     });
     
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
