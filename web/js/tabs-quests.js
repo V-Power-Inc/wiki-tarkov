@@ -5,20 +5,41 @@
 
 $(document).ready(function() {
 
-    /** Попап для увеличения картинок в квестах **/
-    $('.image-quests').magnificPopup(
-        {
-        type:'image',
-        showCloseBtn: true,
-        });
+    /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
+    try {
+        var MagnificImg = $('.image-link');
+        var MagnificTitle = MagnificImg.attr("alt").length > 0;
+    }
 
-    $('.parent-container').magnificPopup({
-        delegate: 'a', // child items selector, by clicking on it popup will open
-        type: 'image',
-        gallery: {
-            enabled: true
-        },
-        // other options
+    catch (error) {
+    }
+
+    if (MagnificTitle) {
+        $(MagnificImg).wrap('<a class="image-link" title="' + $(MagnificImg).attr('alt') + '" href=' + $(MagnificImg).attr('src') + '></a>');
+        $(MagnificImg).unwrap();
+    }
+
+    if (MagnificImg) {
+        $(MagnificImg).wrap('<a class="image-link" title="' + $(MagnificImg).attr('alt') + '" href=' + $(MagnificImg).attr('src') + '></a>');
+    }
+
+    /** Попап для увеличения картинок в квестах **/
+    $('.image-link').each(function () {
+        $(this).magnificPopup(
+            {
+                type: 'image',
+                showCloseBtn: true,
+                mainClass: 'image-link'
+            });
+    });
+    $('.parent-container').each(function () { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        });
     });
 
     /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/

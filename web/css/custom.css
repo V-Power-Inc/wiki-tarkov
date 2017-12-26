@@ -729,3 +729,10 @@ button::-moz-focus-inner {
 .parent-container img {
     box-shadow: 1px 1px 6px 2px;
 }
+
+/** В квесты **/
+.tab-pane .parent-container img, .tab-pane a.image-link img.image-link{
+    border: 1px solid white;
+    box-shadow: 1px 1px 6px 2px;
+}
+
