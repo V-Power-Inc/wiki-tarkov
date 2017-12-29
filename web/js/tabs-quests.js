@@ -6,32 +6,23 @@
 $(document).ready(function() {
 
     /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
-    try {
-        var MagnificImg = $('.image-link');
-        var MagnificTitle = MagnificImg.attr("alt").length > 0;
-    }
 
-    catch (error) {
-    }
-
-    if (MagnificTitle) {
-        $(MagnificImg).wrap('<a class="image-link" title="' + $(MagnificImg).attr('alt') + '" href=' + $(MagnificImg).attr('src') + '></a>');
-        $(MagnificImg).unwrap();
-    }
+    var MagnificImg = $('.image-link');
 
     if (MagnificImg) {
-        $(MagnificImg).wrap('<a class="image-link" title="' + $(MagnificImg).attr('alt') + '" href=' + $(MagnificImg).attr('src') + '></a>');
+        $(MagnificImg).each(function () {
+            $(this).wrap('<a class="image-link" title="' + $(this).attr('alt') + '" href=' + $(this).attr('src') + '></a>');
+        });
     }
 
     /** Попап для увеличения картинок в квестах **/
-    $('.image-link').each(function () {
-        $(this).magnificPopup(
+    $('.image-link').magnificPopup(
             {
                 type: 'image',
                 showCloseBtn: true,
                 mainClass: 'image-link'
             });
-    });
+  
     $('.parent-container').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
