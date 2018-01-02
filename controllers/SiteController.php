@@ -63,9 +63,7 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
-        // Пока нет квестов - редирект
-        $this->goHome();
-      //  return $this->render('quests/mirotvorec-quests.php');
+        return $this->render('quests/mirotvorec-quests.php');
     }
 
     /** Рендер страницы со списком интерактивных карт **/

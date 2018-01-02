@@ -8,6 +8,10 @@
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор и прохождение квестов Прапора.';
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Прохождение и разбор квестов Прапора по онлайн-шутеру Escape from Takov.',
+]);
 ?>
 <div class="heading-class">
     <div class="container">
