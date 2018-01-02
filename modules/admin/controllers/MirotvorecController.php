@@ -8,6 +8,10 @@ use app\models\MirotvorecSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
 
 /**
  * MirotvorecController implements the CRUD actions for Mirotvorec model.
@@ -77,6 +81,7 @@ class MirotvorecController extends Controller
     public function actionCreate()
     {
         $model = new Mirotvorec();
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -96,6 +101,7 @@ class MirotvorecController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

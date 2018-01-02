@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\MirotvorecSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mirotvorecs';
+$this->title = 'Квесты Миротворца';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mirotvorec-index">
@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Mirotvorec', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать новый квест', ['create'], ['class' => 'btn btn-success']) ?>
+        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,15 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+//            'id',
             'tab_number',
             'title',
-            'content:ntext',
+//            'content:ntext',
+            'preview' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return  $data->preview;
+                },
+            ],
             'date_create',
-            // 'date_edit',
-            // 'preview',
+            //           'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
         ],
     ]); ?>
 </div>

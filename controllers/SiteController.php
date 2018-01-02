@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
+use app\models\Mirotvorec;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Mapstaticcontent;
@@ -63,7 +64,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
-        return $this->render('quests/mirotvorec-quests.php');
+        $query =  Mirotvorec::find();
+        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/

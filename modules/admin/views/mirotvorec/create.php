@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Mirotvorec */
 
-$this->title = 'Create Mirotvorec';
+$this->title = 'Создать новый квест';
 $this->params['breadcrumbs'][] = ['label' => 'Mirotvorecs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
