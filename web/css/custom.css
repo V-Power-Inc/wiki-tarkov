@@ -361,7 +361,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content {
+.quests-content, .keys-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
@@ -735,4 +735,64 @@ button::-moz-focus-inner {
     border: 1px solid white;
     box-shadow: 1px 1px 6px 2px;
 }
+
+.item-key {
+    margin: 10px 0;
+    padding: 10px;
+    background: gainsboro;
+    border: 1px solid #c3392c;
+    border-radius: 5px;
+    max-height: 121px;
+    height: 100%;
+}
+
+.item-key p.item-content {
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.item-key p.item-name {
+    font-weight: bold;
+}
+
+p.item-name a {
+    color: #c3392c;
+    font-size: 18px;
+}
+
+p.item-name a:hover {
+    color: cornflowerblue;
+}
+
+.f-left {
+    float: left;
+}
+
+span.key-selector {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+}
+
+.form-control.key-selector {
+    width: 200px;
+    height: 37px;
+    font-weight: normal;
+    margin-top: 10px;
+    display: inline;
+    vertical-align: middle;
+}
+
+.h-37 {
+    height: 37px;
+}
+
+.btn.btn-primary.h-37 {
+    margin-left: 15px;
+    vertical-align: middle;
+    display: inline;
+    margin-top: 10px;
+}
+
+
 

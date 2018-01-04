@@ -101,6 +101,11 @@ class SiteController extends Controller
     public function actionForest() {
         return $this->render('maps/forest-location.php');
     }
+
+    /** Рендер страницы с наборами ключей **/
+    public function actionKeys() {
+        return $this->render('keys/index.php');
+    }
     
 
     /** Обработчик ошибок - отображает статусы ответа сервера **/
