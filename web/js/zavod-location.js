@@ -225,14 +225,14 @@ $(document).ready(function() {
                 L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
             }
         });
-        $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты</button>');
+        $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-exits-v', function(){
         map.removeLayer(exits);
-        $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты</button>');
+        $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>');
         $('#active-exits-v').remove();
         $('#voenniymarker').hide();
         $('#polkiimarker').hide();

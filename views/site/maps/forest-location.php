@@ -42,7 +42,7 @@ $this->registerMetaTag([
             <button class="btn btn-danger dikie-b">Спавны диких</button>
             <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
             <button class="btn btn-primary polki-b">Офисные ящики</button>
-            <button class="btn btn-default exits-b">Выходы с карты</button>
+            <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
             <button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>
         </div>
         <!-- Контент страницы -->
