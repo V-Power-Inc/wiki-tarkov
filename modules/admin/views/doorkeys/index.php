@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DoorkeysSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Doorkeys';
+$this->title = 'Справочник ключей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doorkeys-index">
@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Doorkeys', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить новый ключ', ['create'], ['class' => 'btn btn-success']) ?>
+        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

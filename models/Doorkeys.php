@@ -13,6 +13,7 @@ use Yii;
  * @property string $content
  * @property integer $active
  * @property string $date_create
+ * @property string $preview
  */
 class Doorkeys extends \yii\db\ActiveRecord
 {
@@ -33,8 +34,8 @@ class Doorkeys extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['content'], 'string'],
             [['active'], 'integer'],
-            [['date_create'], 'safe'],
-            [['name', 'mapgroup'], 'string', 'max' => 255],
+            [['date_create', 'mapgroup'], 'safe'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,11 +46,24 @@ class Doorkeys extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'mapgroup' => 'Mapgroup',
-            'content' => 'Content',
-            'active' => 'Active',
-            'date_create' => 'Date Create',
+            'name' => 'Название ключа',
+            'mapgroup' => 'Используется на картах',
+            'content' => 'Содержание',
+            'active' => 'Включен',
+            'date_create' => 'Дата создания',
+            'preview' => 'Превьюшка ключа',
         ];
+    }
+
+    // Преобразуем массив в строку
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->mapgroup != null) {
+                $this->mapgroup = implode(", ", $this->mapgroup);
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить ключ', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить ключ', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить этот ключ?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -36,5 +36,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_create',
         ],
     ]) ?>
-
+    <a class="btn btn-primary" href="/admin/doorkeys/">Вернуться в справочник ключей</a>
 </div>

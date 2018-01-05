@@ -97,6 +97,14 @@ class DoorkeysController extends Controller
     {
         $model = $this->findModel($id);
 
+        //Преобразуем строку employees в массив
+        $nn=preg_split('/\s*,\s*/',trim($model->mapgroup),-1,PREG_SPLIT_NO_EMPTY);
+        $mapgroup=array();
+        foreach ($nn as $pr) {
+            $mapgroup[]=$pr;
+        }
+        $model->mapgroup=$mapgroup;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

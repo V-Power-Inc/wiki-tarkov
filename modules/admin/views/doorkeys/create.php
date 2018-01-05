@@ -6,11 +6,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Doorkeys */
 
-$this->title = 'Create Doorkeys';
+$this->title = 'Создать новый маркер для интерактивной карты Леса';
 $this->params['breadcrumbs'][] = ['label' => 'Doorkeys', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="doorkeys-create">
+<div class="doorkeys-create"> 
 
     <h1><?= Html::encode($this->title) ?></h1>
 
