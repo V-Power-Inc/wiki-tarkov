@@ -11,7 +11,6 @@ use app\models\Zavod;
 use app\models\Forest;
 use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
-use yii\web\Response;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -110,7 +109,6 @@ class SiteController extends Controller
         $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
         $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
         $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
-
         return $this->render('keys/index.php', 
             [
             'zavod'=>$zavod,

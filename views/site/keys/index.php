@@ -6,7 +6,7 @@
  * Time: 22:20
  */
 
-use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
 ?>
 
 
@@ -25,18 +25,23 @@ use yii\helpers\Url;
 
             <div class="col-lg-6">
                 <span class="key-selector">Искать ключи на локации:</span>
-                <select class="form-control key-selector">
-                    <option>Все ключи</option>
-                    <option>Ключи Таможни</option>
-                    <option>Ключи Завода</option>
-                    <option>Ключи Леса</option>
-                    <option>Ключи Берега</option>
-                </select>
+<!--                --><?php //$form = ActiveForm::begin(['id' => 'mapsearch']) ?>
+                
+<?//= $form->field($form_model, 'doorkey')->dropDownList([
+//        'Все ключи' => 'Все ключи',
+//        'Таможня' => 'Таможня',
+//        'Берег' => 'Берег',
+//        'Лес' => 'Лес',
+//        'Завод' => 'Завод',
+//    ]);
+//
+//?>
 
                 <button type="button" class="btn btn-primary h-37">Осуществить поиск...</button>
+<!--                --><?php //$form = ActiveForm::end() ?>
             </div>
 
-            <!-- Блок контента - ключи на локации Таможня -->
+    <!-- Блок контента - ключи на локации Таможня -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Таможня</h2>
                 <!-- Контентная часть ключей -->
@@ -49,6 +54,7 @@ use yii\helpers\Url;
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
             </div>
+            
     <!-- Блок контента ключи на локации Завод -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Завод</h2>
@@ -62,6 +68,7 @@ use yii\helpers\Url;
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
             </div>
+            
     <!-- Блок контента ключи на локации Лес -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Лес</h2>
@@ -75,6 +82,7 @@ use yii\helpers\Url;
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
             </div>
+            
     <!-- Блок контента ключи на локации Берег -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Берег</h2>
