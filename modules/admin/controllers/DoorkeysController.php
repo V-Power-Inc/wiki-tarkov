@@ -8,6 +8,10 @@ use app\models\DoorkeysSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
 
 /**
  * DoorkeysController implements the CRUD actions for Doorkeys model.
@@ -77,7 +81,8 @@ class DoorkeysController extends Controller
     public function actionCreate()
     {
         $model = new Doorkeys();
-
+        $model->uploadPreview();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -96,7 +101,8 @@ class DoorkeysController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->uploadPreview();
+        
         //Преобразуем строку employees в массив
         $nn=preg_split('/\s*,\s*/',trim($model->mapgroup),-1,PREG_SPLIT_NO_EMPTY);
         $mapgroup=array();

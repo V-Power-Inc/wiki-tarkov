@@ -29,11 +29,33 @@ use mihaildev\elfinder\ElFinder;
 
    ?>
 
+    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    
+
+    <?php if($model->preview) {
+        echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
+        echo '<img src='. $model->preview .' ?>';
+        echo '<br>';
+        echo '<br>';
+    };
+    ?>
+    
+
+    <?php  echo $form->field($model, 'shortcontent')->widget(CKEditor::className(),[
+        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '100']),
+    ]);
+    ?>
+
+    <br>
+    <br>
+    
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
+    <br>
+    
     <?= $form->field($model, 'active')->checkbox([
         'label' => 'Включен',
     ]); ?>

@@ -28,11 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'mapgroup',
-            'content:ntext',
-            'active',
+            'shortcontent:ntext',
+            'preview' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return $data->preview;
+                },
+            ],
+            // 'active',
             // 'date_create',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        
+            'tableOptions' => [
+                'class' => 'table table-striped table-bordered customed'
+            ],
+       
     ]); ?>
 </div>

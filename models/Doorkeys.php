@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
 
 /**
  * This is the model class for table "doorkeys".
@@ -14,9 +18,15 @@ use Yii;
  * @property integer $active
  * @property string $date_create
  * @property string $preview
+ * @property string $shortcontent
  */
 class Doorkeys extends \yii\db\ActiveRecord
 {
+    
+/** Переменная файла превьюшки ключа **/
+    public $file=null;
+    
+    
     /**
      * @inheritdoc
      */
@@ -32,10 +42,11 @@ class Doorkeys extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['content'], 'string'],
+            [['content','shortcontent'], 'string'],
             [['active'], 'integer'],
             [['date_create', 'mapgroup'], 'safe'],
             [['name'], 'string', 'max' => 255],
+            [['file'], 'image'],
         ];
     }
 
@@ -49,13 +60,15 @@ class Doorkeys extends \yii\db\ActiveRecord
             'name' => 'Название ключа',
             'mapgroup' => 'Используется на картах',
             'content' => 'Содержание',
+            'shortcontent' => 'Краткое описание',
             'active' => 'Включен',
             'date_create' => 'Дата создания',
+            'file' => 'Превьюшка ключа',
             'preview' => 'Превьюшка ключа',
         ];
     }
 
-    // Преобразуем массив в строку
+    /** Преобразуем массив в строку для сохранения привязки ключей к нескольким локациям **/
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
@@ -65,5 +78,16 @@ class Doorkeys extends \yii\db\ActiveRecord
             return true;
         }
         return false;
+    }
+
+    /*** Загрузка и сохранение превьюшек квеста ***/
+    public function uploadPreview() {
+        $fileImg = UploadedFile::getInstance($this, 'file');
+        if($fileImg !== null) {
+            $catalog = 'img/admin/doorkeys/' . $fileImg->baseName . '.' . $fileImg->extension;
+            $fileImg->saveAs($catalog);
+            $this->preview = '/' . $catalog;
+            Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
+        }
     }
 }

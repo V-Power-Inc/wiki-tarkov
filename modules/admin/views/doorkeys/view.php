@@ -31,9 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'mapgroup',
+            'shortcontent:ntext',
             'content:ntext',
             'active',
             'date_create',
+            'preview',
         ],
     ]) ?>
     <a class="btn btn-primary" href="/admin/doorkeys/">Вернуться в справочник ключей</a>
