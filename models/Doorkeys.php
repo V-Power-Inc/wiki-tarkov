@@ -19,6 +19,9 @@ use Imagine\Image\Box;
  * @property string $date_create
  * @property string $preview
  * @property string $shortcontent
+ * @property string $url
+ * @property string $description
+ * @property string $keywords
  */
 class Doorkeys extends \yii\db\ActiveRecord
 {
@@ -41,8 +44,8 @@ class Doorkeys extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['content','shortcontent'], 'string'],
+            [['name', 'description', 'keywords'], 'required'],
+            [['content','shortcontent', 'url'], 'string'],
             [['active'], 'integer'],
             [['date_create', 'mapgroup'], 'safe'],
             [['name'], 'string', 'max' => 255],
@@ -65,6 +68,9 @@ class Doorkeys extends \yii\db\ActiveRecord
             'date_create' => 'Дата создания',
             'file' => 'Превьюшка ключа',
             'preview' => 'Превьюшка ключа',
+            'url' => 'Url адрес',
+            'description' => 'Метатег description',
+            'keywords' => 'Метатег keywords',
         ];
     }
 
@@ -87,7 +93,7 @@ class Doorkeys extends \yii\db\ActiveRecord
             $catalog = 'img/admin/doorkeys/' . $fileImg->baseName . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
+            Image::getImagine()->open($catalog)->thumbnail(new Box(64, 64))->save($catalog , ['quality' => 90]);
         }
     }
 }

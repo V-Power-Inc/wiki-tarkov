@@ -55,7 +55,7 @@ AdminAsset::register($this);
             'items' => [
                 ['label' => 'Открыть сайт', 'url' => ['/site/index'], 'linkOptions' => ['target' => '_blank']],
                 ['label' => 'Справочник квестов', 'url' => ['/site/quests'], 'linkOptions' => ['target' => '_blank']],
-                ['label' => 'База ключей', 'url' => ['/site/contact'] , 'linkOptions' => ['target' => '_blank']],
+                ['label' => 'База ключей', 'url' => ['/site/keys'] , 'linkOptions' => ['target' => '_blank']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : 

@@ -737,7 +737,7 @@ button::-moz-focus-inner {
 }
 
 .item-key {
-    margin: 10px 0;
+    margin: 5px 0;
     padding: 10px;
     background: gainsboro;
     border: 1px solid #c3392c;
@@ -792,6 +792,11 @@ span.key-selector {
     vertical-align: middle;
     display: inline;
     margin-top: 10px;
+}
+
+.item-key div.item-content {
+    padding-left: 10px;
+    display: inline-block;
 }
 
 

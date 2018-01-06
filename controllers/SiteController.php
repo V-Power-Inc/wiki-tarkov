@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
@@ -9,7 +10,8 @@ use app\models\Mirotvorec;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Mapstaticcontent;
-use Yii;
+use app\models\Doorkeys;
+use yii\web\Response;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -80,13 +82,13 @@ class SiteController extends Controller
         return Json::encode($staticcontent);
     }
 
-    /** JSON данные с координатами маркеров Завода */
+    /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
         $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);
     }
 
-    /** JSON данные с координатами маркеров Завода */
+    /** JSON данные с координатами маркеров Завода **/
     public function actionForestmarkers() {
         $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);
@@ -104,10 +106,27 @@ class SiteController extends Controller
 
     /** Рендер страницы с наборами ключей **/
     public function actionKeys() {
-        return $this->render('keys/index.php');
+        $zavod =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id'=>SORT_ASC])->all();
+        $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
+        $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
+        $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
+
+        return $this->render('keys/index.php', 
+            [
+            'zavod'=>$zavod,
+            'forest'=>$forest,
+            'bereg'=>$bereg,
+            'tamojnya'=>$tamojnya,
+            ]);
     }
     
-
+    /** Рендер детальной страницы для вывода ключей  **/
+    public function actionDoorkeysdetail($id)
+    {
+        $models = Doorkeys::find()->where(['url'=>$id])->One();
+        return $this->render('keys/detail-key.php',['model' => $models]);
+    }
+    
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
     {

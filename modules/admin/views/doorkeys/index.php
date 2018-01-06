@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->preview;
                 },
             ],
+            'url',
             // 'active',
             // 'date_create',
 

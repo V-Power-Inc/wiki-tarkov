@@ -16,6 +16,12 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+
    <?= $form->field($model, 'mapgroup')
     ->listBox([
         'Таможня' => 'Таможня',

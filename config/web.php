@@ -91,6 +91,10 @@ $config = [
                 'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
                 'keys' => 'site/keys',
+                'keys/detail-key' => 'site/doorkeysdetail',
+                [
+                    'class' => 'app\components\UrlComponent',
+                ],
             ],
         ],
         'reCaptcha' => [
@@ -100,6 +104,7 @@ $config = [
             'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_',
         ],
     ],
+    
     'params' => $params,
 ];
 
