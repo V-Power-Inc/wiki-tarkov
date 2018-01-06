@@ -2,7 +2,7 @@
 
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Лыжника.';
+$this->title = 'Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.';
 $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Прохождение и разбор квестов Миротворца по онлайн-шутеру Escape from Takov.',
