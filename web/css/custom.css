@@ -746,6 +746,11 @@ button::-moz-focus-inner {
     height: 100%;
 }
 
+.item-key.detail {
+    max-height: 100%;
+    height: 100%;
+}
+
 .item-key p.item-content {
     display: inline-block;
     padding-left: 10px;

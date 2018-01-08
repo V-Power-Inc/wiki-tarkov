@@ -19,6 +19,13 @@ $this->registerMetaTag([
 $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
+<style>
+    img.image-link {
+        color: black!important;
+        outline: none;
+        box-shadow: 0 0 6px 2px;
+    }
+</style>
 
 
 <div class="heading-class">
@@ -35,7 +42,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
             
             <div class="col-lg-12">
                 
-                    <div class="col-lg-12 item-key">
+                    <div class="col-lg-12 item-key detail">
                         <img class="w-100 f-left" src="<?=$model['preview']?>">
                         <div class="item-content">
                             <p class="size-16">Ключ используется на локациях: <b><?=$model['mapgroup']?></b></p>
