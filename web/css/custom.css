@@ -783,19 +783,25 @@ span.key-selector {
     vertical-align: middle;
 }
 
-.h-37 {
-    height: 37px;
-}
-
 .btn.btn-primary.h-37 {
     margin-left: 15px;
     vertical-align: middle;
     display: inline;
-    margin-top: 10px;
+    margin-top: -2px;
 }
 
 .item-key div.item-content {
     padding-left: 10px;
+    display: inline-block;
+}
+
+#doorkeys-doorkey {
+    width: 200px;
+    display: inline-block;
+}
+
+.field-doorkeys-doorkey {
+    padding-top: 10px;
     display: inline-block;
 }
 

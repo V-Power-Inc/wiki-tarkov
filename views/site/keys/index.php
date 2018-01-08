@@ -7,6 +7,8 @@
  */
 
 use yii\bootstrap\ActiveForm;
+
+$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 
@@ -23,22 +25,23 @@ use yii\bootstrap\ActiveForm;
         <div class="col-lg-12 keys-content">
             <p class="size-16 alert alert-info">Наиболее полная база ключей от помещений в игре Escape from Tarkov. Данный справочник содержит информацию о всех доступных ключах от помещений Таркова на локациях Завод, Берег, Лес и Таможня. Также в этом разделе вы можете узнать что находится за открываемыми дверями и узнать где можно с большей вероятностью найти определенный ключи.</p>
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <span class="key-selector">Искать ключи на локации:</span>
-<!--                --><?php //$form = ActiveForm::begin(['id' => 'mapsearch']) ?>
+                    <?php $form = ActiveForm::begin(['options' => ['action' => ['site/keys']],'id' => 'mapsearch','method' => 'post',]) ?>
                 
-<?//= $form->field($form_model, 'doorkey')->dropDownList([
-//        'Все ключи' => 'Все ключи',
-//        'Таможня' => 'Таможня',
-//        'Берег' => 'Берег',
-//        'Лес' => 'Лес',
-//        'Завод' => 'Завод',
-//    ]);
-//
-//?>
+<?= $form->field($form_model, 'doorkey')->dropDownList([
+       'Все ключи' => 'Все ключи',
+       'Таможня' => 'Таможня',
+       'Берег' => 'Берег',
+       'Лес' => 'Лес',
+       'Завод' => 'Завод',
+      ]); 
+?>
 
-                <button type="button" class="btn btn-primary h-37">Осуществить поиск...</button>
-<!--                --><?php //$form = ActiveForm::end() ?>
+                <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
+              
+                
+                <?php $form = ActiveForm::end() ?>
             </div>
 
     <!-- Блок контента - ключи на локации Таможня -->

@@ -28,7 +28,7 @@ class Doorkeys extends \yii\db\ActiveRecord
     
 /** Переменная файла превьюшки ключа **/
     public $file=null;
-    
+    public $doorkey;
     
     /**
      * @inheritdoc
@@ -71,6 +71,7 @@ class Doorkeys extends \yii\db\ActiveRecord
             'url' => 'Url адрес',
             'description' => 'Метатег description',
             'keywords' => 'Метатег keywords',
+            'doorkey' => '',
         ];
     }
 
