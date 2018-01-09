@@ -13,6 +13,7 @@ use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
 use yii\helpers\Json;
 use yii\web\Controller;
+use yii\web\HttpException;
 
 
 class SiteController extends Controller
@@ -149,7 +150,11 @@ class SiteController extends Controller
     public function actionDoorkeysdetail($id)
     {
         $models = Doorkeys::find()->where(['url'=>$id])->One();
+        if($models) {
         return $this->render('keys/detail-key.php',['model' => $models]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
