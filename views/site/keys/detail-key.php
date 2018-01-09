@@ -16,6 +16,25 @@ $this->registerMetaTag([
     'content' => $model['keywords'],
 ]);
 
+/******** OpenGraph теги ************/
+
+$this->registerMetaTag([
+    'property' => 'og:title',
+    'content' => $model['name'],
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:url',
+    'content' => 'https://tarkov-wiki.ru/'.$model['url'],
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:description',
+    'content' => $model['description'],
+]);
+
+/******** Окончание OpenGraph тегов ************/
+
 $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
