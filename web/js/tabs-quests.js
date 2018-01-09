@@ -5,20 +5,32 @@
 
 $(document).ready(function() {
 
-    /** Попап для увеличения картинок в квестах **/
-    $('.image-quests').magnificPopup(
-        {
-        type:'image',
-        showCloseBtn: true,
-        });
+    /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
 
-    $('.parent-container').magnificPopup({
-        delegate: 'a', // child items selector, by clicking on it popup will open
-        type: 'image',
-        gallery: {
-            enabled: true
-        },
-        // other options
+    var MagnificImg = $('.image-link');
+
+    if (MagnificImg) {
+        $(MagnificImg).each(function () {
+            $(this).wrap('<a class="image-link" title="' + $(this).attr('alt') + '" href=' + $(this).attr('src') + '></a>');
+        });
+    }
+
+    /** Попап для увеличения картинок в квестах **/
+    $('.image-link').magnificPopup(
+            {
+                type: 'image',
+                showCloseBtn: true,
+                mainClass: 'image-link'
+            });
+  
+    $('.parent-container').each(function () { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        });
     });
 
     /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
@@ -35,32 +47,6 @@ $(document).ready(function() {
     $('.nav.nav-list.bs-docs-sidenav li').click(function () {
         $('#info-alert-prapor').fadeOut();
     });
-        /** Делаем фиксированное меню при отскролливании страницы, либо если вертиклаьный скролл изначально не был в самом начале - проверяется размер окна браузера **/
-    
-        if (document.body.clientWidth >= '991')  {
-            if (window.pageYOffset !== 0) {
-                $('.nav.nav-list.bs-docs-sidenav').addClass("affix");
-                $('.nav.nav-list.bs-docs-sidenav.affix').addClass("fixed-nav-top-145");
-            } else {
-                $('.nav.nav-list.bs-docs-sidenav.affix.fixed-nav-top-145').removeClass("fixed-nav-top-145");
-                $('.nav.nav-list.bs-docs-sidenav.affix').removeClass("affix");
-            }
-    
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('.nav.nav-list.bs-docs-sidenav').addClass("affix");
-                $('.nav.nav-list.bs-docs-sidenav.affix').addClass("fixed-nav-top-145");
-            } else {
-                $('.nav.nav-list.bs-docs-sidenav.affix.fixed-nav-top-145').removeClass("fixed-nav-top-145");
-                $('.nav.nav-list.bs-docs-sidenav.affix').removeClass("affix");
-            }
-        });
-        /** При клике на таб - скроллим к верху экрана **/
-            $('a[data-toggle="tab"]').on('click', function() {
-                $("html, body").animate({ scrollTop: 0 }, 1);
-            });
-    }
-
 
 });
 

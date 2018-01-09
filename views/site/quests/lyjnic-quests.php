@@ -1,7 +1,12 @@
 <?php
 
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.';
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Прохождение и разбор квестов Лыжника по онлайн-шутеру Escape from Takov.',
+]);
 ?>
 
 <div class="heading-class">
@@ -36,6 +41,13 @@ $this->title = 'Квесты Лыжника в Escape from Tarkov. Разбор 
                         <?=$item['content']?>
                     </div>
                 <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Комментарии -->
+        <div class="col-sm-12 disqs-comments">
+            <div id="disqus_thread">
+
             </div>
         </div>
     </div>

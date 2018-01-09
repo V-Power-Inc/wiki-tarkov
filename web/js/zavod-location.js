@@ -16,7 +16,7 @@ const map = L.map('map', {
 });
 
 /** Обращаемся к слоям зума интерактивной карты **/
-L.tileLayer('https://eft-locations.kfc-it.ru/img/zavod/{z}/{x}/{y}.png', {
+L.tileLayer('/img/zavod/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
@@ -225,14 +225,14 @@ $(document).ready(function() {
                 L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
             }
         });
-        $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты</button>');
+        $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-exits-v', function(){
         map.removeLayer(exits);
-        $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты</button>');
+        $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>');
         $('#active-exits-v').remove();
         $('#voenniymarker').hide();
         $('#polkiimarker').hide();
@@ -317,14 +317,43 @@ $(document).ready(function() {
 
     /** Инициализация OpenPopup **/
     $('body').on('click','.leaflet-marker-icon', function(){
+        /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
+        try {
+            var MagnificImg = $('.leaflet-popup-content p img');
+            var MagnificTitle = MagnificImg.attr("alt").length > 0;
+        }
+
+        catch(error) {}
+
+        if (MagnificTitle) {
+            $(MagnificImg).unwrap();
+            $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
+        }
+
+        if (MagnificImg) {
+            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
+            $('.mfp-title').css({"display" : "none"});
+        }
+
+        /** Инициализация самого скрипта **/
         $('.image-link').magnificPopup(
             {
                 type: 'image',
                 showCloseBtn: true,
                 mainClass: 'image-link'
             });
-    });
 
+        $('.parent-container').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        });
+    });
+    
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
     $.wait = function( callback, seconds){
         return window.setTimeout(callback, seconds * 800 );
@@ -350,6 +379,7 @@ $(document).ready(function() {
         });
     }
 });
+
 
 
 

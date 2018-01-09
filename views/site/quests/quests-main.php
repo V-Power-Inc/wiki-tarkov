@@ -87,7 +87,7 @@ $this->title = 'Торговцы в Escape from Tarkov - описания тор
                 <p class="traders-desc">Лыжник продает различные предметы из экипировки - это обвесы, рюкзаки, головные уборы, бронежилеты. Также у него можно купить любые виды дробовиков, и охотничьи ружья. На последнем уровне репутации с Лыжником вы сможете купить у него снайперскую винтовку ДВЛ-10.</p>
                 <p class="traders-desc">У лыжника пожалуй самые сложные квесты в игре, в особенности первый квест, который называется "Снабженец". Квесты Лыжника зачастую подразумевают убийства операторов ЧВК (игроков) а также поиск предметов на карте в труднодоступных и опасных местах. Однако приоритет прокачки репутации с лыжником очень высокий, т.к. именно у него на последнем уровне репутации вы сможете покупать тяжелый бронежилет "Форт-М" и шлем "Кивер-М".</p>
                 <br>
-                <p class="mobile-text-center"><a class="btn btn-default main-link float-right" href="https://eft-locations.kfc-it.ru/quests-of-traders/lyjnic-quests">Перейти в раздел квестов Лыжника</a></p>
+                <p class="mobile-text-center"><a class="btn btn-default main-link float-right" href="https://tarkov-wiki.ru/quests-of-traders/lyjnic-quests">Перейти в раздел квестов Лыжника</a></p>
             </div>
         </div>
     </div>
@@ -97,16 +97,15 @@ $this->title = 'Торговцы в Escape from Tarkov - описания тор
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block; z-index: 100">
-                <h2 class="mobile-text-center"><a href="#">Миротворец</a></h2>
+                <h2 class="mobile-text-center"><a href="/quests-of-traders/mirotvorec-quests">Миротворец</a></h2>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 mobile-text-center">
-                <a href="#"><img class="image-trader" src="/img/torgovcy/morotvorec.jpg" style="max-width:100%;" alt="Миротворец"></a>
+                <a href="/quests-of-traders/mirotvorec-quests"><img class="image-trader" src="/img/torgovcy/morotvorec.jpg" style="max-width:100%;" alt="Миротворец"></a>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10">
                 <p class="traders-desc">Миротворец торгует Западными товарами. В арсенале Миротворца в Escape from Tarkov вы можете найти американские автоматы и пистолеты пулеметы, самый покупаемый товар у Миротворца это автомат M4A1. Также у него можно покупать бронежилеты, гранаты М-67, Важный момент заключается в том что Миротворец торгует товарами за доллары, это значит что для того чтобы прокачать с ним репутацию, вам придется продать ему очень много добычи из рейдов но оно того стоит.</p>
-                <p class="alert alert-danger size-16">Квесты для этого торговца еще не были введены в игру.</p>
             <br>
-<!--                <p><a class="btn btn-default main-link float-right" href="#">Перейти в раздел квестов Миротворца</a></p>-->
+                <p><a class="btn btn-default main-link float-right" href="/quests-of-traders/mirotvorec-quests">Перейти в раздел квестов Миротворца</a></p>
             </div>
         </div>
     </div>

@@ -32,6 +32,7 @@ class MenuComponent
             case 'index': self::$index = 'class="active"'; break;
             case 'quests': self::$quests = 'class="active"'; break;
             case 'locations': self::$locations = 'class="active"'; break;
+            case 'keys': self::$keys = 'class="active"'; break;
         }
     }
     /**
@@ -66,11 +67,12 @@ class MenuComponent
             <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
             <div class="collapse navbar-collapse" id="navbar-main">
                 <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://eft-locations.kfc-it.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип eft-locations.kfc-it.ru"></a>
+                <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
 
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
+                    <li '.self::$keys.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                 </ul>
 

@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
+use app\models\Mirotvorec;
 use app\models\Zavod;
+use app\models\Forest;
 use app\models\Mapstaticcontent;
-use Yii;
+use app\models\Doorkeys;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -62,9 +65,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
-        // Пока нет квестов - редирект
-        $this->goHome();
-      //  return $this->render('quests/mirotvorec-quests.php');
+        $query =  Mirotvorec::find();
+        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
@@ -78,8 +81,15 @@ class SiteController extends Controller
         return Json::encode($staticcontent);
     }
 
+    /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
         $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+        return Json::encode($markers);
+    }
+
+    /** JSON данные с координатами маркеров Завода **/
+    public function actionForestmarkers() {
+        $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);
     }
 
@@ -87,8 +97,86 @@ class SiteController extends Controller
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
     }
-    
 
+    /** Рендер страницы с картой Леса **/
+    public function actionForest() {
+        return $this->render('maps/forest-location.php');
+    }
+
+    /** Рендер страницы с наборами ключей **/
+    public function actionKeys() {
+
+        $zavod =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id'=>SORT_ASC])->all();
+        $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
+        $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
+        $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
+        $form_model = new Doorkeys();
+        if ($form_model->load(Yii::$app->request->post())) {
+            
+        $arr = $_POST;
+/** Если пришел Берег через POST **/
+            if($arr["Doorkeys"]["doorkey"]=="Берег") {
+                $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
+                return $this->render('keys/keyseach.php',
+                    [
+                        'form_model' => $form_model,
+                        'keysearch'=>$bereg,
+                        'arr'=>$arr,]);
+            }
+/** Если пришла Таможня через POST **/
+            elseif($arr["Doorkeys"]["doorkey"]=="Таможня") {
+                $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
+                return $this->render('keys/keyseach.php',
+                    [
+                        'form_model' => $form_model,
+                        'keysearch'=>$tamojnya,
+                        'arr'=>$arr,]);
+            }
+/** Если пришел Завод через POST **/
+            elseif($arr["Doorkeys"]["doorkey"]=="Завод") {
+                $zavod =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id'=>SORT_ASC])->all();
+                return $this->render('keys/keyseach.php',
+                    [
+                        'form_model' => $form_model,
+                        'keysearch'=>$zavod,
+                        'arr'=>$arr,]);
+            }
+/** Если пришел Лес через POST **/
+            elseif($arr["Doorkeys"]["doorkey"]=="Лес") {
+                $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
+                return $this->render('keys/keyseach.php',
+                    [
+                        'form_model' => $form_model,
+                        'keysearch'=>$forest,
+                        'arr'=>$arr,]);
+            }
+/** Если пришли все ключи через POST **/
+            elseif($arr["Doorkeys"]["doorkey"]=="Все ключи") {
+                $allkeys = Doorkeys::find()->andWhere(['active' => 1])->orderby(['id'=>SORT_ASC])->all();
+                return $this->render('keys/keyseach.php',
+                    [
+                        'form_model' => $form_model,
+                        'keysearch'=>$allkeys,
+                        'arr'=>$arr,]);
+            }
+        }
+
+        return $this->render('keys/index.php', 
+            [
+            'zavod'=>$zavod,
+            'forest'=>$forest,
+            'bereg'=>$bereg,
+            'tamojnya'=>$tamojnya,
+            'form_model' => $form_model]);
+    }
+    
+    /** Рендер детальной страницы для вывода ключей  **/
+    public function actionDoorkeysdetail($id)
+    {
+        $models = Doorkeys::find()->where(['url'=>$id])->One();
+        return $this->render('keys/detail-key.php',['model' => $models]);
+    }
+    
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
     {
