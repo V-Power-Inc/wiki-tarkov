@@ -51,8 +51,11 @@ $this->registerMetaTag([
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
         </div>
 
+        <!-- Расстояние - заглушка -->
+        <div class="col-xs-12 height-25"></div>
+
         <!-- Комментарии -->
-        <div id="mc-container" class="padding-top-30"></div>
+        <div id="mc-container" class="kek-recustom"></div>
         <script type="text/javascript">
             cackle_widget = window.cackle_widget || [];
             cackle_widget.push({widget: 'Comment', id: 57165});

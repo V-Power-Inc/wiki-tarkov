@@ -744,7 +744,13 @@ button::-moz-focus-inner {
     border-right: 17px solid #8BC34A;
 }
 
-.padding-top-30 {
-    padding-top: 30px;
+.kek-recustom {
+    padding: 20px;
+    background: white;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 
+.height-25 {
+    height: 25px;
+}
