@@ -71,7 +71,6 @@ $this->registerMetaTag([
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
             })();
         </script>
-        <a id="mc-link" href="http://cackle.me">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a>
         
         
     </div>
