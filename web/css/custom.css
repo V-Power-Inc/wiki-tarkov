@@ -736,3 +736,15 @@ button::-moz-focus-inner {
     box-shadow: 1px 1px 6px 2px;
 }
 
+.mfp-arrow-right:after {
+    border-left: 17px solid #8BC34A;
+}
+
+.mfp-arrow-left:after {
+    border-right: 17px solid #8BC34A;
+}
+
+.padding-top-30 {
+    padding-top: 30px;
+}
+
