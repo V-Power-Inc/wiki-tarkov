@@ -37,7 +37,7 @@ use yii\bootstrap\ActiveForm;
                         'Завод' => 'Завод',
                     ],
                     [
-                        'value' => $arr["Doorkeys"]["doorkey"]
+                        'value' => $arr
                     ]);
                     ?>
         

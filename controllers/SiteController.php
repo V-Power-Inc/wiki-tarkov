@@ -104,70 +104,45 @@ class SiteController extends Controller
     }
 
     /** Рендер страницы с наборами ключей **/
-    public function actionKeys() {
-
-        $zavod =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id'=>SORT_ASC])->all();
-        $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
-        $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
-        $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
+    public function actionKeys()
+    {
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id' => SORT_ASC])->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id' => SORT_ASC])->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id' => SORT_ASC])->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id' => SORT_ASC])->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
-            
-        $arr = $_POST;
-/** Если пришел Берег через POST **/
-            if($arr["Doorkeys"]["doorkey"]=="Берег") {
-                $bereg =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id'=>SORT_ASC])->all();
+            if(isset($_POST['Doorkeys']['doorkey'])){
+                $doorkey = $_POST['Doorkeys']['doorkey'];
+            }else{
+                $doorkey = "Все ключи";
+            }
+           
+            $words = ["Берег","Таможня","Завод","Лес","Все ключи"];
+            /** Если пришел Берег через POST **/
+            if(in_array($doorkey,$words)) {
+                $curentWord =  $words[array_search($doorkey,$words)];
+               if($curentWord == "Все ключи"){
+                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['id' => SORT_ASC])->all();
+               }else{
+                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['id' => SORT_ASC])->all();
+               }
+                
                 return $this->render('keys/keyseach.php',
                     [
                         'form_model' => $form_model,
-                        'keysearch'=>$bereg,
-                        'arr'=>$arr,]);
+                        'keysearch' => $result,
+                        'arr' => $curentWord,]);
             }
-/** Если пришла Таможня через POST **/
-            elseif($arr["Doorkeys"]["doorkey"]=="Таможня") {
-                $tamojnya =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id'=>SORT_ASC])->all();
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch'=>$tamojnya,
-                        'arr'=>$arr,]);
-            }
-/** Если пришел Завод через POST **/
-            elseif($arr["Doorkeys"]["doorkey"]=="Завод") {
-                $zavod =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id'=>SORT_ASC])->all();
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch'=>$zavod,
-                        'arr'=>$arr,]);
-            }
-/** Если пришел Лес через POST **/
-            elseif($arr["Doorkeys"]["doorkey"]=="Лес") {
-                $forest =  Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id'=>SORT_ASC])->all();
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch'=>$forest,
-                        'arr'=>$arr,]);
-            }
-/** Если пришли все ключи через POST **/
-            elseif($arr["Doorkeys"]["doorkey"]=="Все ключи") {
-                $allkeys = Doorkeys::find()->andWhere(['active' => 1])->orderby(['id'=>SORT_ASC])->all();
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch'=>$allkeys,
-                        'arr'=>$arr,]);
-            }
+        } else {
+            return $this->render('keys/index.php',
+                [
+                    'zavod'=>$zavod,
+                    'forest'=>$forest,
+                    'bereg'=>$bereg,
+                    'tamojnya'=>$tamojnya,
+                    'form_model' => $form_model]);
         }
-
-        return $this->render('keys/index.php', 
-            [
-            'zavod'=>$zavod,
-            'forest'=>$forest,
-            'bereg'=>$bereg,
-            'tamojnya'=>$tamojnya,
-            'form_model' => $form_model]);
     }
     
     /** Рендер детальной страницы для вывода ключей  **/
