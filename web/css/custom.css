@@ -743,7 +743,7 @@ button::-moz-focus-inner {
     border: 1px solid #c3392c;
     border-radius: 5px;
     max-height: 121px;
-    height: 100%;
+    height: 121px;
 }
 
 .item-key.detail {
@@ -798,6 +798,8 @@ span.key-selector {
 .item-key div.item-content {
     padding-left: 10px;
     display: inline-block;
+    width: 100%;
+    max-width: 1010px;
 }
 
 #doorkeys-doorkey {

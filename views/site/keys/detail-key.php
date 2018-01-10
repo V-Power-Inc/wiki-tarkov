@@ -62,7 +62,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
             <div class="col-lg-12">
                 
                     <div class="col-lg-12 item-key detail">
-                        <img class="w-100 f-left" src="<?=$model['preview']?>">
+                        <img class="w-100 f-left fixible" src="<?=$model['preview']?>">
                         <div class="item-content">
                             <p class="size-16">Ключ используется на локациях: <b><?=$model['mapgroup']?></b></p>
                             <?=$model['content']?>

@@ -51,7 +51,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($tamojnya as $k_tamojnya): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_tamojnya['url']?>"><?=$k_tamojnya['name']?></a></p>
-                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left" src="<?=$k_tamojnya['preview']?>"></a>
+                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible" src="<?=$k_tamojnya['preview']?>"></a>
                         <div class="item-content"><?=$k_tamojnya['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
