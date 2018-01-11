@@ -66,6 +66,14 @@ var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
 });
+var DomspawnIcon = L.icon({
+    iconUrl: '/img/mapicons/forestspawns/spawn_les_dom.png',
+    iconSize: [259, 259]
+});
+var OldstationspawnIcon = L.icon({
+    iconUrl: '/img/mapicons/forestspawns/spawn_les_stanciya.png',
+    iconSize: [360, 360]
+});
 
 
 $(document).ready(function() {
@@ -103,6 +111,8 @@ $(document).ready(function() {
     var exits = L.layerGroup();
     var keys = L.layerGroup();
     var chvk = L.layerGroup();
+    var housespawn = L.layerGroup();
+    var oldstationspawn = L.layerGroup();
 
 
     /** Обработка клика по кнопке выбора маркеров военного ящика **/
@@ -220,11 +230,17 @@ $(document).ready(function() {
         $('#exitsmarker').fadeIn();
         // Добавляем переключатель выхода
         $('.random-exits').fadeIn();
-        exits.addTo(map);
+      //  exits.addTo(map);
+        oldstationspawn.addTo(map);
+        L.marker([67.272,-157.939], {icon: OldstationspawnIcon}).addTo(map);
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Маркеры выходов") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
+            if (markersData[i].exits_group == "Спавн на старой станции") {
+                var ExitsIcon = L.icon({
+                    iconSize: [30, 30],
+                    iconUrl: markersData[i].customicon,
+                });
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(oldstationspawn);
             }
         });
         $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
