@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'exits_group',
+            'exit_anyway',
             // 'content:ntext',
             // 'enabled',
 

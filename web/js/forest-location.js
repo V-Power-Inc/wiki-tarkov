@@ -68,7 +68,7 @@ var ChvkIcon = L.icon({
 });
 var DomspawnIcon = L.icon({
     iconUrl: '/img/mapicons/forestspawns/spawn_les_dom.png',
-    iconSize: [259, 259]
+    iconSize: [250, 250]
 });
 var OldstationspawnIcon = L.icon({
     iconUrl: '/img/mapicons/forestspawns/spawn_les_stanciya.png',
@@ -113,6 +113,10 @@ $(document).ready(function() {
     var chvk = L.layerGroup();
     var housespawn = L.layerGroup();
     var oldstationspawn = L.layerGroup();
+
+    /** Добавляем маркеры для статичных зон спавна **/
+    L.marker([74.044,51.768], {icon: DomspawnIcon}).setZIndexOffset(999).addTo(housespawn);
+    L.marker([67.709,-147.129], {icon: OldstationspawnIcon}).setZIndexOffset(999).addTo(oldstationspawn);
 
 
     /** Обработка клика по кнопке выбора маркеров военного ящика **/
@@ -227,12 +231,18 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#polkiimarker').hide();
         $('#playermarker').hide();
+        // Указываем появиться кнопкам с переключателями
         $('#exitsmarker').fadeIn();
         // Добавляем переключатель выхода
         $('.random-exits').fadeIn();
       //  exits.addTo(map);
+        try {
+            map.removeLayer(housespawn);
+            map.removeLayer(oldstationspawn);
+        } catch(err) {}
+        
         oldstationspawn.addTo(map);
-        L.marker([67.709,-147.129], {icon: OldstationspawnIcon}).addTo(map);
+        
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
             if (markersData[i].exits_group == "Спавн на старой станции" || markersData[i].exit_anyway == "1") {
@@ -248,7 +258,55 @@ $(document).ready(function() {
         $(this).remove();
     });
 
+    /******************************************* Обработка клика по кнопке со спавнами ЧВК на доме *********************/
+    $('.house-spawn').click(function() {
+        try {
+            map.removeLayer(housespawn);
+            map.removeLayer(oldstationspawn);
+        } catch(err) {}
+        housespawn.addTo(map);
+
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].exits_group == "Спавн на доме" || markersData[i].exit_anyway == "1") {
+                var ExitsIcon = L.icon({
+                    iconSize: [30, 30],
+                    iconUrl: markersData[i].customicon,
+                });
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(housespawn);
+            }
+        });
+    });
+
+    /********************************* Обработка клика по кнопке со спавнами ЧВК на старой станции *********************/
+    $('.station-spawn').click(function() {
+        try {
+            map.removeLayer(housespawn);
+            map.removeLayer(oldstationspawn);
+        } catch(err) {}
+        
+        oldstationspawn.addTo(map);
+        // Принимаем координаты по ajax
+        $.each(markersData, function(i) {
+            if (markersData[i].exits_group == "Спавн на старой станции" || markersData[i].exit_anyway == "1") {
+                var ExitsIcon = L.icon({
+                    iconSize: [30, 30],
+                    iconUrl: markersData[i].customicon,
+                });
+                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(oldstationspawn);
+            }
+        });
+    });
+
+    
     $('body').on('click','#active-exits-v', function(){
+        $('.station-spawn').addClass('active');
+        $('.house-spawn').removeClass('active');
+        
+        try {
+            map.removeLayer(housespawn);
+            map.removeLayer(oldstationspawn);
+        } catch(err) {}
         map.removeLayer(exits);
         $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>');
         $('#active-exits-v').remove();
