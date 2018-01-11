@@ -77,7 +77,8 @@ class ForestController extends Controller
     public function actionCreate()
     {
         $model = new Forest();
-
+        $model->uploadPreview();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -96,6 +97,7 @@ class ForestController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

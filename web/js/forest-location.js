@@ -218,6 +218,8 @@ $(document).ready(function() {
         $('#polkiimarker').hide();
         $('#playermarker').hide();
         $('#exitsmarker').fadeIn();
+        // Добавляем переключатель выхода
+        $('.random-exits').fadeIn();
         exits.addTo(map);
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
@@ -240,6 +242,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        // Убираемы переключатель выхода
+        $('.random-exits').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров дверей открываемых ключами **/

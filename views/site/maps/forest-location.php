@@ -47,6 +47,26 @@ $this->registerMetaTag([
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">
+            <!-- Маркеры выходов в зависимости от спавна -->
+            <div class="random-exits">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary remastered active">
+                        <input type="radio" name="options" id="option1" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span>Выходы для спавна Дом</span>
+                    </label>
+                    <br>
+                    <br>
+                    <label class="btn btn-primary remastered">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span>Выходы для спавна Старая станция</span>
+                    </label>
+                </div>
+                <br>
+                <br>
+            </div>
+
             <div class="static-description">
                 <h2>Интерактивная карта Леса</h2>
                 <p>Интерактивная карта локации Лес из игры Escape from Tarkov с местами спавнов диких, игроков ЧВК а также месторасположем военных ящиков, выходов с локации, дверей открываемых ключами и офисных ящиков.</p>
