@@ -20,7 +20,8 @@ class AdminAsset extends AssetBundle
     //    'css/owl-css/owl.theme.default.min.css',
         'css/font-awesome/font-awesome.min.css',
         'css/custom.css',
-        'css/media-queryes.css'
+        'css/admin.css',
+        'css/media-queryes.css',
     ];
     public $js = [
         'js/bootstrap-js/bootstrap.min.js',

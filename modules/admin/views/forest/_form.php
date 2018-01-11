@@ -8,6 +8,8 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Forest */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="forest-form">
