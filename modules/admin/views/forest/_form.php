@@ -31,7 +31,7 @@ use mihaildev\elfinder\ElFinder;
 
     <?php if($model->customicon) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
-        echo '<img src='. $model->preview .' ?>';
+        echo '<img src='. $model->customicon .' ?>';
     };
     ?>
 
@@ -53,6 +53,10 @@ use mihaildev\elfinder\ElFinder;
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
+
+    <?= $form->field($model, 'exit_anyway')->checkbox([
+        'label' => 'Доступен для любого спавна ЧВК',
+    ]); ?>
 
     <?= $form->field($model, 'enabled')->checkbox([
         'label' => 'Включен',

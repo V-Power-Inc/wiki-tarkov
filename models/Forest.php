@@ -20,6 +20,7 @@ use Imagine\Image\Box;
  * @property integer $enabled
  * @property string $customicon
  * @property string $exits_group
+ * @property int $exit_anyway
  */
 class Forest extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,7 @@ class Forest extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['coords_x', 'coords_y'], 'number'],
             [['content'], 'string'],
-            [['enabled'], 'integer'],
+            [['enabled', 'exit_anyway'], 'integer'],
             [['name','exits_group'], 'string', 'max' => 100],
             [['marker_group'], 'string', 'max' => 55],
             [['customicon'], 'string', 'max' => 255],
@@ -65,6 +66,7 @@ class Forest extends \yii\db\ActiveRecord
             'exits_group' => 'Спавн был в зоне',
             'file' => 'Иконка маркера',
             'enabled' => 'Включен',
+            'exit_anyway' => 'Включен',
         ];
     }
 

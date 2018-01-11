@@ -235,7 +235,7 @@ $(document).ready(function() {
         L.marker([67.272,-157.939], {icon: OldstationspawnIcon}).addTo(map);
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
-            if (markersData[i].exits_group == "Спавн на старой станции") {
+            if (markersData[i].exits_group == "Спавн на старой станции" || markersData[i].exit_anyway == "1") {
                 var ExitsIcon = L.icon({
                     iconSize: [30, 30],
                     iconUrl: markersData[i].customicon,
