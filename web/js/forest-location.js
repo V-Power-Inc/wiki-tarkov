@@ -72,7 +72,7 @@ var DomspawnIcon = L.icon({
 });
 var OldstationspawnIcon = L.icon({
     iconUrl: '/img/mapicons/forestspawns/spawn_les_stanciya.png',
-    iconSize: [360, 360]
+    iconSize: [250, 250]
 });
 
 
@@ -232,7 +232,7 @@ $(document).ready(function() {
         $('.random-exits').fadeIn();
       //  exits.addTo(map);
         oldstationspawn.addTo(map);
-        L.marker([67.272,-157.939], {icon: OldstationspawnIcon}).addTo(map);
+        L.marker([67.709,-147.129], {icon: OldstationspawnIcon}).addTo(map);
         // Принимаем координаты по ajax
         $.each(markersData, function(i) {
             if (markersData[i].exits_group == "Спавн на старой станции" || markersData[i].exit_anyway == "1") {
