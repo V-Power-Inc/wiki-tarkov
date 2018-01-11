@@ -18,12 +18,14 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://tarkov-wiki.ru/favicon.png">
     <meta name="yandex-verification" content="43485f66dfa368e2" />
-    <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
+    <meta property="og:image" content="/img/logo-full.png">
+   <?php if(!stristr(Yii::$app->request->url,'/keys/')) { ?>
+    <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:description" content="Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений">
     <meta property="og:url" content="https://tarkov-wiki.ru">
-    <meta property="og:image" content="/img/logo-full.png">
+    <?php } ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
