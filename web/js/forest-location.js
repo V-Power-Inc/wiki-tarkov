@@ -128,13 +128,20 @@ $(document).ready(function() {
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
     $.each(markersData, function(i) {
-        if (markersData[i].exits_group == "Спавн на старой станции" || markersData[i].exit_anyway == "1") {
+        if (markersData[i].exit_anyway == "1") {
             var ExitsIcon = L.icon({
                 iconSize: [210, 210],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
-        } else if (markersData[i].exits_group == "Спавн на доме" || markersData[i].exit_anyway == "1") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
+        } else if (markersData[i].exits_group == "Спавн на старой станции") {
+            var ExitsIcon = L.icon({
+                iconSize: [210, 210],
+                iconUrl: markersData[i].customicon,
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
+        } else if (markersData[i].exits_group == "Спавн на доме") {
             var ExitsIcon = L.icon({
                 iconSize: [210, 210],
                 iconUrl: markersData[i].customicon,
