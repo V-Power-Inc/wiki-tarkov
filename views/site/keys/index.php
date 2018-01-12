@@ -6,6 +6,16 @@
  * Time: 22:20
  */
 
+$this->title = 'Справочник ключей Escape from Tarkov. Ключи от дверей в Таркове';
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Справочник ключей Escape from Tarkov. Ключи от помещений в Таркове',
+]);
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
+]);
+
 use yii\bootstrap\ActiveForm;
 
 $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
