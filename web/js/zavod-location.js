@@ -2,6 +2,9 @@
  * Created by DIR300NRU-ADMIN on 13.11.2017.
  */
 
+/** Вызываем заглушку для страницы в самом начале **/
+$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
+
 $(function () {
     var param = $('meta[name=csrf-param]').attr("content");
     var token = $('meta[name=csrf-token]').attr("content");
@@ -66,9 +69,6 @@ var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
 });
-
-/** Вызываем заглушку для страницы в самом начале **/
-$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
 
 $(document).ready(function() {
 /** Устанавлиеваем новый центр карты **/

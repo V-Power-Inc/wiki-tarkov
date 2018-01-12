@@ -2,6 +2,9 @@
  * Created by comp on 22.12.2017.
  */
 
+/** Вызываем заглушку для страницы в самом начале **/
+$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
+
 $(function () {
     var param = $('meta[name=csrf-param]').attr("content");
     var token = $('meta[name=csrf-token]').attr("content");
@@ -74,9 +77,6 @@ var OldstationspawnIcon = L.icon({
     iconUrl: '/img/mapicons/forestspawns/spawn_les_stanciya.png',
     iconSize: [250, 250]
 });
-
-/** Вызываем заглушку для страницы в самом начале **/
-$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
 
 $(document).ready(function() {
     /** Устанавлиеваем новый центр карты **/
