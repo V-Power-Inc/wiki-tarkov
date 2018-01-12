@@ -8,6 +8,8 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Forest */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="forest-form">
@@ -27,6 +29,24 @@ use mihaildev\elfinder\ElFinder;
         ])
     ?>
 
+    <?= $form->field($model, 'file')->fileInput(['value' => $model->customicon]) ?>
+
+    <?php if($model->customicon) {
+        echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
+        echo '<img src='. $model->customicon .' ?>';
+    };
+    ?>
+
+    <br>
+    <br>
+
+    <?= $form->field($model, 'exits_group')
+        ->dropDownList([
+            'Спавн на старой станции' => 'Спавн на старой станции',
+            'Спавн на доме' => 'Спавн на доме',
+        ])
+    ?>
+    
     <?= $form->field($model, 'coords_x')->textInput() ?>
 
     <?= $form->field($model, 'coords_y')->textInput() ?>
@@ -35,6 +55,10 @@ use mihaildev\elfinder\ElFinder;
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
+
+    <?= $form->field($model, 'exit_anyway')->checkbox([
+        'label' => 'Доступен для любого спавна ЧВК',
+    ]); ?>
 
     <?= $form->field($model, 'enabled')->checkbox([
         'label' => 'Включен',

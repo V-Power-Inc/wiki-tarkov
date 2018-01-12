@@ -18,12 +18,14 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://tarkov-wiki.ru/favicon.png">
     <meta name="yandex-verification" content="43485f66dfa368e2" />
-    <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
+    <meta property="og:image" content="/img/logo-full.png">
+   <?php if(!stristr(Yii::$app->request->url,'/keys/')) { ?>
+    <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:description" content="Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений">
     <meta property="og:url" content="https://tarkov-wiki.ru">
-    <meta property="og:image" content="/img/logo-full.png">
+    <?php } ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -65,7 +67,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
-                    <p class="copyright text-center">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
+                    <p class="copyright text-center">© 2017-2018 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">
 </span>

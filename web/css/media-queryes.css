@@ -14,6 +14,10 @@
         width: 300px;
     }
 
+    .item-key div.item-content {
+        max-width: 810px;
+    }
+
 }
 
 
@@ -50,6 +54,15 @@
 
     footer {
         height: auto;
+    }
+
+    .item-key div.item-content {
+        max-width: 590px;
+    }
+
+    .item-key {
+        max-height: 160px;
+        height: 160px;
     }
 
 }
@@ -146,6 +159,29 @@
 
     h1 {
         font-size: 28px;
+    }
+
+    .item-key div.item-content {
+        max-width: 580px;
+    }
+
+    .item-key {
+        max-height: 100%;
+        height: 100%;
+    }
+
+}
+
+
+/*** Кастомные паддинги ***/
+@media (max-width: 752px) {
+
+    .item-key div.item-content {
+        display: block;
+    }
+
+    .fixible {
+        margin: 0 5px;
     }
 
 }

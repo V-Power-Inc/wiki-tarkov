@@ -3,18 +3,21 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Forest;
-use app\models\ForestSearch;
+use app\models\Doorkeys;
+use app\models\DoorkeysSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
 
 /**
- * ForestController implements the CRUD actions for Forest model.
+ * DoorkeysController implements the CRUD actions for Doorkeys model.
  */
-class ForestController extends Controller
+class DoorkeysController extends Controller
 {
-
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -27,6 +30,7 @@ class ForestController extends Controller
             return self::actionIndex();
         }
     }
+    
     /**
      * @inheritdoc
      */
@@ -43,12 +47,12 @@ class ForestController extends Controller
     }
 
     /**
-     * Lists all Forest models.
+     * Lists all Doorkeys models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ForestSearch();
+        $searchModel = new DoorkeysSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -58,7 +62,7 @@ class ForestController extends Controller
     }
 
     /**
-     * Displays a single Forest model.
+     * Displays a single Doorkeys model.
      * @param integer $id
      * @return mixed
      */
@@ -70,13 +74,13 @@ class ForestController extends Controller
     }
 
     /**
-     * Creates a new Forest model.
+     * Creates a new Doorkeys model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Forest();
+        $model = new Doorkeys();
         $model->uploadPreview();
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -89,7 +93,7 @@ class ForestController extends Controller
     }
 
     /**
-     * Updates an existing Forest model.
+     * Updates an existing Doorkeys model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -98,6 +102,14 @@ class ForestController extends Controller
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
+        
+        //Преобразуем строку employees в массив
+        $nn=preg_split('/\s*,\s*/',trim($model->mapgroup),-1,PREG_SPLIT_NO_EMPTY);
+        $mapgroup=array();
+        foreach ($nn as $pr) {
+            $mapgroup[]=$pr;
+        }
+        $model->mapgroup=$mapgroup;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,7 +121,7 @@ class ForestController extends Controller
     }
 
     /**
-     * Deletes an existing Forest model.
+     * Deletes an existing Doorkeys model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,15 +134,15 @@ class ForestController extends Controller
     }
 
     /**
-     * Finds the Forest model based on its primary key value.
+     * Finds the Doorkeys model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Forest the loaded model
+     * @return Doorkeys the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Forest::findOne($id)) !== null) {
+        if (($model = Doorkeys::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

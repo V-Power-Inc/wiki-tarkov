@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ForestSearch */
+/* @var $searchModel app\models\DoorkeysSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Маркеры интерактивной карты локации Лес';
+$this->title = 'Справочник ключей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="forest-index">
+<div class="doorkeys-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Создать новый маркер', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить новый ключ', ['create'], ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
@@ -27,21 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'marker_group',
-            'coords_x',
-            'coords_y',
-            'customicon' => [
+            'mapgroup',
+            'shortcontent:ntext',
+            'preview' => [
                 'format' => 'image',
                 'value' => function($data) {
-                    return  $data->customicon;
+                    return $data->preview;
                 },
             ],
-            'exits_group',
-            'exit_anyway',
-            // 'content:ntext',
-            // 'enabled',
+            'url',
+            // 'active',
+            // 'date_create',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        
+            'tableOptions' => [
+                'class' => 'table table-striped table-bordered customed'
+            ],
+       
     ]); ?>
 </div>

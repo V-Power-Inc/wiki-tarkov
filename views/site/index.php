@@ -63,9 +63,7 @@ $this->registerMetaTag([
     
                     <p class="size-16">В данном разделе - вы сможете найти информацию о любом ключе открывающим двери и помещения в Escape from Tarkov. Вы сможете увидеть где можно найти тот или иной ключ, как выглядят открываемые двери а также увидеть что находится внутри открытых вами помещений.</p>
 
-<!--                    <p><a class="btn btn-default main-link" href="#">Перейти в раздел ключей EFT</a></p>-->
-
-                    <p class="alert alert-danger text-center" style="padding: 8px;"><b>В разработке</b></a></p>
+                    <p><a class="btn btn-default main-link" href="/keys">Перейти в раздел ключей EFT</a></p>
                 </div>
                 <div class="col-lg-4">
                     <h2>Карты локаций</h2>

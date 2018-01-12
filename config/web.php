@@ -90,6 +90,11 @@ $config = [
                 'quests-of-traders/skypchik-quests' => 'site/skypchikpage',
                 'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
+                'keys' => 'site/keys',
+                'keys/detail-key' => 'site/doorkeysdetail',
+                [
+                    'class' => 'app\components\UrlComponent',
+                ],
             ],
         ],
         'reCaptcha' => [
@@ -99,6 +104,7 @@ $config = [
             'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_',
         ],
     ],
+    
     'params' => $params,
 ];
 
@@ -115,7 +121,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // Доуступно с любого хоста
-        //'allowedIPs' => ['127.0.0.1', '::1','*'],
+//        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 

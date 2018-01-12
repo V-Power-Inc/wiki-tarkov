@@ -33,5 +33,6 @@ $this->title = 'Админка tarkov-wiki';
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
+        <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
     </ul>
 </div>

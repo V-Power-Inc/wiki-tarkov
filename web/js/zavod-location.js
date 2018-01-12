@@ -2,6 +2,9 @@
  * Created by DIR300NRU-ADMIN on 13.11.2017.
  */
 
+/** Вызываем заглушку для страницы в самом начале **/
+$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
+
 $(function () {
     var param = $('meta[name=csrf-param]').attr("content");
     var token = $('meta[name=csrf-token]').attr("content");
@@ -67,18 +70,18 @@ var ChvkIcon = L.icon({
     iconSize: [30, 30]
 });
 
-
 $(document).ready(function() {
 /** Устанавлиеваем новый центр карты **/
     map.panTo(new L.LatLng(67, 10));
 
 /** Делаем бэкграунд черным **/
-    $('body').css({'background':'black'});
-    
+$('body').css({'background':'black'});
+
 /** По прогрузке документа получаем данные по ajax со статическим контентом маркеров **/
     $.ajax({
         url: '/site/static',
         dataType: 'json',
+        async: false,
         success: function(result) {
             staticData = result;
         }
@@ -88,8 +91,10 @@ $(document).ready(function() {
     $.ajax({
         url: '/site/zavodmarkers',
         dataType: 'json',
+        async: false,
         success: function(markers) {
             markersData = markers;
+            $('.loader-maps-background').fadeOut();
         }
     });
     
@@ -103,7 +108,27 @@ $(document).ready(function() {
     var exits = L.layerGroup();
     var keys = L.layerGroup();
     var chvk = L.layerGroup();
-    
+
+    /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
+    // Принимаем координаты по ajax
+    // Тут реализована старая схема, иконки всех выходов одинаковые, без дополнительных полей в Базе
+    $.each(markersData, function(i) {
+        if (markersData[i].marker_group == "Маркеры выходов") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
+        } else if (markersData[i].marker_group == "Военные ящики") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
+        } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
+        } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content == "") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).addTo(dikiy);
+        } else if (markersData[i].marker_group == "Офисные полки") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).openPopup().addTo(polki);
+        } else if (markersData[i].marker_group == "Спавны игроков ЧВК") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).openPopup().addTo(chvk);
+        } else if (markersData[i].marker_group == "Маркеры ключей") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
+        }
+    });
 
 /** Обработка клика по кнопке выбора маркеров военного ящика **/
     $('body').on('click','.voenka-b', function(){
@@ -116,12 +141,6 @@ $(document).ready(function() {
         $('#playermarker').hide();
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Военные ящики") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
-            }
-        });
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Военные ящики</button>');
         $('#voenniymarker').html(staticData[1].content);
         $(this).remove();
@@ -149,14 +168,6 @@ $(document).ready(function() {
         $('#playermarker').hide();
         $('#dikiymarker').fadeIn();
         dikiy.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
-            } else if(markersData[i].marker_group == "Спавны диких" && markersData[i].content == ""){
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).addTo(dikiy);
-            }
-        });
         $(".dikie-b").before('<button class="btn btn-danger dikie-b active" id="active-dikie-v">Спавны диких</button>');
         $('#dikiymarker').html(staticData[0].content);
         $(this).remove();
@@ -185,12 +196,6 @@ $(document).ready(function() {
         $('#playermarker').hide();
         $('#polkiimarker').fadeIn();
         polki.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Офисные полки") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).openPopup().addTo(polki);
-            }
-        });
         $(".polki-b").before('<button class="btn btn-primary polki-b active" id="active-polki-v">Офисные ящики</button>');
         $('#polkiimarker').html(staticData[2].content);
         $(this).remove();
@@ -219,12 +224,6 @@ $(document).ready(function() {
         $('#playermarker').hide();
         $('#exitsmarker').fadeIn();
         exits.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Маркеры выходов") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
-            }
-        });
         $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();
@@ -253,12 +252,6 @@ $(document).ready(function() {
         $('#playermarker').hide();
         $('#keysmarker').fadeIn();
         keys.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Маркеры ключей") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
-            }
-        });
         $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Отпираемые двери</button>');
         $('#keysmarker').html(staticData[4].content);
         $(this).remove();
@@ -287,12 +280,6 @@ $(document).ready(function() {
         $('#keysmarker').hide();
         $('#playermarker').fadeIn();
         chvk.addTo(map);
-        // Принимаем координаты по ajax
-        $.each(markersData, function(i) {
-            if (markersData[i].marker_group == "Спавны игроков ЧВК") {
-                L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).openPopup().addTo(chvk);
-            }
-        });
         $(".gamers-b").before('<button class="btn btn-gamers gamers-b active" id="active-players-v">Спавны ЧВК</button>');
         $('#playermarker').html(staticData[5].content);
         $(this).remove();
