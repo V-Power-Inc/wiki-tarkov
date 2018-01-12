@@ -1,11 +1,15 @@
 <?php
 
 $this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/disquss.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Лыжника.';
+$this->title = 'Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.';
 $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Прохождение и разбор квестов Миротворца по онлайн-шутеру Escape from Takov.',
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Квесты миротворца в Escape from Tarkov, квесты миротворец Тарков',
 ]);
 ?>
 
@@ -45,13 +49,30 @@ $this->registerMetaTag([
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            <br>
+            <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
         </div>
 
+        <!-- Расстояние - заглушка -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
+        
+        
         <!-- Комментарии -->
-        <div class="col-sm-12 disqs-comments">
-            <div id="disqus_thread">
-
-            </div>
-        </div>
+        <div id="mc-container" class="kek-recustom"></div>
+        <script type="text/javascript">
+            cackle_widget = window.cackle_widget || [];
+            cackle_widget.push({widget: 'Comment', id: 57165});
+            (function() {
+                var mc = document.createElement('script');
+                mc.type = 'text/javascript';
+                mc.async = true;
+                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+            })();
+        </script>
+        
+        
+        
     </div>
 </div>

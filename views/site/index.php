@@ -4,6 +4,16 @@
 $this->registerJsFile('js/owl-init.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'База знаний Escape from Tarkov. Карты локаций, ключи от дверей, разбор квестов торговцев';
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений.',
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Интерактивные карты локаций Escape from Tarkov, квесты Escape from Tarkov, Ключи Escape from Tarkov.',
+]);
 ?>
 <div class="owl-carousel owl-theme">
     <div class="owl-item">

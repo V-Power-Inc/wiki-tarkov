@@ -6,6 +6,16 @@
  * Time: 15:15
  */
 $this->title = 'Торговцы в Escape from Tarkov - описания торговцев и разбор квестов';
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Торговцы в Escape from Tarkov - описания торговцев и разбор квестов - прохождения заданий Escape from Tarkov.',
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Квесты Escape from Tarkov, Задачи торговцев, квесты в Таркоеве',
+]);
 ?>
 <div class="heading-class">
     <div class="container">

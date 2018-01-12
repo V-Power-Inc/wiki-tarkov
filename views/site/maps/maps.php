@@ -7,6 +7,16 @@
  */
 
 $this->title = 'Карты локаций Escape from Tarkov - интерактивные карты с просмотром ключей от помещений';
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Карты локаций Escape from Tarkov - интерактивные карты Леса, Завода - просмотр маркеров со спавнами',
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Карта Леса Тарков, Карта таможни Тарков, Escape from tarkov интерактивные карты',
+]);
 ?>
 
 <div class="heading-class">
