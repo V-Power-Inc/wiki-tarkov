@@ -69,7 +69,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                         </div>
                     </div>
 
-                <a href="/keys"><button type="button" class="btn btn-primary">Вернуться в справочник ключей</button></a>
+                <a href="/keys"><button type="button" class="btn btn-primary margin-top-15">Вернуться в справочник ключей</button></a>
             </div>
 
             <!-- Расстояние - заглушка -->
