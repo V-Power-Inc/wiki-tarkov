@@ -90,6 +90,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 })();
             </script>
             
+        </div>
     </div>
 </div>
 
