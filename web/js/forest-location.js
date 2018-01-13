@@ -128,7 +128,7 @@ $(document).ready(function() {
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
     $.each(markersData, function(i) {
-        if (markersData[i].exit_anyway == "1") {
+        if (markersData[i].exit_anyway == "1" && markersData[i].exits_group !== '') {
             var ExitsIcon = L.icon({
                 iconSize: [210, 210],
                 iconUrl: markersData[i].customicon,

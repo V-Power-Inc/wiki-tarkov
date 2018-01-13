@@ -89,7 +89,7 @@ AdminAsset::register($this);
         <div class="container nobackground">
             <div class="row">
                 <div class="col-sm-12">
-                    <p class="copyright text-right">© 2017 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
+                    <p class="copyright text-right">© 2017-<?php echo date("Y");?>&nbsp;<a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">
 </span>

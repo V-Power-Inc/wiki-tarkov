@@ -67,7 +67,7 @@ AppAsset::register($this);
                 </div>
 
                 <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
-                    <p class="copyright text-center">© 2017-2018 <a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
+                    <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
 <span class="col-sm-12 counter-footer">
 </span>
