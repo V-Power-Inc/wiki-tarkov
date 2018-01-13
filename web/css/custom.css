@@ -894,3 +894,7 @@ border-bottom-left-radius: 5px!important;
     margin-left: -100px;
     margin-top: -55px;
 }
+
+.item-content.d-block.w-100 {
+    max-width: 100%;
+}
