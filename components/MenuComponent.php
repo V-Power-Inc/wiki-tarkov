@@ -40,15 +40,14 @@ class MenuComponent
      * @return array|\yii\db\ActiveRecord[]
      */
     public static function showMenu(){
-
+        $pagequests = "";
+        
         if (Yii::$app->request->url == "/quests-of-traders/prapor-quests" || 
             Yii::$app->request->url == "/quests-of-traders/terapevt-quests" ||
             Yii::$app->request->url == "/quests-of-traders/skypchik-quests" ||
             Yii::$app->request->url == "/quests-of-traders/lyjnic-quests" ||
             Yii::$app->request->url == "/quests-of-traders/mirotvorec-quests") {
             $pagequests = 'class="active"';
-        } else {
-            $pagequests = "";
         }
 
         self::Active();
