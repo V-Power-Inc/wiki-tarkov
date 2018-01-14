@@ -30,10 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'marker_group',
             'coords_x',
             'coords_y',
+            'customicon' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return  $data->customicon;
+                },
+            ],
             // 'content:ntext',
             // 'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
         ],
     ]); ?>
 </div>

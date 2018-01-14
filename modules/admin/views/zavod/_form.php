@@ -8,6 +8,8 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zavod */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="zavod-form">
@@ -17,15 +19,27 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
    <?= $form->field($model, 'marker_group')
-    ->dropDownList([
-    'Военные ящики' => 'Военные ящики',
-    'Спавны диких' => 'Спавны диких', 
-    'Спавны игроков ЧВК' => 'Спавны игроков ЧВК',
-    'Офисные полки' => 'Офисные полки',
-    'Маркеры выходов' => 'Маркеры выходов',
-    'Маркеры ключей' => 'Маркеры ключей',
-    ])
-        ?>
+        ->dropDownList([
+        'Военные ящики' => 'Военные ящики',
+        'Спавны диких' => 'Спавны диких', 
+        'Спавны игроков ЧВК' => 'Спавны игроков ЧВК',
+        'Офисные полки' => 'Офисные полки',
+        'Маркеры выходов' => 'Маркеры выходов',
+        'Маркеры ключей' => 'Маркеры ключей',
+        ])
+    ?>
+
+    <?= $form->field($model, 'file')->fileInput(['value' => $model->customicon]) ?>
+
+    <?php if($model->customicon) {
+        echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
+        echo '<img src='. $model->customicon .' ?>';
+    };
+    ?>
+
+    <br>
+    <br>
+    
     <?= $form->field($model, 'coords_x')->textInput() ?>
 
     <?= $form->field($model, 'coords_y')->textInput() ?>

@@ -78,7 +78,8 @@ class ZavodController extends Controller
     public function actionCreate()
     {
         $model = new Zavod();
-
+        $model->uploadPreview();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -97,6 +98,7 @@ class ZavodController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post())) {
             json_encode($model);
