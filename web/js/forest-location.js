@@ -61,10 +61,10 @@ var KeysIcon = L.icon({
     iconUrl: '/img/mapicons/keys.png',
     iconSize: [30, 30]
 });
-var ExitsIcon = L.icon({
-    iconUrl: '/img/mapicons/exits.png',
-    iconSize: [30, 30]
-});
+// var ExitsIcon = L.icon({
+//     iconUrl: '/img/mapicons/exits.png',
+//     iconSize: [30, 30]
+// });
 var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]

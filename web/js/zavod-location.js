@@ -61,10 +61,10 @@ var KeysIcon = L.icon({
     iconUrl: '/img/mapicons/keys.png',
     iconSize: [30, 30]
 });
-var ExitsIcon = L.icon({
-    iconUrl: '/img/mapicons/exits.png',
-    iconSize: [30, 30]
-});
+// var ExitsIcon = L.icon({
+//     iconUrl: '/img/mapicons/exits.png',
+//     iconSize: [30, 30]
+// });
 var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
@@ -111,9 +111,13 @@ $('body').css({'background':'black'});
 
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
-    // Тут реализована старая схема, иконки всех выходов одинаковые, без дополнительных полей в Базе
+    // Циклы в этом скрипте ненмого отличаются от вывода маркеров в Лесу, необходимо внимательно проверить в чем разница
     $.each(markersData, function(i) {
         if (markersData[i].marker_group == "Маркеры выходов") {
+            var ExitsIcon = L.icon({
+                iconSize: [70, 24],
+                iconUrl: markersData[i].customicon,
+            });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
         } else if (markersData[i].marker_group == "Военные ящики") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
