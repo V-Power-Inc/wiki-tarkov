@@ -11,28 +11,24 @@ namespace app\components;
 use app\models\Menu;
 use yii\helpers\Url;
 use Yii;
-/** Бля - это конечно нихуя не дело, надо будет поправить */
+
 class MenuComponent
 {
     public static $index = null;
     public static $quests = null;
     public static $locations = null;
     public static $keys = null;
-
-    public function init()
-    {
-        if ($this->name === null) {
-            $this->name = __CLASS__;
-        }
-    }
+    public static $detaikey = null;
 
     public static function  Active(){
         $activeAction = \Yii::$app->controller->action->id;
+        // case аналогично $activeAction == 'index'
         switch ($activeAction){
             case 'index': self::$index = 'class="active"'; break;
             case 'quests': self::$quests = 'class="active"'; break;
             case 'locations': self::$locations = 'class="active"'; break;
             case 'keys': self::$keys = 'class="active"'; break;
+            case 'doorkeysdetail': self::$detaikey = 'class="active"'; break;
         }
     }
     /**
@@ -42,11 +38,12 @@ class MenuComponent
     public static function showMenu(){
         $pagequests = "";
         
-        if (Yii::$app->request->url == "/quests-of-traders/prapor-quests" || 
-            Yii::$app->request->url == "/quests-of-traders/terapevt-quests" ||
-            Yii::$app->request->url == "/quests-of-traders/skypchik-quests" ||
-            Yii::$app->request->url == "/quests-of-traders/lyjnic-quests" ||
-            Yii::$app->request->url == "/quests-of-traders/mirotvorec-quests") {
+        $urlarray = ["/quests-of-traders/prapor-quests", 
+                    "/quests-of-traders/terapevt-quests",
+                    "/quests-of-traders/skypchik-quests",
+                    "/quests-of-traders/lyjnic-quests",
+                    "/quests-of-traders/mirotvorec-quests"];
+        if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'class="active"';
         }
 
@@ -71,7 +68,7 @@ class MenuComponent
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
-                    <li '.self::$keys.'><a href="/keys">Ключи от дверей</a></li>
+                    <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                 </ul>
 
