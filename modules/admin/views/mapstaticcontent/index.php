@@ -11,12 +11,7 @@ $this->title = 'Описания маркеров в правой колонке
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mapstaticcontent-index">
- <!-- Пизда костыль -->   
-    <style>
-        .glyphicon.glyphicon-trash {
-            display: none;
-        }
-    </style>
+
     
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -24,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
-        <?// Html::a('Create Mapstaticcontent', ['create'], ['class' => 'btn btn-success']) ?>
+        <?// Html::a('Создать новое статичное описание', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

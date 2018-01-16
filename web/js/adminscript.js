@@ -38,7 +38,7 @@ if((window.location.href.indexOf('forest')) == 28) {
 /** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Завода **/
 else if ((window.location.href.indexOf('zavod')) == 28) {
     $(document).ready(function () {
-        if($('#zavod-marker_group option:selected').text() === "Маркеры выходов") {
+        if($('#zavod-marker_group option:selected').text() === "Маркеры выходов" || $('#zavod-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-zavod-file').fadeIn();
         } else if($('#zavod-marker_group option:selected').text() !== "Маркеры выходов") {
             $('.form-group.field-zavod-file').fadeOut();
@@ -46,7 +46,7 @@ else if ((window.location.href.indexOf('zavod')) == 28) {
     });
 
     $("#zavod-marker_group").change(function() {
-        if($('#zavod-marker_group option:selected').text() === "Маркеры выходов") {
+        if($('#zavod-marker_group option:selected').text() === "Маркеры выходов" || $('#zavod-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-zavod-file').fadeIn();
         } else {
             $('.form-group.field-zavod-file').fadeOut();
