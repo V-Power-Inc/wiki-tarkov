@@ -153,6 +153,7 @@ $('body').css({'background':'black'});
 $('body').on('click','.bandits-b', function(){
     $('.static-description').hide();
     $('#necessaryplaces').hide();
+    $('#voenniymarker').hide();
     $('#polkiimarker').hide();
     $('#dikiymarker').hide();
     $('#exitsmarker').hide();
@@ -184,6 +185,7 @@ $('body').on('click','.places-b', function(){
     $('.static-description').hide();
     $('#polkiimarker').hide();
     $('#dikiymarker').hide();
+    $('#voenniymarker').hide();
     $('#exitsmarker').hide();
     $('#keysmarker').hide();
     $('#playermarker').hide();
