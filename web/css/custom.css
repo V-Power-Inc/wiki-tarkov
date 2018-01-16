@@ -573,7 +573,7 @@ h1.map-title {
     padding-top: 5px;
 }
 
-#voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img, #dikiymarker img, #playermarker img {
+#voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img, #dikiymarker img, #playermarker img, #dikiyexitmarker img, #necessaryplaces img  {
     max-width: 100%;
     box-shadow: 0px 0px 2px 1px;
     border: 1px solid #ffffff;

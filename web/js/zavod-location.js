@@ -71,8 +71,8 @@ var ChvkIcon = L.icon({
 });
 
 var PlacesInt = L.icon({
-    iconUrl: '/img/mapicons/chvk.png',
-    iconSize: [30, 30]
+    iconUrl: '/img/mapicons/whatis.png',
+    iconSize: [28, 27]
 });
 
 $(document).ready(function() {
