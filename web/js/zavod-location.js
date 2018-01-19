@@ -123,7 +123,7 @@ $('body').css({'background':'black'});
     $.each(markersData, function(i) {
         if (markersData[i].marker_group == "Маркеры выходов") {
             var ExitsIcon = L.icon({
-                iconSize: [70, 24],
+                iconSize: [181, 26],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().addTo(exits);
