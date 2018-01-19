@@ -243,11 +243,12 @@ $(document).ready(function() {
     $('body').on('click','.voenka-b', function(){
         $('.static-description').hide();
         $('#polkiimarker').hide();
-        $('#polkiimarker').hide();
         $('#dikiymarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
         $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Военные ящики</button>');
@@ -265,6 +266,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров диких **/
@@ -275,6 +278,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         $('#dikiymarker').fadeIn();
         dikiy.addTo(map);
         $(".dikie-b").before('<button class="btn btn-danger dikie-b active" id="active-dikie-v">Спавны диких</button>');
@@ -292,6 +297,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров офисных полок **/
@@ -303,6 +310,8 @@ $(document).ready(function() {
         $('#keysmarker').hide();
         $('#dikiymarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         $('#polkiimarker').fadeIn();
         polki.addTo(map);
         $(".polki-b").before('<button class="btn btn-primary polki-b active" id="active-polki-v">Офисные ящики</button>');
@@ -320,6 +329,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров выходов с карты **/
@@ -331,6 +342,8 @@ $(document).ready(function() {
         $('#dikiymarker').hide();
         $('#polkiimarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         // Указываем появиться кнопкам с переключателями
         $('#exitsmarker').fadeIn();
         // Добавляем переключатель выхода
