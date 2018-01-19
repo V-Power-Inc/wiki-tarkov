@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use app\models\Forest;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ForestSearch */
@@ -25,9 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'name',
-            'marker_group',
+            [
+                'attribute' => 'marker_group',
+                'value' => 'marker_group',
+                'filter' => Html::activeDropDownList($searchModel,'marker_group',ArrayHelper::map(Forest::find()->asArray()->all(), 'marker_group', 'marker_group'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
+            ],
             'coords_x',
             'coords_y',
             'customicon' => [
