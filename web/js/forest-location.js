@@ -137,14 +137,14 @@ $(document).ready(function() {
     $.each(markersData, function(i) {
         if (markersData[i].exit_anyway == "1" && markersData[i].exits_group !== '') {
             var ExitsIcon = L.icon({
-                iconSize: [210, 210],
+                iconSize: [140, 25],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
         } else if (markersData[i].exits_group == "Спавн на старой станции") {
             var ExitsIcon = L.icon({
-                iconSize: [210, 210],
+                iconSize: [140, 25],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
