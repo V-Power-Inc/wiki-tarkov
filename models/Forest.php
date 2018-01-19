@@ -66,7 +66,7 @@ class Forest extends \yii\db\ActiveRecord
             'exits_group' => 'Спавн был в зоне',
             'file' => 'Иконка маркера',
             'enabled' => 'Включен',
-            'exit_anyway' => 'Включен',
+            'exit_anyway' => 'Общий выход',
         ];
     }
 
