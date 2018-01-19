@@ -562,18 +562,18 @@ h1.map-title {
     width: 77%;
 }
 
-#voenniymarker, #polkiimarker, #keysmarker, #exitsmarker, #dikiymarker, #playermarker {
+#voenniymarker, #polkiimarker, #keysmarker, #exitsmarker, #dikiymarker, #playermarker, #dikiyexitmarker, #necessaryplaces {
     display: none;
     font-size: 12px;
     color: white;
 }
 
-#voenniymarker h2, #polkiimarker h2, #keysmarker h2, #exitsmarker h2, #dikiymarker h2, #playermarker h2 {
+#voenniymarker h2, #polkiimarker h2, #keysmarker h2, #exitsmarker h2, #dikiymarker h2, #playermarker h2, #dikiyexitmarker h2, #necessaryplaces h2 {
     margin-top: 0;
     padding-top: 5px;
 }
 
-#voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img, #dikiymarker img, #playermarker img {
+#voenniymarker img, #polkiimarker img, #keysmarker img, #exitsmarker img, #dikiymarker img, #playermarker img, #dikiyexitmarker img, #necessaryplaces img  {
     max-width: 100%;
     box-shadow: 0px 0px 2px 1px;
     border: 1px solid #ffffff;
@@ -627,6 +627,30 @@ h1.map-title {
     color: white;
     background-color: #FFC107!important;
     border-color: #FFC107!important;
+    box-shadow: inset 0px 0px 2px 2px;
+}
+
+.bandits-b {
+    background: #561b19;
+    color: white!important;
+}
+
+.places-b {
+    background: #80008073;
+    color: white!important;
+}
+
+.bandits-b.active {
+    background: #561b19!important;
+    color: white!important;
+    border-color: white!important;
+    box-shadow: inset 0px 0px 2px 2px;
+}
+
+.places-b.active {
+    background: #80008073;
+    color: white!important;
+    border-color: white!important;
     box-shadow: inset 0px 0px 2px 2px;
 }
 

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Zavod;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ZavodSearch */
@@ -25,9 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'name',
-            'marker_group',
+            [
+                'attribute' => 'marker_group',
+                'value' => 'marker_group',
+                'filter' => Html::activeDropDownList($searchModel,'marker_group',ArrayHelper::map(Zavod::find()->asArray()->all(), 'marker_group', 'marker_group'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
+            ],
             'coords_x',
             'coords_y',
             'customicon' => [
