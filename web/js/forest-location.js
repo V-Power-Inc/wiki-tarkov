@@ -150,7 +150,7 @@ $(document).ready(function() {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
         } else if (markersData[i].exits_group == "Спавн на доме") {
             var ExitsIcon = L.icon({
-                iconSize: [210, 210],
+                iconSize: [140, 25],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
