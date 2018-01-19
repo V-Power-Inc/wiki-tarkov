@@ -6,7 +6,7 @@
 
 
 /** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Леса **/
-if((window.location.href.indexOf('forest')) == 28) {
+if((window.location.href.indexOf('forest')) > -1) {
     $( document ).ready(function() {
         if($('#forest-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-forest-exits_group').fadeIn();
@@ -50,7 +50,7 @@ if((window.location.href.indexOf('forest')) == 28) {
 }
 
 /** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Завода **/
-else if ((window.location.href.indexOf('zavod')) == 28) {
+else if ((window.location.href.indexOf('zavod')) > -1) {
     $(document).ready(function () {
         if($('#zavod-marker_group option:selected').text() === "Маркеры выходов" || $('#zavod-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-zavod-file').fadeIn();
