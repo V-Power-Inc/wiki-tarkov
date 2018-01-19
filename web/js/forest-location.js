@@ -397,6 +397,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         // Убираемы переключатель выхода
         $('.random-exits').hide();
     });
@@ -410,6 +412,8 @@ $(document).ready(function() {
         $('#polkiimarker').hide();
         $('#exitsmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         $('#keysmarker').fadeIn();
         keys.addTo(map);
         $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Отпираемые двери</button>');
@@ -427,6 +431,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
     });
 
     /** Обработка клика по кнопке выбора маркеров спавнов ЧВК BEAR и USEC **/
@@ -438,6 +444,8 @@ $(document).ready(function() {
         $('#polkiimarker').hide();
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
         $('#playermarker').fadeIn();
         chvk.addTo(map);
         $(".gamers-b").before('<button class="btn btn-gamers gamers-b active" id="active-players-v">Спавны ЧВК</button>');
@@ -455,6 +463,8 @@ $(document).ready(function() {
         $('#exitsmarker').hide();
         $('#keysmarker').hide();
         $('#playermarker').hide();
+        $('#dikiyexitmarker').hide();
+        $('#necessaryplaces').hide();
     });
 
     /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/
