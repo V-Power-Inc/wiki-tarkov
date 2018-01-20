@@ -8,6 +8,7 @@
 
 namespace app\components;
 use app\models\Doorkeys;
+use app\models\News;
 use yii\web\UrlRuleInterface;
 use yii\base\Object;
 
@@ -18,6 +19,8 @@ class UrlComponent extends Object implements UrlRuleInterface
     {
         if (Doorkeys::find()->where(['url'=> $route])->One()) {
             return 'keys/'.$route;
+        } elseif (News::find()->where(['url'=> $route])->One()){
+            return 'news/'.$route;
         }
         return false;
     }
@@ -29,6 +32,10 @@ class UrlComponent extends Object implements UrlRuleInterface
         if($ppp[0] == 'keys'){
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
                 return ['site/doorkeysdetail',['id'=>$matches[3]]];
+            }
+        } elseif ($ppp[0] == 'news') {
+            if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+                return ['site/newsdetail',['id'=>$matches[3]]];
             }
         }
 

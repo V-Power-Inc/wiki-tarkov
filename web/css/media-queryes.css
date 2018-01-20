@@ -18,6 +18,11 @@
         max-width: 810px;
     }
 
+    .navbar-brand {
+        height: 0px;
+        padding: 0px;
+    }
+
 }
 
 
@@ -63,6 +68,21 @@
     .item-key {
         max-height: 160px;
         height: 160px;
+    }
+
+    .news-titleimage {
+        max-width: 200px;
+        width: 200px;
+        float: left;
+        border: 1px solid grey;
+        box-shadow: 1px 1px 1px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .news-shortitem {
+        height: auto;
     }
 
 }
