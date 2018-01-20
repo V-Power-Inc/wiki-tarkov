@@ -169,6 +169,11 @@ class SiteController extends Controller
         }
     }
     
+    /** Рендер страницы списка новостей **/
+    public function actionNews() {
+        return $this->render('news/list.php');
+    }
+    
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
     {

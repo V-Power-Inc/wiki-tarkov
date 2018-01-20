@@ -70,6 +70,7 @@ class MenuComponent
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
+                    <li><a href="/news">Новости</a></li>
                 </ul>
 
             </div>

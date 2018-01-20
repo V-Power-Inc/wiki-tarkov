@@ -49,7 +49,7 @@ body {
 
 .navbar-default .navbar-nav > li > a {
     color: #edeef0;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -68,7 +68,7 @@ body {
     position: relative;
     display: block;
     padding: 14.7px 5px;
-    width: 200px;
+    width: 180px;
     text-align: center;
 }
 
@@ -921,4 +921,53 @@ border-bottom-left-radius: 5px!important;
 
 .item-content.d-block.w-100 {
     max-width: 100%;
+}
+
+.news-shortitem {
+    padding: 10px;
+    margin: 15px 0 15px 0;
+    background: #edeef0;
+    height: auto;
+    min-height: 180px;
+    border-radius: 5px;
+    border: 2px solid #c3392c;
+}
+
+.news-short-title {
+    font-size: 19px;
+    font-weight: bold;
+    text-align: left;
+    color: #c3392c;
+}
+
+.news-titleimage {
+    max-width: 100%;
+    width: 200px;
+    float: left;
+    border: 1px solid grey;
+    box-shadow: 1px 1px 1px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.news-shorttext {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+a.news-link {
+    color: #c3392c;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+a.news-link:hover {
+    color: #337ab7;
+    transition: 0.5s;
+    text-decoration: none;
 }
