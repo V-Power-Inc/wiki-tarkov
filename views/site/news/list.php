@@ -31,15 +31,6 @@ $this->registerMetaTag([
 
 <div class="container">
     <div class="row">
-       <!-- Боковая колонка -->
-<!--        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-<!--            <ul class="nav nav-list bs-docs-sidenav">-->
-<!--                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i>Материалы за 2017</a></li>-->
-<!--                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i>Материалы за 2018</a></li>-->
-<!--                <li><a data-toggle="tab" href="#2" class="relative"><i class="fa fa-chevron-right"></i>Материалы за 2019</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-        
         
         <!-- Основной блок контента -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 quests-content">
@@ -55,9 +46,11 @@ $this->registerMetaTag([
                         <p class="news-short-title"><a class="news-link" href="/news/<?=$item['url']?>"><?=$item['title']?></a></p>
                         <span class="news-date"><?=$item['date_create']?></span>
                         <a class="news-link" href="/news/<?=$item['url']?>"><img class="news-titleimage" src="<?=$item['preview']?>"></a>
-                        <div class="text-left"><?=$item['content'] ?></div>
+                        <div class="text-left news-short-text"><?= strip_tags(substr($item['content'], 0, 600)) ?>...</div>
                         <p class="text-right"><a class="btn btn-default main-link" href="/news/<?=$item['url']?>">Читать детально</a></p>
                     </div>
+
+             
                 </div>
             <?php endforeach; ?>
                 <!-- Окончание новостного блока -->

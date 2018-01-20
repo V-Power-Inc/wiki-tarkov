@@ -1002,3 +1002,7 @@ a.news-link:hover {
 .bg-white {
     background: white;
 }
+
+.news-short-text {
+    font-size: 16px;
+}
