@@ -12,9 +12,11 @@ use app\models\Zavod;
 use app\models\Forest;
 use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
+use app\models\News;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
+use yii\data\Pagination;
 
 
 class SiteController extends Controller
@@ -161,7 +163,7 @@ class SiteController extends Controller
     /** Рендер детальной страницы для вывода ключей  **/
     public function actionDoorkeysdetail($id)
     {
-        $models = Doorkeys::find()->where(['url'=>$id])->One();
+        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->One();
         if($models) {
         return $this->render('keys/detail-key.php',['model' => $models]);
         } else {
@@ -171,7 +173,21 @@ class SiteController extends Controller
     
     /** Рендер страницы списка новостей **/
     public function actionNews() {
-        return $this->render('news/list.php');
+        $query =  News::find()->andWhere(['enabled' => 1]);
+        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
+        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $request = \Yii::$app->request;
+        return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+    }
+    
+    /** Рендер детальной страницы новости **/
+    public function actionNewsdetail($id) {
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        if($models) {
+            return $this->render('news/detail.php',['model' => $models]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/

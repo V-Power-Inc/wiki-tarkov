@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
     <meta property="og:image" content="/img/logo-full.png">
-   <?php if(!stristr(Yii::$app->request->url,'/keys/')) { ?>
+   <?php if(!stristr(Yii::$app->request->url,'/keys/') || !stristr(Yii::$app->request->url,'/news/')) { ?>
     <meta property="og:title" content="База знаний Escape from Tarkov">
     <meta property="og:description" content="Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений">
     <meta property="og:url" content="https://tarkov-wiki.ru">
