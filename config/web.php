@@ -90,6 +90,7 @@ $config = [
                 'quests-of-traders/skypchik-quests' => 'site/skypchikpage',
                 'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
+                'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
                 'keys/detail-key' => 'site/doorkeysdetail',
                 [

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Mehanic;
 use Yii;
 use app\models\Lyjnic;
 use app\models\Terapevt;
@@ -69,6 +70,17 @@ class SiteController extends Controller
         $query =  Mirotvorec::find();
         $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->all();
         return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
+    }
+
+    /** Рендер страницы квестов Скупщика **/
+    public function actionMehanicpage() {
+        // Пока нет квестов - редирект
+          $this->goHome();
+
+      // Включить строчки что идут ниже, после того как торговец механик появится в игре Escape from Tarkov.  
+      //  $query =  Mehanic::find();
+      //  $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->all();
+      //  return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
