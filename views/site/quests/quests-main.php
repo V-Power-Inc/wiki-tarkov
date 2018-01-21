@@ -128,7 +128,7 @@ $this->registerMetaTag([
                 <h2 class="mobile-text-center"><a href="#">Механик</a></h2>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 mobile-text-center">
-                <a href="#"><img class="image-trader" src="/img/torgovcy/mehanik_icon.png" style="max-width:100%;" alt="Лыжник"></a>
+                <a href="#"><img class="image-trader" src="/img/torgovcy/mehanik_icon.png" style="max-width:100%;" alt="Механик"></a>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10">
                 <p class="traders-desc">Достоверно еще неизвестно что именно будет продавать Механик и какие квесты будет давать для прохождения, однако нельзя исключать что вместе с внедрением этого торговца в игру мы сможем также увидеть много новых предметов.</p>
