@@ -3,18 +3,18 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Terapevt;
-use app\models\TerapevtSearch;
+use app\models\Tamojnya;
+use app\models\TamojnyaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TerapevtController implements the CRUD actions for Terapevt model.
+ * TamojnyaController implements the CRUD actions for Tamojnya model.
  */
-class TerapevtController extends Controller
+class TamojnyaController extends Controller
 {
-   
+    
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -27,7 +27,6 @@ class TerapevtController extends Controller
             return self::actionIndex();
         }
     }
-    
     
     /**
      * @inheritdoc
@@ -45,12 +44,12 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Lists all Terapevt models.
+     * Lists all Tamojnya models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TerapevtSearch();
+        $searchModel = new TamojnyaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +59,7 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Displays a single Terapevt model.
+     * Displays a single Tamojnya model.
      * @param integer $id
      * @return mixed
      */
@@ -72,13 +71,13 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Creates a new Terapevt model.
+     * Creates a new Tamojnya model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Terapevt();
+        $model = new Tamojnya();
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,7 +90,7 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Updates an existing Terapevt model.
+     * Updates an existing Tamojnya model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +110,7 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Deletes an existing Terapevt model.
+     * Deletes an existing Tamojnya model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +123,15 @@ class TerapevtController extends Controller
     }
 
     /**
-     * Finds the Terapevt model based on its primary key value.
+     * Finds the Tamojnya model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Terapevt the loaded model
+     * @return Tamojnya the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Terapevt::findOne($id)) !== null) {
+        if (($model = Tamojnya::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

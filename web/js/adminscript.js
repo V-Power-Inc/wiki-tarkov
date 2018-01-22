@@ -67,3 +67,47 @@ else if ((window.location.href.indexOf('zavod')) > -1) {
         }
     });
 }
+
+/** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Таможни **/
+else if ((window.location.href.indexOf('tamojnya')) > -1) {
+    $( document ).ready(function() {
+        if($('#tamojnya-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-tamojnya-exits_group').fadeIn();
+            $('.form-group.field-tamojnya-file').fadeIn();
+        } else if ($('#tamojnya-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        } else {
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        }
+    });
+
+    $("#tamojnya-marker_group").change(function() {
+        if($('#tamojnya-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-tamojnya-exits_group').fadeIn();
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeIn();
+        } else if ($('#forest-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        } else {
+            $('.form-group.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-file').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        }
+    });
+}
