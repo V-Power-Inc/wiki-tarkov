@@ -109,7 +109,7 @@ class SiteController extends Controller
         return Json::encode($markers);
     }
 
-    /** JSON данные с координатами маркеров Леса **/
+    /** JSON данные с координатами маркеров Таможни **/
     public function actionTamojnyamarkers() {
         $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);

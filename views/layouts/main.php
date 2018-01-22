@@ -18,13 +18,12 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://tarkov-wiki.ru/favicon.png">
     <meta name="yandex-verification" content="43485f66dfa368e2" />
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="База знаний Escape from Tarkov">
-    <meta property="og:image" content="/img/logo-full.png">
-   <?php if(!stristr(Yii::$app->request->url,'/keys/') || !stristr(Yii::$app->request->url,'/news/')) { ?>
-    <meta property="og:title" content="База знаний Escape from Tarkov">
-    <meta property="og:description" content="Интерактивные карты локаций, описания квестов торговцев и их прохождения, карта ключей от помещений">
-    <meta property="og:url" content="https://tarkov-wiki.ru">
+    <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
+    } else if(stristr(Yii::$app->request->url,'/news/')) { 
+    } else { ?>
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="База знаний Escape from Tarkov">
+        <meta property="og:image" content="/img/logo-full.png">
     <?php } ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -45,17 +44,12 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
-
-
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
 
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
-        <?= $content ?>
-
-    
-    
+    <?= $content ?>
 </div>
 
 <footer>
@@ -69,8 +63,7 @@ AppAsset::register($this);
                 <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
                     <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a href="https://kfc-it.ru" target="_blank">KFCTP Internet Community</a></p>
                 </div>
-<span class="col-sm-12 counter-footer">
-</span>
+              <span class="col-sm-12 counter-footer"></span>
             </div>
         </div>
 </footer>
