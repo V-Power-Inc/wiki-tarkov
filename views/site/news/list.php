@@ -44,9 +44,9 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="news-shortitem">
                         <p class="news-short-title"><a class="news-link" href="/news/<?=$item['url']?>"><?=$item['title']?></a></p>
-                        <span class="news-date"><?=$item['date_create']?></span>
+                        <span class="news-date"><?=date('d-m-Y',strtotime($item['date_create']))?></span>
                         <a class="news-link" href="/news/<?=$item['url']?>"><img class="news-titleimage" src="<?=$item['preview']?>"></a>
-                        <div class="text-left news-short-text"><?= strip_tags(substr($item['content'], 0, 600)) ?>...</div>
+                        <div class="text-left news-short-text"><?= $item['shortdesc'] ?></div>
                         <p class="text-right"><a class="btn btn-default main-link" href="/news/<?=$item['url']?>">Читать детально</a></p>
                     </div>
 
