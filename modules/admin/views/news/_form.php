@@ -32,13 +32,21 @@ use mihaildev\elfinder\ElFinder;
 
     <br>
     <br>
+    
+    <?= $form->field($model, 'shortdesc')->textarea(['rows' => 3]) ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => false]) ?>
+    <?= $form->field($model, 'date_create')->widget(\yii\jui\DatePicker::className(), [
+        'language' => 'ru',
+        'dateFormat' => 'yyyy-MM-dd',
+    ]) ?>
+    
+    <!-- Виджет datePicker тестируется - ниже стабильная строка для вывода даты -->
+    <?php // $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => false]) ?>
 
     <?= $form->field($model, 'enabled')->checkbox([
         'label' => 'Новость активна',
