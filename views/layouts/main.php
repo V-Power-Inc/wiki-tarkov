@@ -23,6 +23,7 @@ AppAsset::register($this);
     } else { ?>
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="База знаний Escape from Tarkov">
+        <meta property="og:title" content="<?= Html::encode($this->title) ?>">
         <meta property="og:image" content="/img/logo-full.png">
     <?php } ?>
     <?= Html::csrfMetaTags() ?>
