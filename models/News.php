@@ -20,6 +20,7 @@ use Imagine\Image\Box;
  * @property integer $enabled
  * @property string $description
  * @property string $keywords
+ * @property string $shortdesc
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -38,7 +39,7 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'keywords'], 'required'],
+            [['title', 'description', 'keywords', 'shortdesc'], 'required'],
             [['content'], 'string'],
             [['date_create'], 'safe'],
             [['enabled'], 'integer'],
@@ -64,6 +65,7 @@ class News extends \yii\db\ActiveRecord
             'file' => 'Превьюшка новости',
             'description' => 'Метатег description',
             'keywords' => 'Метатег keywords',
+            'shortdesc' => 'Краткое описание',
         ];
     }
 
