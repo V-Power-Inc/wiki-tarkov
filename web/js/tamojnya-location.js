@@ -29,8 +29,8 @@ map.setMinZoom(4);
 map.setZoom(4);
 
 /** Ограничение на перетягивание карты, если в экране есть края карты **/
-var southWest = L.latLng(90, -180),
-    northEast = L.latLng(66.125, 22.236);
+var southWest = L.latLng(84.795, -174.199),
+    northEast = L.latLng(66.792, 18.984);
 var bounds = L.latLngBounds(southWest, northEast);
 
 map.setMaxBounds(bounds);
