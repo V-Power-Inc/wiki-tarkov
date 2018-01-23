@@ -84,6 +84,7 @@ $config = [
                 'maps' => 'site/locations',
                 'maps/zavod-location' => 'site/zavod',
                 'maps/forest-location' => 'site/forest',
+                'maps/tamojnya-location' => 'site/tamojnya',
                 'quests-of-traders' => 'site/quests',
                 'quests-of-traders/prapor-quests' => 'site/praporpage',
                 'quests-of-traders/terapevt-quests' => 'site/terapevtpage',

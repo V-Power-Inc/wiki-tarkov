@@ -125,6 +125,11 @@ class SiteController extends Controller
         return $this->render('maps/forest-location.php');
     }
 
+    /** Рендер страницы с картой Таомжни **/
+    public function actionTamojnya() {
+        return $this->render('maps/tamojnya-location.php');
+    }
+
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {

@@ -55,11 +55,11 @@ $this->registerMetaTag([
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Таможни</h2>
-            <img class="maps__small" src="/img/maps/tamojnya_small.jpg">
+            <a href="/maps/tamojnya-location"><img class="maps__small" src="/img/maps/tamojnya_small.jpg"></a>
             <br>
             <br>
-            <p class="alert alert-danger"><b>В разработке</b></p>
-<!--            <a class="btn btn-default main-link" href="#">Перейти к карте Таможни</a>-->
+<!--            <p class="alert alert-danger"><b>В разработке</b></p>-->
+           <a class="btn btn-default main-link" href="/maps/tamojnya-location">Перейти к карте Таможни</a>
         </div>
         
     </div>
