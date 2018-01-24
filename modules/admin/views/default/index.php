@@ -25,7 +25,7 @@ $this->title = 'Админка tarkov-wiki';
         <h2 class="text-center">Маркеры на картах</h2>
         <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
         <li><a href="/admin/forest" class="admin-tabs w-100-important">Маркеры на локации Лес</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Таможня</a></li>
+        <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Берег</a></li>
     </ul>
 </div>

@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class TerapevtController extends Controller
 {
-    public $file=null;
+   
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 

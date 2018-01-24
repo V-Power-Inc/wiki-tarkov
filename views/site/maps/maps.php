@@ -36,7 +36,7 @@ $this->registerMetaTag([
             <p class="alert alert-info size-16">В этом резделе сайта вы можете перейти к интерактивным картам локаций из Escape from Tarkov. На интерактивных картах будут отображены ключи от помещений а также информация о том где эти ключи можно найти.</p>
         </div>
         
-        
+    <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Завода</h2>
             <a href="/maps/zavod-location"><img class="maps__small" src="/img/maps/zavod_small.jpg"></a>
@@ -55,16 +55,38 @@ $this->registerMetaTag([
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Таможни</h2>
-            <img class="maps__small" src="/img/maps/tamojnya_small.jpg">
+            <a href="/maps/tamojnya-location"><img class="maps__small" src="/img/maps/tamojnya_small.jpg"></a>
             <br>
             <br>
-            <p class="alert alert-danger"><b>В разработке</b></p>
-<!--            <a class="btn btn-default main-link" href="#">Перейти к карте Таможни</a>-->
+<!--            <p class="alert alert-danger"><b>В разработке</b></p>-->
+           <a class="btn btn-default main-link" href="/maps/tamojnya-location">Перейти к карте Таможни</a>
         </div>
+    </div>
+
+
+
+    <div class="row maps-margin-top-30">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+            <h2 class="text-center map-heading">Карта Берега</h2>
+            <img class="maps__small" src="/img/maps/bereg-small.jpg">
+            <br>
+            <br>
+                        <p class="alert alert-danger"><b>В разработке</b></p>
+<!--            <a class="btn btn-default main-link" href="#">Перейти к карте Берега</a>-->
+        </div>
+    </div>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     </div>
-    
-    
     
     
 </div>

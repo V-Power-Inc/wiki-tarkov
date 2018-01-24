@@ -85,6 +85,10 @@
         height: auto;
     }
 
+    .maps-margin-top-30 {
+        margin-top: 0;
+    }
+
 }
 
 /*** col-xs screen size (767px) ***/

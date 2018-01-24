@@ -10,6 +10,7 @@ use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Zavod;
 use app\models\Forest;
+use app\models\Tamojnya;
 use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
 use app\models\News;
@@ -102,9 +103,15 @@ class SiteController extends Controller
         return Json::encode($markers);
     }
 
-    /** JSON данные с координатами маркеров Завода **/
+    /** JSON данные с координатами маркеров Леса **/
     public function actionForestmarkers() {
         $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
+        return Json::encode($markers);
+    }
+
+    /** JSON данные с координатами маркеров Таможни **/
+    public function actionTamojnyamarkers() {
+        $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
         return Json::encode($markers);
     }
 
@@ -116,6 +123,11 @@ class SiteController extends Controller
     /** Рендер страницы с картой Леса **/
     public function actionForest() {
         return $this->render('maps/forest-location.php');
+    }
+
+    /** Рендер страницы с картой Таомжни **/
+    public function actionTamojnya() {
+        return $this->render('maps/tamojnya-location.php');
     }
 
     /** Рендер страницы с наборами ключей **/

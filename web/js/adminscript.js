@@ -11,6 +11,8 @@ if((window.location.href.indexOf('forest')) > -1) {
         if($('#forest-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-forest-exits_group').fadeIn();
             $('.form-group.field-forest-file').fadeIn();
+         //   $('#forest-exit_anyway').val('');
+         //   $('.form-group.field-forest-exit_anyway input').val('');
         } else if ($('#forest-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeOut();
@@ -31,6 +33,8 @@ if((window.location.href.indexOf('forest')) > -1) {
             $('.form-group.field-forest-exits_group').fadeIn();
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeIn();
+         //   $('#forest-exit_anyway').val('');
+         //   $('.form-group.field-forest-exit_anyway input').val('');
         } else if ($('#forest-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeOut();
@@ -64,6 +68,54 @@ else if ((window.location.href.indexOf('zavod')) > -1) {
             $('.form-group.field-zavod-file').fadeIn();
         } else {
             $('.form-group.field-zavod-file').fadeOut();
+        }
+    });
+}
+
+/** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Таможни **/
+else if ((window.location.href.indexOf('tamojnya')) > -1) {
+    $( document ).ready(function() {
+        if($('#tamojnya-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-tamojnya-exits_group').fadeIn();
+            $('.form-group.field-tamojnya-file').fadeIn();
+         //   $('#tamojnya-exit_anyway').val('');
+         //   $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#tamojnya-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        } else {
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        }
+    });
+
+    $("#tamojnya-marker_group").change(function() {
+        if($('#tamojnya-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-tamojnya-exits_group').fadeIn();
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeIn();
+         //   $('#tamojnya-exit_anyway').val('');
+         //  $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#tamojnya-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        } else {
+            $('.form-group.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-file').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
         }
     });
 }

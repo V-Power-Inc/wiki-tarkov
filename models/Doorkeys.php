@@ -91,7 +91,7 @@ class Doorkeys extends \yii\db\ActiveRecord
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');
         if($fileImg !== null) {
-            $catalog = 'img/admin/doorkeys/' . $fileImg->baseName . '.' . $fileImg->extension;
+            $catalog = 'img/admin/doorkeys/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
             Image::getImagine()->open($catalog)->thumbnail(new Box(64, 64))->save($catalog , ['quality' => 90]);
