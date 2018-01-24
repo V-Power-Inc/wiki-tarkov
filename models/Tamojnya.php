@@ -72,7 +72,7 @@ class Tamojnya extends \yii\db\ActiveRecord
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');
         if($fileImg !== null) {
-            $catalog = 'img/admin/tamojnyaicons/' . $fileImg->baseName . '.' . $fileImg->extension;
+            $catalog = 'img/admin/tamojnyaicons/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->customicon = '/' . $catalog;
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);

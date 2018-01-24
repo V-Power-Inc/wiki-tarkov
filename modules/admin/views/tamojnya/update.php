@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tamojnya */
 
-$this->title = 'Update Tamojnya: ' . $model->name;
+$this->title = 'Обновить маркер: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Tamojnyas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

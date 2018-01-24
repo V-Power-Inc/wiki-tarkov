@@ -66,7 +66,7 @@ class Mehanic extends \yii\db\ActiveRecord
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');
         if($fileImg !== null) {
-            $catalog = 'img/admin/resized/mehanic/' . $fileImg->baseName . '.' . $fileImg->extension;
+            $catalog = 'img/admin/resized/mehanic/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);

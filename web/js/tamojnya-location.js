@@ -69,12 +69,12 @@ var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
 });
-var DomspawnIcon = L.icon({
-    iconUrl: '/img/mapicons/forestspawns/spawn_les_dom.png',
+var GarajIcon = L.icon({
+    iconUrl: '/img/mapicons/tamojnyaspawns/tamozhnya.png',
     iconSize: [250, 250]
 });
-var OldstationspawnIcon = L.icon({
-    iconUrl: '/img/mapicons/forestspawns/spawn_les_stanciya.png',
+var BoilersIcon = L.icon({
+    iconUrl: '/img/mapicons/tamojnyaspawns/boileri.png',
     iconSize: [250, 250]
 });
 
@@ -129,28 +129,28 @@ $(document).ready(function() {
     var interstplaces = L.layerGroup();
 
     /** Добавляем маркеры для статичных зон спавна **/
-    L.marker([74.044,51.768], {icon: DomspawnIcon}).setZIndexOffset(999).addTo(garajispawn);
-    L.marker([67.709,-147.129], {icon: OldstationspawnIcon}).setZIndexOffset(999).addTo(boilersspawn);
+    L.marker([79.113, -138.621], {icon: GarajIcon}).setZIndexOffset(999).addTo(garajispawn);
+    L.marker([79.963,-42.913], {icon: BoilersIcon}).setZIndexOffset(999).addTo(boilersspawn);
 
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
     $.each(markersData, function(i) {
         if (markersData[i].exit_anyway == "1" && markersData[i].exits_group !== '') {
             var ExitsIcon = L.icon({
-                iconSize: [140, 25],
+                iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(boilersspawn);
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(garajispawn);
-        } else if (markersData[i].exits_group == "Спавн на старой станции") {
+        } else if (markersData[i].exits_group == "Спавн на бойлерах") {
             var ExitsIcon = L.icon({
-                iconSize: [140, 25],
+                iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(boilersspawn);
-        } else if (markersData[i].exits_group == "Спавн на доме") {
+        } else if (markersData[i].exits_group == "Спавн на гаражах") {
             var ExitsIcon = L.icon({
-                iconSize: [140, 25],
+                iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(garajispawn);
@@ -168,7 +168,7 @@ $(document).ready(function() {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
         } else if (markersData[i].marker_group == "Выходы за Диких") {
             var DikiyExitIcon = L.icon({
-                iconSize: [140, 25],
+                iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikiyExitIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(990).addTo(dikieexits);
@@ -354,7 +354,7 @@ $(document).ready(function() {
             map.removeLayer(boilersspawn);
         } catch(err) {}
 
-        boilersspawn.addTo(map);
+        garajispawn.addTo(map);
         $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();

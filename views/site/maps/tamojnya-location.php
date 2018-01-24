@@ -52,20 +52,21 @@ $this->registerMetaTag([
             <!-- Маркеры выходов в зависимости от спавна -->
             <div class="random-exits">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary remastered station-spawn active">
-                        <input type="radio" name="options" id="option2" autocomplete="off">
-                        <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Старая станция</span>
-                    </label>
-
-                    <br>
-                    <br>
-
-                    <label class="btn btn-primary house-spawn remastered">
+                    <label class="btn btn-primary house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Дом</span>
+                        <span>Выходы для спавна Гаражи</span>
                     </label>
+                    
+                    <br>
+                    <br>
+
+                    <label class="btn btn-primary remastered station-spawn">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span>Выходы для спавна Бойлеры</span>
+                    </label>
+
                 </div>
                 <br>
                 <br>
@@ -73,9 +74,9 @@ $this->registerMetaTag([
 
             <div class="static-description">
                 <h2>Интерактивная карта Таможни</h2>
-                <p>Интерактивная карта локации Таможня со спавнами ЧВК с обоих сторон локации, маркеры Диких, военных ящиков а также указания где найти ценные ключи от дверей и сейфов.</p>
+                <p>Интерактивная карта локации Таможня со спавнами ЧВК с обоих сторон локации, маркеры Диких, выходы с локации Таможня играя за Диких, военных ящиков а также указания где найти ценные ключи от дверей и сейфов.</p>
                 <p>Нажимая на любой маркер, вы сможете увидеть уточняющую информацию о нем, при нажатии на спавны диких, вы узнаете как они ведут себя в определенных ситуациях и в каких количествах могут спавниться.</p>
-                <p>Нажимая на меркеры ключей - вы сможете узнать какие ключи нужны вам для открытия дверей - <u>ключи можно найти на трупах диких, в офисных полках и одежде</u>.</p>
+                <p>Нажимая на маркеры ключей - вы сможете узнать какие ключи нужны вам для открытия дверей - <u>ключи можно найти на трупах диких, в офисных полках и одежде</u>.</p>
                 <p class="alert alert-info"><b>Ключ от выхода с завода</b> также спавнится в 3х этажном общежитии на Таможне на 1 этаже на столе слева от телевизора в помещении консержки.</p>
                 <p></p>
             </div>
