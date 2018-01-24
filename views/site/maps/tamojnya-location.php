@@ -9,10 +9,10 @@
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/tamojnya-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Карта локации Таможня в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
+$this->title = 'Карта локации Таможня в Escape from Tarkov - интерактивная карта с выходами Диких';
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Интерактивная карта локации Таможня из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
+    'content' => 'Интерактивная карта локации Таможня из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, выходов с локации за Диких.',
 ]);
 ?>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -37,7 +37,7 @@ $this->registerMetaTag([
     <div class="inner-button"><img src="/img/maps/button_inner.png"></div>
     <div class="col-lg-12">
         <div class="option-buttons">
-            <h1 class="map-title">Маркеры</h1>
+            <h2 class="map-title">Маркеры</h2>
             <button class="btn btn-danger dikie-b">Спавны диких</button>
             <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
             <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
@@ -73,12 +73,11 @@ $this->registerMetaTag([
             </div>
 
             <div class="static-description">
+                <p class="alert alert-danger"><b>В настоящий момент маркеры на стадии заполнения. В ближайшее время появятся все маркеры на локации Таможня, а также детальные описания каждого из них.</b></p>
                 <h2>Интерактивная карта Таможни</h2>
-                <p>Интерактивная карта локации Таможня со спавнами ЧВК с обоих сторон локации, маркеры Диких, выходы с локации Таможня играя за Диких, военных ящиков а также указания где найти ценные ключи от дверей и сейфов.</p>
+                <p>Интерактивная карта локации Таможня с точками появления ЧВК на спавнах Таможня и бойлеры, маркеры выходов с локации за Диких, военных ящиков и интересных мест локации Таможня.</p>
                 <p>Нажимая на любой маркер, вы сможете увидеть уточняющую информацию о нем, при нажатии на спавны диких, вы узнаете как они ведут себя в определенных ситуациях и в каких количествах могут спавниться.</p>
                 <p>Нажимая на маркеры ключей - вы сможете узнать какие ключи нужны вам для открытия дверей - <u>ключи можно найти на трупах диких, в офисных полках и одежде</u>.</p>
-                <p class="alert alert-info"><b>Ключ от выхода с завода</b> также спавнится в 3х этажном общежитии на Таможне на 1 этаже на столе слева от телевизора в помещении консержки.</p>
-                <p></p>
             </div>
             <div id="voenniymarker"></div>
             <div id="polkiimarker"></div>

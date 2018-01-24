@@ -37,7 +37,7 @@ $this->registerMetaTag([
         <div class="inner-button"><img src="/img/maps/button_inner.png"></div>
         <div class="col-lg-12">
             <div class="option-buttons">
-                <h1 class="map-title">Маркеры</h1>
+                <h2 class="map-title">Маркеры</h2>
                 <button class="btn btn-danger dikie-b">Спавны диких</button>
                 <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
                 <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>

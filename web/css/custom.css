@@ -535,7 +535,7 @@ h2.white {
     margin: 5px 0;
 }
 
-h1.map-title {
+h1.map-title, h2.map-title {
     color: white;
     text-align: center;
     padding-bottom: 10px;
