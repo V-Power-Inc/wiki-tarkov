@@ -27,21 +27,33 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <li class="relative">
                     <a href="#">Экипировка</a>
                     <i class="fa fa-plus categories-abs" aria-hidden="true"></i>
-                        <!-- Подкатегории меню -->
-                        <li class="level-2"><a href="#">Подкатегория 1</a></li>
-                        <li class="level-2"><a href="#">Подкатегория 2</a></li>
-                        <li class="level-2"><a href="#">Подкатегория 3</a></li>
                 </li>
+                <!-- Подкатегории меню -->
+                    <li class="level-2"><a href="#">Подкатегория 1</a></li>
+                    <li class="level-2"><a href="#">Подкатегория 2</a></li>
+                    <li class="level-2"><a href="#">Подкатегория 3</a></li>
+                <!-- Окончание подкатегорий -->
                 <li class="relative"><a href="#">Медицина</a></li>
                 <li class="relative"><a href="#">Квестовые предметы</a></li>
-                <li><a href="#">Пища</a></li>
-                <li><a href="#">Хлам</a></li>
+                <li class="relative"><a href="#">Пища</a></li>
+                <li class="relative">
+                    <a href="#">Хлам</a>
+                    <i class="fa fa-plus categories-abs" aria-hidden="true"></i>
+                </li>
+
+                    <!-- Подкатегории меню -->
+                    <li class="level-2"><a href="#">Подкатегория 1</a></li>
+                    <li class="level-2"><a href="#">Подкатегория 2</a></li>
+                    <li class="level-2"><a href="#">Подкатегория 3</a></li>
+                    <!-- Окончание подкатегорий -->
+                
             </ul>
         </div>
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
-           
+           <p class="alert alert-info size-16">На этой странице вы можете узнать информацию о любом луте из игры Escape from Tarkov. В справочнике вы сможете найти информацию о любом внутриигровом предмете. <br><br>
+           Для удобства была создана разбивка по категориям, что облегчит вам поиск наиболее интересных предметов.</p>
         </div>
 
         <!-- Расстояние - заглушка -->

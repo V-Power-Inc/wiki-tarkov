@@ -7,11 +7,14 @@ $(document).ready(function() {
     $(".fa.fa-plus.categories-abs").click(function() {
         $(this).removeClass('fa-plus');
         $(this).addClass('fa-minus');
+        $(this).siblings('ul').addClass('many');
+            $("li.level-2").each(function() {
+                if($("li.level-2").parent(".many") == true) {
+                    $(this).fadeIn();
+                }
+            });
 
-        $(this).next("li.level-2").css({"display" : "block"});
+
     });
-    
-    
-    
     
 });
