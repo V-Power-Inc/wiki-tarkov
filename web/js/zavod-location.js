@@ -420,8 +420,8 @@ $('body').on('click','.places-b', function(){
         }
 
         if (MagnificImg) {
-            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
-            $('.mfp-title').css({"display" : "none"});
+            $(MagnificImg).unwrap();
+            $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
         }
 
         /** Инициализация самого скрипта **/
