@@ -55,7 +55,7 @@ $this->registerMetaTag([
                     <label class="btn btn-primary house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Гаражи</span>
+                        <span>Выходы для спавна Таможня</span>
                     </label>
                     
                     <br>
