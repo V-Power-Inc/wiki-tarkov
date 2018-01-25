@@ -95,6 +95,7 @@ $config = [
                 'keys' => 'site/keys',
                 'keys/detail-key' => 'site/doorkeysdetail',
                 'news' => 'site/news',
+                'loot' => 'loot/mainloot',
                 [
                     'class' => 'app\components\UrlComponent',
                 ],

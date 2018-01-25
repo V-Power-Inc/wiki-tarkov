@@ -1010,3 +1010,47 @@ a.news-link:hover {
 .maps-margin-top-30 {
     margin-top: 30px;
 }
+
+.nav.categories {
+    background: white;
+    border-radius: 5px;
+}
+
+.nav.categories > li > a {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.nav-stacked.categories > li + li {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.nav.categories > li > a:hover, .nav.categories > li > a:focus {
+    text-decoration: none;
+    background-color: #4a76a8;
+    color: white;
+}
+
+.nav-pills.categories > li.active > a {
+    color: #fff;
+    background-color: #c3392c;
+}
+
+.categories-abs {
+    position: absolute;
+    top: 19px;
+    right: 20px;
+    color: #c3392c;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+li.level-2 {
+    padding-left: 40px;
+    display: none;
+    font-size: 14px;
+    font-weight: bold;
+}
