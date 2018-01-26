@@ -1052,4 +1052,16 @@ li.level-2 {
     padding-left: 40px;
     font-size: 14px;
     font-weight: bold;
+    position: relative;
+    display: block;
+    text-decoration: none;
 }
+
+.level-2 a {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 14.7px 5px;
+}
+

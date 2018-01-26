@@ -9,9 +9,8 @@ $(document).ready(function($){
     });
     
     /** Изменяем по клику иконки минуса и плюса в вертикальном меню **/
-    $(".fa.fa-plus.categories-abs").click(function() {
-        $(this).removeClass('fa-plus');
-        $(this).addClass('fa-minus');
+    $("li.relative i.fa-plus").click(function() {
+        $(this).toggleClass("fa-minus");
     });
 
     // $('body').on('click','.fa.categories-abs.fa-minus', function() {
