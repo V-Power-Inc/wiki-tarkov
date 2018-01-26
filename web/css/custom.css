@@ -1010,3 +1010,28 @@ a.news-link:hover {
 .maps-margin-top-30 {
     margin-top: 30px;
 }
+
+
+
+/*** Recustom Magnific Arrows of 26_01_2018 ***/
+
+.mfp-arrow-left {
+    left: 150px;
+}
+
+.mfp-arrow-right {
+    right: 150px;
+}
+
+.mfp-arrow-left:before {
+    margin-left: 25px;
+    border-right: 27px solid #ff0909;
+}
+
+.mfp-arrow-right:before {
+    border-left: 27px solid #ff0000;
+}
+
+.mfp-arrow {
+    opacity: 1;
+}
