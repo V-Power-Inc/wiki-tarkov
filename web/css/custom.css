@@ -385,9 +385,9 @@ ul li a.relative i {
     font-size: 18px;
 }
 
-.nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus {
+.nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus,  li > a.admin-inline.unactive, .li > a.admin-inline.unactive:hover, li > a.admin-inline.unactive:focus {
     cursor: no-drop;
-    background: grey;
+    background: grey!important;
     color: rgb(255, 255, 255)!important;
     font-size: 14px;
     font-weight: bold;
@@ -396,6 +396,11 @@ ul li a.relative i {
 .w-100-important {
     width: 100%!important;
     max-width: 100%!important;
+}
+
+.w-45-important {
+    width: 45%!important;
+    max-width: 45%!important;
 }
 
 .w-200 {
@@ -1102,3 +1107,39 @@ li.level-2.active {
     font-size: 16px;
     padding-right: 5px;
 }
+
+li > a.admin-inline {
+    display: inline-block;
+    background: rgba(128, 128, 128, 0.29);
+    font-weight: bold;
+    text-align: center;
+    color: #337ab7;
+    width: 300px;
+    padding: 14.7px 5px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+li > a.admin-inline:hover {
+    background: cornflowerblue;
+    font-weight: bold;
+    color: black;
+}
+
+.nav-pills > div > li.d-inline  {
+    display: inline;
+}
+
+.nav-pills > div > li.category-admin-margins {
+    margin-top: 30px;
+    margin-left:20px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
