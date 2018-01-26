@@ -6,7 +6,7 @@
  * Time: 19:19
  */
 
-use app\components\CategorymenuComponent;
+use app\components\LeftmenuWidget;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 
@@ -25,7 +25,9 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
     <div class="row">
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <?= CategorymenuComponent::showLeftmenu() ?>
+            <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
+            <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
+            </ul>
         </div>
 
         <!-- Основное содержимое страницы -->

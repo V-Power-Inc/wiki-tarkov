@@ -59,9 +59,9 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
-    /** Получаем корневые категории которые активны */
+    /** Получаем все категории которые активны - indexBy заменяет ключ массива на ключ автоинкрементарного id из базы */
     public function getMainCategories() {
-        $categories = Category::find()->where(['enabled' => '1'])->andWhere(['parent_category' => null])->asArray()->all();
+        $categories = Category::find()->where(['enabled' => '1'])->indexBy('id')->asArray()->all();
         return $categories;
     }
 
