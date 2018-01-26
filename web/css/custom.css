@@ -1061,6 +1061,12 @@ li.level-2 {
     padding: 5px 0;
 }
 
+li.level-2.active {
+    background: #b5e6ff;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+}
+
 .level-2 a {
     width: 100%;
     text-align: left;
@@ -1069,6 +1075,7 @@ li.level-2 {
     padding: 10px 0;
 }
 
+/** Important styles of store **/
 .categories-menu li.relative > a + .dcjq-icon {
     position: absolute;
     display: block;
@@ -1088,6 +1095,7 @@ li.level-2 {
     background: url(/img/img-minus.png) no-repeat 0 center;
     cursor: pointer;
 }
+/** End og Important styles of store **/
 
 .fa-check-circle {
     color: #c3392c;

@@ -45,7 +45,8 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     <div class="dcjq-icon">&nbsp;&nbsp;&nbsp;</div>
                         <!-- Подкатегории меню -->
                         <ul class="children-cats">
-                            <li class="level-2"><i class="fa fa-check-circle" aria-hidden="true"></i><a href="#">Подкатегория 1</a></li>
+                            <!-- Ljxthybq 'ktvtyn c rkfccjv active -->
+                            <li class="level-2 active"><i class="fa fa-check-circle" aria-hidden="true"></i><a href="#">Подкатегория 1</a></li>
                             <li class="level-2"><i class="fa fa-check-circle" aria-hidden="true"></i><a href="#">Подкатегория 2</a></li>
                             <li class="level-2"><i class="fa fa-check-circle" aria-hidden="true"></i><a href="#">Подкатегория 3</a></li>
                         </ul>
