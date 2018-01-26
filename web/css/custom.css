@@ -1053,12 +1053,12 @@ a.news-link:hover {
 }
 
 li.level-2 {
-    padding-left: 10px;
     font-size: 14px;
     font-weight: bold;
     position: relative;
     display: block;
     text-decoration: none;
+    padding: 5px 0;
 }
 
 .level-2 a {
@@ -1087,4 +1087,10 @@ li.level-2 {
     width: 20px;
     background: url(/img/img-minus.png) no-repeat 0 center;
     cursor: pointer;
+}
+
+.fa-check-circle {
+    color: #c3392c;
+    font-size: 16px;
+    padding-right: 5px;
 }
