@@ -14,7 +14,6 @@ use yii\filters\VerbFilter;
  */
 class CategoryController extends Controller
 {
-    
     /** Подключаем отдельный layout для админки сайта **/
     public $layout = 'admin';
 

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Category */
 
-$this->title = $model->title;
+$this->title = 'Категория: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить категорию', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить категорию', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены что хотите удалить эту категорию?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,11 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'parent_category',
-            'url:url',
+            'url',
             'content:ntext',
             'description',
             'enabled',
         ],
     ]) ?>
-
+    <a class="btn btn-primary" href="/admin/category/">Вернуться в список категорий</a>
 </div>

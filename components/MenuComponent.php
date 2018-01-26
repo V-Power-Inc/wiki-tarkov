@@ -7,9 +7,6 @@
  */
 
 namespace app\components;
-
-use app\models\Menu;
-use yii\helpers\Url;
 use Yii;
 
 class MenuComponent

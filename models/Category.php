@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "category".
@@ -13,6 +14,7 @@ use Yii;
  * @property string $url
  * @property string $content
  * @property string $description
+ * @property string $keywords
  * @property integer $enabled
  *
  * @property Items[] $items
@@ -33,10 +35,10 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'url'], 'required'],
+            [['title', 'url', 'description'], 'required'],
             [['parent_category', 'enabled'], 'integer'],
             [['content'], 'string'],
-            [['title', 'url', 'description'], 'string', 'max' => 255],
+            [['title', 'url', 'description', 'keywords'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,13 +49,20 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'parent_category' => 'Parent Category',
-            'url' => 'Url',
-            'content' => 'Content',
-            'description' => 'Description',
-            'enabled' => 'Enabled',
+            'title' => 'Имя категории',
+            'parent_category' => 'Родительская категория',
+            'url' => 'Url адрес категории',
+            'content' => 'Содержимое',
+            'description' => 'SEO описание',
+            'keywords' => 'SEO ключевые слова',
+            'enabled' => 'Включен',
         ];
+    }
+
+    /** Получаем корневые категории которые активны */
+    public function getMainCategories() {
+        $categories = Category::find()->where(['enabled' => '1'])->andWhere(['parent_category' => null])->asArray()->all();
+        return $categories;
     }
 
     /**
