@@ -27,12 +27,12 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <li class="relative active"><a href="#">Оружие</a></li>
                 <li class="relative">
                     <a href="#">Экипировка</a>
-                    <i class="fa fa-plus categories-abs">&nbsp;</i>
+                    <div class="dcjq-icon">&nbsp;&nbsp;&nbsp;</div>
                         <!-- Подкатегории меню -->
-                        <ul>
-                            <li class="level-2"><a href="#">Подкатегория 1</a></li>
-                            <li class="level-2"><a href="#">Подкатегория 2</a></li>
-                            <li class="level-2"><a href="#">Подкатегория 3</a></li>
+                        <ul class="children-cats">
+                            <li class="level-2"><a href="#">Военное снаряжение</a></li>
+                            <li class="level-2"><a href="#">Обвесы</a></li>
+                            <li class="level-2"><a href="#">Ранцы</a></li>
                         </ul>
                         <!-- Окончание подкатегорий -->
                 </li>
@@ -42,9 +42,9 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <li class="relative"><a href="#">Пища</a></li>
                 <li class="relative">
                     <a href="#">Хлам</a>
-                    <i class="fa fa-plus categories-abs">&nbsp;</i>
+                    <div class="dcjq-icon">&nbsp;&nbsp;&nbsp;</div>
                         <!-- Подкатегории меню -->
-                        <ul>
+                        <ul class="children-cats">
                             <li class="level-2"><a href="#">Подкатегория 1</a></li>
                             <li class="level-2"><a href="#">Подкатегория 2</a></li>
                             <li class="level-2"><a href="#">Подкатегория 3</a></li>

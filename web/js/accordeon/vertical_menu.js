@@ -10,7 +10,7 @@
         var defaults = {
             classParent	 : 'as-parent',
             classActive	 : 'active',
-            classArrow	 : 'categories-abs',
+            classArrow	 : 'dcjq-icon',
             classCount	 : 'dcjq-count',
             classExpand	 : 'dcjq-current-parent',
             classDisable : '',
@@ -32,7 +32,7 @@
 
             var obj = this;
             // Строчка ниже определяет какой элемент в дереве будет вызывать событие выпадения менюшки
-            $objLinks = $('li > i',obj);
+            $objLinks = $('li > div',obj);
             $objSub = $('li > ul',obj);
             if(defaults.classDisable){
                 $objLinks = $('li:not(.'+defaults.classDisable+') > a',obj);

@@ -1048,8 +1048,12 @@ a.news-link:hover {
     font-size: 20px;
 }
 
+.children-cats {
+    display: none;
+}
+
 li.level-2 {
-    padding-left: 40px;
+    padding-left: 10px;
     font-size: 14px;
     font-weight: bold;
     position: relative;
@@ -1060,8 +1064,27 @@ li.level-2 {
 .level-2 a {
     width: 100%;
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
-    padding: 14.7px 5px;
+    padding: 10px 0;
 }
 
+.categories-menu li.relative > a + .dcjq-icon {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 17px;
+    width: 20px;
+    background: url(/img/img-plus.png) no-repeat 0 center;
+    cursor: pointer;
+}
+
+.categories-menu li.relative > a.active + .dcjq-icon {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 17px;
+    width: 20px;
+    background: url(/img/img-minus.png) no-repeat 0 center;
+    cursor: pointer;
+}
