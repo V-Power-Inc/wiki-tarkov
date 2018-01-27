@@ -18,7 +18,8 @@ use app\models\Category;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parent_category')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'title'), $params = ['prompt' => 'Не задано']) ?>
+    <!-- В arrayMap проверяем - сделать более 3-х уровневое дерево категорий невозможно -->
+    <?= $form->field($model, 'parent_category')->dropDownList(ArrayHelper::map(Category::find()->where(['parent_category' => null])->all(), 'id', 'title'), $params = ['prompt' => 'Не задано']) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 

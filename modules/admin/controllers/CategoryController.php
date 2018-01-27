@@ -7,7 +7,9 @@ use app\models\Category;
 use app\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\HttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -115,9 +117,17 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
+        $LockedID = $model->id;
+        $result = in_array($LockedID, $CategoriesArray);
+        /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет */
+        if($result) {
+            return $this->redirect(['index']);
+        } else {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        }
     }
 
     /**
