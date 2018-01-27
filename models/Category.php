@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string $description
  * @property string $keywords
  * @property integer $enabled
+ * @property integer $sortir
  *
  * @property Items[] $items
  */
@@ -35,8 +36,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'url', 'description'], 'required'],
-            [['parent_category', 'enabled'], 'integer'],
+            [['title', 'url', 'description', 'sortir'], 'required'],
+            [['parent_category', 'enabled', 'sortir'], 'integer'],
             [['content'], 'string'],
             [['title', 'url', 'description', 'keywords'], 'string', 'max' => 255],
         ];
@@ -55,6 +56,7 @@ class Category extends \yii\db\ActiveRecord
             'content' => 'Содержимое',
             'description' => 'SEO описание',
             'keywords' => 'SEO ключевые слова',
+            'sortir' => 'Сортировка',
             'enabled' => 'Включен',
         ];
     }

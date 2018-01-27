@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'parent_category',
             'url:url',
-            'content:ntext',
+            'sortir',
             // 'description',
             // 'enabled',
 

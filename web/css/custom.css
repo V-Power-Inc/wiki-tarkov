@@ -1033,10 +1033,15 @@ a.news-link:hover {
     margin-left: 0;
 }
 
-.nav.categories > li > a:hover, .nav.categories > li > a:focus {
+.nav.categories > li > a:hover {
     text-decoration: none;
     background-color: #4a76a8;
     color: white;
+}
+
+.nav.categories > li > a:focus {
+    background: white;
+    color: #337ab7;
 }
 
 .nav-pills.categories > li.active > a {

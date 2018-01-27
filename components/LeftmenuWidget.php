@@ -38,7 +38,7 @@ class LeftmenuWidget extends Widget {
         // $menu = Yii::$app->cache->get('leftmenu');
         // if($menu) return $menu;
         
-        $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->asArray()->all();
+        $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->orderby(['sortir' => SORT_ASC])->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHTML = $this->getMenuHtml($this->tree);
 
