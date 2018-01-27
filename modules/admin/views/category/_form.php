@@ -40,7 +40,7 @@ use app\models\Category;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать новую категорию' : 'Изменить категорию', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <a class="btn btn-primary" href="/admin/category">Вернуться в список категорий</a>
+        <a class="btn btn-primary" href="/admin/category/index?dp-1-sort=sortir">Вернуться в список категорий</a>
     </div>
 
     <?php ActiveForm::end(); ?>

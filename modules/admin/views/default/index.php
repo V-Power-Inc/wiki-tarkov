@@ -10,7 +10,7 @@ $this->title = 'Админка tarkov-wiki';
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center margin-bottom-30">Работа со справочником лута</h2>
         <div class="text-center">
-            <li class="d-inline category-admin-margins"><a href="/admin/category/" class="admin-inline">Категории справочника лута</a></li>
+            <li class="d-inline category-admin-margins"><a href="/admin/category/index?dp-1-sort=sortir" class="admin-inline">Категории справочника лута</a></li>
             <li class="d-inline category-admin-margins"><a href="#" class="admin-inline unactive">Лут в справочнике лута</a></li>
         </div>
     </ul>

@@ -123,10 +123,10 @@ class CategoryController extends Controller
         $result = in_array($LockedID, $CategoriesArray);
         /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет */
         if($result) {
-            return $this->redirect(['index']);
+            return $this->redirect(['index?dp-1-sort=sortir']);
         } else {
             $this->findModel($id)->delete();
-            return $this->redirect(['index']);
+            return $this->redirect(['index?dp-1-sort=sortir']);
         }
     }
 

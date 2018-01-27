@@ -37,5 +37,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'enabled',
         ],
     ]) ?>
-    <a class="btn btn-primary" href="/admin/category/">Вернуться в список категорий</a>
+    <a class="btn btn-primary" href="/admin/category/index?dp-1-sort=sortir">Вернуться в список категорий</a>
 </div>
