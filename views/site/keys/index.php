@@ -61,7 +61,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($tamojnya as $k_tamojnya): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_tamojnya['url']?>"><?=$k_tamojnya['name']?></a></p>
-                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible" src="<?=$k_tamojnya['preview']?>"></a>
+                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible" alt="<?=$k_tamojnya['name']?>" src="<?=$k_tamojnya['preview']?>"></a>
                         <div class="item-content"><?=$k_tamojnya['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -75,7 +75,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($zavod as $k_zavod): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_zavod['url']?>"><?=$k_zavod['name']?></a></p>
-                        <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible" src="<?=$k_zavod['preview']?>"></a>
+                        <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible" alt="<?=$k_zavod['name']?>" src="<?=$k_zavod['preview']?>"></a>
                         <div class="item-content"><?=$k_zavod['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -89,7 +89,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($forest as $k_forest): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_forest['url']?>"><?=$k_forest['name']?></a></p>
-                        <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible" src="<?=$k_forest['preview']?>"></a>
+                        <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible" alt="<?=$k_forest['name']?>" src="<?=$k_forest['preview']?>"></a>
                         <div class="item-content"><?=$k_forest['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -103,7 +103,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($bereg as $k_bereg): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_bereg['url']?>"><?=$k_bereg['name']?></a></p>
-                        <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible" src="<?=$k_bereg['preview']?>"></a>
+                        <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible" alt="<?=$k_bereg['name']?>" src="<?=$k_bereg['preview']?>"></a>
                         <div class="item-content"><?=$k_bereg['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
