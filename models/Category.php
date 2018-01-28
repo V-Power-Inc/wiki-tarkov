@@ -36,9 +36,10 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'url', 'description', 'sortir'], 'required'],
+            [['title', 'description', 'sortir', 'url'], 'required'],
             [['parent_category', 'enabled', 'sortir'], 'integer'],
             [['content'], 'string'],
+            [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
             [['title', 'url', 'description', 'keywords'], 'string', 'max' => 255],
         ];
     }

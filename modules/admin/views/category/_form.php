@@ -23,7 +23,7 @@ use app\models\Category;
 
     <?= $form->field($model, 'sortir')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'url', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '150']),

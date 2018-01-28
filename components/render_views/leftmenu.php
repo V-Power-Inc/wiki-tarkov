@@ -1,11 +1,11 @@
 <!-- 1 уровень вложенности -->
 <?php if(!isset($category['childs'])) : ?>
-<li class="relative"><a href="/loot/<?= $category['url'] ?>"><?= $category['title'] ?></a>
+<li class="relative <?= (stristr(Yii::$app->request->url, $category['url'])) ? 'active' : '' ?>"><a href="/loot/<?= $category['url'] ?>"><?= $category['title'] ?></a>
 <?php endif; ?>
 
 <!-- 2 уровень вложенности -->    
 <?php if(isset($category['childs'])) : ?>
-    <li class="relative"><a href="/loot/<?= $category['url'] ?>"><?= $category['title'] ?></a>
+    <li class="relative <?= (stristr(Yii::$app->request->url, $category['url'])) ? 'active' : '' ?>"><a href="/loot/<?= $category['url'] ?>"><?= $category['title'] ?></a>
     <div class="dcjq-icon">&nbsp;&nbsp;&nbsp;</div>
     <ul class="children-cats">
         <?php foreach($category['childs'] as $childCategory) : ?>
