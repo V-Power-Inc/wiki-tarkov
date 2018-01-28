@@ -56,7 +56,7 @@ use yii\bootstrap\ActiveForm;
                     <?php foreach ($keysearch as $keys): ?>
                         <div class="col-lg-12 item-key">
                             <p class="item-name"><a href="/keys/<?=$keys['url']?>"><?=$keys['name']?></a></p>
-                            <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible" src="<?=$keys['preview']?>"></a>
+                            <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible" alt="<?=$keys['name']?>" src="<?=$keys['preview']?>"></a>
                             <div class="item-content"><?=$keys['shortcontent']?></div>
                         </div>
                     <?php endforeach; ?>
