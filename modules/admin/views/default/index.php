@@ -35,6 +35,7 @@ $this->title = 'Админка tarkov-wiki';
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
-        <li><a href="/admin/news" class="admin-tabs w-100-important">Работа с новостями</a></li>
+        <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>
+        <li><a href="/admin/articles" class="admin-tabs w-100-important">Полезные статьи</a></li>
     </ul>
 </div>

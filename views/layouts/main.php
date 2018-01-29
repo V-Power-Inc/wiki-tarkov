@@ -20,7 +20,8 @@ AppAsset::register($this);
     <meta name="yandex-verification" content="43485f66dfa368e2" />
     <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
     } else if(stristr(Yii::$app->request->url,'/news/')) { 
-    } else { ?>
+    } else if(stristr(Yii::$app->request->url,'/articles/')){
+    } else {?>
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="База знаний Escape from Tarkov">
         <meta property="og:title" content="<?= Html::encode($this->title) ?>">
