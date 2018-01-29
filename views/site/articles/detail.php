@@ -62,7 +62,7 @@ $this->registerMetaTag([
     <div class="row">
 
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <div class="news-shortitem bg-white">
                 <span class="news-date d-block"><?=date('d-m-Y',strtotime($model['date_create']))?></span>
                 <br>
@@ -88,8 +88,10 @@ $this->registerMetaTag([
                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
                 })();
             </script>
+        </div>
 
-
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
         </div>
 
 
