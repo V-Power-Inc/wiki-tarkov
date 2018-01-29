@@ -19,7 +19,7 @@ class ItemsSearch extends Items
     {
         return [
             [['id', 'active', 'parentcat_id'], 'integer'],
-            [['title', 'preview', 'category', 'shortdesc', 'content', 'date_create'], 'safe'],
+            [['title', 'preview', 'shortdesc', 'content', 'date_create'], 'safe'],
         ];
     }
 
@@ -67,7 +67,6 @@ class ItemsSearch extends Items
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'shortdesc', $this->shortdesc])
             ->andFilterWhere(['like', 'content', $this->content]);
 
