@@ -1211,3 +1211,7 @@ li > a.admin-inline:hover {
 .custom-key-margin {
     margin: 2px 7px;
 }
+
+.margin-top-20 {
+    margin-top: 20px;
+}

@@ -28,6 +28,11 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
             <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
+
+            <!-- Виджет Discord -->
+            <div class="margin-top-20">
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
         </div>
 
         <!-- Основное содержимое страницы -->
