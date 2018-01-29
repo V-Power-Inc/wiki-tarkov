@@ -782,14 +782,15 @@ button::-moz-focus-inner, label::-moz-focus-inner, label {
 .height-25 {
     height: 25px;
 }
+
 .item-key {
     margin: 5px 0;
     padding: 10px;
     background: gainsboro;
     border: 1px solid #c3392c;
     border-radius: 5px;
-    max-height: 121px;
-    height: 121px;
+    max-height: 141px;
+    height: 141px;
 }
 
 .item-key.detail {
@@ -843,7 +844,7 @@ span.key-selector {
 
 .item-key div.item-content {
     padding-left: 10px;
-    display: inline-block;
+    display: block;
     width: 100%;
     max-width: 1010px;
 }
@@ -1205,4 +1206,8 @@ li > a.admin-inline:hover {
 
 .mfp-arrow {
     opacity: 1;
+}
+
+.custom-key-margin {
+    margin: 2px 7px;
 }

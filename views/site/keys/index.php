@@ -32,7 +32,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 keys-content">
+        <div class="col-lg-9 keys-content">
             <p class="size-16 alert alert-info">Наиболее полная база ключей от помещений в игре Escape from Tarkov. Данный справочник содержит информацию о всех доступных ключах от помещений Таркова на локациях Завод, Берег, Лес и Таможня. Также в этом разделе вы можете узнать что находится за открываемыми дверями и узнать где можно с большей вероятностью найти определенный ключи.</p>
 
             <div class="col-lg-12">
@@ -61,7 +61,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($tamojnya as $k_tamojnya): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_tamojnya['url']?>"><?=$k_tamojnya['name']?></a></p>
-                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible" src="<?=$k_tamojnya['preview']?>"></a>
+                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_tamojnya['preview']?>"></a>
                         <div class="item-content"><?=$k_tamojnya['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -75,7 +75,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($zavod as $k_zavod): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_zavod['url']?>"><?=$k_zavod['name']?></a></p>
-                        <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible" src="<?=$k_zavod['preview']?>"></a>
+                        <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_zavod['preview']?>"></a>
                         <div class="item-content"><?=$k_zavod['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -89,7 +89,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($forest as $k_forest): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_forest['url']?>"><?=$k_forest['name']?></a></p>
-                        <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible" src="<?=$k_forest['preview']?>"></a>
+                        <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_forest['preview']?>"></a>
                         <div class="item-content"><?=$k_forest['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -103,13 +103,18 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 <?php foreach ($bereg as $k_bereg): ?>
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_bereg['url']?>"><?=$k_bereg['name']?></a></p>
-                        <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible" src="<?=$k_bereg['preview']?>"></a>
+                        <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_bereg['preview']?>"></a>
                         <div class="item-content"><?=$k_bereg['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
             </div>
         </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+        </div>
+        
     </div>
 </div>
 
