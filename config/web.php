@@ -93,8 +93,8 @@ $config = [
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
                 'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
-                'keys/detail-key' => 'site/doorkeysdetail',
                 'news' => 'site/news',
+                'articles' => 'site/articles',
                 [
                     'class' => 'app\components\UrlComponent',
                 ],
