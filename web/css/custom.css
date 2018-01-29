@@ -67,8 +67,7 @@ body {
 .nav > li > a {
     position: relative;
     display: block;
-    padding: 14.7px 5px;
-    width: 180px;
+    width: auto;
     text-align: center;
 }
 
