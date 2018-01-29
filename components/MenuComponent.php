@@ -20,6 +20,8 @@ class MenuComponent
     public static $newsdetail = null;
     public static $articles = null;
     public static $articlesdetail = null;
+    public static $lootcat = null;
+    public static $mainloot = null;
 
     public static function  Active(){
         $activeAction = \Yii::$app->controller->action->id;
@@ -34,6 +36,8 @@ class MenuComponent
             case 'articledetail': self::$articlesdetail = 'class="active"'; break;
             case 'news': self::$news = 'class="active"'; break;
             case 'newsdetail': self::$newsdetail = 'class="active"'; break;
+            case 'category': self::$lootcat = 'class="active"'; break;
+            case 'mainloot': self::$mainloot = 'class="active"'; break;
         }
     }
     /**
@@ -73,7 +77,7 @@ class MenuComponent
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
-                    <li><a href="/loot">Справочник лута</a></li>
+                    <li '.self::$lootcat.' '.self::$mainloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>

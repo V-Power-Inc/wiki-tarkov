@@ -1215,3 +1215,43 @@ li > a.admin-inline:hover {
 .margin-top-20 {
     margin-top: 20px;
 }
+
+/*** Стили оформления лута ***/
+.col-lg-12 .item-loot {
+    margin: 10px 0;
+    padding: 20px;
+    background: gainsboro;
+    border-radius: 5px;
+    border: 1px solid #c3392c;
+}
+
+.item-loot-title {
+    padding: 0 0 10px 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-loot-title a {
+    color: #c3392c;
+}
+
+.item-loot-title a:hover {
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+.loot-image {
+    float: left;
+    margin: 5px 10px 5px 0;
+    border: 1px solid white;
+    box-shadow: 1px 1px 20px;
+}
+
+.loot-description {
+    font-size: 16px;
+}
+
+a.loot-link {
+    color: black;
+}

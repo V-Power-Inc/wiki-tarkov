@@ -39,6 +39,11 @@ class LootController extends Controller
         }
     }
     
+    /** Рендер детальной страницы лута */
+    public function actionDetailloot() {
+        return $this->render('item-detail.php');
+    }
+    
     
     
     

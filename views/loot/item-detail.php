@@ -26,7 +26,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
-            <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
+                <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
 
             <!-- Виджет Discord -->
@@ -37,30 +37,14 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
-           <p class="alert alert-info size-16">На этой странице вы можете узнать информацию о любом луте из игры Escape from Tarkov. В справочнике вы сможете найти информацию о любом внутриигровом предмете. <br><br>
-           Для удобства была создана разбивка по категориям, что облегчит вам поиск наиболее интересных предметов.</p>
 
             <div class="row">
                 <!-- Итем из таблицы предметов -->
                 <div class="col-lg-12">
                     <div class="item-loot">
-                    
-                    <h2 class="item-loot-title"><a href="#">Тушенка</a></h2>
-                    <a class="loot-link" href=""><img class="loot-image" src="/img/m4a1.jpg"></a>
-                        <p class="loot-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-    
-                        </p>
-    
-                    </div>
-                </div>
-                <!-- Окончания итем из цикла -->
-
-                <!-- Итем из таблицы предметов -->
-                <div class="col-lg-12">
-                    <div class="item-loot">
 
                         <h2 class="item-loot-title"><a href="#">Тушенка</a></h2>
-                        <a class="loot-link" href="#"><img class="loot-image" src="/img/m4a1.jpg"></a>
+                        <a class="loot-link" href=""><img class="loot-image" src="/img/m4a1.jpg"></a>
                         <p class="loot-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 
                         </p>
@@ -68,6 +52,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     </div>
                 </div>
                 <!-- Окончания итем из цикла -->
+                
             </div>
 
 
@@ -77,19 +62,19 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
         <!-- Комментарии -->
-    <!--     <div id="mc-container" class="kek-recustom"></div>
-        <script type="text/javascript">
-            cackle_widget = window.cackle_widget || [];
-            cackle_widget.push({widget: 'Comment', id: 57165});
-            (function() {
-                var mc = document.createElement('script');
-                mc.type = 'text/javascript';
-                mc.async = true;
-                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-            })();
-        </script>
-    -->
+        <!--     <div id="mc-container" class="kek-recustom"></div>
+            <script type="text/javascript">
+                cackle_widget = window.cackle_widget || [];
+                cackle_widget.push({widget: 'Comment', id: 57165});
+                (function() {
+                    var mc = document.createElement('script');
+                    mc.type = 'text/javascript';
+                    mc.async = true;
+                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+                })();
+            </script>
+        -->
 
     </div>
 </div>
