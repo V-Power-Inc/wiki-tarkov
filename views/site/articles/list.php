@@ -23,7 +23,7 @@ $this->registerMetaTag([
 
 <div class="heading-class">
     <div class="container">
-        <h1 class="main-site-heading">Полезные статьи по Escape from Tarkov</h1>
+        <h1 class="main-site-heading">Полезная информация по Escape from Tarkov</h1>
     </div>
 </div>
 
