@@ -123,7 +123,7 @@ class ArticlesController extends Controller
 
     /**
      * Finds the Articles model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * If the model  is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Articles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
