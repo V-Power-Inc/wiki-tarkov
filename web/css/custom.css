@@ -67,8 +67,7 @@ body {
 .nav > li > a {
     position: relative;
     display: block;
-    padding: 14.7px 5px;
-    width: 180px;
+    width: auto;
     text-align: center;
 }
 
@@ -1185,6 +1184,25 @@ li > a.admin-inline:hover {
     margin-bottom: 5px;
 }
 
+/*** Recustom Magnific Arrows of 26_01_2018 ***/
 
+.mfp-arrow-left {
+    left: 150px;
+}
 
+.mfp-arrow-right {
+    right: 150px;
+}
 
+.mfp-arrow-left:before {
+    margin-left: 25px;
+    border-right: 27px solid #ff0909;
+}
+
+.mfp-arrow-right:before {
+    border-left: 27px solid #ff0000;
+}
+
+.mfp-arrow {
+    opacity: 1;
+}

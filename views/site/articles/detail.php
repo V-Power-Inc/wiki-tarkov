@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: comp
- * Date: 20.01.2018
- * Time: 17:02
+ * User: DIR300NRU-ADMIN
+ * Date: 29.01.2018
+ * Time: 14:19
  */
 
 $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -45,8 +45,8 @@ $this->registerMetaTag([
 
 <style>
     img.image-link {
-    border: 1px solid white;
-    box-shadow: 1px 1px 6px 2px;
+        border: 1px solid white;
+        box-shadow: 1px 1px 6px 2px;
     }
 </style>
 
@@ -66,14 +66,14 @@ $this->registerMetaTag([
             <div class="news-shortitem bg-white">
                 <span class="news-date d-block"><?=date('d-m-Y',strtotime($model['date_create']))?></span>
                 <br>
-                <img class="news-titleimage" alt="<?=$model['title']?>" src="<?=$model['preview']?>">
+                <img class="news-titleimage" src="<?=$model['preview']?>">
                 <div class="text-left"><?=$model['content'] ?></div>
-                
+
                 <br>
-                
-                <p class="text-right"><a class="btn btn-default main-link" href="/news">Вернуться к списку новостей</a></p>
+
+                <p class="text-right"><a class="btn btn-default main-link" href="/articles">Вернуться к списку статей</a></p>
             </div>
-            
+
 
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
@@ -88,10 +88,10 @@ $this->registerMetaTag([
                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
                 })();
             </script>
-            
-            
+
+
         </div>
-            
-        
+
+
     </div>
 </div>

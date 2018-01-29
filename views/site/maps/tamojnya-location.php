@@ -43,7 +43,7 @@ $this->registerMetaTag([
             <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
             <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
             <button class="btn btn-success voenka-b">Военные ящики</button>
-            <button class="btn btn-primary polki-b">Офисные ящики</button>
+            <button class="btn btn-primary polki-b">Квестовые точки</button>
             <button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>
             <button class="btn btn-places w-100 places-b">Интересные места</button>
         </div>
@@ -55,7 +55,7 @@ $this->registerMetaTag([
                     <label class="btn btn-primary house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Гаражи</span>
+                        <span>Выходы для спавна Таможня</span>
                     </label>
                     
                     <br>

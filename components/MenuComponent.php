@@ -16,6 +16,10 @@ class MenuComponent
     public static $locations = null;
     public static $keys = null;
     public static $detaikey = null;
+    public static $news = null;
+    public static $newsdetail = null;
+    public static $articles = null;
+    public static $articlesdetail = null;
 
     public static function  Active(){
         $activeAction = \Yii::$app->controller->action->id;
@@ -26,6 +30,10 @@ class MenuComponent
             case 'locations': self::$locations = 'class="active"'; break;
             case 'keys': self::$keys = 'class="active"'; break;
             case 'doorkeysdetail': self::$detaikey = 'class="active"'; break;
+            case 'articles': self::$articles = 'class="active"'; break;
+            case 'articledetail': self::$articlesdetail = 'class="active"'; break;
+            case 'news': self::$news = 'class="active"'; break;
+            case 'newsdetail': self::$newsdetail = 'class="active"'; break;
         }
     }
     /**
@@ -67,7 +75,8 @@ class MenuComponent
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
-                    <li><a href="/news">Новости</a></li>
+                    <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
+                    <li '.self::$news.' '.self::$newsdetail.'><a href="/news">Новости</a></li>
                 </ul>
 
             </div>

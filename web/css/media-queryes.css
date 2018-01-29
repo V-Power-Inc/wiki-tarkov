@@ -1,3 +1,14 @@
+/*** Custom media for Magnific ***/
+@media (max-width: 1500px) {
+    .mfp-arrow-left {
+        left: 0;
+    }
+
+    .mfp-arrow-right {
+        right: 0;
+    }
+}
+
 
 /*** col-md screen size (1199px) ***/
 @media (max-width: 1199px) {
@@ -23,6 +34,14 @@
         padding: 0px;
     }
 
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 10px;
+        width: 140px;
+        text-align: center;
+    }
+
 }
 
 
@@ -32,9 +51,14 @@
     .nav > li > a {
         position: relative;
         display: block;
-        padding: 15px;
-        width: auto;
+        padding: 10px 10px;
+        width: 115px;
         text-align: center;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #edeef0;
+        font-size: 14px;
     }
 
     .mobile-text-center {
@@ -93,6 +117,14 @@
 
 /*** col-xs screen size (767px) ***/
 @media (max-width: 767px) {
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 14.7px 5px;
+        width: 100%;
+        text-align: center;
+    }
 
     .navbar-brand {
         padding: 0;
