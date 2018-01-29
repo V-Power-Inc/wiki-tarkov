@@ -73,6 +73,7 @@ class MenuComponent
                 <ul class="nav navbar-nav">
                     <li '.self::$index.'><a href="/">Главная</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
+                    <li><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
