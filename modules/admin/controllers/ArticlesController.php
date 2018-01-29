@@ -14,10 +14,10 @@ use yii\filters\VerbFilter;
  */
 class ArticlesController extends Controller
 {
-    /** Ïîäêëş÷àåì îòäåëüíûé layout äëÿ CRUD ìîäåëåé **/
+    /** ĞŸĞ¾Ğ´ĞºĞ»ÑÑ‡Ğ°ĞµĞ¼ Ğ¾Ñ‚Ğ´ĞµĞ»ÑŒĞ½Ñ‹Ğ¹ layout Ğ´Ğ»Ñ CRUD Ğ¼Ğ¾Ğ´ĞµĞ»ĞµĞ¹ **/
     public $layout = 'admin';
 
-    /** Ïğîâåğêà ïîëüçîâàòåëÿ íà ãîñòÿ  **/
+    /** ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ñ Ğ½Ğ° Ğ³Ğ¾ÑÑ‚Ñ  **/
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
