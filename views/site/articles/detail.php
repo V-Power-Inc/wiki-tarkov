@@ -71,7 +71,7 @@ $this->registerMetaTag([
 
                 <br>
 
-                <p class="text-right"><a class="btn btn-default main-link" href="/news">Вернуться к списку новостей</a></p>
+                <p class="text-right"><a class="btn btn-default main-link" href="/articles">Вернуться к списку статей</a></p>
             </div>
 
 
