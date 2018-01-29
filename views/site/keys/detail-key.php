@@ -57,7 +57,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-9 keys-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
             
             <div class="col-lg-12">
                 

@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 keys-content">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
                 <p class="size-16 alert alert-info">Наиболее полная база ключей от помещений в игре Escape from Tarkov. Данный справочник содержит информацию о всех доступных ключах от помещений Таркова на локациях Завод, Берег, Лес и Таможня. Также в этом разделе вы можете узнать что находится за открываемыми дверями и узнать где можно с большей вероятностью найти определенный ключи.</p>
                 <div class="col-lg-12">
         
