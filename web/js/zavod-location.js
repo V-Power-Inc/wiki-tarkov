@@ -49,9 +49,10 @@ var ArmyIcon = L.icon({
     iconUrl: '/img/mapicons/voen-yaj.png',
     iconSize: [30, 30],
 });
+/** Раньше это был маркер полок, теперь это иконка маркеров квестов **/
 var PolkiIcon = L.icon({
-    iconUrl: '/img/mapicons/chkaf.png',
-    iconSize: [30, 30]
+    iconUrl: '/img/mapicons/quest_icon1.png',
+    iconSize: [20, 24.39]
 });
 var DikieIcon = L.icon({
     iconUrl: '/img/mapicons/dikie.png',
@@ -133,7 +134,7 @@ $('body').css({'background':'black'});
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content == "") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).addTo(dikiy);
-        } else if (markersData[i].marker_group == "Офисные полки") {
+        } else if (markersData[i].marker_group == "Квестовые точки") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).openPopup().addTo(polki);
         } else if (markersData[i].marker_group == "Спавны игроков ЧВК") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).openPopup().addTo(chvk);
@@ -271,7 +272,7 @@ $('body').on('click','.places-b', function(){
         $('#playermarker').hide();
     });
 
-    /** Обработка клика по кнопке выбора маркеров офисных полок **/
+    /** Обработка клика по кнопке выбора маркеров Квестовые точки **/
     $('body').on('click','.polki-b', function(){
         $('.static-description').hide();
         $('#dikiyexitmarker').hide();
@@ -284,14 +285,14 @@ $('body').on('click','.places-b', function(){
         $('#playermarker').hide();
         $('#polkiimarker').fadeIn();
         polki.addTo(map);
-        $(".polki-b").before('<button class="btn btn-primary polki-b active" id="active-polki-v">Офисные ящики</button>');
+        $(".polki-b").before('<button class="btn btn-primary polki-b active" id="active-polki-v">Квестовые точки</button>');
         $('#polkiimarker').html(staticData[2].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-polki-v', function(){
         map.removeLayer(polki);
-        $('#active-polki-v').before('<button class="btn btn-primary polki-b">Офисные ящики</button>');
+        $('#active-polki-v').before('<button class="btn btn-primary polki-b">Квестовые точки</button>');
         $('#active-polki-v').remove();
         $('#dikiyexitmarker').hide();
         $('#necessaryplaces').hide();
@@ -420,8 +421,8 @@ $('body').on('click','.places-b', function(){
         }
 
         if (MagnificImg) {
-            $(MagnificImg).wrap('<a class="image-link" href='+ $(MagnificImg).attr('src') +'></a>');
-            $('.mfp-title').css({"display" : "none"});
+            $(MagnificImg).unwrap();
+            $(MagnificImg).wrap('<a class="image-link" title="'+$(MagnificImg).attr('alt')+'" href='+$(MagnificImg).attr('src')+'></a>');
         }
 
         /** Инициализация самого скрипта **/

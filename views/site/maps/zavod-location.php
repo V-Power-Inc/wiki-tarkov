@@ -43,7 +43,7 @@ $this->registerMetaTag([
                 <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
                 <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
                 <button class="btn btn-success voenka-b">Военные ящики</button>
-                <button class="btn btn-primary polki-b">Офисные ящики</button>
+                <button class="btn btn-primary polki-b">Квестовые точки</button>
                 <button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>
                 <button class="btn btn-places w-100 places-b">Интересные места</button>
             </div>

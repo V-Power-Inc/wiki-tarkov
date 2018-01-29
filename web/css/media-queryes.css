@@ -1,3 +1,14 @@
+/*** Custom media for Magnific ***/
+@media (max-width: 1500px) {
+    .mfp-arrow-left {
+        left: 0;
+    }
+
+    .mfp-arrow-right {
+        right: 0;
+    }
+}
+
 
 /*** col-md screen size (1199px) ***/
 @media (max-width: 1199px) {
