@@ -134,11 +134,13 @@ class CategoryController extends Controller
         $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
         $Items = new Items();
         $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
+        $ItemsMainCategories = ArrayHelper::getColumn($Items->getAllItems(), 'maincat_id');
         $LockedID = $model->id;
+        $MainCategoryRelation = in_array($LockedID, $ItemsMainCategories);
         $CategoryRelation = in_array($LockedID, $CategoriesArray);
         $ItemRelation = in_array($LockedID, $ItemsCategories);
         /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
-        if($CategoryRelation || $ItemRelation) {
+        if($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
             return $this->redirect(['index?dp-1-sort=sortir']);
         } else {
             $this->findModel($id)->delete();

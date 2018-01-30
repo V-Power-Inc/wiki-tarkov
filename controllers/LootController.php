@@ -38,18 +38,14 @@ class LootController extends Controller
     public function actionCategory($id)
     {
         $Categories = Category::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
-        $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $Categories->id])->asArray()->all();
-        if($Categories) {
-            echo "<pre>";
-                print_r($items);
-            echo "<pre>";
-            echo '<hr>';
-            echo "<pre>";
-            print_r($Categories);
-            echo "<pre>";
-            exit();
+
+        if($Categories && $Categories->parent_category !== null) {
+            $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $Categories->id])->asArray()->all();
             return $this->render('categorie-page.php',['model' => $Categories, 'items' => $items,]);
-        } else {
+        } else if($Categories && $Categories->parent_category == null) {
+            $mainitems = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $Categories->id])->asArray()->all();
+            return $this->render('categorie-page.php',['model' => $Categories, 'items' => $mainitems,]);
+        } else  {
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
@@ -58,9 +54,5 @@ class LootController extends Controller
     public function actionDetailloot() {
         return $this->render('item-detail.php');
     }
-    
-    
-    
-    
     
 }
