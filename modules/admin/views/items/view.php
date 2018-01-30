@@ -38,5 +38,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'parentcat_id',
         ],
     ]) ?>
-
+    <a class="btn btn-primary" href="/admin/items/">Вернуться в список предметов справочника лута</a>
 </div>

@@ -6,6 +6,7 @@ use Yii;
 use yii\imagine\Image;
 use Imagine\Gd;
 use Imagine\Image\Box;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "items".
@@ -49,6 +50,7 @@ class Items extends \yii\db\ActiveRecord
             [['title', 'shortdesc', 'parentcat_id'], 'required'],
             [['shortdesc', 'content'], 'string'],
             [['date_create'], 'safe'],
+            [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview'], 'string', 'max' => 255],
             [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parentcat_id' => 'id']],
@@ -80,7 +82,7 @@ class Items extends \yii\db\ActiveRecord
             $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->save($catalog , ['quality' => 90]);
+            Image::getImagine()->open($catalog)->save($catalog);
         }
     }
 
