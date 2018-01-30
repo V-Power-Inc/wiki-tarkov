@@ -7,6 +7,7 @@
  */
 
 use app\components\LeftmenuWidget;
+use yii\widgets\LinkPager;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 
@@ -43,7 +44,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
             <div class="row">
                 <!-- Цикл всех предметов из справочника -->
-                <?php foreach ($fullitems as $item) : ?>
+                <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
                             <h2 class="item-loot-title"><a href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
@@ -52,6 +53,17 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+                <div class="col-lg-12 pagination text-center">
+                    <?= LinkPager::widget([
+                        'pagination' => $pagination,
+                        'firstPageLabel' => 'первая',
+                        'lastPageLabel' => 'последняя',
+                        'prevPageLabel' => '&laquo;',
+                        'prevPageLabel' => '&laquo;',
+                    ]);
+                    ?>
+                </div>
                 
             </div>
 
