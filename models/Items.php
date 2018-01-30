@@ -131,6 +131,12 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ItemsToTerapevt::className(), ['item_id' => 'id']);
     }
+    
+    /** Получаем список всех предметов из таблицы справочника лута **/
+    public function getAllItems() {
+        $Items = Items::find()->asArray()->all();
+        return $Items;
+    }
 
     /*** Ниже получаем родительскую категорию ***/
     /**
@@ -140,10 +146,7 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
     }
-
-    public function getParentName()
-    {
-        $parent = $this->title;
-        return $parent ? $parent->title : '';
-    }
+    
+    
+    
 }

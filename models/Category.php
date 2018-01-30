@@ -68,6 +68,12 @@ class Category extends \yii\db\ActiveRecord
         return $categories;
     }
 
+    /** Получаем массив всех категорий, включенных и выключенных */
+    public function getAllCategories() {
+        $Categories = Category::find()->andWhere('parent_category' !== null)->indexBy('id')->asArray()->all();
+        return $Categories;
+    }
+
     /** Получаем массив всех дочерних категорий, включенных и выключенных */
     public function getChildCategories() {
         $Childcategories = Category::find()->andWhere('parent_category' !== null)->indexBy('id')->asArray()->all();

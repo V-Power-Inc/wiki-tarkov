@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Category;
 use app\models\CategorySearch;
+use app\models\Items;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
@@ -131,10 +132,21 @@ class CategoryController extends Controller
     {
         $model = $this->findModel($id);
         $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
+        $Items = new Items();
+        $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
         $LockedID = $model->id;
         $result = in_array($LockedID, $CategoriesArray);
-        /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет */
-        if($result) {
+        $ItemRelation = in_array($LockedID, $ItemsCategories);
+        /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
+        if($result || $ItemRelation) {
+//            echo "<pre>";
+//            print_r($ItemsCategories);
+//            echo "<pre>";
+//            echo '<hr>';
+//            echo "<pre>";
+//            print_r($LockedID);
+//            echo "<pre>";
+//            exit();
             return $this->redirect(['index?dp-1-sort=sortir']);
         } else {
             $this->findModel($id)->delete();

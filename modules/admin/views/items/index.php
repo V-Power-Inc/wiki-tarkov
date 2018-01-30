@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="items-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -44,10 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'parentcat_id',
                 'label'=>'Родительская категория',
                 'format'=>'text', // Возможные варианты: raw, html
-                'content'=>function($data){
-                    return $data = Items::getParentName()->one();
+                'content'=>function($model){
+                    return $model->parentcat->title;
+                    //return $data = new Items::class()->Parentcat()->title;
                 },
-                'filter' => Items::getParentcat()
             ],
 
             ['class' => 'yii\grid\ActionColumn'],
