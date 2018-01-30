@@ -37,22 +37,14 @@ class LootController extends Controller
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionCategory($id)
     {
-        $Categories = Category::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
-
-        if($Categories && $Categories->parent_category !== null) {
-            $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $Categories->id])->asArray()->all();
-            return $this->render('categorie-page.php',['model' => $Categories, 'items' => $items,]);
-        } else if($Categories && $Categories->parent_category == null) {
-            $mainitems = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $Categories->id])->asArray()->all();
-            return $this->render('categorie-page.php',['model' => $Categories, 'items' => $mainitems,]);
-        } else  {
+        $id = Yii::$app->request->get('id');
+        $model = Category::find()->where(['enabled' => 1])->andWhere(['id' => $id])->one();
+        $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $id])->all();
+        if ($model) {
+        return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
+        } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
-    }
-    
-    /** Рендер детальной страницы лута */
-    public function actionDetailloot() {
-        return $this->render('item-detail.php');
     }
     
 }

@@ -66,19 +66,23 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             
             <!-- Описание категории -->
             <p class="alert alert-info size-16"><?= $model['content'] ?></p>
-            
-            
+
             <!-- Цикл предметов категории -->
-            <?php foreach ($items as $item) : ?>
-                <div class="col-lg-12">
-                    <div class="item-loot">
-                        <h2 class="item-loot-title"><a href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
-                        <a class="loot-link" href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
-                        <p class="loot-description"><?= $item['shortdesc'] ?></p>
+            <?php if(!empty($items)) : ?>
+                <?php foreach ($items as $item) : ?>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $item['id']]) ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $item['id']]) ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-            
+                <?php endforeach; ?>
+            <?php else : ?>
+            <div class="col-lg-12">
+                <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Расстояние - заглушка -->

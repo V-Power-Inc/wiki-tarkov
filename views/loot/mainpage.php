@@ -47,8 +47,8 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <h2 class="item-loot-title"><a href="<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>
