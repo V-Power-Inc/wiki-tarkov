@@ -66,7 +66,7 @@ $this->registerMetaTag([
             <div class="news-shortitem bg-white">
                 <span class="news-date d-block"><?=date('d-m-Y',strtotime($model['date_create']))?></span>
                 <br>
-                <img class="news-titleimage" src="<?=$model['preview']?>">
+                <img class="news-titleimage" alt="<?=$item['title']?>" src="<?=$model['preview']?>">
                 <div class="text-left"><?=$model['content'] ?></div>
 
                 <br>
