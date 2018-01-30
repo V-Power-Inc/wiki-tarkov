@@ -1218,6 +1218,8 @@ li > a.admin-inline:hover {
 
 /*** Стили оформления лута ***/
 .col-lg-12 .item-loot {
+    min-height: 200px;
+    height: auto;
     margin: 10px 0;
     padding: 20px;
     background: gainsboro;

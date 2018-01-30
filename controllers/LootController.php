@@ -26,14 +26,15 @@ class LootController extends Controller
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
-        return $this->render('mainpage.php');
+        $fullitems = Items::find()->where(['active' => 1])->asArray()->all();
+        return $this->render('mainpage.php', ['fullitems' => $fullitems,]);
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionCategory($id)
     {
         $Categories = Category::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
-        $Items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $Categories->id])->asArray()->all();
+        $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $Categories->id])->asArray()->all();
         if($Categories) {
 //            echo "<pre>";
 //                print_r($Items);
@@ -43,7 +44,7 @@ class LootController extends Controller
 //            print_r($Categories);
 //            echo "<pre>";
 //            exit();
-            return $this->render('categorie-page.php',['model' => $Categories]);
+            return $this->render('categorie-page.php',['model' => $Categories, 'items' => $items,]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

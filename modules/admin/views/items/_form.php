@@ -20,6 +20,8 @@ use app\models\Category;
 
     <?= $form->field($model, 'parentcat_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'title')) ?>
 
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {

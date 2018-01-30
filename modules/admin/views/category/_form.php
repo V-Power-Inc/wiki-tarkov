@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
 use yii\helpers\ArrayHelper;
 use app\models\Category;
 
@@ -25,10 +23,7 @@ use app\models\Category;
     
     <?= $form->field($model, 'url', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '150']),
-    ]);
-    ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 3]) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 

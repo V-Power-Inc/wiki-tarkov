@@ -41,33 +41,17 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
            Для удобства была создана разбивка по категориям, что облегчит вам поиск наиболее интересных предметов.</p>
 
             <div class="row">
-                <!-- Итем из таблицы предметов -->
-                <div class="col-lg-12">
-                    <div class="item-loot">
-                    
-                    <h2 class="item-loot-title"><a href="#">Тушенка</a></h2>
-                    <a class="loot-link" href=""><img class="loot-image" src="/img/m4a1.jpg"></a>
-                        <p class="loot-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-    
-                        </p>
-    
+                <!-- Цикл всех предметов из справочника -->
+                <?php foreach ($fullitems as $item) : ?>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                        </div>
                     </div>
-                </div>
-                <!-- Окончания итем из цикла -->
-
-                <!-- Итем из таблицы предметов -->
-                <div class="col-lg-12">
-                    <div class="item-loot">
-
-                        <h2 class="item-loot-title"><a href="#">Тушенка</a></h2>
-                        <a class="loot-link" href="#"><img class="loot-image" src="/img/m4a1.jpg"></a>
-                        <p class="loot-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-                        </p>
-
-                    </div>
-                </div>
-                <!-- Окончания итем из цикла -->
+                <?php endforeach; ?>
+                
             </div>
 
 

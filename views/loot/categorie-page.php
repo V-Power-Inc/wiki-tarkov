@@ -63,7 +63,22 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
-                    <!-- Тут будут циклы из предметов этой категории -->
+            
+            <!-- Описание категории -->
+            <p class="alert alert-info size-16"><?= $model['content'] ?></p>
+            
+            
+            <!-- Цикл предметов категории -->
+            <?php foreach ($items as $item) : ?>
+                <div class="col-lg-12">
+                    <div class="item-loot">
+                        <h2 class="item-loot-title"><a href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
+                        <a class="loot-link" href="<?= Yii::$app->request->url ?>/<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                        <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            
         </div>
 
         <!-- Расстояние - заглушка -->
