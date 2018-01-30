@@ -41,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'date_create',
             // 'active',
             [
-                // Тут непонятно
                 'attribute'=>'parentcat_id',
                 'label'=>'Родительская категория',
                 'format'=>'text', // Возможные варианты: raw, html
@@ -50,7 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     //return $data = new Items::class()->Parentcat()->title;
                 },
             ],
+            [
+                'attribute'=>'maincat_id',
+                'label'=>'Корневая категория',
+                'format'=>'text', // Возможные варианты: raw, html
+                'content'=>function($model){
+                    return $model->maincat->title;
+                    //return $data = new Items::class()->Parentcat()->title;
+                },
+            ],
 
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

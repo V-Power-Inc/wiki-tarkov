@@ -29,6 +29,7 @@ use yii\web\UploadedFile;
  * @property ItemsToPrapor[] $itemsToPrapors
  * @property ItemsToTerapevt[] $itemsToTerapevts
  * @property Category $parentcat
+ * @property Category $maintcat
  */
 class Items extends \yii\db\ActiveRecord
 {
@@ -151,6 +152,11 @@ class Items extends \yii\db\ActiveRecord
     public function getParentcat()
     {
         return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
+    }
+
+    public function getMaincat()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'maincat_id']);
     }
     
     
