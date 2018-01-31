@@ -98,7 +98,7 @@ $config = [
                 'news' => 'site/news',
                 'loot' => 'loot/mainloot',
                 'articles' => 'site/articles',
-                'loot/<id:[\w_\/-]+>' => 'loot/category',
+                'loot/<category:[\w_\/-]+>' => 'loot/category',
                 'item/<id:[\w_\/-]+>' => 'item/detailloot',
                 
                 [
