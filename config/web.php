@@ -79,7 +79,9 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+           // 'enableStrictParsing' => false,
             'rules' => [
+                '' => 'site/index',
                 'admin/login' => 'admin/default/logout',
                 'maps' => 'site/locations',
                 'maps/zavod-location' => 'site/zavod',
@@ -96,8 +98,8 @@ $config = [
                 'news' => 'site/news',
                 'loot' => 'loot/mainloot',
                 'articles' => 'site/articles',
-                'category/<id:\d+>' => 'loot/category',
-                'item/<id:\d+>' => 'item/detailloot',
+                'loot/<id:\d+>' => 'item/detailloot',
+                'loot/<url:[\w_\/-]+>'=>'loot/category',
                 [
                     'class' => 'app\components\UrlComponent',
                 ],

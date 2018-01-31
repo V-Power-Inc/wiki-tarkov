@@ -10,6 +10,7 @@ namespace app\controllers;
 use app\models\Category;
 use yii\web\Controller;
 use app\models\Items;
+use yii\web\HttpException;
 use Yii;
 
 class ItemController extends Controller {
@@ -18,6 +19,11 @@ class ItemController extends Controller {
 public function actionDetailloot($id) {
     $id = Yii::$app->request->get('id');
     $item = Items::findOne($id);
-        return $this->render('/loot/item-detail.php', compact('item'));
+    
+        if($item) {
+            return $this->render('/loot/item-detail.php', compact('item'));
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 }

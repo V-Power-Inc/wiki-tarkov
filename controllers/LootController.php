@@ -35,13 +35,16 @@ class LootController extends Controller
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($id)
+    public function actionCategory($url)
     {
-        $id = Yii::$app->request->get('id');
-        $model = Category::find()->where(['enabled' => 1])->andWhere(['id' => $id])->one();
-        $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $id])->all();
-        if ($model) {
+        $url = Yii::$app->request->get('url');
+        $model = Category::find()->where(['enabled' => 1])->andWhere(['url' => $url])->one();
+        $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $model['id']])->all();
+        if ($model && $items) {
         return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
+        } elseif ($model && empty($items)) {
+            $items = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $model['id']])->all();
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

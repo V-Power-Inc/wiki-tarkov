@@ -50,7 +50,7 @@ class Items extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'shortdesc', 'parentcat_id', 'maincat_id', 'url'], 'required'],
+            [['title', 'shortdesc', 'maincat_id', 'url'], 'required'],
             [['shortdesc', 'content'], 'string'],
             [['date_create'], 'safe'],
             [['file'], 'image'],
