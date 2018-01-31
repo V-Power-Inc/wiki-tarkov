@@ -7,7 +7,6 @@
  */
 
 namespace app\controllers;
-use app\models\Category;
 use yii\web\Controller;
 use app\models\Items;
 use yii\web\HttpException;
@@ -17,8 +16,9 @@ class ItemController extends Controller {
     
 /** Рендер детальной страницы лута */
 public function actionDetailloot($id) {
+
     $id = Yii::$app->request->get('id');
-    $item = Items::findOne($id);
+    $item = Items::find()->where(['active' => 1])->andWhere(['url' => $id])->one();
     
         if($item) {
             return $this->render('/loot/item-detail.php', compact('item'));
