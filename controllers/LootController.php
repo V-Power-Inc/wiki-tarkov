@@ -41,7 +41,7 @@ class LootController extends Controller
         $model = Category::find()->where(['enabled' => 1])->andWhere(['url' => $url])->one();
         $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $model['id']])->all();
         if ($model && $items) {
-        return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
         } elseif ($model && empty($items)) {
             $items = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $model['id']])->all();
             return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
@@ -49,5 +49,5 @@ class LootController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
+
 }
