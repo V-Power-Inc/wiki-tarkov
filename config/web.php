@@ -98,8 +98,9 @@ $config = [
                 'news' => 'site/news',
                 'loot' => 'loot/mainloot',
                 'articles' => 'site/articles',
-                'loot/<url:[\w_\/-]+>'=>'loot/category',
                 'loot/<id:\d+>' => 'item/detailloot',
+                'loot/<url:[\w_\/-]+>'=>'loot/category',
+                
                 [
                     'class' => 'app\components\UrlComponent',
                 ],
