@@ -37,6 +37,10 @@ $this->registerMetaTag([
                     <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
             </ul>
+
+            <div class="margin-top-20">
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
         </div>
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
