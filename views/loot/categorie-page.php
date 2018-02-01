@@ -42,7 +42,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 ?>
 <div class="heading-class">
     <div class="container">
-        <h1 class="main-site-heading"><?= $model['title'] ?></h1>
+        <h1 class="main-site-heading"><?= (isset($childmodel)) ? $childmodel->title : $model['title'] ?></h1>
     </div>
 </div>
 
@@ -73,8 +73,8 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $item['url']]) ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $item['url']]) ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <h2 class="item-loot-title"><a href="<?= $model->url . (isset($childmodel)) ? $childmodel->url : '' . $item['url'] ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= $model->url . (isset($childmodel)) ? $childmodel->url : '' . $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>

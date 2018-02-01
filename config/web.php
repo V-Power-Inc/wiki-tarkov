@@ -98,9 +98,10 @@ $config = [
                 'news' => 'site/news',
                 'loot' => 'loot/mainloot',
                 'articles' => 'site/articles',
+                'loot/<cat:[\w_\/-]+>/<parentcat:[\w_\/-]+>/<id:[\w_\/-]+>.html' => 'item/detailloot',
+                'loot/<cat:[\w_\/-]+>/<id:[\w_\/-]+>.html' => 'item/detailloot',
                 'loot/<category:[\w_\/-]+>/<child:[\w_\/-]+>' => 'loot/category',
                 'loot/<category:[\w_\/-]+>' => 'loot/category',
-                'item/<id:[\w_\/-]+>' => 'item/detailloot',
                 
                 [
                     'class' => 'app\components\UrlComponent',

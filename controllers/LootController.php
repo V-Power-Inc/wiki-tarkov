@@ -35,7 +35,7 @@ class LootController extends Controller
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($category, $child = null)
+    public function actionCategory($category=null, $child = null)
     {
         $category = Yii::$app->request->get('category');
         $child = Yii::$app->request->get('child');
@@ -64,9 +64,10 @@ class LootController extends Controller
             $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $items->count(),]);
             $fullitems = $items->offset($pagination->offset)->orderby(['id'=>SORT_DESC])->limit($pagination->limit)->all();
             $request = \Yii::$app->request;
-            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems,  'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+            
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'childmodel' => $childmodel, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
         } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            throw new HttpException(404 ,'Такой категории не существует');
         }
     }
 
