@@ -9,7 +9,9 @@
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 
-$this->title = $model['title'];
+if(!$childmodel) {
+
+$this->title = "Escape from Tarkov: " . $model['title'];
 
 $this->registerMetaTag([
     'name' => 'description',
@@ -36,6 +38,36 @@ $this->registerMetaTag([
     'property' => 'og:description',
     'content' => $model['description'],
 ]);
+
+} elseif ($childmodel) {
+    $this->title = "Escape from Tarkov: " . $childmodel->title;
+
+    $this->registerMetaTag([
+        'name' => 'description',
+        'content' => $childmodel->description,
+    ]);
+    $this->registerMetaTag([
+        'name' => 'keywords',
+        'content' => $childmodel->keywords,
+    ]);
+
+    /******** OpenGraph теги ************/
+
+    $this->registerMetaTag([
+        'property' => 'og:title',
+        'content' => $childmodel->title,
+    ]);
+
+    $this->registerMetaTag([
+        'property' => 'og:url',
+        'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+    ]);
+
+    $this->registerMetaTag([
+        'property' => 'og:description',
+        'content' => $childmodel->description,
+    ]);
+}
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -69,12 +101,27 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <p class="alert alert-info size-16"><?= $model['content'] ?></p>
 
             <!-- Цикл предметов категории -->
-            <?php if(!empty($items)) : ?>
+
+            <?php if(empty($items)) : ?>
+                <div class="col-lg-12">
+                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+                </div>
+            <?php elseif(!empty($items) && $childmodel) : ?>
                 <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= $model->url . (isset($childmodel)) ? $childmodel->url : '' . $item['url'] ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= $model->url . (isset($childmodel)) ? $childmodel->url : '' . $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <h2 class="item-loot-title"><a href="<?= $childmodel->url . '/' . $item['url'] . '.html' ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= $childmodel->url . '/' . $item['url'] . '.html' ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php elseif (!$childmodel) : ?>
+                <?php foreach ($items as $item) : ?>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="<?= $model['url'] . '/' . $item['url'] . '.html' ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= $model['url'] . '/' . $item['url'] . '.html' ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>
@@ -90,11 +137,6 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     ]);
                     ?>
                 </div>
-                
-            <?php else : ?>
-            <div class="col-lg-12">
-                <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
-            </div>
             <?php endif; ?>
         </div>
 

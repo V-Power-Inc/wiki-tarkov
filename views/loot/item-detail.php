@@ -8,14 +8,14 @@
 
 use app\components\LeftmenuWidget;
 
-$this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
+$this->title = "Escape from Tarkov: $item->title";
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="heading-class">
     <div class="container">
-        <h1 class="main-site-heading">Справочник лута Escape from Tarkov</h1>
+        <h1 class="main-site-heading"><?= $item->title ?></h1>
     </div>
 </div>
 
@@ -42,8 +42,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <!-- Итем из таблицы предметов -->
                 <div class="col-lg-12">
                     <div class="item-loot">
-
-                        <h2 class="item-loot-title"><?= $item->title ?></h2>
+                        
                         <a class="loot-link"><img class="loot-image" src="<?= $item->preview ?>"></a>
                         <p class="loot-description">
                             <?= $item->content ?>

@@ -48,15 +48,23 @@ class LootController extends Controller
         $request = \Yii::$app->request;
         // Если вернулась основная категория с массивом предметов
         if ($model && $fullitems) {
-            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+//            echo '<pre>';
+//               echo print_r($fullitems);
+//               exit;
+//            echo '</pre>';
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'childmodel' => $childmodel, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
         } 
         // Если вернулась основная категория с пустым массивом предметов и пустым идентификатором дочерней категории
         elseif ($model && empty($fullitems) && $child == '') {
+//            echo '<pre>';
+//            echo print_r($fullitems);
+//            exit;
+//            echo '</pre>';
             $items = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $model['id']]);
             $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $items->count(),]);
             $fullitems = $items->offset($pagination->offset)->orderby(['id'=>SORT_DESC])->limit($pagination->limit)->all();
             $request = \Yii::$app->request;
-            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'childmodel' => $childmodel, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
         } 
         // Если вернулась основная категория и дочерняя категория также была определена
         elseif(($model && !$child == '')) {
@@ -64,7 +72,10 @@ class LootController extends Controller
             $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $items->count(),]);
             $fullitems = $items->offset($pagination->offset)->orderby(['id'=>SORT_DESC])->limit($pagination->limit)->all();
             $request = \Yii::$app->request;
-            
+//            echo '<pre>';
+//               echo print_r($fullitems);
+//               exit;
+//            echo '</pre>';
             return $this->render('categorie-page.php', ['model' => $model, 'items' => $fullitems, 'childmodel' => $childmodel, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
         } else {
             throw new HttpException(404 ,'Такой категории не существует');
