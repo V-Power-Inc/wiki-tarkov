@@ -10,6 +10,7 @@ namespace app\components;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
+use app\models\Category;
 use yii\web\UrlRuleInterface;
 use yii\base\Object;
 
@@ -23,7 +24,7 @@ class UrlComponent extends Object implements UrlRuleInterface
         } elseif (News::find()->where(['url'=> $route])->One()){
             return 'news/'.$route;
         } elseif(Articles::find()->where(['url'=> $route])->One()) {
-            return 'articles/'.$route;
+            return 'articles/' . $route;
         }
         return false;
     }

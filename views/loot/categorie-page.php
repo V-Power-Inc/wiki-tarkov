@@ -78,6 +78,16 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                         </div>
                     </div>
                 <?php endforeach; ?>
+            <?php elseif(!empty($childitems)) : ?>
+                <?php foreach ($childitems as $childitem) : ?>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $childitem['url']]) ?>"><?= $childitem['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= yii\helpers\Url::to(['item/detailloot' ,'id' => $childitem['url']]) ?>"><img class="loot-image" src="<?= $childitem['preview'] ?>"></a>
+                            <p class="loot-description"><?= $childitem['shortdesc'] ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             <?php else : ?>
             <div class="col-lg-12">
                 <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>

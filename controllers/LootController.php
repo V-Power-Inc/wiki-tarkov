@@ -35,15 +35,25 @@ class LootController extends Controller
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($category)
+    public function actionCategory($category, $child = null)
     {
         $category = Yii::$app->request->get('category');
+        $child = Yii::$app->request->get('child');
         $model = Category::find()->where(['enabled' => 1])->andWhere(['url' => $category])->one();
+        $childmodel = Category::find()->where(['enabled' => 1])->andWhere(['url' => $child])->one();
         $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $model['id']])->all();
+        // Если вернулась основная категория с массивом предметов
         if ($model && $items) {
             return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
-        } elseif ($model && empty($items)) {
+        } 
+        // Если вернулась основная категория с пустым массивом предметов и пустым идентификатором дочерней категории
+        elseif ($model && empty($items) && $child == '') {
             $items = Items::find()->where(['active' => 1])->andWhere(['maincat_id' => $model['id']])->all();
+            return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
+        } 
+        // Если вернулась основная категория и дочерняя категория также была определена
+        elseif(($model && !$child == '')) {
+            $items = Items::find()->where(['active' => 1])->andWhere(['parentcat_id' => $childmodel['id']])->all();
             return $this->render('categorie-page.php', ['model' => $model, 'items' => $items]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
