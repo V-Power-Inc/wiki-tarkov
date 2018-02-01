@@ -17,9 +17,6 @@ class ItemController extends Controller {
     
 /** Рендер детальной страницы лута */
 public function actionDetailloot($cat,$parentcat=null,$id) {
-    
-
-    
     $cat = Yii::$app->request->get('cat');
     $parentcat = Yii::$app->request->get('parentcat');
     $id = Yii::$app->request->get('id');
@@ -55,4 +52,17 @@ public function actionDetailloot($cat,$parentcat=null,$id) {
             throw new HttpException(404 ,'Такого предмета не существует');
         }
     }
+
+    /*** Экшен для рендера с главной страницы справочника ***/    
+    public function actionLast($id) {
+        $id = Yii::$app->request->get('id');
+        $item = Items::find()->where(['active' => 1])->andWhere(['url' => $id])->one();
+        if($item) {
+            return $this->render('/loot/item-detail.php', compact('item'));
+        } else {
+            throw new HttpException(404 ,'Такого предмета не существует');
+        }
+    }
 }
+
+

@@ -24,8 +24,6 @@ use app\models\Category;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fullurl')->textInput(['maxlength' => true, 'disabled' => true]) ?>
-
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {

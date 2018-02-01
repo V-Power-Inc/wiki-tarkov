@@ -8,6 +8,7 @@
 
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
+use yii\helpers\Url;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 
@@ -47,8 +48,8 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= $item['url'] ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <h2 class="item-loot-title"><a href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>
