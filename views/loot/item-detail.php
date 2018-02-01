@@ -44,7 +44,7 @@ $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::classNa
                 <div class="col-lg-12">
                     <div class="item-loot">
                         
-                        <a class="loot-link"><img class="loot-image" src="<?= $item->preview ?>"></a>
+                        <a class="loot-link"><img class="loot-image" alt="<?= $item->title ?>" src="<?= $item->preview ?>"></a>
                         <p class="loot-description">
                             <?= $item->content ?>
                         </p>

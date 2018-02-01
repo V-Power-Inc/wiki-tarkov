@@ -49,7 +49,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     <div class="col-lg-12">
                         <div class="item-loot">
                             <h2 class="item-loot-title"><a href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><img class="loot-image" src="<?= $item['preview'] ?>"></a>
+                            <a class="loot-link" href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>
