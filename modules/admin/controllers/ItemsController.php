@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
+use app\models\Category;
 use app\models\Items;
 use app\models\ItemsSearch;
 use yii\web\Controller;
@@ -79,7 +80,7 @@ class ItemsController extends Controller
     {
         $model = new Items();
         $model->uploadPreview();
-
+        //todo: Тут надо получать полный путь до предмета в поле fullurl при сохранении предмета
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -99,7 +100,7 @@ class ItemsController extends Controller
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
-
+        //todo: Тут надо получать полный путь до предмета в поле fullurl при сохранении предмета
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

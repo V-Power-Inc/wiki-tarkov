@@ -12,6 +12,7 @@ $this->title = "Escape from Tarkov: $item->title";
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="heading-class">
     <div class="container">

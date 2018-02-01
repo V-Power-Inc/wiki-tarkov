@@ -21,6 +21,7 @@ use yii\web\UploadedFile;
  * @property string $url
  * @property integer $parentcat_id
  * @property integer $maincat_id
+ * @property string $fullurl
  *
  * @property ItemsToDoorkeys[] $itemsToDoorkeys
  * @property ItemsToLyjnic[] $itemsToLyjnics
@@ -52,7 +53,7 @@ class Items extends \yii\db\ActiveRecord
         return [
             [['title', 'shortdesc', 'maincat_id', 'url'], 'required'],
             [['shortdesc', 'content'], 'string'],
-            [['date_create'], 'safe'],
+            [['date_create', 'fullurl'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview'], 'string', 'max' => 255],
@@ -77,6 +78,7 @@ class Items extends \yii\db\ActiveRecord
             'file' => 'Превьюшка предмета',
             'url' => 'URL адрес',
             'maincat_id' => 'Корневая категория',
+            'fullurl' => 'Полный URL адрес',
         ];
     }
 

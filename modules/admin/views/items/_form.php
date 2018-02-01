@@ -24,11 +24,13 @@ use app\models\Category;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'fullurl')->textInput(['maxlength' => true, 'disabled' => true]) ?>
+
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
-        echo '<img src='. $model->preview .' ?>';
+        echo '<img src='. $model->preview .' style="max-width: 100%;" ?>';
     };
     ?>
 

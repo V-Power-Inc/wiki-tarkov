@@ -65,5 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
+        ],
     ]); ?>
 </div>
