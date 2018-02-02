@@ -41,25 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'date_create',
             // 'active',
             'parentcat_id',
-//            [
-//                'attribute'=>'parentcat_id',
-//                'value' => 'Категория не выбрана',
-//                'label'=>'Родительская категория',
-//                'format'=>'text', // Возможные варианты: raw, html
-//                'content'=> ''
-////                    function($model){
-////                    return $model->parentcat->title;
-////                    //return $data = new Items::class()->Parentcat()->title;
-////                },
-//            ],
             [
-                'attribute'=>'maincat_id',
-                'label'=>'Корневая категория',
+                'attribute'=>'parentcat_id',
+                'value' => 'Категория не выбрана',
+                'label'=>'Родительская категория',
                 'format'=>'text', // Возможные варианты: raw, html
-                'content'=>function($model){
-                    return $model->maincat->title;
-                    //return $data = new Items::class()->Parentcat()->title;
-                },
+                'content'=> '',
+                    function($model){
+                    return $model->parentcat->title;
+                   //return $data = new Items::class()->Parentcat()->title;
+               },
             ],
 
             

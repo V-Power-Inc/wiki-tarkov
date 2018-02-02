@@ -18,8 +18,6 @@ use app\models\Category;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'maincat_id')->dropDownList(ArrayHelper::map(Category::find()->where(['parent_category' => null])->all(), 'id', 'title')) ?>
-
     <?= $form->field($model, 'parentcat_id')->dropDownList(ArrayHelper::map(Category::find()->where(['not like', 'parent_category', 'null'])->all(), 'id', 'title'), $params = ['prompt' => 'Не задано']) ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>

@@ -96,13 +96,8 @@ $config = [
                 'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
                 'news' => 'site/news',
-                'loot' => 'loot/mainloot',
                 'articles' => 'site/articles',
-                'loot/all-items/<id:[\w_\/-]+>.html' => 'item/last',
-                'loot/<cat:[\w_\/-]+>/<parentcat:[\w_\/-]+>/<id:[\w_\/-]+>.html' => 'item/detailloot',
-                'loot/<cat:[\w_\/-]+>/<id:[\w_\/-]+>.html' => 'item/detailloot',
-                'loot/<category:[\w_\/-]+>/<child:[\w_\/-]+>' => 'loot/category',
-                'loot/<category:[\w_\/-]+>' => 'loot/category',
+                'loot' => 'loot/mainloot',
                 
                 [
                     'class' => 'app\components\UrlComponent',

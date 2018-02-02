@@ -116,16 +116,6 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                         </div>
                     </div>
                 <?php endforeach; ?>
-            <?php elseif (!$childmodel) : ?>
-                <?php foreach ($items as $item) : ?>
-                    <div class="col-lg-12">
-                        <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= $model['url'] . '/' . $item['url'] . '.html' ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= $model['url'] . '/' . $item['url'] . '.html' ?>"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
 
                 <div class="col-lg-12 pagination text-center">
                     <?= LinkPager::widget([
