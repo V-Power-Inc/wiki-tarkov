@@ -73,7 +73,7 @@ class Items extends \yii\db\ActiveRecord
             'content' => 'Содержимое',
             'date_create' => 'Дата создания',
             'active' => 'Лут активен',
-            'parentcat_id' => 'Родительская категория',
+            'parentcat_id' => 'Дочерняя категория',
             'file' => 'Превьюшка предмета',
             'url' => 'URL адрес',
             'maincat_id' => 'Корневая категория',
