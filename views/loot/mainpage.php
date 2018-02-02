@@ -45,26 +45,18 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
             <div class="row">
                 <!-- Цикл всех предметов из справочника -->
-                <?php foreach ($items as $item) : ?>
-                    <div class="col-lg-12">
-                        <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= Url::toRoute(['item/last', 'id' => $item['url']]); ?>"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="item-loot">
+                        <h2 class="item-loot-title"><a href="Урл до предмета">Название предмета</a></h2>
+                        <a class="loot-link" href="урл до предмета"><img class="loot-image" alt="название предмета" src="/img/m4a1.jpg"></a>
+                        <p class="loot-description">Описание предмета</p>
                     </div>
-                <?php endforeach; ?>
-
-                <div class="col-lg-12 pagination text-center">
-                    <?= LinkPager::widget([
-                        'pagination' => $pagination,
-                        'firstPageLabel' => 'первая',
-                        'lastPageLabel' => 'последняя',
-                        'prevPageLabel' => '&laquo;',
-                        'prevPageLabel' => '&laquo;',
-                    ]);
-                    ?>
                 </div>
+                <!-- Окончание цикла -->
+
+           <!--     <div class="col-lg-12 pagination text-center">  -->
+                    <!-- Тут пагинация -->
+            <!--    </div>  -->
                 
             </div>
 
@@ -75,18 +67,18 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
         <!-- Комментарии -->
-       <div id="mc-container" class="kek-recustom"></div>
-        <script type="text/javascript">
-            cackle_widget = window.cackle_widget || [];
-            cackle_widget.push({widget: 'Comment', id: 57165});
-            (function() {
-                var mc = document.createElement('script');
-                mc.type = 'text/javascript';
-                mc.async = true;
-                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-            })();
-        </script>
+<!--       <div id="mc-container" class="kek-recustom"></div>-->
+<!--        <script type="text/javascript">-->
+<!--            cackle_widget = window.cackle_widget || [];-->
+<!--            cackle_widget.push({widget: 'Comment', id: 57165});-->
+<!--            (function() {-->
+<!--                var mc = document.createElement('script');-->
+<!--                mc.type = 'text/javascript';-->
+<!--                mc.async = true;-->
+<!--                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';-->
+<!--                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);-->
+<!--            })();-->
+<!--        </script>-->
    
 
     </div>

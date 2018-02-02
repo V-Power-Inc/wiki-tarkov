@@ -9,72 +9,41 @@
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 
-if(!$childmodel) {
+//$this->title = "Escape from Tarkov: " . $model['title'];
+//
+//$this->registerMetaTag([
+//    'name' => 'description',
+//    'content' => $model['description'],
+//]);
+//$this->registerMetaTag([
+//    'name' => 'keywords',
+//    'content' => $model['keywords'],
+//]);
+//
+///******** OpenGraph теги ************/
+//
+//$this->registerMetaTag([
+//    'property' => 'og:title',
+//    'content' => $model['title'],
+//]);
+//
+//$this->registerMetaTag([
+//    'property' => 'og:url',
+//    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+//]);
+//
+//$this->registerMetaTag([
+//    'property' => 'og:description',
+//    'content' => $model['description'],
+//]);
 
-$this->title = "Escape from Tarkov: " . $model['title'];
-
-$this->registerMetaTag([
-    'name' => 'description',
-    'content' => $model['description'],
-]);
-$this->registerMetaTag([
-    'name' => 'keywords',
-    'content' => $model['keywords'],
-]);
-
-/******** OpenGraph теги ************/
-
-$this->registerMetaTag([
-    'property' => 'og:title',
-    'content' => $model['title'],
-]);
-
-$this->registerMetaTag([
-    'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
-]);
-
-$this->registerMetaTag([
-    'property' => 'og:description',
-    'content' => $model['description'],
-]);
-
-} elseif ($childmodel) {
-    $this->title = "Escape from Tarkov: " . $childmodel->title;
-
-    $this->registerMetaTag([
-        'name' => 'description',
-        'content' => $childmodel->description,
-    ]);
-    $this->registerMetaTag([
-        'name' => 'keywords',
-        'content' => $childmodel->keywords,
-    ]);
-
-    /******** OpenGraph теги ************/
-
-    $this->registerMetaTag([
-        'property' => 'og:title',
-        'content' => $childmodel->title,
-    ]);
-
-    $this->registerMetaTag([
-        'property' => 'og:url',
-        'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
-    ]);
-
-    $this->registerMetaTag([
-        'property' => 'og:description',
-        'content' => $childmodel->description,
-    ]);
-}
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="heading-class">
     <div class="container">
-        <h1 class="main-site-heading"><?= (isset($childmodel)) ? $childmodel->title : $model['title'] ?></h1>
+        <h1 class="main-site-heading">Заголовок категории</h1>
     </div>
 </div>
 
@@ -98,54 +67,47 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
             
             <!-- Описание категории -->
-            <p class="alert alert-info size-16"><?= $model['content'] ?></p>
+            <p class="alert alert-info size-16">Описание категории</p>
 
             <!-- Цикл предметов категории -->
-
-            <?php if(empty($items)) : ?>
-                <div class="col-lg-12">
-                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
-                </div>
-            <?php elseif(!empty($items) && $childmodel) : ?>
-                <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="<?= $childmodel->url . '/' . $item['url'] . '.html' ?>"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="<?= $childmodel->url . '/' . $item['url'] . '.html' ?>"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                            <h2 class="item-loot-title"><a href="Ссылка на предмет">Название предмета</a></h2>
+                            <a class="loot-link" href="Урл адрес до предмета"><img class="loot-image" alt="Название категории" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description">Описание предмета</p>
                         </div>
                     </div>
-                <?php endforeach; ?>
-
-                <div class="col-lg-12 pagination text-center">
-                    <?= LinkPager::widget([
-                        'pagination' => $pagination,
-                        'firstPageLabel' => 'первая',
-                        'lastPageLabel' => 'последняя',
-                        'prevPageLabel' => '&laquo;',
-                        'prevPageLabel' => '&laquo;',
-                    ]);
-                    ?>
-                </div>
-            <?php endif; ?>
+            <!-- Окончание цикла предметов -->
+            
+            <!-- Нет лута -->
+            <div class="col-lg-12">
+                <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+            </div>
+            <!-- Нет лута -->
+            
+            <!--Пагинация -->
+<!--                <div class="col-lg-12 pagination text-center">-->
+<!---->
+<!--                </div>-->
+      
         </div>
 
         <!-- Расстояние - заглушка -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
         <!-- Комментарии -->
-            <div id="mc-container" class="kek-recustom"></div>
-            <script type="text/javascript">
-                cackle_widget = window.cackle_widget || [];
-                cackle_widget.push({widget: 'Comment', id: 57165});
-                (function() {
-                    var mc = document.createElement('script');
-                    mc.type = 'text/javascript';
-                    mc.async = true;
-                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                })();
-            </script>
+<!--            <div id="mc-container" class="kek-recustom"></div>-->
+<!--            <script type="text/javascript">-->
+<!--                cackle_widget = window.cackle_widget || [];-->
+<!--                cackle_widget.push({widget: 'Comment', id: 57165});-->
+<!--                (function() {-->
+<!--                    var mc = document.createElement('script');-->
+<!--                    mc.type = 'text/javascript';-->
+<!--                    mc.async = true;-->
+<!--                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';-->
+<!--                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);-->
+<!--                })();-->
+<!--            </script>-->
         
 
     </div>
