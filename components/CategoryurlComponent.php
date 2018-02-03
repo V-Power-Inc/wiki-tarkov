@@ -37,7 +37,7 @@ class CategoryurlComponent implements UrlRuleInterface
         $pathInfo = $route;
         if (preg_match('%^(([\d]+)([\/]?)([\-\d\w]+))$%', $pathInfo, $matches)) {
             $catigories = Category::find()->select('url')->where(['id'=>$matches[2]])->scalar();
-            return $catigories.'/'.$matches[4];
+            return '/loot' .$catigories.'/'.$matches[4];
         }
         return false;  // данное правило не применимо
     }

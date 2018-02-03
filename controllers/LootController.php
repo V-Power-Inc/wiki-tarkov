@@ -31,9 +31,12 @@ class LootController extends Controller
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($category=null, $child = null)
+    public function actionCategory($categorie)
     {
-        return $this->render('categorie-page.php');
+        $categorie = Yii::$app->request->get('category');
+        $cat = Category::find()->select('url')->where(['url'=>$categorie])->scalar();
+
+        return $this->render('categorie-page.php', ['cat' => $cat]);
     }
 
 }

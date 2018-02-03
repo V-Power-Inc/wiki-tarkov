@@ -153,12 +153,5 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
     }
-
-    public function getMaincat()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'maincat_id']);
-    }
-    
-    
     
 }
