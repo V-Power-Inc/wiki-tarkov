@@ -102,6 +102,9 @@ $config = [
                 [
                     'class' => 'app\components\UrlComponent',
                 ],
+                [
+                    'class' => 'app\components\CategoryurlComponent',
+                ],
             ],
         ],
         'reCaptcha' => [

@@ -33,7 +33,7 @@ class LootController extends Controller
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionCategory($category=null, $child = null)
     {
-       
+        return $this->render('categorie-page.php');
     }
 
 }

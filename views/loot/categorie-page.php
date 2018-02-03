@@ -73,7 +73,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     <div class="col-lg-12">
                         <div class="item-loot">
                             <h2 class="item-loot-title"><a href="Ссылка на предмет">Название предмета</a></h2>
-                            <a class="loot-link" href="Урл адрес до предмета"><img class="loot-image" alt="Название категории" src="<?= $item['preview'] ?>"></a>
+                            <a class="loot-link" href="Урл адрес до предмета"><img class="loot-image" alt="Название категории" src="/img/m4a1.jpg"></a>
                             <p class="loot-description">Описание предмета</p>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ use app\models\Category;
 use yii\web\UrlRuleInterface;
 
 
-class PathRule implements UrlRuleInterface
+class CategoryurlComponent implements UrlRuleInterface
 {
 /** Урл компонент для маршрутизации каткгорий справочника лута **/
     public function parseRequest($manager, $request)
@@ -22,7 +22,7 @@ class PathRule implements UrlRuleInterface
         $path = $rest = substr($request->pathInfo, 0, strpos($request->pathInfo,'.'));
         // если это простой url тоесть из вертикального меню
         if($request->pathInfo === ''){
-            return ['articles/index',[]];
+            return ['loot/category',[]];
         }elseif(strpos($request->pathInfo,'/') !== false){
             if (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%', $path, $matches)){
                 return ['articles/fulltext',['name'=>$matches[3]]];
@@ -36,8 +36,8 @@ class PathRule implements UrlRuleInterface
     {
         $pathInfo = $route;
         if (preg_match('%^(([\d]+)([\/]?)([\-\d\w]+))$%', $pathInfo, $matches)) {
-            $catigories = Category::find()->select('cat_url')->where(['id'=>$matches[2]])->scalar();
-            return $catigories.'/'.$matches[4].'.html';
+            $catigories = Category::find()->select('url')->where(['id'=>$matches[2]])->scalar();
+            return $catigories.'/'.$matches[4];
         }
         return false;  // данное правило не применимо
     }

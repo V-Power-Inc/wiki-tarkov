@@ -1,7 +1,7 @@
 <!-- Тут тоже надо переделать как и везде -->
 <!-- 1 уровень вложенности -->
 <?php if(!isset($category['childs'])) : ?>
-<li class="relative <?= (stristr(Yii::$app->request->url, \yii\helpers\Url::to(['loot/category', 'category' => $category['url']]))) ? 'active' : '' ?>"><a href="<?= \yii\helpers\Url::to(['loot/category', 'category' => $category['url']]); ?>"><?= $category['title'] ?></a>
+<li class="relative <?= (stristr(Yii::$app->request->url, \yii\helpers\Url::to(['loot/category', 'catigories' => $category['url']]))) ? 'active' : '' ?>"><a href="<?= \yii\helpers\Url::to(['loot/category', 'catigories' => $category['url']]); ?>"><?= $category['title'] ?></a>
 <?php endif; ?>
 
 <!-- 2 уровень вложенности -->
