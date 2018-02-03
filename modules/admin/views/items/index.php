@@ -40,10 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'content:ntext',
             // 'date_create',
             // 'active',
-            'parentcat_id',
+//            'parentcat_id',
             [
                 'attribute'=>'parentcat_id',
-                'value' => 'Категория не выбрана',
                 'label'=>'Родительская категория',
                 'format'=>'text', // Возможные варианты: raw, html
                 'content'=> '',
