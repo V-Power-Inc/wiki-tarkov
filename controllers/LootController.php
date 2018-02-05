@@ -12,7 +12,6 @@ use yii\web\Controller;
 use yii;
 use app\models\Category;
 use app\models\Items;
-use yii\web\HttpException;
 use yii\data\Pagination;
 
 
@@ -31,12 +30,17 @@ class LootController extends Controller
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($categorie)
+    public function actionCategory($name)
     {
-        $categorie = Yii::$app->request->get('category');
-        $cat = Category::find()->select('url')->where(['url'=>$categorie])->scalar();
-
-        return $this->render('categorie-page.php', ['cat' => $cat]);
+        if($name) {
+            // $catigories = Yii::$app->request->get('catigories');
+            $cat = Category::find()->where(['url'=>$name])->One();
+            //echo "<pre>";
+            //    print_r($cat );
+            //echo "<pre>";
+            //exit();
+            return $this->render('categorie-page.php', ['cat' => $cat]);
+        }
     }
 
 }

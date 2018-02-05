@@ -9,33 +9,33 @@
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 
-//$this->title = "Escape from Tarkov: " . $model['title'];
-//
-//$this->registerMetaTag([
-//    'name' => 'description',
-//    'content' => $model['description'],
-//]);
-//$this->registerMetaTag([
-//    'name' => 'keywords',
-//    'content' => $model['keywords'],
-//]);
-//
-///******** OpenGraph теги ************/
-//
-//$this->registerMetaTag([
-//    'property' => 'og:title',
-//    'content' => $model['title'],
-//]);
-//
-//$this->registerMetaTag([
-//    'property' => 'og:url',
-//    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
-//]);
-//
-//$this->registerMetaTag([
-//    'property' => 'og:description',
-//    'content' => $model['description'],
-//]);
+$this->title = "Escape from Tarkov: " . $cat['title'];
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => $cat['description'],
+]);
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => $cat['keywords'],
+]);
+
+/******** OpenGraph теги ************/
+
+$this->registerMetaTag([
+    'property' => 'og:title',
+    'content' => $cat['title'],
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:url',
+    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+]);
+
+$this->registerMetaTag([
+    'property' => 'og:description',
+    'content' => $cat['description'],
+]);
 
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -43,7 +43,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 ?>
 <div class="heading-class">
     <div class="container">
-        <h1 class="main-site-heading">Заголовок категории</h1>
+        <h1 class="main-site-heading"><?= $cat->title ?></h1>
     </div>
 </div>
 
@@ -67,7 +67,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
             
             <!-- Описание категории -->
-            <p class="alert alert-info size-16">Описание категории</p>
+            <p class="alert alert-info size-16"><?= $cat->content ?></p>
 
             <!-- Цикл предметов категории -->
                     <div class="col-lg-12">
