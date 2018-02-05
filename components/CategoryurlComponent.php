@@ -38,11 +38,11 @@ class CategoryurlComponent implements UrlRuleInterface
 
     public function createUrl($manager, $route, $params)
     {
-        $pathInfo = $route;
-        if (preg_match('%^(([\d]+)([\/]?)([\-\d\w]+))$%', $pathInfo, $matches)) {
-            $catigories = Category::find()->select('url')->where(['id'=>$matches[2]])->scalar();
-            return '/loot/' .$catigories.'/'.$matches[4];
-        }
+//        $pathInfo = $route;
+//        if (preg_match('%^(([\d]+)([\/]?)([\-\d\w]+))$%', $pathInfo, $matches)) {
+//            $catigories = Category::find()->select('url')->where(['id'=>$matches[2]])->scalar();
+//            return '/loot/' .$catigories.'/'.$matches[4];
+//        }
         return false;  // данное правило не применимо
     }
 }
