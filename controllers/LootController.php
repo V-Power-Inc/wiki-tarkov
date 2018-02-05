@@ -32,15 +32,16 @@ class LootController extends Controller
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionCategory($name)
     {
-        if($name) {
-            // $catigories = Yii::$app->request->get('catigories');
-            $cat = Category::find()->where(['url'=>$name])->One();
-            //echo "<pre>";
-            //    print_r($cat );
-            //echo "<pre>";
-            //exit();
-            return $this->render('categorie-page.php', ['cat' => $cat]);
-        }
+       
+        $cat = Category::find()->where(['url'=>$name])->One();
+        
+        // Тут надо получить предметы из всех дочерних категорий если мы находимся в родительской
+        $fullitems = Items::find()->where(['parentcat_id' => $cat['id']])->andWhere(['active' => 1]);
+        $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $fullitems->count(),]);
+        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $request = \Yii::$app->request;
+        
+        return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
 
 }

@@ -69,27 +69,35 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <!-- Описание категории -->
             <p class="alert alert-info size-16"><?= $cat->content ?></p>
 
+            <?php if(empty($items)) : ?>
+                <!-- Нет лута -->
+                <div class="col-lg-12">
+                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+                </div>
+                <!-- Нет лута -->
+            <?php else : ?>
             <!-- Цикл предметов категории -->
+            <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="Ссылка на предмет">Название предмета</a></h2>
-                            <a class="loot-link" href="Урл адрес до предмета"><img class="loot-image" alt="Название категории" src="/img/m4a1.jpg"></a>
-                            <p class="loot-description">Описание предмета</p>
+                            <h2 class="item-loot-title"><a href="<?= $item['url'] ?>"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="<?= $item['url'] ?>"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         </div>
                     </div>
+            <?php endforeach; ?>
             <!-- Окончание цикла предметов -->
+
             
-            <!-- Нет лута -->
-            <div class="col-lg-12">
-                <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
-            </div>
-            <!-- Нет лута -->
+                    <div class="col-lg-12 pagination text-center">
+                        <?= LinkPager::widget([
+                            'pagination' => $pagination,
+                        ]);
+                        ?>
+                    </div>
+            <?php endif; ?>
+
             
-            <!--Пагинация -->
-<!--                <div class="col-lg-12 pagination text-center">-->
-<!---->
-<!--                </div>-->
-      
         </div>
 
         <!-- Расстояние - заглушка -->
