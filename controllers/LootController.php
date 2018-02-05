@@ -13,6 +13,7 @@ use yii;
 use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 
 class LootController extends Controller
@@ -35,13 +36,19 @@ class LootController extends Controller
        
         $cat = Category::find()->where(['url'=>$name])->One();
         
-        // Тут надо получить предметы из всех дочерних категорий если мы находимся в родительской
-        $fullitems = Items::find()->where(['parentcat_id' => $cat['id']])->andWhere(['active' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $fullitems->count(),]);
-        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-        $request = \Yii::$app->request;
-        
-        return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        if($cat) { 
+            
+            // Тут надо получить предметы из всех дочерних категорий если мы находимся в родительской
+            $fullitems = Items::find()->where(['parentcat_id' => $cat['id']])->andWhere(['active' => 1]);
+            $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $fullitems->count(),]);
+            $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+            $request = \Yii::$app->request;
+
+            return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+       
     }
 
 }
