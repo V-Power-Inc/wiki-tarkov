@@ -22,9 +22,9 @@ class CategoryurlComponent implements UrlRuleInterface
        // $path = $rest = substr($request->pathInfo, 0, strpos($request->pathInfo,'.'));
       
         // если это простой url тоесть из вертикального меню
-        if($request->pathInfo === ''){ 
+        if($request->pathInfo === ''){
             return ['loot/category',[]];
-        }elseif(strpos($request->pathInfo,'/') !== false){
+        } elseif(strpos($request->pathInfo,'/') !== false){
             if(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                 return ['loot/category',['name'=>$matches[5]]];
             }
