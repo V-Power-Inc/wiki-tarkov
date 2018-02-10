@@ -40,17 +40,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'content:ntext',
             // 'date_create',
             // 'active',
-//            'parentcat_id',
-            [
-                'attribute'=>'parentcat_id',
-                'label'=>'Родительская категория',
-                'format'=>'text', // Возможные варианты: raw, html
-                'content'=> '',
-                    function($model){
-                    return $model->parentcat->title;
-                   //return $data = new Items::class()->Parentcat()->title;
-               },
-            ],
+            'parentcat_id',
+//            [
+//                'attribute'=>'parentcat_id',
+//                'label'=>'Родительская категория',
+//                'format'=>'text', // Возможные варианты: raw, html
+//                'content'=> '',
+//                    function($model){
+//                    return $model->parentcat->title;
+//                   //return $data = new Items::class()->Parentcat()->title;
+//               },
+//            ],
 
             
             ['class' => 'yii\grid\ActionColumn'],
