@@ -98,7 +98,6 @@ $config = [
                 'news' => 'site/news',
                 'articles' => 'site/articles',
                 'loot' => 'loot/mainloot',
-                
                 [
                     'class' => 'app\components\UrlComponent',
                 ],

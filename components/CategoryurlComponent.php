@@ -30,7 +30,7 @@ class CategoryurlComponent implements UrlRuleInterface
             }
             elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                 return ['loot/category',['name'=>$matches[3]]];
-            } 
+            }
         }
 
         throw new HttpException(404 ,'Такая страница не существует');
