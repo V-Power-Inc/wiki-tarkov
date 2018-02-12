@@ -79,7 +79,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-           // 'enableStrictParsing' => false,
             'rules' => [
                 '' => 'site/index',
                 'admin/login' => 'admin/default/logout',
@@ -98,6 +97,7 @@ $config = [
                 'news' => 'site/news',
                 'articles' => 'site/articles',
                 'loot' => 'loot/mainloot',
+                'site/<action>' => 'site/<action>',
                 [
                     'class' => 'app\components\UrlComponent',
                 ],

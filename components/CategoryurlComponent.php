@@ -20,7 +20,7 @@ class CategoryurlComponent implements UrlRuleInterface
     public function parseRequest($manager, $request)
     {
        // $path = $rest = substr($request->pathInfo, 0, strpos($request->pathInfo,'.'));
-      
+         
         // если это простой url тоесть из вертикального меню
         if($request->pathInfo === ''){
             return ['loot/category',[]];
@@ -32,8 +32,7 @@ class CategoryurlComponent implements UrlRuleInterface
                 return ['loot/category',['name'=>$matches[3]]];
             }
         }
-
-        throw new HttpException(404 ,'Такая страница не существует');
+        return false;
     }
 
     public function createUrl($manager, $route, $params)
