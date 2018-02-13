@@ -19,6 +19,8 @@ use yii\web\UploadedFile;
  * @property string $date_create
  * @property integer $active
  * @property string $url
+ * @property string $description
+ * @property string $keywords
  * @property integer $parentcat_id
  *
  * @property ItemsToDoorkeys[] $itemsToDoorkeys
@@ -49,9 +51,9 @@ class Items extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'shortdesc', 'url'], 'required'],
+            [['title', 'shortdesc', 'url', 'description'], 'required'],
             [['shortdesc', 'content'], 'string'],
-            [['date_create'], 'safe'],
+            [['date_create', 'keywords'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview'], 'string', 'max' => 255],
@@ -77,6 +79,8 @@ class Items extends \yii\db\ActiveRecord
             'url' => 'URL адрес',
             'maincat_id' => 'Корневая категория',
             'fullurl' => 'Полный URL адрес',
+            'description' => 'SEO описание',
+            'keywords' => 'SEO ключевые слова',
         ];
     }
 

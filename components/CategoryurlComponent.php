@@ -19,7 +19,6 @@ class CategoryurlComponent implements UrlRuleInterface
 /** Урл компонент для маршрутизации каткгорий справочника лута **/
     public function parseRequest($manager, $request)
     {
-
         $site = stristr($request->pathInfo,'site'); // Проверка на контроллер site
         $admin = stristr($request->pathInfo,'admin'); // Проверка на модуль админа
         $maps = stristr($request->pathInfo,'maps'); // Проверка на интерактивные карты
@@ -31,6 +30,8 @@ class CategoryurlComponent implements UrlRuleInterface
                 }
                 elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                     return ['loot/category',['name'=>$matches[3]]];
+                } elseif(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+                    return ['item/detailloot', ['item' => $matches[3]]];
                 }
             }
             return false;

@@ -45,18 +45,23 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
             <div class="row">
                 <!-- Цикл всех предметов из справочника -->
+                <?php foreach($items as $item): ?>
                 <div class="col-lg-12">
                     <div class="item-loot">
-                        <h2 class="item-loot-title"><a href="Урл до предмета">Название предмета</a></h2>
-                        <a class="loot-link" href="урл до предмета"><img class="loot-image" alt="название предмета" src="/img/m4a1.jpg"></a>
-                        <p class="loot-description">Описание предмета</p>
+                        <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
+                        <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="название предмета" src="<?= $item['preview'] ?>"></a>
+                        <p class="loot-description"><?= $item['shortdesc'] ?></p>
                     </div>
                 </div>
+                <?php endforeach ?>
                 <!-- Окончание цикла -->
 
-           <!--     <div class="col-lg-12 pagination text-center">  -->
-                    <!-- Тут пагинация -->
-            <!--    </div>  -->
+                <div class="col-lg-12 pagination text-center">
+                    <?= LinkPager::widget([
+                        'pagination' => $pagination,
+                    ]);
+                    ?>
+                </div>
                 
             </div>
 

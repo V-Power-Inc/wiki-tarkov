@@ -9,13 +9,20 @@
 namespace app\controllers;
 use yii\web\Controller;
 use yii\web\HttpException;
+use app\models\Items;
 use Yii;
 
 class ItemController extends Controller {
     
 /** Рендер детальной страницы лута */
-public function actionDetailloot($cat,$parentcat=null,$id) {
+public function actionDetailloot($item) {
 
+        if($item) {
+        $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
+            return $this->render('/loot/item-detail.php', ['item' => $loot]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 }
 

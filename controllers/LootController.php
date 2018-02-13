@@ -28,17 +28,19 @@ class LootController extends Controller
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
-        return $this->render('mainpage.php');
+        $fullitems = Items::find()->where(['active' => 1]);
+        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $fullitems->count(),]);
+        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $request = \Yii::$app->request;
+        
+        return $this->render('mainpage.php', ['items' => $items,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionCategory($name)
     {
-       
         $cat = Category::find()->where(['url'=>$name])->One();
-        
         if($cat) {
-            
             $fullitems = Items::find()
                 ->alias( 'i')
                 ->select('i.*')
@@ -48,7 +50,6 @@ class LootController extends Controller
                 ->orWhere(['c1.parent_category' => $cat->id])
                 ->andWhere(['active' => 1])
                 ->with('parentcat');
-//                ->all();
            
             $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $fullitems->count(),]);
             $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();

@@ -22,6 +22,10 @@ use app\models\Category;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {

@@ -10,6 +10,16 @@ use app\components\LeftmenuWidget;
 
 $this->title = "Escape from Tarkov: $item->title";
 
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => $item->description,
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => $item->keywords,
+]);
+
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
