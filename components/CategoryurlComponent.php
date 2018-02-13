@@ -12,6 +12,7 @@ use yii\web\UrlRule;
 use app\models\Category;
 use yii\web\UrlRuleInterface;
 use yii\web\HttpException;
+use Yii;
 
 
 class CategoryurlComponent implements UrlRuleInterface
@@ -19,9 +20,9 @@ class CategoryurlComponent implements UrlRuleInterface
 /** Урл компонент для маршрутизации каткгорий справочника лута **/
     public function parseRequest($manager, $request)
     {
-        $site = stristr($request->pathInfo,'site'); // Проверка на контроллер site
-        $admin = stristr($request->pathInfo,'admin'); // Проверка на модуль админа
-        $maps = stristr($request->pathInfo,'maps'); // Проверка на интерактивные карты
+        $site = stristr(Yii::$app->request->url,'/site/'); // Проверка на контроллер site
+        $admin = stristr(Yii::$app->request->url,'/admin/'); // Проверка на модуль админа
+        $maps = stristr(Yii::$app->request->url,'/maps/'); // Проверка на интерактивные карты
         
         if(!$site && !$admin && !$maps) {
             if(strpos($request->pathInfo,'/') !== false){
