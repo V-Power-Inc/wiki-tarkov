@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Items;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemsSearch */
@@ -9,6 +10,7 @@ use yii\grid\GridView;
 
 $this->title = 'Список предметов справочника лута';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="items-index">
 
@@ -26,29 +28,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'title',
             'preview' => [
                 'format' => 'image',
                 'value' => function($data) {
-                    return  $data->preview;
+                    return $data->preview;
                 },
             ],
             'shortdesc:ntext',
             // 'content:ntext',
             // 'date_create',
             // 'active',
-            //'parentcat_id',
-            [
-                'attribute'=>'parentcat_id',
-                'label'=>'Родительская категория',
-                'format'=>'text', // Возможные варианты: raw, html
-                'content'=> '',
-                    function($model){
-                    return $model->parentcat->title;
-                  // return $model = new Items::class()->Parentcat()->title;
-               },
-            ],
+            'parentcat_id',
+//            [
+//                'attribute'=>'parentcat_id',
+//                'label'=>'Родительская категория',
+//                'format'=>'text', // Возможные варианты: raw, html
+//                'content'=> '',
+//                    function($model){
+//                    return $model->parentcat->title;
+//               },
+//            ],
 
             
             ['class' => 'yii\grid\ActionColumn'],
