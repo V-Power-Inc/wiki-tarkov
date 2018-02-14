@@ -93,7 +93,10 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     <div class="col-lg-12 pagination text-center">
                         <?= LinkPager::widget([
                             'pagination' => $pagination,
-                            
+                            'firstPageLabel' => 'первая',
+                            'lastPageLabel' => 'последняя',
+                            'prevPageLabel' => '&laquo;',
+                            'prevPageLabel' => '&laquo;',
                         ]);
                         ?>
                     </div>
