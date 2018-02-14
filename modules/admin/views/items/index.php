@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\models\Items;
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemsSearch */
@@ -41,12 +43,17 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'date_create',
             // 'active',
             
-            // Ниже узнаем по связи название родительской категории из связанной таблицы
+// Ниже узнаем по связи название родительской категории из связанной таблицы
+//            [
+//                'attribute' => 'parentcat_id',
+//                'value' => 'parentcat.title',
+//            ],
+
             [
                 'attribute' => 'parentcat_id',
                 'value' => 'parentcat.title',
+                'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
             ],
-
             
             ['class' => 'yii\grid\ActionColumn'],
         ],
