@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Items;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
 
