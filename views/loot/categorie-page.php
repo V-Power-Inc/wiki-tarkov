@@ -8,6 +8,7 @@
 
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
+use Yii;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -92,6 +93,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                     <div class="col-lg-12 pagination text-center">
                         <?= LinkPager::widget([
                             'pagination' => $pagination,
+                            
                         ]);
                         ?>
                     </div>

@@ -41,6 +41,14 @@ class CategoryurlComponent implements UrlRuleInterface
 
     public function createUrl($manager, $route, $params)
     {
-        return false;  // данное правило не применимо
+        if ($route === 'loot/category' && Category::find()->where(['url'=>$params['name']])->andWhere(['enabled' => 1])->andWhere(['parent_category' => null])->One()) {
+            return 'loot/'.$params['name'];
+        } elseif ($route === 'loot/category' && Category::find()->where(['url'=>$params['name']])->andWhere(['enabled' => 1])->andWhere(['not like', 'parent_category', 'null'])->One()) {
+            $cat = Category::find()->where(['url'=>$params['name']])->One();
+            $parentcat = Category::find()->where(['id'=>$cat->parent_category])->One();
+
+            return 'loot/'.$parentcat->url.'/'.$params['name'];
+        }
+        return false;
     }
 }

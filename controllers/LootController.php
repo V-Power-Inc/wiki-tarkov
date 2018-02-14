@@ -50,12 +50,12 @@ class LootController extends Controller
                 ->orWhere(['c1.parent_category' => $cat->id])
                 ->andWhere(['active' => 1])
                 ->with('parentcat');
-           
+            
             $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $fullitems->count(),]);
             $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-         
             $request = \Yii::$app->request;
-            return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+            
+            return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1), 'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
