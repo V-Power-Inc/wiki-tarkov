@@ -58,7 +58,7 @@ $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::classNa
                         <p class="loot-description">
                             <?= $item->content ?>
                         </p>
-
+                        <p class="text-right"><a class="btn btn-default main-link" onclick="javascript:history.back(); return false;">Вернуться на предыдущую страницу</a></p>
                     </div>
                 </div>
                 <!-- Окончания итем из цикла -->
