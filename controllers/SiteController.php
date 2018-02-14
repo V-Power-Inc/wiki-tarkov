@@ -206,7 +206,7 @@ class SiteController extends Controller
     /** Рендер страницы списка полезных статей  **/
     public function actionArticles() {
         $query =  Articles::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 1,'totalCount' => $query->count(),]);
+        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
         $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
         $request = \Yii::$app->request;
         return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
