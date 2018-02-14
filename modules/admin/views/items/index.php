@@ -40,16 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'content:ntext',
             // 'date_create',
             // 'active',
-            'parentcat_id',
-//            [
-//                'attribute'=>'parentcat_id',
-//                'label'=>'Родительская категория',
-//                'format'=>'text', // Возможные варианты: raw, html
-//                'content'=> '',
-//                    function($model){
-//                    return $model->parentcat->title;
-//               },
-//            ],
+            
+            // Ниже узнаем по связи название родительской категории из связанной таблицы
+            [
+                'attribute' => 'parentcat_id',
+                'value' => 'parentcat.title',
+            ],
 
             
             ['class' => 'yii\grid\ActionColumn'],
