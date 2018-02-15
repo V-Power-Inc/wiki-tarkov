@@ -96,7 +96,7 @@ $this->registerMetaTag([
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
             <!-- Виджет Discord -->
-            <div class="     ">
+            <div class="margin-top-15">
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
             </div>
         </div>
