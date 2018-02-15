@@ -72,11 +72,23 @@ $this->registerMetaTag([
     
                     <p><a class="btn btn-default main-link" href="/maps">Перейти к интерактивным картам EFT</a></p>
                 </div>
-    
             </div>
+            
+            
             <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <div class="row">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+                    </div>
+
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                        <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%94%D0%BE%D0%BD%D0%B0%D1%82%D1%8B%20%D0%BD%D0%B0%20%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5%20tarkov-wiki.ru&targets-hint=&default-sum=&button-text=12&payment-type-choice=on&hint=&successURL=https%3A%2F%2Ftarkov-wiki.ru&quickpay=shop&account=410016162855090" width="450" height="213" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                    </div>
+
+                </div>
             </div>
+
+            
         </div>
     </div>
 </div>

@@ -384,9 +384,9 @@ ul li a.relative i {
     font-size: 18px;
 }
 
-.nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus {
+.nav > li > a.admin-tabs.unactive, .nav > li > a.admin-tabs.unactive:hover, .nav > li > a.admin-tabs.unactive:active, .nav > li > a.admin-tabs.unactive:focus,  li > a.admin-inline.unactive, .li > a.admin-inline.unactive:hover, li > a.admin-inline.unactive:focus {
     cursor: no-drop;
-    background: grey;
+    background: grey!important;
     color: rgb(255, 255, 255)!important;
     font-size: 14px;
     font-weight: bold;
@@ -395,6 +395,11 @@ ul li a.relative i {
 .w-100-important {
     width: 100%!important;
     max-width: 100%!important;
+}
+
+.w-45-important {
+    width: 45%!important;
+    max-width: 45%!important;
 }
 
 .w-200 {
@@ -783,8 +788,8 @@ button::-moz-focus-inner, label::-moz-focus-inner, label {
     background: gainsboro;
     border: 1px solid #c3392c;
     border-radius: 5px;
-    max-height: 121px;
-    height: 121px;
+    max-height: 141px;
+    height: 141px;
 }
 
 .item-key.detail {
@@ -838,7 +843,7 @@ span.key-selector {
 
 .item-key div.item-content {
     padding-left: 10px;
-    display: inline-block;
+    display: block;
     width: 100%;
     max-width: 1010px;
 }
@@ -1010,7 +1015,174 @@ a.news-link:hover {
     margin-top: 30px;
 }
 
+.nav.categories {
+    background: white;
+    border-radius: 5px;
+}
 
+.nav.categories > li > a {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.nav-stacked.categories > li + li {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.nav.categories > li > a:hover {
+    text-decoration: none;
+    background-color: #4a76a8;
+    color: white;
+}
+
+.nav.categories > li > a:focus {
+    background: white;
+    color: #337ab7;
+}
+
+.nav-pills.categories > li.active > a {
+    color: #fff;
+    background-color: #a2a2a2;
+}
+
+.categories-abs {
+    position: absolute;
+    top: 19px;
+    right: 20px;
+    color: #c3392c;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.children-cats {
+    display: none;
+}
+
+li.level-2 {
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    padding: 5px 0;
+}
+
+li.level-2.active {
+    background: #b5e6ff;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+}
+
+.level-2 a {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 10px 0;
+}
+
+/** Important styles of store **/
+.categories-menu li.relative > a + .dcjq-icon {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 12px;
+    width: 20px;
+    background: url(/img/img-plus.png) no-repeat 0 center;
+    cursor: pointer;
+}
+
+.categories-menu li.relative > a.active + .dcjq-icon {
+    position: absolute;
+    display: block;
+    right: 10px;
+    top: 12px;
+    width: 20px;
+    background: url(/img/img-minus.png) no-repeat 0 center;
+    cursor: pointer;
+}
+/** End og Important styles of store **/
+
+.fa-check-circle {
+    color: #c3392c;
+    font-size: 16px;
+    padding-right: 5px;
+}
+
+li > a.admin-inline {
+    display: inline-block;
+    background: rgba(128, 128, 128, 0.29);
+    font-weight: bold;
+    text-align: center;
+    color: #337ab7;
+    width: 300px;
+    padding: 14.7px 5px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+li > a.admin-inline:hover {
+    background: cornflowerblue;
+    font-weight: bold;
+    color: black;
+}
+
+.nav-pills > div > li.d-inline  {
+    display: inline;
+}
+
+.nav-pills > div > li.category-admin-margins {
+    margin-top: 30px;
+    margin-left:20px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+/*** Bootstrap labels ***/
+
+.label, .badge {
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #999999;
+}
+
+.label-important, .badge-important {
+    background-color: #b94a48;
+}
+
+.label-success, .badge-success {
+    background-color: #468847;
+}
+
+.label-warning, .badge-warning {
+    background-color: #f89406;
+}
+
+.label-info, .badge-info {
+    background-color: #3a87ad;
+}
+
+.label-inverse, .badge-inverse {
+    background-color: #333333;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
 
 /**** Recustom Magnific Arrows of 26_01_2018 ****/
 
@@ -1037,4 +1209,56 @@ a.news-link:hover {
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.custom-key-margin {
+    margin: 2px 7px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+/*** Стили оформления лута ***/
+.col-lg-12 .item-loot {
+    min-height: 200px;
+    height: auto;
+    margin: 10px 0;
+    padding: 20px;
+    background: gainsboro;
+    border-radius: 5px;
+    border: 1px solid #c3392c;
+}
+
+.item-loot-title {
+    padding: 0 0 10px 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-loot-title a {
+    color: #c3392c;
+}
+
+.item-loot-title a:hover {
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+.loot-image {
+    float: left;
+    margin: 5px 10px 5px 0;
+    border: 1px solid white;
+    box-shadow: 1px 1px 20px;
+    max-width: 100%;
+    background: #343739;
+}
+
+.loot-description {
+    font-size: 16px;
+}
+
+a.loot-link {
+    color: black;
 }

@@ -33,7 +33,7 @@ $this->registerMetaTag([
     <div class="row">
         
         <!-- Основной блок контента -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
+        <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
 
             <p class="alert alert-info sm-vertical-margin-20 size-16">
                 Escape from Tarkov - онлайн-шутер, который в данный момент находится на стадии разработки, в связи с чем мы можем регулярно узнавать о патчах и грядущих изменениях. Эта игра очень часто вместе с патчами очень сильно видоизменяется, этот раздел создан для того чтобы вы могли видеть актуальную информацию о стадии разработки игры, а также могли читать чейнджлоги патчей, которые уже попали в релиз.
@@ -69,11 +69,15 @@ $this->registerMetaTag([
                 </div>
             </div>
         </div>
-        
-        
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+
+        <!-- Боковая правая колонка -->
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            <!-- Виджет Discord -->
+            <div>
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
         </div>
+        
     </div>
 </div>
 
