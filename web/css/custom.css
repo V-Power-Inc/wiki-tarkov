@@ -1249,6 +1249,7 @@ li > a.admin-inline:hover {
     border: 1px solid white;
     box-shadow: 1px 1px 20px;
     max-width: 100%;
+    background: #343739;
 }
 
 .loot-description {
