@@ -75,11 +75,12 @@ $config = [
             ],
         ],
         'db' => $db,
-
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
                 'admin/login' => 'admin/default/logout',
                 'maps' => 'site/locations',
                 'maps/zavod-location' => 'site/zavod',
@@ -95,8 +96,16 @@ $config = [
                 'keys' => 'site/keys',
                 'news' => 'site/news',
                 'articles' => 'site/articles',
+                'loot' => 'loot/mainloot',
+                'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
+                'loot/<name:[\w_\/-]+>' => 'loot/category',
+                
+               
                 [
                     'class' => 'app\components\UrlComponent',
+                ],
+                [
+                    'class' => 'app\components\CategoryurlComponent',
                 ],
             ],
         ],
@@ -117,7 +126,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        // 'allowedIPs' => ['127.0.0.1', '::1', '*'],
     ];
 
     $config['bootstrap'][] = 'gii';

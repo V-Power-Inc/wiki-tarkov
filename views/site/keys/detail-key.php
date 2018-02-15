@@ -57,7 +57,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 keys-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
             
             <div class="col-lg-12">
                 
@@ -90,6 +90,10 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 })();
             </script>
             
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
         </div>
     </div>
 </div>

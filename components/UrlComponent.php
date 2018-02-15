@@ -16,18 +16,6 @@ use yii\base\Object;
 class UrlComponent extends Object implements UrlRuleInterface
 {
 
-    public function createUrl($manager, $route, $params)
-    {
-        if (Doorkeys::find()->where(['url'=> $route])->One()) {
-            return 'keys/'.$route;
-        } elseif (News::find()->where(['url'=> $route])->One()){
-            return 'news/'.$route;
-        } elseif(Articles::find()->where(['url'=> $route])->One()) {
-            return 'articles/'.$route;
-        }
-        return false;
-    }
-
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
@@ -46,6 +34,20 @@ class UrlComponent extends Object implements UrlRuleInterface
             }
         }
 
-        return false; 
+        return false;
     }
+    
+    public function createUrl($manager, $route, $params)
+    {
+        if (Doorkeys::find()->where(['url'=> $route])->One()) {
+            return 'keys/'.$route;
+        } elseif (News::find()->where(['url'=> $route])->One()){
+            return 'news/'.$route;
+        } elseif(Articles::find()->where(['url'=> $route])->One()) {
+            return 'articles/' . $route;
+        }
+        return false;
+    }
+
+
 }
