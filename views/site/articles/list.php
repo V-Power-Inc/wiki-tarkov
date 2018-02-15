@@ -33,7 +33,7 @@ $this->registerMetaTag([
     <div class="row">
 
         <!-- Основной блок контента -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 quests-content">
+        <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
 
             <p class="alert alert-info sm-vertical-margin-20 size-16">
                 Полезные материалы по онлайн-шутеру Escape from Tarkov. В этом разделе вы сможете прочить про некоторые внутриигровые нюансы, о которых ранее вы могли не знать. Также в этом разеделе будут описаны всевозможные вариации горячий клавиш и прочее. Актуальность информации также гарантируется.
@@ -69,5 +69,14 @@ $this->registerMetaTag([
                 </div>
             </div>
         </div>
+
+        <!-- Боковая правая колонка -->
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+            <!-- Виджет Discord -->
+            <div>
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
+        </div>
+        
     </div>
 </div>
