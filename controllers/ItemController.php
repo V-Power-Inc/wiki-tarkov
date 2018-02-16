@@ -17,8 +17,9 @@ class ItemController extends Controller {
 /** Рендер детальной страницы лута */
 public function actionDetailloot($item) {
 
-        if($item) {
-        $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
+    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
+       
+    if($loot) {
             return $this->render('/loot/item-detail.php', ['item' => $loot]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
