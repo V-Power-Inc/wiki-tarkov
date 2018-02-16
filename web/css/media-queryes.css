@@ -34,11 +34,16 @@
         padding: 0px;
     }
 
+    .navbar-default .navbar-nav > li > a {
+        color: #edeef0;
+        font-size: 14px;
+    }
+
     .nav > li > a {
         position: relative;
         display: block;
-        padding: 10px;
-        width: 140px;
+        padding: 20px 13px;
+        width: auto;
         text-align: center;
     }
 
@@ -51,8 +56,8 @@
     .nav > li > a {
         position: relative;
         display: block;
-        padding: 10px 10px;
-        width: 115px;
+        padding: 10px 0px;
+        width: 95px;
         text-align: center;
     }
 
@@ -224,6 +229,11 @@
     .item-key {
         max-height: 100%;
         height: 100%;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #edeef0;
+        font-size: 16px;
     }
 
 }

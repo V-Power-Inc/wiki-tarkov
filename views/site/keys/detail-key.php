@@ -57,12 +57,12 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 keys-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
             
             <div class="col-lg-12">
                 
                     <div class="col-lg-12 item-key detail">
-                        <img class="w-100 margin-5 f-left fixible" src="<?=$model['preview']?>">
+                        <img class="w-100 margin-5 f-left fixible" alt="<?=$model['name']?>" src="<?=$model['preview']?>">
                         <div class="item-content d-block w-100">
                             <p class="size-16">Ключ используется на локациях: <b><?=$model['mapgroup']?></b></p>
                             <?=$model['content']?>
@@ -90,6 +90,10 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
                 })();
             </script>
             
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
         </div>
     </div>
 </div>

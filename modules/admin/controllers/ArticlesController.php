@@ -14,10 +14,10 @@ use yii\filters\VerbFilter;
  */
 class ArticlesController extends Controller
 {
-    /** Ïîäêëþ÷àåì îòäåëüíûé layout äëÿ CRUD ìîäåëåé **/
+    /** ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼ Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ð¹ layout Ð´Ð»Ñ CRUD Ð¼Ð¾Ð´ÐµÐ»ÐµÐ¹ **/
     public $layout = 'admin';
 
-    /** Ïðîâåðêà ïîëüçîâàòåëÿ íà ãîñòÿ  **/
+    /** ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð½Ð° Ð³Ð¾ÑÑ‚Ñ  **/
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
@@ -123,7 +123,7 @@ class ArticlesController extends Controller
 
     /**
      * Finds the Articles model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * If the model  is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Articles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
