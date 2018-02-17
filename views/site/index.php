@@ -47,7 +47,7 @@ $this->registerMetaTag([
     
 </div>
     
-<!-- Вызов виджета Twitch -->
+<!-- Вызов виджета Twitch --->
 <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 <script type="text/javascript">
     var options = {
