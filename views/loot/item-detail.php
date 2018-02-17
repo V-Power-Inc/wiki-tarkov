@@ -41,23 +41,9 @@ $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::classNa
             </ul>
 
             <!-- Виджет Twitch -->
-            <html>
-            <body>
-            <div id="twitch-embed" class="margin-top-20"></div>
-            <script src="https://embed.twitch.tv/embed/v1.js"></script>
-            <script type="text/javascript">
-                new Twitch.Embed("twitch-embed", {
-                    width: 261,
-                    height: 380,
-                    layout: "video",
-                    autoplay: false,
-                    channel: "enslaver_V"
-                });
-                var player = new Twitch.Player("<enslaver_V>", options);
-                player.setVolume(0);
-            </script>
-            </body>
-            </html>
+            <div class="margin-top-20">
+                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
+            </div>
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">

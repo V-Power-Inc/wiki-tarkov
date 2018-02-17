@@ -120,23 +120,9 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <!-- Виджет Twitch -->
-            <html>
-            <body>
-            <div id="twitch-embed"></div>
-            <script src="https://embed.twitch.tv/embed/v1.js"></script>
-            <script type="text/javascript">
-                new Twitch.Embed("twitch-embed", {
-                    width: 261,
-                    height: 380,
-                    layout: "video",
-                    autoplay: false,
-                    channel: "enslaver_V"
-                });
-                var player = new Twitch.Player("<enslaver_V>", options);
-                player.setVolume(0);
-            </script>
-            </body>
-            </html>
+            <div>
+                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
+            </div>
             
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
