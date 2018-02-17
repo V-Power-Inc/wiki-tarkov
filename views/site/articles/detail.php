@@ -94,10 +94,28 @@ $this->registerMetaTag([
 
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <!-- Виджет Discord -->
-            <div class="margin-top-15">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
-            </div>
+            <!-- Виджет Twitch -->
+            <html>
+            <body>
+            <div id="twitch-embed" class="margin-top-15"></div>
+            <script src="https://embed.twitch.tv/embed/v1.js"></script>
+            <script type="text/javascript">
+                new Twitch.Embed("twitch-embed", {
+                    width: 261,
+                    height: 380,
+                    layout: "video",
+                    autoplay: false,
+                    channel: "enslaver_V"
+                });
+                var player = new Twitch.Player("<enslaver_V>", options);
+                player.setVolume(0);
+            </script>
+            </body>
+            </html>
+
+            <!-- Виджет дискорда -->
+            <div class="margin-top-20"></div>
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
         </div>
 
 

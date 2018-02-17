@@ -119,3 +119,50 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
         }
     });
 }
+/** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Берега **/
+else if ((window.location.href.indexOf('bereg')) > -1) {
+    $( document ).ready(function() {
+        if($('#bereg-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-bereg-exits_group').fadeIn();
+            $('.form-group.field-bereg-file').fadeIn();
+            //   $('#tamojnya-exit_anyway').val('');
+            //   $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#bereg-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-bereg-file').fadeIn();
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.field-bereg-exits_group').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
+        } else {
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
+        }
+    });
+
+    $("#bereg-marker_group").change(function() {
+        if($('#bereg-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-bereg-exits_group').fadeIn();
+            $('.form-group.field-bereg-file').fadeIn();
+            $('.form-group.field-bereg-exit_anyway').fadeIn();
+            //   $('#tamojnya-exit_anyway').val('');
+            //  $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#bereg-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-bereg-file').fadeIn();
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.field-bereg-exits_group').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
+        } else {
+            $('.form-group.field-bereg-exits_group').fadeOut();
+            $('.form-group.field-bereg-file').fadeOut();
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
+        }
+    });
+}

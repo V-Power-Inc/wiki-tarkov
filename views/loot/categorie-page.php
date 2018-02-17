@@ -57,6 +57,25 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
                 <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
+            
+            <!-- Виджет Twitch -->
+            <html>
+            <body>
+            <div id="twitch-embed" class="margin-top-20"></div>
+            <script src="https://embed.twitch.tv/embed/v1.js"></script>
+            <script type="text/javascript">
+                new Twitch.Embed("twitch-embed", {
+                    width: 261,
+                    height: 380,
+                    layout: "video",
+                    autoplay: false,
+                    channel: "enslaver_V"
+                });
+                var player = new Twitch.Player("<enslaver_V>", options);
+                player.setVolume(0);
+            </script>
+            </body>
+            </html>
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
