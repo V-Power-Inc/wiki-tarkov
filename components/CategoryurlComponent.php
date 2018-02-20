@@ -23,8 +23,9 @@ class CategoryurlComponent implements UrlRuleInterface
         $site = stristr(Yii::$app->request->url,'/site/'); // Проверка на контроллер site
         $admin = stristr(Yii::$app->request->url,'/admin/'); // Проверка на модуль админа
         $maps = stristr(Yii::$app->request->url,'/maps/'); // Проверка на интерактивные карты
+        $elfinder = stristr(Yii::$app->request->url,'/elfinder/'); // Проверка на менеджер изображений
         
-        if(!$site && !$admin && !$maps) {
+        if(!$site && !$admin && !$maps && !$elfinder) {
             if(strpos($request->pathInfo,'/') !== false){
                 if(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                     return ['loot/category',['name'=>$matches[5]]];
