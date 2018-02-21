@@ -134,10 +134,10 @@ class SiteController extends Controller
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['id' => SORT_ASC])->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['id' => SORT_ASC])->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['id' => SORT_ASC])->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['id' => SORT_ASC])->all();
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['name' => SORT_STRING])->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['name' => SORT_STRING])->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['name' => SORT_STRING])->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['name' => SORT_STRING])->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
             if(isset($_POST['Doorkeys']['doorkey'])){
@@ -151,9 +151,9 @@ class SiteController extends Controller
             if(in_array($doorkey,$words)) {
                 $curentWord =  $words[array_search($doorkey,$words)];
                if($curentWord == "Все ключи"){
-                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['id' => SORT_ASC])->all();
+                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->all();
                }else{
-                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['id' => SORT_ASC])->all();
+                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->all();
                }
                 
                 return $this->render('keys/keyseach.php',
