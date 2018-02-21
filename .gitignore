@@ -45,6 +45,3 @@ config/db.php
 
 # ignore images
 web/img/upload
-
-# ignore web
-config/web.php
