@@ -87,6 +87,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
         <!-- Комментарии -->
+        <?php if(empty($_GET)) : ?>
        <div id="mc-container" class="kek-recustom"></div>
         <script type="text/javascript">
             cackle_widget = window.cackle_widget || [];
@@ -99,6 +100,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
             })();
         </script>
+        <?php endif; ?>
    
 
     </div>
