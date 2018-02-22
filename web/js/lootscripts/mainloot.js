@@ -7,6 +7,15 @@ $(document).ready(function($){
     $('#categories-menu').dcAccordion({
         eventType: 'click',
     });
+
+    /*** Раскрытия аккордеона меню при проверке на активную категорию в Url адресе ***/
+    if (document.location.href.indexOf('json') == -1) {
+        // не содержит
+    } else {
+        // содержит
+    }
+
+
 });
 
 

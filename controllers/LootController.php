@@ -14,7 +14,6 @@ use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
 use yii\web\HttpException;
-use yii\db\Query;
 
 
 class LootController extends Controller
@@ -61,5 +60,4 @@ class LootController extends Controller
         }
        
     }
-
 }
