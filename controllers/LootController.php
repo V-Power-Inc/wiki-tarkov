@@ -23,7 +23,6 @@ class LootController extends Controller
      *
      * @return string
      */
-
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
