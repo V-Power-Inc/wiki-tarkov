@@ -15,6 +15,7 @@ use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
+use app\models\Traders;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -37,7 +38,23 @@ class SiteController extends Controller
 
     /** Рендер главной страницы с квестами **/
     public function actionQuests() {
-        return $this->render('quests/quests-main.php');
+        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->asArray()->all();
+        return $this->render('quests/quests-main.php', ['traders' => $traders]);
+    }
+
+    /*** Заглушка для страницы Traders ***/
+    public function actionTraders301() {
+        return $this->redirect('/quests-of-traders', 301);
+    }
+
+    /** Рендер детальной страницы торговца **/
+    public function actionTradersdetail($id) {
+        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        if($trader) {
+            return $this->render('traders/detail.php',['trader' => $trader]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** Рендер страницы квестов Прапора **/
@@ -46,8 +63,7 @@ class SiteController extends Controller
         $prapor = $query->orderby(['tab_number'=>SORT_ASC])->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
-
-
+    
     /** Рендер страницы квестов Терапевта **/
     public function actionTerapevtpage() {
         $query =  Terapevt::find();

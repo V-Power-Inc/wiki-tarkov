@@ -7,10 +7,10 @@ $(document).ready(function($){
     $('#categories-menu').dcAccordion({
         eventType: 'click',
     });
-});
 
-
-
+    /*** Скрипт раскрытия аккордеона меню при проверке на активную категорию в Url адресе ***/
+    $(".relative.active.as-parent-li").find('div.dcjq-icon').trigger('click');
+});  
 
 
 

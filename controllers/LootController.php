@@ -14,7 +14,6 @@ use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
 use yii\web\HttpException;
-use yii\db\Query;
 
 
 class LootController extends Controller
@@ -24,12 +23,11 @@ class LootController extends Controller
      *
      * @return string
      */
-
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
         $fullitems = Items::find()->where(['active' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $fullitems->count(),]);
+        $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
         $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
         $request = \Yii::$app->request;
         
@@ -51,7 +49,7 @@ class LootController extends Controller
                 ->andWhere(['active' => 1])
                 ->with('parentcat');
             
-            $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $fullitems->count(),]);
+            $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
             $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
             $request = \Yii::$app->request;
             
@@ -61,5 +59,4 @@ class LootController extends Controller
         }
        
     }
-
 }
