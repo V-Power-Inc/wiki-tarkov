@@ -10,6 +10,7 @@ namespace app\components;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
+use app\models\Traders;
 use yii\web\UrlRuleInterface;
 use yii\base\Object;
 
@@ -32,6 +33,10 @@ class UrlComponent extends Object implements UrlRuleInterface
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
                 return ['site/articledetail',['id'=>$matches[3]]];
             }
+        } elseif ($ppp[0] == 'traders') {
+            if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+                return ['site/tradersdetail',['id'=>$matches[3]]];
+            }
         }
 
         return false;
@@ -45,6 +50,8 @@ class UrlComponent extends Object implements UrlRuleInterface
             return 'news/'.$route;
         } elseif(Articles::find()->where(['url'=> $route])->One()) {
             return 'articles/' . $route;
+        } elseif(Traders::find()->where(['url'=> $route])->One()) {
+            return 'traders/' . $route;
         }
         return false;
     }

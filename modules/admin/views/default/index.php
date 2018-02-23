@@ -45,6 +45,7 @@ $this->title = 'Админка tarkov-wiki';
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
+        <li><a href="/admin/traders/index?dp-1-sort=sortir" class="admin-tabs w-100-important">Торговцы</a></li>
         <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
         <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>

@@ -46,5 +46,5 @@ config/db.php
 # ignore images
 web/img/upload
 
-# no index.php
-index.php
+# no index.php in web directory
+web/index.php

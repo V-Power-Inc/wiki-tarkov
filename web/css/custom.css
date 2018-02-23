@@ -1278,3 +1278,14 @@ a.loot-link {
     color: white;
     border: 2px solid #7284c1;
 }
+
+.custom-admin-div {
+    padding: 10px;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}
+
+img.w-100-auto {
+    max-width: 100%;
+    width: auto
+}
