@@ -10,6 +10,18 @@ use mihaildev\elfinder\ElFinder;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<p class="alert alert-danger size-16 margin-bottom-5">
+    <b>Внимание</b> - ссылка на список квестов торговца должна выглядеть вот так: <b>/quests-of-traders/lyjnic-quests</b> - Нужно брать реально существующий адрес, иначе будет ссылка на несуществующую страницу и пользователи будут перенаправляться на несуществующую страницу.
+    <br>
+    <br>
+    Ссылка на детальную страницу торговца - это одно слово на линтинском - пример: <b>prapor</b>
+</p>
+
+<span class="label label-important">Важные особенности работы!</span>
+
+<br>
+<br>
+
 <div class="traders-form">
 
     <?php $form = ActiveForm::begin(); ?>
