@@ -237,6 +237,11 @@ class SiteController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+
+    /** Рендер страницы списка навыков персонажа **/
+    public function actionSkills() {
+        return $this->render('skills/list.php');
+    }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()

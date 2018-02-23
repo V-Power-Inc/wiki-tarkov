@@ -95,6 +95,7 @@ $config = [
                 'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
                 'news' => 'site/news',
+                'skills' => 'site/skills',
                 'traders' => 'site/traders301',
                 'articles' => 'site/articles',
                 'loot' => 'loot/mainloot',
