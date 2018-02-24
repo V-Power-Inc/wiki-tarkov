@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Catskills::find()->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'url', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
     
@@ -32,6 +32,8 @@ use yii\helpers\ArrayHelper;
 
     <br>
     <br>
+
+    <?= $form->field($model, 'short_desc')->textarea(['rows' => 3]) ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),

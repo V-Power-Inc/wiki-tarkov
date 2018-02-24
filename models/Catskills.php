@@ -47,6 +47,7 @@ class Catskills extends \yii\db\ActiveRecord
             [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
             [['sortir', 'enabled'], 'integer'],
             [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
+            [['file'], 'image'],
         ];
     }
 

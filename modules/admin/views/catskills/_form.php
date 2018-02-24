@@ -26,7 +26,7 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'sortir')->textInput() ?>
 
-    <?= $form->field($model, 'url', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 

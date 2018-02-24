@@ -31,7 +31,7 @@ class SkillsurlComponent implements UrlRuleInterface
                 }
                 
 //                elseif(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
-//                    return ['item/detailloot', ['item' => $matches[3]]];
+//                    return ['item/detailloot', ['url' => $matches[3]]];
 //                }
             }
             return false;

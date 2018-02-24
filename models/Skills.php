@@ -20,6 +20,7 @@ use Imagine\Image\Box;
  * @property string $keywords
  * @property string $preview
  * @property string $content
+ * @property string $short_desc
  *
  * @property CatSkills $category0
  */
@@ -43,10 +44,11 @@ class Skills extends \yii\db\ActiveRecord
     {
         return [
             [['category', 'enabled'], 'integer'],
-            [['content'], 'string'],
+            [['content', 'short_desc'], 'string'],
             [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
             [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Catskills::className(), 'targetAttribute' => ['category' => 'id']],
+            [['file'], 'image'],
         ];
     }
 
@@ -66,6 +68,7 @@ class Skills extends \yii\db\ActiveRecord
             'preview' => 'Превьюшка умения',
             'file' => 'Превьюшка умения',
             'content' => 'Содержание',
+            'short_desc' => 'Краткое описание',
         ];
     }
 

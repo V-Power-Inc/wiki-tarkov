@@ -82,25 +82,25 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <!-- Описание категории -->
             <div class="alert alert-info size-16"><?= $cat->content ?></div>
 
-<!--            --><?php //if(empty($items)) : ?>
-<!--                <!-- Нет лута -->-->
-<!--                <div class="col-lg-12">-->
-<!--                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>-->
-<!--                </div>-->
-<!--                <!-- Нет лута -->-->
-<!--            --><?php //else : ?>
-<!--                <!-- Цикл предметов категории -->-->
-<!--                --><?php //foreach ($items as $item) : ?>
-<!--                    <div class="col-lg-12">-->
-<!--                        <div class="item-loot">-->
-<!--                            <h2 class="item-loot-title"><a href="/loot/--><?//= $item['url'] ?><!--.html">--><?//= $item['title'] ?><!--</a></h2>-->
-<!--                            <a class="loot-link" href="/loot/--><?//= $item['url'] ?><!--.html"><img class="loot-image" alt="--><?//= $item['title'] ?><!--" src="--><?//= $item['preview'] ?><!--"></a>-->
-<!--                            <p class="loot-description">--><?//= $item['shortdesc'] ?><!--</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                --><?php //endforeach; ?>
-<!--                <!-- Окончание цикла предметов -->-->
-<!--            --><?php //endif; ?>
+            <?php if(empty($items)) : ?>
+                <!-- Нет лута -->
+                <div class="col-lg-12">
+                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+                </div>
+                <!-- Нет лута -->
+            <?php else : ?>
+                <!-- Цикл предметов категории -->
+                <?php foreach ($items as $item) : ?>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <!-- Окончание цикла предметов -->
+            <?php endif; ?>
 
 
         </div>

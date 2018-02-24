@@ -48,6 +48,13 @@ $this->registerMetaTag([
         border: 1px solid white;
         box-shadow: 1px 1px 6px 2px;
     }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 2px solid black;
+    }
 </style>
 
 <div class="heading-class">
