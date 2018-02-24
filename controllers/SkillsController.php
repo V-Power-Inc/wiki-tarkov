@@ -10,6 +10,7 @@ namespace app\controllers;
 use yii\web\Controller;
 use yii\web\HttpException;
 use app\models\Catskills;
+use app\models\Skills;
 
 
 class SkillsController extends Controller
@@ -28,12 +29,21 @@ class SkillsController extends Controller
         $cat = Catskills::find()->where(['url'=>$name])->One();
         
         if($cat) {
-            return $this->render('/skills/skillscat-page.php', ['cat' => $cat]);
+            $items = Skills::find()->where(['enabled' => 1])->andWhere(['category' => $cat->id])->asArray()->all();
+            return $this->render('/skills/skillscat-page.php', ['cat' => $cat, 'items' => $items]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
-
     }
+    
+    /*** Рендер детальной страницы умения ***/
+    public function actionSkillsdetail($url) {
+        $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->One();
 
-
+        if($item) {
+            return $this->render('/skills/skill-detail.php', ['item' => $item]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
 }

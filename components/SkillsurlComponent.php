@@ -26,13 +26,15 @@ class SkillsurlComponent implements UrlRuleInterface
 
         if(!$site && !$admin && !$maps && !$elfinder && !$loot) {
             if(strpos($request->pathInfo,'/') !== false){
-                if(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+//                echo '<pre>';
+//                echo print_r($request->pathInfo);
+//                exit;
+//                echo '</pre>';
+                if(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+                    return ['skills/skillsdetail', ['url' => $matches[5]]];
+                } elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                     return ['skills/skillscategory',['name'=>$matches[3]]];
-                }
-                
-//                elseif(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
-//                    return ['item/detailloot', ['url' => $matches[3]]];
-//                }
+                } 
             }
             return false;
         }

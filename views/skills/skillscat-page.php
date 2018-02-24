@@ -85,7 +85,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <?php if(empty($items)) : ?>
                 <!-- Нет лута -->
                 <div class="col-lg-12">
-                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+                    <p class="alert alert-danger size-16">В данный момент в разделе нет доступных умений.</p>
                 </div>
                 <!-- Нет лута -->
             <?php else : ?>
@@ -93,9 +93,9 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
                 <?php foreach ($items as $item) : ?>
                     <div class="col-lg-12">
                         <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                            <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
+                            <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                            <p class="loot-description"><?= $item['short_desc'] ?></p>
                         </div>
                     </div>
                 <?php endforeach; ?>
