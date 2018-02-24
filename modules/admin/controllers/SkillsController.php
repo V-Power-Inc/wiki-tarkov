@@ -3,8 +3,8 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Catskills;
-use app\models\CatskillsSearch;
+use app\models\Skills;
+use app\models\SkillsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,14 +12,13 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * CatskillsController implements the CRUD actions for Catskills model.
+ * SkillsController implements the CRUD actions for Skills model.
  */
-class CatskillsController extends Controller
+class SkillsController extends Controller
 {
 
-    /** Подключаем отдельный layout для админки сайта **/
+    /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
-
 
     /** Проверка пользователя на гостя  **/
     public function beforeAction($action)
@@ -47,12 +46,12 @@ class CatskillsController extends Controller
     }
 
     /**
-     * Lists all Catskills models.
+     * Lists all Skills models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CatskillsSearch();
+        $searchModel = new SkillsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,7 +61,7 @@ class CatskillsController extends Controller
     }
 
     /**
-     * Displays a single Catskills model.
+     * Displays a single Skills model.
      * @param integer $id
      * @return mixed
      */
@@ -74,13 +73,13 @@ class CatskillsController extends Controller
     }
 
     /**
-     * Creates a new Catskills model.
+     * Creates a new Skills model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Catskills();
+        $model = new Skills();
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,7 +97,7 @@ class CatskillsController extends Controller
     }
 
     /**
-     * Updates an existing Catskills model.
+     * Updates an existing Skills model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -123,28 +122,28 @@ class CatskillsController extends Controller
     }
 
     /**
-     * Deletes an existing Catskills model.
+     * Deletes an existing Skills model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        // На всякий случай выпилил удаление категорий
-       // $this->findModel($id)->delete();
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Catskills model based on its primary key value.
+     * Finds the Skills model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Catskills the loaded model
+     * @return Skills the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Catskills::findOne($id)) !== null) {
+        if (($model = Skills::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

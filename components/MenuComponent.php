@@ -23,14 +23,16 @@ class MenuComponent
     public static $lootcat = null;
     public static $mainloot = null;
     public static $loot = null;
-    public static $skills = null;
+    public static $skillscategory = null;
+    public static $mainskills = null;
     
 
     public static function  Active(){
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
-            case 'skills': self::$skils = 'class="active"'; break;
+            case 'mainskills': self::$mainskills = 'class="active"'; break;
+            case 'skillscategory': self::$skillscategory = 'class="active"'; break;
             case 'quests': self::$quests = 'class="active"'; break;
             case 'locations': self::$locations = 'class="active"'; break;
             case 'keys': self::$keys = 'class="active"'; break;
@@ -79,7 +81,7 @@ class MenuComponent
                 <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
 
                 <ul class="nav navbar-nav">
-                    <li '.self::$skils.'><a href="/skills">Умения</a></li>
+                    <li '.self::$skillscategory.' '.self::$mainskills.'><a href="/skills">Умения</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>

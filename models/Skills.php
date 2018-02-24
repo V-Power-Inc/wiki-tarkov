@@ -9,24 +9,23 @@ use Imagine\Gd;
 use Imagine\Image\Box;
 
 /**
- * This is the model class for table "cat_skills".
+ * This is the model class for table "skills".
  *
  * @property integer $id
  * @property string $title
- * @property string $content
- * @property integer $sortir
+ * @property integer $category
  * @property string $url
+ * @property integer $enabled
  * @property string $description
  * @property string $keywords
- * @property integer $enabled
  * @property string $preview
- * @property string $bg_style
+ * @property string $content
  *
- * @property Skills[] $skills
+ * @property CatSkills $category0
  */
-class Catskills extends \yii\db\ActiveRecord
+class Skills extends \yii\db\ActiveRecord
 {
-
+    
     public $file;
     
     /**
@@ -34,7 +33,7 @@ class Catskills extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'cat_skills';
+        return 'skills';
     }
 
     /**
@@ -43,10 +42,11 @@ class Catskills extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'bg_style'], 'string'],
+            [['category', 'enabled'], 'integer'],
+            [['content'], 'string'],
             [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
-            [['sortir', 'enabled'], 'integer'],
             [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
+            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Catskills::className(), 'targetAttribute' => ['category' => 'id']],
         ];
     }
 
@@ -57,16 +57,15 @@ class Catskills extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Название категории',
-            'content' => 'Содержимое категории',
-            'sortir' => 'Сортировка категории',
-            'url' => 'Url категории',
-            'description' => 'SEO описание категории',
+            'title' => 'Заголовок умения',
+            'category' => 'Родительская категория',
+            'url' => 'URL адрес умения',
+            'enabled' => 'Включен',
+            'description' => 'SEO описание',
             'keywords' => 'SEO ключевые слова',
-            'enabled' => 'Категория активна',
-            'preview' => 'Превьюшка категории',
-            'file' => 'Превьюшка категории',
-            'bg_style' => 'Цвет фона',
+            'preview' => 'Превьюшка умения',
+            'file' => 'Превьюшка умения',
+            'content' => 'Содержание',
         ];
     }
 
@@ -84,8 +83,8 @@ class Catskills extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSkills()
+    public function getCategory0()
     {
-        return $this->hasMany(Skills::className(), ['category' => 'id']);
+        return $this->hasOne(Catskills::className(), ['id' => 'category']);
     }
 }

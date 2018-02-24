@@ -1289,3 +1289,7 @@ img.w-100-auto {
     max-width: 100%;
     width: auto
 }
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}

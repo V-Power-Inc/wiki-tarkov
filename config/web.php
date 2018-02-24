@@ -95,7 +95,7 @@ $config = [
                 'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
                 'news' => 'site/news',
-                'skills' => 'site/skills',
+                'skills' => 'skills/mainskills',
                 'traders' => 'site/traders301',
                 'articles' => 'site/articles',
                 'loot' => 'loot/mainloot',
@@ -105,6 +105,9 @@ $config = [
 
                 [
                     'class' => 'app\components\UrlComponent',
+                ],
+                [
+                    'class' => 'app\components\SkillsurlComponent',
                 ],
                 [
                     'class' => 'app\components\CategoryurlComponent',

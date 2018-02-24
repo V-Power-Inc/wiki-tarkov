@@ -46,6 +46,7 @@ $this->title = 'Админка tarkov-wiki';
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>
+        <li><a href="/admin/skills" class="admin-tabs w-100-important">Пассивные умения</a></li>
         <li><a href="/admin/traders/index?dp-1-sort=sortir" class="admin-tabs w-100-important">Торговцы</a></li>
         <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
