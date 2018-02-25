@@ -4,12 +4,12 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Catskills;
+use app\models\Skills;
 use app\models\CatskillsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
-use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /**
  * CatskillsController implements the CRUD actions for Catskills model.
@@ -86,11 +86,6 @@ class CatskillsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            /** Проверка поля url на уникальность **/
-            if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validate($model);
-            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -111,11 +106,6 @@ class CatskillsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            /** Проверка поля url на уникальность **/
-            if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ActiveForm::validate($model);
-            }
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -130,9 +120,20 @@ class CatskillsController extends Controller
      */
     public function actionDelete($id)
     {
-        // На всякий случай выпилил удаление категорий
-       // $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+
+        $model = $this->findModel($id);
+
+        $Items = new Skills();
+        $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'category');
+        $LockedID = $model->id;
+        $ItemRelation = in_array($LockedID, $ItemsCategories);
+        /** Проверяем - привязано ли умение к удаляемой категории */
+        if($ItemRelation) {
+            return $this->redirect(['index']);
+        } else {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        }
     }
 
     /**

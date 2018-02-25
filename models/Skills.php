@@ -90,4 +90,10 @@ class Skills extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Catskills::className(), ['id' => 'category']);
     }
+
+    /** Получаем список всех предметов из таблицы справочника лута **/
+    public function getAllItems() {
+        $Items = Skills::find()->asArray()->all();
+        return $Items;
+    }
 }

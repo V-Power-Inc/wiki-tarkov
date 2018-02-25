@@ -53,7 +53,7 @@ $this->registerMetaTag([
         margin-top: 20px;
         margin-bottom: 20px;
         border: 0;
-        border-top: 2px solid black;
+        border-bottom: 2px solid black;
     }
 </style>
 

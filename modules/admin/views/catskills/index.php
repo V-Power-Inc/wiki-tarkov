@@ -13,7 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="catskills-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p class="alert alert-danger size-16 margin-bottom-5">
+        <b>Внимание</b> - чтобы удалить категорию скила, сначала надо удалить все привязанные к ней пассивные умения, <b>иначе удаление не произойдет.</b><br></p>
+    <span class="label label-important">Важные особенности работы!</span>
+
+    <br>
+    <br>
 
     <p>
         <?= Html::a('Создать новую категорию', ['create'], ['class' => 'btn btn-success']) ?>
