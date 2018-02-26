@@ -1300,6 +1300,6 @@ img.w-100-auto {
 }
 
 .fix-tables {
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
 }
