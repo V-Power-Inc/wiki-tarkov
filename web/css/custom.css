@@ -1268,6 +1268,11 @@ a.loot-link {
     max-width: 100%;
 }
 
+.loot-tables-second {
+    width: 100%;
+    max-width: 100%;
+}
+
 .loot-tables tr td {
     padding: 10px;
     border: 2px solid #0e2077;
@@ -1292,4 +1297,9 @@ img.w-100-auto {
 
 .margin-bottom-0 {
     margin-bottom: 0;
+}
+
+.fix-tables {
+    overflow-x: scroll;
+    width: 100%;
 }

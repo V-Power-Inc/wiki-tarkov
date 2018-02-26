@@ -3,7 +3,6 @@
  */
 
 /** Скорлл кнопка до верхней части сайта **/
-
 $(document).ready(function() {
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {
@@ -17,15 +16,9 @@ $(document).ready(function() {
         return false;
     });
     
-/** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
-
-    $('.nav.nav-list.bs-docs-sidenav.affix li').click(function() {
-       $('#info-alert-prapor').fadeOut();
-    });
-
-    if(window.location.hash !== '') {
-        $('#info-alert-prapor').remove();
-    }
+/*** Оборачиваем все таблицы с классом loot-tables специальным дивом со скроллом ***/
+    var tables = $('.loot-tables');
+    $(tables).wrap('<div class="fix-tables"></div>');
 });
 
 

@@ -5,6 +5,16 @@
 
 $(document).ready(function() {
 
+    /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
+
+    $('.nav.nav-list.bs-docs-sidenav.affix li').click(function() {
+        $('#info-alert-prapor').fadeOut();
+    });
+
+    if(window.location.hash !== '') {
+        $('#info-alert-prapor').remove();
+    }
+
     /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
 
     var MagnificImg = $('.image-link');
