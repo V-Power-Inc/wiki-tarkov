@@ -72,6 +72,14 @@ $this->registerMetaTag([
 
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="news-shortitem bg-white">
+
+                <p class="mobile-text-center">
+                    <?php if ($trader->urltoquets !== '' && $trader->urltoquets !== null): ?>
+                        <a class="btn btn-default main-link float-right mobile-btn-margin" href="<?= $trader->urltoquets ?>"><?= $trader->button_quests ?></a>
+                    <?php endif; ?>
+                    <a class="btn btn-default main-link float-left mobile-btn-margin" href="/quests-of-traders">Вернуться к списку торговцев</a>
+                </p>
+                
                 <img class="news-titleimage w-100-auto" alt="<?=$trader->title?>" src="<?=$trader->preview?>">
                 <div class="text-left"><?=$trader->fullcontent ?></div>
 
