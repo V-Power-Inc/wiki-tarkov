@@ -8,7 +8,10 @@
 
 use app\components\LeftmenuWidget;
 
-$this->title = "Escape from Tarkov: $item->title";
+/** Преобразуем title в нижний регистр **/
+$lowertitle = mb_strtolower($item->title);
+
+$this->title = "Escape from Tarkov: Умение $lowertitle";
 
 $this->registerMetaTag([
     'name' => 'description',
