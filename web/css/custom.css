@@ -1303,3 +1303,17 @@ img.w-100-auto {
     overflow-x: auto;
     width: 100%;
 }
+
+/*** Стили для Вовчика ***/
+
+.solid-green {
+    border: 1px solid green;
+    border-radius: 3px;
+}
+
+.solid-orange {
+    border: 1px solid #FFA500;
+    border-radius: 3px;
+}
+
+/*** Окончание стилей для Вовчика ***/
