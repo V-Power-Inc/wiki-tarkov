@@ -70,6 +70,10 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <!-- Описание категории -->
             <div class="alert alert-info size-16"><?= $cat->content ?></div>
 
+            <div class="col-lg-12">
+                <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
+            </div>
+            
             <?php if(empty($items)) : ?>
                 <!-- Нет лута -->
                 <div class="col-lg-12">
@@ -79,18 +83,32 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
             <?php else : ?>
                 <!-- Цикл предметов категории -->
                 <?php foreach ($items as $item) : ?>
-                    <div class="col-lg-12">
-                        <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['short_desc'] ?></p>
+                    <?php if($item['enabled'] == 1) : ?>
+                        <div class="col-lg-12">
+                            <div class="item-loot">
+                                <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
+                                <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                                <p class="loot-description"><?= $item['short_desc'] ?></p>
+                            </div>
                         </div>
-                    </div>
+                    <?php elseif($item['enabled'] == 0) : ?>
+                        <div class="col-lg-12">
+                            <div class="item-loot">
+                                <h2 class="item-loot-title"><a><?= $item['title'] ?></a></h2>
+                                <a class="loot-link"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                                <p class="loot-description"><?= $item['short_desc'] ?></p>
+                                <p class="alert alert-danger size-16 unactive-skill">В настоящий момент это умение не реализовано в игре.</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
                 <!-- Окончание цикла предметов -->
             <?php endif; ?>
 
-
+            <div class="col-lg-12">
+                <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
+            </div>
+            
         </div>
 
 

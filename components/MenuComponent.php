@@ -25,6 +25,7 @@ class MenuComponent
     public static $loot = null;
     public static $skillscategory = null;
     public static $mainskills = null;
+    public static $skillsdetail = null;
     
 
     public static function  Active(){
@@ -44,6 +45,7 @@ class MenuComponent
             case 'category': self::$lootcat = 'class="active"'; break;
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
+            case 'skillsdetail':self::$skillsdetail = 'class="active"'; break;
         }
     }
     /**
@@ -81,7 +83,7 @@ class MenuComponent
                 <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
 
                 <ul class="nav navbar-nav">
-                    <li '.self::$skillscategory.' '.self::$mainskills.'><a href="/skills">Умения</a></li>
+                    <li '.self::$skillscategory.' '.self::$mainskills.' '.self::$skillsdetail.'><a href="/skills">Умения</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>

@@ -29,7 +29,8 @@ class SkillsController extends Controller
         $cat = Catskills::find()->where(['url'=>$name])->One();
         
         if($cat) {
-            $items = Skills::find()->where(['enabled' => 1])->andWhere(['category' => $cat->id])->asArray()->all();
+            // Здесь мы возвращаем и неактивные элементы, т.к. на них стоит проверка во вьюшке
+            $items = Skills::find()->andWhere(['category' => $cat->id])->asArray()->all();
             return $this->render('/skills/skillscat-page.php', ['cat' => $cat, 'items' => $items]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');

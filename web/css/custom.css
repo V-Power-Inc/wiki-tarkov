@@ -1337,6 +1337,10 @@ img.w-100-auto {
     background-color: #fff0;
 }
 
+.unactive-skill {
+    margin-left: 90px;
+}
+
 /*** Стили для Вовчика ***/
 
 .solid-green {

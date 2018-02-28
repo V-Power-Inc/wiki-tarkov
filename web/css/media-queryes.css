@@ -287,4 +287,9 @@
         font-size: 28px;
     }
 
+    .unactive-skill {
+        margin-left: 0;
+        margin-top: 60px;
+    }
+
 }
