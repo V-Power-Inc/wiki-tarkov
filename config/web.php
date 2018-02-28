@@ -95,6 +95,7 @@ $config = [
                 'quests-of-traders/mehanik-quests' => 'site/mehanicpage',
                 'keys' => 'site/keys',
                 'news' => 'site/news',
+                'skills' => 'skills/mainskills',
                 'traders' => 'site/traders301',
                 'articles' => 'site/articles',
                 'loot' => 'loot/mainloot',
@@ -104,6 +105,9 @@ $config = [
 
                 [
                     'class' => 'app\components\UrlComponent',
+                ],
+                [
+                    'class' => 'app\components\SkillsurlComponent',
                 ],
                 [
                     'class' => 'app\components\CategoryurlComponent',
@@ -134,7 +138,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // Доуступно с любого хоста
-//        'allowedIPs' => ['127.0.0.1', '::1','*'],
+ //       'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 

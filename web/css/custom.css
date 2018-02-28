@@ -117,7 +117,9 @@ footer .list-unstyled li a:hover {
 }
 
 .copyright a {
-    color: yellow;
+    font-weight: bold;
+    color: #7289da;
+    font-style: italic;
     text-decoration: none;
 }
 
@@ -1268,6 +1270,11 @@ a.loot-link {
     max-width: 100%;
 }
 
+.loot-tables-second {
+    width: 100%;
+    max-width: 100%;
+}
+
 .loot-tables tr td {
     padding: 10px;
     border: 2px solid #0e2077;
@@ -1289,3 +1296,61 @@ img.w-100-auto {
     max-width: 100%;
     width: auto
 }
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.fix-tables {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.fix-tables table {
+    margin-bottom: 5px;
+}
+
+.fix-tables::-webkit-scrollbar {
+   background: #ffffff03;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
+.fix-tables::-webkit-scrollbar-thumb {
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-button {
+    width: 17.5px;
+}
+
+::-webkit-scrollbar-button:horizontal:increment {
+    background-image: url(/img/navigation/right-arrow.png);
+    background-position: -1px;
+    background-color: #fff0;
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+    background-image: url(/img/navigation/left-arrow.png);
+    background-color: #fff0;
+}
+
+.unactive-skill {
+    margin-left: 90px;
+}
+
+/*** Стили для Вовчика ***/
+
+.solid-green {
+    border: 1px solid green;
+    border-radius: 3px;
+}
+
+.solid-orange {
+    border: 1px solid #FFA500;
+    border-radius: 3px;
+}
+
+/*** Окончание стилей для Вовчика ***/

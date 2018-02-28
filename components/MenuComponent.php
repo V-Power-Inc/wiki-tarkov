@@ -11,7 +11,7 @@ use Yii;
 
 class MenuComponent
 {
-    public static $index = null;
+    public static $skils = null;
     public static $quests = null;
     public static $locations = null;
     public static $keys = null;
@@ -23,13 +23,17 @@ class MenuComponent
     public static $lootcat = null;
     public static $mainloot = null;
     public static $loot = null;
+    public static $skillscategory = null;
+    public static $mainskills = null;
+    public static $skillsdetail = null;
     
 
     public static function  Active(){
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
-            case 'index': self::$index = 'class="active"'; break;
+            case 'mainskills': self::$mainskills = 'class="active"'; break;
+            case 'skillscategory': self::$skillscategory = 'class="active"'; break;
             case 'quests': self::$quests = 'class="active"'; break;
             case 'locations': self::$locations = 'class="active"'; break;
             case 'keys': self::$keys = 'class="active"'; break;
@@ -41,6 +45,7 @@ class MenuComponent
             case 'category': self::$lootcat = 'class="active"'; break;
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
+            case 'skillsdetail':self::$skillsdetail = 'class="active"'; break;
         }
     }
     /**
@@ -78,10 +83,10 @@ class MenuComponent
                 <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
 
                 <ul class="nav navbar-nav">
-                    <li '.self::$index.'><a href="/">Главная</a></li>
-                    <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Справочник квестов</a></li>
+                    <li '.self::$skillscategory.' '.self::$mainskills.' '.self::$skillsdetail.'><a href="/skills">Умения</a></li>
+                    <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Торговцы</a></li>
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.'><a href="/loot">Справочник лута</a></li>
-                    <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Ключи от дверей</a></li>
+                    <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
                     <li '.self::$news.' '.self::$newsdetail.'><a href="/news">Новости</a></li>
