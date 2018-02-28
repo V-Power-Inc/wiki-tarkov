@@ -63,19 +63,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
 <div class="container">
     <div class="row">
-        <!-- Меню левой части страницы -->
-        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-
-            <!-- Виджет Twitch -->
-            <div>
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
-            <!-- Виджет Discord -->
-            <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
-            </div>
-        </div>
-
+        
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
 
@@ -104,6 +92,21 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 
 
         </div>
+
+
+        <!-- Меню правой части страницы -->
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+            <!-- Виджет Twitch -->
+            <div>
+                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
+            </div>
+            <!-- Виджет Discord -->
+            <div class="margin-top-20">
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
+        </div>
+        
 
         <!-- Расстояние - заглушка -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
