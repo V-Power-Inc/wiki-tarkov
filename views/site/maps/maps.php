@@ -51,7 +51,7 @@ use app\components\AlertComponent;
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Завода</h2>
-            <a href="/maps/zavod-location"><img class="maps__small" src="/img/maps/zavod_small.jpg"></a>
+            <a href="/maps/zavod-location"><img class="maps__small" src="/img/maps/zavod_prev.jpg"></a>
             <br>
             <br>
             <a class="btn btn-default main-link" href="/maps/zavod-location">Перейти к карте Завода</a>
@@ -59,7 +59,7 @@ use app\components\AlertComponent;
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Леса</h2>
-            <a href="/maps/forest-location"><img class="maps__small" src="/img/maps/forest_small.jpg"></a>
+            <a href="/maps/forest-location"><img class="maps__small" src="/img/maps/forest_prev.jpg"></a>
             <br>
             <br>
             <a class="btn btn-default main-link" href="/maps/forest-location">Перейти к карте Леса</a>
@@ -67,7 +67,7 @@ use app\components\AlertComponent;
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
             <h2 class="text-center map-heading">Карта Таможни</h2>
-            <a href="/maps/tamojnya-location"><img class="maps__small" src="/img/maps/tamojnya_small.jpg"></a>
+            <a href="/maps/tamojnya-location"><img class="maps__small" src="/img/maps/karta_tamozhnya_preview.png"></a>
             <br>
             <br>
 <!--            <p class="alert alert-danger"><b>В разработке</b></p>-->
@@ -80,14 +80,24 @@ use app\components\AlertComponent;
     <div class="row maps-margin-top-30">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
             <h2 class="text-center map-heading">Карта Берега</h2>
-            <img class="maps__small" src="/img/maps/bereg-small.jpg">
+            <a href="/maps/bereg-location"><img class="maps__small" src="/img/maps/karta_bereg_preview.png"></a>
             <br>
             <br>
-                        <p class="alert alert-danger"><b>В разработке</b></p>
-<!--            <a class="btn btn-default main-link" href="#">Перейти к карте Берега</a>-->
+<!--                        <p class="alert alert-danger"><b>В разработке</b></p>-->
+            <a class="btn btn-default main-link" href="/maps/bereg-location">Перейти к карте Берега</a>
+        </div>
+   
+
+        
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+            <h2 class="text-center map-heading">Карта Развязки</h2>
+            <img class="maps__small" src="/img/maps/razvyazka_small.jpg">
+            <br>
+            <br>
+            <p class="alert alert-danger"><b>Локация была анонсирована разработчиками.</b></p>
+<!--                <a class="btn btn-default main-link" href="#">Перейти к карте Развязки</a>-->
         </div>
     </div>
-
         
         
         
