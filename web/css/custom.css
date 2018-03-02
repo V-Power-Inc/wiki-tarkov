@@ -1374,7 +1374,7 @@ img.w-100-auto {
 }
 
 .bitkoin {
-    position: absolute;
+    position: fixed;
     top: 13px;
     left: 20px;
     z-index: 9999;
