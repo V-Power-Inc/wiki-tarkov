@@ -11,6 +11,7 @@ use app\models\Mirotvorec;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
+use app\models\Bereg;
 use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
 use app\models\News;
@@ -132,6 +133,12 @@ class SiteController extends Controller
         return Json::encode($markers);
     }
 
+    /** JSON данные с координатами маркеров Таможни **/
+    public function actionBeregmarkers() {
+        $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
+        return Json::encode($markers);
+    }
+
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
@@ -142,11 +149,16 @@ class SiteController extends Controller
         return $this->render('maps/forest-location.php');
     }
 
-    /** Рендер страницы с картой Таомжни **/
+    /** Рендер страницы с картой Таможни **/
     public function actionTamojnya() {
         return $this->render('maps/tamojnya-location.php');
     }
 
+    /** Рендер страницы с картой Берега **/
+    public function actionBereg() {
+        return $this->render('maps/bereg-location.php');
+    }
+    
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {

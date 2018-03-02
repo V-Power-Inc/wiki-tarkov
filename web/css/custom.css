@@ -1354,3 +1354,36 @@ img.w-100-auto {
 }
 
 /*** Окончание стилей для Вовчика ***/
+
+.tarkov-alert p.text-run, .tarkov-good p.text-run {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+.tarkov-alert {
+    padding: 20px;
+    background: url(/img/status_smg.png) no-repeat 100% 4px;
+    border-radius: 10px;
+}
+
+.tarkov-good {
+    padding: 20px;
+    background: url(/img/status_smg_good.png) no-repeat 100% 4px;
+    border-radius: 10px;
+}
+
+.bitkoin {
+    position: absolute;
+    top: 13px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.bitkoin_text {
+    display: inline-block;
+    font-size: 14px;
+    color: #d1b13a;
+    font-weight: bold;
+    padding: 0 5px;
+}

@@ -1,3 +1,10 @@
+/*** Hide bitkoin ***/
+@media (max-width: 1805px) {
+    .bitkoin {
+        display: none;
+    }
+}
+
 /*** Custom media for Magnific ***/
 @media (max-width: 1500px) {
     .mfp-arrow-left {
@@ -49,6 +56,18 @@
 
     footer {
         height: auto;
+    }
+
+    .tarkov-alert {
+        padding: 20px;
+        background: url(/img/status_smg.png) no-repeat 1%;
+        border-radius: 10px;
+    }
+
+    .tarkov-good {
+        padding: 20px;
+        background: url(/img/status_smg_good.png) no-repeat 1%;
+        border-radius: 10px;
     }
 
 }

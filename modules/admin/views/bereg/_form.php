@@ -8,6 +8,8 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Bereg */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="bereg-form">
@@ -42,8 +44,8 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'exits_group')
         ->dropDownList([
-            'Спавн на старой станции' => 'Спавн на старой станции',
-            'Спавн на доме' => 'Спавн на доме',
+            'Спавн в Деревне' => 'Спавн в Деревне',
+            'Спавн на Берегу' => 'Спавн на Берегу',
         ])
     ?>
 

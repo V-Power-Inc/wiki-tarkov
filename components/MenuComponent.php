@@ -8,6 +8,7 @@
 
 namespace app\components;
 use Yii;
+use app\components\AlertComponent;
 
 class MenuComponent
 {
@@ -93,7 +94,7 @@ class MenuComponent
                 </ul>
 
             </div>
-        </div>
+        </div>    
     </nav>';
 
         return $menu;

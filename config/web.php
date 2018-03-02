@@ -86,6 +86,7 @@ $config = [
                 'maps/zavod-location' => 'site/zavod',
                 'maps/forest-location' => 'site/forest',
                 'maps/tamojnya-location' => 'site/tamojnya',
+                'maps/bereg-location' => 'site/bereg',
                 'quests-of-traders' => 'site/quests',
                 'quests-of-traders/prapor-quests' => 'site/praporpage',
                 'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
@@ -138,7 +139,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // Доуступно с любого хоста
- //       'allowedIPs' => ['127.0.0.1', '::1','*'],
+//        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 
