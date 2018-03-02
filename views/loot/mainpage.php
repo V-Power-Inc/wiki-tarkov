@@ -14,6 +14,8 @@ $this->title = "Справочник лута Escape from Tarkov. База вн�
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
+use app\components\AlertComponent;
 ?>
 <div class="heading-class">
     <div class="container">
@@ -22,6 +24,18 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 </div>
 
 <hr class="grey-line">
+
+<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
+    <!-- Информационная строка -->
+    <div class="row">
+        <div class="container">
+            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
+                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
+            </div>
+        </div>
+    </div>
+    <hr class="grey-line">
+<?php endif; ?>
 
 <div class="container">
     <div class="row">
