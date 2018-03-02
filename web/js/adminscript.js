@@ -136,6 +136,7 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             $('#bereg-exits_group').val('');
         } else {
             $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.form-group.field-bereg-file').fadeOut();
             $('.form-group.field-bereg-exit_anyway input').val('');
             $('#bereg-exit_anyway').val('');
             $('#bereg-exits_group').val('');

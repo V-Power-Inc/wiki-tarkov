@@ -70,12 +70,12 @@ var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
 });
-var GarajIcon = L.icon({
-    iconUrl: '/img/mapicons/tamojnyaspawns/tamozhnya.png',
+var villageIcon = L.icon({
+    iconUrl: '/img/mapicons/beregspawns/derevnya_spawn.png',
     iconSize: [250, 250]
 });
-var BoilersIcon = L.icon({
-    iconUrl: '/img/mapicons/tamojnyaspawns/boileri.png',
+var beregIcon = L.icon({
+    iconUrl: '/img/mapicons/beregspawns/bereg_spawn.png',
     iconSize: [250, 250]
 });
 
@@ -124,14 +124,14 @@ $(document).ready(function() {
     var exits = L.layerGroup();
     var keys = L.layerGroup();
     var chvk = L.layerGroup();
-    var garajispawn = L.layerGroup();
-    var boilersspawn = L.layerGroup();
+    var villagespawn = L.layerGroup();
+    var beregspawn = L.layerGroup();
     var dikieexits =  L.layerGroup();
     var interstplaces = L.layerGroup();
 
     /** Добавляем маркеры для статичных зон спавна **/
-    L.marker([79.113, -138.621], {icon: GarajIcon}).setZIndexOffset(999).addTo(garajispawn);
-    L.marker([79.963,-42.913], {icon: BoilersIcon}).setZIndexOffset(999).addTo(boilersspawn);
+    L.marker([56.945, 58.447], {icon: villageIcon}).setZIndexOffset(999).addTo(villagespawn);
+    L.marker([72.013,-129.045], {icon: beregIcon}).setZIndexOffset(999).addTo(beregspawn);
 
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
@@ -141,20 +141,20 @@ $(document).ready(function() {
                 iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(boilersspawn);
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(garajispawn);
-        } else if (markersData[i].exits_group == "Спавн на бойлерах") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(beregspawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(villagespawn);
+        } else if (markersData[i].exits_group == "Спавн на Берегу") {
             var ExitsIcon = L.icon({
                 iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(boilersspawn);
-        } else if (markersData[i].exits_group == "Спавн на гаражах") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(beregspawn);
+        } else if (markersData[i].exits_group == "Спавн в Деревне") {
             var ExitsIcon = L.icon({
                 iconSize: [170, 30],
                 iconUrl: markersData[i].customicon,
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(garajispawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(villagespawn);
         } else if (markersData[i].marker_group == "Военные ящики") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
@@ -351,11 +351,11 @@ $(document).ready(function() {
         $('.random-exits').fadeIn();
         //  exits.addTo(map);
         try {
-            map.removeLayer(garajispawn);
-            map.removeLayer(boilersspawn);
+            map.removeLayer(villagespawn);
+            map.removeLayer(beregspawn);
         } catch(err) {}
 
-        garajispawn.addTo(map);
+        villagespawn.addTo(map);
         $(".exits-b").before('<button class="btn btn-default exits-b active" id="active-exits-v">Выходы с карты за ЧВК</button>');
         $('#exitsmarker').html(staticData[3].content);
         $(this).remove();
@@ -364,20 +364,20 @@ $(document).ready(function() {
     /******************************************* Обработка клика по кнопке со спавнами ЧВК на доме *********************/
     $('.house-spawn').click(function() {
         try {
-            map.removeLayer(garajispawn);
-            map.removeLayer(boilersspawn);
+            map.removeLayer(villagespawn);
+            map.removeLayer(beregspawn);
         } catch(err) {}
-        garajispawn.addTo(map);
+        villagespawn.addTo(map);
     });
 
     /********************************* Обработка клика по кнопке со спавнами ЧВК на старой станции *********************/
     $('.station-spawn').click(function() {
         try {
-            map.removeLayer(garajispawn);
-            map.removeLayer(boilersspawn);
+            map.removeLayer(villagespawn);
+            map.removeLayer(beregspawn);
         } catch(err) {}
 
-        boilersspawn.addTo(map);
+        beregspawn.addTo(map);
     });
 
 
@@ -386,8 +386,8 @@ $(document).ready(function() {
         $('.house-spawn').removeClass('active');
 
         try {
-            map.removeLayer(garajispawn);
-            map.removeLayer(boilersspawn);
+            map.removeLayer(villagespawn);
+            map.removeLayer(beregspawn);
         } catch(err) {}
         map.removeLayer(exits);
         $('#active-exits-v').before('<button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>');

@@ -52,20 +52,22 @@ $this->registerMetaTag([
             <!-- Маркеры выходов в зависимости от спавна -->
             <div class="random-exits">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary remastered station-spawn active">
-                        <input type="radio" name="options" id="option2" autocomplete="off">
-                        <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Старая станция</span>
-                    </label>
 
-                    <br>
-                    <br>
-
-                    <label class="btn btn-primary house-spawn remastered">
+                    <label class="btn btn-primary house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
-                        <span>Выходы для спавна Дом</span>
+                        <span>Выходы для спавна Деревня</span>
                     </label>
+
+                    <br>
+                    <br>
+
+                    <label class="btn btn-primary remastered station-spawn">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span>Выходы для спавна Берег</span>
+                    </label>
+
                 </div>
                 <br>
                 <br>
