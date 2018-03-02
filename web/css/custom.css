@@ -1372,3 +1372,18 @@ img.w-100-auto {
     background: url(/img/status_smg_good.png) no-repeat 100% 4px;
     border-radius: 10px;
 }
+
+.bitkoin {
+    position: absolute;
+    top: 13px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.bitkoin_text {
+    display: inline-block;
+    font-size: 14px;
+    color: #d1b13a;
+    font-weight: bold;
+    padding: 0 5px;
+}

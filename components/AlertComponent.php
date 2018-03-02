@@ -20,4 +20,10 @@ class AlertComponent extends Component
         return $info;
     }
     
+    /** Компонент который выводит курс биткоина **/
+    public static function bitkoin() {
+        $bitkoin = Info::find()->where(['id' => 1])->one();
+        return $bitkoin;
+    }
+    
 }

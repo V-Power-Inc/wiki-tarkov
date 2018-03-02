@@ -1,3 +1,10 @@
+/*** Hide bitkoin ***/
+@media (max-width: 1805px) {
+    .bitkoin {
+        display: none;
+    }
+}
+
 /*** Custom media for Magnific ***/
 @media (max-width: 1500px) {
     .mfp-arrow-left {

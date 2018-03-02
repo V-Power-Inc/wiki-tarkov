@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
+use app\components\AlertComponent;
 
 AppAsset::register($this);
 ?>
@@ -51,6 +52,14 @@ AppAsset::register($this);
 
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
+    
+    <?php if((AlertComponent::bitkoin()->enabled !== 0)) : ?>
+        <div class="bitkoin">
+            <img src="<?= AlertComponent::bitkoin()->preview ?>" style="max-width: 30px;"><span class="bitkoin_text"><?= AlertComponent::bitkoin()->course ?></span>
+        </div>
+    <?php endif; ?>
+    
+    
     <?= $content ?>
 </div>
 
