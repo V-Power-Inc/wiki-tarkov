@@ -51,6 +51,18 @@
         height: auto;
     }
 
+    .tarkov-alert {
+        padding: 20px;
+        background: url(/img/status_smg.png) no-repeat 1%;
+        border-radius: 10px;
+    }
+
+    .tarkov-good {
+        padding: 20px;
+        background: url(/img/status_smg_good.png) no-repeat 1%;
+        border-radius: 10px;
+    }
+
 }
 
 

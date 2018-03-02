@@ -3,18 +3,18 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Category;
-use app\models\Items;
-use app\models\ItemsSearch;
+use app\models\Info;
+use app\models\InfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ItemsController implements the CRUD actions for Items model.
+ * InfoController implements the CRUD actions for Info model.
  */
-class ItemsController extends Controller
+class InfoController extends Controller
 {
+
     /** Подключаем отдельный layout для админки сайта **/
     public $layout = 'admin';
 
@@ -45,12 +45,12 @@ class ItemsController extends Controller
     }
 
     /**
-     * Lists all Items models.
+     * Lists all Info models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ItemsSearch();
+        $searchModel = new InfoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class ItemsController extends Controller
     }
 
     /**
-     * Displays a single Items model.
+     * Displays a single Info model.
      * @param integer $id
      * @return mixed
      */
@@ -72,14 +72,15 @@ class ItemsController extends Controller
     }
 
     /**
-     * Creates a new Items model.
+     * Creates a new Info model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Items();
+        $model = new Info();
         $model->uploadPreview();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -90,7 +91,7 @@ class ItemsController extends Controller
     }
 
     /**
-     * Updates an existing Items model.
+     * Updates an existing Info model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,6 +100,7 @@ class ItemsController extends Controller
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -109,28 +111,29 @@ class ItemsController extends Controller
     }
 
     /**
-     * Deletes an existing Items model.
+     * Deletes an existing Info model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        // Удалить виджеты нельзя
+        //  $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Items model based on its primary key value.
+     * Finds the Info model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Items the loaded model
+     * @return Info the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Items::findOne($id)) !== null) {
+        if (($model = Info::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
