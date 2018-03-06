@@ -652,10 +652,10 @@ h1.map-title, h2.map-title {
 }
 
 .bandits-b.active {
-    background: #ffffff!important;
     color: black!important;
-    border-color: white!important;
-    box-shadow: inset 0px 0px 2px 2px;
+    background-color: #d4d4d4!important;
+    border-color: #d4d4d4!important;
+    box-shadow: inset 0px 0px 8px 1px;
 }
 
 .places-b.active {
