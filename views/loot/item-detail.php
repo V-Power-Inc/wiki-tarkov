@@ -26,6 +26,14 @@ $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::classNa
 
 use app\components\AlertComponent;
 ?>
+
+<style>
+    img.image-link {
+        border: 1px solid white;
+        box-shadow: 1px 1px 6px 2px;
+    }
+</style>
+
 <div class="heading-class">
     <div class="container">
         <h1 class="main-site-heading"><?= $item->title ?></h1>
