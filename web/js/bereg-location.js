@@ -138,20 +138,20 @@ $(document).ready(function() {
     $.each(markersData, function(i) {
         if (markersData[i].exit_anyway == "1" && markersData[i].exits_group !== '') {
             var ExitsIcon = L.icon({
-                iconSize: [170, 30],
+                iconSize: [190, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(beregspawn);
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(villagespawn);
         } else if (markersData[i].exits_group == "Спавн на Берегу") {
             var ExitsIcon = L.icon({
-                iconSize: [170, 30],
+                iconSize: [190, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(beregspawn);
         } else if (markersData[i].exits_group == "Спавн в Деревне") {
             var ExitsIcon = L.icon({
-                iconSize: [170, 30],
+                iconSize: [190, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(villagespawn);
@@ -169,7 +169,7 @@ $(document).ready(function() {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
         } else if (markersData[i].marker_group == "Выходы за Диких") {
             var DikiyExitIcon = L.icon({
-                iconSize: [170, 30],
+                iconSize: [190, 30],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikiyExitIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(990).addTo(dikieexits);
