@@ -45,6 +45,10 @@ use app\components\AlertComponent;
             <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
 
+            <br>
+
+            <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
+            
             <!-- Виджет Twitch -->
             <div class="margin-top-20">
                 <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>

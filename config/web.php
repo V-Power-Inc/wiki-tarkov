@@ -99,6 +99,7 @@ $config = [
                 'skills' => 'skills/mainskills',
                 'traders' => 'site/traders301',
                 'articles' => 'site/articles',
+                'loot/quest-loot' => 'loot/questloot',
                 'loot' => 'loot/mainloot',
                 'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
                 'loot/<name:[\w_\/-]+>' => 'loot/category',

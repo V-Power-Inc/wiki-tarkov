@@ -73,6 +73,10 @@ use app\components\AlertComponent;
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
                 <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
+
+            <br>
+
+            <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
             
             <!-- Виджет Twitch -->
             <div class="margin-top-20">
