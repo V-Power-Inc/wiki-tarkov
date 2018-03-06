@@ -52,7 +52,7 @@ var ArmyIcon = L.icon({
 /** Раньше это был маркер полок, теперь это иконка маркеров квестов **/
 var PolkiIcon = L.icon({
     iconUrl: '/img/mapicons/quest_icon2.png',
-    iconSize: [20, 24.39]
+    iconSize: [30, 30]
 });
 var DikieIcon = L.icon({
     iconUrl: '/img/mapicons/dikie.png',

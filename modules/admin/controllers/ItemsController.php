@@ -99,6 +99,15 @@ class ItemsController extends Controller
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
+
+        //Преобразуем строку employees в массив
+        $nn=preg_split('/\s*,\s*/',trim($model->trader_group),-1,PREG_SPLIT_NO_EMPTY);
+        $tradergroup=array();
+        foreach ($nn as $pr) {
+            $tradergroup[]=$pr;
+        }
+        $model->trader_group=$tradergroup;
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

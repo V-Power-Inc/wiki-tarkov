@@ -10,6 +10,8 @@ use app\models\Category;
 /* @var $this yii\web\View */
 /* @var $model app\models\Items */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="items-form">
@@ -43,6 +45,24 @@ use app\models\Category;
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
+
+    <?= $form->field($model, 'quest_item')->checkbox([
+        'label' => 'Квестовый предмет',
+    ]); ?>
+    
+    <?= $form->field($model, 'trader_group')
+        ->listBox([
+           'Прапор' => 'Прапор', 
+           'Терапевт' => 'Терапевт',
+           'Лыжник' => 'Лыжник',
+           'Миротворец' => 'Миротворец',
+           'Скупщик' => 'Скупщик',
+           'Механик' => 'Механик',
+        ],
+        [
+            'multiple' => true,
+            'style' => 'height: 115px',
+        ]); ?>
 
     <?= $form->field($model, 'date_create')->textInput(['disabled' => true]) ?>
 

@@ -637,24 +637,29 @@ h1.map-title, h2.map-title {
 }
 
 .bandits-b {
-    background: #561b19;
-    color: white!important;
+    background: #ffffff;
+    color: #0c0c0c!important;
+}
+
+.bandits-b:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
 }
 
 .places-b {
-    background: #80008073;
+    background: #40044a;
     color: white!important;
 }
 
 .bandits-b.active {
-    background: #561b19!important;
-    color: white!important;
+    background: #ffffff!important;
+    color: black!important;
     border-color: white!important;
     box-shadow: inset 0px 0px 2px 2px;
 }
 
 .places-b.active {
-    background: #80008073;
+    background: #40044a;
     color: white!important;
     border-color: white!important;
     box-shadow: inset 0px 0px 2px 2px;
@@ -1386,4 +1391,8 @@ img.w-100-auto {
     color: #d1b13a;
     font-weight: bold;
     padding: 0 5px;
+}
+
+.mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
+    color: #ff3f2d;
 }

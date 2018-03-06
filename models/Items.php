@@ -22,6 +22,8 @@ use yii\web\UploadedFile;
  * @property string $description
  * @property string $keywords
  * @property integer $parentcat_id
+ * @property integer $quest_item
+ * @property string $trader_group
  *
  * @property ItemsToDoorkeys[] $itemsToDoorkeys
  * @property ItemsToLyjnic[] $itemsToLyjnics
@@ -53,12 +55,24 @@ class Items extends \yii\db\ActiveRecord
         return [
             [['title', 'shortdesc', 'url', 'description'], 'required'],
             [['shortdesc', 'content'], 'string'],
-            [['date_create', 'keywords'], 'safe'],
+            [['date_create', 'keywords', 'trader_group', 'quest_item'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview'], 'string', 'max' => 255],
             [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parentcat_id' => 'id']],
         ];
+    }
+
+    /** Преобразуем массив в строку для сохранения привязки предмета лута к нескольким торговцам **/
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->trader_group != null) {
+                $this->trader_group = implode(", ", $this->trader_group);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -81,6 +95,8 @@ class Items extends \yii\db\ActiveRecord
             'fullurl' => 'Полный URL адрес',
             'description' => 'SEO описание',
             'keywords' => 'SEO ключевые слова',
+            'trader_group' => 'Относится к торговцам',
+            'quest_item' => 'Квестовый предмет',
         ];
     }
 

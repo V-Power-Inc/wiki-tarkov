@@ -168,3 +168,18 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
         }
     });
 }
+/** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе справочнику лута Items **/
+else if ((window.location.href.indexOf('items')) > -1) {
+    $( document ).ready(function() {
+        if($('#items-trader_group option:selected').text() !== null && $('#items-trader_group option:selected').text() !== '') {
+            $('.form-group.field-items-trader_group').fadeIn();
+        } else if($('#items-trader_group option:selected').text() == null || $('#items-trader_group option:selected').text() == '') {
+            $('.form-group.field-items-trader_group').fadeOut();
+        }
+        
+        $("#items-quest_item").click(function() {
+            $('.form-group.field-items-trader_group').toggle();
+            $('#items-trader_group option:selected').val(null);
+        });
+    });
+}
