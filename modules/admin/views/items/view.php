@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'shortdesc:ntext',
             'content:ntext',
             'date_create',
+            'quest_item',
+            'trader_group',
             'active',
             'parentcat_id',
         ],

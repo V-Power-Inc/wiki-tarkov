@@ -12,6 +12,8 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Список предметов справочника лута';
 $this->params['breadcrumbs'][] = $this->title;
 
+// Выводим по 100 предметов на страницу
+$dataProvider->pagination->pageSize=100;
 ?>
 <div class="items-index">
 
@@ -38,6 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'shortdesc:ntext',
+            'quest_item',
+            'trader_group',
             // 'content:ntext',
             // 'date_create',
             // 'active',
@@ -51,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'parentcat_id',
                 'value' => 'parentcat.title',
-                'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
+                'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию предмета']),
             ],
             
             ['class' => 'yii\grid\ActionColumn'],
