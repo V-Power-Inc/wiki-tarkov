@@ -38,6 +38,7 @@ class Items extends \yii\db\ActiveRecord
 {
     
     public $file = null;
+    public $questitem;
     
     /**
      * @inheritdoc
@@ -97,6 +98,7 @@ class Items extends \yii\db\ActiveRecord
             'keywords' => 'SEO ключевые слова',
             'trader_group' => 'Относится к торговцам',
             'quest_item' => 'Квестовый предмет',
+            'questitem' => '',
         ];
     }
 

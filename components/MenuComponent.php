@@ -27,6 +27,7 @@ class MenuComponent
     public static $skillscategory = null;
     public static $mainskills = null;
     public static $skillsdetail = null;
+    public static $questloot = null;
     
 
     public static function  Active(){
@@ -47,6 +48,7 @@ class MenuComponent
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
             case 'skillsdetail':self::$skillsdetail = 'class="active"'; break;
+            case 'questloot':self::$questloot = 'class="active"'; break;
         }
     }
     /**
@@ -86,7 +88,7 @@ class MenuComponent
                 <ul class="nav navbar-nav">
                     <li '.self::$skillscategory.' '.self::$mainskills.' '.self::$skillsdetail.'><a href="/skills">Умения</a></li>
                     <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Торговцы</a></li>
-                    <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.'><a href="/loot">Справочник лута</a></li>
+                    <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>

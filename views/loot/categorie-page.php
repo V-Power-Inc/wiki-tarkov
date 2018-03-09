@@ -73,6 +73,10 @@ use app\components\AlertComponent;
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">
                 <?= LeftmenuWidget::widget(['tpl' => 'leftmenu']) ?>
             </ul>
+
+            <br>
+
+            <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
             
             <!-- Виджет Twitch -->
             <div class="margin-top-20">
@@ -104,6 +108,9 @@ use app\components\AlertComponent;
                             <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
                             <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                            <?php if($item['quest_item'] == 1) : ?>
+                            <p class="alert alert-danger size-16"><b>Этот предмет необходим для выполнения квеста.</b></p>
+                            <?php endif; ?>
                         </div>
                     </div>
             <?php endforeach; ?>

@@ -1396,3 +1396,19 @@ img.w-100-auto {
 .mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
     color: #ff3f2d;
 }
+
+#items-questitem {
+    width: 200px;
+    display: inline-block;
+}
+
+.field-items-questitem {
+    padding-top: 10px;
+    display: inline-block;
+}
+
+
+
+
+
+
