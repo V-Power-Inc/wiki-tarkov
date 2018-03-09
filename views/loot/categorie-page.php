@@ -109,7 +109,7 @@ use app\components\AlertComponent;
                             <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
                             <p class="loot-description"><?= $item['shortdesc'] ?></p>
                             <?php if($item['quest_item'] == 1) : ?>
-                            <p class="alert alert-danger size-16"><b>Этот предмет необходим для выполнения квеста.</b></p>
+                            <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
                             <?php endif; ?>
                         </div>
                     </div>
