@@ -1407,6 +1407,10 @@ img.w-100-auto {
     display: inline-block;
 }
 
+.custom-margin-top {
+    margin-top: 70px;
+}
+
 
 
 
