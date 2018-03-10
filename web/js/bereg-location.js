@@ -252,14 +252,14 @@ $(document).ready(function() {
         $('#necessaryplaces').hide();
         $('#voenniymarker').fadeIn();
         voenloot.addTo(map);
-        $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Военные ящики</button>');
+        $(".voenka-b").before('<button class="btn btn-success voenka-b active" id="active-bounds-v">Оружейные ящики</button>');
         $('#voenniymarker').html(staticData[1].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-bounds-v', function(){
         map.removeLayer(voenloot);
-        $('#active-bounds-v').before('<button class="btn btn-success voenka-b">Военные ящики</button>');
+        $('#active-bounds-v').before('<button class="btn btn-success voenka-b">Оружейные ящики</button>');
         $('#active-bounds-v').remove();
         $('#voenniymarker').hide();
         $('#polkiimarker').hide();
@@ -417,14 +417,14 @@ $(document).ready(function() {
         $('#necessaryplaces').hide();
         $('#keysmarker').fadeIn();
         keys.addTo(map);
-        $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Отпираемые двери</button>');
+        $(".keys-b").before('<button class="btn btn-yellow keys-b active" id="active-keys-v">Открываемые двери</button>');
         $('#keysmarker').html(staticData[4].content);
         $(this).remove();
     });
 
     $('body').on('click','#active-keys-v', function(){
         map.removeLayer(keys);
-        $('#active-keys-v').before('<button class="btn btn-yellow w-100 keys-b">Отпираемые двери</button>');
+        $('#active-keys-v').before('<button class="btn btn-yellow w-100 keys-b">Открываемые двери</button>');
         $('#active-keys-v').remove();
         $('#voenniymarker').hide();
         $('#polkiimarker').hide();
