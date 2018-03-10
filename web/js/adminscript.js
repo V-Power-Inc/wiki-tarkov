@@ -20,6 +20,13 @@ if((window.location.href.indexOf('forest')) > -1) {
             $('.form-group.field-forest-exit_anyway input').val('');
             $('#forest-exit_anyway').val('');
             $('#forest-exits_group').val('');
+        } else if ($('#forest-marker_group option:selected').text() === "Интересные места") {
+            $('.form-group.field-forest-file').fadeIn();
+            $('.form-group.field-forest-exit_anyway').fadeOut();
+            $('.field-forest-exits_group').fadeOut();
+            $('.form-group.field-forest-exit_anyway input').val('');
+            $('#forest-exit_anyway').val('');
+            $('#forest-exits_group').val('');
         } else {
             $('.form-group.field-forest-exit_anyway').fadeOut();
             $('.form-group.field-forest-exit_anyway input').val('');
@@ -42,6 +49,13 @@ if((window.location.href.indexOf('forest')) > -1) {
             $('.form-group.field-forest-exit_anyway input').val('');
             $('#forest-exit_anyway').val('');
             $('#forest-exits_group').val('');
+        } else if ($('#forest-marker_group option:selected').text() === "Интересные места") {
+            $('.form-group.field-forest-file').fadeIn();
+            $('.form-group.field-forest-exit_anyway').fadeOut();
+            $('.field-forest-exits_group').fadeOut();
+            $('.form-group.field-forest-exit_anyway input').val('');
+            $('#forest-exit_anyway').val('');
+            $('#forest-exits_group').val('');
         } else {
             $('.form-group.field-forest-exits_group').fadeOut();
             $('.form-group.field-forest-file').fadeOut();
@@ -55,8 +69,12 @@ if((window.location.href.indexOf('forest')) > -1) {
 
 /** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе маркеров Завода **/
 else if ((window.location.href.indexOf('zavod')) > -1) {
+    
+    
     $(document).ready(function () {
         if($('#zavod-marker_group option:selected').text() === "Маркеры выходов" || $('#zavod-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-zavod-file').fadeIn();
+        } else if($('#zavod-marker_group option:selected').text() === "Интересные места") {
             $('.form-group.field-zavod-file').fadeIn();
         } else {
             $('.form-group.field-zavod-file').fadeOut();
@@ -65,6 +83,8 @@ else if ((window.location.href.indexOf('zavod')) > -1) {
 
     $("#zavod-marker_group").change(function() {
         if($('#zavod-marker_group option:selected').text() === "Маркеры выходов" || $('#zavod-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-zavod-file').fadeIn();
+        } else if($('#zavod-marker_group option:selected').text() === "Интересные места") {
             $('.form-group.field-zavod-file').fadeIn();
         } else {
             $('.form-group.field-zavod-file').fadeOut();
@@ -149,6 +169,13 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             $('.form-group.field-bereg-exit_anyway input').val('');
             $('#bereg-exit_anyway').val('');
             $('#bereg-exits_group').val('');
+        } else if ($('#bereg-marker_group option:selected').text() === "Интересные места") {
+            $('.form-group.field-bereg-file').fadeIn();
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.field-bereg-exits_group').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
         } else {
             $('.form-group.field-bereg-exit_anyway').fadeOut();
             $('.form-group.field-bereg-file').fadeOut();
@@ -167,6 +194,13 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             //   $('#tamojnya-exit_anyway').val('');
             //  $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#bereg-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-bereg-file').fadeIn();
+            $('.form-group.field-bereg-exit_anyway').fadeOut();
+            $('.field-bereg-exits_group').fadeOut();
+            $('.form-group.field-bereg-exit_anyway input').val('');
+            $('#bereg-exit_anyway').val('');
+            $('#bereg-exits_group').val('');
+        } else if ($('#bereg-marker_group option:selected').text() === "Интересные места") {
             $('.form-group.field-bereg-file').fadeIn();
             $('.form-group.field-bereg-exit_anyway').fadeOut();
             $('.field-bereg-exits_group').fadeOut();
