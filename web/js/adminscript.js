@@ -87,6 +87,13 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
             $('.form-group.field-tamojnya-exit_anyway input').val('');
             $('#tamojnya-exit_anyway').val('');
             $('#tamojnya-exits_group').val('');
+        } else if ($('#tamojnya-marker_group option:selected').text() === "Интересные места") {
+            $('.form-group.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
         } else {
             $('.form-group.field-tamojnya-exit_anyway').fadeOut();
             $('.form-group.field-tamojnya-exit_anyway input').val('');
@@ -106,6 +113,14 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
             $('.form-group.field-tamojnya-file').fadeIn();
             $('.form-group.field-tamojnya-exit_anyway').fadeOut();
             $('.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-exit_anyway input').val('');
+            $('#tamojnya-exit_anyway').val('');
+            $('#tamojnya-exits_group').val('');
+        } else if ($('#tamojnya-marker_group option:selected').text() === "Интересные места") {
+            // todo: Придумать метод по удалению изображения.
+            $('.form-group.field-tamojnya-exits_group').fadeOut();
+            $('.form-group.field-tamojnya-file').fadeIn();
+            $('.form-group.field-tamojnya-exit_anyway').fadeOut();
             $('.form-group.field-tamojnya-exit_anyway input').val('');
             $('#tamojnya-exit_anyway').val('');
             $('#tamojnya-exits_group').val('');
