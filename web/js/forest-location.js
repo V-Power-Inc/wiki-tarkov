@@ -174,8 +174,14 @@ $(document).ready(function() {
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikiyExitIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(990).addTo(dikieexits);
-        } else if (markersData[i].marker_group == "Интересные места") {
+        } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon == null) {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PlacesInt}).bindPopup(markersData[i].content).openPopup().addTo(interstplaces);
+        } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon !== null) {
+            var InterestPlaces = L.icon({
+                iconSize: [30, 30],
+                iconUrl: markersData[i].customicon,
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: InterestPlaces}).bindPopup(markersData[i].content).openPopup().addTo(interstplaces);
         }
     });
 
