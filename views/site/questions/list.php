@@ -52,7 +52,7 @@ use app\components\AlertComponent;
 
             <!-- Стиль текста для вопросов и ответов -->
             <!-- question-content -->
-            
+    <?php if(!empty($questions)) : ?>
         <?php foreach($questions as $item): ?>
             <div class="question-block bg-white">
                 <h2 class="question-title"><?=$item['title'] ?></h2>
@@ -66,18 +66,24 @@ use app\components\AlertComponent;
             </div>
         <?php endforeach; ?>
 
-
-            <div class="col-lg-12 pagination text-center">
-                <?= LinkPager::widget([
-                    'pagination' => $pagination,
-                    'firstPageLabel' => 'первая',
-                    'lastPageLabel' => 'последняя',
-                    'prevPageLabel' => '&laquo;',
-                    'prevPageLabel' => '&laquo;',
-                ]);
-                ?>
+        <div class="col-lg-12 pagination text-center">
+            <?= LinkPager::widget([
+                'pagination' => $pagination,
+                'firstPageLabel' => 'первая',
+                'lastPageLabel' => 'последняя',
+                'prevPageLabel' => '&laquo;',
+                'prevPageLabel' => '&laquo;',
+            ]);
+            ?>
+        </div>
+    <?php elseif(empty($questions)): ?>
+            <div class="question-block bg-white">
+                <div class="col-lg-12" style="margin-top: 27px;">
+                    <p class="alert alert-danger size-16">Данный раздел находится на стадии заполнения.</p>
+                </div>
             </div>
-
+            <?php endif; ?>
+            
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
             <script type="text/javascript">
