@@ -17,6 +17,7 @@ use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
+use app\models\Questions;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -248,6 +249,17 @@ class SiteController extends Controller
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
+    }
+    
+    /*** Рендер страницы справочника вопрос-ответ ***/
+    public function actionQuestions() {
+        $model = Questions::find()->where(['enabled' => 1]);
+
+        $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
+        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $request = \Yii::$app->request;
+        
+        return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/

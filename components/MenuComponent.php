@@ -28,6 +28,7 @@ class MenuComponent
     public static $mainskills = null;
     public static $skillsdetail = null;
     public static $questloot = null;
+    public static $questions = null;
     
 
     public static function  Active(){
@@ -49,6 +50,7 @@ class MenuComponent
             case 'mainloot': self::$loot = 'class="active"'; break;
             case 'skillsdetail':self::$skillsdetail = 'class="active"'; break;
             case 'questloot':self::$questloot = 'class="active"'; break;
+            case 'questions':self::$questions = 'class="active"'; break;
         }
     }
     /**
@@ -69,7 +71,7 @@ class MenuComponent
 
         self::Active();
         $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
-        <div class="container">
+        <div class="container adaptive-fix">
             <!-- Заголовок -->
             <div class="navbar-header">
                 <img class="mobile-small-logo" src="/img/logo.png">
@@ -93,6 +95,7 @@ class MenuComponent
                     <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
                     <li '.self::$news.' '.self::$newsdetail.'><a href="/news">Новости</a></li>
+                    <li '.self::$questions.'><a href="/questions">Частые вопросы</a></li>
                 </ul>
 
             </div>

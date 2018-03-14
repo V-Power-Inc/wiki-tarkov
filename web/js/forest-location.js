@@ -156,8 +156,14 @@ $(document).ready(function() {
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
-        } else if (markersData[i].marker_group == "Военные ящики") {
+        } else if (markersData[i].marker_group == "Военные ящики" && markersData[i].customicon == null) {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
+        } else if (markersData[i].marker_group == "Военные ящики"  && markersData[i].customicon !== null) {
+            var CustomVoenIcon = L.icon({
+                iconSize: [30, 30],
+                iconUrl: markersData[i].customicon,
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomVoenIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content == "") {

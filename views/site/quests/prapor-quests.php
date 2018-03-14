@@ -33,7 +33,7 @@ use app\components\AlertComponent;
     </div>
 </div>
 
-<hr class="grey-line">
+<hr class="grey-line" style="border-top: 0;">
 
 <?php if((AlertComponent::alert()->enabled !== 0)) : ?>
     <!-- Информационная строка -->
