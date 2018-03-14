@@ -49,7 +49,7 @@
     .nav > li > a {
         position: relative;
         display: block;
-        padding: 20px 13px;
+        padding: 20px 9px;
         width: auto;
         text-align: center;
     }
@@ -311,4 +311,13 @@
         margin-top: 60px;
     }
 
+}
+
+
+/*** navbar custom hotfix col-sm col-xs ***/
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .adaptive-fix {
+        width: 900px;
+    }
 }
