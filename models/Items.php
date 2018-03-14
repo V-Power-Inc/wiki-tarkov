@@ -166,6 +166,12 @@ class Items extends \yii\db\ActiveRecord
         $Items = Items::find()->asArray()->all();
         return $Items;
     }
+    
+    /** Получаем все активные предметы из справочника лута в виде массива **/
+    public function getActiveItems() {
+        $activeLoot = Items::find()->where(['active' => 1])->asArray()->all();
+        return $activeLoot;
+    }
 
     /*** Ниже получаем родительскую категорию ***/
     /**

@@ -8,6 +8,7 @@
 
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
+use kartik\widgets\Typeahead;
 use Yii;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
@@ -93,6 +94,12 @@ use app\components\AlertComponent;
             
             <!-- Описание категории -->
             <p class="alert alert-info size-16"><?= $cat->content ?></p>
+
+            <!-- ajax поиск -->
+            <div class="col-lg-12">
+
+            </div>
+
 
             <?php if(empty($items)) : ?>
                 <!-- Нет лута -->

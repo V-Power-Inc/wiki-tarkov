@@ -26,12 +26,14 @@ class LootController extends Controller
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
+        $model = new Items;
+        $allitems = $model->getActiveItems();
         $fullitems = Items::find()->where(['active' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
         $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
         $request = \Yii::$app->request;
         
-        return $this->render('mainpage.php', ['items' => $items,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
@@ -97,5 +99,11 @@ class LootController extends Controller
             'allquestitems' => $allquestitems,
             'form_model' => $form_model]);
         }
+    }
+    
+    /*** Json формат всех данных из справочника лута ***/
+    public function actionLootjson() {
+        $result = Items::find()->where(['active' => 1])->asArray()->all();
+        echo json_encode($result);
     }
 }
