@@ -1468,6 +1468,10 @@ img.w-100-auto {
     max-height: 386px;
 }
 
+.tt-menu .tt-suggestion {
+    padding: 0;
+    margin: 3px 20px;
+}
 
 
 
