@@ -14,6 +14,8 @@ use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
 use yii\web\HttpException;
+use yii\helpers\Json;
+use yii\db\Query;
 
 
 class LootController extends Controller
@@ -26,12 +28,14 @@ class LootController extends Controller
     /** Рендер страницы списка категорий и общего списка лута  **/
     public function actionMainloot()
     {
+        $model = new Items;
+        $allitems = $model->getActiveItems();
         $fullitems = Items::find()->where(['active' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
         $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
         $request = \Yii::$app->request;
         
-        return $this->render('mainpage.php', ['items' => $items,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
@@ -97,5 +101,30 @@ class LootController extends Controller
             'allquestitems' => $allquestitems,
             'form_model' => $form_model]);
         }
+    }
+    
+    /** Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута. **/
+    /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
+    
+    public function actionLootjson($q = null) {
+        
+        $query = new Query;
+
+        $query->select('title, shortdesc, preview, url, parentcat_id')
+            ->from('items')
+            ->where('title LIKE "%' . $q .'%"')
+            ->andWhere(['active' => 1])
+            ->orderBy('title');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        
+        $out = [];
+        
+        /** Цикл составления готовых данных по запросу пользователя в поиске **/
+        foreach ($data as $d) {
+            $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
+            $out[] = ['value' => $d['title'],'title' => $d['title'],'parentcat_id' => $parencat->title,'shortdesc' => $d['shortdesc'],'preview' => $d['preview'],'url' => $d['url']];
+        }
+        return Json::encode($out);
     }
 }
