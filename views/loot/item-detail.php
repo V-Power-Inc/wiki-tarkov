@@ -100,7 +100,7 @@ use yii\web\JsExpression;
                             '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
                         echo Typeahead::widget([
                             'name' => 'items',
-                            'scrollable' => false,
+                            'scrollable' => true,
                             'options' => ['placeholder' => 'Введите сюда название предмета'],
                             'pluginOptions' => ['hint' => false, 'highlight' => true],
                             'dataset' => [
@@ -109,7 +109,7 @@ use yii\web\JsExpression;
                                         'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
                                         'wildcard' => '%QUERY',
                                     ],
-                                    'limit' => 10,
+                                    'limit' => 50,
                                     'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                     'display' => 'value',
                                     'templates' => [

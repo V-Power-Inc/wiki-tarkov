@@ -1464,6 +1464,10 @@ img.w-100-auto {
     margin-bottom: 10px;
 }
 
+.tt-scrollable-menu .tt-menu {
+    max-height: 386px;
+}
+
 
 
 
