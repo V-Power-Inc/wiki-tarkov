@@ -8,6 +8,10 @@
 
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
+use kartik\typeahead\Typeahead;
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+use yii\web\JsExpression;
 use Yii;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
@@ -90,9 +94,42 @@ use app\components\AlertComponent;
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
-            
+            <div class="top-content">
             <!-- Описание категории -->
             <p class="alert alert-info size-16"><?= $cat->content ?></p>
+
+            <!-- ajax поиск предметов в справочнике лута -->
+
+            <?php
+            // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
+            echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
+            $template = '<div class="ajax-result"><a href="/loot/{{url}}.html"><img src="{{preview}}" class="ajax-image-preview">'.
+                '<p class="repo-language ajax-preview-title">{{title}}</p>' .
+                '<!--p class="repo-name">{{category}}</p> -->' .
+                '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+            echo Typeahead::widget([
+                'name' => 'items',
+                'scrollable' => false,
+                'options' => ['placeholder' => 'Введите сюда название предмета'],
+                'pluginOptions' => ['hint' => false, 'highlight' => true],
+                'dataset' => [
+                    [
+                        'remote' => [
+                            'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
+                            'wildcard' => '%QUERY',
+                        ],
+                        'limit' => 10,
+                        'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                        'display' => 'value',
+                        'templates' => [
+                            'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                            'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                        ]
+                    ]
+                ]
+            ]);
+            ?>
+            </div>
 
             <?php if(empty($items)) : ?>
                 <!-- Нет лута -->

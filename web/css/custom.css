@@ -1426,6 +1426,49 @@ img.w-100-auto {
     display: none;
 }
 
+.ajax-image-preview {
+    max-width: 50px;
+    float: left;
+    margin: 5px 10px;
+    box-shadow: 1px 1px 20px;
+    color:black;
+    border: 1px solid white;
+}
+
+.ajax-preview-title {
+    color: #c3392c;
+    font-size: 16px;
+    padding-top: 2px;
+}
+
+.ajax-result {
+    padding: 5px 0;
+}
+
+.ajax-result  a .repo-description {
+    text-decoration: none;
+}
+
+.ajax-livesearch {
+    padding: 20px;
+    background: gainsboro;
+    border-radius: 5px;
+    border: 1px solid #c3392c;
+}
+
+.top-content {
+    padding: 20px;
+    background: gainsboro;
+    border: 1px solid #c3392c;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.tt-scrollable-menu .tt-menu {
+    max-height: 386px;
+}
+
+
 
 
 
