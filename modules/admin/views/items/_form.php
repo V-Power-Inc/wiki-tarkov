@@ -49,20 +49,24 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
     <?= $form->field($model, 'quest_item')->checkbox([
         'label' => 'Квестовый предмет',
     ]); ?>
-    
+
     <?= $form->field($model, 'trader_group')
         ->listBox([
-           'Прапор' => 'Прапор', 
-           'Терапевт' => 'Терапевт',
-           'Лыжник' => 'Лыжник',
-           'Миротворец' => 'Миротворец',
-           'Скупщик' => 'Скупщик',
-           'Механик' => 'Механик',
+            'Прапор' => 'Прапор',
+            'Терапевт' => 'Терапевт',
+            'Лыжник' => 'Лыжник',
+            'Миротворец' => 'Миротворец',
+            'Скупщик' => 'Скупщик',
+            'Механик' => 'Механик',
         ],
-        [
-            'multiple' => true,
-            'style' => 'height: 115px',
-        ]); ?>
+            [
+                'multiple' => true,
+                'style' => 'height: 115px',
+            ]); ?>
+
+    <?= $form->field($model, 'search_words')->textInput(['maxlength' => true])->textarea(['rows' => 6]) ?>
+
+    <?php // $form->field($model, 'module_weapon')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'date_create')->textInput(['disabled' => true]) ?>
 
@@ -70,7 +74,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
         'label' => 'Предмет активен',
     ]); ?>
 
-   
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать новый предмет' : 'Обновить существующий предмет', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
