@@ -65,37 +65,46 @@ use app\components\AlertComponent;
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
-           <p class="alert alert-info size-16">На этой странице вы можете узнать информацию о любом луте из игры Escape from Tarkov. В справочнике вы сможете найти информацию о любом внутриигровом предмете. <br><br>
+         <div class="top-content">   
+           <p class="alert alert-info size-16 margin-top-20">На этой странице вы можете узнать информацию о любом луте из игры Escape from Tarkov. В справочнике вы сможете найти информацию о любом внутриигровом предмете. <br><br>
            Для удобства была создана разбивка по категориям, что облегчит вам поиск наиболее интересных предметов.<br><br>
            В категории c оружием вы сможете найти всю информацию о таких редких винтовках как ВСС Вал или ДВЛ-10, а также узнать немало нового о тех видах вооружения, о которых вы уже наслышаны.</p>
+            
+            <!-- ajax поиск предметов в справочнике лута -->
 
-            <!-- ajax поиск -->
-            <div class="col-lg-12">
-                
-            <?php
-            // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
-            echo '<label class="control-label">Введите название предмета</label>';
-            $template = '<div><p class="repo-language">{{title}}</p>' .
-                '<p class="repo-name">{{category}}</p>' .
-                '<p class="repo-description">{{shortdesc}}</p></div>';
-            echo Typeahead::widget([
-                'name' => 'twitter_oss',
-                'options' => ['placeholder' => 'Введите сюда название предмета'],
-                'dataset' => [
-                    [
-                        'prefetch' => 'https://dev.kfc-it.ru/loot/lootjson',
-                        'display' => 'value',
-                        'templates' => [
-                            'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
-                            'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                <?php
+                // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
+                echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
+                $template = '<div class="ajax-result"><a href="/loot/{{url}}.html"><img src="{{preview}}" class="ajax-image-preview">'.
+                    '<p class="repo-language ajax-preview-title">{{title}}</p>' .
+                    '<!--p class="repo-name">{{category}}</p> -->' .
+                    '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+                echo Typeahead::widget([
+                    'name' => 'items',
+                    'scrollable' => false,
+                    'options' => ['placeholder' => 'Введите сюда название предмета'],
+                    'pluginOptions' => ['hint' => false, 'highlight' => true],
+                    'dataset' => [
+                        [
+                            'remote' => [
+                                'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
+                                'wildcard' => '%QUERY',
+                            ],
+                            'limit' => 10,
+                            'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                            'display' => 'value',
+                            'templates' => [
+                                'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                                'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                            ]
                         ]
                     ]
-                ]
-            ]);
-            ?>
-           
-            </div>
+                ]);
+                ?>
 
+           
+         </div>   
+            
             <div class="row">
                 <!-- Цикл всех предметов из справочника -->
 

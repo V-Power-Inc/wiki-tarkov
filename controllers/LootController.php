@@ -14,6 +14,8 @@ use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
 use yii\web\HttpException;
+use yii\helpers\Json;
+use yii\db\Query;
 
 
 class LootController extends Controller
@@ -102,8 +104,25 @@ class LootController extends Controller
     }
     
     /*** Json формат всех данных из справочника лута ***/
-    public function actionLootjson() {
-        $result = Items::find()->where(['active' => 1])->asArray()->all();
-        echo json_encode($result);
+    public function actionLootjson($q = null) {
+        
+        $model = new Category();
+        
+        $query = new Query;
+
+        $query->select('title, shortdesc, preview, url, parentcat_id')
+            ->from('items')
+            ->where('title LIKE "%' . $q .'%"')
+            ->andWhere(['active' => 1])
+            ->orderBy('title');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        
+        $out = [];
+        foreach ($data as $d) {
+            $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
+            $out[] = ['value' => $d['title'],'title' => $d['title'],'parentcat_id' => $parencat->title,'shortdesc' => $d['shortdesc'],'preview' => $d['preview'],'url' => $d['url']];
+        }
+        return Json::encode($out);
     }
 }
