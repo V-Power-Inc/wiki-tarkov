@@ -103,10 +103,10 @@ class LootController extends Controller
         }
     }
     
-    /*** Json формат всех данных из справочника лута ***/
+    /** Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута. **/
+    /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
+    
     public function actionLootjson($q = null) {
-        
-        $model = new Category();
         
         $query = new Query;
 
@@ -119,6 +119,8 @@ class LootController extends Controller
         $data = $command->queryAll();
         
         $out = [];
+        
+        /** Цикл составления готовых данных по запросу пользователя в поиске **/
         foreach ($data as $d) {
             $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
             $out[] = ['value' => $d['title'],'title' => $d['title'],'parentcat_id' => $parencat->title,'shortdesc' => $d['shortdesc'],'preview' => $d['preview'],'url' => $d['url']];
