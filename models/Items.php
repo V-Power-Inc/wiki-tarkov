@@ -24,6 +24,8 @@ use yii\web\UploadedFile;
  * @property integer $parentcat_id
  * @property integer $quest_item
  * @property string $trader_group
+ * @property string $search_words
+ * @property string $module_weapon
  *
  * @property ItemsToDoorkeys[] $itemsToDoorkeys
  * @property ItemsToLyjnic[] $itemsToLyjnics
@@ -36,10 +38,10 @@ use yii\web\UploadedFile;
  */
 class Items extends \yii\db\ActiveRecord
 {
-    
+
     public $file = null;
     public $questitem;
-    
+
     /**
      * @inheritdoc
      */
@@ -55,7 +57,7 @@ class Items extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'shortdesc', 'url', 'description'], 'required'],
-            [['shortdesc', 'content'], 'string'],
+            [['shortdesc', 'content', 'search_words', 'module_weapon'], 'string'],
             [['date_create', 'keywords', 'trader_group', 'quest_item'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
@@ -79,6 +81,7 @@ class Items extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    // todo: Продумать функицонал связывающий модуль и пушки, на которые он цепляется
     public function attributeLabels()
     {
         return [
@@ -99,6 +102,8 @@ class Items extends \yii\db\ActiveRecord
             'trader_group' => 'Относится к торговцам',
             'quest_item' => 'Квестовый предмет',
             'questitem' => '',
+            'module_weapon' => 'Оружия связанные с модулем',
+            'search_words' => 'Слова синонимы для быдланов (livesearch)'
         ];
     }
 
@@ -160,13 +165,13 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ItemsToTerapevt::className(), ['item_id' => 'id']);
     }
-    
+
     /** Получаем список всех предметов из таблицы справочника лута **/
     public function getAllItems() {
         $Items = Items::find()->asArray()->all();
         return $Items;
     }
-    
+
     /** Получаем все активные предметы из справочника лута в виде массива **/
     public function getActiveItems() {
         $activeLoot = Items::find()->where(['active' => 1])->asArray()->all();
@@ -181,5 +186,5 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
     }
-    
+
 }

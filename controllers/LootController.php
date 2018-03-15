@@ -34,7 +34,7 @@ class LootController extends Controller
         $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
         $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
         $request = \Yii::$app->request;
-        
+
         return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
 
@@ -52,23 +52,23 @@ class LootController extends Controller
                 ->orWhere(['c1.parent_category' => $cat->id])
                 ->andWhere(['active' => 1])
                 ->with('parentcat');
-            
+
             $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
             $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
             $request = \Yii::$app->request;
-            
+
             return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1), 'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
-       
+
     }
 
     /*** Рендер страницы списка предметов для квестов торговцев ***/
     public function actionQuestloot()
     {
         $allquestitems = Items::find()->where(['quest_item' => 1])->all();
-        
+
         $form_model = new Items();
         if ($form_model->load(Yii::$app->request->post())) {
             if (isset($_POST['Items']['questitem'])) {
@@ -76,50 +76,51 @@ class LootController extends Controller
             } else {
                 $questitem = "Все предметы";
             }
-        
 
-        $words = ["Все предметы","Прапор","Терапевт","Скупщик","Лыжник","Миротворец","Механик"];
 
-        /** Если пришли данные через POST **/
-        if(in_array($questitem,$words)) {
-            $curentWord = $words[array_search($questitem, $words)];
-            if ($curentWord == "Все предметы") {
-                $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->all();
-            } else {
-                $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->all();
-            }
+            $words = ["Все предметы","Прапор","Терапевт","Скупщик","Лыжник","Миротворец","Механик"];
 
-            return $this->render('quest-page.php',
-                [
-                    'form_model' => $form_model,
-                    'questsearch' => $result,
-                    'arr' => $curentWord,]);
+            /** Если пришли данные через POST **/
+            if(in_array($questitem,$words)) {
+                $curentWord = $words[array_search($questitem, $words)];
+                if ($curentWord == "Все предметы") {
+                    $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->all();
+                } else {
+                    $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->all();
+                }
+
+                return $this->render('quest-page.php',
+                    [
+                        'form_model' => $form_model,
+                        'questsearch' => $result,
+                        'arr' => $curentWord,]);
             }
         }  else {
             return $this->render('quest-page.php',
-            [
-            'allquestitems' => $allquestitems,
-            'form_model' => $form_model]);
+                [
+                    'allquestitems' => $allquestitems,
+                    'form_model' => $form_model]);
         }
     }
-    
+
     /** Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута. **/
     /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
-    
+
     public function actionLootjson($q = null) {
-        
+
         $query = new Query;
 
-        $query->select('title, shortdesc, preview, url, parentcat_id')
+        $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
             ->from('items')
             ->where('title LIKE "%' . $q .'%"')
+            ->orWhere('search_words LIKE "%' .$q.'%"')
             ->andWhere(['active' => 1])
             ->orderBy('title');
         $command = $query->createCommand();
         $data = $command->queryAll();
-        
+
         $out = [];
-        
+
         /** Цикл составления готовых данных по запросу пользователя в поиске **/
         foreach ($data as $d) {
             $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
