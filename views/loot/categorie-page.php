@@ -100,35 +100,35 @@ use app\components\AlertComponent;
 
             <!-- ajax поиск предметов в справочнике лута -->
 
-            <?php
-            // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
-            echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
-            $template = '<div class="ajax-result"><a href="/loot/{{url}}.html"><img src="{{preview}}" class="ajax-image-preview">'.
-                '<p class="repo-language ajax-preview-title">{{title}}</p>' .
-                '<!--p class="repo-name">{{category}}</p> -->' .
-                '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
-            echo Typeahead::widget([
-                'name' => 'items',
-                'scrollable' => false,
-                'options' => ['placeholder' => 'Введите сюда название предмета'],
-                'pluginOptions' => ['hint' => false, 'highlight' => true],
-                'dataset' => [
-                    [
-                        'remote' => [
-                            'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
-                            'wildcard' => '%QUERY',
-                        ],
-                        'limit' => 10,
-                        'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
-                        'display' => 'value',
-                        'templates' => [
-                            'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
-                            'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                <?php
+                // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
+                echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
+                $template = '<div class="ajax-result"><a href="/loot/{{url}}.html"><img src="{{preview}}" class="ajax-image-preview">'.
+                    '<p class="repo-language ajax-preview-title">{{title}}</p>' .
+                    '<!--p class="repo-name">{{category}}</p> -->' .
+                    '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+                echo Typeahead::widget([
+                    'name' => 'items',
+                    'scrollable' => true,
+                    'options' => ['placeholder' => 'Введите сюда название предмета'],
+                    'pluginOptions' => ['hint' => false, 'highlight' => true],
+                    'dataset' => [
+                        [
+                            'remote' => [
+                                'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
+                                'wildcard' => '%QUERY',
+                            ],
+                            'limit' => 50,
+                            'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                            'display' => 'value',
+                            'templates' => [
+                                'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                                'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                            ]
                         ]
                     ]
-                ]
-            ]);
-            ?>
+                ]);
+                ?>
             </div>
 
             <?php if(empty($items)) : ?>
