@@ -259,6 +259,16 @@
         font-size: 16px;
     }
 
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #f5f5f5;
+        font-size: 16px;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #fff;
+        background-color: rgba(255, 152, 0, 0.47);
+    }
+
 }
 
 
