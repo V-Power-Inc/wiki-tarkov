@@ -12,9 +12,6 @@ use app\components\AlertComponent;
 
 class MenuComponent
 {
-    public static $skils = null;
-    public static $quests = null;
-    public static $locations = null;
     public static $keys = null;
     public static $detaikey = null;
     public static $news = null;
@@ -24,8 +21,6 @@ class MenuComponent
     public static $lootcat = null;
     public static $mainloot = null;
     public static $loot = null;
-    public static $skillscategory = null;
-    public static $mainskills = null;
     public static $skillsdetail = null;
     public static $questloot = null;
     public static $questions = null;
@@ -35,10 +30,6 @@ class MenuComponent
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
-            case 'mainskills': self::$mainskills = 'class="active"'; break;
-            case 'skillscategory': self::$skillscategory = 'class="active"'; break;
-            case 'quests': self::$quests = 'class="active"'; break;
-            case 'locations': self::$locations = 'class="active"'; break;
             case 'keys': self::$keys = 'class="active"'; break;
             case 'doorkeysdetail': self::$detaikey = 'class="active"'; break;
             case 'articles': self::$articles = 'class="active"'; break;
@@ -48,7 +39,7 @@ class MenuComponent
             case 'category': self::$lootcat = 'class="active"'; break;
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
-            case 'skillsdetail':self::$skillsdetail = 'class="active"'; break;
+            case 'skillsdetail':self::$skillsdetail = 'active'; break;
             case 'questloot':self::$questloot = 'class="active"'; break;
             case 'questions':self::$questions = 'class="active"'; break;
         }
@@ -58,16 +49,60 @@ class MenuComponent
      * @return array|\yii\db\ActiveRecord[]
      */
     public static function showMenu(){
+
+        /*** Разбивка для страниц карт локаций ***/
+        $intermaps = "";
+
+        $mapsurls = [
+            "/maps",
+            "/maps/zavod-location",
+            "/maps/bereg-location",
+            "/maps/forest-location",
+            "/maps/tamojnya-location",
+        ];
+
+        if (in_array(Yii::$app->request->url, $mapsurls)) {
+            $intermaps = 'active';
+        }
+
+       /*** Разбивка для страниц торговцев и их квестов ***/
         $pagequests = "";
         
-        $urlarray = ["/quests-of-traders/prapor-quests", 
+        $urlarray = ["/quests-of-traders",
+                    "/quests-of-traders/prapor-quests", 
                     "/quests-of-traders/terapevt-quests",
                     "/quests-of-traders/skypchik-quests",
                     "/quests-of-traders/lyjnic-quests",
-                    "/quests-of-traders/mirotvorec-quests"];
+                    "/quests-of-traders/mirotvorec-quests",
+                    "/traders/prapor",
+                    "/traders/terapevt",
+                    "/traders/lyjnic",
+                    "/traders/mirotvorec",
+                    "/traders/mehanic",
+                    "/traders/skupshik",
+        ];
         if (in_array(Yii::$app->request->url, $urlarray)) {
-            $pagequests = 'class="active"';
+            $pagequests = 'active';
         }
+        
+        
+        /*** Разбивка для активных умений ***/
+        $skills = '';
+        
+        $skillsarray = [
+            "/skills",
+            "/skills/physical",
+            "/skills/mental",
+            "/skills/practical",
+            "/skills/combat",
+            "/skills/special",
+        ];
+            
+        if (in_array(Yii::$app->request->url,$skillsarray)) {
+            $skills = 'active';
+        }
+
+        /*** Далее пошел габлон отрисовки меню ***/
 
         self::Active();
         $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
@@ -88,11 +123,57 @@ class MenuComponent
                 <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
 
                 <ul class="nav navbar-nav">
-                    <li '.self::$skillscategory.' '.self::$mainskills.' '.self::$skillsdetail.'><a href="/skills">Умения</a></li>
-                    <li '.self::$quests.' '.$pagequests.'><a href="/quests-of-traders">Торговцы</a></li>
+                    
+                    <!-- dropdown list - skills -->
+                    <li class="dropdown '.$skills.self::$skillsdetail.'">
+                      <a href="#" class="dropdown-toggle '.$skills.self::$skillsdetail.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Умения</b><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/skills/physical">Физические умения</a></li>
+                        <li><a href="/skills/mental">Ментальные умения</a></li>
+                        <li><a href="/skills/practical">Практические умения</a></li>
+                        <li><a href="/skills/combat">Боевые умения</a></li>
+                        <li><a href="/skills/special">Особые умения</a></li>
+                            <li role="separator" class="divider"></li>
+                        <li><a href="/skills">Смотреть все умения</a></li>
+                      </ul>
+                    </li>
+                    
+                     <!-- dropdown list - traders -->
+                     <li class="dropdown '.$pagequests.'">
+                      <a href="#" class="dropdown-toggle '.$pagequests.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Торговцы</b><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/traders/prapor">Прапор</a></li>
+                        <li><a href="/traders/terapevt">Терапевт</a></li>
+                        <li><a href="/traders/skupshik">Скупщик</a></li>
+                        <li><a href="/traders/lyjnic">Лыжник</a></li>
+                        <li><a href="/traders/mirotvorec">Миротворец</a></li>
+                        <li><a href="/traders/mehanic">Механик</a></li>
+                            <li role="separator" class="divider"></li>
+                        <li><a href="/quests-of-traders">Смотреть всех торговцев</a></li>
+                      </ul>
+                    </li>
+
+                
+                    <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
-                    <li '.self::$locations.'><a href="/maps">Карты локаций</a></li>
+                    
+                    
+                    <!-- dropdown list map locations -->
+                                         
+                     <li class="dropdown '.$intermaps.'">
+                      <a href="#" class="dropdown-toggle '.$intermaps.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Карты локаций</b><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/maps/zavod-location">Завод</a></li>
+                        <li><a href="/maps/tamojnya-location">Таможня</a></li>
+                        <li><a href="/maps/forest-location">Лес</a></li>
+                        <li><a href="/maps/bereg-location">Берег</a></li>
+                            <li role="separator" class="divider"></li>
+                        <li><a href="/maps">Смотреть список доступных карт</a></li>
+                      </ul>
+                    </li>
+
+                     <!-- Other lists of menu selects -->    
                     <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
                     <li '.self::$news.' '.self::$newsdetail.'><a href="/news">Новости</a></li>
                     <li '.self::$questions.'><a href="/questions">Частые вопросы</a></li>

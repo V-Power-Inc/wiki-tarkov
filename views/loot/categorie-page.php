@@ -98,7 +98,7 @@ use app\components\AlertComponent;
             <!-- Описание категории -->
             <p class="alert alert-info size-16"><?= $cat->content ?></p>
 
-            <!-- ajax поиск предметов в справочнике лута -->
+                <!-- ajax поиск предметов в справочнике лута -->
 
                 <?php
                 // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
@@ -107,6 +107,10 @@ use app\components\AlertComponent;
                     '<p class="repo-language ajax-preview-title">{{title}}</p>' .
                     '<!--p class="repo-name">{{category}}</p> -->' .
                     '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+
+                $keys = '<div class="ajax-result"><a href="/keys/{{url}}"><img src="{{preview}}" class="ajax-image-preview">'.
+                    '<p class="repo-language ajax-preview-title keydoors">{{name}}</p>' .
+                    '<p class="repo-description black"><b>Полезен на локациях: {{mapgroup}}</b></p></a></div>';
                 echo Typeahead::widget([
                     'name' => 'items',
                     'scrollable' => true,
@@ -122,51 +126,65 @@ use app\components\AlertComponent;
                             'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                             'display' => 'value',
                             'templates' => [
-                                'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                                //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящий лут не найден.</div>',
                                 'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
                             ]
+                        ],
+                        [
+                            'remote' => [
+                                'url' => Url::to(['site/keysjson']) . '?q=%QUERY',
+                                'wildcard' => '%QUERY',
+                            ],
+                            'limit' => 50,
+                            'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                            'display' => 'value',
+                            'templates' => [
+                                //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящие ключи от дверей не найдены.</div>',
+                                'suggestion' => new JsExpression("Handlebars.compile('{$keys}')")
+                            ]
                         ]
-                    ]
+                    ],
                 ]);
                 ?>
             </div>
 
-            <?php if(empty($items)) : ?>
-                <!-- Нет лута -->
-                <div class="col-lg-12">
-                    <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
-                </div>
-                <!-- Нет лута -->
-            <?php else : ?>
-            <!-- Цикл предметов категории -->
-            <?php foreach ($items as $item) : ?>
+            
+        <div class="row">
+                <?php if(empty($items)) : ?>
+                    <!-- Нет лута -->
                     <div class="col-lg-12">
-                        <div class="item-loot">
-                            <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                            <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                            <p class="loot-description"><?= $item['shortdesc'] ?></p>
-                            <?php if($item['quest_item'] == 1) : ?>
-                            <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
-                            <?php endif; ?>
+                        <p class="alert alert-danger size-16">В данный момент в разделе нет лута.</p>
+                    </div>
+                    <!-- Нет лута -->
+                <?php else : ?>
+                <!-- Цикл предметов категории -->
+                <?php foreach ($items as $item) : ?>
+                        <div class="col-lg-12">
+                            <div class="item-loot">
+                                <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
+                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                                <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                                <?php if($item['quest_item'] == 1) : ?>
+                                <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
-            <?php endforeach; ?>
-            <!-- Окончание цикла предметов -->
-
-            
-                    <div class="col-lg-12 pagination text-center">
-                        <?= LinkPager::widget([
-                            'pagination' => $pagination,
-                            'firstPageLabel' => 'первая',
-                            'lastPageLabel' => 'последняя',
-                            'prevPageLabel' => '&laquo;',
-                            'prevPageLabel' => '&laquo;',
-                        ]);
-                        ?>
-                    </div>
-            <?php endif; ?>
-
-            
+                <?php endforeach; ?>
+                <!-- Окончание цикла предметов -->
+    
+                
+                        <div class="col-lg-12 pagination text-center">
+                            <?= LinkPager::widget([
+                                'pagination' => $pagination,
+                                'firstPageLabel' => 'первая',
+                                'lastPageLabel' => 'последняя',
+                                'prevPageLabel' => '&laquo;',
+                                'prevPageLabel' => '&laquo;',
+                            ]);
+                            ?>
+                        </div>
+                <?php endif; ?>
+            </div>
         </div>
 
         <!-- Расстояние - заглушка -->

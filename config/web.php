@@ -101,6 +101,7 @@ $config = [
                 'articles' => 'site/articles',
                 'questions' => 'site/questions',
                 'loot/lootjson' => 'loot/lootjson',
+                'site/keysjson' => 'site/keysjson',
                 'loot/quest-loot' => 'loot/questloot',
                 'loot' => 'loot/mainloot',
                 'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
