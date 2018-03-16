@@ -68,7 +68,8 @@ use app\components\AlertComponent;
          <div class="top-content">   
            <p class="alert alert-info size-16 margin-top-20">На этой странице вы можете узнать информацию о любом луте из игры Escape from Tarkov. В справочнике вы сможете найти информацию о любом внутриигровом предмете. <br><br>
            Для удобства была создана разбивка по категориям, что облегчит вам поиск наиболее интересных предметов.<br><br>
-           В категории c оружием вы сможете найти всю информацию о таких редких винтовках как ВСС Вал или ДВЛ-10, а также узнать немало нового о тех видах вооружения, о которых вы уже наслышаны.</p>
+           В категории c оружием вы сможете найти всю информацию о таких редких винтовках как ВСС Вал или ДВЛ-10, а также узнать немало нового о тех видах вооружения, о которых вы уже наслышаны. <br><br>
+           Используйте наш умный поиск предметов, для того чтобы быстро найти то что вас интересует, также через этот поиск вы можете искать <b>ключи от дверей</b>.</p>
             
             <!-- ajax поиск предметов в справочнике лута -->
 
@@ -79,6 +80,10 @@ use app\components\AlertComponent;
                  '<p class="repo-language ajax-preview-title">{{title}}</p>' .
                  '<!--p class="repo-name">{{category}}</p> -->' .
                  '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+             
+             $keystemp = '<div class="ajax-result"><a href="/keys/{{url}}"><img src="{{preview}}" class="ajax-image-preview">'.
+                 '<p class="repo-language ajax-preview-title">{{name}}</p>' .
+                 '<p class="repo-description black"><b>Полезен на локациях: {{mapgroup}}</b></p></a></div>';
              echo Typeahead::widget([
                  'name' => 'items',
                  'scrollable' => true,
@@ -94,11 +99,24 @@ use app\components\AlertComponent;
                          'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                          'display' => 'value',
                          'templates' => [
-                             'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                           //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящий лут не найден.</div>',
                              'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
                          ]
+                     ],
+                     [
+                         'remote' => [
+                             'url' => Url::to(['site/keysjson']) . '?q=%QUERY',
+                             'wildcard' => '%QUERY',
+                         ],
+                         'limit' => 50,
+                         'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                         'display' => 'value',
+                         'templates' => [
+                           //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящие ключи от дверей не найдены.</div>',
+                             'suggestion' => new JsExpression("Handlebars.compile('{$keystemp}')")
+                         ]
                      ]
-                 ]
+                 ],
              ]);
              ?>
 

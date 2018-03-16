@@ -22,6 +22,7 @@ use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\Pagination;
+use yii\db\Query;
 
 
 class SiteController extends Controller
@@ -260,6 +261,27 @@ class SiteController extends Controller
         $request = \Yii::$app->request;
         
         return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+    }
+    
+    /*** Данные о доступных ключах от дверей в формате Json - выборка только по включенным ***/
+    public function actionKeysjson($q = null) {
+        $query = new Query;
+
+        $query->select('name, mapgroup, preview, url')
+            ->from('doorkeys')
+            ->where('name LIKE "%' . $q .'%"')
+            ->andWhere(['active' => 1])
+            ->orderBy('name');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+
+        $out = [];
+
+        /** Цикл составления готовых данных по запросу пользователя в поиске **/
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['name'],'name' => $d['name'],'preview' => $d['preview'],'url' => $d['url'],'mapgroup' => $d['mapgroup']];
+        }
+        return Json::encode($out);
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/

@@ -98,6 +98,10 @@ use yii\web\JsExpression;
                             '<p class="repo-language ajax-preview-title">{{title}}</p>' .
                             '<!--p class="repo-name">{{category}}</p> -->' .
                             '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+
+                        $keystemp = '<div class="ajax-result"><a href="/keys/{{url}}"><img src="{{preview}}" class="ajax-image-preview">'.
+                            '<p class="repo-language ajax-preview-title">{{name}}</p>' .
+                            '<p class="repo-description black"><b>Полезен на локациях: {{mapgroup}}</b></p></a></div>';
                         echo Typeahead::widget([
                             'name' => 'items',
                             'scrollable' => true,
@@ -113,11 +117,24 @@ use yii\web\JsExpression;
                                     'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                     'display' => 'value',
                                     'templates' => [
-                                        'notFound' => '<div class="text-danger" style="padding:0 8px">Искомое значение не было найдено.</div>',
+                                        //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящий лут не найден.</div>',
                                         'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
                                     ]
+                                ],
+                                [
+                                    'remote' => [
+                                        'url' => Url::to(['site/keysjson']) . '?q=%QUERY',
+                                        'wildcard' => '%QUERY',
+                                    ],
+                                    'limit' => 50,
+                                    'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                    'display' => 'value',
+                                    'templates' => [
+                                        //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящие ключи от дверей не найдены.</div>',
+                                        'suggestion' => new JsExpression("Handlebars.compile('{$keystemp}')")
+                                    ]
                                 ]
-                            ]
+                            ],
                         ]);
                         ?>
                     </div>
