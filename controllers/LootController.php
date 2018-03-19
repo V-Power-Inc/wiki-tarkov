@@ -108,25 +108,29 @@ class LootController extends Controller
     /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
 
     public function actionLootjson($q = null) {
+        if(Yii::$app->request->isAjax) {
 
-        $query = new Query;
+            $query = new Query;
 
-        $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
-            ->from('items')
-            ->where('title LIKE "%' . $q .'%"')
-            ->orWhere('search_words LIKE "%' .$q.'%"')
-            ->andWhere(['active' => 1])
-            ->orderBy('title');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
+            $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
+                ->from('items')
+                ->where('title LIKE "%' . $q . '%"')
+                ->orWhere('search_words LIKE "%' . $q . '%"')
+                ->andWhere(['active' => 1])
+                ->orderBy('title');
+            $command = $query->createCommand();
+            $data = $command->queryAll();
 
-        $out = [];
+            $out = [];
 
-        /** Цикл составления готовых данных по запросу пользователя в поиске **/
-        foreach ($data as $d) {
-            $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
-            $out[] = ['value' => $d['title'],'title' => $d['title'],'parentcat_id' => $parencat->title,'shortdesc' => $d['shortdesc'],'preview' => $d['preview'],'url' => $d['url']];
+            /** Цикл составления готовых данных по запросу пользователя в поиске **/
+            foreach ($data as $d) {
+                $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
+                $out[] = ['value' => $d['title'], 'title' => $d['title'], 'parentcat_id' => $parencat->title, 'shortdesc' => $d['shortdesc'], 'preview' => $d['preview'], 'url' => $d['url']];
+            }
+            return Json::encode($out);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
         }
-        return Json::encode($out);
     }
 }
