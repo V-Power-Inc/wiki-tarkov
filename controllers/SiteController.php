@@ -113,32 +113,52 @@ class SiteController extends Controller
 
     /** Прилетают данные о статичном контенте описаний маркеров **/
     public function actionStatic() {
-        $staticcontent = Mapstaticcontent::find()->asArray()->all();
-        return Json::encode($staticcontent);
+        if(Yii::$app->request->isAjax) {
+            $staticcontent = Mapstaticcontent::find()->asArray()->all();
+            return Json::encode($staticcontent);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
-        $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
-        return Json::encode($markers);
+        if(Yii::$app->request->isAjax) {
+            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** JSON данные с координатами маркеров Леса **/
     public function actionForestmarkers() {
-        $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
-        return Json::encode($markers);
+        if(Yii::$app->request->isAjax) {
+            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** JSON данные с координатами маркеров Таможни **/
     public function actionTamojnyamarkers() {
-        $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
-        return Json::encode($markers);
+        if(Yii::$app->request->isAjax) {
+            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** JSON данные с координатами маркеров Таможни **/
     public function actionBeregmarkers() {
-        $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
-        return Json::encode($markers);
+        if(Yii::$app->request->isAjax) {
+            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     /** Рендер страницы с картой завода **/
@@ -265,23 +285,27 @@ class SiteController extends Controller
     
     /*** Данные о доступных ключах от дверей в формате Json - выборка только по включенным ***/
     public function actionKeysjson($q = null) {
-        $query = new Query;
+        if(Yii::$app->request->isAjax) {
+            $query = new Query;
 
-        $query->select('name, mapgroup, preview, url')
-            ->from('doorkeys')
-            ->where('name LIKE "%' . $q .'%"')
-            ->andWhere(['active' => 1])
-            ->orderBy('name');
-        $command = $query->createCommand();
-        $data = $command->queryAll();
+            $query->select('name, mapgroup, preview, url')
+                ->from('doorkeys')
+                ->where('name LIKE "%' . $q . '%"')
+                ->andWhere(['active' => 1])
+                ->orderBy('name');
+            $command = $query->createCommand();
+            $data = $command->queryAll();
 
-        $out = [];
+            $out = [];
 
-        /** Цикл составления готовых данных по запросу пользователя в поиске **/
-        foreach ($data as $d) {
-            $out[] = ['value' => $d['name'],'name' => $d['name'],'preview' => $d['preview'],'url' => $d['url'],'mapgroup' => $d['mapgroup']];
+            /** Цикл составления готовых данных по запросу пользователя в поиске **/
+            foreach ($data as $d) {
+                $out[] = ['value' => $d['name'], 'name' => $d['name'], 'preview' => $d['preview'], 'url' => $d['url'], 'mapgroup' => $d['mapgroup']];
+            }
+            return Json::encode($out);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
         }
-        return Json::encode($out);
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
