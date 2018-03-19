@@ -83,7 +83,7 @@ use app\components\AlertComponent;
              
              $keystemp = '<div class="ajax-result"><a href="/keys/{{url}}"><img src="{{preview}}" class="ajax-image-preview">'.
                  '<p class="repo-language ajax-preview-title">{{name}}</p>' .
-                 '<p class="repo-description black"><b>Полезен на локациях: {{mapgroup}}</b></p></a></div>';
+                 '<p class="repo-description black"><b>Находится в категориях: {{mapgroup}}</b></p></a></div>';
              echo Typeahead::widget([
                  'name' => 'items',
                  'scrollable' => true,
