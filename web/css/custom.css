@@ -895,13 +895,14 @@ border-bottom-left-radius: 5px!important;
 }
 
 .loader-maps-background {
-    background: #000000a3;
+    background: #000000a3 repeat;
     width: 100%;
     height: 100%;
     max-width: 100%;
     max-height: 100%;
     z-index: 9999;
-    position: absolute;
+    position: fixed;
+    overflow: hidden;
 }
 
 .preloader_map {

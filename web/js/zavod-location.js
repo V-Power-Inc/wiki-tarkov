@@ -18,6 +18,9 @@ L.tileLayer('/img/zavod/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
+/** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
+var hash = new L.Hash(map);
+
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setMaxZoom(4);
 map.setMinZoom(2);
@@ -72,8 +75,6 @@ var PlacesInt = L.icon({
 });
 
 $(document).ready(function() {
-/** Устанавлиеваем новый центр карты **/
-    map.panTo(new L.LatLng(67, 10));
 
 /** Делаем бэкграунд черным **/
 $('body').css({'background':'black'});

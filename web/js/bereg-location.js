@@ -18,6 +18,9 @@ L.tileLayer('/img/bereg/{z}/{x}/{y}.png', {
     noWrap: true,
 }).addTo(map);
 
+/** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
+var hash = new L.Hash(map);
+
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setMaxZoom(6);
 map.setMinZoom(3);
@@ -80,8 +83,6 @@ var PlacesInt = L.icon({
 });
 
 $(document).ready(function() {
-    /** Устанавлиеваем новый центр карты **/
-    map.panTo(new L.LatLng(61.373, -10.469));
 
     /** Делаем бэкграунд черным **/
     $('body').css({'background':'black'});
