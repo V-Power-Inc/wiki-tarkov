@@ -23,6 +23,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
+use yii\web\Cookie;
 
 
 class SiteController extends Controller
@@ -178,6 +179,11 @@ class SiteController extends Controller
 
     /** Рендер страницы с картой Берега **/
     public function actionBereg() {
+        // $cookies = Yii::$app->request->cookies;
+        //echo '<pre>';
+        //   echo print_r($cookies);
+        //   exit;
+        //echo '</pre>';
         return $this->render('maps/bereg-location.php');
     }
     
@@ -307,6 +313,23 @@ class SiteController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+    
+    /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу **/
+    public function actionClickremember($buttonname = null) {
+        if(Yii::$app->request->isPost) {
+            $postdata = $_POST;
+            
+            
+            
+        } else {
+            $buttonname = $_POST;
+            echo '<pre>';
+               echo print_r($buttonname);
+               exit;
+            echo '</pre>';
+        }
+    }
+    
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
