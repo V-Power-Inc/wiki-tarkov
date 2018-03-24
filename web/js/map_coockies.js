@@ -17,7 +17,7 @@ $(document).ready(function() {
         /*** Данные с параметром ID нажатой кнопки улетают на бэкэнд ***/
         $.ajax({
             url: '/site/clickremember',
-            data: {param: param, token : token, id : activebutton},
+            data: {param: param, token : token, name:'interbuttons', buttons : activebutton},
             async: false,
             type: "POST",
             success: function(data) {

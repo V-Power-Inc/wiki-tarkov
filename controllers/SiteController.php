@@ -18,6 +18,7 @@ use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
 use app\models\Questions;
+use app\models\Usercoockies;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -315,18 +316,75 @@ class SiteController extends Controller
     }
     
     /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу **/
-    public function actionClickremember($buttonname = null) {
+    public function actionClickremember() {
         if(Yii::$app->request->isPost) {
+
+            // Присваиваем переменной все что пришло в экшон через $_POST
             $postdata = $_POST;
+
+            // получение коллекции (yii\web\CookieCollection) из компонента "response"
+            $cookies = Yii::$app->response->cookies;
             
-            
-            
+            if (empty($cookies->get('interbuttons'))) {
+
+            // Делаем запись со значение куки в base 64
+            $sqlvalue = base64_encode($postdata['buttons']);
+
+            // Проверяем есть ли эквивалетная запись в таблице базы данных
+            $sqlexists = Usercoockies::find()->where(['buttons' => $sqlvalue])->one();
+
+                if(empty($sqlexists)) {
+                    $model = new Usercoockies();
+                   // $model->id = ;
+                    $model->name = $postdata['name'];
+                   // $model->buttons = base64_encode($postdata['buttons']);
+                    $model->buttons = hash('ripemd160', date("dmyhis", strtotime("now"))) . ',' .$postdata['buttons'];
+                    $model->save();
+                }
+
+                // добавление новой куки в HTTP-ответ
+                $cookies->add(new \yii\web\Cookie([
+                    'name' => $postdata['name'],
+                    'value' => $postdata['buttons'],
+                    'expire' => time() + 950400,
+                    'secure' => 1,
+                ]));
+                
+                
+//                echo '<pre>';
+//                echo print_r($cookies->get('interbuttons'));
+//                exit;
+//                echo '</pre>';
+
+            } else if (!empty($cookies->get('interbuttons'))) {
+              //  $activecoockie = $cookies->get('interbuttons');
+
+                $basecoockie = Usercoockies::find()->where(['buttons' => explode(',', $postdata['buttons'])])->one();
+
+                // $model = new Usercoockies();
+                // $model->id = ;
+                $basecoockie->name = $postdata['name'];
+                // $model->buttons = base64_encode($postdata['buttons']);
+                $basecoockie->buttons = substr($basecoockie->buttons, -1). ',' .$postdata['buttons'];
+                $basecoockie->save();
+
+                // добавление новой куки в HTTP-ответ
+                $cookies->add(new \yii\web\Cookie([
+                    'name' => $basecoockie->name,
+                    'value' => $basecoockie->buttons,
+                    'expire' => time() + 950400,
+                    'secure' => 1,
+                ]));
+
+                echo '<pre>';
+                echo print_r($cookies->get('interbuttons'));
+                exit;
+                echo '</pre>';
+                
+            }
+                
         } else {
-            $buttonname = $_POST;
-            echo '<pre>';
-               echo print_r($buttonname);
-               exit;
-            echo '</pre>';
+            throw new HttpException(404 ,'Такая страница не существует');
         }
     }
     
