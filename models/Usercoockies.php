@@ -9,6 +9,7 @@ use Yii;
  *
  * @property string $name
  * @property string $buttons
+ * @property string $date_create
  */
 class Usercoockies extends \yii\db\ActiveRecord
 {
@@ -28,6 +29,7 @@ class Usercoockies extends \yii\db\ActiveRecord
         return [
             [['buttons'], 'string'],
             [['name'], 'string', 'max' => 255],
+            [['date_create'], 'safe'],
         ];
     }
 
@@ -39,6 +41,7 @@ class Usercoockies extends \yii\db\ActiveRecord
         return [
             'name' => 'Имя кукиса',
             'buttons' => 'base64 закодированные ID нажатых кнопок',
+            'date_create' => 'Дата создания кукиса',
         ];
     }
     
