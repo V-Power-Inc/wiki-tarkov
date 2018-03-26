@@ -13,30 +13,19 @@ $(document).ready(function() {
 
         /*** Объявляем переменной ID кнопки, по которой кликнул пользователь ***/
         var activebutton = $(this).attr('id');
-
-        /*** Объявляем название куки которую проверяем на существование ***/
-        //todo: Эта проверка почему то не работает.
-        var interbuttons = $.cookie('interbuttons');
-
-        /*** Получаем ID куки если она существует ***/
-      //  var coockieid = $.cookie('interbuttons', 'value');
         
-     //   console.log(coockieid);
+        var interbuttons = 'interbuttons';
+        
+        /*** Функция проверяющая существование кукиса ***/
+        // возвращает cookie с именем name, если есть, если нет, то undefined
+        function getCookie(interbuttons) {
+            var matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + interbuttons.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
 
-        if(interbuttons !== null) {
-            /*** Данные с параметром ID записи из базы улетают на бэкэнд ***/
-            $.ajax({
-                url: '/site/clickremember',
-                data: {param: param, token : token, name:'interbuttons', value : interbuttons},
-                async: false,
-                type: "POST",
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-            
-            
-        } else if (interbuttons == null) {
+        if (getCookie(interbuttons) == undefined) {
             /*** Данные с параметром ID нажатой кнопки улетают на бэкэнд ***/
             $.ajax({
                 url: '/site/clickremember',
@@ -47,9 +36,19 @@ $(document).ready(function() {
                     console.log(data);
                 }
             });
+        } else if(getCookie(interbuttons) !== undefined) {
+            /*** Данные с параметром ID записи из базы улетают на бэкэнд ***/
+            $.ajax({
+                url: '/site/clickremember',
+                data: {param: param, token: token, name: 'interbuttons', value: interbuttons},
+                async: false,
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+
         }
-
-
 
     });
 });
