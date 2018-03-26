@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/bootstrap-js/bootstrap.min.js',
         'js/popup/magnific-popup.js',
+        'js/jquery.cookie.js',
         'js/main.js'
     ];
     public $depends = [

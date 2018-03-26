@@ -7,9 +7,11 @@ use Yii;
 /**
  * This is the model class for table "usercoockies".
  *
+ * @property integer $id
  * @property string $name
  * @property string $buttons
  * @property string $date_create
+ * @property string $date_edit
  */
 class Usercoockies extends \yii\db\ActiveRecord
 {
@@ -29,7 +31,7 @@ class Usercoockies extends \yii\db\ActiveRecord
         return [
             [['buttons'], 'string'],
             [['name'], 'string', 'max' => 255],
-            [['date_create'], 'safe'],
+            [['date_create', 'date_edit'], 'safe'],
         ];
     }
 
@@ -39,9 +41,11 @@ class Usercoockies extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'Автоинкрементарный ID записей кукисов',
             'name' => 'Имя кукиса',
-            'buttons' => 'base64 закодированные ID нажатых кнопок',
+            'buttons' => 'Json массив кнопок',
             'date_create' => 'Дата создания кукиса',
+            'date_edit' => 'Дата последнего изменения кукива',
         ];
     }
     

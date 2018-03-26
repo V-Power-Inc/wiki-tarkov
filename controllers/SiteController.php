@@ -315,74 +315,71 @@ class SiteController extends Controller
         }
     }
     
-    /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу **/
+    /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу а также их передача на фронт ***/
     public function actionClickremember() {
         if(Yii::$app->request->isPost) {
 
-            // Присваиваем переменной все что пришло в экшон через $_POST
+            // Данные из $_POST присваиваем переменной $postdata для удобочитаемости
             $postdata = $_POST;
 
-            // получение коллекции (yii\web\CookieCollection) из компонента "response"
-            $cookies = Yii::$app->response->cookies;
-            
-            if (empty($cookies->get('interbuttons'))) {
+            // Созданем переменную для проверки в базе текущей куки на существование
+            $exisstscoockie = Usercoockies::find()->where(['id' => $postdata['value']])->One();
 
-            // Делаем запись со значение куки в base 64
-            $sqlvalue = base64_encode($postdata['buttons']);
+            // Проверяем есть ли такая кука в базе
+            /** Эта проверка почему то не работает. **/
+            if(!$exisstscoockie) {
+                // Сохраняем данные о куке
+                $model = new Usercoockies;
+                $model->name = $postdata['name'];
+                $model->buttons = $postdata['value'];
+                $model->date_edit = date("ymdhis", strtotime("now"));
+                $model->save();
 
-            // Проверяем есть ли эквивалетная запись в таблице базы данных
-            $sqlexists = Usercoockies::find()->where(['buttons' => $sqlvalue])->one();
+                // ID последнего сохраненного объекта в базу
+                $lastid = Yii::$app->db->lastInsertID;
+                
+                // Получем данные о последнем сохраненном объекте в базу
+                $lastincert = Usercoockies::find()->where(['id' => $lastid])->one();
 
-                if(empty($sqlexists)) {
-                    $model = new Usercoockies();
-                   // $model->id = ;
-                    $model->name = $postdata['name'];
-                   // $model->buttons = base64_encode($postdata['buttons']);
-                    $model->buttons = hash('ripemd160', date("dmyhis", strtotime("now"))) . ',' .$postdata['buttons'];
-                    $model->save();
-                }
+                // получение коллекции (yii\web\CookieCollection) из компонента "response"
+                $cookies = Yii::$app->response->cookies;
 
-                // добавление новой куки в HTTP-ответ
+                // Создаем новую куку
                 $cookies->add(new \yii\web\Cookie([
-                    'name' => $postdata['name'],
-                    'value' => $postdata['buttons'],
+                    'name' => $lastincert->name,
+                    'value' => $lastincert->id,
                     'expire' => time() + 950400,
                     'secure' => 1,
                 ]));
                 
+//                echo "<pre>";
+//                    print_r($model->load($exisstscoockie));
+//                echo "<pre>";
+//                exit();
                 
-//                echo '<pre>';
-//                echo print_r($cookies->get('interbuttons'));
-//                exit;
-//                echo '</pre>';
+            } elseif ($exisstscoockie) {
 
-            } else if (!empty($cookies->get('interbuttons'))) {
-              //  $activecoockie = $cookies->get('interbuttons');
 
-                $basecoockie = Usercoockies::find()->where(['buttons' => explode(',', $postdata['buttons'])])->one();
-
-                // $model = new Usercoockies();
-                // $model->id = ;
-                $basecoockie->name = $postdata['name'];
-                // $model->buttons = base64_encode($postdata['buttons']);
-                $basecoockie->buttons = substr($basecoockie->buttons, -1). ',' .$postdata['buttons'];
-                $basecoockie->save();
-
-                // добавление новой куки в HTTP-ответ
-                $cookies->add(new \yii\web\Cookie([
-                    'name' => $basecoockie->name,
-                    'value' => $basecoockie->buttons,
-                    'expire' => time() + 950400,
-                    'secure' => 1,
-                ]));
-
-                echo '<pre>';
-                echo print_r($cookies->get('interbuttons'));
-                exit;
-                echo '</pre>';
-                
             }
-                
+
+
+
+
+
+
+
+//      echo "<pre>";
+//          print_r($_POST);
+//      echo "<pre>";
+//      exit();
+
+
+
+
+
+
+
+
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
