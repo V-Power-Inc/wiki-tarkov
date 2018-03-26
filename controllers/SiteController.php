@@ -332,7 +332,7 @@ class SiteController extends Controller
                 $model = new Usercoockies;
                 $model->name = $postdata['name'];
                 $model->buttons = $postdata['value'];
-                $model->date_edit = date("ymdhis", strtotime("now"));
+                $model->date_edit = date("ymdHis", strtotime("now"));
                 $model->save();
 
                 // ID последнего сохраненного объекта в базу
@@ -346,8 +346,8 @@ class SiteController extends Controller
 
                 // Создаем новую куку
                 $cookies->add(new \yii\web\Cookie([
-                    'name' => $lastincert->name,
-                    'value' => $lastincert->id,
+                    'name' => 'interbuttons',
+                    'value' => $lastid,
                     'expire' => time() + 950400,
                     'secure' => 1,
                 ]));
@@ -359,7 +359,10 @@ class SiteController extends Controller
                 
             } elseif ($exisstscoockie) {
 
-
+echo '<pre>';
+   echo print_r($_POST);
+   exit;
+echo '</pre>';
             }
 
 
