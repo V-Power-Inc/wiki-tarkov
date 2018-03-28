@@ -314,6 +314,18 @@ class SiteController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+
+    /*** Получаем готовую куку Interbuttons если она существует - отрицательный результат null ***/
+    public static function actionGetCookie() {
+        $cookieslist = Yii::$app->request->cookies;
+
+        if ($cookieslist->has('interbuttons')) {
+            $cookieValue = $cookieslist->getValue('interbuttons');
+            echo $cookieValue;
+        } else {
+            return null;
+        }
+    }
     
     /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу а также их передача на фронт ***/
     public function actionClickremember() {
@@ -322,12 +334,13 @@ class SiteController extends Controller
             // Данные из $_POST присваиваем переменной $postdata для удобочитаемости
             $postdata = $_POST;
 
-            // Созданем переменную для проверки в базе текущей куки на существование
-            $exisstscoockie = Usercoockies::find()->where(['id' => $postdata['value']])->One();
+            // Создаем переменную для проверки в базе текущей куки на существование
+            $exisstscoockie = $this->actionGetCookie();
 
             // Проверяем есть ли такая кука в базе
-            /** Эта проверка почему то не работает. **/
-            if(!$exisstscoockie) {
+            /*** Эта проверка почему то не работает. ***/
+            if($exisstscoockie == null) {
+               
                 // Сохраняем данные о куке
                 $model = new Usercoockies;
                 $model->name = $postdata['name'];
@@ -345,49 +358,33 @@ class SiteController extends Controller
                 $cookies = Yii::$app->response->cookies;
 
                 // Создаем новую куку
-                $cookies->add(new \yii\web\Cookie([
+                $newcoockie = new \yii\web\Cookie([
                     'name' => 'interbuttons',
                     'value' => $lastid,
                     'expire' => time() + 950400,
                     'secure' => 1,
-                ]));
-                
-//                echo "<pre>";
-//                    print_r($model->load($exisstscoockie));
-//                echo "<pre>";
-//                exit();
-                
-            } elseif ($exisstscoockie) {
+                    'httpOnly' => 0,
+                ]);
 
-echo '<pre>';
-   echo print_r($_POST);
-   exit;
-echo '</pre>';
+                // Додавляем ее в ответ
+                Yii::$app->getResponse()->getCookies()->add($newcoockie);
+                
+            } elseif ($exisstscoockie !== null) {
+
+                
+                
+                echo '<pre>';
+                   echo print_r($_POST);
+                   exit;
+                echo '</pre>';
+                
+                
             }
-
-
-
-
-
-
-
-//      echo "<pre>";
-//          print_r($_POST);
-//      echo "<pre>";
-//      exit();
-
-
-
-
-
-
-
-
+            
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()

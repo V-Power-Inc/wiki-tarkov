@@ -14,16 +14,10 @@ $(document).ready(function() {
         /*** Объявляем переменной ID кнопки, по которой кликнул пользователь ***/
         var activebutton = $(this).attr('id');
 
+        /*** Объявляем куку в переменную ***/
         var cookie = $.cookie("interbuttons");
         
         /*** Функция проверяющая существование кукиса ***/
-        // возвращает cookie с именем name, если есть, если нет, то undefined
-        function getCookie(interbuttons) {
-            var matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + interbuttons.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
 
         if (cookie == null) {
             /*** Данные с параметром ID нажатой кнопки улетают на бэкэнд ***/
