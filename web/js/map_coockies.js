@@ -14,18 +14,12 @@ $(document).ready(function() {
         /*** Объявляем переменной ID кнопки, по которой кликнул пользователь ***/
         var activebutton = $(this).attr('id');
 
+        /*** Объявляем куку в переменную ***/
         var cookie = $.cookie("interbuttons");
         
         /*** Функция проверяющая существование кукиса ***/
-        // возвращает cookie с именем name, если есть, если нет, то undefined
-        function getCookie(interbuttons) {
-            var matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + interbuttons.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
 
-        if (cookie == null) {
+        if (cookie == null || cookie == null) {
             /*** Данные с параметром ID нажатой кнопки улетают на бэкэнд ***/
             $.ajax({
                 url: '/site/clickremember',
@@ -36,19 +30,6 @@ $(document).ready(function() {
                     console.log(data);
                 }
             });
-        } else if(cookie !== null) {
-            /*** Данные с параметром ID записи из базы улетают на бэкэнд ***/
-            $.ajax({
-                url: '/site/clickremember',
-                data: {param: param, token: token, name: 'interbuttons', value: 'ItWorks'},
-                async: false,
-                type: "POST",
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-
         }
-
     });
 });
