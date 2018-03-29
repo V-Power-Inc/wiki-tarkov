@@ -352,13 +352,12 @@ class SiteController extends Controller
                 // Получаем запись кукиса из базы
                 $sqlexists = Usercoockies::find()->where(['id' => $existscookie])->one();
 
+                // todo: Временно отключил обновления существующих записей чтобы не срать в базу и уменьшить лаги при нажатиях кнопок
                 // Задаем переменную для поля buttons
-                $sqlexists->buttons = $sqlexists->buttons . ',' .$postdata['value'];
+               // $sqlexists->buttons = $sqlexists->buttons . ',' .$postdata['value'];
                 
                 // Сохраняем переменную
-                $sqlexists->save();
-
-                
+               // $sqlexists->save();
                 
             }
             

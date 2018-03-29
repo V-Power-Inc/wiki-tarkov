@@ -40,22 +40,27 @@ $this->registerMetaTag([
     <div class="col-lg-12">
         <div class="option-buttons">
             <h2 class="map-title">Маркеры</h2>
-            <button class="btn btn-danger dikie-b" id="dikie-spawns-bereg">Спавны диких</button>
-            <button class="btn btn-gamers gamers-b" id="chvk-spawns-bereg">Спавны ЧВК</button>
-            <button class="btn btn-bandits bandits-b" id="dikie-exits-bereg">Выходы с карты за Диких</button>
-            <button class="btn btn-default exits-b" id="chvk-exits-bereg">Выходы с карты за ЧВК</button>
-            <button class="btn btn-success voenka-b" id="weapons-bereg">Оружейные ящики</button>
-            <button class="btn btn-primary polki-b" id="quests-bereg">Квестовые точки</button>
-            <button class="btn btn-yellow w-100 keys-b" id="doors-bereg">Открываемые двери</button>
-            <button class="btn btn-places w-100 places-b" id="interesting-places-bereg">Интересные места</button>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="dikie-b" id="dikie-spawns-bereg"><i class="dikie-spawns"></i>Спавны диких</p>
+                    <p class="gamers-b" id="chvk-spawns-bereg"><i class="chvk-spawns"></i>Спавны ЧВК</p>
+                    <p class="bandits-b" id="dikie-exits-bereg"><i class="dikie-exits"></i>Выходы с карты за Диких</p>
+                    <p class="exits-b" id="chvk-exits-bereg"><i class="chvk-exits"></i>Выходы с карты за ЧВК</p>
+                </div>
+            
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="voenka-b" id="weapons-bereg"><i class="weapon-cases"></i>Оружейные ящики</p>
+                    <p class="polki-b" id="quests-bereg"><i class="quest-tochki"></i>Квестовые точки</p>
+                    <p class="w-100 keys-b" id="doors-bereg"><i class="doors-tochki"></i>Открываемые двери</p>
+                    <p class="w-100 places-b" id="interesting-places-bereg"><i class="interest-tochki"></i>Интересные места</p>
+                </div>
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">
             <!-- Маркеры выходов в зависимости от спавна -->
             <div class="random-exits">
-                <div class="btn-group" data-toggle="buttons">
+                <div class="btn-group w-100" data-toggle="buttons">
 
-                    <label class="btn btn-primary house-spawn remastered active">
+                    <label class="btn btn-primary w-100 house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                         <span>Выходы для спавна Деревня</span>
@@ -64,7 +69,7 @@ $this->registerMetaTag([
                     <br>
                     <br>
 
-                    <label class="btn btn-primary remastered station-spawn">
+                    <label class="btn btn-primary w-100 remastered station-spawn">
                         <input type="radio" name="options" id="option2" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                         <span>Выходы для спавна Берег</span>

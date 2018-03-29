@@ -9,7 +9,7 @@ $(document).ready(function() {
     var token = $('meta[name=csrf-token]').attr("content");
 
     /*** Узнаем ID кнопки с маркером по которой кликнули ***/
-    $('.btn').click(function(){
+    $('.map_buttons p').click(function(){
 
         /*** Объявляем переменной ID кнопки, по которой кликнул пользователь ***/
         var activebutton = $(this).attr('id');
