@@ -19,7 +19,7 @@ $(document).ready(function() {
         
         /*** Функция проверяющая существование кукиса ***/
 
-        if (cookie == null || cookie == null) {
+        if (cookie == null || cookie !== null) {
             /*** Данные с параметром ID нажатой кнопки улетают на бэкэнд ***/
             $.ajax({
                 url: '/site/clickremember',
