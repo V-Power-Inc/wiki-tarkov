@@ -315,58 +315,6 @@ class SiteController extends Controller
         }
     }
     
-    /*** Экшон для обработки кукисов (Coockies) - здесь происходит прием и сохранение новых кук в таблицу а также их передача на фронт ***/
-    public function actionClickremember() {
-        if(Yii::$app->request->isPost) {
-
-            // Данные из $_POST присваиваем переменной $postdata для удобочитаемости
-            $postdata = $_POST;
-
-            // Проверяем существует ли кука
-            if((!isset(\Yii::$app->request->cookies['interbuttons']))) {
-               
-                // Сохраняем данные о куке
-                $model = new Usercoockies;
-                $model->name = $postdata['name'];
-                $model->buttons = $postdata['value'];
-                $model->date_edit = date("ymdHis", strtotime("now"));
-                $model->save();
-                
-                // Создаем новую куку
-                $newcoockie = new \yii\web\Cookie([
-                    'name' => 'interbuttons',
-                    'value' => $model->id,
-                    'expire' => time() + 950400,
-                    'secure' => 1,
-                    'httpOnly' => 0,
-                ]);
-
-                // Додавляем ее в ответ
-                Yii::$app->getResponse()->getCookies()->add($newcoockie);
-                
-            } elseif (isset(\Yii::$app->request->cookies['interbuttons'])) {
-                
-                // Получаем значение кукиса, который уже существует в базе
-                $existscookie = Yii::$app->request->cookies->getValue('interbuttons');
-                
-                // Получаем запись кукиса из базы
-                $sqlexists = Usercoockies::find()->where(['id' => $existscookie])->one();
-                
-                // Задаем переменную для поля buttons
-                $sqlexists->buttons = $sqlexists->buttons . ',' .$postdata['value'];
-                
-                // Сохраняем переменную
-                $sqlexists->save();
-                
-                
-                
-            }
-            
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
     {
