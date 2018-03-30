@@ -84,24 +84,15 @@ var PlacesInt = L.icon({
 
 $(document).ready(function() {
 
+    /** Зачеркиваем кнопки маркеров, по которым нажали **/
+    
+
     /** Делаем бэкграунд черным **/
     $('body').css({'background':'black'});
 
     /*** Объявляем проверочные токены для Ajax ***/
     var param = $('meta[name=csrf-param]').attr("content");
     var token = $('meta[name=csrf-token]').attr("content");
-    
-    /** По прогрузке документа получаем данные по ajax со статическим контентом маркеров **/
-    $.ajax({
-        url: '/site/static',
-        dataType: 'json',
-        data: {param: param, token : token},
-        async: false,
-        success: function(result) {
-            staticData = result;
-            $('.loader-maps-background').fadeOut();
-        }
-    });
 
     /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
     $.ajax({
@@ -196,7 +187,7 @@ $(document).ready(function() {
     $('body').on('click','.bandits-b', function(){
         dikieexits.addTo(map);
         $(".bandits-b").attr('id', 'active-bandits-v');
-        $('#dikiyexitmarker').html(staticData[6].content);
+        // $('#dikiyexitmarker').html(staticData[6].content);
        // $(this).remove();
     });
 
@@ -209,7 +200,7 @@ $(document).ready(function() {
     $('body').on('click','.places-b', function(){
         interstplaces.addTo(map);
         $(".places-b").attr('id', 'active-places-v');
-        $('#necessaryplaces').html(staticData[7].content);
+        // $('#necessaryplaces').html(staticData[7].content);
        // $(this).remove();
     });
 
@@ -222,7 +213,7 @@ $(document).ready(function() {
     $('body').on('click','.voenka-b', function(){
         voenloot.addTo(map);
         $(".voenka-b").attr('id' , 'active-bounds-v');
-        $('#voenniymarker').html(staticData[1].content);
+        // $('#voenniymarker').html(staticData[1].content);
         // $(this).remove();
     });
 
@@ -235,7 +226,7 @@ $(document).ready(function() {
     $('body').on('click','.dikie-b', function(){
         dikiy.addTo(map);
         $(".dikie-b").attr('id', 'active-dikie-v');
-        $('#dikiymarker').html(staticData[0].content);
+        // $('#dikiymarker').html(staticData[0].content);
        // $(this).remove();
     });
 
@@ -248,7 +239,7 @@ $(document).ready(function() {
     $('body').on('click','.polki-b', function(){
         polki.addTo(map);
         $(".polki-b").attr('id', 'active-polki-v');
-        $('#polkiimarker').html(staticData[2].content);
+        // $('#polkiimarker').html(staticData[2].content);
         // $(this).remove();
     });
 
@@ -269,7 +260,7 @@ $(document).ready(function() {
 
         villagespawn.addTo(map);
         $(".exits-b").attr('id', 'active-exits-v');
-        $('#exitsmarker').html(staticData[3].content);
+        // $('#exitsmarker').html(staticData[3].content);
        // $(this).remove();
     });
 
@@ -312,7 +303,7 @@ $(document).ready(function() {
     $('body').on('click','.keys-b', function(){
         keys.addTo(map);
         $(".keys-b").attr('id', 'active-keys-v');
-        $('#keysmarker').html(staticData[4].content);
+        // $('#keysmarker').html(staticData[4].content);
        // $(this).remove();
     });
 
@@ -325,7 +316,7 @@ $(document).ready(function() {
     $('body').on('click','.gamers-b', function(){
         chvk.addTo(map);
         $(".gamers-b").attr('id', 'active-players-v');
-        $('#playermarker').html(staticData[5].content);
+        // $('#playermarker').html(staticData[5].content);
        // $(this).remove();
     });
 
