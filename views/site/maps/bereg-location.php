@@ -8,7 +8,9 @@
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/bereg-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/map_coockies.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Карта локации Берег в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
 $this->registerMetaTag([
     'name' => 'description',
@@ -38,14 +40,14 @@ $this->registerMetaTag([
     <div class="col-lg-12">
         <div class="option-buttons">
             <h2 class="map-title">Маркеры</h2>
-            <button class="btn btn-danger dikie-b">Спавны диких</button>
-            <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
-            <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
-            <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
-            <button class="btn btn-success voenka-b">Оружейные ящики</button>
-            <button class="btn btn-primary polki-b">Квестовые точки</button>
-            <button class="btn btn-yellow w-100 keys-b">Открываемые двери</button>
-            <button class="btn btn-places w-100 places-b">Интересные места</button>
+            <button class="btn btn-danger dikie-b" id="dikie-spawns-bereg">Спавны диких</button>
+            <button class="btn btn-gamers gamers-b" id="chvk-spawns-bereg">Спавны ЧВК</button>
+            <button class="btn btn-bandits bandits-b" id="dikie-exits-bereg">Выходы с карты за Диких</button>
+            <button class="btn btn-default exits-b" id="chvk-exits-bereg">Выходы с карты за ЧВК</button>
+            <button class="btn btn-success voenka-b" id="weapons-bereg">Оружейные ящики</button>
+            <button class="btn btn-primary polki-b" id="quests-bereg">Квестовые точки</button>
+            <button class="btn btn-yellow w-100 keys-b" id="doors-bereg">Открываемые двери</button>
+            <button class="btn btn-places w-100 places-b" id="interesting-places-bereg">Интересные места</button>
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">

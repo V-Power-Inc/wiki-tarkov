@@ -18,11 +18,13 @@ use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
 use app\models\Questions;
+use app\models\Usercoockies;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
+use yii\web\Cookie;
 
 
 class SiteController extends Controller
@@ -178,6 +180,11 @@ class SiteController extends Controller
 
     /** Рендер страницы с картой Берега **/
     public function actionBereg() {
+        // $cookies = Yii::$app->request->cookies;
+        //echo '<pre>';
+        //   echo print_r($cookies);
+        //   exit;
+        //echo '</pre>';
         return $this->render('maps/bereg-location.php');
     }
     
