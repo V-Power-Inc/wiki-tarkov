@@ -10,31 +10,22 @@ const map = L.map('map', {
     center: [61.373, -10.469],
     maxzoom: 6,
     minzoom: 3,
-    zoom: 3
+    zoom: 3,
 });
-
-/** Обращаемся к слоям зума интерактивной карты **/
-L.tileLayer('/img/bereg/{z}/{x}/{y}.png', {
-    noWrap: true,
-}).addTo(map);
 
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 var hash = new L.Hash(map);
 
+/** Обращаемся к слоям зума интерактивной карты **/
+L.tileLayer('/img/bereg/{z}/{x}/{y}.png', {
+    noWrap: true,
+    errorTileUrl: '/img/black-bg.jpg',
+}).addTo(map);
+
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setMaxZoom(6);
 map.setMinZoom(3);
-map.setZoom(3);
-
-/** Ограничение на перетягивание карты, если в экране есть края карты **/
-var southWest = L.latLng(84.879, -177.715),
-    northEast = L.latLng(1.758, 155.039);
-var bounds = L.latLngBounds(southWest, northEast);
-
-map.setMaxBounds(bounds);
-map.on('drag', function() {
-    map.panInsideBounds(bounds, { animate: false });
-});
+// map.setZoom(3);
 
 /** Получаем текщие координаты по местонахождению мышки **/
 function onMouseMove(e) {
@@ -83,7 +74,7 @@ var PlacesInt = L.icon({
 });
 
 $(document).ready(function() {
-
+    
     /** Зачеркиваем кнопки маркеров, по которым нажали **/
     
 

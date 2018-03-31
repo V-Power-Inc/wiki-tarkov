@@ -1461,4 +1461,8 @@ img.w-100-auto {
     background-size: 15px 15px;
 }
 
+/*** Стили для кнопок маркеров ***/
 
+.dikie-b, .gamers-b, .bandits-b, .exits-b, .voenka-b, .polki-b, .keys-b, .places-b  {
+    text-decoration: line-through;
+}
