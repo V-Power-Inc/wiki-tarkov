@@ -1405,6 +1405,7 @@ img.w-100-auto {
     font-size: 14px;
     cursor: pointer;
     position: relative;
+    text-decoration: line-through;
 }
 
 .btn-group.w-100, label.w-100 {
@@ -1463,11 +1464,7 @@ img.w-100-auto {
 
 /*** Стили для кнопок маркеров ***/
 
-.dikie-b, .gamers-b, .bandits-b, .exits-b, .voenka-b, .polki-b, .keys-b, .places-b  {
-    text-decoration: line-through;
-}
-
-.unthrough {
+.map_buttons p.unthrough {
     text-decoration: none;
 }
 

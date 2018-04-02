@@ -19,7 +19,7 @@ var hash = new L.Hash(map);
 /** Обращаемся к слоям зума интерактивной карты **/
 L.tileLayer('/img/bereg/{z}/{x}/{y}.png', {
     noWrap: true,
-    errorTileUrl: '/img/black-bg.jpg',
+    errorTileUrl: '/img/error-bg.jpg',
 }).addTo(map);
 
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
