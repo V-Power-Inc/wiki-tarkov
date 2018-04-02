@@ -1466,3 +1466,11 @@ img.w-100-auto {
 .dikie-b, .gamers-b, .bandits-b, .exits-b, .voenka-b, .polki-b, .keys-b, .places-b  {
     text-decoration: line-through;
 }
+
+.unthrough {
+    text-decoration: none;
+}
+
+.through {
+    text-decoration: line-through;
+}

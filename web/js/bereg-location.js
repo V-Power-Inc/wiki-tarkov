@@ -75,8 +75,20 @@ var PlacesInt = L.icon({
 
 $(document).ready(function() {
     
+    /** Убираем зачеркивание у кнопок у которых оно уже было **/
+    $('body').on('click','.map_buttons p', function() {
+        if($(this).hasClass('unthrough') !== true) {
+           $(this).addClass('unthrough');
+        }
+    });
+
     /** Зачеркиваем кнопки маркеров, по которым нажали **/
-    
+    $('body').on('click','.map_buttons p.unthrough', function() {
+        // console.log($(this).attr('id').length);
+        if ($(this).hasClass('unthrough') == true)  {
+            $(this).removeClass('unthrough');
+        }
+    });
 
     /** Делаем бэкграунд черным **/
     $('body').css({'background':'black'});
