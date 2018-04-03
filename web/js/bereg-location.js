@@ -75,6 +75,58 @@ var PlacesInt = L.icon({
 
 $(document).ready(function() {
     
+    /*** Показываем все маркеры при клике на кнопку - показать все маркеры ***/
+    $('body').on('click','.markers-on', function() {
+        // Вырубаем сначала все включенные слои
+        try {
+            $('#active-bandits-v').click();
+            $('#active-places-v').click();
+            $('#active-bounds-v').click();
+            $('#active-dikie-v').click();
+            $('#active-polki-v').click();
+            $('#active-exits-v').click();
+            $('#active-keys-v').click();
+            $('#active-players-v').click();
+        }
+        catch(err) {}
+
+        // Включаем все маркеры кроме спавнов
+        $('.dikie-b').click();
+        $('.gamers-b').click();
+        $('.bandits-b').click();
+        $('.exits-b').click();
+        $('.voenka-b').click();
+        $('.polki-b').click();
+        $('.keys-b').click();
+        $('.places-b').click();
+
+        $('.map_buttons p').each(function() {
+            $(this).addClass('unthrough');
+        });
+    });
+
+    /*** Скрываем все маркеры если нажали кнопку - скрыть марккеры ***/
+    $('body').on('click','.markers-off', function() {
+        // Отключаем все включенные слои
+        try {
+            $('#active-bandits-v').click();
+            $('#active-places-v').click();
+            $('#active-bounds-v').click();
+            $('#active-dikie-v').click();
+            $('#active-polki-v').click();
+            $('#active-exits-v').click();
+            $('#active-keys-v').click();
+            $('#active-players-v').click();
+        }
+        catch(err) {}
+
+        $('.map_buttons p').each(function() {
+            $(this).removeClass('unthrough');
+            $(this).attr('id', '');
+        });
+
+    });
+    
     /** Убираем зачеркивание у кнопок у которых оно уже было **/
     $('body').on('click','.map_buttons p', function() {
         if($(this).hasClass('unthrough') !== true) {

@@ -1471,3 +1471,7 @@ img.w-100-auto {
 .through {
     text-decoration: line-through;
 }
+
+.markers-off, .markers-on {
+    text-decoration: none!important;
+}
