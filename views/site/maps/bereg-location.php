@@ -53,7 +53,7 @@ $this->registerMetaTag([
                     <p class="polki-b" id="quests-bereg"><i class="quest-tochki"></i>Квестовые точки</p>
                     <p class="w-100 keys-b" id="doors-bereg"><i class="doors-tochki"></i>Открываемые двери</p>
                     <p class="w-100 places-b" id="interesting-places-bereg"><i class="interest-tochki"></i>Интересные места</p>
-                    <p class="markers-off" id="bereg-hide-all">Скрыть все маркеры<i class="fa fa-eye-slash"></i></p>
+                    <p class="markers-off" id="bereg-hide-all"><i class="fa fa-eye-slash"></i>Скрыть все маркеры</p>
                 </div>
         </div>
         <!-- Контент страницы -->
@@ -90,14 +90,7 @@ $this->registerMetaTag([
                 <p class="alert alert-info"><b>На интерактивной карте также есть схема санатория "Лазурный Берег", на которой вы сможете посмотреть, и узнать что находится в помещениях восточного, западного и центрального корпусов этого комплекса.</b></p>
                 <p></p>
             </div>
-            <div id="voenniymarker"></div>
-            <div id="polkiimarker"></div>
-            <div id="dikiymarker"></div>
-            <div id="exitsmarker"></div>
-            <div id="keysmarker"></div>
-            <div id="playermarker"></div>
-            <div id="dikiyexitmarker"></div>
-            <div id="necessaryplaces"></div>
+
         </div>
     </div>
 </div>
