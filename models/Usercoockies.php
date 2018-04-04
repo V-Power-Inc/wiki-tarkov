@@ -13,6 +13,8 @@ use Yii;
  * @property string $date_create
  * @property string $date_edit
  */
+
+/*** Разработка кукисов остановлена с 04.04.2018г. ***/
 class Usercoockies extends \yii\db\ActiveRecord
 {
     /**

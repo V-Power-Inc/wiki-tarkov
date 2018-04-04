@@ -39,14 +39,32 @@ $this->registerMetaTag([
         <div class="col-lg-12">
             <div class="option-buttons">
                 <h2 class="map-title">Маркеры</h2>
-                <button class="btn btn-danger dikie-b">Спавны диких</button>
-                <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
-                <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
-                <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
-                <button class="btn btn-success voenka-b">Оружейные ящики</button>
-                <button class="btn btn-primary polki-b">Квестовые точки</button>
-                <button class="btn btn-yellow w-100 keys-b">Открываемые двери</button>
-                <button class="btn btn-places w-100 places-b">Интересные места</button>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="dikie-b" id="spawns-dikie-zavod"><i class="dikie-spawns"></i>Спавны диких</p>
+                    <p class="gamers-b" id="spawns-chvk-zavod"><i class="chvk-spawns"></i>Спавны ЧВК</p>
+                    <p class="bandits-b" id="exits-dikie-zavod"><i class="dikie-exits"></i>Выходы с карты за Диких</p>
+                    <p class="exits-b" id="exits-chvk-zavod"><i class="chvk-exits"></i>Выходы с карты за ЧВК</p>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="voenka-b" id="weapons-zavod"><i class="weapon-cases"></i>Оружейные ящики</p>
+                    <p class="polki-b" id="quests-zavod"><i class="quest-tochki"></i>Квестовые точки</p>
+                    <p class="w-100 keys-b" id="doors-zavod"><i class="doors-tochki"></i>Открываемые двери</p>
+                    <p class="w-100 places-b" id="interesting-zavod"><i class="interest-tochki"></i>Интересные места</p>
+                </div>
+
+                <!-- Функциональные кнопки --->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-on" id="zavod-count-on"><i class="fa fa-check-square" aria-hidden="true"></i>Показать количество маркеров</p>
+                    <p class="markers-on">Показать все маркеры<i class="fa fa-eye"></i></p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-off" id="zavod-count-off"><i class="fa fa-square" aria-hidden="true"></i>Скрыть количество маркеров</p>
+                    <p class="markers-off"><i class="fa fa-eye-slash"></i>Скрыть все маркеры</p>
+                </div>
+                
             </div>
             <!-- Контент страницы -->
             <div class="col-lg-12">
@@ -58,14 +76,7 @@ $this->registerMetaTag([
                     <p class="alert alert-info">Информацию о спавне <b>ключа от Выхода с Завода</b> и открываемым этим ключом дверям вы <b><a href="/keys/key-of-exit-zavod" style="color: #d9534f;" target="_blank">сможете найти в нашей статье.</a></b> </p>
                     <p></p>
                 </div>
-                <div id="voenniymarker"></div>
-                <div id="polkiimarker"></div>
-                <div id="dikiymarker"></div>
-                <div id="exitsmarker"></div>
-                <div id="keysmarker"></div>
-                <div id="playermarker"></div>
-                <div id="dikiyexitmarker"></div>
-                <div id="necessaryplaces"></div>
+
             </div>
         </div>
     </div>
