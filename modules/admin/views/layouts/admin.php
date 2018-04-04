@@ -30,7 +30,8 @@ AdminAsset::register($this);
     </head>
     <body>
     <?php $this->beginBody() ?>
-
+    
+    
     <div class="wrap">
         <?php
         NavBar::begin([
@@ -75,6 +76,9 @@ AdminAsset::register($this);
         NavBar::end();
     }
         ?>
+
+        <div id="particles-js"></div>
+        
         <div class="container padding-top-110">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
