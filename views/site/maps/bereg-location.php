@@ -45,7 +45,6 @@ $this->registerMetaTag([
                     <p class="gamers-b" id="chvk-spawns-bereg"><i class="chvk-spawns"></i>Спавны ЧВК</p>
                     <p class="bandits-b" id="dikie-exits-bereg"><i class="dikie-exits"></i>Выходы с карты за Диких</p>
                     <p class="exits-b" id="chvk-exits-bereg"><i class="chvk-exits"></i>Выходы с карты за ЧВК</p>
-                    <p class="markers-on" id="bereg-show-all">Показать все маркеры<i class="fa fa-eye"></i></p>
                 </div>
             
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
@@ -53,8 +52,19 @@ $this->registerMetaTag([
                     <p class="polki-b" id="quests-bereg"><i class="quest-tochki"></i>Квестовые точки</p>
                     <p class="w-100 keys-b" id="doors-bereg"><i class="doors-tochki"></i>Открываемые двери</p>
                     <p class="w-100 places-b" id="interesting-places-bereg"><i class="interest-tochki"></i>Интересные места</p>
+                </div>
+
+            <!-- Функциональные кнопки --->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-on" id="bereg-count-on"><i class="fa fa-check-square" aria-hidden="true"></i>Показать количество маркеров</p>
+                    <p class="markers-on" id="bereg-show-all">Показать все маркеры<i class="fa fa-eye"></i></p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-off" id="bereg-count-off"><i class="fa fa-square" aria-hidden="true"></i>Скрыть количество маркеров</p>
                     <p class="markers-off" id="bereg-hide-all"><i class="fa fa-eye-slash"></i>Скрыть все маркеры</p>
                 </div>
+            
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">

@@ -499,7 +499,7 @@ h2.white {
 }
 
 .optins_layerstability {
-    width: 500px;
+    width: 540px;
     position: absolute;
     right: 0;
     top: 183px;
@@ -1418,6 +1418,7 @@ img.w-100-auto {
     position: absolute;
     left: -20px;
     top: 2px;
+    text-align: center;
 }
 
 /*** Кастомные иконки интерактивных маркеров ***/
@@ -1472,6 +1473,23 @@ img.w-100-auto {
     text-decoration: line-through;
 }
 
-.markers-off, .markers-on {
+.markers-off, .markers-on, .count-off, .count-on {
     text-decoration: none!important;
+}
+
+.map_buttons p span.count-markers-global {
+    margin: 0 0 0 5px;
+    padding: 0px;
+    text-decoration: none!important;
+    background: white;
+    border-radius: 5px 5px 5px 5px;
+    color: #f73927;
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    float: right;
+}
+
+.map_buttons.padding-top-30 {
+    padding-top: 30px;
 }
