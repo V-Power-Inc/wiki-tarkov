@@ -39,14 +39,31 @@ $this->registerMetaTag([
     <div class="col-lg-12">
         <div class="option-buttons">
             <h2 class="map-title">Маркеры</h2>
-            <button class="btn btn-danger dikie-b">Спавны диких</button>
-            <button class="btn btn-gamers gamers-b">Спавны ЧВК</button>
-            <button class="btn btn-bandits bandits-b">Выходы с карты за Диких</button>
-            <button class="btn btn-default exits-b">Выходы с карты за ЧВК</button>
-            <button class="btn btn-success voenka-b">Оружейные ящики</button>
-            <button class="btn btn-primary polki-b">Квестовые точки</button>
-            <button class="btn btn-yellow w-100 keys-b">Открываемые двери</button>
-            <button class="btn btn-places w-100 places-b">Интересные места</button>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                <p class="dikie-b"><i class="dikie-spawns"></i>Спавны диких</p>
+                <p class="gamers-b"><i class="chvk-spawns"></i>Спавны ЧВК</p>
+                <p class="bandits-b"><i class="dikie-exits"></i>Выходы с карты за Диких</p>
+                <p class="exits-b"><i class="chvk-exits"></i>Выходы с карты за ЧВК</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                <p class="voenka-b"><i class="weapon-cases"></i>Оружейные ящики</p>
+                <p class="polki-b"><i class="quest-tochki"></i>Квестовые точки</p>
+                <p class="keys-b"><i class="doors-tochki"></i>Открываемые двери</p>
+                <p class="places-b"><i class="interest-tochki"></i>Интересные места</p>
+            </div>
+
+            <!-- Функциональные кнопки --->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                <p class="count-on" id="tamojnya-count-on"><i class="fa fa-check-square" aria-hidden="true"></i>Показать количество маркеров</p>
+                <p class="markers-on">Показать все маркеры<i class="fa fa-eye"></i></p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                <p class="count-off" id="tamojnya-count-on"><i class="fa fa-square" aria-hidden="true"></i>Скрыть количество маркеров</p>
+                <p class="markers-off"><i class="fa fa-eye-slash"></i>Скрыть все маркеры</p>
+            </div>
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">
@@ -81,15 +98,6 @@ $this->registerMetaTag([
                 <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Таможня с определенной вероятностью, производственного лута и квестовых предметов необходимых для прохождения заданий от торговцев. Интерактивная карта локации Таможня поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
                 <p>Есть возможность узнать спавны ЧВК и Диких на карте Таможня, с картинками их месторасположений, а также комментариями о различных особенностях этих спавнов. </p>
             </div>
-            <div id="voenniymarker"></div>
-            <div id="polkiimarker"></div>
-            <div id="dikiymarker"></div>
-            <div id="exitsmarker"></div>
-            <div id="keysmarker"></div>
-            <div id="playermarker"></div>
-            <div id="dikiyexitmarker"></div>
-            <div id="necessaryplaces"></div>
-
            
         </div>
     </div>

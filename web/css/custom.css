@@ -499,7 +499,7 @@ h2.white {
 }
 
 .optins_layerstability {
-    width: 437px;
+    width: 540px;
     position: absolute;
     right: 0;
     top: 183px;
@@ -587,82 +587,6 @@ h1.map-title, h2.map-title {
 
 .red {
     color: #c74f27;
-}
-
-.voenka-b.active {
-    color: #fff;
-    background-color: #5c8e5c!important;
-    border-color: #5c8e5c!important;
-    box-shadow: inset 0px 0px 2px 2px;
-}
-
-.dikie-b.active {
-    color: #fff;
-    background-color: #d9534f!important;
-    border-color: #d9534f!important;
-    box-shadow: inset 0px 0px 2px 2px;
-}
-
-.polki-b.active {
-    color: #fff;
-    background-color: #286090!important;
-    border-color: #286090!important;
-    box-shadow: inset 0px 0px 2px 2px;
-}
-
-.exits-b.active {
-    color: black!important;
-    background-color: #d4d4d4!important;
-    border-color: #d4d4d4!important;
-    box-shadow: inset 0px 0px 8px 1px;
-}
-
-.keys-b.active {
-    color: black;
-    background-color: #fff000!important;
-    border-color: #fff000!important;
-    box-shadow: inset 0px 0px 2px 2px;
-}
-
-.gamers-b {
-    background: #FFC107;
-    color: black;
-}
-
-.gamers-b.active {
-    color: white;
-    background-color: #FFC107!important;
-    border-color: #FFC107!important;
-    box-shadow: inset 0px 0px 2px 2px;
-}
-
-.bandits-b {
-    background: #ffffff;
-    color: #0c0c0c!important;
-}
-
-.bandits-b:hover {
-    background-color: #e6e6e6;
-    border-color: #adadad;
-}
-
-.places-b {
-    background: #40044a;
-    color: white!important;
-}
-
-.bandits-b.active {
-    color: black!important;
-    background-color: #d4d4d4!important;
-    border-color: #d4d4d4!important;
-    box-shadow: inset 0px 0px 8px 1px;
-}
-
-.places-b.active {
-    background: #40044a;
-    color: white!important;
-    border-color: white!important;
-    box-shadow: inset 0px 0px 2px 2px;
 }
 
 button:active, button:focus, label:active, label:focus, label {
@@ -1499,8 +1423,98 @@ img.w-100-auto {
     border: 2px solid #c3392c;
 }
 
+/*** Общий цвет для всех кнопок на интерактивных картах, в дальнейшем можно доработать ***/
+.map_buttons p {
+    color: #feae0c;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    text-decoration: line-through;
+}
 
+.btn-group.w-100, label.w-100 {
+    width: 100%;
+}
 
+.map_buttons p i {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    text-align: center;
+}
 
+/*** Кастомные иконки интерактивных маркеров ***/
 
+.dikie-b i {
+    background: url('/img/mapicons/dikie.png');
+    background-size: 15px 15px;
+}
 
+.gamers-b i {
+    background: url('/img/mapicons/chvk.png');
+    background-size: 15px 15px;
+}
+
+.bandits-b i {
+    background: url('/img/mapicons/ikon_dikiy_exit.png');
+    background-size: 15px 15px;
+}
+
+.exits-b i {
+    background: url('/img/mapicons/chvk_exit.png');
+    background-size: 15px 15px;
+}
+
+.voenka-b i {
+    background: url('/img/mapicons/voen-yaj.png');
+    background-size: 15px 15px;
+}
+
+.polki-b i {
+    background: url('/img/mapicons/quest_icon2.png');
+    background-size: 15px 15px;
+}
+
+.keys-b i {
+    background: url('/img/mapicons/keys.png');
+    background-size: 15px 15px;
+}
+
+.places-b i {
+    background: url('/img/mapicons/whatis.png');
+    background-size: 15px 15px;
+}
+
+/*** Стили для кнопок маркеров ***/
+
+.map_buttons p.unthrough {
+    text-decoration: none;
+}
+
+.through {
+    text-decoration: line-through;
+}
+
+.markers-off, .markers-on, .count-off, .count-on {
+    text-decoration: none!important;
+}
+
+.map_buttons p span.count-markers-global {
+    margin: 0 0 0 5px;
+    padding: 0px;
+    text-decoration: none!important;
+    background: white;
+    border-radius: 5px 5px 5px 5px;
+    color: #f73927;
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    float: right;
+}
+
+.map_buttons.padding-top-30 {
+    padding-top: 30px;
+}

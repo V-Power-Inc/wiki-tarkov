@@ -10,7 +10,7 @@ $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppA
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/bereg-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/map_coockies.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+// $this->registerJsFile('js/map_coockies.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Карта локации Берег в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
 $this->registerMetaTag([
     'name' => 'description',
@@ -40,22 +40,39 @@ $this->registerMetaTag([
     <div class="col-lg-12">
         <div class="option-buttons">
             <h2 class="map-title">Маркеры</h2>
-            <button class="btn btn-danger dikie-b" id="dikie-spawns-bereg">Спавны диких</button>
-            <button class="btn btn-gamers gamers-b" id="chvk-spawns-bereg">Спавны ЧВК</button>
-            <button class="btn btn-bandits bandits-b" id="dikie-exits-bereg">Выходы с карты за Диких</button>
-            <button class="btn btn-default exits-b" id="chvk-exits-bereg">Выходы с карты за ЧВК</button>
-            <button class="btn btn-success voenka-b" id="weapons-bereg">Оружейные ящики</button>
-            <button class="btn btn-primary polki-b" id="quests-bereg">Квестовые точки</button>
-            <button class="btn btn-yellow w-100 keys-b" id="doors-bereg">Открываемые двери</button>
-            <button class="btn btn-places w-100 places-b" id="interesting-places-bereg">Интересные места</button>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="dikie-b" id="dikie-spawns-bereg"><i class="dikie-spawns"></i>Спавны диких</p>
+                    <p class="gamers-b" id="chvk-spawns-bereg"><i class="chvk-spawns"></i>Спавны ЧВК</p>
+                    <p class="bandits-b" id="dikie-exits-bereg"><i class="dikie-exits"></i>Выходы с карты за Диких</p>
+                    <p class="exits-b" id="chvk-exits-bereg"><i class="chvk-exits"></i>Выходы с карты за ЧВК</p>
+                </div>
+            
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
+                    <p class="voenka-b" id="weapons-bereg"><i class="weapon-cases"></i>Оружейные ящики</p>
+                    <p class="polki-b" id="quests-bereg"><i class="quest-tochki"></i>Квестовые точки</p>
+                    <p class="w-100 keys-b" id="doors-bereg"><i class="doors-tochki"></i>Открываемые двери</p>
+                    <p class="w-100 places-b" id="interesting-places-bereg"><i class="interest-tochki"></i>Интересные места</p>
+                </div>
+
+            <!-- Функциональные кнопки --->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-on" id="bereg-count-on"><i class="fa fa-check-square" aria-hidden="true"></i>Показать количество маркеров</p>
+                    <p class="markers-on">Показать все маркеры<i class="fa fa-eye"></i></p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons padding-top-30">
+                    <p class="count-off" id="bereg-count-off"><i class="fa fa-square" aria-hidden="true"></i>Скрыть количество маркеров</p>
+                    <p class="markers-off"><i class="fa fa-eye-slash"></i>Скрыть все маркеры</p>
+                </div>
+            
         </div>
         <!-- Контент страницы -->
         <div class="col-lg-12">
             <!-- Маркеры выходов в зависимости от спавна -->
             <div class="random-exits">
-                <div class="btn-group" data-toggle="buttons">
+                <div class="btn-group w-100" data-toggle="buttons">
 
-                    <label class="btn btn-primary house-spawn remastered active">
+                    <label class="btn btn-primary w-100 house-spawn remastered active">
                         <input type="radio" name="options" id="option1" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                         <span>Выходы для спавна Деревня</span>
@@ -64,7 +81,7 @@ $this->registerMetaTag([
                     <br>
                     <br>
 
-                    <label class="btn btn-primary remastered station-spawn">
+                    <label class="btn btn-primary w-100 remastered station-spawn">
                         <input type="radio" name="options" id="option2" autocomplete="off">
                         <span class="glyphicon glyphicon-ok"></span>
                         <span>Выходы для спавна Берег</span>
@@ -83,14 +100,7 @@ $this->registerMetaTag([
                 <p class="alert alert-info"><b>На интерактивной карте также есть схема санатория "Лазурный Берег", на которой вы сможете посмотреть, и узнать что находится в помещениях восточного, западного и центрального корпусов этого комплекса.</b></p>
                 <p></p>
             </div>
-            <div id="voenniymarker"></div>
-            <div id="polkiimarker"></div>
-            <div id="dikiymarker"></div>
-            <div id="exitsmarker"></div>
-            <div id="keysmarker"></div>
-            <div id="playermarker"></div>
-            <div id="dikiyexitmarker"></div>
-            <div id="necessaryplaces"></div>
+
         </div>
     </div>
 </div>

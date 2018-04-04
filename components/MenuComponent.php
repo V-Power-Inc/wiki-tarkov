@@ -164,10 +164,10 @@ class MenuComponent
                      <li class="dropdown '.$intermaps.'">
                       <a href="#" class="dropdown-toggle '.$intermaps.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Карты локаций</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="/maps/zavod-location">Завод</a></li>
-                        <li><a href="/maps/tamojnya-location">Таможня</a></li>
-                        <li><a href="/maps/forest-location">Лес</a></li>
-                        <li><a href="/maps/bereg-location">Берег</a></li>
+                        <li><a href="/maps/zavod-location#3/68.97/-8.00">Завод</a></li>
+                        <li><a href="/maps/tamojnya-location#4/80.40/-75.98">Таможня</a></li>
+                        <li><a href="/maps/forest-location#3/72.50/-9.58">Лес</a></li>
+                        <li><a href="/maps/bereg-location#3/60.93/-10.81">Берег</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/maps">Смотреть список доступных карт</a></li>
                       </ul>
