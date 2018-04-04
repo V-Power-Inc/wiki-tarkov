@@ -66,6 +66,67 @@ var PlacesInt = L.icon({
 
 $(document).ready(function() {
 
+    /*** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров ****/
+    $('body').on('click','.count-on', function() {
+        // Сначада пробуем удалить существующие блоки в HTML 
+        try {
+            $('.count-markers-global').each(function() {
+                $(this).remove();
+            });
+        } catch(undefined) {}
+
+        // Переменные для количества маркеров каждой группы маркеров
+        var spawndikiycount = 0;
+        var spawnchvkcount = 0;
+        var exitsdikiecount = 0;
+        var exitschvkcount = 0;
+        var voenlootcount = 0;
+        var questscount = 0;
+        var keyscount = 0;
+        var interestcount = 0;
+
+        // Встречая совпадение, увеличиваем число на единицу
+        $.each(markersData, function(i) {
+            if(markersData[i].marker_group == "Спавны диких") {
+                spawndikiycount+= 1;
+            } else if(markersData[i].marker_group == "Спавны игроков ЧВК") {
+                spawnchvkcount+= 1;
+            } else if(markersData[i].marker_group == "Выходы за Диких") {
+                exitsdikiecount+=1;
+            } else if(markersData[i].marker_group == "Маркеры выходов") {
+                exitschvkcount+=1;
+            } else if(markersData[i].marker_group == "Военные ящики") {
+                voenlootcount+=1;
+            } else if(markersData[i].marker_group == "Квестовые точки") {
+                questscount+=1;
+            } else if(markersData[i].marker_group == "Интересные места") {
+                interestcount+=1;
+            } else if(markersData[i].marker_group == "Маркеры ключей") {
+                keyscount+=1;
+            }
+        });
+
+        // Вывод количества маркеров на каждую группу, после соответствующих записей в боковом меню карты
+        $('.dikie-b').append('<span class="count-markers-global">'+spawndikiycount+'</span>');
+        $('.gamers-b').append('<span class="count-markers-global">'+spawnchvkcount+'</span>');
+        $('.bandits-b').append('<span class="count-markers-global">'+exitsdikiecount+'</span>');
+        $('.exits-b').append('<span class="count-markers-global">'+exitschvkcount+'</span>');
+        $('.voenka-b').append('<span class="count-markers-global">'+voenlootcount+'</span>');
+        $('.polki-b').append('<span class="count-markers-global">'+questscount+'</span>');
+        $('.keys-b').append('<span class="count-markers-global">'+keyscount+'</span>');
+        $('.places-b').append('<span class="count-markers-global">'+interestcount+'</span>');
+
+    });
+
+    /*** Скрываем количества каждого типа маркеров при клике на кнопку скрыть количество ***/
+    $('body').on('click','.count-off', function() {
+        try {
+            $('.count-markers-global').each(function() {
+                $(this).remove();
+            });
+        } catch(undefined) {}
+    });
+
 /*** Показываем все маркеры при клике на кнопку - показать все маркеры ***/
 $('body').on('click','.markers-on', function() {
     // Вырубаем сначала все включенные слои
@@ -349,7 +410,7 @@ var token = $('meta[name=csrf-token]').attr("content");
     };
     
     $('.outer-button').click(function () {
-        $(".optins_layerstability").animate({ right: -437}, 800);
+        $(".optins_layerstability").animate({ right: -540}, 800);
         $.wait(function(){$(".outer-button").hide()} ,1);
         $.wait(function(){$(".inner-button").show()} ,1);
     });
