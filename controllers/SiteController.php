@@ -180,12 +180,12 @@ class SiteController extends Controller
 
     /** Рендер страницы с картой Берега **/
     public function actionBereg() {
-        // $cookies = Yii::$app->request->cookies;
-        //echo '<pre>';
-        //   echo print_r($cookies);
-        //   exit;
-        //echo '</pre>';
         return $this->render('maps/bereg-location.php');
+    }
+    
+    /** Рендер страницы с картой Развязки **/
+    public function actionRazvyazka(){
+        return $this->render('maps/razvyazka-location.php');
     }
     
     /** Рендер страницы с наборами ключей **/
