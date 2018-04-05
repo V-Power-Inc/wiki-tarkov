@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Mehanic;
+use app\models\Razvyazka;
 use Yii;
 use app\models\Lyjnic;
 use app\models\Terapevt;
@@ -18,13 +19,11 @@ use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
 use app\models\Questions;
-use app\models\Usercoockies;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
-use yii\web\Cookie;
 
 
 class SiteController extends Controller
@@ -157,6 +156,16 @@ class SiteController extends Controller
     public function actionBeregmarkers() {
         if(Yii::$app->request->isAjax) {
             $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+    
+    /** JSON данные с координатами маркеров Развязки **/
+    public function actionRazvyazkamarkers() {
+        if(Yii::$app->request->isAjax) {
+            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');

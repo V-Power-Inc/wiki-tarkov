@@ -216,6 +216,67 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             $('#bereg-exits_group').val('');
         }
     });
+} else if ((window.location.href.indexOf('razvyazka')) > -1) {
+    $( document ).ready(function() {
+        if($('#razvyazka-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-razvyazka-exits_group').fadeIn();
+            $('.form-group.field-razvyazka-file').fadeIn();
+            //   $('#razvyazka-exit_anyway').val('');
+            //   $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#razvyazka-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-razvyazka-file').fadeIn();
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        } else if ($('#razvyazka-marker_group option:selected').text() === "Интересные места" || $('#razvyazka-marker_group option:selected').text() === "Военные ящики") {
+            $('.form-group.field-razvyazka-file').fadeIn();
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        } else {
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.form-group.field-razvyazka-file').fadeOut();
+            $('.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        }
+    });
+
+    $("#razvyazka-marker_group").change(function() {
+        if($('#razvyazka-marker_group option:selected').text() === "Маркеры выходов") {
+            $('.form-group.field-razvyazka-exits_group').fadeIn();
+            $('.form-group.field-razvyazka-file').fadeIn();
+            $('.form-group.field-razvyazka-exit_anyway').fadeIn();
+            //   $('#tamojnya-exit_anyway').val('');
+            //  $('.form-group.field-tamojnya-exit_anyway input').val('');
+        } else if ($('#razvyazka-marker_group option:selected').text() === "Выходы за Диких") {
+            $('.form-group.field-razvyazka-file').fadeIn();
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        } else if ($('#razvyazka-marker_group option:selected').text() === "Интересные места" || $('#razvyazka-marker_group option:selected').text() === "Военные ящики") {
+            $('.form-group.field-razvyazka-file').fadeIn();
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        } else {
+            $('.form-group.field-razvyazka-exits_group').fadeOut();
+            $('.form-group.field-razvyazka-file').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway').fadeOut();
+            $('.form-group.field-razvyazka-exit_anyway input').val('');
+            $('#razvyazka-exit_anyway').val('');
+            $('#razvyazka-exits_group').val('');
+        }
+    });
 }
 /** Проверяем позицию вхождения слова по url, для создания проверок в админке в разделе справочнику лута Items **/
 else if ((window.location.href.indexOf('items')) > -1) {
