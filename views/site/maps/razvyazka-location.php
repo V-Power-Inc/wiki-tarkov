@@ -25,13 +25,22 @@ $this->registerMetaTag([
 
 <!-- Инициализация карты -->
 <div class="w-100">
-    <div id="map" class="map">
+    <!-- todo: Убрать ручные стили после релиза -->
+    <div id="map" class="map relative" style="background: #e7dfdd; margin-top: -10px;">
+        
+        <!-- NetCat div block -->
+        <div style="width:400px; height:300px; position:absolute;top:50%;left:50%;margin:-200px 0 0 -150px;">
+            <img src="/img/netcat.gif">
+        </div>
+        
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>
         <!-- Кнопка вернуться к центру -->
-        <p class="mapcenter"><a class="btn btn-default main-link">Вернуться к центру карты</a></p>
+        <!-- todo: Убрать disavled класс после релиза -->
+        <p class="mapcenter"><a class="btn btn-default main-link disabled">Вернуться к центру карты</a></p>
     </div>
 </div>
+
 <!-- Опции карты -->
 <div class="optins_layerstability">
     
@@ -102,8 +111,7 @@ $this->registerMetaTag([
                 <p>Интерактивная карта локации Развязка из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации Развязка, узнать о местонахождении оружейных и военных ящиков. </p>
                 <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Развязки. Интерактивная карта локации Развязка поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
 
-                <p class="alert alert-danger"><b>В настоящий момент карта находится в разработке. Как только она будет завершена, вы увидите на сайте специальное уведомление.</b></p>
-                <p></p>
+                <p class="alert alert-danger"><b>В настоящий момент карта находится в разработке.</b></p>
             </div>
 
         </div>

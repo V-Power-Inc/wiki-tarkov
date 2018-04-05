@@ -91,13 +91,15 @@ use app\components\AlertComponent;
         
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
             <h2 class="text-center map-heading">Карта Развязки</h2>
-            <img class="maps__small" src="/img/maps/razvyazka_small.jpg">
+            <a href="/maps/razvyazka-location"><img class="maps__small" src="/img/maps/razvyazka_small.jpg"></a>
             <br>
             <br>
-            <p class="alert alert-danger"><b>Локация была анонсирована разработчиками.</b></p>
-                <a class="btn btn-default main-link" href="/maps/razvyazka-locaton">Перейти к карте Развязки</a>
+                <a class="btn btn-default main-link" href="/maps/razvyazka-location">Перейти к карте Развязки</a>
 
-
+            <br>
+            <br>
+            
+            <p class="alert alert-danger"><b>Карта локации находится в разработке.</b></p>
 
             <!--                <a class="btn btn-default main-link" href="#">Перейти к карте Развязки</a>-->
         </div>
