@@ -95,7 +95,11 @@ use app\components\AlertComponent;
             <br>
             <br>
             <p class="alert alert-danger"><b>Локация была анонсирована разработчиками.</b></p>
-<!--                <a class="btn btn-default main-link" href="#">Перейти к карте Развязки</a>-->
+                <a class="btn btn-default main-link" href="/maps/razvyazka-locaton">Перейти к карте Развязки</a>
+
+
+
+            <!--                <a class="btn btn-default main-link" href="#">Перейти к карте Развязки</a>-->
         </div>
     </div>
         
