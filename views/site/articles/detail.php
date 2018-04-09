@@ -107,14 +107,32 @@ use app\components\AlertComponent;
 
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <!-- Виджет Twitch -->
-            <div class="margin-top-15">
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
 
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
             <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+
+            <!-- Yandex.RTB R-A-267537-1 -->
+            <div id="yandex_rtb_R-A-267537-1"></div>
+            <script type="text/javascript">
+                (function(w, d, n, s, t) {
+                    w[n] = w[n] || [];
+                    w[n].push(function() {
+                        Ya.Context.AdvManager.render({
+                            blockId: "R-A-267537-1",
+                            renderTo: "yandex_rtb_R-A-267537-1",
+                            async: true
+                        });
+                    });
+                    t = d.getElementsByTagName("script")[0];
+                    s = d.createElement("script");
+                    s.type = "text/javascript";
+                    s.src = "//an.yandex.ru/system/context.js";
+                    s.async = true;
+                    t.parentNode.insertBefore(s, t);
+                })(this, this.document, "yandexContextAsyncCallbacks");
+            </script>
+        
         </div>
 
 
