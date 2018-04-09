@@ -81,6 +81,7 @@ $this->registerMetaTag([
             <div class="margin-top-20">
                     
                 <div class="row margin-top-20">
+                    <!-- Виджет Discord -->
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                         <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
                     </div>
