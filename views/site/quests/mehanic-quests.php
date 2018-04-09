@@ -58,12 +58,7 @@ use app\components\AlertComponent;
                     <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
             </ul>
-
-            <!-- Виджет Twitch -->
-            <div class="margin-top-20">
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
-
+            
             <div class="margin-top-20">
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
             </div>

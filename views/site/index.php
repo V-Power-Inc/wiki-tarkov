@@ -79,24 +79,6 @@ $this->registerMetaTag([
             
             
             <div class="margin-top-20">
-
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <!-- Виджет Twitch -->
-                        <div id="<enslaver_V>"></div>
-    
-                        <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
-                        <script type="text/javascript">
-                            var options = {
-                                width: '100%',
-                                height: 367.14,
-                                channel: "<enslaver_V>",
-                            };
-                            var player = new Twitch.Player("<enslaver_V>", options);
-                            player.setVolume(0);
-                        </script>
-                    </div>
-                </div>
                     
                 <div class="row margin-top-20">
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">

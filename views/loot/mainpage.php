@@ -52,11 +52,6 @@ use app\components\AlertComponent;
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
             
-            <!-- Виджет Twitch -->
-            <div class="margin-top-20">
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
-            
             <!-- Виджет Discord -->
             <div class="margin-top-20">
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>

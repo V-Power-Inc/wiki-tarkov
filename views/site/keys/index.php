@@ -133,11 +133,6 @@ use app\components\AlertComponent;
         </div>
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <!-- Виджет Twitch -->
-            <div>
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
-            
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>

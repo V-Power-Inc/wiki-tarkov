@@ -78,10 +78,6 @@ use app\components\AlertComponent;
 
         <!-- Меню правой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <!-- Виджет Twitch -->
-            <div>
-                <iframe src="https://player.twitch.tv/?channel=enslaver_v&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="100%"></iframe>
-            </div>
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
