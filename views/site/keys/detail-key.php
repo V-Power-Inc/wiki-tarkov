@@ -86,53 +86,35 @@ use app\components\AlertComponent;
                 <a href="/keys"><button type="button" class="btn btn-primary margin-top-15">Вернуться в справочник ключей</button></a>
             </div>
 
-            <!-- Расстояние - заглушка -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
+                <!-- Расстояние - заглушка -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
 
-            <!-- Комментарии -->
-            <div id="mc-container" class="kek-recustom"></div>
-            <script type="text/javascript">
-                cackle_widget = window.cackle_widget || [];
-                cackle_widget.push({widget: 'Comment', id: 57165});
-                (function() {
-                    var mc = document.createElement('script');
-                    mc.type = 'text/javascript';
-                    mc.async = true;
-                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                })();
-            </script>
-            
-        </div>
+                <!-- Комментарии -->
+                <div id="mc-container" class="kek-recustom"></div>
+                <script type="text/javascript">
+                    cackle_widget = window.cackle_widget || [];
+                    cackle_widget.push({widget: 'Comment', id: 57165});
+                    (function() {
+                        var mc = document.createElement('script');
+                        mc.type = 'text/javascript';
+                        mc.async = true;
+                        mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+                    })();
+                </script>
 
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <!-- Виджет дискорда -->
+            </div>
 
-            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <!-- Виджет дискорда -->
 
-            <!-- Yandex.RTB R-A-267537-1 -->
-            <div id="yandex_rtb_R-A-267537-1"></div>
-            <script type="text/javascript">
-                (function(w, d, n, s, t) {
-                    w[n] = w[n] || [];
-                    w[n].push(function() {
-                        Ya.Context.AdvManager.render({
-                            blockId: "R-A-267537-1",
-                            renderTo: "yandex_rtb_R-A-267537-1",
-                            async: true
-                        });
-                    });
-                    t = d.getElementsByTagName("script")[0];
-                    s = d.createElement("script");
-                    s.type = "text/javascript";
-                    s.src = "//an.yandex.ru/system/context.js";
-                    s.async = true;
-                    t.parentNode.insertBefore(s, t);
-                })(this, this.document, "yandexContextAsyncCallbacks");
-            </script>
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
 
-        </div>
+                <!--Yandex direct -->
+                <?= $this->render('/other/yandex-direct.php'); ?>
+
+            </div>
         </div>
     </div>
 </div>
