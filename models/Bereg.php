@@ -41,6 +41,7 @@ class Bereg extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['coords_x', 'coords_y'], 'number'],
             [['content'], 'string'],
             [['enabled', 'exit_anyway'], 'integer'],

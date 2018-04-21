@@ -20,12 +20,6 @@ $this->registerMetaTag([
 use app\components\AlertComponent;
 ?>
 
-<!-- Кастомные стили -->
-<style>
-    hr {
-        border-top: 2px solid #000;
-    }
-</style>
 
 <div class="heading-class">
     <div class="container">
