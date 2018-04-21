@@ -21,13 +21,6 @@ $this->registerMetaTag([
 use app\components\AlertComponent;
 ?>
 
-<!-- Кастомные стили -->
-<style>
-    hr {
-        border-top: 2px solid #000;
-    }
-</style>
-
 <div class="heading-class">
     <div class="container">
         <h1 class="main-site-heading">Квесты Механика</h1>
@@ -89,8 +82,11 @@ use app\components\AlertComponent;
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Механик - новый торговец, который был введн в игру Escape from Tarkov в конце января 2018 года. Теперь с этим торговцем также как и с остальными можно прокачивать репутацию, чтобы покупать более редкое оружие и модули. На данной странице представлен полный список квестов с торговцем Механик из онлайн-шутера Escape from Tarkov. <br>
-                    <br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.
+                    <br><b>В данный момент справочник квестов Механика на стадии заполнения.</b>
                 </p>
+                <!-- Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна. -->
+
+
                 <!--                <p class="alert alert-danger size-16">В настоящий момент здесь опубликованы не все квесты этого торговца, в ближайшее время появятся недостающие.</p>-->
                 <img class="torgovec-info-quest-image" src="/img/torgovcy/mehanic-quests/mehanic-full.jpg" alt="Квесты торговца Лыжника из Escape from Tarkov">
             </div>

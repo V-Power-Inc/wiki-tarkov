@@ -98,13 +98,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Скупщика **/
     public function actionMehanicpage() {
-        // Пока нет квестов - редирект
-          $this->goHome();
-
-      // Включить строчки что идут ниже, после того как торговец механик появится в игре Escape from Tarkov.  
-      //  $query =  Mehanic::find();
-      //  $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->all();
-      //  return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
+        $query =  Mehanic::find();
+        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
@@ -113,14 +109,14 @@ class SiteController extends Controller
     }
 
     /** Прилетают данные о статичном контенте описаний маркеров **/
-    public function actionStatic() {
-        if(Yii::$app->request->isAjax) {
-            $staticcontent = Mapstaticcontent::find()->asArray()->all();
-            return Json::encode($staticcontent);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
+//    public function actionStatic() {
+//        if(Yii::$app->request->isAjax) {
+//            $staticcontent = Mapstaticcontent::find()->asArray()->all();
+//            return Json::encode($staticcontent);
+//        } else {
+//            throw new HttpException(404 ,'Такая страница не существует');
+//        }
+//    }
 
     /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
