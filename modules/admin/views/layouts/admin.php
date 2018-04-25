@@ -80,6 +80,18 @@ AdminAsset::register($this);
         <div id="particles-js"></div>
         
         <div class="container padding-top-110">
+
+            <div class="row">
+                <div class="col-lg-12 auth-info">
+                    <p class="text-center auth-title">Учетные данные авторизованного пользователя</p>
+                    <p class="auth-info">Логин: <span><?= Yii::$app->user->identity->user ?></span></p>
+                    <p class="auth-info">Имя: <span><?= Yii::$app->user->identity->name ?></span></p>
+                    <p class="auth-info">Роль: <span style="color:red;"><?= Yii::$app->user->identity->role ?></span></p>
+                    <p class="auth-info">Дата окончания учетной записи: <span><?= (Yii::$app->user->identity->date_end)?Yii::$app->user->identity->date_end:'Учетная запись не лимитирована датой окончания'?></span></p>
+                </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                      <?= $content ?>

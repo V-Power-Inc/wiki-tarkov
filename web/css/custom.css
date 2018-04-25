@@ -1515,3 +1515,23 @@ img.w-100-auto {
     text-align: center;
     float: right;
 }
+
+.auth-info {
+    background: #cdcecf;
+    padding: 20px;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}
+
+.auth-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p.auth-info {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0;
+    background: none;
+    border: 0;
+}
