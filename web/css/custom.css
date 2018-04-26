@@ -1535,3 +1535,11 @@ p.auth-info {
     background: none;
     border: 0;
 }
+
+.exits-icon-admin {
+    max-width: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}

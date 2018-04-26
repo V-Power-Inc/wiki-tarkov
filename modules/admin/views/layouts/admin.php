@@ -83,7 +83,8 @@ AdminAsset::register($this);
         <?php if(isset(Yii::$app->user->identity->user)): ?>
         <!-- Блок данных об авторизованном пользователе -->
             <div class="row">
-                <div class="col-lg-12 auth-info">
+                <div class="col-lg-12 auth-info relative">
+                    <div class="exit"><img class="exits-icon-admin" src="/img/exits-krest.png"></div>
                     <p class="text-center auth-title">Учетные данные авторизованного пользователя</p>
                     <p class="auth-info">Логин: <span><?= Yii::$app->user->identity->user ?></span></p>
                     <p class="auth-info">Имя: <span><?= Yii::$app->user->identity->name ?></span></p>
