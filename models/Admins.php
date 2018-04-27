@@ -13,6 +13,9 @@ use \yii\web\IdentityInterface;
  * @property string $password Пароль
  * @property string $captcha Гугл капча
  * @property int $remember_me Галочка - запомнить
+ * @property string $role
+ * @property string $name
+ * @property string $date_end
  */
 class Admins extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -32,7 +35,7 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['user', 'password', 'remember_me'], 'required'],
             [['remember_me'], 'integer'],
-            [['captcha'], 'safe'],
+            [['captcha','role','name'], 'safe'],
             [['user', 'password'], 'string', 'max' => 45],
             [['captcha'], 'string', 'max' => 255],
         ];
@@ -49,6 +52,9 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'captcha' => 'Captcha',
             'remember_me' => 'Remember Me',
+            'role' => 'Уровень прав учетной записи',
+            'date_end' => 'Дата окончания учетной записи',
+            'name' => 'Имя пользователя учетной записи',
         ];
     }
 

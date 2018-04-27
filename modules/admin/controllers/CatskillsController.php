@@ -120,19 +120,20 @@ class CatskillsController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Yii::$app->user->identity->id !== 3) {
+            $model = $this->findModel($id);
 
-        $model = $this->findModel($id);
-
-        $Items = new Skills();
-        $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'category');
-        $LockedID = $model->id;
-        $ItemRelation = in_array($LockedID, $ItemsCategories);
-        /** Проверяем - привязано ли умение к удаляемой категории */
-        if($ItemRelation) {
-            return $this->redirect(['index']);
-        } else {
-            $this->findModel($id)->delete();
-            return $this->redirect(['index']);
+            $Items = new Skills();
+            $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'category');
+            $LockedID = $model->id;
+            $ItemRelation = in_array($LockedID, $ItemsCategories);
+            /** Проверяем - привязано ли умение к удаляемой категории */
+            if($ItemRelation) {
+                return $this->redirect(['index']);
+            } else {
+                $this->findModel($id)->delete();
+                return $this->redirect(['index']);
+            }
         }
     }
 

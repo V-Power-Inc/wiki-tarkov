@@ -119,9 +119,12 @@ class MehanicController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(Yii::$app->user->identity->id !== 3) {
 
-        return $this->redirect(['index']);
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        }
     }
 
     /**
