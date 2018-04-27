@@ -130,21 +130,23 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
-        $Items = new Items();
-        $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
-        $ItemsMainCategories = ArrayHelper::getColumn($Items->getAllItems(), 'maincat_id');
-        $LockedID = $model->id;
-        $MainCategoryRelation = in_array($LockedID, $ItemsMainCategories);
-        $CategoryRelation = in_array($LockedID, $CategoriesArray);
-        $ItemRelation = in_array($LockedID, $ItemsCategories);
-        /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
-        if($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
-            return $this->redirect(['index?dp-1-sort=sortir']);
-        } else {
-            $this->findModel($id)->delete();
-            return $this->redirect(['index?dp-1-sort=sortir']);
+        if(Yii::$app->user->identity->id !== 3) {
+            $model = $this->findModel($id);
+            $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
+            $Items = new Items();
+            $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
+            $ItemsMainCategories = ArrayHelper::getColumn($Items->getAllItems(), 'maincat_id');
+            $LockedID = $model->id;
+            $MainCategoryRelation = in_array($LockedID, $ItemsMainCategories);
+            $CategoryRelation = in_array($LockedID, $CategoriesArray);
+            $ItemRelation = in_array($LockedID, $ItemsCategories);
+            /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
+            if ($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
+                return $this->redirect(['index?dp-1-sort=sortir']);
+            } else {
+                $this->findModel($id)->delete();
+                return $this->redirect(['index?dp-1-sort=sortir']);
+            }
         }
     }
 

@@ -121,4 +121,7 @@ class MapstaticcontentController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /*** Экшен удаления был вырезан в одном из более ранних коммитов ***/
+
 }
