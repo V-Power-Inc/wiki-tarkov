@@ -82,7 +82,7 @@ AdminAsset::register($this);
         <?php if(Yii::$app->user->identity->id == 3): ?>
             <!-- Style for moderator -->
             <style>
-                [title='Удалить'] {
+                [title='Удалить'], .btn.btn-danger {
                     display: none;
                 }
             </style>
