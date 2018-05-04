@@ -11,7 +11,15 @@ const map = L.map('map', {
     maxzoom: 6,
     minzoom: 3,
     zoom: 3,
+    crs: L.CRS.Simple
 });
+
+// var startCoordinate = new L.LatLng(0, -1);
+// var endCoordinate = new L.LatLng(0, 1);
+//
+// var distance = startCoordinate.distanceTo(endCoordinate);
+//
+// console.log(distance);
 
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 var hash = new L.Hash(map);
@@ -73,8 +81,13 @@ var PlacesInt = L.icon({
     iconSize: [28, 27]
 });
 
-$(document).ready(function() {
+var rangeicon = L.icon({
+    iconUrl: '/img/mapicons/icon_zeroin.png',
+    iconSize: [23, 23]
+});
 
+$(document).ready(function() {
+    
     /*** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров ****/
     $('body').on('click','.count-on', function() {
         // Сначада пробуем удалить существующие блоки в HTML 
@@ -237,6 +250,7 @@ $(document).ready(function() {
     var beregspawn = L.layerGroup();
     var dikieexits =  L.layerGroup();
     var interstplaces = L.layerGroup();
+    var zeroin = L.layerGroup();
 
     /** Добавляем маркеры для статичных зон спавна **/
     L.marker([56.945, 58.447], {icon: villageIcon}).setZIndexOffset(999).addTo(villagespawn);
@@ -439,6 +453,16 @@ $(document).ready(function() {
     $('body').on('click','#active-players-v', function(){
         map.removeLayer(chvk);
         $(this).attr('id', '');
+    });
+    
+    /********** Система определения расстояния ZEROIN **********/
+    
+    /** Первая координата для определения расстояния на карте **/
+    map.on('click', function(e) {
+        L.marker([e.latlng.lat, e.latlng.lng], {icon: rangeicon}).setZIndexOffset(999).addTo(zeroin);
+        zeroin.addTo(map);
+        
+        console.log(zeroin);
     });
 
     /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/
