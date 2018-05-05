@@ -80,6 +80,7 @@ class MenuComponent
                     "/traders/mirotvorec",
                     "/traders/mehanic",
                     "/traders/skupshik",
+                    "/traders/baraholshik"
         ];
         if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'active';
@@ -148,6 +149,7 @@ class MenuComponent
                         <li><a href="/traders/lyjnic">Лыжник</a></li>
                         <li><a href="/traders/mirotvorec">Миротворец</a></li>
                         <li><a href="/traders/mehanic">Механик</a></li>
+                        <li><a href="/traders/baraholshik">Барахольщик</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/quests-of-traders">Смотреть всех торговцев</a></li>
                       </ul>
