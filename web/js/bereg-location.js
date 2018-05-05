@@ -13,6 +13,14 @@ const map = L.map('map', {
     zoom: 3,
 });
 
+// Заготовка на систему ZeroIN
+// var startCoordinate = new L.LatLng(0, -1);
+// var endCoordinate = new L.LatLng(0, 1);
+//
+// var distance = startCoordinate.distanceTo(endCoordinate);
+//
+// console.log(distance);
+
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 var hash = new L.Hash(map);
 
@@ -74,7 +82,7 @@ var PlacesInt = L.icon({
 });
 
 $(document).ready(function() {
-
+    
     /*** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров ****/
     $('body').on('click','.count-on', function() {
         // Сначада пробуем удалить существующие блоки в HTML 
