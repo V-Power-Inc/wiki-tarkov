@@ -59,6 +59,7 @@ use app\components\AlertComponent;
        'Берег' => 'Берег',
        'Лес' => 'Лес',
        'Завод' => 'Завод',
+       'Развязка' => 'Развязка',
        '3-х этажная общага на Таможне' => '3-х этажная общага на Таможне',
        '2-х этажная общага на Таможне' => '2-х этажная общага на Таможне',
        'Восточное крыло санатория' => 'Восточное крыло санатория',
@@ -131,6 +132,21 @@ use app\components\AlertComponent;
                 <!-- Оконачание контентной части ключей -->
             </div>
         </div>
+
+        <!-- Блок контента ключи на локации Развязка -->
+        <div class="col-lg-12">
+            <h2 class="keys-titles">Ключи на локации Развязка</h2>
+            <!-- Контентная часть ключей -->
+            <?php foreach ($razvyazka as $k_razvyazka): ?>
+                <div class="col-lg-12 item-key">
+                    <p class="item-name"><a href="/keys/<?=$k_razvyazka['url']?>"><?=$k_razvyazka['name']?></a></p>
+                    <a href="/keys/<?=$k_razvyazka['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka['preview']?>"></a>
+                    <div class="item-content"><?=$k_razvyazka['shortcontent']?></div>
+                </div>
+            <?php endforeach; ?>
+            <!-- Оконачание контентной части ключей -->
+        </div>
+    </div>
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <!-- Виджет дискорда -->
