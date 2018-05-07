@@ -196,10 +196,11 @@ class SiteController extends Controller
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['name' => SORT_STRING])->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['name' => SORT_STRING])->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['name' => SORT_STRING])->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['name' => SORT_STRING])->all();
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->orderby(['name' => SORT_STRING])->limit(20)->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
             if(isset($_POST['Doorkeys']['doorkey'])){
@@ -208,7 +209,7 @@ class SiteController extends Controller
                 $doorkey = "Все ключи";
             }
            
-            $words = ["Берег","Таможня","Завод","Лес","Все ключи", "3-х этажная общага на Таможне", "2-х этажная общага на Таможне", "Восточное крыло санатория", "Западное крыло санатория", "Ключи от техники", "Квестовые ключи", "Ключи от сейфов/помещений с сейфами"];
+            $words = ["Берег","Таможня","Завод","Лес","Все ключи", "3-х этажная общага на Таможне", "2-х этажная общага на Таможне", "Восточное крыло санатория", "Западное крыло санатория", "Ключи от техники", "Квестовые ключи", "Ключи от сейфов/помещений с сейфами","Развязка"];
             /** Если пришел Берег через POST **/
             if(in_array($doorkey,$words)) {
                 $curentWord =  $words[array_search($doorkey,$words)];
@@ -231,6 +232,7 @@ class SiteController extends Controller
                     'forest'=>$forest,
                     'bereg'=>$bereg,
                     'tamojnya'=>$tamojnya,
+                    'razvyazka' => $razvyazka,
                     'form_model' => $form_model]);
         }
     }
