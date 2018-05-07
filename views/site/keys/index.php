@@ -131,7 +131,7 @@ use app\components\AlertComponent;
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
             </div>
-        </div>
+       
 
         <!-- Блок контента ключи на локации Развязка -->
         <div class="col-lg-12">
