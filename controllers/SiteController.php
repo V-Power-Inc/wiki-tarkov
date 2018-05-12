@@ -9,6 +9,7 @@ use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
+use app\models\Baraholshik;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -96,11 +97,18 @@ class SiteController extends Controller
         return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
-    /** Рендер страницы квестов Скупщика **/
+    /** Рендер страницы квестов Механика **/
     public function actionMehanicpage() {
         $query =  Mehanic::find();
         $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->all();
         return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
+    }
+
+    /** Рендер страницы квестов Барахольщика **/
+    public function actionBaraholshikpage() {
+        $query =  Baraholshik::find();
+        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/

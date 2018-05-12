@@ -95,6 +95,7 @@ $config = [
                 'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
                 'quests-of-traders/mehanic-quests' => 'site/mehanicpage',
+                'quests-of-traders/baraholshik-quests' => 'site/baraholshikpage',
                 'keys' => 'site/keys',
                 'news' => 'site/news',
                 'skills' => 'skills/mainskills',
@@ -144,7 +145,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // Доуступно с любого хоста
-//        'allowedIPs' => ['127.0.0.1', '::1','*'],
+        // 'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 
