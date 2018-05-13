@@ -329,6 +329,11 @@ class SiteController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+
+    /*** Рендер страницы справочника валют ***/
+    public function actionCurrencies() {
+        return $this->render('currencies/index.php');
+    }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
