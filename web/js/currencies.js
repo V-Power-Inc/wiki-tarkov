@@ -18,17 +18,20 @@
         }
     });
     
-    /*** Задаем переменные по значениям рублей как целочисленные ***/
-    var dollar = Math.floor(valuteData[0]/100);
-    var euro = Math.floor(valuteData[1]/100);
-    var bitkoin = Math.floor(valuteData[2]/100);
-    
     /*** Функция конвертации долларов в рубли ****/
     function dollarConventer(valNum) {
         document.getElementById('outputdollar').value=valNum*valuteData[0].value/100 + " руб.";
     }
-    
-    
+
+    /*** Функция конвертации евро в рубли ****/
+    function euroConventer(valNum) {
+        document.getElementById('outputeuro').value=valNum*valuteData[1].value/100 + " руб.";
+    }
+
+    /*** Функция конвертации биткоинов в рубли ****/
+    function bitkoinConventer(valNum) {
+        document.getElementById('outputbitkoin').value=valNum*valuteData[2].value/100 + " руб.";
+    }
     
     
 

@@ -66,11 +66,10 @@ use app\components\AlertComponent;
             </p>
 
             <!-- Начало рассчетной части -->
-
-
-            <!-- Строка курса доллара -->
+            
             <?php if($dollar->enabled==1): ?>
-            <h2>Курс доллара</h2>
+            <!-- Строка курса доллара -->
+            <h2>Курс Доллара</h2>
             <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
 
             <!-- Блок рассчета под долларовые поля -->
@@ -79,7 +78,7 @@ use app\components\AlertComponent;
             <!-- Инпут с курсом доллара -->
             <div class="form-group">
                 <label class="control-label">Курс доллара в рублях:</label>
-                <input class="form-control valute-course" value="1$ = <?= $dollar->value/100 ?>  рублей." disabled="">
+                <input class="form-control valute-course" value="1 доллар = <?= $dollar->value/100 ?> рублей." disabled="">
 
                 <div class="help-block"></div>
             </div>
@@ -103,13 +102,94 @@ use app\components\AlertComponent;
             </div>
             <?php endif; ?>
 
-        </div>
+            <?php if($euro->enabled==1): ?>
+                <!-- Строка курса евро -->
+                <h2>Курс Евро</h2>
+                <p class="size-16 alert alert-info">Евро валюта является ходовой у торговца Механика, за нее он продает различные дополнения для вашего оружия в виде модулей, однако не только он продает товары за евро, у Лыжника также можно найти несколько товаров продаваемых за евро.</p>
 
+                <!-- Блок рассчета под евро поля -->
+                <div style="padding: 10px;">
+
+                    <!-- Инпут с курсом евро -->
+                    <div class="form-group">
+                        <label class="control-label">Курс евро в рублях:</label>
+                        <input class="form-control valute-course" value="1 евро = <?= $euro->value/100 ?> рублей." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Инпут с пересчетом евро на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">Введите интересующее количество евро:</label>
+                        <input class="form-control valute-course" id="dollar-refference" oninput="euroConventer(this.value)" onchange="euroConventer(this.value)" value="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Поле перессчета евро на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">В рублях это составит:</label>
+                        <input class="form-control valute-course" id="outputeuro" value="0 руб." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                </div>
+            <?php endif; ?>
+
+
+            <?php if($bitkoin->enabled==1): ?>
+                <!-- Строка курса биткоина -->
+                <h2>Курс Биткоина</h2>
+                <p class="size-16 alert alert-info">Это самая дорогостоющая валюта, стоимость 1 биткоина в Таркове составляет десятки тысяч рублей. Валюта в ходу у Механика, за нее у него можно купить оружие с отличными боевыми характеристиками. Зачастую ЧВК используют биткоины также для того, чтобы поправить свое финансовое положение - следовательно продавать биткоин тоже очень выгодно.</p>
+
+                <!-- Блок рассчета под евро поля -->
+                <div style="padding: 10px;">
+
+                    <!-- Инпут с курсом биткоина -->
+                    <div class="form-group">
+                        <label class="control-label">Курс биткоина в рублях:</label>
+                        <input class="form-control valute-course" value="1 биткоин = <?= $bitkoin->value/100 ?> рублей." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Инпут с пересчетом биткоина на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">Введите интересующее количество биткоинов:</label>
+                        <input class="form-control valute-course" id="dollar-refference" oninput="bitkoinConventer(this.value)" onchange="euroConventer(this.value)" value="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Поле перессчета биткоина на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">В рублях это составит:</label>
+                        <input class="form-control valute-course" id="outputbitkoin" value="0 руб." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                </div>
+            <?php endif; ?>
+            
+            
+            
+            
+        </div>
 
         <!-- Боковая правая колонка -->
-        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-        
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <!-- Виджет Discord -->
+            <div>
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>
+
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
         </div>
         
+    </div>
+    
     </div>
 </div>
