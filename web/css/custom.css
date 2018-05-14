@@ -1558,6 +1558,10 @@ p.auth-info {
 
 .valute-course {
     font-size: 16px;
-    color: black;
+    color: #7289da;
     font-weight: bold;
+}
+
+.curencies-title {
+    color: #c3392c;
 }

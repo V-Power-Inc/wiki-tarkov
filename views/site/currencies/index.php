@@ -69,7 +69,7 @@ use app\components\AlertComponent;
             
             <?php if($dollar->enabled==1): ?>
             <!-- Строка курса доллара -->
-            <h2>Курс Доллара</h2>
+            <h2 class="curencies-title">Курс Доллара</h2>
             <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
 
             <!-- Блок рассчета под долларовые поля -->
@@ -104,7 +104,7 @@ use app\components\AlertComponent;
 
             <?php if($euro->enabled==1): ?>
                 <!-- Строка курса евро -->
-                <h2>Курс Евро</h2>
+                <h2 class="curencies-title">Курс Евро</h2>
                 <p class="size-16 alert alert-info">Евро валюта является ходовой у торговца Механика, за нее он продает различные дополнения для вашего оружия в виде модулей, однако не только он продает товары за евро, у Лыжника также можно найти несколько товаров продаваемых за евро.</p>
 
                 <!-- Блок рассчета под евро поля -->
@@ -121,7 +121,7 @@ use app\components\AlertComponent;
                     <!-- Инпут с пересчетом евро на рубли -->
                     <div class="form-group">
                         <label class="control-label">Введите интересующее количество евро:</label>
-                        <input class="form-control valute-course" id="dollar-refference" oninput="euroConventer(this.value)" onchange="euroConventer(this.value)" value="">
+                        <input class="form-control valute-course" id="euro-refference" oninput="euroConventer(this.value)" onchange="euroConventer(this.value)" value="">
 
                         <div class="help-block"></div>
                     </div>
@@ -140,7 +140,7 @@ use app\components\AlertComponent;
 
             <?php if($bitkoin->enabled==1): ?>
                 <!-- Строка курса биткоина -->
-                <h2>Курс Биткоина</h2>
+                <h2 class="curencies-title">Курс Биткоина</h2>
                 <p class="size-16 alert alert-info">Это самая дорогостоющая валюта, стоимость 1 биткоина в Таркове составляет десятки тысяч рублей. Валюта в ходу у Механика, за нее у него можно купить оружие с отличными боевыми характеристиками. Зачастую ЧВК используют биткоины также для того, чтобы поправить свое финансовое положение - следовательно продавать биткоин тоже очень выгодно.</p>
 
                 <!-- Блок рассчета под евро поля -->
@@ -157,7 +157,7 @@ use app\components\AlertComponent;
                     <!-- Инпут с пересчетом биткоина на рубли -->
                     <div class="form-group">
                         <label class="control-label">Введите интересующее количество биткоинов:</label>
-                        <input class="form-control valute-course" id="dollar-refference" oninput="bitkoinConventer(this.value)" onchange="euroConventer(this.value)" value="">
+                        <input class="form-control valute-course" id="bitkoin-refference" oninput="bitkoinConventer(this.value)" onchange="euroConventer(this.value)" value="">
 
                         <div class="help-block"></div>
                     </div>
@@ -172,8 +172,20 @@ use app\components\AlertComponent;
 
                 </div>
             <?php endif; ?>
-            
-            
+
+            <!-- Комментарии -->
+            <div id="mc-container" class="kek-recustom"></div>
+            <script type="text/javascript">
+                cackle_widget = window.cackle_widget || [];
+                cackle_widget.push({widget: 'Comment', id: 57165});
+                (function() {
+                    var mc = document.createElement('script');
+                    mc.type = 'text/javascript';
+                    mc.async = true;
+                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+                })();
+            </script>
             
             
         </div>

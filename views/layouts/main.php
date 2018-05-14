@@ -31,13 +31,6 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-5548904712403954",
-            enable_page_level_ads: true
-        });
-    </script>
     <!-- BEGIN JIVOSITE CODE {literal} -->
     <script type='text/javascript'>
         (function(){ var widget_id = 'OXowZeYTop';var d=document;var w=window;function l(){
@@ -52,13 +45,6 @@ AppAsset::register($this);
 
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
-    
-    <?php if((AlertComponent::bitkoin()->enabled !== 0)) : ?>
-        <div class="bitkoin">
-            <img src="<?= AlertComponent::bitkoin()->preview ?>" style="max-width: 30px;"><span class="bitkoin_text"><?= AlertComponent::bitkoin()->course ?></span>
-        </div>
-    <?php endif; ?>
-    
     
     <?= $content ?>
 </div>

@@ -14,23 +14,40 @@
         data: {param: param, token : token},
         success: function(valutes) {
             valuteData = valutes;
-            console.log(valuteData);
         }
     });
     
     /*** Функция конвертации долларов в рубли ****/
     function dollarConventer(valNum) {
-        document.getElementById('outputdollar').value=valNum*valuteData[0].value/100 + " руб.";
+        if(!isNaN(valNum)) {
+            document.getElementById('outputdollar').value=valNum*valuteData[0].value/100 + " руб.";
+        } else {
+            $('#dollar-refference').val(null);
+            $('#outputdollar').val(null);
+            alert('Введите целое число');
+        }
     }
 
     /*** Функция конвертации евро в рубли ****/
     function euroConventer(valNum) {
-        document.getElementById('outputeuro').value=valNum*valuteData[1].value/100 + " руб.";
+        if(!isNaN(valNum)) {
+            document.getElementById('outputeuro').value = valNum * valuteData[1].value / 100 + " руб.";
+        } else {
+            $('#euro-refference').val(null);
+            $('#outputeuro').val(null);
+            alert('Введите целое число');
+        }
     }
 
     /*** Функция конвертации биткоинов в рубли ****/
     function bitkoinConventer(valNum) {
-        document.getElementById('outputbitkoin').value=valNum*valuteData[2].value/100 + " руб.";
+        if(!isNaN(valNum)) {
+            document.getElementById('outputbitkoin').value = valNum * valuteData[2].value / 100 + " руб.";
+        } else {
+            $('#bitkoin-refference').val(null);
+            $('#outputbitkoin').val(null);
+            alert('Введите целое число');
+        }
     }
     
     

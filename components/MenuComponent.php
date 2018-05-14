@@ -103,6 +103,20 @@ class MenuComponent
             $skills = 'active';
         }
 
+        /*** Разбивка для пунктов меню - прочее ***/
+
+        $other = '';
+
+           if(stristr(Yii::$app->request->url,'/currencies')) {
+               $other = 'active';
+            } else if(stristr(Yii::$app->request->url,'/questions')) {
+               $other = 'active';
+            } else if(stristr(Yii::$app->request->url,'/news')){
+               $other = 'active';
+            } else if(stristr(Yii::$app->request->url,'/articles')){
+               $other = 'active';
+            }
+
         /*** Далее пошел габлон отрисовки меню ***/
 
         self::Active();
@@ -176,10 +190,17 @@ class MenuComponent
                       </ul>
                     </li>
 
-                     <!-- Other lists of menu selects -->    
-                    <li '.self::$articles.' '.self::$articlesdetail.'><a href="/articles">Полезная информация</a></li>
-                    <li '.self::$news.' '.self::$newsdetail.'><a href="/news">Новости</a></li>
-                    <li '.self::$questions.'><a href="/questions">Частые вопросы</a></li>
+                     <!-- Other lists of menu selects -->   
+                     <li class="dropdown '.$other.'">
+                      <a href="#" class="dropdown-toggle '.$other.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Прочая информация</b><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/currencies">Курсы валют</a></li>
+                        <li><a href="/articles">Полезная информация</a></li>
+                        <li><a href="/news">Новости</a></li>
+                        <li><a href="/questions">Частые вопросы</a></li>
+                      </ul>
+                    </li>
+                     
                 </ul>
 
             </div>
