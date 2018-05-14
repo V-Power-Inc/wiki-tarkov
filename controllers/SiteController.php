@@ -20,6 +20,7 @@ use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
 use app\models\Questions;
+use app\models\Currencies;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -332,7 +333,21 @@ class SiteController extends Controller
 
     /*** Рендер страницы справочника валют ***/
     public function actionCurrencies() {
-        return $this->render('currencies/index.php');
+        $dollar = Currencies::find()->where(['title' => 'Доллар'])->One();
+        $euro = Currencies::find()->where(['title' => 'Евро'])->One();
+        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->One();
+        
+        return $this->render('currencies/index.php', ['dollar' => $dollar, 'euro' => $euro, 'bitkoin' => $bitkoin]);
+    }
+    
+    /*** Отдаем валюты из базы в JSON формате ***/
+    public function actionJsonvalute() {
+        if(Yii::$app->request->isAjax) {
+            $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
+            return Json::encode($valutes);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/

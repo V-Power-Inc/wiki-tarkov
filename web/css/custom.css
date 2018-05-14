@@ -1555,3 +1555,9 @@ p.auth-info {
     font-size: 16px;
     color: black;
 }
+
+.valute-course {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+}
