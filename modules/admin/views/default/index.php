@@ -56,5 +56,6 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
         <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>
         <li><a href="/admin/articles" class="admin-tabs w-100-important">Полезные статьи</a></li>
+        <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
     </ul>
 </div>

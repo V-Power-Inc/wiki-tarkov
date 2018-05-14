@@ -1544,3 +1544,24 @@ p.auth-info {
     top: 20px;
     cursor: pointer;
 }
+
+.currencies-content {
+    background: white;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.font-currencies {
+    font-size: 16px;
+    color: black;
+}
+
+.valute-course {
+    font-size: 16px;
+    color: #7289da;
+    font-weight: bold;
+}
+
+.curencies-title {
+    color: #c3392c;
+}
