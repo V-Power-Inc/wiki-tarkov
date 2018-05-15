@@ -87,7 +87,7 @@ $this->registerMetaTag([
                     </div>
 
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                        <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%94%D0%BE%D0%BD%D0%B0%D1%82%D1%8B%20%D0%BD%D0%B0%20%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5%20tarkov-wiki.ru&targets-hint=&default-sum=&button-text=12&payment-type-choice=on&hint=&successURL=https%3A%2F%2Ftarkov-wiki.ru&quickpay=shop&account=410016162855090" width="450" height="213" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                        <?= $this->render('/other/yandex-donate.php'); ?>
                     </div>
 
                 </div>
