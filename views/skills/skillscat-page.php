@@ -134,6 +134,8 @@ use app\components\AlertComponent;
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
             </div>
 
+            <?= $this->render('/other/yandex-donate.php'); ?>
+
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
