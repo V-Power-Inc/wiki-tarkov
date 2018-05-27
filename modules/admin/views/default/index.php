@@ -6,7 +6,7 @@ $this->title = 'Админка tarkov-wiki';
 </div>
 
 
-<?php if(Yii::$app->user->identity->id !== 4): ?>
+<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 4): ?>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
