@@ -1,12 +1,13 @@
 <?php
-$this->title = 'Админка tarkov-wiki';
+/**
+ * Created by PhpStorm.
+ * User: comp
+ * Date: 27.05.2018
+ * Time: 16:04
+ */
+
+/** Эта вьюха для пользователя у которого нет прав работать с интерактивными картами локаций  **/
 ?>
-<div class="col-lg-12 text-center">
-    <h1 class="admin-title-main">Главная админская страница</h1>
-</div>
-
-
-<?php if(Yii::$app->user->identity->id !== 4): ?>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
@@ -18,7 +19,7 @@ $this->title = 'Админка tarkov-wiki';
     </ul>
 </div>
 
-<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 margin-top-30">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Квесты торговцев</h2>
         <li><a href="/admin/prapor/" class="admin-tabs w-100-important">Квесты Прапора</a></li>
@@ -28,25 +29,11 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
         <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Скупщика</a></li>
-
-
-    </ul>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
-    <ul class="nav nav-pills nav-stacked">
-        <h2 class="text-center">Маркеры на картах</h2>
-        <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
-        <li><a href="/admin/forest" class="admin-tabs w-100-important">Маркеры на локации Лес</a></li>
-        <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
-        <li><a href="/admin/bereg" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
-        <li><a href="/admin/razvyazka" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
-<!--        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Берег</a></li>-->
     </ul>
 </div>
 
 
-<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/questions" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>
@@ -61,8 +48,3 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
     </ul>
 </div>
-<?php else: ?>
-    <?= $this->render('workingview-nomaps'); ?>
-<?php endif; ?>
-
-

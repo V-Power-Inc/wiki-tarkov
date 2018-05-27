@@ -21,11 +21,16 @@ class TamojnyaController extends Controller
     /** Проверка пользователя на гостя  **/
     public function beforeAction($action)
     {
+
+        // Проверяем в том числе - если пользователь является вакантным участником, то редиректим его в админку
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
             return $this->redirect('/admin/login');
+        } elseif(Yii::$app->user->identity->id === 4) {
+            return $this->redirect('/admin');
         } else {
             return self::actionIndex();
         }
+
     }
     
     /**
