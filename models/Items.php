@@ -103,7 +103,7 @@ class Items extends \yii\db\ActiveRecord
             'quest_item' => 'Квестовый предмет',
             'questitem' => '',
             'module_weapon' => 'Оружия связанные с модулем',
-            'search_words' => 'Слова синонимы для быдланов (livesearch)'
+            'search_words' => 'Слова синонимы (livesearch)'
         ];
     }
 
