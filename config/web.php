@@ -110,7 +110,6 @@ $config = [
                 'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
                 'loot/<name:[\w_\/-]+>' => 'loot/category',
 
-
                 [
                     'class' => 'app\components\UrlComponent',
                 ],

@@ -6,7 +6,7 @@ $this->title = 'Админка tarkov-wiki';
 </div>
 
 
-<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 4): ?>
+<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 4 && Yii::$app->user->identity->id !== 5): ?>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
@@ -61,8 +61,11 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
     </ul>
 </div>
+
+<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 5) : ?>
+    <?=$this->render('working-lotttables'); ?>
 <?php else: ?>
-    <?= $this->render('workingview-nomaps'); ?>
+    <?=$this->render('workingview-nomaps'); ?>
 <?php endif; ?>
 
 
