@@ -12,6 +12,8 @@ use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Gd;
 use Imagine\Image\Box;
+use app\components\ClientdiscordComponent;
+use app\components\Embeddiscord;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -84,6 +86,16 @@ class NewsController extends Controller
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Отправка уведомления в дискорд канал
+            if($_SERVER['SERVER_NAME'] !== 'dev.kfc-it.ru') {
+                $webhook = new ClientdiscordComponent('https://discordapp.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO');
+                $embed = new Embeddiscord();
+                $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
+                $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
+                $embed->url('https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
+                $webhook->username('Новости Таркова')->message($model->title)->embed($embed)->send();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
