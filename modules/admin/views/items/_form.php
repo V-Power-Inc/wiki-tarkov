@@ -58,6 +58,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
             'Миротворец' => 'Миротворец',
             'Скупщик' => 'Скупщик',
             'Механик' => 'Механик',
+            'Барахольщик' => 'Барахольщик'
         ],
             [
                 'multiple' => true,
