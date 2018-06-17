@@ -184,7 +184,7 @@ class MenuComponent
                         <li><a href="/maps/tamojnya-location#4/80.40/-75.98">Таможня</a></li>
                         <li><a href="/maps/forest-location#3/72.50/-9.58">Лес</a></li>
                         <li><a href="/maps/bereg-location#3/60.93/-10.81">Берег</a></li>
-                        <li><a href="/maps/razvyazka-location">Развязка</a></li>
+                        <li><a href="/maps/razvyazka-location#3/75.32/-44.38">Развязка</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/maps">Смотреть список доступных карт</a></li>
                       </ul>
