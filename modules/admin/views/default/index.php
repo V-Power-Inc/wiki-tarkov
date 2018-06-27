@@ -62,7 +62,7 @@ $this->title = 'Админка tarkov-wiki';
     </ul>
 </div>
 
-<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 5) : ?>
+<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 4) : ?>
     <?=$this->render('working-lotttables'); ?>
 <?php else: ?>
     <?=$this->render('workingview-nomaps'); ?>
