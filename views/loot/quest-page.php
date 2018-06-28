@@ -56,7 +56,7 @@ use yii\bootstrap\ActiveForm;
 
         <!-- no-scale -->
         <div class="col-lg-12">
-            <?= $this->render('/other/google-gorizontal.php'); ?>
+            <?= $this->render('/other/google-gor.php'); ?>
         </div>
         
         <!-- Меню левой части страницы -->
