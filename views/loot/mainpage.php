@@ -42,6 +42,12 @@ use app\components\AlertComponent;
 
 <div class="container">
     <div class="row">
+
+        <!-- no-scale -->
+        <div class="col-lg-12">
+            <?= $this->render('/other/google-gorizontal.php'); ?>
+        </div>
+        
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
             <ul class="nav nav-pills nav-stacked categories categories-menu" id="categories-menu">

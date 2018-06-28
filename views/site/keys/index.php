@@ -46,6 +46,12 @@ use app\components\AlertComponent;
 
 <div class="container">
     <div class="row">
+
+        <!-- no-scale -->
+        <div class="col-lg-12">
+            <?= $this->render('/other/google-gorizontal.php'); ?>
+        </div>
+        
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
             <p class="size-16 alert alert-info">Наиболее полная база ключей от помещений в игре Escape from Tarkov. Данный справочник содержит информацию о всех доступных ключах от помещений Таркова на локациях Завод, Берег, Лес и Таможня. Также в этом разделе вы можете узнать что находится за открываемыми дверями и узнать где можно с большей вероятностью найти определенный ключи.</p>
 
