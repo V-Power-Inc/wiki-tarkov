@@ -32,7 +32,7 @@ $this->registerMetaTag([
 
             <!-- no-scale -->
             <div class="col-lg-12">
-                <?= $this->render('/other/google-gorizontal.php'); ?>
+                <?= $this->render('/other/google-gor.php'); ?>
             </div>
             
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
