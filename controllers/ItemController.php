@@ -14,6 +14,9 @@ use Yii;
 
 class ItemController extends Controller {
     
+    // CSRF валидация POST запросов методов этого контроллера отключена
+    public $enableCsrfValidation = false;
+    
 /** Рендер детальной страницы лута */
 public function actionDetailloot($item) {
 
@@ -25,6 +28,16 @@ public function actionDetailloot($item) {
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-}
 
+    /** Рендер страницы предпросмотра детальной страницы лута **/
+    public function actionPreviewloot() {
+        if(Yii::$app->user->isGuest !== true) {
+            $item = new Items;
+            $item->load(Yii::$app->request->post());
+            return $this->render('/loot/item-preview.php', ['item' => $item]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+}
 
