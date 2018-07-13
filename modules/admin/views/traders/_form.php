@@ -8,6 +8,8 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Traders */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <p class="alert alert-danger size-16 margin-bottom-5">
@@ -41,7 +43,7 @@ use mihaildev\elfinder\ElFinder;
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
-        echo '<img src='. $model->preview .' ?>';
+        echo '<img src='. $model->preview .' class="existed-photo" ?>';
     };
     ?>
 
@@ -85,9 +87,23 @@ use mihaildev\elfinder\ElFinder;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать торговца' : 'Обновить торговца', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <a class="btn btn-warning" id="preview-print">Предпросмотр материала</a>
         <a class="btn btn-primary" href="/admin/traders/index?dp-1-sort=sortir">Вернуться в список Торговцев</a>
+
     </div>
 
     <?php ActiveForm::end(); ?>
+
+
+    <!-- Форма для отображения превью -->
+    <form id="prev-form" action="/site/previewtrader" method="post" target="blank">
+        <input type="hidden" id="text-title" name="Traders[title]">
+        <input type="hidden" id="text-preview" name="Traders[preview]" value = '<?=$model->preview?>'>
+        <input type="hidden" id="text-content" name="Traders[content]">
+        <input type="hidden" id="text-url" name="Traders[urltoquests]">
+        <input type="hidden" id="text-button" name="Traders[button_quests]">
+        <input type="hidden" id="text-button-detail" name="Traders[button_detail]">
+        <input type="hidden" id="text-fullcontent" name="Traders[fullcontent]">
+    </form>
 
 </div>

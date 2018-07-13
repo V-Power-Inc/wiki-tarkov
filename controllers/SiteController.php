@@ -35,7 +35,10 @@ class SiteController extends Controller
      *
      * @return string
      */
-    
+
+    // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
+    public $enableCsrfValidation;
+
     /** Рендер главной страницы сайта  **/
     public function actionIndex()
     {
@@ -362,6 +365,19 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    /** Рендер страницы предпросмотра детальной страницы торговца **/
+    public function actionPreviewtrader() {
+        if(Yii::$app->user->isGuest !== true) {
+            // Отключаем CSRF валидацию POST запросов
+            $this->enableCsrfValidation=false;
+            $trader = new Traders;
+            $trader->load(Yii::$app->request->post());
+            return $this->render('traders/trader-preview.php', ['trader' => $trader]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
 }
