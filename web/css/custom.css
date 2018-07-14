@@ -1674,3 +1674,7 @@ p.auth-info {
     padding-top: 0;
     padding-bottom: 15px;
 }
+
+.no-adb {
+    margin-bottom: 10px;
+}
