@@ -30,7 +30,8 @@ class AppAsset extends AssetBundle
         'js/bootstrap-js/bootstrap.min.js',
         'js/popup/magnific-popup.js',
         'js/jquery.cookie.js',
-        'js/main.js'
+        'js/main.js',
+        'js/ads.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
