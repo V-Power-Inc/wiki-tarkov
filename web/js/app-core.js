@@ -11,10 +11,15 @@ onload=function(){
                 var elementClass = element.className;
                 if (elementClass && elementClass.indexOf(className) != -1 && hasClassName.test(elementClass))
                     results.push(element);}
-            return results;}}
+            return results;
+        }
+    }
     blocked = 0;
     var ad_nodes = document.getElementsByClassName(ads);
     for(i in ad_nodes){
         if (ad_nodes[i].offsetHeight == 0){
             blocked = 1;
-            document.getElementById('mdl_ctnr').style.display='block';}}}
+            document.getElementById('mdl_ctnr').style.display='block';
+        }
+    }
+}
