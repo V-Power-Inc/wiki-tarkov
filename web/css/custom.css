@@ -1621,7 +1621,8 @@ p.auth-info {
     display:block;
     position:absolute;
     background:#292C33;
-    top:0;left:140px;
+    top:0;
+    left:165px;
     line-height:25px;
     font-weight:bold;
     width:50px;

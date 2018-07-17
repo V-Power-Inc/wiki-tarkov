@@ -20,6 +20,7 @@ onload=function(){
         if (ad_nodes[i].offsetHeight == 0){
             blocked = 1;
             document.getElementById('mdl_ctnr').style.display='block';
+            $('body').css({'overflow':'hidden'});
         }
     }
 }
