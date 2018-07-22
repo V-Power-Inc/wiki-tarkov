@@ -471,9 +471,12 @@ a.image-quests:focus {
 
 .map-heading {
     color: #c3392c;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .maps__small {
+    height: 100%;
     max-width: 100%;
     margin-top: 10px;
 }
