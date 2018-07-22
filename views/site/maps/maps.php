@@ -112,14 +112,25 @@ use app\components\AlertComponent;
 <!--        <a class="btn btn-default main-link" href="#">Перейти к карте лаборатории TerraGroup</a>-->
 
             <p class="alert alert-danger"><b>Карта локации находится в разработке.</b></p>
-
-
         </div>
     </div>
-        
-        
-        
-        
+
+
+
+    <div class="row maps-margin-top-30">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+            <h2 class="text-center map-heading">Карта локации улицы Таркова</h2>
+            <!--            <a href="/maps/razvyazka-location">-->
+            <img class="maps__small" src="/img/maps/streets-of-tarkov.png">
+            <!--            </a>-->
+            <br>
+            <br>
+            <!--        <a class="btn btn-default main-link" href="#">Перейти к карте улиц Таркова</a>-->
+
+            <p class="alert alert-danger"><b>Карта локации находится в разработке.</b></p>
+        </div>
+
+    </div>
         
         
         
