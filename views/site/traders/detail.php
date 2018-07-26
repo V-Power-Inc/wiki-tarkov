@@ -112,9 +112,9 @@ use app\components\AlertComponent;
             
             </div>
 
-         
-            <?= $this->render('/other/google-recommended.php'); ?>
-            
+            <div class="row">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
 
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>

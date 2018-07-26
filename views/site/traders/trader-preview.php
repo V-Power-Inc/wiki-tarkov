@@ -80,6 +80,10 @@ use app\components\AlertComponent;
 
             </div>
 
+          
+            <?= $this->render('/other/google-recommended.php'); ?>
+            
+
         </div>
 
         <!-- Боковая правая колонка -->
