@@ -123,7 +123,7 @@ use app\components\AlertComponent;
                 <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
             </div>
 
-            <div class="row">
+            <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>
             </div>
             

@@ -164,8 +164,8 @@ use yii\web\JsExpression;
 
 
         </div>
-        
-        <div class="row">
+
+        <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
         

@@ -71,7 +71,7 @@ use app\components\AlertComponent;
                 <!-- Окончания итем из цикла -->
             </div>
 
-            <div class="row">
+            <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>
             </div>
             

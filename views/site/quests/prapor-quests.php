@@ -90,7 +90,7 @@ use app\components\AlertComponent;
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
         </div>
 
-        <div class="row">
+        <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
 
