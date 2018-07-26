@@ -85,7 +85,11 @@ use app\components\AlertComponent;
                     <p class="alert alert-danger size-16">Данный раздел находится на стадии заполнения.</p>
                 </div>
             </div>
-            <?php endif; ?>
+    <?php endif; ?>
+
+            <div class="row">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
             
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>

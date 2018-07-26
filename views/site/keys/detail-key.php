@@ -92,6 +92,10 @@ use app\components\AlertComponent;
                 <a href="/keys"><button type="button" class="btn btn-primary margin-top-15">Вернуться в справочник ключей</button></a>
             </div>
 
+                <div class="row">
+                    <?= $this->render('/other/google-recommended.php'); ?>
+                </div>
+
                 <!-- Расстояние - заглушка -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 

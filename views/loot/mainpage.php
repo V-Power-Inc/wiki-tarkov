@@ -171,9 +171,13 @@ use app\components\AlertComponent;
 
         </div>
 
+        <div class="row">
+            <?= $this->render('/other/google-recommended.php'); ?>
+        </div>
+        
         <!-- Расстояние - заглушка -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
-
+        
         <!-- Комментарии -->
         <?php if(empty($_GET)) : ?>
        <div id="mc-container" class="kek-recustom"></div>
