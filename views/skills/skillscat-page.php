@@ -122,6 +122,10 @@ use app\components\AlertComponent;
             <div class="col-lg-12">
                 <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
             </div>
+
+            <div class="row">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
             
         </div>
 

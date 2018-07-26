@@ -69,10 +69,12 @@ use app\components\AlertComponent;
                     </div>
                 </div>
                 <!-- Окончания итем из цикла -->
-
             </div>
 
-
+            <div class="row">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
+            
         </div>
 
 
@@ -93,7 +95,7 @@ use app\components\AlertComponent;
             <?= $this->render('/other/disable-adblock.php'); ?>
 
         </div>
-
+        
         <!-- Расстояние - заглушка -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
 
