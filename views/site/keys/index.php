@@ -152,6 +152,10 @@ use app\components\AlertComponent;
             <?php endforeach; ?>
             <!-- Оконачание контентной части ключей -->
         </div>
+            
+        <div class="col-lg-12">
+            <?= $this->render('/other/google-recommended.php'); ?>
+        </div>
     </div>
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
