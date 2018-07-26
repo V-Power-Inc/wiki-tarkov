@@ -197,8 +197,8 @@ use app\components\AlertComponent;
                 <?php endif; ?>
             </div>
         </div>
-        
-        <div class="row">
+
+        <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
         

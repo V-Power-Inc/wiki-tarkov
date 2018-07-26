@@ -92,7 +92,7 @@ use app\components\AlertComponent;
                 <a href="/keys"><button type="button" class="btn btn-primary margin-top-15">Вернуться в справочник ключей</button></a>
             </div>
 
-                <div class="row">
+                <div class="recommended-gm-content">
                     <?= $this->render('/other/google-recommended.php'); ?>
                 </div>
 

@@ -92,10 +92,10 @@ use app\components\AlertComponent;
                 <p class="text-right"><a class="btn btn-default main-link" href="/news">Вернуться к списку новостей</a></p>
             </div>
 
-            <div class="row">
+            <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>
             </div>
-
+            
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
             <script type="text/javascript">
