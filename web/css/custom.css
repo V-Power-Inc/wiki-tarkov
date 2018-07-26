@@ -1682,3 +1682,13 @@ p.auth-info {
 .no-adb {
     margin-bottom: 10px;
 }
+
+.recommended-gm-content {
+    float: left;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: block;
+}
