@@ -82,10 +82,13 @@ $this->registerMetaTag([
                     
                 <div class="row margin-top-20">
                     <!-- Виджет Discord -->
+                    
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                        <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+                            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
+                                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+                            <?php  $this->endCache(); } ?>
                     </div>
-
+                    
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                         <?= $this->render('/other/yandex-donate.php'); ?>
                     </div>
