@@ -36,6 +36,31 @@ class SiteController extends Controller
      * @return string
      */
 
+    // Кешируем все запросы из БД - храним их в кеше
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 604800,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM prapor UNION 
+                              SELECT COUNT(*) FROM lyjnic UNION
+                              SELECT COUNT(*) FROM baraholshik UNION
+                              SELECT COUNT(*) FROM mirotvorec UNION
+                              SELECT COUNT(*) FROM mehanic UNION
+                              SELECT COUNT(*) FROM doorkeys UNION
+                              SELECT COUNT(*) FROM articles UNION
+                              SELECT COUNT(*) FROM news UNION
+                              SELECT COUNT(*) FROM questions UNION
+                              SELECT COUNT(*) FROM traders UNION
+                              SELECT COUNT(*) FROM currencies UNION',
+                ],
+            ],
+        ];
+    }
+
     // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
     public $enableCsrfValidation;
 

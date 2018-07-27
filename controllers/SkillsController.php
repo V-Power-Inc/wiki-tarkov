@@ -15,6 +15,21 @@ use app\models\Skills;
 
 class SkillsController extends Controller
 {
+
+    // Кешируем все запросы из БД - храним их в кеше
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 604800,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM skills UNION SELECT COUNT(*) FROM cat_skills',
+                ],
+            ],
+        ];
+    }
     
     /** Рендер страницы списка навыков персонажа **/
     public function actionMainskills()
