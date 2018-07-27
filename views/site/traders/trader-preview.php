@@ -91,7 +91,9 @@ use app\components\AlertComponent;
 
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
-            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
+                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            <?php  $this->endCache(); } ?>
 
         </div>
 
