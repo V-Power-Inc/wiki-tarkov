@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    '4' => 4,
-    '5' => 5,
+    'adminEmail' => 'info@tarkov-wiki.ru',
+    'discordCache' => 1, // enable cache of discord view
 ];
