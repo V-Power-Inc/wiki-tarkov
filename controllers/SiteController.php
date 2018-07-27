@@ -14,7 +14,6 @@ use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
 use app\models\Bereg;
-use app\models\Mapstaticcontent;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -30,36 +29,16 @@ use yii\db\Query;
 
 class SiteController extends Controller
 {
+
     /**
      * Displays homepage.
      *
      * @return string
      */
 
-    // Кешируем все запросы из БД - храним их в кеше
-//    public function behaviors()
-//    {
-//        return [
-//            [
-//                'class' => 'yii\filters\PageCache',
-//                'duration' => 604800,
-//                'dependency' => [
-//                    'class' => 'yii\caching\DbDependency',
-//                    'sql' => 'SELECT COUNT(*) FROM prapor UNION 
-//                              SELECT COUNT(*) FROM lyjnic UNION
-//                              SELECT COUNT(*) FROM baraholshik UNION
-//                              SELECT COUNT(*) FROM mirotvorec UNION
-//                              SELECT COUNT(*) FROM mehanic UNION
-//                              SELECT COUNT(*) FROM doorkeys UNION
-//                              SELECT COUNT(*) FROM articles UNION
-//                              SELECT COUNT(*) FROM news UNION
-//                              SELECT COUNT(*) FROM questions UNION
-//                              SELECT COUNT(*) FROM traders UNION
-//                              SELECT COUNT(*) FROM currencies UNION',
-//                ],
-//            ],
-//        ];
-//    }
+    /** Кеширование по секундам с различными сроками **/
+    const WEEK_CACHE = 604800;
+    const TWO_DAYS = 172800;
 
     // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
     public $enableCsrfValidation;
@@ -72,7 +51,7 @@ class SiteController extends Controller
 
     /** Рендер главной страницы с квестами **/
     public function actionQuests() {
-        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->asArray()->all();
+        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::WEEK_CACHE)->asArray()->all();
         return $this->render('quests/quests-main.php', ['traders' => $traders]);
     }
 
@@ -83,7 +62,7 @@ class SiteController extends Controller
 
     /** Рендер детальной страницы торговца **/
     public function actionTradersdetail($id) {
-        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->One();
         if($trader) {
             return $this->render('traders/detail.php',['trader' => $trader]);
         } else {
@@ -94,14 +73,14 @@ class SiteController extends Controller
     /** Рендер страницы квестов Прапора **/
     public function actionPraporpage() {
         $query =  Prapor::find();
-        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
     
     /** Рендер страницы квестов Терапевта **/
     public function actionTerapevtpage() {
         $query =  Terapevt::find();
-        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
     }
 
@@ -115,28 +94,28 @@ class SiteController extends Controller
     /** Рендер страницы квестов Лыжника **/
     public function actionLyjnicpage() {
         $query =  Lyjnic::find();
-        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
     }
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
         $query =  Mirotvorec::find();
-        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
     /** Рендер страницы квестов Механика **/
     public function actionMehanicpage() {
         $query =  Mehanic::find();
-        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
     }
 
     /** Рендер страницы квестов Барахольщика **/
     public function actionBaraholshikpage() {
         $query =  Baraholshik::find();
-        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->all();
+        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
     }
 
@@ -233,11 +212,11 @@ class SiteController extends Controller
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
             if(isset($_POST['Doorkeys']['doorkey'])){
@@ -277,7 +256,7 @@ class SiteController extends Controller
     /** Рендер детальной страницы для вывода ключей  **/
     public function actionDoorkeysdetail($id)
     {
-        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->One();
+        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::TWO_DAYS)->One();
         if($models) {
         return $this->render('keys/detail-key.php',['model' => $models]);
         } else {
@@ -289,14 +268,14 @@ class SiteController extends Controller
     public function actionNews() {
         $query =  News::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
         $request = \Yii::$app->request;
         return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
     
     /** Рендер детальной страницы новости **/
     public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::TWO_DAYS)->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
         } else {
@@ -308,14 +287,14 @@ class SiteController extends Controller
     public function actionArticles() {
         $query =  Articles::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
         $request = \Yii::$app->request;
         return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
 
     /** Рендер детальной страницы полезной статьи **/
     public function actionArticledetail($id) {
-        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::TWO_DAYS)->One();
         if($models) {
             return $this->render('articles/detail.php',['model' => $models]);
         } else {
@@ -328,7 +307,7 @@ class SiteController extends Controller
         $model = Questions::find()->where(['enabled' => 1]);
 
         $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
-        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
         $request = \Yii::$app->request;
         
         return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
@@ -361,9 +340,9 @@ class SiteController extends Controller
 
     /*** Рендер страницы справочника валют ***/
     public function actionCurrencies() {
-        $dollar = Currencies::find()->where(['title' => 'Доллар'])->One();
-        $euro = Currencies::find()->where(['title' => 'Евро'])->One();
-        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->One();
+        $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::TWO_DAYS)->One();
+        $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::TWO_DAYS)->One();
+        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::TWO_DAYS)->One();
         
         return $this->render('currencies/index.php', ['dollar' => $dollar, 'euro' => $euro, 'bitkoin' => $bitkoin]);
     }
@@ -373,6 +352,19 @@ class SiteController extends Controller
         if(Yii::$app->request->isAjax) {
             $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
             return Json::encode($valutes);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+
+    /** Рендер страницы предпросмотра детальной страницы торговца **/
+    public function actionPreviewtrader() {
+        if(Yii::$app->user->isGuest !== true) {
+            // Отключаем CSRF валидацию POST запросов
+            $this->enableCsrfValidation=false;
+            $trader = new Traders;
+            $trader->load(Yii::$app->request->post());
+            return $this->render('traders/trader-preview.php', ['trader' => $trader]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
@@ -390,19 +382,6 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
-    }
-
-    /** Рендер страницы предпросмотра детальной страницы торговца **/
-    public function actionPreviewtrader() {
-        if(Yii::$app->user->isGuest !== true) {
-            // Отключаем CSRF валидацию POST запросов
-            $this->enableCsrfValidation=false;
-            $trader = new Traders;
-            $trader->load(Yii::$app->request->post());
-            return $this->render('traders/trader-preview.php', ['trader' => $trader]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
     }
 
 }

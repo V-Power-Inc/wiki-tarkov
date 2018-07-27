@@ -67,7 +67,9 @@ use yii\web\JsExpression;
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
+                    <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <?php  $this->endCache(); } ?>
             </div>
         </div>
 

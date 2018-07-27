@@ -12,7 +12,6 @@ use yii\web\Controller;
 use yii;
 use app\models\Category;
 use app\models\Items;
-use app\models\Doorkeys;
 use yii\data\Pagination;
 use yii\web\HttpException;
 use yii\helpers\Json;
