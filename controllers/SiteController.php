@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Mehanic;
 use app\models\Razvyazka;
 use Yii;
+use app\models\Skypshik;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
@@ -86,9 +87,9 @@ class SiteController extends Controller
 
     /** Рендер страницы квестов Скупщика **/
     public function actionSkypchikpage() {
-        // Пока нет квестов - редирект
-        $this->goHome();
-      //  return $this->render('quests/skyp-quests.php');
+        $query =  Skypshik::find();
+        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
     }
 
     /** Рендер страницы квестов Лыжника **/

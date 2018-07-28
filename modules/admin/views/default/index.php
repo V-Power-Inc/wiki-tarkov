@@ -27,9 +27,12 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/mirotvorec/" class="admin-tabs w-100-important">Квесты Миротворца</a></li>
         <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
         <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Скупщика</a></li>
-
-
+        <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
+        <!-- disabled for now -->
+        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Лешего</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Электроника</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Башкира</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Хохла</a></li>
     </ul>
 </div>
 
@@ -41,7 +44,13 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
         <li><a href="/admin/bereg" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
         <li><a href="/admin/razvyazka" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
-<!--        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Берег</a></li>-->
+        <!-- disabled -->
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Улицы Таркова</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации лаб. TerraGroup</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Пригород</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Поселок</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Маяк</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Терминал</a></li>
     </ul>
 </div>
 
@@ -54,11 +63,13 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>
         <li><a href="/admin/skills" class="admin-tabs w-100-important">Пассивные умения</a></li>
         <li><a href="/admin/traders/index?dp-1-sort=sortir" class="admin-tabs w-100-important">Торговцы</a></li>
-        <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
         <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>
         <li><a href="/admin/articles" class="admin-tabs w-100-important">Полезные статьи</a></li>
         <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
+        <!-- disabled -->
+        <!-- link to /admin/mapstaticcontent -->
+        <li><a href="#" class="admin-tabs w-100-important unactive">Контент в описаниях маркеров</a></li>
     </ul>
 </div>
 
