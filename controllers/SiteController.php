@@ -11,6 +11,7 @@ use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
+use app\models\Leshy;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -118,6 +119,13 @@ class SiteController extends Controller
         $query =  Baraholshik::find();
         $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
+    }
+
+    /** Рендер страницы квестов Лешего **/
+    public function actionLeshypage() {
+        $query =  Leshy::find();
+        $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/leshy-quests.php', ['leshy'=>$leshy,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
