@@ -97,6 +97,7 @@ $config = [
                 'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
                 'quests-of-traders/mehanic-quests' => 'site/mehanicpage',
                 'quests-of-traders/baraholshik-quests' => 'site/baraholshikpage',
+              //  'quests-of-traders/leshy-quests' => 'site/leshypage',
                 'currencies' => 'site/currencies',
                 'keys' => 'site/keys',
                 'news' => 'site/news',

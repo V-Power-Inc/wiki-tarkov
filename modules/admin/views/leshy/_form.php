@@ -6,11 +6,11 @@ use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Skypshik */
+/* @var $model app\models\Leshy */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="skypshik-form">
+<div class="leshy-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
@@ -40,7 +40,7 @@ use mihaildev\elfinder\ElFinder;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить квест', ['class' => 'btn btn-success']) ?>
-        <a class="btn btn-primary" href="/admin/skypshik">Вернуться в список квестов Скупщика</a>
+        <a class="btn btn-primary" href="/admin/leshy">Вернуться в список квестов Лешего</a>
     </div>
 
     <?php ActiveForm::end(); ?>
