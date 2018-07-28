@@ -12,6 +12,7 @@ use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
 use app\models\Leshy;
+use app\models\Warden;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -126,6 +127,13 @@ class SiteController extends Controller
         $query =  Leshy::find();
         $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/leshy-quests.php', ['leshy'=>$leshy,]);
+    }
+
+    /** Рендер страницы квестов Смотрителя (Перевод зависит от локализации разработчиков) **/
+    public function actionWardenpage() {
+        $query =  Warden::find();
+        $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
