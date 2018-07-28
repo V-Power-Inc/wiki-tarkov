@@ -26,16 +26,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+//            'id',
             'tab_number',
             'title',
-            'content:ntext',
+//            'content:ntext',
+            'preview' => [
+                'format' => 'image',
+                'value' => function($data) {
+                    return  $data->preview;
+                },
+            ],
             'date_create',
-            //'date_edit',
-            //'preview',
+            //           'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+
         'tableOptions' => [
             'class' => 'table table-striped table-bordered customed'
         ],
