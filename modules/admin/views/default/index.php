@@ -27,7 +27,7 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/mirotvorec/" class="admin-tabs w-100-important">Квесты Миротворца</a></li>
         <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
         <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
-        <li><a href="#" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
+        <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
         <!-- disabled for now -->
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Лешего</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Электроника</a></li>
