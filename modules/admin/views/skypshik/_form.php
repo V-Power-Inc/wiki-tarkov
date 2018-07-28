@@ -40,7 +40,7 @@ use mihaildev\elfinder\ElFinder;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить квест', ['class' => 'btn btn-success']) ?>
-        <a class="btn btn-primary" href="admin/skypshik">Вернуться в список квестов Скупщика</a>
+        <a class="btn btn-primary" href="/admin/skypshik">Вернуться в список квестов Скупщика</a>
     </div>
 
     <?php ActiveForm::end(); ?>
