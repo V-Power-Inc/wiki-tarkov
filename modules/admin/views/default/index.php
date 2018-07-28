@@ -63,11 +63,13 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>
         <li><a href="/admin/skills" class="admin-tabs w-100-important">Пассивные умения</a></li>
         <li><a href="/admin/traders/index?dp-1-sort=sortir" class="admin-tabs w-100-important">Торговцы</a></li>
-        <li><a href="/admin/mapstaticcontent" class="admin-tabs w-100-important">Контент в описаниях маркеров</a></li>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
         <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>
         <li><a href="/admin/articles" class="admin-tabs w-100-important">Полезные статьи</a></li>
         <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
+        <!-- disabled -->
+        <!-- link to /admin/mapstaticcontent -->
+        <li><a href="#" class="admin-tabs w-100-important unactive">Контент в описаниях маркеров</a></li>
     </ul>
 </div>
 

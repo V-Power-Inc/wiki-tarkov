@@ -95,6 +95,8 @@ AdminAsset::register($this);
            <?php if(Yii::$app->request->url == '/admin'): ?>
                 <?php if(isset(Yii::$app->user->identity->user)): ?>
                 <!-- Блок данных об авторизованном пользователе -->
+                <!-- Добавили блок Display-none - функционал временно отключен за ненужностью -->
+                <div style="display: none;">
                     <div class="row">
                         <div class="col-lg-12 auth-info relative">
                             <div class="exit"><img class="exits-icon-admin" src="/img/exits-krest.png"></div>
@@ -105,6 +107,7 @@ AdminAsset::register($this);
                             <p class="auth-info">Дата окончания учетной записи: <span><?= (Yii::$app->user->identity->date_end)?Yii::$app->user->identity->date_end:'Учетная запись не лимитирована датой окончания'?></span></p>
                         </div>
                     </div>
+                </div>
                 <?php endif; ?>
            <?php endif; ?>
 
