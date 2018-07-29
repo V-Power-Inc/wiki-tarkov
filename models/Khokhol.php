@@ -7,7 +7,7 @@ use yii\imagine\Image;
 use Imagine\Image\Box;
 
 /**
- * This is the model class for table "bashkir".
+ * This is the model class for table "khokhol".
  *
  * @property int $id
  * @property int $tab_number
@@ -17,7 +17,7 @@ use Imagine\Image\Box;
  * @property string $date_edit
  * @property string $preview
  */
-class Bashkir extends \yii\db\ActiveRecord
+class Khokhol extends \yii\db\ActiveRecord
 {
     public $file=null;
     /**
@@ -25,7 +25,7 @@ class Bashkir extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'bashkir';
+        return 'khokhol';
     }
 
     /**

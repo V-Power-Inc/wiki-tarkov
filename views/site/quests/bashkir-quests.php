@@ -15,7 +15,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => 'Квесты Башкира в Escape from Tarkov, квесты миротворец Тарков',
+    'content' => 'Квесты Башкира в Escape from Tarkov, квесты башкир Тарков',
 ]);
 
 use app\components\AlertComponent;
