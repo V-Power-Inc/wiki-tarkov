@@ -13,6 +13,7 @@ use app\models\Mirotvorec;
 use app\models\Baraholshik;
 use app\models\Leshy;
 use app\models\Warden;
+use app\models\Bashkir;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -134,6 +135,13 @@ class SiteController extends Controller
         $query =  Warden::find();
         $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
         return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
+    }
+
+    /** Рендер страницы квестов Башкира **/
+    public function actionBashkirpage() {
+        $query =  Bashkir::find();
+        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/bashkir-quests.php', ['bashkir'=>$bashkir,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/

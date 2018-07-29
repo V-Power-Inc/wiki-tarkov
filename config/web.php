@@ -99,6 +99,7 @@ $config = [
                 'quests-of-traders/baraholshik-quests' => 'site/baraholshikpage',
               //  'quests-of-traders/leshy-quests' => 'site/leshypage',
               //  'quests-of-traders/warden-quests' => 'site/wardenpage',
+              //  'quests-of-traders/bashkir-quests' => 'site/bashkirpage',
                 'currencies' => 'site/currencies',
                 'keys' => 'site/keys',
                 'news' => 'site/news',

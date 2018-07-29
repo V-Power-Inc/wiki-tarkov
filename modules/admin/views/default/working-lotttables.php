@@ -29,8 +29,8 @@
         <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
         <li><a href="/admin/leshy/" class="admin-tabs w-100-important">Квесты Лешего</a></li>
         <li><a href="/admin/warden/" class="admin-tabs w-100-important">Квесты Смотрителя</a></li>
+        <li><a href="/admin/bashkir/" class="admin-tabs w-100-important">Квесты Башкира</a></li>
         <!-- disabled for now -->
-        <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Башкира</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Квесты Хохла</a></li>
     </ul>
 </div>
