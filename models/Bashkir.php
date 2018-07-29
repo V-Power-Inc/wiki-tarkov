@@ -7,43 +7,43 @@ use yii\imagine\Image;
 use Imagine\Image\Box;
 
 /**
- * This is the model class for table "prapor".
+ * This is the model class for table "bashkir".
  *
- * @property integer $id
+ * @property int $id
+ * @property int $tab_number
  * @property string $title
  * @property string $content
- * @property integer $tab_number
  * @property string $date_create
  * @property string $date_edit
  * @property string $preview
  */
-class Prapor extends \yii\db\ActiveRecord
+class Bashkir extends \yii\db\ActiveRecord
 {
     public $file=null;
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'prapor';
+        return 'bashkir';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['content'], 'string'],
             [['tab_number'], 'integer'],
-            [['date_create', 'date_edit', 'preview'], 'safe'],
+            [['content'], 'string'],
+            [['date_create', 'date_edit'], 'safe'],
             [['file'], 'image'],
-            [['title'], 'string', 'max' => 100],
+            [['title', 'preview'], 'string', 'max' => 100],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

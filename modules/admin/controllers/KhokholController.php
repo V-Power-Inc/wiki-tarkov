@@ -3,18 +3,17 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Prapor;
-use app\models\PraporSearch;
+use app\models\Khokhol;
+use app\models\KhokholSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PraporController implements the CRUD actions for Prapor model.
+ * KhokholController implements the CRUD actions for Khokhol model.
  */
-class PraporController extends Controller
+class KhokholController extends Controller
 {
-
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -27,10 +26,9 @@ class PraporController extends Controller
             return self::actionIndex();
         }
     }
-    
-    
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -45,12 +43,12 @@ class PraporController extends Controller
     }
 
     /**
-     * Lists all Prapor models.
+     * Lists all Khokhol models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PraporSearch();
+        $searchModel = new KhokholSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,9 +58,10 @@ class PraporController extends Controller
     }
 
     /**
-     * Displays a single Prapor model.
+     * Displays a single Khokhol model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -72,72 +71,70 @@ class PraporController extends Controller
     }
 
     /**
-     * Creates a new Prapor model.
+     * Creates a new Khokhol model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prapor();
-        $model->uploadPreview();
-        
+        $model = new Khokhol();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Prapor model.
+     * Updates an existing Khokhol model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Prapor model.
+     * Deletes an existing Khokhol model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
+        $this->findModel($id)->delete();
 
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Prapor model based on its primary key value.
+     * Finds the Khokhol model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prapor the loaded model
+     * @return Khokhol the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prapor::findOne($id)) !== null) {
+        if (($model = Khokhol::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -13,6 +13,8 @@ use app\models\Mirotvorec;
 use app\models\Baraholshik;
 use app\models\Leshy;
 use app\models\Warden;
+use app\models\Bashkir;
+use app\models\Khokhol;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -136,6 +138,20 @@ class SiteController extends Controller
         return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
     }
 
+    /** Рендер страницы квестов Башкира **/
+    public function actionBashkirpage() {
+        $query =  Bashkir::find();
+        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/bashkir-quests.php', ['bashkir'=>$bashkir,]);
+    }
+
+    /** Рендер страницы квестов Хохла **/
+    public function actionKhokholpage() {
+        $query =  Khokhol::find();
+        $khokhol = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        return $this->render('quests/khokhol-quests.php', ['khokhol'=>$khokhol,]);
+    }
+
     /** Рендер страницы со списком интерактивных карт **/
     public function actionLocations() {
           return $this->render('maps/maps.php');
@@ -181,7 +197,7 @@ class SiteController extends Controller
         }
     }
 
-    /** JSON данные с координатами маркеров Таможни **/
+    /** JSON данные с координатами маркеров Берега **/
     public function actionBeregmarkers() {
         if(Yii::$app->request->isAjax) {
             $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
