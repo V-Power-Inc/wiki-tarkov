@@ -8,7 +8,7 @@
 /*** Эта вьюха была создана для администратора интерактивных карт, которого Вочик собирался прособеседовать 15-08-2018 ***/
 ?>
 
-<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Маркеры на картах</h2>
         <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
@@ -23,5 +23,13 @@
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Поселок</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Маяк</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Терминал</a></li>
+    </ul>
+</div>
+
+
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+    <ul class="nav nav-pills nav-stacked">
+        <h2 class="text-center">Дополнительно</h2>
+        <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
     </ul>
 </div>
