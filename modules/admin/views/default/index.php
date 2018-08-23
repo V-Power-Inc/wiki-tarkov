@@ -6,7 +6,7 @@ $this->title = 'Админка tarkov-wiki';
 </div>
 
 
-<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 4 && Yii::$app->user->identity->id !== 5 && Yii::$app->user->identity->id !== 6): ?>
+<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 3 && Yii::$app->user->identity->id !== 4 && Yii::$app->user->identity->id !== 5 && Yii::$app->user->identity->id !== 6): ?>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
@@ -78,6 +78,8 @@ $this->title = 'Админка tarkov-wiki';
     <?=$this->render('working-lotttables'); ?>
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 6) : ?>
     <?=$this->render('maps-user'); ?>
+<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 3) : ?>
+    <?=$this->render('dmitry-loot'); ?>
 <?php else : ?>
     <?=$this->render('workingview-nomaps'); ?>
 <?php endif; ?>
