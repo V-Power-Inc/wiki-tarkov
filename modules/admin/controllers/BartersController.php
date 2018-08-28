@@ -3,36 +3,34 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Zavod;
-use app\models\ZavodSearch;
+use app\models\Barters;
+use app\models\BartersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ZavodController implements the CRUD actions for Zavod model.
+ * BartersController implements the CRUD actions for Barters model.
  */
-class ZavodController extends Controller
+class BartersController extends Controller
 {
 
-    /** Подключаем отдельный layout для CRUD моделей **/
+    /** Подключаем отдельный layout для админки сайта **/
     public $layout = 'admin';
+
 
     /** Проверка пользователя на гостя  **/
     public function beforeAction($action)
     {
-        // Проверяем в том числе - если пользователь является вакантным участником, то редиректим его в админку
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
             return $this->redirect('/admin/login');
-        } elseif(Yii::$app->user->identity->id === 5) {
-            return $this->redirect('/admin');
         } else {
             return self::actionIndex();
         }
     }
-    
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -47,12 +45,12 @@ class ZavodController extends Controller
     }
 
     /**
-     * Lists all Zavod models.
+     * Lists all Barters models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ZavodSearch();
+        $searchModel = new BartersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,9 +60,10 @@ class ZavodController extends Controller
     }
 
     /**
-     * Displays a single Zavod model.
+     * Displays a single Barters model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -74,76 +73,70 @@ class ZavodController extends Controller
     }
 
     /**
-     * Creates a new Zavod model.
+     * Creates a new Barters model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Zavod();
-        $model->uploadPreview();
-        
+        $model = new Barters();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Zavod model.
+     * Updates an existing Barters model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->uploadPreview();
 
-        if ($model->load(Yii::$app->request->post())) {
-            json_encode($model);
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            json_decode(json_encode($model), true);
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Zavod model.
+     * Deletes an existing Barters model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
+        $this->findModel($id)->delete();
 
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Zavod model based on its primary key value.
+     * Finds the Barters model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Zavod the loaded model
+     * @return Barters the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Zavod::findOne($id)) !== null) {
+        if (($model = Barters::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

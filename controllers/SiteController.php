@@ -25,6 +25,7 @@ use app\models\Articles;
 use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
+use app\models\Barters;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -67,9 +68,12 @@ class SiteController extends Controller
 
     /** Рендер детальной страницы торговца **/
     public function actionTradersdetail($id) {
+
         $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->One();
+
         if($trader) {
-            return $this->render('traders/detail.php',['trader' => $trader]);
+            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->asArray()->all();
+            return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

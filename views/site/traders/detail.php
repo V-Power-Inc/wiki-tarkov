@@ -8,6 +8,7 @@
 
 $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/barter-tabs.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Escape from Tarkov: ' .$trader->title;
 $this->registerMetaTag([
     'name' => 'description',
@@ -98,7 +99,47 @@ use app\components\AlertComponent;
                 </p>
                 
                 <img class="news-titleimage w-100-auto" alt="<?=$trader->title?>" src="<?=$trader->preview?>">
-                <div class="text-left"><?=$trader->fullcontent ?></div>
+
+                <div class="text-left">
+                    <?=$trader->fullcontent ?>
+                </div>
+
+                <div class="barters-block">
+                    <?php if(empty($barters)): ?>
+                        <p class="alert alert-danger size-16">
+                            Для данного торговца информация о бартерах и продаваемых товарах не найдена.
+                        </p>
+                    <?php else: ?>
+
+                        <!-- Табы -->
+                        <ul class="nav nav-tabs barters">
+                            <?php foreach($barters as $key => $value): ?>
+                                <?php if($key == 0): ?>
+                                    <li><a class="first-lvl <?=$trader->url.$value['id']?>" data-toggle="tab" href="#<?=$trader->url.$value['id']?>"><?=$value['site_title']?></a></li>
+                                <?php else: ?>
+                                    <li><a data-toggle="tab" class="<?=$trader->url.$value['id']?>" href="#<?=$trader->url.$value['id']?>"><?=$value['site_title']?></a></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+
+                        <!-- Контент табов -->
+                        <div class="tab-content">
+                            <?php foreach($barters as $key => $value): ?>
+                                <?php if($key == 0): ?>
+                                    <div id="<?=$trader->url.$value['id']?>" class="tab-pane fade in active">
+                                        <h3><?=$value['title']?></h3>
+                                        <p><?=$value['content']?></p>
+                                    </div>
+                                <?php else: ?>
+                                    <div id="<?=$trader->url.$value['id']?>" class="tab-pane fade in">
+                                        <h3><?=$value['title']?></h3>
+                                        <p><?=$value['content']?></p>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
 
                 <br>
 

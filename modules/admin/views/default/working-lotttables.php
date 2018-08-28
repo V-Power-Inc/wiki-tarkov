@@ -5,7 +5,7 @@
  * Date: 31.05.2018
  * Time: 18:47
  */
-/** Эта вьюха для пользователя у которого есть права работать со всеми разделами кроме интерактивных карт - в данный момент используется для пользователя KondorMax **/
+/** С 28-08-2018 пользователь KondorMax обладает всеми правами редактирования контента на сайте **/
 ?>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
@@ -17,7 +17,7 @@
     </ul>
 </div>
 
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Квесты торговцев</h2>
         <li><a href="/admin/prapor/" class="admin-tabs w-100-important">Квесты Прапора</a></li>
@@ -36,10 +36,29 @@
     </ul>
 </div>
 
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+    <ul class="nav nav-pills nav-stacked">
+        <h2 class="text-center">Маркеры на картах</h2>
+        <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
+        <li><a href="/admin/forest" class="admin-tabs w-100-important">Маркеры на локации Лес</a></li>
+        <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
+        <li><a href="/admin/bereg" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
+        <li><a href="/admin/razvyazka" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
+        <!-- disabled -->
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Улицы Таркова</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации лаб. TerraGroup</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Пригород</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Поселок</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Маяк</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Терминал</a></li>
+    </ul>
+</div>
 
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
+
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
+        <li><a href="/admin/barters" class="admin-tabs w-100-important">Бартеры торговцев</a></li>
         <li><a href="/admin/questions" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>
         <li><a href="/admin/info" class="admin-tabs w-100-important">Информационные виджеты</a></li>
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>

@@ -8,3 +8,14 @@
 .navbar {
     z-index: 1;
 }
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.adm.label.margin-bottom-20 {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding-top: 6px;
+}
