@@ -1727,3 +1727,7 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     text-align: center;
     padding: 5px;
 }
+
+#map {
+    background: url(/img/pattern-light.png) repeat;
+}

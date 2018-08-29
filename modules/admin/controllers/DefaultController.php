@@ -44,8 +44,8 @@ class DefaultController extends Controller
 
             if($model->validate()){
                 \Yii::$app->user->login($model->getUser());
+                return $this->redirect('/admin');
             }
-            return $this->redirect('/admin');
         }
         return $this->render('login', [ 'model' => $model,]);
     }

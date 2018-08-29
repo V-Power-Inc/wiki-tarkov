@@ -106,9 +106,9 @@ use app\components\AlertComponent;
 
                 <div class="barters-block">
                     <?php if(empty($barters)): ?>
-                        <p class="alert alert-danger size-16">
+                      <!--  <p class="alert alert-danger size-16">
                             Для данного торговца информация о бартерах и продаваемых товарах не найдена.
-                        </p>
+                        </p> -->
                     <?php else: ?>
 
                         <!-- Табы -->

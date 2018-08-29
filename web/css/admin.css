@@ -19,3 +19,44 @@
     font-size: 16px;
     padding-top: 6px;
 }
+
+.moderator-title {
+    color: #c3392c;
+    text-align: center;
+}
+
+.admin-register-new-user, .ban-existing-user {
+    margin: 15px 0;
+    padding: 20px;
+    background: gainsboro;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}
+
+.user-traitor {
+    color: red;
+    font-weight: bold;
+}
+
+.count-users {
+    color: green;
+    font-weight: bold;
+}
+
+.user-information {
+    background: white;
+    border: 2px solid #c3392c;
+}
+
+.user-information.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+}
+
+.table.user-information .label-danger {
+    background-color: #d9534f;
+}
+
+.gods-btn {
+    font-size: 20px;
+}
