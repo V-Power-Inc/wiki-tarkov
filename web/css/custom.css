@@ -1184,7 +1184,7 @@ li > a.admin-inline:hover {
 }
 
 .loot-image {
-    display: inline-block;
+    float: left;
     margin: 5px 10px 5px 0;
     border: 1px solid white;
     box-shadow: 1px 1px 20px;
@@ -1194,7 +1194,6 @@ li > a.admin-inline:hover {
 
 .loot-description {
     font-size: 16px;
-    vertical-align: top;
 }
 
 a.loot-link {
