@@ -30,6 +30,7 @@ use mihaildev\elfinder\ElFinder;
             'Механик' => 'Механик',
             'Барахольщик' => 'Барахольщик',
         ])
+        // todo: Добавлять сюда торговцев по мере необходимости, когда они будут выходит
     ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
@@ -44,7 +45,7 @@ use mihaildev\elfinder\ElFinder;
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить новую запись', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить запись', ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/barters">Вернуться в список бартеров</a>
     </div>
 
