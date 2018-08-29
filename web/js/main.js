@@ -19,6 +19,10 @@ $(document).ready(function() {
 /*** Оборачиваем все таблицы с классом loot-tables специальным дивом со скроллом ***/
     var tables = $('.loot-tables');
     $(tables).wrap('<div class="fix-tables"></div>');
+
+/*** Обрачиваем Wiki таблицы специальным дивом со скроллом ***/
+    var wikia = $('table.wikitable');
+    $(wikia).wrap('<div class="fix-tables"></div>');
 });
 
 

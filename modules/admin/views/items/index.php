@@ -12,9 +12,14 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Список предметов справочника лута';
 $this->params['breadcrumbs'][] = $this->title;
 
-// Выводим по 100 предметов на страницу
-$dataProvider->pagination->pageSize=100;
+// Выводим по 5 предметов на страницу
+$dataProvider->pagination->pageSize=5;
 ?>
+
+<p class="alert alert-info size-16">
+    <b>Включена облегченная версия справочника, в данный момент на страницу выводится максимум по 5 предметов из справочника лута</b>
+</p>
+
 <div class="items-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

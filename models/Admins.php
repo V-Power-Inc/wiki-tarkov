@@ -9,6 +9,7 @@ use \yii\web\IdentityInterface;
  * This is the model class for table "admins".
  *
  * @property int $id
+ * @property int $banned
  * @property string $user Почта
  * @property string $password Пароль
  * @property string $captcha Гугл капча
@@ -33,9 +34,10 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['user', 'password', 'remember_me'], 'required'],
-            [['remember_me'], 'integer'],
-            [['captcha','role','name'], 'safe'],
+            [['user', 'password', 'name', 'role'], 'required'],
+            [['user'], 'unique', 'message' => 'Логин пользователя должен быть уникальным.'],
+            [['remember_me', 'banned'], 'integer'],
+            [['captcha','role','name','remember_me'], 'safe'],
             [['user', 'password'], 'string', 'max' => 45],
             [['captcha'], 'string', 'max' => 255],
         ];
@@ -48,13 +50,14 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'user' => 'User',
-            'password' => 'Password',
+            'user' => 'Логин пользователя',
+            'password' => 'Пароль пользователя',
             'captcha' => 'Captcha',
             'remember_me' => 'Remember Me',
-            'role' => 'Уровень прав учетной записи',
+            'role' => 'Роль',
             'date_end' => 'Дата окончания учетной записи',
             'name' => 'Имя пользователя учетной записи',
+            'banned' => 'Забанен'
         ];
     }
 
@@ -91,4 +94,25 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
     {
         //return $this->authKey === $authKey;
     }
+
+    /*** Получаем всех незабаненных пользователей в виде объектов кроме себя ***/
+    public function unbannedUsers() {
+        return self::find()->where(['banned' => null])->andWhere(['not like', 'id', Yii::$app->user->identity->id])->all();
+    }
+
+    /*** Получаем общее количество пользователей в системе ***/
+    public function UsersCount() {
+       return self::find()->count();
+    }
+
+    /*** Получаем количество забаненных пользователей ***/
+    public function bannedUsers() {
+        return self::find()->where(['banned' => 1])->count();
+    }
+
+    /*** Получаем всех пользователей сайта в виде массива ***/
+    public function takeAllUsers() {
+        return self::find()->asArray()->all();
+    }
+
 }

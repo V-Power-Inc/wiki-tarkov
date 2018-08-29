@@ -81,6 +81,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'admin/ass-destroyer' => 'admin/moderator/index',
                 'trader/preview' => 'site/previewtrader',
                 'admin/login' => 'admin/default/logout',
                 'maps' => 'site/locations',

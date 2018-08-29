@@ -5,6 +5,12 @@ $this->title = 'Админка tarkov-wiki';
     <h1 class="admin-title-main">Главная админская страница</h1>
 </div>
 
+<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2 || Yii::$app->user->identity->id == 4 ): ?>
+    <div class="col-lg-12 text-center margin-bottom-20">
+        <a class="btn btn-primary gods-btn" href="/admin/ass-destroyer">Модерация для избранных</a>
+    </div>
+<?php endif; ?>
+
 
 <?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 3 && Yii::$app->user->identity->id !== 4 && Yii::$app->user->identity->id !== 5 && Yii::$app->user->identity->id !== 6): ?>
 
@@ -59,6 +65,7 @@ $this->title = 'Админка tarkov-wiki';
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
+        <li><a href="/admin/barters" class="admin-tabs w-100-important">Бартеры торговцев</a></li>
         <li><a href="/admin/questions" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>
         <li><a href="/admin/info" class="admin-tabs w-100-important">Информационные виджеты</a></li>
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>
