@@ -5,10 +5,12 @@ $this->title = 'Админка tarkov-wiki';
     <h1 class="admin-title-main">Главная админская страница</h1>
 </div>
 
-<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2 || Yii::$app->user->identity->id == 4 ): ?>
-    <div class="col-lg-12 text-center margin-bottom-20">
-        <a class="btn btn-primary gods-btn" href="/admin/ass-destroyer">Модерация для избранных</a>
-    </div>
+<?php if(isset(Yii::$app->user->identity->id)): ?>
+    <?php if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2 || Yii::$app->user->identity->id == 4 ): ?>
+        <div class="col-lg-12 text-center margin-bottom-20">
+            <a class="btn btn-primary gods-btn" href="/admin/ass-destroyer">Модерация для избранных</a>
+        </div>
+    <?php endif; ?>
 <?php endif; ?>
 
 

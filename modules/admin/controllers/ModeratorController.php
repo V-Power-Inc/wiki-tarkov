@@ -43,6 +43,11 @@ class ModeratorController extends Controller
         $countusers = $users->UsersCount();
         $bannedusers = $users->bannedUsers();
         $active_users = $users->unbannedUsers();
+
+        if($active_users == false) {
+            return $this->redirect('/admin/login', 301);
+        }
+
         $array_users = $users->takeAllUsers();
 
         return $this->render('index', [
