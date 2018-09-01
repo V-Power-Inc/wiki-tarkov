@@ -28,6 +28,9 @@ class ItemController extends Controller {
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM items',
                 ],
+                'variations' => [
+                    Yii::$app->request->pathInfo,
+                ]
             ],
         ];
     }
