@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use app\models\Catskills;
 use app\models\Skills;
+use yii;
 
 
 class SkillsController extends Controller
@@ -27,6 +28,11 @@ class SkillsController extends Controller
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM skills UNION SELECT COUNT(*) FROM cat_skills',
                 ],
+                'variations' => [
+                    Yii::$app->request->pathInfo,
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->url
+                ]
             ],
         ];
     }
