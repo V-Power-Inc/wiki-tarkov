@@ -48,6 +48,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '1hBkrFZrVWrw8sN25lzsC_f99y1waHDa',
         ],
+        'assetManager' => [
+            'linkAssets' => true
+        ],
         'cache' => [
             'class' => 'yii\redis\Cache',
         ],
