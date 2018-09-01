@@ -34,7 +34,6 @@ class LootController extends Controller
                     'sql' => 'SELECT COUNT(*) FROM items UNION SELECT COUNT(*) FROM category',
                 ],
                 'variations' => [
-                    Yii::$app->request->pathInfo,
                     Yii::$app->request->get('page'),
                     Yii::$app->request->url
                 ]
