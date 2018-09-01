@@ -35,6 +35,8 @@ class LootController extends Controller
                 ],
                 'variations' => [
                     Yii::$app->request->pathInfo,
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->url
                 ]
             ],
         ];
