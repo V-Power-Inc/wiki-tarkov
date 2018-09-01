@@ -18,6 +18,7 @@ use yii\helpers\Json;
 use yii\db\Query;
 
 
+
 class LootController extends Controller
 {
     // Кешируем все запросы из БД - храним их в кеше
@@ -146,5 +147,19 @@ class LootController extends Controller
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }
+    }
+
+    /** Обработчик ошибок - отображает статусы ответа сервера **/
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+        ];
     }
 }
