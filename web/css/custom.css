@@ -1337,6 +1337,7 @@ img.w-100-auto {
     display: inline-block;
 }
 
+
 .custom-margin-top {
     margin-top: 70px;
 }
@@ -1730,4 +1731,8 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
 
 #map {
     background: url(/img/pattern-light.png) repeat;
+}
+
+.fixies-float-image {
+    display: inline;
 }

@@ -17,6 +17,7 @@ $this->title = "Справочник лута Escape from Tarkov. База вн�
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use app\components\AlertComponent;
 ?>
@@ -150,7 +151,11 @@ use app\components\AlertComponent;
                 <div class="col-lg-12">
                     <div class="item-loot">
                         <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                        <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="название предмета" src="<?= $item['preview'] ?>"></a>
+                        <a class="loot-link" href="/loot/<?= $item['url'] ?>.html">
+                            <div class="fixies-float-image">
+                                <img class="loot-image" alt="название предмета" src="<?= $item['preview'] ?>">
+                            </div>
+                        </a>
                         <p class="loot-description"><?= $item['shortdesc'] ?></p>
                         <?php if($item['quest_item'] == 1) : ?>
                             <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
