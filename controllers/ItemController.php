@@ -29,7 +29,7 @@ class ItemController extends Controller {
                     'sql' => 'SELECT COUNT(*) FROM items',
                 ],
                 'variations' => [
-                    Yii::$app->request->pathInfo,
+                    Yii::$app->request->url
                 ]
             ],
         ];
