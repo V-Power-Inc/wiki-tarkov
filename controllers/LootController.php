@@ -22,6 +22,24 @@ use yii\db\Query;
 class LootController extends Controller
 {
 
+    // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 604800,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM items UNION SELECT COUNT(*) FROM category',
+                ],
+                'variations' => [
+                    Yii::$app->request->pathInfo,
+                ]
+            ],
+        ];
+    }
+
     /**
      * Displays homepage.
      *
