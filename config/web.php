@@ -49,7 +49,13 @@ $config = [
             'cookieValidationKey' => '1hBkrFZrVWrw8sN25lzsC_f99y1waHDa',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+        ],
+        'redis' => [
+            'class'    => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
         ],
         'user' => [
             'identityClass' => 'app\models\Admins',
