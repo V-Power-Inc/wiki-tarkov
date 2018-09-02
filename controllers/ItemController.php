@@ -26,7 +26,7 @@ class ItemController extends Controller {
                 'duration' => 604800,
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM items',
+                    'sql' => 'SELECT COUNT(*) FROM items where active = 1',
                 ],
                 'variations' => [
                     Yii::$app->request->url
