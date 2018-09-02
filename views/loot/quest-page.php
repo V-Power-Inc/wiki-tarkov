@@ -24,6 +24,7 @@ $this->registerMetaTag([
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use yii\bootstrap\ActiveForm;
 ?>
@@ -154,7 +155,11 @@ use yii\bootstrap\ActiveForm;
                         <div class="col-lg-12">
                             <div class="item-loot">
                                 <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
+                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html">
+                                    <div class="fixies-float-image">
+                                        <img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>">
+                                    </div>
+                                </a>
                                 <p class="loot-description"><?= $item['shortdesc'] ?></p>
                             </div>
                         </div>
