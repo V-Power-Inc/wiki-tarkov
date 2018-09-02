@@ -29,8 +29,8 @@ class SkillsController extends Controller
                     'sql' => 'SELECT COUNT(*) FROM skills UNION SELECT COUNT(*) FROM cat_skills',
                 ],
                 'variations' => [
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->url
+                    Yii::$app->request->url,
+                    Yii::$app->request->get('page')
                 ]
             ],
         ];
