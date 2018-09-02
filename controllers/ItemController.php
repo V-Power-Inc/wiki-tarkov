@@ -29,7 +29,8 @@ class ItemController extends Controller {
                     'sql' => 'SELECT COUNT(*) FROM items where active = 1',
                 ],
                 'variations' => [
-                    Yii::$app->request->url
+                    Yii::$app->request->url,
+                    Yii::$app->response->statusCode
                 ]
             ],
         ];
