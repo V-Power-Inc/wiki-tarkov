@@ -29,9 +29,10 @@ class LootController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
+                'only' => ['mainloot','category'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM items UNION SELECT COUNT(*) FROM category',
+                    'sql' => 'SELECT COUNT(*) FROM items WHERE active = 1 UNION SELECT COUNT(*) FROM category WHERE enabled = 1',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
