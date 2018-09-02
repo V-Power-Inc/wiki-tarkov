@@ -84,9 +84,7 @@ $this->registerMetaTag([
                     <!-- Виджет Discord -->
                     
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
-                            <?php  $this->endCache(); } ?>
+                        <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
                     </div>
                     
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
