@@ -49,7 +49,7 @@ $config = [
             'cookieValidationKey' => '1hBkrFZrVWrw8sN25lzsC_f99y1waHDa',
         ],
         'assetManager' => [
-            'forceCopy' => true,
+            'linkAssets' => true
         ],
         'cache' => [
             'class' => 'yii\redis\Cache',
