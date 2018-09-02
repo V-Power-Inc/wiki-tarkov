@@ -69,9 +69,6 @@ use app\components\AlertComponent;
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
-            <!-- off ads -->
-            <?= $this->render('/other/disable-adblock.php'); ?>
-
         </div>
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">

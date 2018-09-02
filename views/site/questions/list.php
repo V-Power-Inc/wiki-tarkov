@@ -121,9 +121,6 @@ use app\components\AlertComponent;
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
-            <!-- off ads -->
-            <?= $this->render('/other/disable-adblock.php'); ?>
-
         </div>
 
 
