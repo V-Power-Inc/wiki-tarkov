@@ -49,7 +49,8 @@ $config = [
             'cookieValidationKey' => '1hBkrFZrVWrw8sN25lzsC_f99y1waHDa',
         ],
         'assetManager' => [
-            'linkAssets' => true
+            'linkAssets' => true,
+            'appendTimestamp' => true
         ],
         'cache' => [
             'class' => 'yii\redis\Cache',
