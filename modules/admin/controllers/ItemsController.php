@@ -28,6 +28,8 @@ class ItemsController extends Controller
             return self::actionIndex();
         }
     }
+
+    /*** Ускоряем контроллер кешами ***/
     
     /**
      * @inheritdoc
@@ -41,6 +43,18 @@ class ItemsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+//            'cache' => [
+//                'class' => 'yii\filters\PageCache',
+//                'duration' => 604800,
+//                'dependency' => [
+//                    'class' => 'yii\caching\DbDependency',
+//                    'sql' => 'SELECT COUNT(*) FROM items',
+//                ],
+//                'variations' => [
+//                    Yii::$app->request->url,
+//                    Yii::$app->request->get('page')
+//                ]
+//            ]
         ];
     }
 
