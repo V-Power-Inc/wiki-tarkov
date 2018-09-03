@@ -90,7 +90,7 @@ class LootController extends Controller
     /*** Рендер страницы списка предметов для квестов торговцев ***/
     public function actionQuestloot()
     {
-        $allquestitems = Items::find()->where(['quest_item' => 1])->all();
+        $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->all();
 
         $form_model = new Items();
         if ($form_model->load(Yii::$app->request->post())) {
