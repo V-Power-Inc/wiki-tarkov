@@ -17,6 +17,7 @@ use yii\web\UploadedFile;
  * @property string $shortdesc
  * @property string $content
  * @property string $date_create
+ * @property string $date_update
  * @property integer $active
  * @property string $url
  * @property string $description
@@ -58,7 +59,7 @@ class Items extends \yii\db\ActiveRecord
         return [
             [['title', 'shortdesc', 'url', 'description'], 'required'],
             [['shortdesc', 'content', 'search_words', 'module_weapon'], 'string'],
-            [['date_create', 'keywords', 'trader_group', 'quest_item'], 'safe'],
+            [['date_create', 'date_update', 'keywords', 'trader_group', 'quest_item'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview'], 'string', 'max' => 255],
@@ -103,7 +104,8 @@ class Items extends \yii\db\ActiveRecord
             'quest_item' => 'Квестовый предмет',
             'questitem' => '',
             'module_weapon' => 'Оружия связанные с модулем',
-            'search_words' => 'Слова синонимы (livesearch)'
+            'search_words' => 'Слова синонимы (livesearch)',
+            'date_update' => 'Дата последнего обновления'
         ];
     }
 

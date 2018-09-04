@@ -20,13 +20,18 @@ class ItemController extends Controller {
     // Кешируем все запросы из БД - храним их в кеше
     public function behaviors()
     {
+        // Получаем URL предмета чтобы обновлять кеши по date_update
+        $url= Yii::$app->request->url;
+        $finaladdr = substr((trim(substr($url,strripos($url,'/')),'/')),0,-5);
+
         return [
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
+                'only' => ['detaillot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM items where active = 1',
+                    'sql' => 'SELECT date_update FROM items where url like "%'.$finaladdr.'%" limit 1',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
