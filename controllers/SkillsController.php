@@ -31,7 +31,7 @@ class SkillsController extends Controller
                 'duration' => 604800,
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT date_update FROM skills where date_update order by date_update desc limit 1',
+                    'sql' => 'SELECT MAX(date_update) from skills limit 1',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
