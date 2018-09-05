@@ -58,7 +58,12 @@ use app\components\AlertComponent;
             <br>
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
-            
+
+            <!-- Виджет Вконтакте -->
+            <div class="vk-widget-styling">
+                <?= $this->render('/other/wk-widget'); ?>
+            </div>
+
             <!-- Виджет Discord -->
             <div class="margin-top-20">
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>

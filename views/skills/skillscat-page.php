@@ -132,7 +132,12 @@ use app\components\AlertComponent;
 
         <!-- Меню правой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            
+
+            <!-- Виджет Вконтакте -->
+            <div class="vk-widget-styling">
+                <?= $this->render('/other/wk-widget'); ?>
+            </div>
+
             <!-- Виджет Discord -->
             <div class="margin-top-20">
                 <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>

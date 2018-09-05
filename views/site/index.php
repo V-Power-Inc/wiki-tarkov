@@ -81,6 +81,13 @@ $this->registerMetaTag([
             <div class="margin-top-20">
                     
                 <div class="row margin-top-20">
+
+
+                    <!-- Виджет Вконтакте -->
+                    <div class="vk-widget-styling">
+                        <?= $this->render('/other/wk-widget'); ?>
+                    </div>
+
                     <!-- Виджет Discord -->
                     
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
