@@ -11,4 +11,4 @@ function Fiximg() {
 
 }
 
-setTimeout(Fiximg, 100);
+setTimeout(Fiximg, 250);
