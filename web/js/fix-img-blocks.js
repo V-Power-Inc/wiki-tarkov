@@ -5,7 +5,7 @@ function Fiximg() {
             var calc = $(this).height() - 129;
 
            var heightParent = $(this).closest('.item-loot').height();
-            $(this).closest('.item-loot').css({'height': heightParent+calc})
+            $(this).closest('.item-loot').css({'height': heightParent+calc+80})
         }
     })
 
