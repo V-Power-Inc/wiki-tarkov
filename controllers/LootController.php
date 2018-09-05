@@ -32,7 +32,7 @@ class LootController extends Controller
                 'only' => ['Mainloot','Category'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT date_update FROM items where date_update order by date_update desc limit 1',
+                    'sql' => 'SELECT MAX(date_update) from items limit 1',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
