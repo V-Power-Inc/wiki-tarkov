@@ -82,20 +82,36 @@ $this->registerMetaTag([
                     
                 <div class="row margin-top-20">
 
+                    <div class="col-lg-12">
+                        <!-- Виджет Вконтакте -->
+                        <div class="vk-widget-styling">
+                            <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
 
-                    <!-- Виджет Вконтакте -->
-                    <div class="vk-widget-styling">
-                        <?= $this->render('/other/wk-widget'); ?>
+                            <!-- VK Widget -->
+                            <div id="vk_groups"></div>
+                            <script type="text/javascript">
+                                VK.Widgets.Group("vk_groups", {mode: 3, width: "1140"}, 162698237);
+                            </script>
+                        </div>
                     </div>
+
 
                     <!-- Виджет Discord -->
                     
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-                        <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+
+                        <div class="margin-top-20">
+                            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+                        </div>
+
+                        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
+
                     </div>
                     
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                        <?= $this->render('/other/yandex-donate.php'); ?>
+                        <div style="margin-top: 11px;">
+                            <?= $this->render('/other/yandex-donate.php'); ?>
+                        </div>
                     </div>
 
                 </div>
