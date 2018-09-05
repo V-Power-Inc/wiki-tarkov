@@ -14,13 +14,9 @@ use Yii;
 
 class ItemController extends Controller {
 
-    /** Кеширование по секундам с различными сроками **/
-    const WEEK_CACHE = 604800;
-    const TWO_DAYS = 172800;
-    const ONE_DAY = 86400;
     
-    // CSRF валидация POST запросов методов этого контроллера отключена
-    public $enableCsrfValidation = false;
+    // CSRF валидация POST запросов методов этого контроллера включена
+    public $enableCsrfValidation;
 
     // Кешируем все запросы из БД - храним их в кеше
     public function behaviors()
@@ -49,8 +45,8 @@ class ItemController extends Controller {
 /** Рендер детальной страницы лута */
 public function actionDetailloot($item) {
 
-    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->cache(self::TWO_DAYS)->One();
-       
+    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
+
     if($loot) {
             return $this->render('/loot/item-detail.php', ['item' => $loot]);
         } else {
@@ -60,6 +56,9 @@ public function actionDetailloot($item) {
 
     /** Рендер страницы предпросмотра детальной страницы лута **/
     public function actionPreviewloot() {
+
+        $this->enableCsrfValidation = false;
+
         if(Yii::$app->user->isGuest !== true) {
             $item = new Items;
             $item->load(Yii::$app->request->post());
