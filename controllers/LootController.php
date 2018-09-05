@@ -22,6 +22,11 @@ use yii\db\Query;
 class LootController extends Controller
 {
 
+    /** Кеширование по секундам с различными сроками **/
+    const WEEK_CACHE = 604800;
+    const TWO_DAYS = 172800;
+    const ONE_DAY = 86400;
+
     // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
     public function behaviors()
     {
@@ -32,7 +37,7 @@ class LootController extends Controller
                 'only' => ['mainloot','category'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM items WHERE active = 1 UNION SELECT COUNT(*) FROM category WHERE enabled = 1',
+                    'sql' => 'SELECT MAX(date_update) FROM items UNION SELECT MAX(date_update) FROM category',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
@@ -55,7 +60,7 @@ class LootController extends Controller
         $allitems = $model->getActiveItems();
         $fullitems = Items::find()->where(['active' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_DAY)->all();
         $request = \Yii::$app->request;
 
         return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
@@ -77,7 +82,7 @@ class LootController extends Controller
                 ->with('parentcat');
 
             $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-            $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
+            $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_DAY)->all();
             $request = \Yii::$app->request;
 
             return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1), 'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
@@ -90,7 +95,7 @@ class LootController extends Controller
     /*** Рендер страницы списка предметов для квестов торговцев ***/
     public function actionQuestloot()
     {
-        $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->all();
+        $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->cache(self::ONE_DAY)->all();
 
         $form_model = new Items();
         if ($form_model->load(Yii::$app->request->post())) {
@@ -107,9 +112,9 @@ class LootController extends Controller
             if(in_array($questitem,$words)) {
                 $curentWord = $words[array_search($questitem, $words)];
                 if ($curentWord == "Все предметы") {
-                    $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->all();
+                    $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->cache(self::ONE_DAY)->all();
                 } else {
-                    $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->all();
+                    $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->cache(self::ONE_DAY)->all();
                 }
 
                 return $this->render('quest-page.php',

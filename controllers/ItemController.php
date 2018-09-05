@@ -13,6 +13,11 @@ use app\models\Items;
 use Yii;
 
 class ItemController extends Controller {
+
+    /** Кеширование по секундам с различными сроками **/
+    const WEEK_CACHE = 604800;
+    const TWO_DAYS = 172800;
+    const ONE_DAY = 86400;
     
     // CSRF валидация POST запросов методов этого контроллера отключена
     public $enableCsrfValidation = false;
@@ -44,7 +49,7 @@ class ItemController extends Controller {
 /** Рендер детальной страницы лута */
 public function actionDetailloot($item) {
 
-    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
+    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->cache(self::TWO_DAYS)->One();
        
     if($loot) {
             return $this->render('/loot/item-detail.php', ['item' => $loot]);

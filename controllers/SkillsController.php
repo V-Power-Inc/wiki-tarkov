@@ -17,6 +17,11 @@ use yii;
 class SkillsController extends Controller
 {
 
+    /** Кеширование по секундам с различными сроками **/
+    const WEEK_CACHE = 604800;
+    const TWO_DAYS = 172800;
+    const ONE_DAY = 86400;
+
     // Кешируем все запросы из БД - храним их в кеше
     public function behaviors()
     {
@@ -26,7 +31,7 @@ class SkillsController extends Controller
                 'duration' => 604800,
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM skills UNION SELECT COUNT(*) FROM cat_skills',
+                    'sql' => 'SELECT MAX(date_update) FROM skills',
                 ],
                 'variations' => [
                     Yii::$app->request->url,
@@ -39,18 +44,18 @@ class SkillsController extends Controller
     /** Рендер страницы списка навыков персонажа **/
     public function actionMainskills()
     {
-        $catskills = Catskills::find()->where(['enabled' => 1])->asArray()->all();
+        $catskills = Catskills::find()->where(['enabled' => 1])->cache(self::ONE_DAY)->asArray()->all();
         return $this->render('/skills/list.php', ['catskills' => $catskills,]);
     }
 
     /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
     public function actionSkillscategory($name)
     {
-        $cat = Catskills::find()->where(['url'=>$name])->One();
+        $cat = Catskills::find()->where(['url'=>$name])->cache(self::ONE_DAY)->One();
         
         if($cat) {
             // Здесь мы возвращаем и неактивные элементы, т.к. на них стоит проверка во вьюшке
-            $items = Skills::find()->andWhere(['category' => $cat->id])->asArray()->all();
+            $items = Skills::find()->andWhere(['category' => $cat->id])->cache(self::ONE_DAY)->asArray()->all();
             return $this->render('/skills/skillscat-page.php', ['cat' => $cat, 'items' => $items]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -59,7 +64,7 @@ class SkillsController extends Controller
     
     /*** Рендер детальной страницы умения ***/
     public function actionSkillsdetail($url) {
-        $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->One();
+        $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
 
         if($item) {
             return $this->render('/skills/skill-detail.php', ['item' => $item]);

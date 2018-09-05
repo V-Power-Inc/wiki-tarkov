@@ -45,6 +45,7 @@ class SiteController extends Controller
     /** Кеширование по секундам с различными сроками **/
     const WEEK_CACHE = 604800;
     const TWO_DAYS = 172800;
+    const ONE_DAY = 86400;
 
     // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
     public $enableCsrfValidation;
@@ -69,10 +70,10 @@ class SiteController extends Controller
     /** Рендер детальной страницы торговца **/
     public function actionTradersdetail($id) {
 
-        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->One();
+        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
 
         if($trader) {
-            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->asArray()->all();
+            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::TWO_DAYS)->asArray()->all();
             return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -174,7 +175,7 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -184,7 +185,7 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Леса **/
     public function actionForestmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -194,7 +195,7 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Таможни **/
     public function actionTamojnyamarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -204,7 +205,7 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Берега **/
     public function actionBeregmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -214,7 +215,7 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Развязки **/
     public function actionRazvyazkamarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -267,9 +268,9 @@ class SiteController extends Controller
             if(in_array($doorkey,$words)) {
                 $curentWord =  $words[array_search($doorkey,$words)];
                if($curentWord == "Все ключи"){
-                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->all();
+                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->cache(self::TWO_DAYS)->all();
                }else{
-                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->all();
+                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->cache(self::TWO_DAYS)->all();
                }
                 
                 return $this->render('keys/keyseach.php',
