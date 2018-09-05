@@ -141,7 +141,7 @@ class ItemsController extends Controller
     {
         if(Yii::$app->user->identity->id !== 3) {
 
-            $this->findModel($id)->delete();
+            // $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
         }
