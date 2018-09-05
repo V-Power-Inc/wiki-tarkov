@@ -22,26 +22,7 @@ use yii\db\Query;
 class LootController extends Controller
 {
 
-    // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => 'yii\filters\PageCache',
-                'duration' => 604800,
-                'only' => ['mainloot','category'],
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT date_update FROM items order by date_update desc limit 1',
-                ],
-                'variations' => [
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page')
-                ]
-            ],
-        ];
-    }
+    // todo: Кеширование для этих страниц необходимо починить
 
     /**
      * Displays homepage.
