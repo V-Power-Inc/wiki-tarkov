@@ -90,7 +90,7 @@ $this->registerMetaTag([
                             <!-- VK Widget -->
                             <div id="vk_groups"></div>
                             <script type="text/javascript">
-                                VK.Widgets.Group("vk_groups", {mode: 3, width: "1140"}, 162698237);
+                                VK.Widgets.Group("vk_groups", {mode: 0, width: "auto"}, 162698237);
                             </script>
                         </div>
                     </div>
