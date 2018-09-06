@@ -59,6 +59,12 @@ AppAsset::register($this);
 
                 <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
                     <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
+
+                    <div class="icons-soc">
+                        <a href="https://discordapp.com/invite/J2mz9S?utm_source=Discord%20Widget&utm_medium=Connect" target="_blank"><img src="/img/soc/discord-soc.jpg"></a>
+                        <a href="https://vk.com/vector_power" target="_blank"><img src="/img/soc/vk-user.jpg"></a>
+                    </div>
+
                 </div>
               <span class="col-sm-12 counter-footer"></span>
             </div>
