@@ -75,7 +75,7 @@ body {
 footer {
     background-color: #272727;
     color: #fff;
-    height: 64px;
+    height: 88px;
     border-top: 2px solid #c3392c;
     box-shadow: 0px 1px 4px;
     position: relative;
@@ -115,7 +115,7 @@ footer .list-unstyled li a:hover {
 
 .copyright {
     font-size: 16px;
-    padding-top: 20px;
+    padding-top: 14px;
 }
 
 .copyright a {
@@ -630,7 +630,7 @@ button::-moz-focus-inner, label::-moz-focus-inner, label {
 }
 
 .marks {
-    padding-top: 15px;
+    padding-top: 25px;
     font-size: 13px;
 }
 
@@ -1735,4 +1735,11 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
 
 .fixies-float-image {
     display: inline;
+}
+
+.icons-soc {
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
 }

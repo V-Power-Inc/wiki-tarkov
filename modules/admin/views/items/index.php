@@ -46,6 +46,7 @@ $dataProvider->pagination->pageSize=5;
             ],
             'shortdesc:ntext',
             'quest_item',
+            'date_update',
             'trader_group',
             // 'content:ntext',
             // 'date_create',
