@@ -29,13 +29,14 @@ class ItemController extends Controller {
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
-                'only' => ['detaillot'],
+                'only' => ['detailloot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
+                    Yii::$app->request->url,
                     Yii::$app->response->statusCode
                 ]
             ],
