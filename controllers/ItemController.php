@@ -32,10 +32,9 @@ class ItemController extends Controller {
                 'only' => ['detaillot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT date_update FROM items where url like "%'.$finaladdr.'%" limit 1',
+                    'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
                 'variations' => [
-                    Yii::$app->request->url,
                     Yii::$app->response->statusCode
                 ]
             ],

@@ -29,13 +29,12 @@ class LootController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
-                'only' => ['Mainloot','Category'],
+                'only' => ['mainloot','category'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT MAX(date_update) from items limit 1',
+                    'sql' => 'SELECT MAX(date_update) from items',
                 ],
                 'variations' => [
-                    Yii::$app->request->url,
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page')
                 ]
