@@ -35,6 +35,7 @@ class LootController extends Controller
                     'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
                 'variations' => [
+                    Yii::$app->request->url,
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page')
                 ]
