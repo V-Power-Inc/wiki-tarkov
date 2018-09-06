@@ -35,6 +35,7 @@ class ItemController extends Controller {
                     'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
                 'variations' => [
+                    $_SERVER['SERVER_NAME'],
                     Yii::$app->response->statusCode
                 ]
             ],
