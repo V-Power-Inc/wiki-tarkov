@@ -61,8 +61,9 @@ AppAsset::register($this);
                     <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
 
                     <div class="icons-soc">
-                        <a href="https://discordapp.com/invite/J2mz9S?utm_source=Discord%20Widget&utm_medium=Connect" target="_blank"><img src="/img/soc/discord-soc.jpg"></a>
-                        <a href="https://vk.com/vector_power" target="_blank"><img src="/img/soc/vk-user.jpg"></a>
+                        <a href="https://discordapp.com/invite/J2mz9S?utm_source=Discord%20Widget&utm_medium=Connect" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
+                        <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
+                        <a href="https://vector-power.ru" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>
                     </div>
 
                 </div>
