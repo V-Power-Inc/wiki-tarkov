@@ -34,6 +34,7 @@ class SkillsController extends Controller
                     'sql' => 'SELECT MAX(date_update) from skills limit 1',
                 ],
                 'variations' => [
+                    $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
                     Yii::$app->request->get('page')
                 ]
