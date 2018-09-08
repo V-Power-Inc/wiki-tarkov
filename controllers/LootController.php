@@ -140,7 +140,8 @@ class LootController extends Controller
                 ->where('title LIKE "%' . $q . '%"')
                 ->orWhere('search_words LIKE "%' . $q . '%"')
                 ->andWhere(['active' => 1])
-                ->orderBy('title');
+                ->orderBy('title')
+                ->cache(3600);
             $command = $query->createCommand();
             $data = $command->queryAll();
 
@@ -148,7 +149,7 @@ class LootController extends Controller
 
             /** Цикл составления готовых данных по запросу пользователя в поиске **/
             foreach ($data as $d) {
-                $parencat = Category::find()->where(['id' => $d['parentcat_id']])->one();
+                $parencat = Category::find()->where(['id' => $d['parentcat_id']])->cache(3600)->one();
                 $out[] = ['value' => $d['title'], 'title' => $d['title'], 'parentcat_id' => $parencat->title, 'shortdesc' => $d['shortdesc'], 'preview' => $d['preview'], 'url' => $d['url']];
             }
             return Json::encode($out);

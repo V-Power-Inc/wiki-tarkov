@@ -1743,3 +1743,7 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     width: 100%;
     text-align: center;
 }
+
+.tt-input.loading {
+    color: white;
+}

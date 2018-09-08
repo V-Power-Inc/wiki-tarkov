@@ -16,6 +16,11 @@ $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Интерактивная карта локации Берег из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
 ]);
+
+use kartik\typeahead\Typeahead;
+use yii\helpers\Url;
+use yii\web\JsExpression;
+
 ?>
 
 <!-- off ads -->
@@ -97,9 +102,60 @@ $this->registerMetaTag([
             </div>
 
             <div class="static-description">
+
+
+                <div class="search-map-loot">
+                    <?php
+                    // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
+                    echo '<label class="control-label">Поиск лута</label>';
+                    $template = '<div class="ajax-result"><a href="/loot/{{url}}.html" target="_blank"><img src="{{preview}}" class="ajax-image-preview">'.
+                        '<p class="repo-language ajax-preview-title">{{title}}</p>' .
+                        '<!--p class="repo-name">{{category}}</p> -->' .
+                        '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+
+                    $keystemp = '<div class="ajax-result"><a href="/keys/{{url}}" target="_blank"><img src="{{preview}}" class="ajax-image-preview">'.
+                        '<p class="repo-language ajax-preview-title">{{name}}</p>' .
+                        '<p class="repo-description black"><b>Находится в категориях: {{mapgroup}}</b></p></a></div>';
+                    echo Typeahead::widget([
+                        'name' => 'items',
+                        'scrollable' => true,
+                        'options' => ['placeholder' => 'Введите сюда название предмета'],
+                        'pluginOptions' => ['hint' => false, 'highlight' => true],
+                        'dataset' => [
+                            [
+                                'remote' => [
+                                    'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
+                                    'wildcard' => '%QUERY',
+                                ],
+                                'limit' => 50,
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                'templates' => [
+                                    //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящий лут не найден.</div>',
+                                    'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                                ]
+                            ],
+                            [
+                                'remote' => [
+                                    'url' => Url::to(['site/keysjson']) . '?q=%QUERY',
+                                    'wildcard' => '%QUERY',
+                                ],
+                                'limit' => 50,
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                'templates' => [
+                                    //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящие ключи от дверей не найдены.</div>',
+                                    'suggestion' => new JsExpression("Handlebars.compile('{$keystemp}')")
+                                ]
+                            ]
+                        ],
+                    ]);
+                    ?>
+                </div>
+
                 <h2>Интерактивная карта Берега</h2>
                 <p>Интерактивная карта локации Берег из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации Берег, узнать о местонахождении оружейных и военных ящиков. </p>
-                <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Берег, производственного лута. Интерактивная карта локации Берег поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
+                <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Берег, производственного лута.</p>
 
                 <p class="alert alert-info"><b>На интерактивной карте также есть схема санатория "Лазурный Берег", на которой вы сможете посмотреть, и узнать что находится в помещениях восточного, западного и центрального корпусов этого комплекса.</b></p>
                 <p></p>

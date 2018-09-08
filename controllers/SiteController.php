@@ -359,8 +359,10 @@ class SiteController extends Controller
             $query->select('name, mapgroup, preview, url')
                 ->from('doorkeys')
                 ->where('name LIKE "%' . $q . '%"')
+                ->orWhere('keywords LIKE "%' . $q . '%"')
                 ->andWhere(['active' => 1])
-                ->orderBy('name');
+                ->orderBy('name')
+                ->cache(3600);
             $command = $query->createCommand();
             $data = $command->queryAll();
 

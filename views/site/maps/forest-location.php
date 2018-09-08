@@ -15,6 +15,11 @@ $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Интерактивная карта локации Лес из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
 ]);
+
+use kartik\typeahead\Typeahead;
+use yii\helpers\Url;
+use yii\web\JsExpression;
+
 ?>
 
 <!-- off ads -->
@@ -94,10 +99,61 @@ $this->registerMetaTag([
             </div>
 
             <div class="static-description">
+
+
+                <div class="search-map-loot">
+                    <?php
+                    // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
+                    echo '<label class="control-label">Поиск лута</label>';
+                    $template = '<div class="ajax-result"><a href="/loot/{{url}}.html" target="_blank"><img src="{{preview}}" class="ajax-image-preview">'.
+                        '<p class="repo-language ajax-preview-title">{{title}}</p>' .
+                        '<!--p class="repo-name">{{category}}</p> -->' .
+                        '<p class="repo-description black"><b>Находится в категории: {{parentcat_id}}</b></p></a></div>';
+
+                    $keystemp = '<div class="ajax-result"><a href="/keys/{{url}}" target="_blank"><img src="{{preview}}" class="ajax-image-preview">'.
+                        '<p class="repo-language ajax-preview-title">{{name}}</p>' .
+                        '<p class="repo-description black"><b>Находится в категориях: {{mapgroup}}</b></p></a></div>';
+                    echo Typeahead::widget([
+                        'name' => 'items',
+                        'scrollable' => true,
+                        'options' => ['placeholder' => 'Введите сюда название предмета'],
+                        'pluginOptions' => ['hint' => false, 'highlight' => true],
+                        'dataset' => [
+                            [
+                                'remote' => [
+                                    'url' => Url::to(['loot/lootjson']) . '?q=%QUERY',
+                                    'wildcard' => '%QUERY',
+                                ],
+                                'limit' => 50,
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                'templates' => [
+                                    //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящий лут не найден.</div>',
+                                    'suggestion' => new JsExpression("Handlebars.compile('{$template}')")
+                                ]
+                            ],
+                            [
+                                'remote' => [
+                                    'url' => Url::to(['site/keysjson']) . '?q=%QUERY',
+                                    'wildcard' => '%QUERY',
+                                ],
+                                'limit' => 50,
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                'templates' => [
+                                    //  'notFound' => '<div class="text-danger" style="padding:0 8px">Подходящие ключи от дверей не найдены.</div>',
+                                    'suggestion' => new JsExpression("Handlebars.compile('{$keystemp}')")
+                                ]
+                            ]
+                        ],
+                    ]);
+                    ?>
+                </div>
+
                 <h2>Интерактивная карта Леса</h2>
                 <p>Интерактивная карта локации Лес из Escape from Tarkov - на данной карте, вы сможете увидеть выходы за диких и ЧВК с локации Лес, узнать о местонахождении оружейных и военных ящиков, а также многое другое. </p>
                 <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Лес с определенной вероятностью, производственного лута и квестовых предметов необходимых для прохождения заданий от торговцев. Интерактивная карта локации Лес поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
-                <p>Есть возможность узнать спавны ЧВК и Диких на карте Лес, с картинками их месторасположений, а также комментариями о различных особенностях этих спавнов. </p>
+<!--                <p>Есть возможность узнать спавны ЧВК и Диких на карте Лес, с картинками их месторасположений, а также комментариями о различных особенностях этих спавнов. </p>-->
                <!-- <p class="alert alert-danger">Спавны ЧВК, Диких а также места спавна ключей и оружия могут изменяться в каждом последующем патче.</p> -->
                 <p></p>
                 <?= $this->render('/other/google-gor.php'); ?>
