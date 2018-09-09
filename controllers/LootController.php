@@ -29,7 +29,7 @@ class LootController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
-                'only' => ['mainloot','category', 'questloot'],
+                'only' => ['mainloot','category','questloot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',

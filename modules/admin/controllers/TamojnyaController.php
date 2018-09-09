@@ -21,6 +21,9 @@ class TamojnyaController extends Controller
     /** Проверка пользователя на гостя  **/
     public function beforeAction($action)
     {
+        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
+            return $this->redirect('/admin/default/logout');
+        }
 
         // Проверяем в том числе - если пользователь является вакантным участником, то редиректим его в админку
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
