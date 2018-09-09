@@ -109,7 +109,7 @@ class ModeratorController extends Controller
               $usrtofind->banned = 1;
               $usrtofind->save(false);
               $messages = new MessagesComponent();
-              $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->user</b> был успешно наказан!</p>";
+              $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был успешно наказан!</p>";
               $messages->setMessages($message);
               return $this->redirect('/admin/ass-destroyer');
           }
