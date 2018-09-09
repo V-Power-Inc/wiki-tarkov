@@ -95,6 +95,9 @@ use app\components\AlertComponent;
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -105,12 +108,6 @@ use app\components\AlertComponent;
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
-
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
-            <!-- off ads -->
-            <?= $this->render('/other/disable-adblock.php'); ?>
 
         </div>
         

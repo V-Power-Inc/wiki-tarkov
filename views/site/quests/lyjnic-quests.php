@@ -54,6 +54,9 @@ use app\components\AlertComponent;
 
             <div class="margin-top-20">
 
+                <!--Yandex direct -->
+                <?= $this->render('/other/yandex-direct.php'); ?>
+
                 <!-- Виджет Вконтакте -->
                 <div class="vk-widget-styling">
                     <?= $this->render('/other/wk-widget'); ?>
@@ -65,9 +68,6 @@ use app\components\AlertComponent;
             </div>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
-
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
         <!-- Основное содержимое страницы -->
