@@ -76,6 +76,8 @@ use yii\web\JsExpression;
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
 
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
@@ -88,9 +90,6 @@ use yii\web\JsExpression;
             </div>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
-
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
 

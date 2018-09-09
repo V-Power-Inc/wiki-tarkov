@@ -160,6 +160,9 @@ use app\components\AlertComponent;
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -171,9 +174,6 @@ use app\components\AlertComponent;
             <?php  $this->endCache(); } ?>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
-
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
 

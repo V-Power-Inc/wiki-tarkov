@@ -133,6 +133,9 @@ use app\components\AlertComponent;
         <!-- Меню правой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -146,12 +149,6 @@ use app\components\AlertComponent;
             </div>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
-
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
-            <!-- off ads -->
-            <?= $this->render('/other/disable-adblock.php'); ?>
 
         </div>
         

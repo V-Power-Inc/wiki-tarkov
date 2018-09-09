@@ -4,7 +4,7 @@
  * User: comp
  * Date: 21.04.2018
  * Time: 7:59
- * View of Yandex Direct - used as compact short link in main views with render
+ * View of Google adsense - used as compact short link in main views with render
  */
 ?>
 
