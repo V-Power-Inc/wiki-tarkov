@@ -1747,3 +1747,30 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
 .tt-input.loading {
     color: white;
 }
+
+.vk-useridentity-vote {
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -200px;
+    z-index: 99999;
+    display: none;
+}
+
+.rl-pos {
+    position: relative;
+}
+
+.rl-pos .mx-100 {
+    max-width: 100%;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.mx-100.close-vote {
+    cursor: pointer;
+}

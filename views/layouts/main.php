@@ -6,7 +6,10 @@
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
-use app\components\AlertComponent;
+use yii\web\Cookie;
+
+$cookies = Yii::$app->request->cookies;
+$addcook = Yii::$app->response->cookies;
 
 AppAsset::register($this);
 ?>
@@ -37,16 +40,30 @@ AppAsset::register($this);
             var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
     <!-- {/literal} END JIVOSITE CODE -->
 </head>
+
+
+
+<?php if(!isset($cookies['vkident'])): { ?>
+<div class="loader-maps-background" style="display: none; cursor: pointer;"></div>
+<?php } endif; ?>
+
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
-
+    
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu() ?>
     
     <?= $content ?>
+
+
+    <?php if(!isset($cookies['vkident'])): { ?>
+        
+        <?= $this->render('/other/vk-popup'); ?>
+
+    <?php } endif; ?>
 </div>
 
 <footer>
@@ -80,3 +97,28 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+
+
+
+
+<?php
+
+/*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
+if(!isset($cookies['vkident'])): {
+    $addcook->add(new Cookie([
+        'name' => 'vkident',
+        'value' => 1,
+        'expire' => time() + (10 * 365 * 24 * 60 * 60),
+        'secure' => true,
+    ]));
+} 
+endif;
+
+?>
+
+<?php
+//echo "<pre>";
+//print_r($cookies['vkident']);
+//echo "<pre>";
+//exit();
+//?>
