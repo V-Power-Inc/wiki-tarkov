@@ -14,7 +14,7 @@ $this->registerJsFile('js/vk-core-votes.js', ['depends' => [\yii\web\JqueryAsset
 
 <div class="vk-useridentity-vote">
     <div class="rl-pos">
-        <img class="mx-100 close-vote" src="/img/cancel-vote.png">
+        <img class="mx-100 close-vote" src="/img/cancel-vote.png" onclick="yaCounter47100633.reachGoal('frm-close'); return true;">
     </div>
     
     <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
