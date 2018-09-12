@@ -15,7 +15,7 @@
         <li><a href="/admin/forest" class="admin-tabs w-100-important">Маркеры на локации Лес</a></li>
         <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
         <li><a href="/admin/bereg" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
-        <li><a href="/admin/razvyazka" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
+        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Развязка</a></li>
         <!-- disabled -->
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Улицы Таркова</a></li>
         <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации лаб. TerraGroup</a></li>
