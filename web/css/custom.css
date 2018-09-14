@@ -1681,7 +1681,7 @@ p.auth-info {
 }
 
 .no-adb {
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 .recommended-gm-content {

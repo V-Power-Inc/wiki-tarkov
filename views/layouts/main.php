@@ -43,7 +43,7 @@ AppAsset::register($this);
 
 
 
-<?php if(!isset($cookies['vkident'])): { ?>
+<?php if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
 <div class="loader-maps-background" style="display: none; cursor: pointer;"></div>
 <?php } endif; ?>
 
@@ -59,7 +59,7 @@ AppAsset::register($this);
     <?= $content ?>
 
 
-    <?php if(!isset($cookies['vkident'])): { ?>
+    <?php if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
         
         <?= $this->render('/other/vk-popup'); ?>
 
@@ -104,7 +104,7 @@ AppAsset::register($this);
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
-if(!isset($cookies['vkident'])): {
+if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
     $addcook->add(new Cookie([
         'name' => 'vkident',
         'value' => 1,

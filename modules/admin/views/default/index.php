@@ -20,7 +20,7 @@ $this->title = 'Админка tarkov-wiki';
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center margin-bottom-30">Работа со справочником лута</h2>
         <div class="text-center">
-            <li class="d-inline category-admin-margins"><a href="/admin/category/index?dp-1-sort=sortir" class="admin-inline">Категории справочника лута</a></li>
+            <li class="d-inline category-admin-margins"><a href="/admin/category" class="admin-inline">Категории справочника лута</a></li>
             <li class="d-inline category-admin-margins"><a href="/admin/items" class="admin-inline">Лут в справочнике лута</a></li>
         </div>
     </ul>
@@ -84,12 +84,16 @@ $this->title = 'Админка tarkov-wiki';
 </div>
 
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 4) : ?>
+    <!-- Kondor View -->
     <?=$this->render('working-lotttables'); ?>
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 9) : ?>
+    <!-- Jack Finister View -->
     <?=$this->render('maps-user'); ?>
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 3) : ?>
+    <!-- Koles0 View -->
     <?=$this->render('dmitry-loot'); ?>
 <?php else : ?>
+    <!-- Other View -->
     <?=$this->render('workingview-nomaps'); ?>
 <?php endif; ?>
 
