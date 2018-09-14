@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CategorySearch */
@@ -31,10 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+           // 'id',
             'title',
-            'parent_category',
+            [
+                'attribute' => 'parent_category',
+                'value' => 'parentcat.title',
+                'filter' => Html::activeDropDownList($searchModel,'parent_category',ArrayHelper::map(Category::find()->where(['parent_category' => null])->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию']),
+            ],
             'url:url',
             'sortir',
             // 'description',
