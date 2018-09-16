@@ -315,7 +315,7 @@ class SiteController extends Controller
     
     /** Рендер детальной страницы новости **/
     public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::TWO_DAYS)->One();
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
         } else {
