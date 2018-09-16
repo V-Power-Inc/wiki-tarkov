@@ -22,7 +22,9 @@
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+</div>
 
+<div class="no-adb">
     <!-- tarkof_2 -->
     <ins class="adsbygoogle"
          style="display:block"
