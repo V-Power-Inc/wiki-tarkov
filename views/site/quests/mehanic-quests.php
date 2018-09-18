@@ -60,9 +60,6 @@ use app\components\AlertComponent;
             
             <div class="margin-top-20">
 
-                <!--Yandex direct -->
-                <?= $this->render('/other/yandex-direct.php'); ?>
-
                 <!-- Виджет Вконтакте -->
                 <div class="vk-widget-styling">
                     <?= $this->render('/other/wk-widget'); ?>
@@ -77,7 +74,7 @@ use app\components\AlertComponent;
 
         </div>
         <!-- Основное содержимое страницы -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Механик - новый торговец, который был введен в игру Escape from Tarkov в конце января 2018 года. Теперь с этим торговцем также как и с остальными можно прокачивать репутацию, чтобы покупать более редкое оружие и модули. На данной странице представлен полный список квестов с торговцем Механик из онлайн-шутера Escape from Tarkov.
 <!--                    <br>-->
@@ -101,6 +98,11 @@ use app\components\AlertComponent;
 
             <br>
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
+        </div>
+
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
         </div>
 
         <div class="recommended-gm-content">

@@ -72,13 +72,10 @@ use app\components\AlertComponent;
 
             <?= $this->render('/other/yandex-donate.php'); ?>
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
         </div>
 
         <!-- Основное содержимое страницы -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Барахольщика вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
                 <img class="torgovec-info-quest-image" src="/img/torgovcy/baraholshik-quests/baraholshik-full.jpg" alt="Квесты торговца Барахольщика из Escape from Tarkov">
@@ -96,6 +93,11 @@ use app\components\AlertComponent;
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
         </div>
 
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+        </div>
+        
         <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
