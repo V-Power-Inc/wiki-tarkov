@@ -177,7 +177,8 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::TWO_HOURS)->all();
+            $dependency = Zavod::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE, $dependency)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -187,7 +188,8 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Леса **/
     public function actionForestmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::TWO_HOURS)->all();
+            $dependency = Forest::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE, $dependency)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -197,7 +199,8 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Таможни **/
     public function actionTamojnyamarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::TWO_HOURS)->all();
+            $dependency = Tamojnya::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE, $dependency)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -207,7 +210,8 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Берега **/
     public function actionBeregmarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::TWO_HOURS)->all();
+            $dependency = Bereg::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE, $dependency)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -217,7 +221,8 @@ class SiteController extends Controller
     /** JSON данные с координатами маркеров Развязки **/
     public function actionRazvyazkamarkers() {
         if(Yii::$app->request->isAjax) {
-            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::TWO_HOURS)->all();
+            $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::WEEK_CACHE, $dependency)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
