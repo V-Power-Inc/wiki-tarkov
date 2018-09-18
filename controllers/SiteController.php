@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\models\Mehanic;
 use app\models\Razvyazka;
-use Yii;
 use app\models\Skypshik;
 use app\models\Lyjnic;
 use app\models\Terapevt;
@@ -26,6 +25,7 @@ use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
 use app\models\Barters;
+use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -178,7 +178,7 @@ class SiteController extends Controller
     public function actionZavodmarkers() {
         if(Yii::$app->request->isAjax) {
           //  $dependency = Zavod::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -189,7 +189,7 @@ class SiteController extends Controller
     public function actionForestmarkers() {
         if(Yii::$app->request->isAjax) {
           //  $dependency = Forest::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -200,7 +200,7 @@ class SiteController extends Controller
     public function actionTamojnyamarkers() {
         if(Yii::$app->request->isAjax) {
           //  $dependency = Tamojnya::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -211,7 +211,7 @@ class SiteController extends Controller
     public function actionBeregmarkers() {
         if(Yii::$app->request->isAjax) {
           //  $dependency = Bereg::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -222,7 +222,7 @@ class SiteController extends Controller
     public function actionRazvyazkamarkers() {
         if(Yii::$app->request->isAjax) {
          //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->all();
+            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
