@@ -178,9 +178,6 @@ use app\components\AlertComponent;
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
             <div class="margin-top-20"></div>
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -188,6 +185,12 @@ use app\components\AlertComponent;
 
             <!-- Виджет дискорда -->
             <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
 
 
             <?= $this->render('/other/yandex-donate.php'); ?>
