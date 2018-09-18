@@ -82,6 +82,11 @@ var PlacesInt = L.icon({
 });
 
 $(document).ready(function() {
+    /*** Core code ***/
+    var Inject = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>' +
+                 '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7299368509452780" data-ad-slot="7920099693" data-ad-format="auto"></ins>' +
+                 '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+    
     
     /*** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров ****/
     $('body').on('click','.count-on', function() {
