@@ -185,15 +185,14 @@ use app\components\AlertComponent;
 
             <!-- Виджет дискорда -->
             <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+
+            <?= $this->render('/other/yandex-donate.php'); ?>
             
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
-
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
 
