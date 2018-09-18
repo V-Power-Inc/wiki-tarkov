@@ -21,6 +21,7 @@ use Imagine\Image\Box;
  * @property string $customicon
  * @property string $exits_group
  * @property int $exit_anyway
+ * @property string $date_update
  */
 class Razvyazka extends \yii\db\ActiveRecord
 {
@@ -45,7 +46,7 @@ class Razvyazka extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['enabled', 'exit_anyway'], 'integer'],
             [['name', 'marker_group', 'exits_group'], 'string', 'max' => 100],
-            [['customicon'], 'string', 'max' => 255],
+            [['customicon', 'date_update'], 'string', 'max' => 255],
         ];
     }
 

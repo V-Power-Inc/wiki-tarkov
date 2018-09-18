@@ -21,6 +21,7 @@ use Imagine\Image\Box;
  * @property string $customicon
  * @property string $exits_group
  * @property integer $exit_anyway
+ * @property string $date_update
  */
 class Bereg extends \yii\db\ActiveRecord
 {
@@ -47,7 +48,7 @@ class Bereg extends \yii\db\ActiveRecord
             [['enabled', 'exit_anyway'], 'integer'],
             [['name', 'exits_group'], 'string', 'max' => 100],
             [['marker_group'], 'string', 'max' => 50],
-            [['customicon'], 'string', 'max' => 255],
+            [['customicon', 'date_update'], 'string', 'max' => 255],
         ];
     }
 
