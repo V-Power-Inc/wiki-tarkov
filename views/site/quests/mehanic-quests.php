@@ -101,6 +101,9 @@ use app\components\AlertComponent;
 
         </div>
 
+        <!-- Расстояние заглушка -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
+
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
