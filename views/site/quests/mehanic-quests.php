@@ -72,6 +72,9 @@ use app\components\AlertComponent;
 
             <?= $this->render('/other/yandex-donate.php'); ?>
 
+            <!-- Essense -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
         </div>
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
@@ -100,6 +103,9 @@ use app\components\AlertComponent;
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
 
         </div>
+
+        <!-- Расстояние заглушка -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <!-- Комментарии -->
