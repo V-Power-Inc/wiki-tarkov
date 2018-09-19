@@ -73,6 +73,9 @@ use app\components\AlertComponent;
             <!-- Essense -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
+            <!-- Essense -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
         </div>
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
@@ -100,7 +103,7 @@ use app\components\AlertComponent;
         <!-- Расстояние заглушка -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
             <script type="text/javascript">
