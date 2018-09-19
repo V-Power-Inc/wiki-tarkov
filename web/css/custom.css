@@ -1780,3 +1780,31 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     border-radius: 5px;
     padding: 0;
 }
+
+.label_39 {
+    z-index: 2147483640!important;
+}
+
+.about-us {
+    height: 86px;
+    width: 100%;
+    background: #000000e0;
+    position: fixed;
+    bottom: 0;
+    z-index: 2147483650;
+    display: block;
+    padding: 20px 100px 20px 20px;
+}
+
+.about-us p {
+    color: white;
+    font-size: 14px;
+}
+
+.alert-close-icon {
+    max-width: 30px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}

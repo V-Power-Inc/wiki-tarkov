@@ -31,6 +31,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
+use yii\web\Cookie;
 
 
 class SiteController extends Controller
@@ -412,6 +413,27 @@ class SiteController extends Controller
             $trader = new Traders;
             $trader->load(Yii::$app->request->post());
             return $this->render('traders/trader-preview.php', ['trader' => $trader]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+
+    /*** Устанавливаем кукис отключающий появление уведомления в нижней части экрана ***/
+    public function actionClsalert() {
+        if(Yii::$app->request->isAjax) {
+            $cookies = Yii::$app->request->cookies;
+            $addcook = Yii::$app->response->cookies;
+
+            if(!isset($cookies['as-remind'])) {
+                $addcook->add(new Cookie([
+                    'name' => 'as-remind',
+                    'value' => 1,
+                    'expire' => time() + (10 * 365 * 24 * 60 * 60),
+                    'secure' => true,
+                ]));
+            } else {
+                throw new HttpException(404 ,'Такая страница не существует');
+            }
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

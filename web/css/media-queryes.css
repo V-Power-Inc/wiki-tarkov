@@ -73,6 +73,22 @@
 }
 
 
+/*** alert custom breakpoint (1020px) ***/
+@media (max-width: 1020px) {
+    .about-us {
+        height: 140px;
+    }
+
+    .alert-close-icon {
+        max-width: 50px;
+        position: absolute;
+        right: 30px;
+        top: 47px;
+        cursor: pointer;
+    }
+}
+
+
 /*** col-sm screen size (991px) ***/
 @media (max-width: 991px) {
 
@@ -277,6 +293,19 @@
         background-color: rgba(255, 152, 0, 0.47);
     }
 
+    .about-us {
+        height: 200px;
+        padding: 15px 50px 15px 15px;
+    }
+
+    .alert-close-icon {
+        max-width: 30px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        cursor: pointer;
+    }
+
 }
 
 
@@ -331,6 +360,20 @@
 
 }
 
+/*** alert custom breakpoint (430px) ***/
+@media (max-width: 430px) {
+    .about-us {
+        height: 200px;
+        padding: 10px 50px 10px 15px;
+    }
+}
+
+/*** alert custom breakpoint (400px) ***/
+@media (max-width: 400px) {
+    .about-us {
+        display: none;
+    }
+}
 
 /*** navbar custom hotfix col-sm col-xs ***/
 
