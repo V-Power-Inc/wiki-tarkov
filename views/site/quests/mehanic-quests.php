@@ -72,6 +72,9 @@ use app\components\AlertComponent;
 
             <?= $this->render('/other/yandex-donate.php'); ?>
 
+            <!-- Essense -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
         </div>
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
