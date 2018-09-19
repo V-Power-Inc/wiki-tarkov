@@ -77,7 +77,7 @@ use app\components\AlertComponent;
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Терапевта вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
-                <img class="torgovec-info-quest-image" src="/img/torgovcy/terapevt-quests/terapevt_full.png" alt="Квесты торговца Терапевта из Escape from Tarkov">
+                <img class="torgovec-info-quest-image" src="/img/torgovcy/terapevt-quests/terapevt_full.jpg" alt="Квесты торговца Терапевта из Escape from Tarkov">
             </div>
             <div class="tab-content">
                 <?php foreach ($terapevt as $item): ?>
@@ -95,7 +95,7 @@ use app\components\AlertComponent;
         <!-- Расстояние заглушка -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 comment-fake-side">
             <!-- Комментарии -->
             <div id="mc-container" class="kek-recustom"></div>
             <script type="text/javascript">
