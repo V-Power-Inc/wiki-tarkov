@@ -1774,3 +1774,9 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
 .mx-100.close-vote {
     cursor: pointer;
 }
+
+.comment-fake-side {
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 0;
+}
