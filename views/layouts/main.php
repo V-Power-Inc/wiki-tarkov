@@ -70,10 +70,19 @@ AppAsset::register($this);
 
 
     <?php if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-        
+        <!-- VK Coockie -->
         <?= $this->render('/other/vk-popup'); ?>
-
     <?php } endif; ?>
+
+
+    <?php if(!isset($cookies['as-remind']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
+        <!-- alert coockie -->
+        <div class="about-us">
+            <img class="alert-close-icon" src="/img/close-alert-icon.png" alt="Закрыть" title="Закрыть уведомление" onclick="yaCounter47100633.reachGoal('cls-alert-info'); return true;">
+            <p class="text-center">Доброго времени суток уважаемые пользователи! Как Вы знаете, мы фанатское сообщество по игре Escape from Tarkov и никаких спонсорских средств сайт не получает, а потому - сайт существует исключительно с доходов рекламы. Мы очень просим Вас отключить рекламу на нашем сайте, таким образом <u>Вы сделаете вклад в развитие проекта</u>. Благодарим за понимание!</p>
+        </div>
+    <?php } endif; ?>
+
 </div>
 
 <footer>
@@ -122,13 +131,6 @@ if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !
         'secure' => true,
     ]));
 } 
-endif;
+endif; ?>
 
-?>
 
-<?php
-//echo "<pre>";
-//print_r($cookies['vkident']);
-//echo "<pre>";
-//exit();
-//?>
