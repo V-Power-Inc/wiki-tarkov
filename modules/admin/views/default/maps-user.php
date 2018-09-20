@@ -31,5 +31,6 @@
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/doorkeys" class="admin-tabs w-100-important">Справочник ключей</a></li>
+        <li><a href="/admin/news" class="admin-tabs w-100-important">Новости</a></li>
     </ul>
 </div>
