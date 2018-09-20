@@ -74,10 +74,12 @@ use app\components\AlertComponent;
 <div class="container">
     <div class="row">
 
-        <!-- no-scale -->
-        <div class="col-lg-12">
-            <?= $this->render('/other/google-gor.php'); ?>
-        </div>
+        <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
+            <!-- no-scale -->
+            <div class="col-lg-12">
+                <?= $this->render('/other/google-gor.php'); ?>
+            </div>
+        <?php endif; ?>
         
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
@@ -89,8 +91,10 @@ use app\components\AlertComponent;
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
+            <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
+                <!--Yandex direct -->
+                <?= $this->render('/other/yandex-direct.php'); ?>
+            <?php endif; ?>
 
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
