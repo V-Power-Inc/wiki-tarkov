@@ -205,9 +205,11 @@ use app\components\AlertComponent;
             </div>
         </div>
 
-        <div class="recommended-gm-content">
-            <?= $this->render('/other/google-recommended.php'); ?>
-        </div>
+        <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
+            <div class="recommended-gm-content">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
+        <?php endif; ?>
         
         <!-- Расстояние - заглушка -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
