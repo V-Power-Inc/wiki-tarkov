@@ -1808,3 +1808,8 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     top: 30px;
     cursor: pointer;
 }
+
+.news-shortitem a img.image-link {
+    max-width: 100%;
+    height: auto!important;
+}
