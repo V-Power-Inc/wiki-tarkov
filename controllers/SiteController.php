@@ -37,6 +37,8 @@ use yii\web\Cookie;
 class SiteController extends Controller
 {
 
+    // todo: Конструкции типа SQL Query -> cache() работают некорректно и от них необходимо уходить.
+
     /**
      * Displays homepage.
      *
@@ -321,7 +323,7 @@ class SiteController extends Controller
     
     /** Рендер детальной страницы новости **/
     public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
         } else {
