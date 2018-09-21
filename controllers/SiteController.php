@@ -323,7 +323,8 @@ class SiteController extends Controller
     
     /** Рендер детальной страницы новости **/
     public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        $dependency = News::find()->where(['enabled' => 1])->count();
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR, $dependency)->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
         } else {
