@@ -35,12 +35,17 @@ $(document).ready(function() {
             url: '/site/clsalert',
             data: {param: param, token : token},
             success: function($retrn) {
-                console.log($retrn);
                 $('.about-us').fadeOut();
             }
         });
-
     });
+
+    /*** Оборачиваем фреймы youtube в специальные блоки для адаптивности ***/
+    $('.news-shortitem iframe').each(function () {
+        $(this).attr('allowfullscreen', 'true');
+        $(this).wrap('<div class="video-block"></div>');
+    });
+
 
 });
 
