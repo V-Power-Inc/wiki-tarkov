@@ -46,10 +46,6 @@ class SiteController extends Controller
      */
 
     /** Кеширование по секундам с различными сроками **/
-    const WEEK_CACHE = 604800;
-    const TWO_DAYS = 172800;
-    const ONE_DAY = 86400;
-    const TWO_HOURS = 7200;
     const ONE_HOUR = 3600;
 
     // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
@@ -63,7 +59,7 @@ class SiteController extends Controller
 
     /** Рендер главной страницы с квестами **/
     public function actionQuests() {
-        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::WEEK_CACHE)->asArray()->all();
+        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
         return $this->render('quests/quests-main.php', ['traders' => $traders]);
     }
 
@@ -75,10 +71,10 @@ class SiteController extends Controller
     /** Рендер детальной страницы торговца **/
     public function actionTradersdetail($id) {
 
-        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
+        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
 
         if($trader) {
-            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::TWO_DAYS)->asArray()->all();
+            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
             return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -88,77 +84,77 @@ class SiteController extends Controller
     /** Рендер страницы квестов Прапора **/
     public function actionPraporpage() {
         $query =  Prapor::find();
-        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
     
     /** Рендер страницы квестов Терапевта **/
     public function actionTerapevtpage() {
         $query =  Terapevt::find();
-        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
     }
 
     /** Рендер страницы квестов Скупщика **/
     public function actionSkypchikpage() {
         $query =  Skypshik::find();
-        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
     }
 
     /** Рендер страницы квестов Лыжника **/
     public function actionLyjnicpage() {
         $query =  Lyjnic::find();
-        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
     }
 
     /** Рендер страницы квестов Миротворца **/
     public function actionMirotvorecpage() {
         $query =  Mirotvorec::find();
-        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
     /** Рендер страницы квестов Механика **/
     public function actionMehanicpage() {
         $query =  Mehanic::find();
-        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
     }
 
     /** Рендер страницы квестов Барахольщика **/
     public function actionBaraholshikpage() {
         $query =  Baraholshik::find();
-        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
     }
 
     /** Рендер страницы квестов Лешего **/
     public function actionLeshypage() {
         $query =  Leshy::find();
-        $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/leshy-quests.php', ['leshy'=>$leshy,]);
     }
 
     /** Рендер страницы квестов Смотрителя (Перевод зависит от локализации разработчиков) **/
     public function actionWardenpage() {
         $query =  Warden::find();
-        $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
     }
 
     /** Рендер страницы квестов Башкира **/
     public function actionBashkirpage() {
         $query =  Bashkir::find();
-        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/bashkir-quests.php', ['bashkir'=>$bashkir,]);
     }
 
     /** Рендер страницы квестов Хохла **/
     public function actionKhokholpage() {
         $query =  Khokhol::find();
-        $khokhol = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::WEEK_CACHE)->all();
+        $khokhol = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/khokhol-quests.php', ['khokhol'=>$khokhol,]);
     }
 
@@ -260,11 +256,11 @@ class SiteController extends Controller
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->cache(self::TWO_DAYS)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
             if(isset($_POST['Doorkeys']['doorkey'])){
@@ -278,9 +274,9 @@ class SiteController extends Controller
             if(in_array($doorkey,$words)) {
                 $curentWord =  $words[array_search($doorkey,$words)];
                if($curentWord == "Все ключи"){
-                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->cache(self::TWO_DAYS)->all();
+                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
                }else{
-                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->cache(self::TWO_DAYS)->all();
+                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
                }
                 
                 return $this->render('keys/keyseach.php',
@@ -304,7 +300,7 @@ class SiteController extends Controller
     /** Рендер детальной страницы для вывода ключей  **/
     public function actionDoorkeysdetail($id)
     {
-        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::TWO_DAYS)->One();
+        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
         return $this->render('keys/detail-key.php',['model' => $models]);
         } else {
@@ -316,14 +312,14 @@ class SiteController extends Controller
     public function actionNews() {
         $query =  News::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
+        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
         $request = \Yii::$app->request;
         return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
     
     /** Рендер детальной страницы новости **/
     public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->One();
+        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
         } else {
@@ -335,14 +331,14 @@ class SiteController extends Controller
     public function actionArticles() {
         $query =  Articles::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
+        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
         $request = \Yii::$app->request;
         return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
 
     /** Рендер детальной страницы полезной статьи **/
     public function actionArticledetail($id) {
-        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::TWO_DAYS)->One();
+        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
             return $this->render('articles/detail.php',['model' => $models]);
         } else {
@@ -355,7 +351,7 @@ class SiteController extends Controller
         $model = Questions::find()->where(['enabled' => 1]);
 
         $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
-        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::TWO_DAYS)->all();
+        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
         $request = \Yii::$app->request;
         
         return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
@@ -390,9 +386,9 @@ class SiteController extends Controller
 
     /*** Рендер страницы справочника валют ***/
     public function actionCurrencies() {
-        $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::TWO_DAYS)->One();
-        $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::TWO_DAYS)->One();
-        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::TWO_DAYS)->One();
+        $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::ONE_HOUR)->One();
+        $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::ONE_HOUR)->One();
+        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::ONE_HOUR)->One();
         
         return $this->render('currencies/index.php', ['dollar' => $dollar, 'euro' => $euro, 'bitkoin' => $bitkoin]);
     }
