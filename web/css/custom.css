@@ -1870,3 +1870,8 @@ p.block-gifts-desc {
     border-radius: 5px;
     border: 2px solid #c3392c;
 }
+
+.gifts-link {
+    color: black!important;
+}
+

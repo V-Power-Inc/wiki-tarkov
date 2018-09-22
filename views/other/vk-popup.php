@@ -8,25 +8,28 @@
 
 $this->registerJsFile('js/vk-core-votes.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-/*** Это виджет всплывающего окна с различным контентом - в данный момент тут опрос из группы вконтакте ***/
+/*** Это виджет всплывающего окна с различным контентом - в данный момент тут ссылка на розыгрыш ключей вконтакте ***/
 
 ?>
 
 <div class="vk-gifts-take">
     <div class="rl-pos">
-        <img class="mx-100 close-vote" src="/img/cancel-vote.png" onclick="yaCounter47100633.reachGoal('frm-close'); return true;">
+        <img class="mx-100 close-vote" src="/img/cancel-vote.png" onclick="yaCounter47100633.reachGoal('gift_close'); return true;">
     </div>
     
     <p class="title-block-gifts">Розыгрыш игровых ключей</p>
 
     <div class="games-gifts">
-        <img src="/img/games-gifts.png">
+        <!-- todo: Сделать ссылку именно на конкурсный пост -->
+        <a class="gifts-link" href="#" target="_blank" onclick="yaCounter47100633.reachGoal('image-gift-join'); return true;">
+            <img src="/img/games-gifts.png">
+        </a>
     </div>
 
     <p class="block-gifts-desc">От лица администрации сайта tarkov-wiki.ru и игрового сообщества V-Power проводится розыгрыш с раздачей ключей от <b>Escape From Tarkov: Edge of Darkness, Metro: Exodus, Scum</b> и других интересных проектов.</p>
 
     <!-- todo: Сделать ссылку именно на конкурсный пост -->
-    <p class="link-to-vk"><a href="https://vk.com/vector_power" target="_blank">Подробнее в нашей группе Вконтакте</a></p>
+    <p class="link-to-vk"><a href="https://vk.com/vector_power" target="_blank" onclick="yaCounter47100633.reachGoal('form_gifts_join'); return true;">Подробнее в нашей группе Вконтакте</a></p>
 
     <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
 

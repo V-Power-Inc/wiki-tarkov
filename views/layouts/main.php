@@ -53,8 +53,8 @@ AppAsset::register($this);
 
 
 
-<?php if(!isset($cookies['vkident234']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-<div class="loader-maps-background" style="display: none; cursor: pointer;"></div>
+<?php if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
+<div class="loader-maps-background" style="display: none; cursor: pointer;" onclick="yaCounter47100633.reachGoal('gift_close'); return true;"></div>
 <?php } endif; ?>
 
 <body>

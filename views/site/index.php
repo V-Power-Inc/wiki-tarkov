@@ -20,7 +20,7 @@ $this->registerMetaTag([
     <!-- Конкурсное изображение -->
     <!-- todo: Сделать ссылку именно на конкурсный пост -->
     <div class="owl-item">
-        <a href="https://vk.com/vector_power" target="_blank">
+        <a href="https://vk.com/vector_power" target="_blank" onclick="yaCounter47100633.reachGoal('slider-join'); return true;">
             <img src="/img/slider/konkurs_22092018.png">
         </a>
     </div>
