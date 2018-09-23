@@ -346,6 +346,40 @@
 
 }
 
+@media (max-width: 520px) {
+
+    .vk-useridentity-vote, .vk-gifts-take {
+        width: 340px;
+        height: 610px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -310px;
+        margin-left: -170px;
+        z-index: 99999;
+        background: #ffffff;
+        border-radius: 5px;
+    }
+
+    #widget_pop, #widget_pop iframe {
+        width: 320px!important;
+    }
+
+    #widget_pop iframe html body #community_footer.wcommunity_footer {
+        width: 245px!important;
+    }
+
+    p.title-block-gifts {
+        margin: 40px 0 15px 0;
+        font-size: 22px;
+    }
+
+    p.block-gifts-desc {
+        padding: 25px 25px 10px 25px;
+    }
+
+}
+
 /*** Стили интерактивных карт - ДЛЯ АНДРОЙДОВ ***/
 @media (max-width: 460px) {
 

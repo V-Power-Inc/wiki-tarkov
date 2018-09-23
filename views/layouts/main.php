@@ -53,8 +53,8 @@ AppAsset::register($this);
 
 
 
-<?php if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-<div class="loader-maps-background" style="display: none; cursor: pointer;"></div>
+<?php if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
+<div class="loader-maps-background" style="display: none; cursor: pointer;" onclick="yaCounter47100633.reachGoal('gift_close'); return true;"></div>
 <?php } endif; ?>
 
 <body>
@@ -69,7 +69,7 @@ AppAsset::register($this);
     <?= $content ?>
 
 
-    <?php if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
+    <?php if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
         <!-- VK Coockie -->
         <?= $this->render('/other/vk-popup'); ?>
     <?php } endif; ?>
@@ -123,9 +123,9 @@ AppAsset::register($this);
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
-if(!isset($cookies['vkident']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
+if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
     $addcook->add(new Cookie([
-        'name' => 'vkident',
+        'name' => 'gifts-23092018',
         'value' => 1,
         'expire' => time() + (10 * 365 * 24 * 60 * 60),
         'secure' => true,
