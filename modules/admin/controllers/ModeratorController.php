@@ -107,6 +107,7 @@ class ModeratorController extends Controller
               $usrtofind->user = 'banned-'.date('Y-m-d H:i:s');
               $usrtofind->password = 'Need to regenerate';
               $usrtofind->banned = 1;
+              $usrtofind->bann_reason = $bannuser->bann_reason;
               $usrtofind->save(false);
               $messages = new MessagesComponent();
               $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был успешно наказан!</p>";

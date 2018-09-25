@@ -17,6 +17,7 @@ use \yii\web\IdentityInterface;
  * @property string $role
  * @property string $name
  * @property string $date_end
+ * @property string $bann_reason
  */
 class Admins extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -39,7 +40,7 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
             [['remember_me', 'banned'], 'integer'],
             [['captcha','role','name','remember_me'], 'safe'],
             [['user', 'password'], 'string', 'max' => 45],
-            [['captcha'], 'string', 'max' => 255],
+            [['captcha', 'bann_reason'], 'string', 'max' => 255],
         ];
     }
 
@@ -57,7 +58,8 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
             'role' => 'Роль',
             'date_end' => 'Дата окончания учетной записи',
             'name' => 'Имя пользователя учетной записи',
-            'banned' => 'Забанен'
+            'banned' => 'Забанен',
+            'bann_reason' => 'Причина блокировки'
         ];
     }
 
