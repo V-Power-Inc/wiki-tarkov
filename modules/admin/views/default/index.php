@@ -86,8 +86,8 @@ $this->title = 'Админка tarkov-wiki';
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 4) : ?>
     <!-- Kondor View -->
     <?=$this->render('working-lotttables'); ?>
-<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 9) : ?>
-    <!-- Jack Finister View -->
+<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 10) : ?>
+    <!-- Asik View -->
     <?=$this->render('maps-user'); ?>
 <?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 3) : ?>
     <!-- Koles0 View -->

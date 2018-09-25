@@ -77,6 +77,8 @@ use yii\helpers\ArrayHelper;
 
                 <?= $form->field($users, 'name')->dropDownList(ArrayHelper::map($active_users, 'id', 'name')) ?>
 
+                <?= $form->field($users, 'bann_reason')->textInput() ?>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-danger"><b>Бан с двух ног</b></button>
                 </div>
@@ -103,6 +105,7 @@ use yii\helpers\ArrayHelper;
             <th scope="col">Роль</th>
             <th scope="col">Имя</th>
             <th scope="col">Статус учетки</th>
+            <th scope="col">Причина бана</th>
         </tr>
         </thead>
         <tbody>
@@ -112,6 +115,7 @@ use yii\helpers\ArrayHelper;
                     <td><?= $user['role'] ?></td>
                     <td><?= $user['name'] ?></td>
                     <td><?= ($user['banned'] == 1)? '<label class="label label-danger">Пользователь забанен</label>':'<label class="label label-success">Активна</label>'; ?></td>
+                    <td><?= $user['bann_reason'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
