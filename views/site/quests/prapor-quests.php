@@ -69,8 +69,6 @@ use app\components\AlertComponent;
                 <?php  $this->endCache(); } ?>
             </div>
 
-            <?= $this->render('/other/yandex-donate.php'); ?>
-
             <!-- Essense -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
