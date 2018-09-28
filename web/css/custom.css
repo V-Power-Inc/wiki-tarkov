@@ -1875,3 +1875,14 @@ p.block-gifts-desc {
     color: black!important;
 }
 
+.margins-vertical-20 {
+    margin: 20px 0;
+}
+
+.custom-items-list-search {
+    padding: 20px;
+    background: #00000012;
+    border-radius: 5px;
+    border: 2px solid #c3392c;
+}
+
