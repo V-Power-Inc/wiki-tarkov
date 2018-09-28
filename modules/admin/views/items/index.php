@@ -44,7 +44,8 @@ $dataProvider->pagination->pageSize=20;
                     return $data->preview;
                 },
             ],
-            'shortdesc:ntext',
+            'url',
+             // 'shortdesc:ntext',
             'quest_item',
             'date_update',
             'trader_group',
