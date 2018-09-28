@@ -1886,3 +1886,16 @@ p.block-gifts-desc {
     border: 2px solid #c3392c;
 }
 
+.adm-blue {
+    color: #337ab7;
+}
+
+.customed-labels-adm {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.customed-labels-adm.label-danger {
+    background-color: #d9534f;
+}
+

@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
+use app\models\Admins;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemsSearch */
@@ -59,11 +60,22 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                 },
             ],
             'url',
-             // 'shortdesc:ntext',
-            'quest_item',
+            // 'shortdesc:ntext',
+            // 'quest_item',
             'date_create',
             'date_update',
-            'creator',
+            'creator' => [
+                'attribute' => 'creator',
+                'format' => 'html',
+                'value' => function($user) {
+                    if(!is_null($user->creator)) {
+                    return '<span class="fa fa-user adm-blue"></span> '.$user->creator ;
+                    } else {
+                        return '<span class="not-set">Не определен</span>';
+                    }
+                },
+                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Admins::find()->asArray()->all(), 'name', 'name'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
+            ],
             // 'trader_group',
             // 'content:ntext',
             // 'active',
@@ -78,6 +90,17 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                 'attribute' => 'parentcat_id',
                 'value' => 'parentcat.title',
                 'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию предмета']),
+            ],
+            [
+                'attribute' => 'active',
+                'format' => 'raw',
+                'value' => function($active) {
+                    if($active->active === 1) {
+                        return '<label class="label label-success customed-labels-adm">Активен</label>';
+                    } else {
+                        return '<label class="label label-danger customed-labels-adm">Отключен</label>';
+                    }
+                }
             ],
             
             ['class' => 'yii\grid\ActionColumn'],
