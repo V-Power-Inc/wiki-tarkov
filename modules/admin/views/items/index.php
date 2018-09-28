@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
+use app\models\Admins;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemsSearch */
@@ -12,13 +14,16 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Список предметов справочника лута';
 $this->params['breadcrumbs'][] = $this->title;
 
-// Выводим по 20 предметов на страницу
-$dataProvider->pagination->pageSize=20;
-?>
+/*** Массив значений справочника лута для вывода разного количества записей ***/
+$values = [10,15, 25, 50, 75, 100, 150, 200, 250, 500];
 
-<p class="alert alert-info size-16">
-    <b>Включена облегченная версия справочника, в данный момент на страницу выводится максимум по 20 предметов из справочника лута</b>
-</p>
+if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
+    $dataProvider->pagination->pageSize=$_GET['per-page'];
+} else {
+    $dataProvider->pagination->pageSize=10;
+}
+
+?>
 
 <div class="items-index">
 
@@ -30,6 +35,16 @@ $dataProvider->pagination->pageSize=20;
         <?= Html::a('Создать новый предмет', ['create'], ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
+
+    <div class="margins-vertical-20 custom-items-list-search">
+        <label>Выберите количество записей для отображения:</label>
+        <select class="form-control" onchange="location = this.value;">
+            <?php foreach ($values as $value): ?>
+                <option value="<?= Html::encode(Url::current(['per-page' => $value, 'page' => null])) ?>" <?php if ($dataProvider->pagination->pageSize == $value): ?>selected="selected"<?php endif; ?>><?= $value ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -45,12 +60,24 @@ $dataProvider->pagination->pageSize=20;
                 },
             ],
             'url',
-             // 'shortdesc:ntext',
-            'quest_item',
+            // 'shortdesc:ntext',
+            // 'quest_item',
+            'date_create',
             'date_update',
-            'trader_group',
+            'creator' => [
+                'attribute' => 'creator',
+                'format' => 'html',
+                'value' => function($user) {
+                    if(!is_null($user->creator)) {
+                    return '<span class="fa fa-user adm-blue"></span> '.$user->creator ;
+                    } else {
+                        return '<span class="not-set">Не определен</span>';
+                    }
+                },
+                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Admins::find()->asArray()->all(), 'name', 'name'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
+            ],
+            // 'trader_group',
             // 'content:ntext',
-            // 'date_create',
             // 'active',
             
 // Ниже узнаем по связи название родительской категории из связанной таблицы
@@ -63,6 +90,17 @@ $dataProvider->pagination->pageSize=20;
                 'attribute' => 'parentcat_id',
                 'value' => 'parentcat.title',
                 'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию предмета']),
+            ],
+            [
+                'attribute' => 'active',
+                'format' => 'raw',
+                'value' => function($active) {
+                    if($active->active === 1) {
+                        return '<label class="label label-success customed-labels-adm">Активен</label>';
+                    } else {
+                        return '<label class="label label-danger customed-labels-adm">Отключен</label>';
+                    }
+                }
             ],
             
             ['class' => 'yii\grid\ActionColumn'],

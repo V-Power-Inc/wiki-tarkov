@@ -27,6 +27,7 @@ use yii\web\UploadedFile;
  * @property string $trader_group
  * @property string $search_words
  * @property string $module_weapon
+ * @property string $creator
  *
  * @property ItemsToDoorkeys[] $itemsToDoorkeys
  * @property ItemsToLyjnic[] $itemsToLyjnics
@@ -57,12 +58,12 @@ class Items extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'shortdesc', 'url', 'description'], 'required'],
+            [['title', 'shortdesc', 'url', 'description', 'creator'], 'required'],
             [['shortdesc', 'content', 'search_words', 'module_weapon'], 'string'],
             [['date_create', 'date_update', 'keywords', 'trader_group', 'quest_item'], 'safe'],
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
-            [['title', 'preview'], 'string', 'max' => 255],
+            [['title', 'preview', 'creator'], 'string', 'max' => 255],
             [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parentcat_id' => 'id']],
         ];
     }
@@ -105,7 +106,8 @@ class Items extends \yii\db\ActiveRecord
             'questitem' => '',
             'module_weapon' => 'Оружия связанные с модулем',
             'search_words' => 'Слова синонимы (livesearch)',
-            'date_update' => 'Дата последнего обновления'
+            'date_update' => 'Дата последнего обновления',
+            'creator' => 'Создан пользователем'
         ];
     }
 
