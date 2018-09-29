@@ -8,7 +8,6 @@ $(document).ready(function() {
     /*** Собираем данные в скрытую форму и отправляем их в нужный экшон ***/
     $('#preview-barters').click(function(){
 
-        var id = $('#').val();
         var title = $('#barters-title').val();
         var sitetitle = $('#barters-site_title').val();
         var trader = $('#barters-trader_group').val();
