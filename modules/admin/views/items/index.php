@@ -25,6 +25,19 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
 
 ?>
 
+<style>
+    td:last-child {
+        width: 140px;
+        display: block;
+        height: 150px;
+    }
+    span.glyphicon {
+        padding-top: 55px;
+        font-size: 18px;
+    }
+</style>
+
+
 <div class="items-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

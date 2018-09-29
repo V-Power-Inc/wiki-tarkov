@@ -76,7 +76,7 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
         'label' => 'Предмет активен',
     ]); ?>
 
-    <?= $form->field($model, 'creator')->hiddenInput(['value' => Yii::$app->user->identity->name])->label('') ?>
+    <?= $form->field($model, 'creator')->hiddenInput(['value' => ($model->creator !== Null)?$model->creator:Yii::$app->user->identity->name])->label('') ?>
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать новый предмет' : 'Обновить существующий предмет', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
