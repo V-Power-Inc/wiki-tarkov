@@ -91,6 +91,7 @@ $config = [
             'rules' => [
                 '' => 'site/index',
                 'admin/ass-destroyer' => 'admin/moderator/index',
+                'barter/preview' => 'site/barters-preview',
                 'trader/preview' => 'site/previewtrader',
                 'admin/login' => 'admin/default/logout',
                 'maps' => 'site/locations',

@@ -11,16 +11,12 @@ $(document).ready(function() {
         var buttonquests = $('#traders-button_quests').val();
         var buttondetail = $('#traders-button_detail').val();
 
-
-
-        //
         $('#text-title').val(title);
         $('#text-preview').val(preview);
         $('#text-url').val(url);
         $('#text-button').val(buttonquests);
         $('#text-button-detail').val(buttondetail);
         $('#text-fullcontent').val(content);
-
 
         var form = document.getElementById("prev-form");
         form.submit();

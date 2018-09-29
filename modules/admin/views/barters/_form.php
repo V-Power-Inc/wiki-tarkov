@@ -8,6 +8,9 @@ use mihaildev\elfinder\ElFinder;
 /* @var $this yii\web\View */
 /* @var $model app\models\Barters */
 /* @var $form yii\widgets\ActiveForm */
+
+$this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
 ?>
 
 <div class="barters-form">
@@ -47,8 +50,21 @@ use mihaildev\elfinder\ElFinder;
     <div class="form-group">
         <?= Html::submitButton('Сохранить запись', ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/barters">Вернуться в список бартеров</a>
+
+        <a class="btn btn-warning" id="preview-barters">Предпросмотр материала</a>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <!-- Форма для отображения превью -->
+    <form id="prev-form-barters" action="/site/barters-preview" method="post" target="blank">
+        <input type="hidden" name="_csrf" value="">
+        <input type="hidden" id="trader-id" name="Barters[id]">
+        <input type="hidden" id="trader-title" name="Barters[title]">
+        <input type="hidden" id="site-title" name="Barters[site_title]">
+        <input type="hidden" id="trader" name="Barters[trader_group]">
+        <input type="hidden" id="trader-content" name="Barters[content]">
+    </form>
+
 
 </div>
