@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
-use app\models\Admins;
+use app\models\Items;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ItemsSearch */
@@ -87,7 +87,7 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                         return '<span class="not-set">Не определен</span>';
                     }
                 },
-                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Admins::find()->asArray()->all(), 'name', 'name'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
+                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Items::find()->where(['is not','creator',null])->asArray()->all(), 'creator', 'creator'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
             ],
             // 'trader_group',
             // 'content:ntext',
