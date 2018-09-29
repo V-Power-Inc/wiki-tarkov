@@ -416,6 +416,20 @@ class SiteController extends Controller
         }
     }
 
+    /*** Рендер страницы предпросмотра бартера торговцев ***/
+    public function actionBartersPreview() {
+        if(Yii::$app->user->isGuest !== true) {
+            $barter = new Barters;
+            $barter->load(Yii::$app->request->post());
+
+            $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
+
+            return $this->render('traders/barter-preview.php', ['barter' => $barter, 'id' => $id]);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+
     /*** Устанавливаем кукис отключающий появление уведомления в нижней части экрана ***/
     public function actionClsalert() {
         if(Yii::$app->request->isAjax) {
