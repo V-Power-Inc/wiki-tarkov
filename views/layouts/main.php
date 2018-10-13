@@ -51,12 +51,6 @@ AppAsset::register($this);
     <!-- {/literal} END JIVOSITE CODE -->
 </head>
 
-
-
-<?php if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-<div class="loader-maps-background" style="display: none; cursor: pointer;" onclick="yaCounter47100633.reachGoal('gift_close'); return true;"></div>
-<?php } endif; ?>
-
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
@@ -67,13 +61,6 @@ AppAsset::register($this);
     <?= MenuComponent::showMenu() ?>
     
     <?= $content ?>
-
-
-    <?php if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-        <!-- VK Coockie -->
-        <?= $this->render('/other/vk-popup'); ?>
-    <?php } endif; ?>
-
 
     <?php if(!isset($cookies['as-remind']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
         <!-- alert coockie -->
@@ -123,14 +110,15 @@ AppAsset::register($this);
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
-if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
-    $addcook->add(new Cookie([
-        'name' => 'gifts-23092018',
-        'value' => 1,
-        'expire' => time() + (10 * 365 * 24 * 60 * 60),
-        'secure' => true,
-    ]));
-} 
-endif; ?>
+//if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
+//    $addcook->add(new Cookie([
+//        'name' => 'gifts-23092018',
+//        'value' => 1,
+//        'expire' => time() + (10 * 365 * 24 * 60 * 60),
+//        'secure' => true,
+//    ]));
+//}
+// endif;
+?>
 
 

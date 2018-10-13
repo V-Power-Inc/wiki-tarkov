@@ -17,12 +17,12 @@ $this->registerMetaTag([
 ?>
 <div class="owl-carousel owl-theme">
 
-    <!-- Конкурсное изображение -->
-    <div class="owl-item">
-        <a href="https://vk.com/vector_power?w=wall-162698237_91" target="_blank" onclick="yaCounter47100633.reachGoal('slider-join'); return true;">
-            <img src="/img/slider/konkurs_22092018.png">
-        </a>
-    </div>
+<!-- Конкурсное изображение -->
+<!--    <div class="owl-item">-->
+<!--        <a href="https://vk.com/vector_power?w=wall-162698237_91" target="_blank" onclick="yaCounter47100633.reachGoal('slider-join'); return true;">-->
+<!--            <img src="/img/slider/konkurs_22092018.png">-->
+<!--        </a>-->
+<!--    </div>-->
 
     <div class="owl-item">
         <img src="/img/slider/eft-2.jpg">
