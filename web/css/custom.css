@@ -1899,3 +1899,7 @@ p.block-gifts-desc {
     background-color: #d9534f;
 }
 
+.news-titleimage.block-disp {
+    display: block;
+    float: initial;
+}

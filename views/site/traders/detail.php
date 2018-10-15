@@ -98,7 +98,7 @@ use app\components\AlertComponent;
                     <a class="btn btn-default main-link float-left mobile-btn-margin" href="/quests-of-traders">Вернуться к списку торговцев</a>
                 </p>
                 
-                <img class="news-titleimage w-100-auto" alt="<?=$trader->title?>" src="<?=$trader->preview?>">
+                <img class="news-titleimage w-100-auto block-disp" alt="<?=$trader->title?>" src="<?=$trader->preview?>">
 
                 <div class="text-left">
                     <?=$trader->fullcontent ?>
