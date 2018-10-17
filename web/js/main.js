@@ -45,8 +45,11 @@ $(document).ready(function() {
         $(this).attr('allowfullscreen', 'true');
         $(this).wrap('<div class="video-block"></div>');
     });
-
-
+    
+    /*** Кнопка загрузки аватарки кланового сообщества ***/
+    $('#upl-clan-logo').click(function() {
+       $('#clans-file').click();
+    });
 });
 
 

@@ -364,7 +364,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content, .keys-content {
+.quests-content, .keys-content, .clans-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
@@ -1902,4 +1902,50 @@ p.block-gifts-desc {
 .news-titleimage.block-disp {
     display: block;
     float: initial;
+}
+
+h3.clan-title {
+    color: #074e71;
+    text-decoration: none;
+}
+
+.clan-block {
+    padding: 10px;
+    margin: 15px auto;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+    height: 200px;
+}
+
+.clan-img {
+    max-width: 100%;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+.clan-community-link {
+    font-size: 16px;
+}
+
+a.clan-community-link {
+    font-weight: bold;
+}
+
+.fa.checked-by-admins {
+    color: #1d921b;
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+.clans-content.special-border {
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}
+
+.vs-none {
+    display: none!important;
+}
+
+#upl-clan-logo {
+    margin-top: 24px;
 }
