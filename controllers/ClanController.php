@@ -11,6 +11,8 @@ use yii\web\Controller;
 use app\models\Clans;
 use yii\web\HttpException;
 use app\components\MessagesComponent;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
 use Yii;
 
 class ClanController extends Controller {
@@ -32,11 +34,18 @@ class ClanController extends Controller {
     
     /*** Обработчик сохранения данных в БД ***/
     public function actionSave() {
-        if(Yii::$app->request->isPost) {
-            $model = new Clans();
+        $model = new Clans();
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if(Yii::$app->request->isPost && !Yii::$app->request->isAjax) {
+            
+            $model->uploadPreview();
             $model->load(Yii::$app->request->post());
-
+            
             if($model->save(false)) {
                 $messages = new MessagesComponent();
                 $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";

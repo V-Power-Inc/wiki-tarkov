@@ -27,8 +27,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
-
-    <?= $form->field($model, 'moderated')->textInput() ?>
+    
+    <?= $form->field($model, 'moderated')->checkbox([
+        'label' => 'Заявка одобрена',
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить данные', ['class' => 'btn btn-success']) ?>

@@ -54,7 +54,7 @@ $this->registerMetaTag([
                 <?=Yii::$app->getSession()->getFlash('message')?>
             <?php endif;?>
             
-            <?php $form = ActiveForm::begin(['action' => '/clan/save','options' => ['method' => 'post'],'id' => 'reg-new-clan']); ?>
+            <?php $form = ActiveForm::begin(['action' => '/clan/save', 'options' => ['method' => 'post'], 'id' => 'reg-new-clan']); ?>
 
                 <div class="col-lg-4">
                     <?= $form->field($model, 'title')->textInput() ?>
@@ -65,7 +65,7 @@ $this->registerMetaTag([
                 </div>
     
                 <div class="col-lg-4">
-                    <button class="btn btn-primary" id="upl-clan-logo">Загрузить логотип клана</button>
+                    <button class="btn btn-primary" id="upl-clan-logo" type="button">Загрузить логотип клана</button>
                     <?= $form->field($model, 'file')->fileInput(['class' => 'vs-none'])->label('') ?>
                 </div>
     
