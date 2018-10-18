@@ -18,6 +18,27 @@ use yii\db\Query;
 use Yii;
 
 class ClanController extends Controller {
+
+    // Кешируем все запросы из БД - храним их в кеше
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 604800,
+                'only' => ['index'],
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT MAX(date_update) FROM clans',
+                ],
+                'variations' => [
+                    $_SERVER['SERVER_NAME'],
+                    Yii::$app->request->url,
+                    Yii::$app->response->statusCode,
+                ]
+            ],
+        ];
+    }
     
     /*** Количество заявок для обработки в день ***/
     const ticketsDayLimit = 10;
@@ -105,7 +126,8 @@ class ClanController extends Controller {
                 ->from('clans')
                 ->where('title LIKE "%' . $q . '%"')
                 ->andWhere(['moderated' => 1])
-                ->orderBy('date_create DESC');
+                ->orderBy('date_create DESC')
+                ->cache(3600, 'SELECT MAX(date_update) FROM clans');
             $command = $query->createCommand();
             $data = $command->queryAll();
 

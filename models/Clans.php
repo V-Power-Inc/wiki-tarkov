@@ -16,6 +16,7 @@ use Imagine\Image\Box;
  * @property string $preview
  * @property string $link
  * @property string $date_create
+ * @property string $date_update
  * @property int $moderated
  */
 class Clans extends \yii\db\ActiveRecord
@@ -44,6 +45,7 @@ class Clans extends \yii\db\ActiveRecord
             [['searchclan'], 'string'],
             [['searchclan'], 'safe'],
             [['date_create'], 'safe'],
+            [['date_update'], 'safe'],
             [['moderated'], 'integer'],
             [['title'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 300],
@@ -68,7 +70,8 @@ class Clans extends \yii\db\ActiveRecord
             'date_create' => 'Дата регистрации',
             'moderated' => 'Модерация пройдена',
             'reCaptcha' => 'Защита от спама',
-            'searchclan' => 'Поиска клана по названию'
+            'searchclan' => 'Поиска клана по названию',
+            'date_update' => 'Дата обновления'
         ];
     }
 

@@ -78,6 +78,8 @@ $this->registerMetaTag([
                         \himiklab\yii2\recaptcha\ReCaptcha::class,
                         ['siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5']
                     ) ?>
+
+                    <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())]) ?>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
