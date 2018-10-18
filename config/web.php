@@ -113,6 +113,7 @@ $config = [
               //  'quests-of-traders/bashkir-quests' => 'site/bashkirpage',
               //  'quests-of-traders/khokhol-quests' => 'site/khokholpage',
                 'currencies' => 'site/currencies',
+                'clan/clansearch' => 'clan/clansearch',
                 'clan/save' => 'clan/save',
                 'clans' => 'clan/index',
                 'add-clan' => 'clan/addclan',

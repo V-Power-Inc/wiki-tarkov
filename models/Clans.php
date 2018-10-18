@@ -21,6 +21,7 @@ use Imagine\Image\Box;
 class Clans extends \yii\db\ActiveRecord
 {
     
+    public $searchclan;
     public $file;
     public $reCaptcha = false;
     
@@ -40,6 +41,8 @@ class Clans extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['link'], 'string'],
+            [['searchclan'], 'string'],
+            [['searchclan'], 'safe'],
             [['date_create'], 'safe'],
             [['moderated'], 'integer'],
             [['title'], 'string', 'max' => 100],
@@ -64,7 +67,8 @@ class Clans extends \yii\db\ActiveRecord
             'link' => 'Ссылка на сообщество клана',
             'date_create' => 'Дата регистрации',
             'moderated' => 'Модерация пройдена',
-            'reCaptcha' => 'Защита от спама'
+            'reCaptcha' => 'Защита от спама',
+            'searchclan' => 'Поиска клана по названию'
         ];
     }
 

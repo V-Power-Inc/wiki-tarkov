@@ -13,6 +13,8 @@ use yii\web\HttpException;
 use app\components\MessagesComponent;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
+use yii\helpers\Json;
+use yii\db\Query;
 use Yii;
 
 class ClanController extends Controller {
@@ -22,10 +24,11 @@ class ClanController extends Controller {
     
     /*** Рендерим страницу списка кланов ***/
     public function actionIndex() {
+        $srcclan = new Clans();
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
-        $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->asArray()->all();
+        $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->asArray()->limit(20)->all();
         $avialableTickets = self::ticketsDayLimit-$countickets;
-        return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'countdaylimit' => self::ticketsDayLimit]);
+        return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
     }
     
     /*** Рендерим страницу добавления нового клана ***/
@@ -87,6 +90,32 @@ class ClanController extends Controller {
                     }
                 }
             }
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+    
+    /*** Функция возвращающая название клана в формате JSON по поисковому запросу пользователя ***/
+    public function actionClansearch($q = null) {
+        if(Yii::$app->request->isAjax) {
+
+            $query = new Query;
+
+            $query->select('title, description, preview, link, date_create')
+                ->from('clans')
+                ->where('title LIKE "%' . $q . '%"')
+                ->andWhere(['moderated' => 1])
+                ->orderBy('date_create DESC');
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+
+            $out = [];
+
+            /** Цикл составления готовых данных по запросу пользователя в поиске **/
+            foreach ($data as $d) {
+                $out[] = ['value' => $d['title'], 'title' => $d['title'], 'description' => $d['description'], 'preview' => $d['preview'], 'link' => $d['link'], 'date_create' => $d['date_create']];
+            }
+            return Json::encode($out);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

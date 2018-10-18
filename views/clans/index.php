@@ -7,6 +7,7 @@
  */
 
 use app\components\AlertComponent;
+use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Официальный список кланов";
 
@@ -19,6 +20,8 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Список кланов EQscape from Tarkov',
 ]);
+
+$this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 ?>
 
@@ -70,6 +73,13 @@ $this->registerMetaTag([
             <?php else: ?>
                 <p class="size-16 alert alert-info margin-top-20">Заявок доступно для отправки - <b style="color: green"><?= $avialableTickets ?></b></p>
             <?php endif; ?>
+            
+
+            <!-- searchform -->
+            <?php $form = ActiveForm::begin(['action' => '#']); ?>
+                <?= $form->field($srcclan, 'searchclan')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
+            <?php ActiveForm::end(); ?>
+       
 
             <?php if($avialableTickets <= 0): ?>
                 <button class="btn btn-primary" disabled>Зарегистрировать клан</button>
