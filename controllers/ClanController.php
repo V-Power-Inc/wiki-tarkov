@@ -18,27 +18,6 @@ use yii\db\Query;
 use Yii;
 
 class ClanController extends Controller {
-
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => 'yii\filters\PageCache',
-                'duration' => 604800,
-                'only' => ['index'],
-                'dependency' => [
-                    'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT MAX(date_update) FROM clans',
-                ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                ]
-            ],
-        ];
-    }
     
     /*** Количество заявок для обработки в день ***/
     const ticketsDayLimit = 10;
@@ -47,7 +26,7 @@ class ClanController extends Controller {
     public function actionIndex() {
         $srcclan = new Clans();
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
-        $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->asArray()->limit(20)->all();
+        $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->cache(60)->asArray()->limit(20)->all();
         $avialableTickets = self::ticketsDayLimit-$countickets;
         return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
     }
