@@ -17,19 +17,31 @@ use Yii;
 
 class ClanController extends Controller {
     
+    /*** Количество заявок для обработки в день ***/
+    const ticketsDayLimit = 10;
+    
     /*** Рендерим страницу списка кланов ***/
     public function actionIndex() {
-    
+        $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
         $clans = Clans::find()->where(['moderated' => 1])->asArray()->all();
-        
-        return $this->render('/clans/index', ['clans' => $clans]);
+        $avialableTickets = self::ticketsDayLimit-$countickets;
+        return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'countdaylimit' => self::ticketsDayLimit]);
     }
     
     /*** Рендерим страницу добавления нового клана ***/
     public function actionAddclan() {
-        $model = new Clans();
+        $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
+        $avialableTickets = self::ticketsDayLimit-$countickets;
         
-        return $this->render('/clans/add-clan', ['model' => $model]);
+        if($avialableTickets <= 0) {
+            $messages = new MessagesComponent();
+            $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-tommorow'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
+            $messages->setMessages($message);
+            return $this->redirect('/clans', 301);
+        } else {
+            $model = new Clans();
+            return $this->render('/clans/add-clan', ['model' => $model]);
+        }
     }
     
     /*** Обработчик сохранения данных в БД ***/
@@ -42,20 +54,31 @@ class ClanController extends Controller {
         }
 
         if(Yii::$app->request->isPost && !Yii::$app->request->isAjax) {
-            
-            $model->uploadPreview();
-            $model->load(Yii::$app->request->post());
-            
-            if($model->save(false)) {
+
+            $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
+            $avialableTickets = self::ticketsDayLimit-$countickets;
+
+            if($avialableTickets <= 0) {
                 $messages = new MessagesComponent();
-                $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
+                $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-tommorow'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
                 $messages->setMessages($message);
                 return $this->redirect('/clans', 301);
             } else {
-                $messages = new MessagesComponent();
-                $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом в онлайн-консультант.</b></p>";
-                $messages->setMessages($message);
-                return $this->redirect('/add-clan', 301);
+                
+                $model->uploadPreview();
+                $model->load(Yii::$app->request->post());
+
+                if ($model->save(false)) {
+                    $messages = new MessagesComponent();
+                    $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
+                    $messages->setMessages($message);
+                    return $this->redirect('/clans', 301);
+                } else {
+                    $messages = new MessagesComponent();
+                    $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом в онлайн-консультант.</b></p>";
+                    $messages->setMessages($message);
+                    return $this->redirect('/add-clan', 301);
+                }
             }
         } else {
             throw new HttpException(404 ,'Такая страница не существует');

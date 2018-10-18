@@ -426,6 +426,13 @@
     }
 }
 
+/*** margin in registration clan form success button (416px) ***/
+@media (max-width: 416px) {
+    .mbl-margin-btn {
+        margin-top: 10px;
+    }
+}
+
 /*** alert custom breakpoint (400px) ***/
 @media (max-width: 400px) {
     .about-us {

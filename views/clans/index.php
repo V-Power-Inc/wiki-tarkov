@@ -58,34 +58,44 @@ $this->registerMetaTag([
                 <?=Yii::$app->getSession()->getFlash('message')?>
             <?php endif;?>
             
-            <p class="size-16 alert alert-info">На этой странице представлена база кланов собственноручно зарегистрированная игроками Escape from Tarkov. 
+            <p class="size-16 alert alert-info">
+                На этой странице представлена база кланов собственноручно зарегистрированная игроками Escape from Tarkov. В день рассматривается не больше <?=$countdaylimit?> заявок, также это число является дневным лимитом на количество заявок.
             <br>
             <br>
                 В настоящий момент это наиболее полная <b>официальная база кланов</b> по игре Escape from Tarkov.
             </p>
-            
-            <a class="btn btn-primary" href="/add-clan">Зарегистрировать клан</a>
-            
-            <!-- todo: Сейчас тут проверяется наоборот, т.к. нет записей в базе данных --> 
-            <?php if(!empty($clans)): ?>
-            <p class="size-16 alert alert-danger">В данный момент нет зарегистрированных кланов.</p>
+
+            <?php if($avialableTickets <= 0): ?>
+                <p class="size-16 alert alert-danger margin-top-20">Лимит заявок на регистрацию уже был достигнут, вы сможете заполнить заявку завтра.</p>
             <?php else: ?>
-            <div class="clan-block">
-                <h3 class="clan-title">
-                        Тестовый
-                    <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
-                </h3>
-                
-                <!-- 100x100 -->
-                <img class="clan-img" src="/img/qsch.png" alt="Название клана">
-               
-                
-                <p class="size-16">Это тестовое описание клана, оно не может быть достаточно длинным, поэтому мы оставляем все как есть - возможно описание когда-нибудь станет более подробным.</p>
-                
-                <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="#" rel="nofollow">https://vk.com</a></p>
-                
-            </div>
-                
+                <p class="size-16 alert alert-info margin-top-20">Заявок доступно для отправки - <b style="color: green"><?= $avialableTickets ?></b></p>
+            <?php endif; ?>
+
+            <?php if($avialableTickets <= 0): ?>
+                <button class="btn btn-primary" disabled>Зарегистрировать клан</button>
+            <?php else: ?>
+                <a class="btn btn-primary" href="/add-clan">Зарегистрировать клан</a>
+            <?php endif; ?>
+            
+            <?php if(empty($clans)): ?>
+            <p class="size-16 alert alert-danger margin-top-20">В данный момент нет зарегистрированных кланов.</p>
+            <?php else: ?>
+
+            <?php foreach($clans as $clan): ?>
+                <div class="clan-block">
+                    <h3 class="clan-title">
+                            <?= $clan['title'] ?>
+                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
+                    </h3>
+
+                    <!-- 100x100 -->
+                    <img class="clan-img" src="<?=$clan['preview']?>" alt="<?= $clan['title'] ?>">
+
+                    <p class="size-16"><?=$clan['description']?></p>
+
+                    <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="<?=$clan['link']?>" rel="nofollow" target="_blank">Перейти в сообщество</a></p>
+                </div>
+            <?php endforeach; ?>
             <?php endif; ?>
 
         </div>

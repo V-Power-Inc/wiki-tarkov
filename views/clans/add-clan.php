@@ -47,8 +47,7 @@ $this->registerMetaTag([
 
 <div class="container">
     <div class="row">
-        
-        <div class="col-lg-12 clans-content special-border">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content special-border">
 
             <?php  if(Yii::$app->getSession()->getFlash('message')):?>
                 <?=Yii::$app->getSession()->getFlash('message')?>
@@ -56,21 +55,22 @@ $this->registerMetaTag([
             
             <?php $form = ActiveForm::begin(['action' => '/clan/save', 'options' => ['method' => 'post'], 'id' => 'reg-new-clan']); ?>
 
-                <div class="col-lg-4">
-                    <?= $form->field($model, 'title')->textInput() ?>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <?= $form->field($model, 'title')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
                 </div>
-    
-                <div class="col-lg-4">
-                    <?= $form->field($model, 'description')->textInput() ?>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <?= $form->field($model, 'description')->textInput(['placeholder' => 'Введите краткое описание вашего клана']) ?>
                 </div>
-    
-                <div class="col-lg-4">
-                    <button class="btn btn-primary" id="upl-clan-logo" type="button">Загрузить логотип клана</button>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <?= $form->field($model, 'link')->textInput(['placeholder' => 'https://someclan.ru']) ?>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary" id="upl-clan-logo" type="button">Загрузить логотип</button>
+                    <button type="submit" class="btn btn-success mbl-margin-btn">Зарегистрировать клан</button>
                     <?= $form->field($model, 'file')->fileInput(['class' => 'vs-none'])->label('') ?>
-                </div>
-    
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-success">Зарегистрировать клан</button>
                 </div>
 
             <?php ActiveForm::end(); ?>

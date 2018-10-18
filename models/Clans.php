@@ -72,7 +72,7 @@ class Clans extends \yii\db\ActiveRecord
             $catalog = 'img/admin/resized/clans/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(100, 100))->save($catalog , ['quality' => 70]);
+            Image::getImagine()->open($catalog)->save($catalog , ['quality' => 70]);
         }
     }
 }

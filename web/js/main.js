@@ -50,6 +50,13 @@ $(document).ready(function() {
     $('#upl-clan-logo').click(function() {
        $('#clans-file').click();
     });
+
+    /*** Убираем уведомление о заявки регистрации клана на завтрашний день ***/
+    function clsalerttommorow() {
+        $('#alert-tommorow').fadeOut();
+    }
+
+    setTimeout(clsalerttommorow, 4000);
 });
 
 
