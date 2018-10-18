@@ -50,7 +50,7 @@ class Clans extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 300],
             [['preview'], 'string', 'max' => 255],
-            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['file'], 'file', 'extensions' => 'png, jpg'],
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_', 'uncheckedMessage' => 'Подтвердите что вы не бот']
         ];
     }

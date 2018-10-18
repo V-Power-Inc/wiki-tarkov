@@ -102,8 +102,9 @@ class ClansController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

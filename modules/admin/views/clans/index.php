@@ -24,15 +24,39 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'title',
+            [
+                'attribute' => 'title',
+                'format' => 'raw',
+                'value' => function($active) {
+                    return '<b>'.$active->title.'</b>';
+                }
+            ],
             'description',
-            'preview',
+            'preview' => [
+                'attribute' => 'preview',
+                'format' => 'image',
+                'value' => function($data) {
+                    return $data->preview;
+                },
+            ],
             'link:ntext',
             //'date_create',
-            //'moderated',
+            [
+                'attribute' => 'moderated',
+                'format' => 'raw',
+                'value' => function($active) {
+                    if($active->moderated === 1) {
+                        return '<label class="label label-success customed-labels-adm">Проверено</label>';
+                    } else {
+                        return '<label class="label label-danger customed-labels-adm">Не проверено</label>';
+                    }
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
         ],
     ]); ?>
 </div>

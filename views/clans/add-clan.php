@@ -62,7 +62,7 @@ $this->registerMetaTag([
             </p>
             
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <?= $form->field($model, 'title')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
+                    <?= $form->field($model, 'title')->textInput(['placeholder' => 'Введите название вашего клана']) ?>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">

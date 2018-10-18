@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Название клана']) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true, 'placeholder' => 'Описание клана']) ?>
 
     <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
 
@@ -24,9 +24,9 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'link')->textInput(['maxlength' => true, 'placeholder' => 'Ссылка на сообщество или сайт']) ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
+    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'placeholder' => 'Дата создания', 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
     
     <?= $form->field($model, 'moderated')->checkbox([
         'label' => 'Заявка одобрена',
