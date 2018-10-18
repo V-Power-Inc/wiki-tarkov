@@ -55,6 +55,12 @@ $this->registerMetaTag([
             
             <?php $form = ActiveForm::begin(['action' => '/clan/save', 'options' => ['method' => 'post'], 'id' => 'reg-new-clan']); ?>
 
+            <p class="size-16 alert alert-info margin-top-20">Для отправки заявки на регистрацию вашего клана, отправьте заявку - заполнив следующие поля.
+            <br>
+            <br>
+                <b>Важно!!!</b> Размер логотипа клана должен быть <b>100x100</b> пикселей, а также быть либо формата <b>jpg или png</b> - другие форматы не принимаются.
+            </p>
+            
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <?= $form->field($model, 'title')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
                 </div>
@@ -65,6 +71,13 @@ $this->registerMetaTag([
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <?= $form->field($model, 'link')->textInput(['placeholder' => 'https://someclan.ru']) ?>
+                </div>
+            
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <?= $form->field($model, 'reCaptcha')->widget(
+                        \himiklab\yii2\recaptcha\ReCaptcha::class,
+                        ['siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5']
+                    ) ?>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

@@ -22,6 +22,7 @@ class Clans extends \yii\db\ActiveRecord
 {
     
     public $file;
+    public $reCaptcha = false;
     
     /**
      * {@inheritdoc}
@@ -45,6 +46,7 @@ class Clans extends \yii\db\ActiveRecord
             [['description'], 'string', 'max' => 300],
             [['preview'], 'string', 'max' => 255],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_', 'uncheckedMessage' => 'Подтвердите что вы не бот']
         ];
     }
 
@@ -62,6 +64,7 @@ class Clans extends \yii\db\ActiveRecord
             'link' => 'Ссылка на сообщество клана',
             'date_create' => 'Дата регистрации',
             'moderated' => 'Модерация пройдена',
+            'reCaptcha' => 'Защита от спама'
         ];
     }
 

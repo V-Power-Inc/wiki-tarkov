@@ -23,7 +23,7 @@ class ClanController extends Controller {
     /*** Рендерим страницу списка кланов ***/
     public function actionIndex() {
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
-        $clans = Clans::find()->where(['moderated' => 1])->asArray()->all();
+        $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->asArray()->all();
         $avialableTickets = self::ticketsDayLimit-$countickets;
         return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'countdaylimit' => self::ticketsDayLimit]);
     }

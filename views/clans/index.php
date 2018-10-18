@@ -88,12 +88,25 @@ $this->registerMetaTag([
                         <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
                     </h3>
 
-                    <!-- 100x100 -->
-                    <img class="clan-img" src="<?=$clan['preview']?>" alt="<?= $clan['title'] ?>">
-
+                   <?php if($clan['preview'] == null): ?>
+                       <!-- 100x100 -->
+                       <img class="clan-img" src="/img/qsch.png" alt="Логотип клана отсутствует">
+                   <?php else: ?>
+                        <!-- 100x100 -->
+                        <img class="clan-img" src="<?=$clan['preview']?>" alt="<?= $clan['title'] ?>">
+                   <?php endif; ?>
+                        
                     <p class="size-16"><?=$clan['description']?></p>
 
-                    <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="<?=$clan['link']?>" rel="nofollow" target="_blank">Перейти в сообщество</a></p>
+                    <?php if($clan['link'] == null || $clan['link']==''): ?>
+                        <label class="label label-danger">Клан не опубликовал ссылку на сообщество</label>
+                        <br>
+                        <br>
+                    <?php else: ?>
+                        <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="<?=$clan['link']?>" rel="nofollow" target="_blank">Перейти в сообщество</a></p>
+                    <?php endif; ?>
+
+                    <label class="label label-info date-clan-label">Клан зарегистрирован: <?= date("Y-m-d H:i:s", strtotime($clan['date_create'])) ?></label>
                 </div>
             <?php endforeach; ?>
             <?php endif; ?>
