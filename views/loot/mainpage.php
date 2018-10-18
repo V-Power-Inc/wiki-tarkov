@@ -12,14 +12,24 @@ use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
+use app\components\AlertComponent;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
+
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => 'Полная база лута по Escape from Tarkov - контент постоянно актуализируется',
+]);
+
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => 'Escape from Tarkov: Полная база данных лута',
+]);
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-use app\components\AlertComponent;
 ?>
 <div class="heading-class">
     <div class="container">

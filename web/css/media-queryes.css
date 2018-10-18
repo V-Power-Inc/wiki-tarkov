@@ -346,6 +346,12 @@
 
 }
 
+@media (max-width: 620px) {
+    .sc-margin-sc-btn {
+        margin-top: 10px;
+    }
+}
+
 @media (max-width: 520px) {
 
     .vk-useridentity-vote, .vk-gifts-take {
@@ -423,6 +429,13 @@
     .about-us {
         height: 200px;
         padding: 10px 50px 10px 15px;
+    }
+}
+
+/*** margin in registration clan form success button (416px) ***/
+@media (max-width: 416px) {
+    .mbl-margin-btn {
+        margin-top: 10px;
     }
 }
 
