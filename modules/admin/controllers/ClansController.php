@@ -120,9 +120,11 @@ class ClansController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    
+    // Выключили, специально - чтобы записи не удаляли
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       // $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
