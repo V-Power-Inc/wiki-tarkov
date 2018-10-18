@@ -127,7 +127,7 @@ class ClanController extends Controller {
                 ->where('title LIKE "%' . $q . '%"')
                 ->andWhere(['moderated' => 1])
                 ->orderBy('date_create DESC')
-                ->cache(3600, 'SELECT MAX(date_update) FROM clans');
+                ->cache(60);
             $command = $query->createCommand();
             $data = $command->queryAll();
 

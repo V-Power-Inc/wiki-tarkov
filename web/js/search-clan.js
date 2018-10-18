@@ -50,7 +50,7 @@ $('#clans-searchclan').on('keyup paste',function() {
                     $('.col-lg-9.col-md-9.col-sm-12.col-xs-12.clans-content').append(strdata);
                 });
             } else {
-                $('.col-lg-9.col-md-9.col-sm-12.col-xs-12.clans-content').append('<p class="alert alert-danger size-16 margin-top-20"><b>Кланы соотвествующие запросу не были найдены.</b></p>');
+                $('.col-lg-9.col-md-9.col-sm-12.col-xs-12.clans-content').append('<p class="alert alert-danger size-16 margin-top-20 clans-not-found"><b>Кланы соотвествующие запросу не были найдены.</b></p>');
             }
         }
     });

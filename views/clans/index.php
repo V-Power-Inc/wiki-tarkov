@@ -76,11 +76,13 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
             
 
             <!-- searchform -->
-            <?php $form = ActiveForm::begin(['action' => '#']); ?>
-                <?= $form->field($srcclan, 'searchclan')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
-            <?php ActiveForm::end(); ?>
-       
-
+            <?php if(!empty($clans)): ?>
+                <?php $form = ActiveForm::begin(['action' => '#']); ?>
+                    <?= $form->field($srcclan, 'searchclan')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
+                <?php ActiveForm::end(); ?>
+            <?php endif; ?>
+            
+            
             <?php if($avialableTickets <= 0): ?>
                 <button class="btn btn-primary" disabled>Зарегистрировать клан</button>
             <?php else: ?>
