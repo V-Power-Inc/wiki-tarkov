@@ -346,6 +346,12 @@
 
 }
 
+@media (max-width: 620px) {
+    .sc-margin-sc-btn {
+        margin-top: 10px;
+    }
+}
+
 @media (max-width: 520px) {
 
     .vk-useridentity-vote, .vk-gifts-take {

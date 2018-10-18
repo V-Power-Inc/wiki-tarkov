@@ -83,6 +83,7 @@ $this->registerMetaTag([
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <button class="btn btn-primary" id="upl-clan-logo" type="button">Загрузить логотип</button>
                     <button type="submit" class="btn btn-success mbl-margin-btn">Зарегистрировать клан</button>
+                    <a class="btn btn-info sc-margin-sc-btn" href="/clans">Вернуться к списку кланов</a>
                     <?= $form->field($model, 'file')->fileInput(['class' => 'vs-none'])->label('') ?>
                 </div>
 
