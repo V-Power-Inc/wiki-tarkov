@@ -53,7 +53,7 @@ $(document).ready(function() {
 
     /*** Убираем уведомление о заявки регистрации клана на завтрашний день ***/
     function clsalerttommorow() {
-        $('#alert-tommorow').fadeOut();
+        $('#alert-clans').fadeOut();
     }
 
     setTimeout(clsalerttommorow, 4000);

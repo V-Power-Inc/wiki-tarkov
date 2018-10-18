@@ -44,7 +44,7 @@ class Clans extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 300],
             [['preview'], 'string', 'max' => 255],
-            [['file'], 'image'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -69,10 +69,20 @@ class Clans extends \yii\db\ActiveRecord
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');
         if($fileImg !== null) {
+
             $catalog = 'img/admin/resized/clans/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
             $fileImg->saveAs($catalog);
             $this->preview = '/' . $catalog;
             Image::getImagine()->open($catalog)->save($catalog , ['quality' => 70]);
+
+            $imginfo = getimagesize('https://'.$_SERVER['SERVER_NAME'].$this->preview);
+
+            // Проверяем размеры изображения, если они некорректны - то удаляем его.
+            if($imginfo[0] !== 100 && $imginfo[1] !== 100) {
+                unlink('./'.$this->preview);
+                return false;
+            }
+
         }
     }
 }

@@ -35,7 +35,7 @@ class ClanController extends Controller {
         
         if($avialableTickets <= 0) {
             $messages = new MessagesComponent();
-            $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-tommorow'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
+            $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
             $messages->setMessages($message);
             return $this->redirect('/clans', 301);
         } else {
@@ -60,24 +60,31 @@ class ClanController extends Controller {
 
             if($avialableTickets <= 0) {
                 $messages = new MessagesComponent();
-                $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-tommorow'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
+                $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
                 $messages->setMessages($message);
                 return $this->redirect('/clans', 301);
             } else {
                 
-                $model->uploadPreview();
-                $model->load(Yii::$app->request->post());
-
-                if ($model->save(false)) {
+                if($model->uploadPreview() === false) {
                     $messages = new MessagesComponent();
-                    $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
-                    $messages->setMessages($message);
-                    return $this->redirect('/clans', 301);
-                } else {
-                    $messages = new MessagesComponent();
-                    $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом в онлайн-консультант.</b></p>";
+                    $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>";
                     $messages->setMessages($message);
                     return $this->redirect('/add-clan', 301);
+                } else {
+                
+                    $model->load(Yii::$app->request->post());
+    
+                    if ($model->save(false)) {
+                        $messages = new MessagesComponent();
+                        $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
+                        $messages->setMessages($message);
+                        return $this->redirect('/clans', 301);
+                    } else {
+                        $messages = new MessagesComponent();
+                        $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом в онлайн-консультант.</b></p>";
+                        $messages->setMessages($message);
+                        return $this->redirect('/add-clan', 301);
+                    }
                 }
             }
         } else {
