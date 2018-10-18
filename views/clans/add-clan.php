@@ -76,7 +76,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'reCaptcha')->widget(
                         \himiklab\yii2\recaptcha\ReCaptcha::class,
-                        ['siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5']
+                        ['siteKey' => '6LeP7D0UAAAAALclAz0rCJhO-r00oJ2zkkyW-_sW']
                     ) ?>
 
                     <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())]) ?>
