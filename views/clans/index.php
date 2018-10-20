@@ -18,7 +18,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => 'Список кланов EQscape from Tarkov',
+    'content' => 'Список кланов Escape from Tarkov',
 ]);
 
 $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -78,7 +78,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
             <!-- searchform -->
             <?php if(!empty($clans)): ?>
                 <?php $form = ActiveForm::begin(['action' => '#']); ?>
-                    <?= $form->field($srcclan, 'searchclan')->textInput(['placeholder' => 'Введите названи вашего клана']) ?>
+                    <?= $form->field($srcclan, 'searchclan')->textInput(['placeholder' => 'Введите название вашего клана']) ?>
                 <?php ActiveForm::end(); ?>
             <?php endif; ?>
             
