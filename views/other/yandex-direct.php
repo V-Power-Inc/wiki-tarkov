@@ -12,7 +12,10 @@
 <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
 
 <div class="no-adb">
-    <!-- vertical blocks -->
+    <!-- Payment -->
+    <a href="#" onclick="yaCounter47100633.reachGoal('kiber-lot'); return true;" target="_blank">
+        <img class="mx-100" src="/img/kiberlot.png">
+    </a>
 </div>
 
 <div class="no-adb">
