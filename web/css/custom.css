@@ -1946,3 +1946,7 @@ a.clan-community-link {
 .vs-none {
     display: none!important;
 }
+
+.mx-100 {
+    max-width: 100%;
+}
