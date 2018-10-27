@@ -191,9 +191,6 @@ use app\components\AlertComponent;
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
         </div>
 
 
