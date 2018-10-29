@@ -20,6 +20,9 @@
 
 <div class="no-adb">
     <!-- vertical blocks - disabled since 29-10-2018 -->
+    <a href="mailto:info@tarkov-wiki.ru">
+        <img class="mx-100" src="/img/banner_trk_wiki.jpg">
+    </a>
 </div>
 
 <?php endif; ?>
