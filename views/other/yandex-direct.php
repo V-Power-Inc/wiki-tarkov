@@ -19,17 +19,7 @@
 </div>
 
 <div class="no-adb">
-    <!-- vertical blocks -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9672363886013669"
-         data-ad-slot="4583742183"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <!-- vertical blocks - disabled since 29-10-2018 -->
 </div>
 
 <?php endif; ?>
