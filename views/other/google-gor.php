@@ -11,7 +11,10 @@
 <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html'): ?>
 
 <div class="no-adb">
-    <!-- adsense disabled since 29-10-2018 -->
+
+
+
+
 </div>
 
 <?php endif; ?>
