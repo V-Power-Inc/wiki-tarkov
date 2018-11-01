@@ -161,40 +161,41 @@ use yii\web\JsExpression;
                     </div>
                 </div>
                 <!-- Окончания итем из цикла -->
+
+                <!-- Расстояние заглушка -->
+                <div class="col-lg-12 height-25"></div>
+
+                <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
+                    <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 comment-fake-side">
+                        <div class="recommended-gm-content">
+                            <?= $this->render('/other/google-recommended.php'); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Расстояние заглушка -->
+                <div class="col-lg-12 height-25"></div>
+
+                <div class="col-lg-12 comment-fake-side">
+                    <!-- Комментарии -->
+                    <div id="mc-container" class="kek-recustom"></div>
+                    <script type="text/javascript">
+                        cackle_widget = window.cackle_widget || [];
+                        cackle_widget.push({widget: 'Comment', id: 57165});
+                        (function() {
+                            var mc = document.createElement('script');
+                            mc.type = 'text/javascript';
+                            mc.async = true;
+                            mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+                        })();
+                    </script>
+                </div>
+                
                 
             </div>
 
 
-        </div>
-
-        <!-- Расстояние заглушка -->
-        <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 height-25"></div>
-
-        <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
-            <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 comment-fake-side">
-                <div class="recommended-gm-content">
-                    <?= $this->render('/other/google-recommended.php'); ?>
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <!-- Расстояние заглушка -->
-        <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 height-25"></div>
-
-        <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 comment-fake-side">
-            <!-- Комментарии -->
-            <div id="mc-container" class="kek-recustom"></div>
-            <script type="text/javascript">
-                cackle_widget = window.cackle_widget || [];
-                cackle_widget.push({widget: 'Comment', id: 57165});
-                (function() {
-                    var mc = document.createElement('script');
-                    mc.type = 'text/javascript';
-                    mc.async = true;
-                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                })();
-            </script>
         </div>
 
     </div>

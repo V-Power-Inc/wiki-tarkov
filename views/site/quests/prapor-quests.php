@@ -72,9 +72,6 @@ use app\components\AlertComponent;
             <!-- Essense -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 
-            <!-- Essense -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
         </div>
         
         <!-- Основное содержимое страницы -->
