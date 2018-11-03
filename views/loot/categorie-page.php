@@ -46,6 +46,7 @@ $this->registerMetaTag([
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use app\components\AlertComponent;
 ?>
@@ -91,11 +92,6 @@ use app\components\AlertComponent;
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
-                <!--Yandex direct -->
-                <?= $this->render('/other/yandex-direct.php'); ?>
-            <?php endif; ?>
-
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -106,7 +102,10 @@ use app\components\AlertComponent;
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
             </div>
 
-            <?= $this->render('/other/yandex-donate.php'); ?>
+            <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
+                <!--Yandex direct -->
+                <?= $this->render('/other/yandex-direct.php'); ?>
+            <?php endif; ?>
 
         </div>
 

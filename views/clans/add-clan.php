@@ -59,6 +59,9 @@ $this->registerMetaTag([
             <br>
             <br>
                 <b>Важно!!!</b> Размер логотипа клана должен быть <b>100x100</b> пикселей, а также быть либо формата <b>jpg или png</b> - другие форматы не принимаются.
+                <br>
+                <br>
+                <b>Заполняйте информацию о своем клане достоверно, любая неполноценная информация и кланы с отсутствующим сообществом, либо неполноценно заполненной информацией не будут допущены к публикации.</b>
             </p>
             
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -79,7 +82,7 @@ $this->registerMetaTag([
                         ['siteKey' => '6LeP7D0UAAAAALclAz0rCJhO-r00oJ2zkkyW-_sW']
                     ) ?>
 
-                    <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())]) ?>
+                    <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())])->label('') ?>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
