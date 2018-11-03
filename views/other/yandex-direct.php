@@ -18,7 +18,8 @@
     </a>
 </div>
 
-<div class="no-adb">
+
+<div class="no-adb fortunite-block">
 
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"

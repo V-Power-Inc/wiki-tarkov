@@ -52,6 +52,7 @@ $this->registerMetaTag([
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use app\components\AlertComponent;
 ?>
@@ -133,9 +134,6 @@ use app\components\AlertComponent;
         <!-- Меню правой части страницы -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -148,7 +146,8 @@ use app\components\AlertComponent;
                 <?php  $this->endCache(); } ?>
             </div>
 
-            <?= $this->render('/other/yandex-donate.php'); ?>
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
         

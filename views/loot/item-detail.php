@@ -23,6 +23,7 @@ $this->registerMetaTag([
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use app\components\AlertComponent;
 use kartik\typeahead\Typeahead;
@@ -76,9 +77,6 @@ use yii\web\JsExpression;
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <!--Yandex direct -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
-
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">
                 <?= $this->render('/other/wk-widget'); ?>
@@ -89,7 +87,8 @@ use yii\web\JsExpression;
                 <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
             </div>
 
-            <?= $this->render('/other/yandex-donate.php'); ?>
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
 
