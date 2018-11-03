@@ -55,9 +55,6 @@ use app\components\AlertComponent;
 
             <div class="margin-top-20">
 
-                <!--Yandex direct -->
-                <?= $this->render('/other/yandex-direct.php'); ?>
-
                 <!-- Виджет Вконтакте -->
                 <div class="vk-widget-styling">
                     <?= $this->render('/other/wk-widget'); ?>
@@ -67,9 +64,6 @@ use app\components\AlertComponent;
                     <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
                 <?php  $this->endCache(); } ?>
             </div>
-
-            <!-- Essense -->
-            <?= $this->render('/other/yandex-direct.php'); ?>
 
             <!-- Essense -->
             <?= $this->render('/other/yandex-direct.php'); ?>
