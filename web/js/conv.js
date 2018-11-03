@@ -16,7 +16,7 @@ $(document).ready(function() {
 
         if(Cwidth > 1199 && Cheight >= 720) {
             if(addr.includes(loot)) {
-                if ($(window).scrollTop() >= 1848) {
+                if ($(window).scrollTop() >= 1868) {
                     $('.fortunite-block').css({'position': 'fixed', 'top': '70px'});
                 } else {
                     $('.fortunite-block').css({'position': 'unset', 'top': 'initial'});

@@ -51,8 +51,12 @@ use app\components\AlertComponent;
 <?php endif; ?>
 
 <div class="container">
-    <div class="row"> 
+    <div class="row">
 
+        <!-- no-scale -->
+        <div class="col-lg-12">
+            <?= $this->render('/other/google-gor.php'); ?>
+        </div>
 
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 quests-content">
