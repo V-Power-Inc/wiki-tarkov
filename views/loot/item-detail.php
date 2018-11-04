@@ -165,7 +165,7 @@ use yii\web\JsExpression;
                 <div class="col-lg-12 height-25"></div>
 
                 <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
-                    <div class="col-lg-9 col-md-8 col-lg-offset-3 col-md-offset-4 col-sm-12 col-xs-12 comment-fake-side">
+                    <div class="col-lg-12 comment-fake-side">
                         <div class="recommended-gm-content">
                             <?= $this->render('/other/google-recommended.php'); ?>
                         </div>
