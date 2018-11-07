@@ -101,6 +101,10 @@ use app\components\AlertComponent;
                 </div>
                 <!-- Нет лута -->
             <?php else : ?>
+
+                <!-- core from 07-11-2018 -->
+                <?= $this->render('adsense-loot-feed'); ?>
+
                 <!-- Цикл предметов категории -->
                 <?php foreach ($items as $item) : ?>
                     <?php if($item['enabled'] == 1) : ?>
