@@ -157,7 +157,7 @@ $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::classNa
                 <?php else : ?>
 
                 <!-- core from 07-11-2018 -->
-                <?= $this->render('/other/adsense-loot-feed'); ?>
+
 
                 <?php foreach($items as $item): ?>
                 <div class="col-lg-12">

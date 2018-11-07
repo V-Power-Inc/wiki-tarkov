@@ -176,7 +176,7 @@ use app\components\AlertComponent;
                 <?php else : ?>
 
                 <!-- core from 07-11-2018 -->
-                <?= $this->render('/other/adsense-loot-feed'); ?>
+
 
                 <!-- Цикл предметов категории -->
                 <?php foreach ($items as $item) : ?>
