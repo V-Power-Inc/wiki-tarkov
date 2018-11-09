@@ -18,7 +18,6 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
 
-    <!-- -->
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -26,7 +25,6 @@ AppAsset::register($this);
             enable_page_level_ads: true
         });
     </script>
-    <!-- -->
 
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,14 +60,6 @@ AppAsset::register($this);
     <?= MenuComponent::showMenu() ?>
     
     <?= $content ?>
-
-    <?php if(!isset($cookies['as-remind']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): { ?>
-        <!-- alert coockie -->
-        <div class="about-us">
-            <img class="alert-close-icon" src="/img/close-alert-icon.png" alt="Закрыть" title="Закрыть уведомление" onclick="yaCounter47100633.reachGoal('cls-alert-info'); return true;">
-            <p class="text-center">Доброго времени суток уважаемые пользователи! Как Вы знаете, мы фанатское сообщество по игре Escape from Tarkov и никаких спонсорских средств сайт не получает, а потому - сайт существует исключительно с доходов рекламы. Мы очень просим Вас отключить блокировку рекламы на нашем сайте, таким образом <u>Вы сделаете вклад в развитие проекта</u>. Благодарим за понимание!</p>
-        </div>
-    <?php } endif; ?>
 
 </div>
 
