@@ -16,13 +16,13 @@ $(document).ready(function() {
 
         if(Cwidth > 1199 && Cheight >= 720) {
             if(addr.includes(loot)) {
-                if ($(window).scrollTop() >= 1920) {
+                if ($(window).scrollTop() >= 2466) {
                     $('.fortunite-block').css({'position': 'fixed', 'top': '70px'});
                 } else {
                     $('.fortunite-block').css({'position': 'unset', 'top': 'initial'});
                 }
             } else if (addr.includes(skills)) {
-                if ($(window).scrollTop() >= 1520) {
+                if ($(window).scrollTop() >= 2066) {
                     $('.fortunite-block').css({'position': 'fixed', 'top': '70px'});
                 } else {
                     $('.fortunite-block').css({'position': 'unset', 'top': 'initial'});
