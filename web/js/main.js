@@ -57,6 +57,8 @@ $(document).ready(function() {
     }
 
     setTimeout(clsalerttommorow, 4000);
+
+    console.log("%cВам явно стоит убраться отсюда.", "background: orange; padding: 2px 4px; border-radius: 5px; border: 1px solid black; font-size: 16px");
 });
 
 
