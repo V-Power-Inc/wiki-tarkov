@@ -1693,6 +1693,9 @@ p.auth-info {
     padding-left: 15px;
     display: block;
     margin: 20px 0;
+    border: 1px solid white;
+    background: #ffffff;
+    border-radius: 5px;
 }
 
 .barters.nav > li > a {
