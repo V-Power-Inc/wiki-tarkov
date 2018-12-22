@@ -23,14 +23,13 @@ class LootController extends Controller
 {
 
     // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
-    // todo: Вернуть кеши когда будет проведено тестирование
     public function behaviors()
     {
         return [
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
-                'only' => ['category','questloot'],
+                'only' => ['mainloot','category','questloot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
