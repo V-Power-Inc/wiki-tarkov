@@ -1949,3 +1949,8 @@ a.clan-community-link {
     padding-right: 15px!important;
     padding-left: 15px!important;
 }
+
+.item-key.fix-block {
+    max-height: 160px;
+    height: 160px;
+}
