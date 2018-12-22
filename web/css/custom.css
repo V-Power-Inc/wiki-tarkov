@@ -1944,3 +1944,12 @@ a.clan-community-link {
 .col-lg-9.col-md-9.col-sm-12.col-xs-12.nulled-pdng {
     padding: 0;
 }
+
+.item-loot.h-130 {
+    height: 130px;
+}
+
+.fixible-block {
+    padding-right: 15px!important;
+    padding-left: 15px!important;
+}
