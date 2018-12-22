@@ -19,6 +19,8 @@ $this->registerMetaTag([
     'content' => 'Полезные статьи Escape from Tarkov, Полезные статьи в Таркове',
 ]);
 
+$keysBlocks = [2];
+
 use app\components\AlertComponent;
 ?>
 
@@ -58,7 +60,17 @@ use app\components\AlertComponent;
             </p>
 
             <!--- Новостной блок -->
-            <?php foreach($news as $item): ?>
+            <?php foreach($news as $k => $item): ?>
+
+                <?php if(in_array($k,$keysBlocks)): ?>
+                    <!-- feed recomendations -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="news-shortitem static-height-afm">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="news-shortitem">
                         <p class="news-short-title"><a class="news-link" href="/articles/<?=$item['url']?>"><?=$item['title']?></a></p>

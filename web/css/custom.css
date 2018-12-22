@@ -1961,3 +1961,9 @@ a.clan-community-link {
 .article-stats-padding {
     padding: 15px 10px!important;
 }
+
+.static-height-afm {
+    min-height: 180px!important;
+    max-height: 180px!important;;
+    height: 180px!important;
+}
