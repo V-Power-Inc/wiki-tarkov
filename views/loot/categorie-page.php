@@ -184,8 +184,8 @@ use app\components\AlertComponent;
                     <?php foreach($items as $item => $v): ?>
 
                         <?php if(in_array($item,$keysBlocks)): ?>
-                            <div class="col-lg-12">
-                                <div class="item-loot">
+                            <div class="col-lg-12 fixible-block">
+                                <div class="item-loot h-130">
                                     <?= $this->render('/other/adsense-feed.php'); ?>
                                 </div>
                             </div>

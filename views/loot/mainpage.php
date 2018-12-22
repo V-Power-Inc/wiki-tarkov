@@ -31,7 +31,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$keysBlocks = [3,6,12,16,23,30,36,42,45];
+$keysBlocks = [3,6,12,16,18,23,30,34,40,45,48];
 
 ?>
 <div class="heading-class">
@@ -164,8 +164,8 @@ $keysBlocks = [3,6,12,16,23,30,36,42,45];
                 <?php foreach($items as $item => $v): ?>
 
                     <?php if(in_array($item,$keysBlocks)): ?>
-                        <div class="col-lg-12">
-                            <div class="item-loot">
+                        <div class="col-lg-12 fixible-block">
+                            <div class="item-loot h-130">
                                 <?= $this->render('/other/adsense-feed.php'); ?>
                             </div>
                         </div>
