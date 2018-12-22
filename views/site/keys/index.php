@@ -21,6 +21,8 @@ use yii\bootstrap\ActiveForm;
 $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 use app\components\AlertComponent;
+
+$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
 ?>
 
 
@@ -86,7 +88,15 @@ use app\components\AlertComponent;
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Таможня</h2>
                 <!-- Контентная часть ключей -->
-                <?php foreach ($tamojnya as $k_tamojnya): ?>
+                <?php foreach ($tamojnya as $ztamojnya => $k_tamojnya): ?>
+
+                    <?php if(in_array($ztamojnya,$keysBlocks)): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_tamojnya['url']?>"><?=$k_tamojnya['name']?></a></p>
                         <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_tamojnya['preview']?>"></a>
@@ -100,7 +110,15 @@ use app\components\AlertComponent;
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Завод</h2>
                 <!-- Контентная часть ключей -->
-                <?php foreach ($zavod as $k_zavod): ?>
+                <?php foreach ($zavod as $kzavod => $k_zavod): ?>
+
+                    <?php if(in_array($kzavod,$keysBlocks)): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_zavod['url']?>"><?=$k_zavod['name']?></a></p>
                         <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_zavod['preview']?>"></a>
@@ -114,7 +132,15 @@ use app\components\AlertComponent;
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Лес</h2>
                 <!-- Контентная часть ключей -->
-                <?php foreach ($forest as $k_forest): ?>
+                <?php foreach ($forest as $zforest => $k_forest): ?>
+
+                    <?php if(in_array($zforest,$keysBlocks)): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_forest['url']?>"><?=$k_forest['name']?></a></p>
                         <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_forest['preview']?>"></a>
@@ -128,7 +154,15 @@ use app\components\AlertComponent;
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Берег</h2>
                 <!-- Контентная часть ключей -->
-                <?php foreach ($bereg as $k_bereg): ?>
+                <?php foreach ($bereg as $zbereg => $k_bereg): ?>
+
+                    <?php if(in_array($zbereg,$keysBlocks)): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$k_bereg['url']?>"><?=$k_bereg['name']?></a></p>
                         <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_bereg['preview']?>"></a>
@@ -143,7 +177,15 @@ use app\components\AlertComponent;
         <div class="col-lg-12">
             <h2 class="keys-titles">Ключи на локации Развязка</h2>
             <!-- Контентная часть ключей -->
-            <?php foreach ($razvyazka as $k_razvyazka): ?>
+            <?php foreach ($razvyazka as $zrazvyazka => $k_razvyazka): ?>
+
+                <?php if(in_array($zrazvyazka,$keysBlocks)): ?>
+                    <!-- feed recomendations -->
+                    <div class="col-lg-12 item-key">
+                        <?= $this->render('/other/adsense-feed.php'); ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="col-lg-12 item-key">
                     <p class="item-name"><a href="/keys/<?=$k_razvyazka['url']?>"><?=$k_razvyazka['name']?></a></p>
                     <a href="/keys/<?=$k_razvyazka['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka['preview']?>"></a>

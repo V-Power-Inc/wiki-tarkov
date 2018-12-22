@@ -96,7 +96,7 @@ use app\components\AlertComponent;
                 <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
             </div>
             
-            <?php if(empty($items)) : ?>
+            <?php if(empty($items) || is_null($items)) : ?>
                 <!-- Нет лута -->
                 <div class="col-lg-12">
                     <p class="alert alert-danger size-16">В данный момент в разделе нет доступных умений.</p>
@@ -119,7 +119,7 @@ use app\components\AlertComponent;
                     <?php endif; ?>
 
 
-                    <?php if($item['enabled'] == 1) : ?>
+                    <?php if($v['enabled'] == 1) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
                                 <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>

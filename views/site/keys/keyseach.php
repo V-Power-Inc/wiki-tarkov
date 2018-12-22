@@ -16,6 +16,8 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
+
+$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
 ?>
     
 
@@ -74,7 +76,15 @@ $this->registerMetaTag([
                 
                 <div class="col-lg-12">
                     <!-- Контентная часть ключей -->
-                    <?php foreach ($keysearch as $keys): ?>
+                    <?php foreach ($keysearch as $zkeys => $keys): ?>
+
+                        <?php if(in_array($zkeys,$keysBlocks)): ?>
+                            <!-- feed recomendations -->
+                            <div class="col-lg-12 item-key">
+                                <?= $this->render('/other/adsense-feed.php'); ?>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="col-lg-12 item-key">
                             <p class="item-name"><a href="/keys/<?=$keys['url']?>"><?=$keys['name']?></a></p>
                             <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$keys['preview']?>"></a>
