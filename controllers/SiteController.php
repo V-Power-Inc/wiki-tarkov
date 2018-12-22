@@ -256,11 +256,11 @@ class SiteController extends Controller
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
             if(isset($_POST['Doorkeys']['doorkey'])){
