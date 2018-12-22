@@ -251,52 +251,52 @@ $(document).ready(function() {
                 iconSize: [140, 25],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().setZIndexOffset(999).addTo(housespawn);
         } else if (markersData[i].exits_group == "Спавн на старой станции") {
             var ExitsIcon = L.icon({
                 iconSize: [140, 25],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().setZIndexOffset(999).addTo(oldstationspawn);
         } else if (markersData[i].exits_group == "Спавн на доме") {
             var ExitsIcon = L.icon({
                 iconSize: [140, 25],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(999).addTo(housespawn);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().setZIndexOffset(999).addTo(housespawn);
         } else if (markersData[i].marker_group == "Военные ящики" && markersData[i].customicon == null) {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ArmyIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(voenloot);
         } else if (markersData[i].marker_group == "Военные ящики"  && markersData[i].customicon !== null) {
             var CustomVoenIcon = L.icon({
                 iconSize: [30, 30],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomVoenIcon}).bindPopup(markersData[i].content).openPopup().addTo(voenloot);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomVoenIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(voenloot);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content !== "") {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).openPopup().addTo(dikiy);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(dikiy);
         } else if (markersData[i].marker_group == "Спавны диких" && markersData[i].content == "") {
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikieIcon}).addTo(dikiy);
         } else if (markersData[i].marker_group == "Квестовые точки") {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).openPopup().addTo(polki);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PolkiIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(polki);
         } else if (markersData[i].marker_group == "Спавны игроков ЧВК") {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).openPopup().addTo(chvk);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ChvkIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(chvk);
         } else if (markersData[i].marker_group == "Маркеры ключей") {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).openPopup().addTo(keys);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: KeysIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(keys);
         } else if (markersData[i].marker_group == "Выходы за Диких") {
             var DikiyExitIcon = L.icon({
                 iconSize: [140, 25],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikiyExitIcon}).bindPopup(markersData[i].content).openPopup().setZIndexOffset(990).addTo(dikieexits);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: DikiyExitIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().setZIndexOffset(990).addTo(dikieexits);
         } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon == null) {
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PlacesInt}).bindPopup(markersData[i].content).openPopup().addTo(interstplaces);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: PlacesInt}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(interstplaces);
         } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon !== null) {
             var InterestPlaces = L.icon({
                 iconSize: [30, 30],
                 iconUrl: markersData[i].customicon
             });
-            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: InterestPlaces}).bindPopup(markersData[i].content).openPopup().addTo(interstplaces);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: InterestPlaces}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(interstplaces);
         }
     });
 
@@ -489,6 +489,24 @@ $(document).ready(function() {
             });
         });
     });
+
+    /*** function add special blocks with dop.content to users when inits click on market ***/
+    function AddRelations() {
+        $('.leaflet-popup-content').append('<br><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n' +
+            '<ins class="adsbygoogle"\n' +
+            '     style="display:block; text-align:center;"\n' +
+            '     data-ad-layout="in-article"\n' +
+            '     data-ad-format="fluid"\n' +
+            '     data-ad-client="ca-pub-5071904663034434"\n' +
+            '     data-ad-slot="9226765946"></ins>\n' +
+            '<script>\n' +
+            '     (adsbygoogle = window.adsbygoogle || []).push({});\n' +
+            '</script>');
+    }
+
+    function markerOnClick() {
+        AddRelations();
+    }
             
 
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
