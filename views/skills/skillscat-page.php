@@ -54,6 +54,8 @@ $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\J
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
+$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
+
 use app\components\AlertComponent;
 ?>
 <div class="heading-class">
@@ -106,21 +108,31 @@ use app\components\AlertComponent;
 
 
                 <!-- Цикл предметов категории -->
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item => $v) : ?>
+
+                    <?php if(in_array($item,$keysBlocks)): ?>
+                        <div class="col-lg-12 fixible-block">
+                            <div class="item-loot h-130">
+                                <?= $this->render('/other/adsense-feed.php'); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+
                     <?php if($item['enabled'] == 1) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                                <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                                <p class="loot-description"><?= $item['short_desc'] ?></p>
+                                <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
+                                <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $v['url'] ?>.html"><img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>"></a>
+                                <p class="loot-description"><?= $v['short_desc'] ?></p>
                             </div>
                         </div>
-                    <?php elseif($item['enabled'] == 0) : ?>
+                    <?php elseif($v['enabled'] == 0) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a><?= $item['title'] ?></a></h2>
-                                <a class="loot-link"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                                <p class="loot-description"><?= $item['short_desc'] ?></p>
+                                <h2 class="item-loot-title"><a><?= $v['title'] ?></a></h2>
+                                <a class="loot-link"><img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>"></a>
+                                <p class="loot-description"><?= $v['short_desc'] ?></p>
                                 <p class="alert alert-danger size-16 unactive-skill">В настоящий момент это умение не реализовано в игре.</p>
                             </div>
                         </div>
