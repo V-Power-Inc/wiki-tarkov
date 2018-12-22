@@ -31,7 +31,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$keysBlocks = [3,6,12,16,18,23,30,34,40,45,48];
+$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
 
 ?>
 <div class="heading-class">
