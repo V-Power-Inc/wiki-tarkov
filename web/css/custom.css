@@ -867,7 +867,7 @@ border-bottom-left-radius: 5px!important;
 .news-shortitem {
     padding: 10px;
     margin: 15px 0 15px 0;
-    background: #edeef0;
+    background: gainsboro;
     height: auto;
     min-height: 180px;
     border-radius: 5px;
@@ -1966,4 +1966,5 @@ a.clan-community-link {
     min-height: 180px!important;
     max-height: 180px!important;;
     height: 180px!important;
+    margin: 15px 0 15px 0!important;
 }
