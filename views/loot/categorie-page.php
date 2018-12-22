@@ -48,6 +48,8 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
+$keysBlocks = [3,6,12,16,23,30,36,42,45];
+
 use app\components\AlertComponent;
 ?>
 <div class="heading-class">
@@ -179,17 +181,27 @@ use app\components\AlertComponent;
 
 
                 <!-- Цикл предметов категории -->
-                <?php foreach ($items as $item) : ?>
+                    <?php foreach($items as $item => $v): ?>
+
+                        <?php if(in_array($item,$keysBlocks)): ?>
+                            <div class="col-lg-12">
+                                <div class="item-loot">
+                                    <?= $this->render('/other/adsense-feed.php'); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html">
+                                <h2 class="item-loot-title"><a href="/loot/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
+                                <a class="loot-link" href="/loot/<?= $v['url'] ?>.html">
                                     <div class="fixies-float-image">
-                                        <img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>">
+                                        <img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>">
                                     </div>
                                 </a>
-                                <p class="loot-description"><?= $item['shortdesc'] ?></p>
-                                <?php if($item['quest_item'] == 1) : ?>
+                                <p class="loot-description"><?= $v['shortdesc'] ?></p>
+                                <?php if($v['quest_item'] == 1) : ?>
                                 <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
                                 <?php endif; ?>
                             </div>
