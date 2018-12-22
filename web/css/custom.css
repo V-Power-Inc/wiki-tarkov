@@ -1957,3 +1957,7 @@ a.clan-community-link {
     border-radius: 5px!important;
     margin: 5px 0!important;
 }
+
+.article-stats-padding {
+    padding: 15px 10px!important;
+}
