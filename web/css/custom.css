@@ -1947,6 +1947,8 @@ a.clan-community-link {
 
 .item-loot.h-130 {
     height: 130px;
+    min-height: 130px;
+    max-height: 200px;
 }
 
 .fixible-block {
