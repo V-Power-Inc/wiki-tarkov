@@ -21,6 +21,8 @@ $this->registerMetaTag([
 $this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 use yii\widgets\LinkPager;
 use app\components\AlertComponent;
+
+$keysBlocks = [1,4,7,9];
 ?>
 
 <div class="heading-class">
@@ -56,7 +58,15 @@ use app\components\AlertComponent;
             <!-- Стиль текста для вопросов и ответов -->
             <!-- question-content -->
     <?php if(!empty($questions)) : ?>
-        <?php foreach($questions as $item): ?>
+        <?php foreach($questions as $k => $item): ?>
+
+            <?php if(in_array($k,$keysBlocks)): ?>
+                <!-- feed recomendations -->
+                <div class="question-block bg-white" style="height: 180px; max-height: 180px;">
+                    <?= $this->render('/other/adsense-questions-feed.php'); ?>
+                </div>
+            <?php endif; ?>
+
             <div class="question-block bg-white">
                 <h2 class="question-title"><?=$item['title'] ?></h2>
                 
