@@ -1953,4 +1953,7 @@ a.clan-community-link {
 .item-key.fix-block {
     max-height: 180px;
     height: 180px;
+    border: 1px solid #c3392c!important;
+    border-radius: 5px!important;
+    margin: 5px 0!important;
 }
