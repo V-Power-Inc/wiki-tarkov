@@ -1969,3 +1969,7 @@ a.clan-community-link {
     height: 180px!important;
     margin: 15px 0 15px 0!important;
 }
+
+.col-lg-12.gor-pds {
+    padding: 15px 0!important;
+}

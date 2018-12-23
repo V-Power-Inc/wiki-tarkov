@@ -39,6 +39,17 @@ use app\components\AlertComponent;
 <hr class="grey-line">
 <?php endif; ?>
 
+<!-- Gorizontal information -->
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
+
+<hr class="grey-line">
+
 <!-- Список активных торговцев Таркова -->
 <?php foreach($traders as $trader) : ?>
     <div class="<?= $trader['bg_style'] ?>">
@@ -79,5 +90,14 @@ use app\components\AlertComponent;
         </div>
     </div>
 <?php endforeach; ?>
+
+<!-- Gorizontal information -->
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
 
 
