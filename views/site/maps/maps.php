@@ -41,6 +41,16 @@ use app\components\AlertComponent;
     <hr class="grey-line">
 <?php endif; ?>
 
+<!-- Gorizontal information -->
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
+
+<hr class="grey-line">
 
 <div class="container">
     <div class="row white-content">
@@ -132,12 +142,18 @@ use app\components\AlertComponent;
 
     </div>
         
-        
-        
-        
-        
-        
+
     </div>
-    
-    
 </div>
+
+<hr class="grey-line">
+
+<!-- Gorizontal information -->
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
+
