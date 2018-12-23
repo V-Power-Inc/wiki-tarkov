@@ -1973,3 +1973,7 @@ a.clan-community-link {
 .col-lg-12.gor-pds {
     padding: 15px 0!important;
 }
+
+.gor-pds .no-adb {
+    margin: 0!important;
+}
