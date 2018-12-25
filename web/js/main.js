@@ -55,6 +55,11 @@ $(document).ready(function() {
     function clsalerttommorow() {
         $('#alert-clans').fadeOut();
     }
+    
+    /*** Перезагружаем страницу при клике на кнопку ***/
+    $('.rfr-page').click(function() {
+       location.reload(); 
+    });
 
     setTimeout(clsalerttommorow, 4000);
 
