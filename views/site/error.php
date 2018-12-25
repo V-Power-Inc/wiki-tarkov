@@ -9,7 +9,6 @@ use yii\helpers\Html;
 
 $this->title = $name;
 
-$this->registerJsFile('js/adm-fixier.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="container">

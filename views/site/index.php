@@ -15,7 +15,6 @@ $this->registerMetaTag([
     'content' => 'Интерактивные карты локаций Escape from Tarkov, квесты Escape from Tarkov, Ключи Escape from Tarkov.',
 ]);
 
-$this->registerJsFile('js/adm-fixier.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="owl-carousel owl-theme">
 
