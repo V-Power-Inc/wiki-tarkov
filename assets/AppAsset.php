@@ -28,7 +28,6 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/ads.js',
-        'js/check-users.js',
         'js/bootstrap-js/bootstrap.min.js',
         'js/popup/magnific-popup.js',
         'js/jquery.cookie.js',
