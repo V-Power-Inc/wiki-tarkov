@@ -59,6 +59,7 @@ class MenuComponent
             "/maps/bereg-location",
             "/maps/forest-location",
             "/maps/tamojnya-location",
+            "/maps/terragroup-laboratory-location"
         ];
 
         if (in_array(Yii::$app->request->url, $mapsurls)) {
@@ -189,6 +190,8 @@ class MenuComponent
                         <li><a href="/maps/forest-location#3/72.50/-9.58">Лес</a></li>
                         <li><a href="/maps/bereg-location#3/60.93/-10.81">Берег</a></li>
                         <li><a href="/maps/razvyazka-location#3/75.32/-44.38">Развязка</a></li>
+                        <li><a href="/maps/terragroup-laboratory-location#1/-8/229">Лаборатория Terra Group</a></li>
+                        
                             <li role="separator" class="divider"></li>
                         <li><a href="/maps">Смотреть список доступных карт</a></li>
                       </ul>

@@ -252,6 +252,11 @@ class SiteController extends Controller
     public function actionRazvyazka(){
         return $this->render('maps/razvyazka-location.php');
     }
+
+    /** Рендер страницы с картой лаборатории TerraGroup **/
+    public function actionLaboratoryterra() {
+        return $this->render('maps/laboratory-location.php');
+    }
     
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
