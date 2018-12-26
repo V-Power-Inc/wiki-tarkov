@@ -23,7 +23,8 @@
         "himiklab/yii2-recaptcha-widget" : "*",
         "yiisoft/yii2-imagine": "~2.1.0",
         "kartik-v/yii2-widget-typeahead": "*",
-        "yiisoft/yii2-redis": "~2.0.0"
+        "yiisoft/yii2-redis": "~2.0.0",
+        "martyn911/yii2-adblock-detector":"*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

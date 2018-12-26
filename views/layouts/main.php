@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
+use martyn911\adblock\detector\Detector;
 use yii\web\Cookie;
 
 $cookies = Yii::$app->request->cookies;
@@ -52,6 +53,20 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
+
+<script type="text/javascript">
+    function CheckingUser() {
+        $('body').before('<div class="b-popup"><div class="b-popup-content"><div class="col-lg-12 text-center"><h2 class="main-site-heading" style="font-weight: bold;">Вы используете блокировщик рекламы</h2><p style="font-size: 16px; margin: 20px 0 0 0;">Для того чтобы продолжить использование сайта, отключите блокировщик рекламы на страницах нашего сайта. <br><br> <b>Сайт не может существовать без доходов с показа рекламы.</b> <br><br> Очень надеемся на ваше понимание - команда Tarkov-wiki.ru</p> <button class="btn btn-primary rfr-page" style="margin: 25px 0 0 0;" onclick="yaCounter47100633.reachGoal(\'close-refresh\');">Отключил! Обновить страницу</button> </div></div></div>');
+        $('body').css({"overflow":"hidden"});
+    }
+</script>
+
+<?= Detector::widget([
+    'timeout' => 200, //Число миллисекунд, в конце которых считается, что AdBlock не включен
+    'callback_detected' => 'CheckingUser', //js функция, которая выполняется если adblock включен
+    'callback_not_detected' => false, //js функция, которая выполняется если adblock не включен. Можно отключить - false
+]); ?>
+
 <div class="wrap">
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
