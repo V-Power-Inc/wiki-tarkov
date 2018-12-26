@@ -100,6 +100,7 @@ $config = [
                 'maps/tamojnya-location' => 'site/tamojnya',
                 'maps/bereg-location' => 'site/bereg',
                 'maps/razvyazka-location' => 'site/razvyazka',
+                'maps/terragroup-laboratory-location' => 'site/laboratoryterra',
                 'quests-of-traders' => 'site/quests',
                 'quests-of-traders/prapor-quests' => 'site/praporpage',
                 'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
