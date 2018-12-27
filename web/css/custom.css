@@ -1978,7 +1978,7 @@ a.clan-community-link {
     margin: 0!important;
 }
 
-.b-popup{
+html>div {
     width:100%;
     min-height:100%;
     background-color: #000000e0;
@@ -1987,7 +1987,7 @@ a.clan-community-link {
     top:0px;
     z-index: 99999;
 }
-.b-popup .b-popup-content{
+html>div>div{
     position: absolute;
     top: 0;
     bottom: 0;
