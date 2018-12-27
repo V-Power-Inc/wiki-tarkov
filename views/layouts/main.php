@@ -67,7 +67,7 @@ AppAsset::register($this);
         $('body').css({"overflow":"hidden"});
 
         function takeInfo() {
-            var tag = $('html div div').find('h2.uni-fate').text();
+            var tag = $('html>div>div h2.uni-fate').text();
              if(tag !== 'Вы используете блокировщик рекламы') {
                 CheckingUser();
              }
