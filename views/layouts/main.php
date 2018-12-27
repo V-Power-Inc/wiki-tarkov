@@ -68,6 +68,7 @@ AppAsset::register($this);
 
         function takeInfo() {
             var tag = $('html>div>div h2.uni-fate').text();
+            $('html>div').css({'background-color' : '#100f0fe0'});
              if(tag !== 'Вы используете блокировщик рекламы') {
                 CheckingUser();
              }
