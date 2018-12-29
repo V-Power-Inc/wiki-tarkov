@@ -7,10 +7,13 @@ use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
 use martyn911\adblock\detector\Detector;
+use app\models\Sessions;
+use yii\web\session;
 use yii\web\Cookie;
 
 $cookies = Yii::$app->request->cookies;
 $addcook = Yii::$app->response->cookies;
+// $session = Yii::$app->session;
 
 AppAsset::register($this);
 ?>

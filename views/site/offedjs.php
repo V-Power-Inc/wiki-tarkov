@@ -15,6 +15,8 @@ $this->registerMetaTag([
     'content' => 'Системный сбой - необходимо включить JavaScript.',
 ]);
 
+$this->registerJsFile('js/js-ok.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 ?>
 
 
