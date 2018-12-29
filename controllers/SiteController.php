@@ -455,6 +455,17 @@ class SiteController extends Controller
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+
+    /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
+    public function actionJsdisabled() {
+        return $this->render('/site/offedjs');
+    }
+
+    // todo: Доделать функционал, который будет проверять пользователей по сессиям
+    /*** Проверяем через этот экшен включен ли у пользователя JavaScript ***/
+    public function actionCheckerScr() {
+        return 'good';
+    }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
