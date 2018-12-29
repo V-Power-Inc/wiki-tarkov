@@ -90,6 +90,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+                'offed-js' => 'site/jsdisabled',
                 'admin/ass-destroyer' => 'admin/moderator/index',
                 'barter/preview' => 'site/barters-preview',
                 'trader/preview' => 'site/previewtrader',

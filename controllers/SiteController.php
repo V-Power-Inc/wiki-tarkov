@@ -435,6 +435,11 @@ class SiteController extends Controller
         }
     }
 
+    /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
+    public function actionJsdisabled() {
+        return $this->render('/site/offedjs');
+    }
+
     /*** Устанавливаем кукис отключающий появление уведомления в нижней части экрана ***/
     public function actionClsalert() {
         if(Yii::$app->request->isAjax) {

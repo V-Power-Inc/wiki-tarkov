@@ -2006,3 +2006,7 @@ html>div>div{
     border-radius:5px;
     box-shadow: 0px 0px 10px #000;
 }
+
+.size-18 {
+    font-size: 18px;
+}
