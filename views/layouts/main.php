@@ -113,7 +113,7 @@ AppAsset::register($this);
     var adblock = true;
 </script>
 
-<script type="text/javascript" src="js/adframe.js"></script>
+<script type="text/javascript" src="/js/adframe.js"></script>
 <script type="text/javascript">
     if(adblock) {
         var adsl =  $('html>div>div>div>h2.uni-fate').text();
