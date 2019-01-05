@@ -21,7 +21,6 @@ function CheckingUser() {
             CheckingUser();
         }
     }
-
     setInterval(takeInfo, 300);
 }
 
