@@ -104,6 +104,7 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>
 
+<script type="text/javascript" src="/js/ads.js"></script>
 <script type="text/javascript" src="/js/core-checker.js"></script>
 
 <?php

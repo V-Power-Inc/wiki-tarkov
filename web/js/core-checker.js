@@ -24,3 +24,7 @@ function CheckingUser() {
 
     setInterval(takeInfo, 300);
 }
+
+if (window.canRunAds===undefined) {
+    CheckingUser();
+}
