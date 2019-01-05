@@ -8,14 +8,19 @@
  */
 ?>
 
+    <div class="no-adb">
+        <a href="https://kiberlot.ru/lots/games/63?uuid=1358b89d-7f88-4442-a398-0f0bbe6b49c8" onclick="yaCounter47100633.reachGoal('kbr-lot-2'); return true;" target="_blank">
+            <img class="mx-100" src="/img/kiberlot.png">
+        </a>
+    </div>
+
+    <div class="no-adb">
+        <a href="mailto:info@tarkov-wiki.ru">
+            <img class="mx-100" src="/img/banner_trk_wiki.jpg">
+        </a>
+    </div>
 
 <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols'): ?>
-
-<div class="no-adb">
-    <a href="https://kiberlot.ru/lots/games/63?uuid=1358b89d-7f88-4442-a398-0f0bbe6b49c8" onclick="yaCounter47100633.reachGoal('kbr-lot-2'); return true;" target="_blank">
-        <img class="mx-100" src="/img/kiberlot.png">
-    </a>
-</div>
 
 <div class="no-adb">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
