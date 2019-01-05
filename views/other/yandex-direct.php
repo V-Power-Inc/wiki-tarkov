@@ -14,11 +14,11 @@
         </a>
     </div>
 
-    <div class="no-adb">
-        <a href="mailto:info@tarkov-wiki.ru">
-            <img class="mx-100" src="/img/banner_trk_wiki.jpg">
-        </a>
-    </div>
+<!--    <div class="no-adb">-->
+<!--        <a href="mailto:info@tarkov-wiki.ru">-->
+<!--            <img class="mx-100" src="/img/banner_trk_wiki.jpg">-->
+<!--        </a>-->
+<!--    </div>-->
 
 <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols'): ?>
 
