@@ -106,12 +106,6 @@ AppAsset::register($this);
 
 <script type="text/javascript" src="/js/core-checker.js"></script>
 
-<script type="text/javascript">
-    if (window.canRunAds===undefined) {
-        CheckingUser();
-    }
-</script>
-
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
