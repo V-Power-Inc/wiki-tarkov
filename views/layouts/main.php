@@ -56,7 +56,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <?= Detector::widget([
-    'timeout' => 200, //Число миллисекунд, в конце которых считается, что AdBlock не включен
+    'timeout' => 6000, //Число миллисекунд, в конце которых считается, что AdBlock не включен
     'callback_detected' => 'CheckingUser', //js функция, которая выполняется если adblock включен
     'callback_not_detected' => false, //js функция, которая выполняется если adblock не включен. Можно отключить - false
 ]); ?>
