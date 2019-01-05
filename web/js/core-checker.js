@@ -2,8 +2,6 @@
  * Created by DIR300NRU-ADMIN on 29.12.2018.
  */
 
-/** 05-01-2019 -  Disabled **/
-
 /*** Необфусцированная версия файла называется так - prod-file-core ***/
 
 var current_date = (new Date()).valueOf().toString();
