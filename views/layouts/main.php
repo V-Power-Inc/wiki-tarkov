@@ -89,6 +89,8 @@ AppAsset::register($this);
                         <a href="https://vector-power.ru" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>
                     </div>
 
+                    <p class="contact-info">Контактный Email: <a href="mailto:info@tarkov-wiki.ru">info@tarkov-wiki.ru</a></p>
+
                 </div>
               <span class="col-sm-12 counter-footer"></span>
             </div>
