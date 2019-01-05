@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         'css/media-queryes.css',
     ];
     public $js = [
+        // 'js/adframe.js',
         'js/bootstrap-js/bootstrap.min.js',
         'js/popup/magnific-popup.js',
         'js/jquery.cookie.js',
