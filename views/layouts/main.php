@@ -51,7 +51,7 @@ AppAsset::register($this);
 
     <!-- end code jivosite -->
 
-    <script src="/js/prod-file-core.js"></script>
+    <script src="/js/core-checker.js"></script>
 </head>
 
 <body>
