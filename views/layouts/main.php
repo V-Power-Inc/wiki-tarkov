@@ -56,7 +56,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <?= Detector::widget([
-    'timeout' => 6000, //Число миллисекунд, в конце которых считается, что AdBlock не включен
+    'timeout' => 200, //Число миллисекунд, в конце которых считается, что AdBlock не включен
     'callback_detected' => 'CheckingUser', //js функция, которая выполняется если adblock включен
     'callback_not_detected' => false, //js функция, которая выполняется если adblock не включен. Можно отключить - false
 ]); ?>
@@ -108,6 +108,20 @@ AppAsset::register($this);
 
 
 <script type="text/javascript" src="/js/core-checker.js"></script>
+
+<script type="text/javascript">
+    var adblock = true;
+</script>
+
+<script type="text/javascript" src="js/adframe.js"></script>
+<script type="text/javascript">
+    if(adblock) {
+        var adsl =  $('html>div>div>div>h2.uni-fate').text();
+        if(adsl !== 'Вы используете блокировщик рекламы') {
+            CheckingUser();
+        }
+    }
+</script>
 
 <?php
 
