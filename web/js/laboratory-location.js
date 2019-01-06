@@ -1,5 +1,8 @@
 /*** После релиза нормальной карты этот файл необходимо перезалить по аналогии с другими картами ***/
 
+/** Вызываем заглушку для страницы в самом начале **/
+$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
+
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
     center: [75.845, -68.906],
@@ -12,9 +15,13 @@ const map = L.map('map', {
 var hash = new L.Hash(map);
 
 /** Обращаемся к слоям зума интерактивной карты **/
-L.tileLayer('/img/laboratory/{z}/{x}/{y}.png', {
+// L.tileLayer('/img/laboratory/{z}/{x}/{y}.png', {
+//     noWrap: true,
+//     // errorTileUrl: '/img/error-bg.jpg',
+// }).addTo(map);
+
+L.tileLayer('https://tarkov.zone/wp-content/maps/data/laboratory/img/{z}/{x}/{y}.png', {
     noWrap: true,
-    // errorTileUrl: '/img/error-bg.jpg',
 }).addTo(map);
 
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
@@ -191,24 +198,119 @@ $(document).ready(function() {
 
     /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
     // ajax should be here
+    /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
+    $.ajax({
+        url: '/parse-pidors',
+        dataType: 'json',
+        data: {param: param, token : token},
+        async: false,
+        context: document.body,
+        success: function(markers) {
+            markersData = markers;
+            $('.loader-maps-background').fadeOut();
+        }
+    });
 
     /** Отключаем на минимальном зуме кнопку минуса **/
     $('a.leaflet-control-zoom-out').addClass('leaflet-disabled');
 
     /** Объявляем группы маркеров всех возможных слоев **/
-    var voenloot = L.layerGroup();
-    var dikiy = L.layerGroup();
-    var polki = L.layerGroup();
-    var exits = L.layerGroup();
-    var keys = L.layerGroup();
-    var chvk = L.layerGroup();
-    var dikieexits =  L.layerGroup();
+    var spawn_1 = L.layerGroup();
+    var spawn_2 = L.layerGroup();
+    var bandits_exits =  L.layerGroup();
+    var quest = L.layerGroup();
+    var doors = L.layerGroup();
+    var milbox = L.layerGroup();
+    var interesting = L.layerGroup();
+    var link_obj = L.layerGroup();
     var interstplaces = L.layerGroup();
 
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // code of groups should be here
+    $.each(markersData, function(i) {
+        if (markersData[i].marker_group == 'Выход ЧВК' && markersData[i].enabled == "1") {
+            var ExitsIcon = L.icon({
+                iconSize: [markersData[i].iconSize_w, markersData[i].iconSize_h],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).setZIndexOffset(999).addTo(spawn_2);
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).setZIndexOffset(999).addTo(spawn_1);
+        } else if (markersData[i].marker_group == "Спавн на Таможне" && markersData[i].enabled == "1") {
+            var ExitsIcon = L.icon({
+                iconSize: [markersData[i].iconSize_w, markersData[i].iconSize_h],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).setZIndexOffset(999).addTo(spawn_2);
+        } else if (markersData[i].marker_group == "Спавн на Бойлерах" && markersData[i].enabled == "1") {
+            var ExitsIcon = L.icon({
+                iconSize: [markersData[i].iconSize_w, markersData[i].iconSize_h],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).setZIndexOffset(999).addTo(spawn_1);
+            // BANDITS EXITS
+        } else if (markersData[i].marker_group == "Выходы за Диких" && markersData[i].enabled == "1") {
+            var ExitsIcon = L.icon({
+                iconSize: [markersData[i].iconSize_w, markersData[i].iconSize_h],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).setZIndexOffset(999).addTo(bandits_exits);
+            // QUEST
+        } else if (markersData[i].marker_group == "Квестовые точки" && markersData[i].customicon == null && markersData[i].enabled == "1") {
+            window.param.forEach(function(entry) {
+                if (entry == markersData[i].id) {
+                    L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: quest_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(link_obj);
+                }
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: quest_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(quest);
+        } else if (markersData[i].marker_group == "Квестовые точки" && markersData[i].customicon !== null && markersData[i].enabled == "1") {
+            var CustomQuestIcon = L.icon({
+                iconSize: [38, 42],
+                iconUrl: markersData[i].customicon
+            });
+            window.param.forEach(function(entry) {
+                if (entry == markersData[i].id) {
+                    L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomQuestIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(link_obj);
+                }
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomQuestIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(quest);
+            //DOORS
+        } else if (markersData[i].marker_group == "Закрытые двери" && markersData[i].enabled == "1") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: doors_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(doors);
+            //MILITARY BOX
+        } else if (markersData[i].marker_group == "Военные ящики" && markersData[i].customicon == null && markersData[i].enabled == "1") {
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: milbox_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(milbox);
+        } else if (markersData[i].marker_group == "Военные ящики"  && markersData[i].customicon !== null && markersData[i].enabled == "1") {
+            var CustomVoenIcon = L.icon({
+                iconSize: [38, 42],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: CustomVoenIcon}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(milbox);
+            //INTERESTING
+        } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon == null && markersData[i].enabled == "1") {
+            window.param.forEach(function(entry) {
+                if (entry == markersData[i].id) {
+                    L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: interest_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(link_obj);
+                }
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: interest_m}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(interesting);
+        } else if (markersData[i].marker_group == "Интересные места" && markersData[i].customicon !== null && markersData[i].enabled == "1") {
+            var InterestPlaces = L.icon({
+                iconSize: [38, 42],
+                iconUrl: markersData[i].customicon
+            });
+            L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: InterestPlaces}).bindPopup(markersData[i].content).openPopup().on('click', markerOnClick).addTo(interesting);
+        }
+    });
 
-
+    spawn_1.addTo(map);
+    spawn_2.addTo(map);
+    bandits_exits.addTo(map);
+    quest.addTo(map);
+    doors.addTo(map);
+    milbox.addTo(map);
+    interesting.addTo(map);
+    link_obj.addTo(map);
+    interstplaces.addTo(map);
 
     /** Обработка клика по кнопке выбора маркеров выходов диких с локации **/
     $('body').on('click','.bandits-b', function(){
@@ -310,7 +412,7 @@ $(document).ready(function() {
     $('body').on('click','.leaflet-marker-icon', function() {
         /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
         try {
-            var MagnificImg = $('.leaflet-popup-content p img');
+            var MagnificImg = $('.leaflet-popup-content p img, .leaflet-popup-content img');
             var MagnificTitle = MagnificImg.attr("alt").length > 0;
         }
 

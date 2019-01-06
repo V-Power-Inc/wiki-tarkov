@@ -91,6 +91,7 @@ $config = [
             'rules' => [
                 '' => 'site/index',
                 'offed-js' => 'site/jsdisabled',
+                'parse-pidors' => 'site/parse-pidors',
                 'admin/ass-destroyer' => 'admin/moderator/index',
                 'barter/preview' => 'site/barters-preview',
                 'trader/preview' => 'site/previewtrader',

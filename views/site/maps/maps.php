@@ -114,12 +114,12 @@ use app\components\AlertComponent;
 
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
             <h2 class="text-center map-heading">Карта лаборатории Terra Group</h2>
-            <a href="/maps/terragroup-laboratory-location#1/-8/229">
+            <a href="/maps/terragroup-laboratory-location#2/41.0/-1.2">
                 <img class="maps__small" src="/img/maps/terra-group.png">
             </a>
             <br>
             <br>
-        <a class="btn btn-default main-link" href="/maps/terragroup-laboratory-location#1/-8/229">Перейти к карте лаборатории Terra Group</a>
+        <a class="btn btn-default main-link" href="/maps/terragroup-laboratory-location#2/41.0/-1.2">Перейти к карте лаборатории Terra Group</a>
 
         </div>
     </div>
