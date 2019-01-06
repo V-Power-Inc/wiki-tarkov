@@ -25,6 +25,7 @@ use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
 use app\models\Barters;
+use app\models\Laboratory;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -465,6 +466,39 @@ class SiteController extends Controller
     /*** Проверяем через этот экшен включен ли у пользователя JavaScript ***/
     public function actionCheckerScr() {
         return 'good';
+    }
+
+
+    /*** Метод парсит маркеры и возвращает их в Json с другого сайта tarkov.zone ***/
+    public function actionParsePidors() {
+
+        if(Yii::$app->request->isAjax) {
+
+            $myCurl = curl_init();
+            curl_setopt_array($myCurl, array(
+                CURLOPT_URL => 'https://tarkov.zone/wp-content/maps/data/laboratory/markers.json',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HTTPHEADER => array("Content-type: application/json;charset=utf-8"),
+                CURLOPT_POST => false,
+            ));
+
+            $response = curl_exec($myCurl);
+            curl_close($myCurl);
+
+            $arrayResp = json_decode($response,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+
+            $readyArr = [];
+
+            foreach($arrayResp as $resp) {
+                $resp['customicon'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['customicon']);
+                $resp['content'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['content']);
+                array_push($readyArr,$resp);
+            }
+
+            return json_encode($readyArr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
