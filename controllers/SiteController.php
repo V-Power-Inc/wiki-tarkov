@@ -492,6 +492,7 @@ class SiteController extends Controller
             foreach($arrayResp as $resp) {
                 $resp['customicon'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['customicon']);
                 $resp['content'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['content']);
+                $resp['content'] = str_replace('/keys', '#',$resp['content']);
                 array_push($readyArr,$resp);
             }
 
