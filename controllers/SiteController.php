@@ -229,6 +229,17 @@ class SiteController extends Controller
         }
     }
 
+    /** JSON данные с координатами маркеров Лаборатории **/
+    public function actionLaboratorymarkers() {
+        if(Yii::$app->request->isAjax) {
+            //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
+            $markers = Laboratory::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
+            return Json::encode($markers);
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
+    }
+
     /** Рендер страницы с картой завода **/
     public function actionZavod() {
         return $this->render('maps/zavod-location.php');
@@ -468,39 +479,6 @@ class SiteController extends Controller
         return 'good';
     }
 
-
-    /*** Метод парсит маркеры и возвращает их в Json с другого сайта tarkov.zone ***/
-    public function actionParsePidors() {
-
-        if(Yii::$app->request->isAjax) {
-
-            $myCurl = curl_init();
-            curl_setopt_array($myCurl, array(
-                CURLOPT_URL => 'https://tarkov.zone/wp-content/maps/data/laboratory/markers.json',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => array("Content-type: application/json;charset=utf-8"),
-                CURLOPT_POST => false,
-            ));
-
-            $response = curl_exec($myCurl);
-            curl_close($myCurl);
-
-            $arrayResp = json_decode($response,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-
-            $readyArr = [];
-
-            foreach($arrayResp as $resp) {
-                $resp['customicon'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['customicon']);
-                $resp['content'] = str_replace('/wp-content', 'https://tarkov.zone/wp-content',$resp['content']);
-                $resp['content'] = str_replace('href=', 'data-source=',$resp['content']);
-                array_push($readyArr,$resp);
-            }
-
-            return json_encode($readyArr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()
