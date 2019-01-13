@@ -6,17 +6,6 @@
  * Time: 13:12
  */
 
-
-?>
-
-<?php
-/**
- * Created by PhpStorm.
- * User: comp
- * Date: 28.01.2018
- * Time: 0:17
- */
-
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use Yii;
