@@ -126,6 +126,14 @@ AppAsset::register($this);
         }
     }
 </script>
+<script type="text/javascript">
+    (function(){
+        var bait = 'http://googleads.g.doubleclick.net/pagead/gen_204?id=wfocus&gqid=advertisment&advert=ads';
+        $.ajax({url: bait, dataType: "script"})
+            .fail(function () {  })
+            .abort(function () { CheckingUser(); });
+    })();
+</script>
 
 <?php
 
