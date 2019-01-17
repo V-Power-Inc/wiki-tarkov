@@ -127,6 +127,8 @@ AppAsset::register($this);
     }
 </script>
 
+<link rel="preload" href="https://adservice.google.ru/adsid/integrator.js?domain=tarkov-wiki.ru" as="script" onerror="CheckingUser()">
+
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
