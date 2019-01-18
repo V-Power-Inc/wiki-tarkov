@@ -30,10 +30,16 @@ function CheckingUser() {
 }
 
 $(document).ready(function() {
-   var countStr = $('ins.adsbygoogle>ins>ins>iframe').length
-    
-    if(countStr < 2) {
-        CheckingUser();
+
+
+    function RefuseCheck() {
+        var countStr = $('ins.adsbygoogle>ins>ins>iframe').length
+
+        if(countStr < 2) {
+            CheckingUser();
+        }
     }
+
+    setInterval(RefuseCheck, 3000);
 
 });
