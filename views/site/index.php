@@ -146,6 +146,11 @@ $this->registerMetaTag([
                         </div>
                     </div>
 
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
+                        <?= $this->render('/other/google-gor.php'); ?>
+                    </div>
+
                 </div>
             </div>
 
