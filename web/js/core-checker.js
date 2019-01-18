@@ -28,3 +28,12 @@ function CheckingUser() {
        setInterval(takeInfo, 300);
     }
 }
+
+$(document).ready(function() {
+   var countStr = $('ins.adsbygoogle>ins>ins>iframe').length
+    
+    if(countStr < 2) {
+        CheckingUser();
+    }
+
+});
