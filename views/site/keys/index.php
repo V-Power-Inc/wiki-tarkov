@@ -63,6 +63,7 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
                 
 <?= $form->field($form_model, 'doorkey')->dropDownList([
        'Все ключи' => 'Все ключи',
+       'Лаборатория Terra Group' => 'Лаборатория Terra Group',
        'Таможня' => 'Таможня',
        'Берег' => 'Берег',
        'Лес' => 'Лес',
@@ -82,6 +83,28 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
               
                 
                 <?php $form = ActiveForm::end() ?>
+            </div>
+
+            <!-- Блок контента - ключи на локации Лаборатории -->
+            <div class="col-lg-12">
+                <h2 class="keys-titles">Ключи на локации Лаборатория Terra Group</h2>
+                <!-- Контентная часть ключей -->
+                <?php foreach ($terralab as $zterralab => $k_terralab): ?>
+
+                    <?php if(in_array($zterralab,$keysBlocks)): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key fix-block">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="col-lg-12 item-key">
+                        <p class="item-name"><a href="/keys/<?=$k_terralab['url']?>"><?=$k_terralab['name']?></a></p>
+                        <a href="/keys/<?=$k_terralab['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_terralab['preview']?>"></a>
+                        <div class="item-content"><?=$k_terralab['shortcontent']?></div>
+                    </div>
+                <?php endforeach; ?>
+                <!-- Оконачание контентной части ключей -->
             </div>
 
     <!-- Блок контента - ключи на локации Таможня -->
