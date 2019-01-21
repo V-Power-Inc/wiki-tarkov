@@ -24,6 +24,7 @@ use mihaildev\elfinder\ElFinder;
 
    <?= $form->field($model, 'mapgroup')
     ->listBox([
+        'Лаборатория Terra Group' => 'Лаборатория Terra Group',
         'Таможня' => 'Таможня',
         'Лес' => 'Лес',
         'Берег' => 'Берег',
