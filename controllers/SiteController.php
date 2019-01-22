@@ -278,7 +278,7 @@ class SiteController extends Controller
         $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
         $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
         $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $terralab = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лаборатория Terra Group']])->asArray()->cache(60)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        $terralab = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лаборатория Terra Group']])->asArray()->cache(60)->orderby(['name' => SORT_STRING])->limit(60)->all();
        
         $form_model = new Doorkeys();
         if ($form_model->load(Yii::$app->request->post())) {
