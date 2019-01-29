@@ -26,6 +26,7 @@ use app\models\Questions;
 use app\models\Currencies;
 use app\models\Barters;
 use app\models\Laboratory;
+use app\models\Reviews;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -33,6 +34,9 @@ use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
 use yii\web\Cookie;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use app\components\MessagesComponent;
 
 
 class SiteController extends Controller
@@ -476,10 +480,45 @@ class SiteController extends Controller
         return $this->render('/site/offedjs');
     }
 
-    // todo: Доделать функционал, который будет проверять пользователей по сессиям
-    /*** Проверяем через этот экшен включен ли у пользователя JavaScript ***/
-    public function actionCheckerScr() {
-        return 'good';
+    /*** Рендер страницы сделок с отзывами об онлайн торговце ***/
+    public function actionReviews() {
+        $model = new Reviews();
+        $query =  Reviews::find()->andWhere(['enabled' => 1]);
+        $pagination = new Pagination(['defaultPageSize' => 30,'totalCount' => $query->count(),]);
+        $reviews = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(60)->all();
+        $request = \Yii::$app->request;
+
+        return $this->render('/site/reviews',['model' => $model, 'reviews' => $reviews, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+    }
+
+    /*** Обработчик сохранения нового отзыва, отправленного пользователем ***/
+    public function actionSavereview() {
+
+        $model = new Reviews();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if(Yii::$app->request->isPost && !Yii::$app->request->isAjax) {
+
+            $model->load(Yii::$app->request->post());
+
+            if ($model->save(false)) {
+                $messages = new MessagesComponent();
+                $message = "<p class='alert alert-success size-16 margin-top-20'><b>Спасибо! Отзыв успешно отправлен!</b></p>";
+                $messages->setMessages($message);
+                return $this->redirect('/reviews', 301);
+            } else {
+                $messages = new MessagesComponent();
+                $message = "<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению отзыв не был отправлен.</b></p>";
+                $messages->setMessages($message);
+                return $this->redirect('/reviews', 301);
+            }
+        } else {
+            throw new HttpException(404 ,'Такая страница не существует');
+        }
     }
 
     
