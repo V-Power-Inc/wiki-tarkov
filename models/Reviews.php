@@ -34,7 +34,7 @@ class Reviews extends \yii\db\ActiveRecord
     {
         return [
             [['login', 'comment'], 'required'],
-            [['comment', 'admin_review', 'date_create'], 'string'],
+            [['comment', 'admin_review', 'date_create'], 'string', 'max' => 255],
             [['enabled'], 'integer'],
             [['login'], 'string', 'max' => 255],
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
@@ -48,7 +48,7 @@ class Reviews extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Внутриигровой псевдоним (Логин)',
+            'login' => 'Ваш псевдоним',
             'comment' => 'Отзыв',
             'enabled' => 'Активен',
             'admin_review' => 'Ответ администрации',
