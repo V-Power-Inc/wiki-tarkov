@@ -85,7 +85,7 @@ $this->registerMetaTag([
 
             <?php if(empty($reviews)): ?>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <p class="alert alert-danger size-16">К сожалению в данный момент отзывов еще нету. Вы также можете отправить первый отзыв!</p>
+                <p class="alert alert-danger size-16">К сожалению в данный момент отзывов еще нет. Вы также можете отправить первый отзыв!</p>
             </div>
 
             <?php else: ?>
