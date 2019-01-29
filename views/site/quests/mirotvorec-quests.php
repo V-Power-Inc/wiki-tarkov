@@ -43,6 +43,11 @@ use app\components\AlertComponent;
         <div class="col-lg-12">
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
+
+        <!-- dop info -->
+        <div class="col-lg-12">
+            <p class="alert alert-danger size-16"><b>Квесты миротворца открываются только после прохождения квеста от Лыжника - под названием "Друг с Запада. Часть 2"</b></p>
+        </div>
         
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
