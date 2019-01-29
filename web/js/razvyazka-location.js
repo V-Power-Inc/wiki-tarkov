@@ -224,7 +224,7 @@ $(document).ready(function() {
     $.each(markersData, function(i) {
         if (markersData[i].marker_group == "Маркеры выходов") {
             var ExitsIcon = L.icon({
-                iconSize: [300, 54],
+                iconSize: [200, 34],
                 iconUrl: markersData[i].customicon,
             });
             L.marker([markersData[i].coords_x, markersData[i].coords_y], {icon: ExitsIcon}).bindPopup(markersData[i].content).on('click', markerOnClick).openPopup().addTo(exits);
