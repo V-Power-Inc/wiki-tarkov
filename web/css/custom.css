@@ -2022,3 +2022,12 @@ html>div>div{
     font-weight: bold;
     letter-spacing: 1px;
 }
+
+.reviews-form {
+    margin: 15px 0 25px 0;
+}
+
+#reviews-comment {
+    max-width: 807px;
+    width: 100%;
+}
