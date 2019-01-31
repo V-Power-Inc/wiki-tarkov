@@ -40,6 +40,6 @@ $(document).ready(function() {
         }
     }
 
-    setInterval(RefuseCheck, 3500);
+    setInterval(RefuseCheck, 7000);
 
 });
