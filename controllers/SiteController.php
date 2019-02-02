@@ -505,6 +505,18 @@ class SiteController extends Controller
 
             $model->load(Yii::$app->request->post());
 
+            // Срезаем спам сообщение по вхождению в http и a href
+            $link = 'http';
+            $seclink = 'a href';
+
+            if(stristr($model->comment,$link) || stristr($model->comment,$seclink)) {
+
+                $messages = new MessagesComponent();
+                $message = "<p class='alert alert-danger size-16 margin-top-20'><b>В отзывах не могут присутствовать ссылки на сайты.</b></p>";
+                $messages->setMessages($message);
+                return $this->redirect('/reviews', 301);
+            }
+
             if ($model->save(false)) {
                 $messages = new MessagesComponent();
                 $message = "<p class='alert alert-success size-16 margin-top-20'><b>Спасибо! Отзыв успешно отправлен!</b></p>";
