@@ -106,20 +106,6 @@ AppAsset::register($this);
 
 <script type="text/javascript" src="/js/core-checker.js"></script>
 
-<script type="text/javascript">
-    var adblock = true;
-</script>
-
-<script type="text/javascript" src="/js/adframe.js"></script>
-<script type="text/javascript">
-    if(adblock) {
-        var adsl =  $('html>div>div>div>h2.uni-fate').text();
-        if(adsl !== 'Вы используете блокировщик рекламы') {
-            CheckingUser();
-        }
-    }
-</script>
-
 <?php
 
 /*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
