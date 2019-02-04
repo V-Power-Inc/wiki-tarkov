@@ -497,7 +497,7 @@ $(document).ready(function() {
     }
 
     function markerOnClick() {
-        AddRelations();
+       // AddRelations();
     }
 
 

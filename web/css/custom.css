@@ -2031,3 +2031,17 @@ html>div>div{
     max-width: 807px;
     width: 100%;
 }
+
+.navbar-default .navbar-nav > li.unusial-link > a, .navbar-default .navbar-nav > li.unusial-link > a {
+    background: #ffffff;
+    font-weight: bold;
+    color: #c3392c;
+    transition: .2s;
+}
+
+.navbar-default .navbar-nav > li.unusial-link > a:hover, .navbar-default .navbar-nav > li.unusial-link > a:focus {
+    background: #c3392c82;
+    font-weight: bold;
+    color: #8fa3ea;
+    transition: .2s;
+}
