@@ -419,7 +419,7 @@ var token = $('meta[name=csrf-token]').attr("content");
     }
 
     function markerOnClick() {
-        AddRelations();
+        // AddRelations();
     }
     
     /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
