@@ -181,7 +181,7 @@ class MenuComponent
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
                     
-                    <li class="unusial-link"><a href="https://v-power.myprintbar.ru" target="_blank" onclick="yaCounter47100633.reachGoal(\'go-to-shop\'); return true;">Наш магазин футболок</a></li>
+                    <li class="unusial-link"><a href="https://v-power.myprintbar.ru/?reffer=tarkovwiki" target="_blank" onclick="yaCounter47100633.reachGoal(\'go-to-shop\'); return true;">Наш магазин футболок</a></li>
                     
                     
                     
