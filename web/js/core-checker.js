@@ -15,7 +15,7 @@ function CheckingUser() {
 
     if(!srch) {
 
-        $('body').before('<div class="'+HsSumm+'"><div class="'+HsSumm+'"><div class="col-lg-12 text-center '+HsSumm+'"><h2 class="main-site-heading '+HsSumm+' uni-fate" style="font-weight: bold;">Вы используете блокировщик рекламы</h2><p style="font-size: 16px; margin: 20px 0 0 0;" class="'+HsSumm+'">Для того чтобы продолжить использование сайта, отключите блокировщик рекламы на страницах нашего сайта. <br><br> <b>Сайт не может существовать без доходов с показа рекламы.</b> <br><br> Очень надеемся на ваше понимание - команда Tarkov-wiki.ru</p> <button class="btn btn-primary rfr-page '+HsSumm+'" style="margin: 25px 0 0 0;" onclick="yaCounter47100633.reachGoal(\'close-refresh\');">Отключил! Обновить страницу</button> </div></div></div>');
+        $('body').before('<div class="'+HsSumm+'"><div class="'+HsSumm+'"><div class="col-lg-12 text-center '+HsSumm+'"><h2 class="main-site-heading '+HsSumm+' uni-fate" style="font-weight: bold;">Вы используете блокировщик рекламы</h2><p style="font-size: 16px; margin: 20px 0 0 0;" class="'+HsSumm+'">Для того чтобы продолжить использование сайта, отключите блокировщик рекламы на страницах нашего сайта. <br><br>Также проверьте не блокирует ли контент антивирус или встроенный блокировщик рекламы в VPN расширении браузера. <br><br> <b>Сайт не может существовать без доходов с показа рекламы.</b> <br><br> Очень надеемся на ваше понимание - команда Tarkov-wiki.ru</p> <button class="btn btn-primary rfr-page '+HsSumm+'" style="margin: 25px 0 0 0;" onclick="yaCounter47100633.reachGoal(\'close-refresh\');">Отключил! Обновить страницу</button> </div></div></div>');
         $('body').css({"overflow":"hidden"});
 
         function takeInfo() {

@@ -103,8 +103,8 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>
 
-<!-- Disabled 04-02-2019 -->
-<!--<script type="text/javascript" src="/js/core-checker.js"></script>-->
+
+<script type="text/javascript" src="/js/core-checker.js"></script>
 
 <?php
 
