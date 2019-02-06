@@ -52,7 +52,7 @@ use yii\web\JsExpression;
 
         <!-- no-scale -->
         <div class="col-lg-12">
-            <?= $this->render('/other/google-gor.php'); ?>
+            <!-- ads block -->
         </div>
 
         <!-- Меню левой части страницы -->

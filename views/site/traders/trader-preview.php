@@ -52,7 +52,7 @@ use app\components\AlertComponent;
 
         <!-- no-scale -->
         <div class="col-lg-12">
-            <?= $this->render('/other/google-gor.php'); ?>
+            <!-- ads block -->
         </div>
 
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
@@ -79,8 +79,8 @@ use app\components\AlertComponent;
 
 
             </div>
-          
-            <?= $this->render('/other/google-recommended.php'); ?>
+
+            <!-- ads block -->
 
         </div>
 
