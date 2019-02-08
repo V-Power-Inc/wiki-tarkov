@@ -15,6 +15,9 @@ $cookies = Yii::$app->request->cookies;
 $addcook = Yii::$app->response->cookies;
 // $session = Yii::$app->session;
 
+// Получаем статус ответа сервера
+$status_response = Yii::$app->response->getStatusCode();
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -103,9 +106,14 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>
 
-<?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/site/barters-preview' && Yii::$app->request->url !== '/loot/quest-loot' && Yii::$app->request->url !== '/item/preview'): ?>
-    <script type="text/javascript" src="/js/core-checker.js"></script>
+
+
+<?php if($status_response !== 404): ?>
+    <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/site/barters-preview' && Yii::$app->request->url !== '/loot/quest-loot' && Yii::$app->request->url !== '/item/preview'): ?>
+        <script type="text/javascript" src="/js/core-checker.js"></script>
+    <?php endif; ?>
 <?php endif; ?>
+
 
 <?php
 
