@@ -15,8 +15,8 @@
     </div>
 
     <div class="no-adb">
-        <a href="mailto:info@tarkov-wiki.ru">
-            <img class="mx-100" src="/img/banner_trk_wiki.jpg">
+        <a href="https://v-power.myprintbar.ru/tovari/?reffer=tarkovwiki&heshtag=stalker&search=yes"  onclick="yaCounter47100633.reachGoal('kbr-lot-2'); return true;" target="_blank">
+            <img class="mx-100" src="/img/stalker-banner.jpg">
         </a>
     </div>
 
