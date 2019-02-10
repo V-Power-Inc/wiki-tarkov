@@ -15,7 +15,7 @@
     </div>
 
     <div class="no-adb">
-        <a href="https://v-power.myprintbar.ru/tovari/?reffer=tarkovwiki&heshtag=stalker&search=yes"  onclick="yaCounter47100633.reachGoal('kbr-lot-2'); return true;" target="_blank">
+        <a href="https://v-power.myprintbar.ru/tovari/?reffer=tarkovwiki&heshtag=stalker&search=yes"  onclick="yaCounter47100633.reachGoal('banner_v_link'); return true;" target="_blank">
             <img class="mx-100" src="/img/stalker-banner.jpg">
         </a>
     </div>
