@@ -120,9 +120,7 @@ class MenuComponent
                $other = 'active';
             } else if(stristr(Yii::$app->request->url,'/add-clan')){
                $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/reviews')){
-               $other = 'active';
-           }
+            }
 
         /*** Далее пошел габлон отрисовки меню ***/
 
@@ -212,7 +210,6 @@ class MenuComponent
                         <li><a href="/news">Новости</a></li>
                         <li><a href="/questions">Частые вопросы</a></li>
                         <li><a href="/clans">Официальный список кланов</a></li>
-                        <li><a href="/reviews">Отзывы о проведенных сделках</a></li>
                       </ul>
                     </li>
                      
