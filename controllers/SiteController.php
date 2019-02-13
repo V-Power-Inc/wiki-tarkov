@@ -480,57 +480,16 @@ class SiteController extends Controller
         return $this->render('/site/offedjs');
     }
 
-    /*** Рендер страницы сделок с отзывами об онлайн торговце ***/
+    /*** Рендер страницы сделок с отзывами об онлайн торговце - отключено на продакшене от 13_02_2019 - редиректим на главную ***/
     public function actionReviews() {
-        $model = new Reviews();
-        $query =  Reviews::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 30,'totalCount' => $query->count(),]);
-        $reviews = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(60)->all();
-        $request = \Yii::$app->request;
-
-        return $this->render('/site/reviews',['model' => $model, 'reviews' => $reviews, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        // Сделки не могут проводиться на сайте - теперь редирект на главную страницу
+        return $this->goHome();
     }
 
-    /*** Обработчик сохранения нового отзыва, отправленного пользователем ***/
+    /*** Обработчик сохранения нового отзыва, отправленного пользователем - отключено на продакшене от 13_02_2019 ***/
     public function actionSavereview() {
-
-        $model = new Reviews();
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-
-        if(Yii::$app->request->isPost && !Yii::$app->request->isAjax) {
-
-            $model->load(Yii::$app->request->post());
-
-            // Срезаем спам сообщение по вхождению в http и a href
-            $link = 'http';
-            $seclink = 'a href';
-
-            if(stristr($model->comment,$link) || stristr($model->comment,$seclink)) {
-
-                $messages = new MessagesComponent();
-                $message = "<p class='alert alert-danger size-16 margin-top-20'><b>В отзывах не могут присутствовать ссылки на сайты.</b></p>";
-                $messages->setMessages($message);
-                return $this->redirect('/reviews', 301);
-            }
-
-            if ($model->save(false)) {
-                $messages = new MessagesComponent();
-                $message = "<p class='alert alert-success size-16 margin-top-20'><b>Спасибо! Отзыв успешно отправлен!</b></p>";
-                $messages->setMessages($message);
-                return $this->redirect('/reviews', 301);
-            } else {
-                $messages = new MessagesComponent();
-                $message = "<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению отзыв не был отправлен.</b></p>";
-                $messages->setMessages($message);
-                return $this->redirect('/reviews', 301);
-            }
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
+        // Сделки не могут проводиться на сайте - теперь редирект на главную страницу
+        return $this->goHome();
     }
 
     
