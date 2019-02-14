@@ -178,14 +178,9 @@ class MenuComponent
                     <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
+
                     
-                    <li class="unusial-link"><a href="https://v-power.myprintbar.ru/tovari/?reffer=tarkovwiki&heshtag=stalker&search=yes" target="_blank" onclick="yaCounter47100633.reachGoal(\'go-to-shop\'); return true;">Наш магазин футболок</a></li>
-                    
-                    
-                    
-                    
-                    <!-- dropdown list map locations -->
-                                         
+                    <!-- dropdown list map locations -->              
                      <li class="dropdown '.$intermaps.'">
                       <a href="#" class="dropdown-toggle '.$intermaps.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Карты локаций</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
