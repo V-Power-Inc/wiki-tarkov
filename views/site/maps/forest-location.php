@@ -22,9 +22,6 @@ use yii\web\JsExpression;
 
 ?>
 
-<!-- off ads -->
-<?= $this->render('/other/disable-adblock.php'); ?>
-
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
     <div class="container">
