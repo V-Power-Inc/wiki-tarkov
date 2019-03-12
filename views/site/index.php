@@ -25,6 +25,12 @@ $this->registerMetaTag([
 <!--        </a>-->
 <!--    </div>-->
 
+        <div class="owl-item">
+            <a href="https://kiberlot.ru/lots/games/63?uuid=1358b89d-7f88-4442-a398-0f0bbe6b49c8" target="_blank" onclick="yaCounter47100633.reachGoal('kiber-main-banner'); return true;">
+                <img src="/img/slider/kiber_banner.png">
+            </a>
+        </div>
+
     <div class="owl-item">
         <img src="/img/slider/eft-2.jpg">
     </div>
