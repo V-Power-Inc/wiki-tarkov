@@ -122,11 +122,6 @@ use app\components\AlertComponent;
         </div>
 
 
-        <div class="recommended-gm-content">
-            <?= $this->render('/other/google-recommended.php'); ?>
-        </div>
-
-
     </div>
 
 </div>
