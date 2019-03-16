@@ -103,7 +103,7 @@ class SiteController extends Controller
     /** Рендер страницы квестов Скупщика **/
     public function actionSkypchikpage() {
         $query =  Skypshik::find();
-        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
+        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(30)->all();
         return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
     }
 

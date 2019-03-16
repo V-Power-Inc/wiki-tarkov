@@ -52,7 +52,7 @@ use app\components\AlertComponent;
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <ul class="nav nav-list bs-docs-sidenav">
-                <?php foreach ($prapor as $item): ?>
+                <?php foreach ($skypshik as $item): ?>
                     <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
             </ul>
@@ -81,7 +81,7 @@ use app\components\AlertComponent;
                 <!--                <img class="torgovec-info-quest-image" src="#" alt="Квесты торговца Скупщика из Escape from Tarkov">-->
             </div>
             <div class="tab-content">
-                <?php foreach ($prapor as $item): ?>
+                <?php foreach ($skypshik as $item): ?>
                     <div id="<?=$item['tab_number']?>" class="tab-pane fade">
                         <?php if ($item['preview']):?> <img class="preview-small-image" src="<?= $item['preview'] ?>" alt="<?= $item['title'] ?>"> <?php endif; ?>
                         <?=$item['content']?>
