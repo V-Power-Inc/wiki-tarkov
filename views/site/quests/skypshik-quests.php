@@ -80,6 +80,7 @@ use app\components\AlertComponent;
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Скупщика вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
+<!--                <img class="torgovec-info-quest-image" src="#" alt="Квесты торговца Скупщика из Escape from Tarkov">-->
             </div>
             <div class="tab-content">
                 <?php foreach ($skypshik as $item): ?>
