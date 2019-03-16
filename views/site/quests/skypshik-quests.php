@@ -51,17 +51,13 @@ use app\components\AlertComponent;
 
         <!-- Меню левой части страницы -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-
             <ul class="nav nav-list bs-docs-sidenav">
-                <?php foreach ($skypshik as $item): ?>
+                <?php foreach ($prapor as $item): ?>
                     <li><a data-toggle="tab" href="#<?=$item['tab_number']?>" class="relative"><i class="fa fa-chevron-right"></i><?=$item['title']?></a></li>
                 <?php endforeach; ?>
             </ul>
 
             <div class="margin-top-20">
-
-                <!--Yandex direct -->
-                <?= $this->render('/other/yandex-direct.php'); ?>
 
                 <!-- Виджет Вконтакте -->
                 <div class="vk-widget-styling">
@@ -73,17 +69,19 @@ use app\components\AlertComponent;
                     <?php  $this->endCache(); } ?>
             </div>
 
-            <?= $this->render('/other/yandex-donate.php'); ?>
+            <!-- Essense -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
+
         <!-- Основное содержимое страницы -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16">Квесты Скупщика вы можете выбрать в вертикальном меню - выберите интересующий вас квест и ознакомьтесь с информацией о его прохождении и важных моментах в процессе прохождения, если у Вас возникли вопросы, воспользуйтесь нашим онлайн-торговцем из Escape from Tarkov, он свяжется с вами в кратчайшие сроки. <br><br> Информация о квестах постоянно обновляется, поэтому приведенная здесь информация всегда актуальна.</p>
-<!--                <img class="torgovec-info-quest-image" src="#" alt="Квесты торговца Скупщика из Escape from Tarkov">-->
+                <!--                <img class="torgovec-info-quest-image" src="#" alt="Квесты торговца Скупщика из Escape from Tarkov">-->
             </div>
             <div class="tab-content">
-                <?php foreach ($skypshik as $item): ?>
+                <?php foreach ($prapor as $item): ?>
                     <div id="<?=$item['tab_number']?>" class="tab-pane fade">
                         <?php if ($item['preview']):?> <img class="preview-small-image" src="<?= $item['preview'] ?>" alt="<?= $item['title'] ?>"> <?php endif; ?>
                         <?=$item['content']?>
@@ -95,28 +93,40 @@ use app\components\AlertComponent;
             <button class="btn btn-primary"><a href="/quests-of-traders" style="color: white; text-decoration: none;">Вернуться к списку торговцев</a></button>
         </div>
 
+        <!-- Расстояние заглушка -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 nulled-pdng">
+            <div class="bordered-recomend">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
+        </div>
+
+        <!-- Расстояние заглушка -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 comment-fake-side">
+            <!-- Комментарии -->
+            <div id="mc-container" class="kek-recustom"></div>
+            <script type="text/javascript">
+                cackle_widget = window.cackle_widget || [];
+                cackle_widget.push({widget: 'Comment', id: 57165});
+                (function() {
+                    var mc = document.createElement('script');
+                    mc.type = 'text/javascript';
+                    mc.async = true;
+                    mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+                })();
+            </script>
+        </div>
+
+
         <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
 
-        <!-- Расстояние - заглушка -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
-
-        <!-- Комментарии -->
-        <div id="mc-container" class="kek-recustom"></div>
-        <script type="text/javascript">
-            cackle_widget = window.cackle_widget || [];
-            cackle_widget.push({widget: 'Comment', id: 57165});
-            (function() {
-                var mc = document.createElement('script');
-                mc.type = 'text/javascript';
-                mc.async = true;
-                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-            })();
-        </script>
-
-
 
     </div>
+
 </div>
