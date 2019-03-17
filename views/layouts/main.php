@@ -38,6 +38,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="https://tarkov-wiki.ru/favicon.png">
     <meta name="yandex-verification" content="43485f66dfa368e2" />
+    <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
     <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
     } else if(stristr(Yii::$app->request->url,'/news/')) { 
     } else if(stristr(Yii::$app->request->url,'/articles/')){

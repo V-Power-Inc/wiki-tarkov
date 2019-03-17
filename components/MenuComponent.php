@@ -178,10 +178,7 @@ class MenuComponent
                     <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
-                    
-                    <!-- <li class="unusial-link"><a href="https://www.vsemayki.ru/search/tarkov?ref=5530375" target="_blank" onclick="yaCounter47100633.reachGoal(\'vse-maiki\'); return true;">Тематические товары</a></li> -->
-
-                    
+     
                     <!-- dropdown list map locations -->              
                      <li class="dropdown '.$intermaps.'">
                       <a href="#" class="dropdown-toggle '.$intermaps.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Карты локаций</b><span class="caret"></span></a>
