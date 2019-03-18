@@ -72,6 +72,7 @@ body {
     text-align: center;
 }
 
+/** 172px **/
 footer {
     background-color: #272727;
     color: #fff;
@@ -364,7 +365,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content, .keys-content, .clans-content {
+.quests-content, .keys-content, .clans-content, .donates-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
@@ -2023,6 +2024,17 @@ html>div>div{
     letter-spacing: 1px;
 }
 
+.donate-info {
+    padding: 0 0 15px 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.donate-info a {
+    color: #7289da;
+    font-weight: bold;
+}
+
 .reviews-form {
     margin: 15px 0 25px 0;
 }
@@ -2044,4 +2056,12 @@ html>div>div{
     font-weight: bold;
     color: #8fa3ea;
     transition: .2s;
+}
+
+.size-donates {
+    font-size: 30px;
+}
+
+.size-donates span {
+    color: green;
 }

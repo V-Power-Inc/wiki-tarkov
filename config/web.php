@@ -90,6 +90,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
+               // 'donates' => 'site/donates',
                 'savereview' => 'site/savereview',
                 'reviews' => 'site/reviews',
                 'offed-js' => 'site/jsdisabled',
