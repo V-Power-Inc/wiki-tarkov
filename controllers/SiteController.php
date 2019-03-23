@@ -492,6 +492,11 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /*** Рендер страницы с информацией о донатах - включить при необходимости ***/
+//    public function actionDonates() {
+//        return $this->render('/site/donates');
+//    }
+
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()

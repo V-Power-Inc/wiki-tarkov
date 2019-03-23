@@ -25,6 +25,17 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136829486-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-136829486-1');
+    </script>
+
+
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -87,6 +98,8 @@ AppAsset::register($this);
 
                     <p class="contact-info">Контактный Email: <a href="mailto:info@tarkov-wiki.ru">info@tarkov-wiki.ru</a></p>
 
+<!--                    <p class="donate-info"><a href="/donates">Поддержать проект донатом</a></p>-->
+
                 </div>
               <span class="col-sm-12 counter-footer"></span>
             </div>
@@ -105,7 +118,7 @@ AppAsset::register($this);
 
 
 <?php if($status_response !== 404): ?>
-    <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/site/barters-preview' && Yii::$app->request->url !== '/loot/quest-loot' && Yii::$app->request->url !== '/item/preview' && Yii::$app->request->url !== '/loot/modules' && Yii::$app->request->url !== '/add-clan'): ?>
+    <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/site/barters-preview' && Yii::$app->request->url !== '/loot/quest-loot' && Yii::$app->request->url !== '/item/preview' && Yii::$app->request->url !== '/loot/modules' && Yii::$app->request->url !== '/add-clan' && Yii::$app->request->url !== '/donates'): ?>
         <script type="text/javascript" src="/js/core-checker.js"></script>
     <?php endif; ?>
 <?php endif; ?>
