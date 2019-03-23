@@ -43,9 +43,9 @@ use app\components\AlertComponent;
                 На этой странице вы можете задонатить проекту <b>tarkov-wiki</b>. Актуализация контента это очень сложная работа, которая требует постоянной вовлеченности в процесс. Ниже опубликованы реквизиты для донатов - спасибо за то что вы с нами и поддерживаете нас!
             </p>
 
-            <p class="size-donates">WebMoney: <span>R274632585389</span></p>
-            <p class="size-donates">Qiwi: <span>+79653722435</span></p>
-            <p class="size-donates">Яндекс Кошелек: <span>410016162855090</span></p>
+            <p class="size-donates">WebMoney: <span>R999999999999</span></p>
+            <p class="size-donates">Qiwi: <span>+79999999999</span></p>
+            <p class="size-donates">Яндекс Кошелек: <span>999999999999999</span></p>
         </div>
     </div>
 </div>
