@@ -98,8 +98,6 @@ AppAsset::register($this);
 
                     <p class="contact-info">Контактный Email: <a href="mailto:info@tarkov-wiki.ru">info@tarkov-wiki.ru</a></p>
 
-<!--                    <p class="donate-info"><a href="/donates">Поддержать проект донатом</a></p>-->
-
                 </div>
               <span class="col-sm-12 counter-footer"></span>
             </div>
