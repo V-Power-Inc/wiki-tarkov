@@ -204,7 +204,6 @@ class MenuComponent
                         <li><a href="/news">Новости</a></li>
                         <li><a href="/questions">Частые вопросы</a></li>
                         <li><a href="/clans">Официальный список кланов</a></li>
-                       <!-- <li><a href="/donates">Для донатов</a></li> -->
                       </ul>
                     </li>
                      
