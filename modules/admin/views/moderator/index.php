@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="alert alert-info size-16">На данный момент в системе существует
     <span class="count-users"><?=$countusers?></span> администраторов из которых
-    <span class="user-traitor"><?= $bannedusers ?></span><b>заблокированы</b>.
+    <span class="user-traitor"><?= $bannedusers ?></span><b> заблокированы</b>.
     <br>
     <br>
     Бан пользователя и отключение его от сайта производится через кнопку - забанить, после этой операции, пользователя разлогинивает
