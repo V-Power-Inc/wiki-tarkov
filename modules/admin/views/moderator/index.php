@@ -23,10 +23,10 @@ use yii\helpers\ArrayHelper;
 
 <div class="alert alert-info size-16">На данный момент в системе существует
     <span class="count-users"><?=$countusers?></span> администраторов из которых
-    <span class="user-traitor"><?= $bannedusers ?></span> постигла <b>кара за предательство</b>.
+    <span class="user-traitor"><?= $bannedusers ?></span><b>заблокированы</b>.
     <br>
     <br>
-    Бан пользователя и отключение его от сайта производится через кнопку - бан с двух ног, после этой операции, пользователя разлогинивает
+    Бан пользователя и отключение его от сайта производится через кнопку - забанить, после этой операции, пользователя разлогинивает
     и он больше не сможет зайти на сайт.
 </div>
 
@@ -65,7 +65,7 @@ use yii\helpers\ArrayHelper;
         <?php endif; ?>
     <?php endif; ?>
 
-    <!-- Баним с двух ног существующего пользователя -->
+    <!-- Баним существующего пользователя -->
         <div class="col-lg-6">
             <div class="ban-existing-user">
 
@@ -80,7 +80,7 @@ use yii\helpers\ArrayHelper;
                 <?= $form->field($users, 'bann_reason')->textInput() ?>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-danger"><b>Бан с двух ног</b></button>
+                    <button type="submit" class="btn btn-danger"><b>Забанить</b></button>
                 </div>
 
                 <?php ActiveForm::end(); ?>
