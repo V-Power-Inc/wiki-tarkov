@@ -96,24 +96,16 @@ class ModeratorController extends Controller
 
           $usrtofind = Admins::find()->where(['id' => $bannuser->name])->one();
 
-          // PC_Principal - Enslaver45 - KondorMax
-          if($usrtofind->id == 1 || $usrtofind->id == 2 || $usrtofind->id == 4) {
-              $name = Yii::$app->user->identity->name;
-              $messages = new MessagesComponent();
-              $message =  "<p class='alert alert-danger size-16 margin-top-20'>Неплохая попытка, $name</p>";
-              $messages->setMessages($message);
-              return $this->redirect('/admin/ass-destroyer');
-          } else {
-              $usrtofind->user = 'banned-'.date('Y-m-d H:i:s');
-              $usrtofind->password = 'Need to regenerate';
-              $usrtofind->banned = 1;
-              $usrtofind->bann_reason = $bannuser->bann_reason;
-              $usrtofind->save(false);
-              $messages = new MessagesComponent();
-              $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был успешно наказан!</p>";
-              $messages->setMessages($message);
-              return $this->redirect('/admin/ass-destroyer');
-          }
+          $usrtofind->user = 'banned-'.date('Y-m-d H:i:s');
+          $usrtofind->password = 'Need to regenerate';
+          $usrtofind->banned = 1;
+          $usrtofind->bann_reason = $bannuser->bann_reason;
+          $usrtofind->save(false);
+          $messages = new MessagesComponent();
+          $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был забанен!</p>";
+          $messages->setMessages($message);
+          return $this->redirect('/admin/ass-destroyer');
+
         } else {
             $messages = new MessagesComponent();
             $message =  "<p class='alert alert-danger size-16 margin-top-20'>Возникла неизвестная ошибка.</p>";
