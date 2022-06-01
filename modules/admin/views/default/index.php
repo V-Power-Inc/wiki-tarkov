@@ -6,7 +6,7 @@ $this->title = 'Админка tarkov-wiki';
 </div>
 
 <?php if(isset(Yii::$app->user->identity->id)): ?>
-    <?php if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2 || Yii::$app->user->identity->id == 4 ): ?>
+    <?php if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2): ?>
         <div class="col-lg-12 text-center margin-bottom-20">
             <a class="btn btn-primary gods-btn" href="/admin/ass-destroyer">Модерация для избранных</a>
         </div>

@@ -13,7 +13,7 @@ namespace app\components;
 class ClientdiscordComponent
 {
     protected $url = 'https://discordapp.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO';
-    protected $username = 'tarkov-wiki.ru';
+    protected $username = 'wiki-tarkov.ru';
     protected $avatar;
     protected $message;
     protected $embeds;

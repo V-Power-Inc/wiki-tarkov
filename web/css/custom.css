@@ -1686,17 +1686,7 @@ p.auth-info {
 }
 
 .recommended-gm-content {
-    float: left;
-    width: 100%;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    display: block;
-    margin: 20px 0;
-    border: 1px solid white;
-    background: #ffffff;
-    border-radius: 5px;
+
 }
 
 .barters.nav > li > a {

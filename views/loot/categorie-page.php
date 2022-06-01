@@ -48,7 +48,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\Jque
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
+$keysBlocks = [8,16];
 
 use app\components\AlertComponent;
 ?>
@@ -236,18 +236,7 @@ use app\components\AlertComponent;
 
                 <!-- Комментарии -->
                 <?php if(empty($_GET)) : ?>
-                    <div id="mc-container" class="kek-recustom"></div>
-                    <script type="text/javascript">
-                        cackle_widget = window.cackle_widget || [];
-                        cackle_widget.push({widget: 'Comment', id: 57165});
-                        (function() {
-                            var mc = document.createElement('script');
-                            mc.type = 'text/javascript';
-                            mc.async = true;
-                            mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                        })();
-                    </script>
+                    <?= $this->render('/other/comments');?>
                 <?php endif; ?>
 
             </div>

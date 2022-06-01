@@ -25,30 +25,11 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136829486-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-136829486-1');
-    </script>
-
-
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-5071904663034434",
-            enable_page_level_ads: true
-        });
-    </script>
-
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="https://tarkov-wiki.ru/favicon.png">
-    <meta name="yandex-verification" content="43485f66dfa368e2" />
+    <link rel="icon" type="image/png" href="https://wiki-tarkov.ru/favicon.png">
+    <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
     <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
     } else if(stristr(Yii::$app->request->url,'/news/')) { 
@@ -59,6 +40,7 @@ AppAsset::register($this);
         <meta property="og:title" content="<?= Html::encode($this->title) ?>">
         <meta property="og:image" content="/img/logo-full.png">
     <?php } ?>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -93,10 +75,10 @@ AppAsset::register($this);
                     <div class="icons-soc">
                         <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
                         <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
-                        <a href="https://vector-power.ru" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>
+<!--                        <a href="###" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>-->
                     </div>
 
-                    <p class="contact-info">Контактный Email: <a href="mailto:info@tarkov-wiki.ru">info@tarkov-wiki.ru</a></p>
+<!--                    <p class="contact-info">Контактный Email: <a href="mailto:###">###</a></p>-->
 
                 </div>
               <span class="col-sm-12 counter-footer"></span>
@@ -113,27 +95,5 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>
 
-
-
-<?php if($status_response !== 404): ?>
-    <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/site/barters-preview' && Yii::$app->request->url !== '/loot/quest-loot' && Yii::$app->request->url !== '/item/preview' && Yii::$app->request->url !== '/loot/modules' && Yii::$app->request->url !== '/add-clan' && Yii::$app->request->url !== '/donates'): ?>
-        <script type="text/javascript" src="/js/core-checker.js"></script>
-    <?php endif; ?>
-<?php endif; ?>
-
-
-<?php
-
-/*** Устанавливаем кукис - чтобы попап больше не всплывал ***/
-//if(!isset($cookies['gifts-23092018']) && !stristr(Yii::$app->request->url,'/loot') && !stristr(Yii::$app->request->url,'/skills')): {
-//    $addcook->add(new Cookie([
-//        'name' => 'gifts-23092018',
-//        'value' => 1,
-//        'expire' => time() + (10 * 365 * 24 * 60 * 60),
-//        'secure' => true,
-//    ]));
-//}
-// endif;
-?>
 
 

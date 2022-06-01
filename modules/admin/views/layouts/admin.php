@@ -23,7 +23,7 @@ AdminAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="https://tarkov-wiki.ru/favicon.png">
+        <link rel="shortcut icon" href="https://wiki-tarkov.ru/favicon.png">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
@@ -35,7 +35,7 @@ AdminAsset::register($this);
     <div class="wrap">
         <?php
         NavBar::begin([
-            'brandLabel' => 'Админка сайта - tarkov-wiki',
+            'brandLabel' => 'Админка сайта - wiki-tarkov',
             'brandUrl' => '/admin',
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
