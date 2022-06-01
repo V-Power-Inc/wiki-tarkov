@@ -12,9 +12,9 @@ use app\models\News;
 use app\models\Articles;
 use app\models\Traders;
 use yii\web\UrlRuleInterface;
-use yii\base\Object;
+use yii\base\BaseObject;
 
-class UrlComponent extends Object implements UrlRuleInterface
+class UrlComponent extends BaseObject implements UrlRuleInterface
 {
 
     public function parseRequest($manager, $request)
