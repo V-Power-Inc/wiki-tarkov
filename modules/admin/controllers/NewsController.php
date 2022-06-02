@@ -93,7 +93,7 @@ class NewsController extends Controller
 
             // Отправка уведомления в дискорд канал
             if($_SERVER['SERVER_NAME'] !== 'dev.kfc-it.ru') {
-                $webhook = new ClientdiscordComponent('https://discordapp.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO');
+                $webhook = new ClientdiscordComponent('https://discord.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO');
                 $embed = new Embeddiscord();
                 $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
                 $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
