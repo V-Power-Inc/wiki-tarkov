@@ -19,7 +19,7 @@ $this->registerMetaTag([
     'content' => 'Новости Escape from Tarkov, Новости Таркова',
 ]);
 
-$keysBlocks = [3,6,8];
+$keysBlocks = [6,12];
 
 use app\components\AlertComponent;
 ?>
