@@ -100,7 +100,7 @@ class Admins extends ActiveRecord implements \yii\web\IdentityInterface
     /*** Получаем всех незабаненных пользователей в виде объектов кроме себя ***/
     public function unbannedUsers() {
         if(isset(Yii::$app->user->identity->id)) {
-            return self::find()->where(['banned' => null])->andWhere(['not like', 'id', Yii::$app->user->identity->id])->all();
+            return self::find()->where(['is','banned', null])->andWhere(['not like', 'id', Yii::$app->user->identity->id])->all();
         } else {
             return false;
         }

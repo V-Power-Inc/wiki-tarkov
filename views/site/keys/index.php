@@ -22,7 +22,7 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
 use app\components\AlertComponent;
 
-$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
+$keysBlocks = [8,16];
 ?>
 
 
