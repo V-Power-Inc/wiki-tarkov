@@ -49,5 +49,5 @@ web/img/upload
 # no index.php in web directory
 web/index.php
 
-# Ignore well known 
+# Ignore well known
 .well-known

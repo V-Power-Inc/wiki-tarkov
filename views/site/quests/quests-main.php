@@ -51,7 +51,7 @@ use app\components\AlertComponent;
 <hr class="grey-line">
 
 <!-- Список активных торговцев Таркова -->
-<?php foreach($traders as $trader) : ?>
+<?php foreach($traders as $trader): ?>
     <div class="<?= $trader['bg_style'] ?>">
         <div class="container">
             <div class="row">
@@ -83,7 +83,7 @@ use app\components\AlertComponent;
 
                         <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
                             <a class="btn btn-default main-link float-left mobile-btn-margin" href="/traders/<?= $trader['url'] ?>"><?= $trader['button_detail'] ?></a>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </p>
                 </div>
             </div>
