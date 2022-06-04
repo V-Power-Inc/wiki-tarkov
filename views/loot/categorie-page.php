@@ -101,7 +101,7 @@ use app\components\AlertComponent;
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <?= $this->render('/other/discord-widget.php'); ?>
             </div>
 
             <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
