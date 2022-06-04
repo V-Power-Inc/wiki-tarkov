@@ -42,13 +42,22 @@ use app\components\MessagesComponent;
 class SiteController extends Controller
 {
 
-    // todo: Конструкции типа SQL Query -> cache() работают некорректно и от них необходимо уходить.
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 3600,
+                'only' => ['index'],
+                'variations' => [
+                    $_SERVER['SERVER_NAME'],
+                    Yii::$app->request->url,
+                    Yii::$app->response->statusCode,
+                    Yii::$app->request->get('page')
+                ]
+            ],
+        ];
+    }
 
     /** Кеширование по секундам с различными сроками **/
     const ONE_HOUR = 3600;
