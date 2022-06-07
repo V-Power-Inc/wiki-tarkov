@@ -9,7 +9,7 @@
 $this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/barter-tabs.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Escape from Tarkov: ' .$trader->title;
+$this->title = 'Торговцы Escape from Tarkov: ' .$trader->title;
 $this->registerMetaTag([
     'name' => 'description',
     'content' => $trader->description,
