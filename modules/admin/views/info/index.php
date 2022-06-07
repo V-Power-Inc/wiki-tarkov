@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <? // Html::a('Создать новый информационный виджет', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php // Html::a('Создать новый информационный виджет', ['create'], ['class' => 'btn btn-success']) ?>
         <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
