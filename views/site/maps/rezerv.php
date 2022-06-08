@@ -1,19 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: comp
- * Date: 26.12.2018
- * Time: 21:46
+ * User: basil
+ * Date: 08.06.2022
+ * Time: 18:08
  */
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/laboratory-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Карта локации лаборатория Terra Group в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
+$this->registerJsFile('js/rezerv-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->title = 'Карта локации Резерв в Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Интерактивная карта локации лаборатория Terra Group из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
+    'content' => 'Интерактивная карта локации Резерв из игры Escape from Tarkov',
 ]);
 
 use kartik\typeahead\Typeahead;
@@ -26,7 +26,7 @@ use yii\web\JsExpression;
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
     <div class="container">
-        <h1 class="main-site-heading">Карта локации лаборатория Terra Group</h1>
+        <h1 class="main-site-heading">Карта локации Резерв</h1>
     </div>
 </div>
 
@@ -106,10 +106,8 @@ use yii\web\JsExpression;
                     ?>
                 </div>
 
-                <h2>Интерактивная карта локации лаборатория Terra Group</h2>
-                <p>Интерактивная карта локации лаборатория Terra Group из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации лаборатория Terra Group, узнать о местонахождении оружейных и военных ящиков. </p>
-                <p>Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте лаборатории Terra Group. Интерактивная карта локации лаборатория Terra Group поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
-                <p>В отличие от других карт - локация Terra Group разделена на несколько этажей или секторов, что делает ее довольно необычной и неповторимой, эта схема будет полезная игрокам ЧВК и диким, которые хотят выбраться из лаборатории живыми.</p>
+                <h2>Интерактивная карта локации Резерв</h2>
+                <p>Интерактивная карта локации Резерв из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации лаборатория Terra Group, узнать о местонахождении оружейных и военных ящиков. </p>
                 <p></p>
                 <?= $this->render('/other/google-gor.php'); ?>
             </div>
