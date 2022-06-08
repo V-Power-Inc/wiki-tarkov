@@ -127,16 +127,28 @@ use app\components\AlertComponent;
 
 
     <div class="row maps-margin-top-30">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
-            <h2 class="text-center map-heading">Карта локации улицы Таркова</h2>
-            <!--            <a href="/maps/razvyazka-location">-->
-            <img class="maps__small" src="/img/maps/streets-of-tarkov.png">
-            <!--            </a>-->
-            <br>
-            <br>
-            <!--        <a class="btn btn-default main-link" href="#">Перейти к карте улиц Таркова</a>-->
 
-            <p class="alert alert-danger"><b>Карта локации находится в разработке.</b></p>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+            <h2 class="text-center map-heading">Карта Резерва</h2>
+            <a href="/maps/rezerv-location">
+                <img class="maps__small" src="/img/maps/rezerv.jpg">
+            </a>
+            <br>
+            <br>
+            <a class="btn btn-default main-link" href="/maps/rezerv-location">Перейти к карте Резерв</a>
+
+        </div>
+
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+            <h2 class="text-center map-heading">Карта Маяка</h2>
+            <a href="/maps/lighthouse-location">
+                <img class="maps__small" src="/img/maps/lighthouse.jpg">
+            </a>
+            <br>
+            <br>
+            <a class="btn btn-default main-link" href="/maps/lighthouse-location">Перейти к карте Маяк</a>
+
         </div>
 
     </div>

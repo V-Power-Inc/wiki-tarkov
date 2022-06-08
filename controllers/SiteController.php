@@ -282,6 +282,16 @@ class SiteController extends Controller
     public function actionLaboratoryterra() {
         return $this->render('maps/laboratory-location.php');
     }
+
+    /** Рендер страницы с картой Резерва **/
+    public function actionRezerv() {
+        return $this->render('maps/rezerv.php');
+    }
+
+    /** Рендер страницы с картой Резерва **/
+    public function actionLighthouse() {
+        return $this->render('maps/lighthouse.php');
+    }
     
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()

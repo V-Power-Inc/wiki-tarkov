@@ -9,11 +9,11 @@
 use app\components\AlertComponent;
 use yii\widgets\ActiveForm;
 
-$this->title = "Escape from Tarkov: Официальный список кланов";
+$this->title = "Escape from Tarkov: Список кланов";
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Официальный список кланов зарегистрированный игроками по игре Escape from Tarkov',
+    'content' => 'Список кланов зарегистрированный игроками по игре Escape from Tarkov',
 ]);
 
 $this->registerMetaTag([
@@ -65,7 +65,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
                 На этой странице представлена база кланов собственноручно зарегистрированная игроками Escape from Tarkov. В день рассматривается не больше <?=$countdaylimit?> заявок, также это число является дневным лимитом на количество заявок.
             <br>
             <br>
-                В настоящий момент это наиболее полная <b>официальная база кланов</b> по игре Escape from Tarkov.
+                В настоящий момент это наиболее полная <b>неофициальная база кланов</b> по игре Escape from Tarkov.
             </p>
 
             <?php if($avialableTickets <= 0): ?>
