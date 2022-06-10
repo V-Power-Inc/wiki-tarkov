@@ -1273,6 +1273,17 @@ img.w-100-auto {
     background-color: #fff0;
 }
 
+::-webkit-scrollbar-button:vertical:increment {
+    background-image: url(/img/navigation/bottom-arrow.png);
+    background-position: -1px;
+    background-color: #fff0;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url(/img/navigation/top-arrow.png);
+    background-color: #fff0;
+}
+
 .unactive-skill {
     margin-left: 90px;
 }
@@ -2054,4 +2065,64 @@ html>div>div{
 
 .size-donates span {
     color: green;
+}
+
+table.patrons-tbl >thead > tr > th {
+    text-align: center;
+    padding: 5px 15px;
+}
+
+.patrons-tbl.loot-tables tbody tr:first-child {
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+}
+
+.patrons-table, .patrons-tbl {
+    height: 500px;
+}
+
+.patrons-table .fix-tables {
+    height: 500px;
+}
+
+.sticky-pos {
+    position: sticky;
+    top: -1px;
+    z-index:999;
+}
+
+.patrons-tbl.loot-tables tr td {
+    padding: 10px;
+    border: 2px solid #7284c1;
+}
+
+.pos-sticky-left {
+    position: sticky;
+    left:-1px;
+    z-index: 1000;
+    background: #515972;
+}
+
+.pos-sticky-left-2 {
+    position: sticky;
+    left:91px;
+    z-index: 1000;
+    background: #515972;
+}
+
+.apt-pos-sticky-left {
+    position: sticky;
+    left:-1px;
+    z-index: 800;
+    background: #515972;
+    color: #fff;
+}
+
+.apt-pos-sticky-left-2 {
+    position: sticky;
+    left:90px;
+    z-index: 800;
+    background: #515972;
+    color: #fff;
 }

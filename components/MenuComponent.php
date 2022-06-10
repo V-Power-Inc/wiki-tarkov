@@ -122,7 +122,9 @@ class MenuComponent
                $other = 'active';
             } else if(stristr(Yii::$app->request->url,'/add-clan')){
                $other = 'active';
-            }
+            } else if(stristr(Yii::$app->request->url,'/table-patrons')){
+               $other = 'active';
+           }
 
         /*** Далее пошел габлон отрисовки меню ***/
 
@@ -206,6 +208,7 @@ class MenuComponent
                         <li><a href="/articles">Полезная информация</a></li>
                         <li><a href="/news">Новости</a></li>
                         <li><a href="/questions">Частые вопросы</a></li>
+                        <li><a href="/table-patrons">Таблица патронов Escape from Tarkov</a></li>
                         <li><a href="/clans">Список кланов</a></li>
                       </ul>
                     </li>

@@ -92,6 +92,7 @@ $config = [
                 '' => 'site/index',
                // 'donates' => 'site/donates',
                 'savereview' => 'site/savereview',
+                'table-patrons' => 'site/table-patrons',
                 'reviews' => 'site/reviews',
                 'offed-js' => 'site/jsdisabled',
                 'parse-pidors' => 'site/parse-pidors',

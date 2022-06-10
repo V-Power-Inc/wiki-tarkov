@@ -27,6 +27,7 @@ use app\models\Currencies;
 use app\models\Barters;
 use app\models\Laboratory;
 use app\models\Reviews;
+use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -48,7 +49,7 @@ class SiteController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 3600,
-                'only' => ['index'],
+                'only' => ['index','table-patrons'],
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
@@ -291,6 +292,12 @@ class SiteController extends Controller
     /** Рендер страницы с картой Резерва **/
     public function actionLighthouse() {
         return $this->render('maps/lighthouse.php');
+    }
+
+    /** Рендер страницы с картой Резерва **/
+    public function actionTablePatrons() {
+        $patrons = Patrons::find()->orderBy(['id' => SORT_DESC])->asArray()->cache(self::ONE_HOUR)->all();
+        return $this->render('/site/patrons', ['patrons' => $patrons]);
     }
     
     /** Рендер страницы с наборами ключей **/
