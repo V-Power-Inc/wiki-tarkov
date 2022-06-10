@@ -122,7 +122,9 @@ class MenuComponent
                $other = 'active';
             } else if(stristr(Yii::$app->request->url,'/add-clan')){
                $other = 'active';
-            }
+            } else if(stristr(Yii::$app->request->url,'/table-patrons')){
+               $other = 'active';
+           }
 
         /*** Далее пошел габлон отрисовки меню ***/
 
