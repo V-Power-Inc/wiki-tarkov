@@ -51,4 +51,49 @@
 	<lastmod>2022-10-06T19:05:22+01:00</lastmod>
 	<priority>0.8</priority>
 </url>
+	<url>
+		<loc>https://wiki-tarkov.ru/maps/tamojnya-location</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/maps/razvyazka-location</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/maps/forest-location</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/maps/terragroup-laboratory-location</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/maps/bereg-location</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/quests-of-traders/baraholshik-quests</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/quests-of-traders/mirotvorec-quests</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/keys/tamozhnya-314-mech-key</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://wiki-tarkov.ru/keys/Security-arsenal</loc>
+		<lastmod>2022-10-06T19:05:22+01:00</lastmod>
+		<priority>0.8</priority>
+	</url>
 </urlset>
