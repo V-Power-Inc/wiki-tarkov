@@ -1,2 +1,2 @@
 /** Если все в порядке - редиректим пользователя на главную страницу, значит он включил JS **/
-location.replace("https://tarkov-wiki.ru");
+location.replace("https://wiki-tarkov.ru");

@@ -62,8 +62,6 @@ $(document).ready(function() {
     $('html').on('click','.rfr-page', function() {
         location.reload();
     });
-
-    console.log("%cВам явно стоит убраться отсюда.", "background: orange; padding: 2px 4px; border-radius: 5px; border: 1px solid black; font-size: 16px");
     
     /*** adds code ***/
     var current_date = (new Date()).valueOf().toString();
