@@ -32,14 +32,14 @@ AppAsset::register($this);
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+
     <script type='text/javascript'>
         rbConfig={start:performance.now(),rbDomain:'rotarb.bid',rotator:'rtpn'};token=localStorage.getItem('rtpn')||(1e6+'').replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));rsdfhse=document.createElement('script');
         rsdfhse.setAttribute('src','//rotarb.bid/rtpn.min.js?'+token);rsdfhse.setAttribute('async','async');rsdfhse.setAttribute('type','text/javascript');document.head.appendChild(rsdfhse);
         localStorage.setItem('rtpn', token);</script>
-
-    <!-- Yandex.RTB -->
-    <script>window.yaContextCb=window.yaContextCb||[]</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
 
     <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
     } else if(stristr(Yii::$app->request->url,'/news/')) { 
