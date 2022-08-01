@@ -50,6 +50,10 @@ $this->registerMetaTag([
     
             <p><a class="btn btn-lg btn-success main-inter-link mobile-display-none" href="/maps">Перейти к интерактивным картам Escape from Tarkov</a></p>
         </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
+            <?= $this->render('/other/yandex-direct-mainpage.php'); ?>
+        </div>
     
         <div class="body-content">
     
