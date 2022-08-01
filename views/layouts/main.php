@@ -88,7 +88,7 @@ AppAsset::register($this);
 <!--                        <a href="###" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>-->
                     </div>
 
-<!--                    <p class="contact-info">Контактный Email: <a href="mailto:###">###</a></p>-->
+                    <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
 
                 </div>
               <span class="col-sm-12 counter-footer"></span>
