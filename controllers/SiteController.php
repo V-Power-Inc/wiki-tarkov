@@ -523,6 +523,7 @@ class SiteController extends Controller
 //        return $this->render('/site/donates');
 //    }
 
+
     /**
      * Метод запускает git pull на текущую ветку проекта (Вебхук для битбакета)
      *
