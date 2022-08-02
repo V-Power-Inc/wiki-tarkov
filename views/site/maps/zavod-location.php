@@ -131,7 +131,7 @@ use yii\web\JsExpression;
 <!--                    <p>Есть возможность узнать спавны ЧВК и Диких на карте Завод, с картинками их месторасположений, а также комментариями о различных особенностях этих спавнов. </p>-->
                     <p class="alert alert-info">Информацию о спавне <b>ключа от Выхода с Завода</b> и открываемым этим ключом дверям вы <b><a href="/keys/key-of-exit-zavod" style="color: #d9534f;" target="_blank">сможете найти в нашей статье.</a></b> </p>
                     <p></p>
-                    <?= $this->render('/other/google-gor.php'); ?>
+                    <?= $this->render('/other/yandex-direct-bottom-intermaps'); ?>
                 </div>
 
             </div>
