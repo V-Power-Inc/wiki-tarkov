@@ -10,9 +10,9 @@
 
 
 <div class="margins-vertical-20">
-
     <div class="rl_cnt_bg" data-id="298945"></div>
+</div>
 
+<div class="margins-vertical-20">
     <div class="rl_cnt_bg" data-id="298946"></div>
-
 </div>

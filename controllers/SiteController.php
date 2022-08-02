@@ -523,6 +523,20 @@ class SiteController extends Controller
 //        return $this->render('/site/donates');
 //    }
 
+    /**
+     * Метод запускает git pull на текущую ветку проекта (Вебхук для битбакета)
+     *
+     * @return string
+     */
+    public function actionBitbucketHook(): string
+    {
+        // todo: Логировать все это
+        // git pull after events on bitbucket (git push, git merge)
+        exec('cd /var/www/wiki-tarkov/html && git pull');
+
+        return 'ОК';
+    }
+
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()

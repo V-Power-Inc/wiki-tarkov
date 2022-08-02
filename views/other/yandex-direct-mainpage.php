@@ -9,4 +9,6 @@
  */
 ?>
 
-<div class="rl_cnt_bg" data-id="298950"></div>
+<div class="margins-vertical-20">
+    <div class="rl_cnt_bg" data-id="298950"></div>
+</div>
