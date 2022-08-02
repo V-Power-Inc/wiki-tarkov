@@ -536,7 +536,7 @@ class SiteController extends Controller
 
         // todo: Логировать все это
         // git pull after events on bitbucket (git push, git merge)
-        exec('cd /var/www/wiki-tarkov/html && git pull origin reborn');
+        system('cd /var/www/wiki-tarkov/html && git pull origin reborn');
 
         return 'ОК';
     }
