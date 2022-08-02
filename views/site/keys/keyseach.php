@@ -17,7 +17,7 @@ $this->registerMetaTag([
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
 
-$keysBlocks = [8,16];
+$keysBlocks = [8];
 ?>
     
 

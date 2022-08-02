@@ -22,7 +22,7 @@ $this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::cl
 use yii\widgets\LinkPager;
 use app\components\AlertComponent;
 
-$keysBlocks = [1,4,7,9];
+$keysBlocks = [4];
 ?>
 
 <div class="heading-class">
