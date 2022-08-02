@@ -62,7 +62,7 @@ $keysBlocks = [1,4,7,9];
 
             <?php if(in_array($k,$keysBlocks)): ?>
                 <!-- feed recomendations -->
-                <div class="question-block bg-white" style="height: 180px; max-height: 180px;">
+                <div class="question-block bg-white" style="height: auto; min-height: 180px; display: block;">
                     <?= $this->render('/other/adsense-questions-feed.php'); ?>
                 </div>
             <?php endif; ?>
