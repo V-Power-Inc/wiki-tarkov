@@ -497,7 +497,7 @@ $(document).ready(function() {
     /*** function add special blocks with dop.content to users when inits click on market ***/
     function AddRelations() {
         // Ads were In AppendBlock
-        $('.leaflet-popup-content').append('');
+        $('.leaflet-popup-content').append('<div class="rl_cnt_bg" data-id="298961"></div>');
     }
 
     function markerOnClick() {
