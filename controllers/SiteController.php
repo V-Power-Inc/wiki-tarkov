@@ -530,9 +530,12 @@ class SiteController extends Controller
      */
     public function actionBitbucketHook(): string
     {
+        // Задержка перед git pull reborn
+        sleep(40);
+
         // todo: Логировать все это
         // git pull after events on bitbucket (git push, git merge)
-        exec('cd /var/www/wiki-tarkov/html && git pull');
+        exec('cd /var/www/wiki-tarkov/html && git pull origin reborn');
 
         return 'ОК';
     }
