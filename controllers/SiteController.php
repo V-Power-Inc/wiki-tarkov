@@ -528,17 +528,17 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionBitbucketHook(): string
-    {
-        // Задержка перед git pull reborn
-        sleep(40);
-
-        // todo: Логировать все это
-        // git pull after events on bitbucket (git push, git merge)
-        system('cd /var/www/wiki-tarkov/html && git pull origin reborn');
-
-        return 'ОК';
-    }
+//    public function actionBitbucketHook(): string
+//    {
+//        // Задержка перед git pull reborn
+//        sleep(40);
+//
+//        // todo: Логировать все это
+//        // git pull after events on bitbucket (git push, git merge)
+//        system('cd /var/www/wiki-tarkov/html && git pull origin reborn');
+//
+//        return 'ОК';
+//    }
 
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/

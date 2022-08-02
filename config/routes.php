@@ -61,7 +61,7 @@ return [
     'loot' => 'loot/mainloot',
     'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
     'loot/<name:[\w_\/-]+>' => 'loot/category',
-    'development/after-master-push' => 'site/bitbucket-hook',
+    // 'development/after-master-push' => 'site/bitbucket-hook',
     [
         'class' => 'app\components\UrlComponent',
     ],
