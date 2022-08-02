@@ -156,7 +156,7 @@ use yii\web\JsExpression;
 
                 <p class="alert alert-info"><b>На интерактивной карте также есть схема санатория "Лазурный Берег", на которой вы сможете посмотреть, и узнать что находится в помещениях восточного, западного и центрального корпусов этого комплекса.</b></p>
                 <p></p>
-                <?= $this->render('/other/google-gor.php'); ?>
+                <?= $this->render('/other/yandex-direct-bottom-intermaps'); ?>
             </div>
 
         </div>
