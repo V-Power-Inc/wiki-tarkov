@@ -16,7 +16,6 @@ use yii;
 
 class SkillsController extends Controller
 {
-
     /** Кеширование по секундам с различными сроками **/
     const WEEK_CACHE = 604800;
     const TWO_DAYS = 172800;

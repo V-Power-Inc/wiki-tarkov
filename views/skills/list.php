@@ -6,7 +6,6 @@
  * Time: 23:17
  */
 
-//$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Пассивные умения персонажа Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',

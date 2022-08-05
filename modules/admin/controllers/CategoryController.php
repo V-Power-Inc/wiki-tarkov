@@ -8,7 +8,6 @@ use app\models\CategorySearch;
 use app\models\Items;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\HttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
@@ -44,7 +43,7 @@ class CategoryController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

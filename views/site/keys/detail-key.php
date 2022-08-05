@@ -35,7 +35,7 @@ $this->registerMetaTag([
 
 /******** Окончание OpenGraph тегов ************/
 
-$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 use app\components\AlertComponent;
 ?>

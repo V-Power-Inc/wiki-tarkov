@@ -17,7 +17,7 @@ $this->registerMetaTag([
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
 
-$keysBlocks = [8];
+
 ?>
     
 
@@ -79,7 +79,7 @@ $keysBlocks = [8];
                     <!-- Контентная часть ключей -->
                     <?php foreach ($keysearch as $zkeys => $keys): ?>
 
-                        <?php if(in_array($zkeys,$keysBlocks)): ?>
+                        <?php if(in_array($zkeys,Yii::$app->params['keysBlocks'])): ?>
                             <!-- feed recomendations -->
                             <div class="col-lg-12 item-key fix-block">
                                 <?= $this->render('/other/adsense-feed.php'); ?>

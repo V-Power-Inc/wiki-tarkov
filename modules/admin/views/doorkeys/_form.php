@@ -56,7 +56,7 @@ use mihaildev\elfinder\ElFinder;
     ?>
     
 
-    <?php  echo $form->field($model, 'shortcontent')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'shortcontent')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '100']),
     ]);
     ?>
@@ -64,7 +64,7 @@ use mihaildev\elfinder\ElFinder;
     <br>
     <br>
     
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

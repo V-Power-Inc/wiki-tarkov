@@ -14,7 +14,6 @@ use yii\filters\VerbFilter;
  */
 class ZavodController extends Controller
 {
-
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -42,7 +41,7 @@ class ZavodController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

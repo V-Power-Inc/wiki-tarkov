@@ -3,7 +3,6 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Category;
 use app\models\Items;
 use app\models\ItemsSearch;
 use yii\web\Controller;
@@ -42,23 +41,11 @@ class ItemsController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-//            'cache' => [
-//                'class' => 'yii\filters\PageCache',
-//                'duration' => 604800,
-//                'dependency' => [
-//                    'class' => 'yii\caching\DbDependency',
-//                    'sql' => 'SELECT COUNT(*) FROM items',
-//                ],
-//                'variations' => [
-//                    Yii::$app->request->url,
-//                    Yii::$app->request->get('page')
-//                ]
-//            ]
         ];
     }
 

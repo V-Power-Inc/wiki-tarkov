@@ -9,7 +9,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Barters */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 ?>
 
@@ -36,7 +36,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAss
         // todo: Добавлять сюда торговцев по мере необходимости, когда они будут выходит
     ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

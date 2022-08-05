@@ -8,12 +8,9 @@
 
 namespace app\components;
 
-use yii\web\UrlRule;
 use app\models\Category;
 use yii\web\UrlRuleInterface;
-use yii\web\HttpException;
 use Yii;
-
 
 class CategoryurlComponent implements UrlRuleInterface
 {

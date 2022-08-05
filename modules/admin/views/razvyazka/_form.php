@@ -9,7 +9,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Razvyazka */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
 <div class="razvyazka-form">
@@ -54,7 +54,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
 
     <?= $form->field($model, 'coords_y')->textInput() ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

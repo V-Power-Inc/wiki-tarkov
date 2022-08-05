@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
  */
 class SkillsController extends Controller
 {
-
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -41,7 +40,7 @@ class SkillsController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

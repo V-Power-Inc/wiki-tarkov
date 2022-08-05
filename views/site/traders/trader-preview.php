@@ -5,8 +5,8 @@
  * Date: 13.07.2018
  * Time: 23:58
  */
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 $this->title = 'Предпросмотр: '.$trader->title;
 

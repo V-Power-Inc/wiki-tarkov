@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
 
 /**
@@ -47,7 +45,7 @@ class Skills extends \yii\db\ActiveRecord
             [['content', 'short_desc'], 'string'],
             [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
             [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
-            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Catskills::className(), 'targetAttribute' => ['category' => 'id']],
+            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Catskills::class, 'targetAttribute' => ['category' => 'id']],
             [['file'], 'image'],
         ];
     }
@@ -88,7 +86,7 @@ class Skills extends \yii\db\ActiveRecord
      */
     public function getCategory0()
     {
-        return $this->hasOne(Catskills::className(), ['id' => 'category']);
+        return $this->hasOne(Catskills::class, ['id' => 'category']);
     }
 
     /** Получаем список всех предметов из таблицы справочника лута **/

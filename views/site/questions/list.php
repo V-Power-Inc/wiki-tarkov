@@ -6,7 +6,7 @@
  * Time: 13:45
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: Часто задаваемые вопросы';
 $this->registerMetaTag([
     'name' => 'description',
@@ -18,11 +18,11 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov - часто задаваемые вопросы',
 ]);
 
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 use yii\widgets\LinkPager;
 use app\components\AlertComponent;
 
-$keysBlocks = [4];
+
 ?>
 
 <div class="heading-class">
@@ -60,7 +60,7 @@ $keysBlocks = [4];
     <?php if(!empty($questions)) : ?>
         <?php foreach($questions as $k => $item): ?>
 
-            <?php if(in_array($k,$keysBlocks)): ?>
+            <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
                 <!-- feed recomendations -->
                 <div class="question-block bg-white" style="height: auto; min-height: 180px; display: block;">
                     <?= $this->render('/other/adsense-questions-feed.php'); ?>

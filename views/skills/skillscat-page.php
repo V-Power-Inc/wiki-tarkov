@@ -6,9 +6,7 @@
  * Time: 13:12
  */
 
-use app\components\LeftmenuWidget;
-use yii\widgets\LinkPager;
-use Yii;
+use app\components\AlertComponent;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -38,14 +36,11 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
-$keysBlocks = [8];
 
-use app\components\AlertComponent;
 ?>
 <div class="heading-class">
     <div class="container">
@@ -93,13 +88,10 @@ use app\components\AlertComponent;
                 <!-- Нет лута -->
             <?php else : ?>
 
-                <!-- core from 07-11-2018 -->
-
-
                 <!-- Цикл предметов категории -->
                 <?php foreach ($items as $item => $v) : ?>
 
-                    <?php if(in_array($item,$keysBlocks)): ?>
+                    <?php if(in_array($item,Yii::$app->params['keysBlocks'])): ?>
                         <div class="col-lg-12 fixible-block">
                             <div class="item-loot h-130">
                                 <?= $this->render('/other/adsense-feed.php'); ?>
@@ -143,8 +135,6 @@ use app\components\AlertComponent;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-
-
 
         </div>
 

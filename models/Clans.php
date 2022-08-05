@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Image\Box;
 
 /**
  * This is the model class for table "clans".
@@ -51,7 +49,7 @@ class Clans extends \yii\db\ActiveRecord
             [['description'], 'string', 'max' => 300],
             [['preview'], 'string', 'max' => 255],
             [['file'], 'file', 'extensions' => 'png, jpg'],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::class, 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
         ];
     }
 

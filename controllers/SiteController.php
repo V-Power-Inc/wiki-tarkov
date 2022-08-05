@@ -26,7 +26,6 @@ use app\models\Questions;
 use app\models\Currencies;
 use app\models\Barters;
 use app\models\Laboratory;
-use app\models\Reviews;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
@@ -35,9 +34,6 @@ use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
 use yii\web\Cookie;
-use yii\web\Response;
-use yii\widgets\ActiveForm;
-use app\components\MessagesComponent;
 
 
 class SiteController extends AdvancedController
@@ -179,16 +175,6 @@ class SiteController extends AdvancedController
           return $this->render('maps/maps.php');
     }
 
-    /** Прилетают данные о статичном контенте описаний маркеров **/
-//    public function actionStatic() {
-//        if(Yii::$app->request->isAjax) {
-//            $staticcontent = Mapstaticcontent::find()->asArray()->all();
-//            return Json::encode($staticcontent);
-//        } else {
-//            throw new HttpException(404 ,'Такая страница не существует');
-//        }
-//    }
-
     /** JSON данные с координатами маркеров Завода **/
     public function actionZavodmarkers() {
         if(Yii::$app->request->isAjax) {
@@ -236,7 +222,6 @@ class SiteController extends AdvancedController
     /** JSON данные с координатами маркеров Развязки **/
     public function actionRazvyazkamarkers() {
         if(Yii::$app->request->isAjax) {
-         //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -247,7 +232,6 @@ class SiteController extends AdvancedController
     /** JSON данные с координатами маркеров Лаборатории **/
     public function actionLaboratorymarkers() {
         if(Yii::$app->request->isAjax) {
-            //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Laboratory::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -506,41 +490,6 @@ class SiteController extends AdvancedController
     public function actionJsdisabled() {
         return $this->render('/site/offedjs');
     }
-
-    /*** Рендер страницы сделок с отзывами об онлайн торговце - отключено на продакшене от 13_02_2019 - редиректим на главную ***/
-    public function actionReviews() {
-        // Сделки не могут проводиться на сайте - теперь редирект на главную страницу
-        return $this->goHome();
-    }
-
-    /*** Обработчик сохранения нового отзыва, отправленного пользователем - отключено на продакшене от 13_02_2019 ***/
-    public function actionSavereview() {
-        // Сделки не могут проводиться на сайте - теперь редирект на главную страницу
-        return $this->goHome();
-    }
-
-    /*** Рендер страницы с информацией о донатах - включить при необходимости ***/
-//    public function actionDonates() {
-//        return $this->render('/site/donates');
-//    }
-
-    /**
-     * Метод запускает git pull на текущую ветку проекта (Вебхук для битбакета)
-     *
-     * @return string
-     */
-//    public function actionBitbucketHook(): string
-//    {
-//        // Задержка перед git pull reborn
-//        sleep(40);
-//
-//        // todo: Логировать все это
-//        // git pull after events on bitbucket (git push, git merge)
-//        system('cd /var/www/wiki-tarkov/html && git pull origin reborn');
-//
-//        return 'ОК';
-//    }
-
     
     /** Обработчик ошибок - отображает статусы ответа сервера **/
     public function actions()

@@ -7,9 +7,9 @@
  */
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
-$this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/tamojnya-location.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/tamojnya-location.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Карта локации Таможня в Escape from Tarkov - интерактивная карта с выходами Диких';
 $this->registerMetaTag([
     'name' => 'description',

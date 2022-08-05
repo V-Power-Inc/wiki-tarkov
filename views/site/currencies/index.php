@@ -17,7 +17,7 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 use app\components\AlertComponent;
 ?>

@@ -14,7 +14,6 @@ use yii\filters\VerbFilter;
  */
 class TradersController extends Controller
 {
-
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';
 
@@ -39,7 +38,7 @@ class TradersController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

@@ -18,7 +18,6 @@ class InfoController extends Controller
     /** Подключаем отдельный layout для админки сайта **/
     public $layout = 'admin';
 
-
     /** Проверка пользователя на гостя  **/
     public function beforeAction($action)
     {
@@ -40,7 +39,7 @@ class InfoController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -120,11 +119,8 @@ class InfoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id = null)
     {
-        // Удалить виджеты нельзя
-        //  $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

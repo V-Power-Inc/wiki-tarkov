@@ -10,7 +10,6 @@ use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
 use app\components\AlertComponent;
 
@@ -26,12 +25,11 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov: Полная база данных лута',
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-$keysBlocks = [8];
+
 
 ?>
 <div class="heading-class">
@@ -163,7 +161,7 @@ $keysBlocks = [8];
 
                 <?php foreach($items as $item => $v): ?>
 
-                    <?php if(in_array($item,$keysBlocks)): ?>
+                    <?php if(in_array($item,Yii::$app->params['keysBlocks'])): ?>
                         <div class="col-lg-12 fixible-block">
                             <div class="item-loot h-130">
                                 <?= $this->render('/other/adsense-feed.php'); ?>

@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
 
 /**
@@ -87,6 +85,6 @@ class Catskills extends \yii\db\ActiveRecord
      */
     public function getSkills()
     {
-        return $this->hasMany(Skills::className(), ['category' => 'id']);
+        return $this->hasMany(Skills::class, ['category' => 'id']);
     }
 }

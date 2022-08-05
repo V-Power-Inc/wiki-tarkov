@@ -9,7 +9,6 @@
 namespace app\components;
 use yii\base\Widget;
 use app\models\Category;
-use Yii;
 
 class LeftmenuWidget extends Widget {
 
@@ -49,16 +48,11 @@ class LeftmenuWidget extends Widget {
     
     /** Получаем список всех активных категорий  **/
     public function run() {
-        // Сначала пытаемся получить ранее закешированное меню
-        // $menu = Yii::$app->cache->get('leftmenu');
-        // if($menu) return $menu;
         
         $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->orderby(['sortir' => SORT_ASC])->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHTML = $this->getMenuHtml($this->tree);
 
-        // Кэшируем данные
-        // Yii::$app->cache->set('leftmenu', $this->menuHtml, 200);
         return $this->menuHTML;
     }
 

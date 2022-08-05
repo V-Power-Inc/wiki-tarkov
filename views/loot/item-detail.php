@@ -20,15 +20,13 @@ $this->registerMetaTag([
     'content' => $item->keywords,
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 use app\components\AlertComponent;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
 ?>
 

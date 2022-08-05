@@ -6,11 +6,11 @@
  * Time: 6:12
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->title = 'Реквизиты для донатов - tarkov-wiki.ru';
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->title = 'Реквизиты для донатов - wiki-tarkov.ru';
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Реквизиты для донатов - tarkov-wiki.ru',
+    'content' => 'Реквизиты для донатов - wiki-tarkov.ru',
 ]);
 
 use app\components\AlertComponent;
@@ -40,7 +40,7 @@ use app\components\AlertComponent;
     <div class="row">
         <div class="col-lg-12 donates-content">
             <p class="alert alert-info size-16">
-                На этой странице вы можете задонатить проекту <b>tarkov-wiki</b>. Актуализация контента это очень сложная работа, которая требует постоянной вовлеченности в процесс. Ниже опубликованы реквизиты для донатов - спасибо за то что вы с нами и поддерживаете нас!
+                На этой странице вы можете задонатить проекту <b>wiki-tarkov.ru</b>. Актуализация контента это очень сложная работа, которая требует постоянной вовлеченности в процесс. Ниже опубликованы реквизиты для донатов - спасибо за то что вы с нами и поддерживаете нас!
             </p>
 
             <p class="size-donates">WebMoney: <span>R999999999999</span></p>

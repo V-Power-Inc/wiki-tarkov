@@ -8,10 +8,6 @@ use app\models\DoorkeysSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Gd;
-use Imagine\Image\Box;
 
 /**
  * DoorkeysController implements the CRUD actions for Doorkeys model.
@@ -42,7 +38,7 @@ class DoorkeysController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

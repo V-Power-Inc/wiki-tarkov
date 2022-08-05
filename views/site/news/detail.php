@@ -6,8 +6,8 @@
  * Time: 17:02
  */
 
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/spoiler-script.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/spoiler-script.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model['title'];
 $this->registerMetaTag([
     'name' => 'description',

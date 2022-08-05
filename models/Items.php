@@ -2,10 +2,7 @@
 
 namespace app\models;
 
-use Yii;
 use yii\imagine\Image;
-use Imagine\Gd;
-use Imagine\Image\Box;
 use yii\web\UploadedFile;
 
 /**
@@ -64,7 +61,7 @@ class Items extends \yii\db\ActiveRecord
             [['file'], 'image'],
             [['active', 'parentcat_id'], 'integer'],
             [['title', 'preview', 'creator'], 'string', 'max' => 255],
-            [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parentcat_id' => 'id']],
+            [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['parentcat_id' => 'id']],
         ];
     }
 
@@ -127,7 +124,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToDoorkeys()
     {
-        return $this->hasMany(ItemsToDoorkeys::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToDoorkeys::class, ['item_id' => 'id']);
     }
 
     /**
@@ -135,7 +132,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToLyjnics()
     {
-        return $this->hasMany(ItemsToLyjnic::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToLyjnic::class, ['item_id' => 'id']);
     }
 
     /**
@@ -143,7 +140,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToMechaniks()
     {
-        return $this->hasMany(ItemsToMechanik::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToMechanik::class, ['item_id' => 'id']);
     }
 
     /**
@@ -151,7 +148,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToMirotvorecs()
     {
-        return $this->hasMany(ItemsToMirotvorec::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToMirotvorec::class, ['item_id' => 'id']);
     }
 
     /**
@@ -159,7 +156,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToPrapors()
     {
-        return $this->hasMany(ItemsToPrapor::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToPrapor::class, ['item_id' => 'id']);
     }
 
     /**
@@ -167,7 +164,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getItemsToTerapevts()
     {
-        return $this->hasMany(ItemsToTerapevt::className(), ['item_id' => 'id']);
+        return $this->hasMany(ItemsToTerapevt::class, ['item_id' => 'id']);
     }
 
     /** Получаем список всех предметов из таблицы справочника лута **/
@@ -188,7 +185,7 @@ class Items extends \yii\db\ActiveRecord
      */
     public function getParentcat()
     {
-        return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
+        return $this->hasOne(Category::class, ['id' => 'parentcat_id']);
     }
 
 }

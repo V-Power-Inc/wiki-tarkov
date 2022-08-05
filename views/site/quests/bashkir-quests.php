@@ -6,7 +6,7 @@
  * Time: 15:01
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Квесты Башкира в Escape from Tarkov. Разбор и прохождение квестов Башкира.';
 $this->registerMetaTag([
     'name' => 'description',

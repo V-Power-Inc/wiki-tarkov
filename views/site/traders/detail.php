@@ -6,9 +6,9 @@
  * Time: 17:49
  */
 
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/barter-tabs.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/barter-tabs.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Торговцы Escape from Tarkov: ' .$trader->title;
 $this->registerMetaTag([
     'name' => 'description',

@@ -6,7 +6,7 @@
  * Time: 4:08
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Квесты Смотрителя в Escape from Tarkov. Разбор и прохождение квестов Смотрителя.';
 $this->registerMetaTag([
     'name' => 'description',

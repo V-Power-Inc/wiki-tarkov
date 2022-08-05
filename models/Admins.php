@@ -19,7 +19,7 @@ use \yii\web\IdentityInterface;
  * @property string $date_end
  * @property string $bann_reason
  */
-class Admins extends ActiveRecord implements \yii\web\IdentityInterface
+class Admins extends ActiveRecord implements IdentityInterface
 {
     /**
      * @inheritdoc

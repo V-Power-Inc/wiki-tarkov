@@ -18,11 +18,11 @@ $this->registerMetaTag([
 
 use yii\bootstrap\ActiveForm;
 
-$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 use app\components\AlertComponent;
 
-$keysBlocks = [8];
+
 ?>
 
 
@@ -91,7 +91,7 @@ $keysBlocks = [8];
                 <!-- Контентная часть ключей -->
                 <?php foreach ($terralab as $zterralab => $k_terralab): ?>
 
-                    <?php if(in_array($zterralab,$keysBlocks)): ?>
+                    <?php if(in_array($zterralab,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
                         <div class="col-lg-12 item-key fix-block">
                             <?= $this->render('/other/adsense-feed.php'); ?>
@@ -113,7 +113,7 @@ $keysBlocks = [8];
                 <!-- Контентная часть ключей -->
                 <?php foreach ($tamojnya as $ztamojnya => $k_tamojnya): ?>
 
-                    <?php if(in_array($ztamojnya,$keysBlocks)): ?>
+                    <?php if(in_array($ztamojnya,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
                         <div class="col-lg-12 item-key fix-block">
                             <?= $this->render('/other/adsense-feed.php'); ?>
@@ -135,7 +135,7 @@ $keysBlocks = [8];
                 <!-- Контентная часть ключей -->
                 <?php foreach ($zavod as $kzavod => $k_zavod): ?>
 
-                    <?php if(in_array($kzavod,$keysBlocks)): ?>
+                    <?php if(in_array($kzavod,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
                         <div class="col-lg-12 item-key fix-block">
                             <?= $this->render('/other/adsense-feed.php'); ?>
@@ -157,7 +157,7 @@ $keysBlocks = [8];
                 <!-- Контентная часть ключей -->
                 <?php foreach ($forest as $zforest => $k_forest): ?>
 
-                    <?php if(in_array($zforest,$keysBlocks)): ?>
+                    <?php if(in_array($zforest,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
                         <div class="col-lg-12 item-key fix-block">
                             <?= $this->render('/other/adsense-feed.php'); ?>
@@ -179,7 +179,7 @@ $keysBlocks = [8];
                 <!-- Контентная часть ключей -->
                 <?php foreach ($bereg as $zbereg => $k_bereg): ?>
 
-                    <?php if(in_array($zbereg,$keysBlocks)): ?>
+                    <?php if(in_array($zbereg,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
                         <div class="col-lg-12 item-key fix-block">
                             <?= $this->render('/other/adsense-feed.php'); ?>
@@ -202,7 +202,7 @@ $keysBlocks = [8];
             <!-- Контентная часть ключей -->
             <?php foreach ($razvyazka as $zrazvyazka => $k_razvyazka): ?>
 
-                <?php if(in_array($zrazvyazka,$keysBlocks)): ?>
+                <?php if(in_array($zrazvyazka,Yii::$app->params['keysBlocks'])): ?>
                     <!-- feed recomendations -->
                     <div class="col-lg-12 item-key fix-block">
                         <?= $this->render('/other/adsense-feed.php'); ?>

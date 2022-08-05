@@ -4,7 +4,6 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\models\Admins;
 use app\models\Login;
 /**
  * Default controller for the `admin` module
@@ -59,7 +58,4 @@ class DefaultController extends Controller
         Yii::$app->user->logout();
         return self::actionLogin();
     }
-    
-    
-    
 }

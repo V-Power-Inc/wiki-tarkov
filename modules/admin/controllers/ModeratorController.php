@@ -24,12 +24,12 @@ class ModeratorController extends Controller
     /*** Подключаем отдельный layout для админской страницы моделей ***/
     public $layout = 'admin';
 
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 и KondorMax по ID из таблицы админов сайта  ***/
+    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 ***/
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
             return $this->redirect('/admin/login');
-        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2 || Yii::$app->user->identity->id === 4) {
+        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2) {
             return self::actionIndex();
         } else {
             throw new HttpException(404 ,'Такая страница не существует');

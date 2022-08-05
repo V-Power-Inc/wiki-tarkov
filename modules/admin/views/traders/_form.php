@@ -9,7 +9,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Traders */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
 <p class="alert alert-danger size-16 margin-bottom-5">
@@ -50,12 +50,12 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
     <br>
     <br>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '200']),
     ]);
     ?>
 
-    <?php  echo $form->field($model, 'fullcontent')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'fullcontent')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

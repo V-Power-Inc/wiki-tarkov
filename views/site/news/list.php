@@ -19,7 +19,7 @@ $this->registerMetaTag([
     'content' => 'Новости Escape from Tarkov, Новости Таркова',
 ]);
 
-$keysBlocks = [8];
+
 
 use app\components\AlertComponent;
 ?>
@@ -62,7 +62,7 @@ use app\components\AlertComponent;
                 <!--- Новостной блок -->
             <?php foreach($news as $k => $item): ?>
 
-                <?php if(in_array($k,$keysBlocks)): ?>
+                <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
                     <!-- feed recomendations -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="news-shortitem static-height-afm">

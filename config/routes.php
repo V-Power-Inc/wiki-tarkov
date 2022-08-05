@@ -4,7 +4,6 @@ use app\controllers\SiteController;
 
 return [
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
-    // 'donates' => 'site/donates',
     'savereview' => 'site/savereview',
     'table-patrons' => 'site/table-patrons',
     'reviews' => 'site/reviews',
@@ -31,10 +30,6 @@ return [
     'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
     'quests-of-traders/mehanic-quests' => 'site/mehanicpage',
     'quests-of-traders/baraholshik-quests' => 'site/baraholshikpage',
-    //  'quests-of-traders/leshy-quests' => 'site/leshypage',
-    //  'quests-of-traders/warden-quests' => 'site/wardenpage',
-    //  'quests-of-traders/bashkir-quests' => 'site/bashkirpage',
-    //  'quests-of-traders/khokhol-quests' => 'site/khokholpage',
     'currencies' => 'site/currencies',
     'clan/clansearch' => 'clan/clansearch',
     'clan/save' => 'clan/save',
@@ -53,7 +48,6 @@ return [
     'loot' => 'loot/mainloot',
     'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
     'loot/<name:[\w_\/-]+>' => 'loot/category',
-    // 'development/after-master-push' => 'site/bitbucket-hook',
     [
         'class' => 'app\components\UrlComponent',
     ],

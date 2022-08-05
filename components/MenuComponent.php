@@ -7,8 +7,8 @@
  */
 
 namespace app\components;
+
 use Yii;
-use app\components\AlertComponent;
 
 class MenuComponent
 {
@@ -178,7 +178,6 @@ class MenuComponent
                       </ul>
                     </li>
 
-                
                     <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>

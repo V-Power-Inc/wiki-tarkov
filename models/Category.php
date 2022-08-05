@@ -85,12 +85,12 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Items::className(), ['parentcat_id' => 'id']);
+        return $this->hasMany(Items::class, ['parentcat_id' => 'id']);
     }
 
     /*** Связь таблицы сама на себя - получаем родительскую категорию ***/
     public function getParentcat()
     {
-        return $this->hasOne(Category::className(), ['id' => 'parent_category']);
+        return $this->hasOne(Category::class, ['id' => 'parent_category']);
     }
 }

@@ -31,8 +31,7 @@ class PraporController extends Controller
             return self::actionIndex();
         }
     }
-    
-    
+
     /**
      * @inheritdoc
      */
@@ -40,7 +39,7 @@ class PraporController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

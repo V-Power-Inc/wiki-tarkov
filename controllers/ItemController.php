@@ -12,7 +12,8 @@ use yii\web\HttpException;
 use app\models\Items;
 use Yii;
 
-class ItemController extends Controller {
+class ItemController extends Controller
+{
 
     
     // CSRF валидация POST запросов методов этого контроллера включена

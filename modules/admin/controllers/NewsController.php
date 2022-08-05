@@ -8,10 +8,6 @@ use app\models\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Gd;
-use Imagine\Image\Box;
 use app\components\ClientdiscordComponent;
 use app\components\Embeddiscord;
 
@@ -44,7 +40,7 @@ class NewsController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
