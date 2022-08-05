@@ -30,7 +30,7 @@ use app\models\Reviews;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
-use yii\web\Controller;
+use app\controllers\common\AdvancedController;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
@@ -40,8 +40,9 @@ use yii\widgets\ActiveForm;
 use app\components\MessagesComponent;
 
 
-class SiteController extends Controller
+class SiteController extends AdvancedController
 {
+    const ACTION_INDEX = 'index';
 
     public function behaviors()
     {

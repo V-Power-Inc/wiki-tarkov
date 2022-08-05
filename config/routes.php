@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: basil
- * Date: 02.08.2022
- * Time: 20:49
- *
- * Пути проекта вынесены в отдельный файл
- */
 
-use app\controllers\AdvancedController;
+use app\controllers\SiteController;
 
 return [
-    '' => 'site/index',
+    '' => SiteController::routeId(SiteController::ACTION_INDEX),
     // 'donates' => 'site/donates',
     'savereview' => 'site/savereview',
     'table-patrons' => 'site/table-patrons',

@@ -17,7 +17,6 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-
     'controllerMap' => [
         'elfinder' => [
             'class' => 'mihaildev\elfinder\Controller',
@@ -114,7 +113,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // Доступно с любого хоста
-        // 'allowedIPs' => ['127.0.0.1', '::1','*'],
+        'allowedIPs' => ['127.0.0.1', '::1','*'],
     ];
 }
 
