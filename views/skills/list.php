@@ -50,7 +50,6 @@ use app\components\AlertComponent;
 
     <hr class="grey-line">
 
-
 <?php endif; ?>
 
     <div class="interback-white">

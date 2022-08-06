@@ -105,11 +105,7 @@ use app\components\AlertComponent;
                 </div>
 
                 <div class="barters-block">
-                    <?php if(empty($barters)): ?>
-                      <!--  <p class="alert alert-danger size-16">
-                            Для данного торговца информация о бартерах и продаваемых товарах не найдена.
-                        </p> -->
-                    <?php else: ?>
+                    <?php if(!empty($barters)): ?>
 
                         <!-- Табы -->
                         <ul class="nav nav-tabs barters">
@@ -149,8 +145,7 @@ use app\components\AlertComponent;
                     <?php endif; ?>
                         <a class="btn btn-default main-link float-left mobile-btn-margin" href="/quests-of-traders">Вернуться к списку торговцев</a>
                 </p>
-            
-            
+
             </div>
             
             <div class="recommended-gm-content">
@@ -159,7 +154,6 @@ use app\components\AlertComponent;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-
 
         </div>
 
@@ -181,7 +175,6 @@ use app\components\AlertComponent;
             <?= $this->render('/other/yandex-direct.php'); ?>
 
         </div>
-
 
     </div>
 </div>

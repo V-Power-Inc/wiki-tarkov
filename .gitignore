@@ -51,3 +51,6 @@ web/index.php
 
 # Ignore well known
 .well-known
+
+# Ignore sql dump if exists sometimes
+sql_dump.sql

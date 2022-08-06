@@ -6,6 +6,8 @@
  * Time: 21:41
  */
 
+use app\components\AlertComponent;
+
 $this->title = 'Escape from Tarkov: ' .$model['name'];
 $this->registerMetaTag([
     'name' => 'description',
@@ -36,8 +38,6 @@ $this->registerMetaTag([
 /******** Окончание OpenGraph тегов ************/
 
 $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
-use app\components\AlertComponent;
 ?>
 
 <style>
@@ -95,10 +95,6 @@ use app\components\AlertComponent;
                 <div class="recommended-gm-content">
                     <?= $this->render('/other/google-recommended.php'); ?>
                 </div>
-
-                <!-- Расстояние - заглушка -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
-
 
                 <!-- Комментарии -->
                 <?= $this->render('/other/comments');?>

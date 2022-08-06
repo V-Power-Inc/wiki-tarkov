@@ -19,8 +19,6 @@ $this->registerMetaTag([
     'content' => 'Полезные статьи Escape from Tarkov, Полезные статьи в Таркове',
 ]);
 
-
-
 use app\components\AlertComponent;
 ?>
 

@@ -1,5 +1,7 @@
 <?php
 
+/** Отдельный файл routes - сюда для удобства были вынесены все маршруты */
+
 use app\controllers\SiteController;
 
 return [

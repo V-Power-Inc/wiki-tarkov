@@ -68,43 +68,43 @@ use app\components\AlertComponent;
             <!-- Начало рассчетной части -->
             
             <?php if($dollar->enabled==1): ?>
-            <!-- Строка курса доллара -->
-            <h2 class="curencies-title">Курс Доллара</h2>
-            <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
+                <!-- Строка курса доллара -->
+                <h2 class="curencies-title">Курс Доллара</h2>
+                <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
 
-            <div class="article-stats-padding">
-                <?= $this->render('/other/adsense-article-feed'); ?>
-            </div>
+                <div class="article-stats-padding">
+                    <?= $this->render('/other/adsense-article-feed'); ?>
+                </div>
 
 
-            <!-- Блок рассчета под долларовые поля -->
-            <div style="padding: 10px;">
-                    
-            <!-- Инпут с курсом доллара -->
-            <div class="form-group">
-                <label class="control-label">Курс доллара в рублях:</label>
-                <input class="form-control valute-course" value="1 доллар = <?= $dollar->value/100 ?> рублей." disabled="">
+                <!-- Блок рассчета под долларовые поля -->
+                <div style="padding: 10px;">
 
-                <div class="help-block"></div>
-            </div>
+                    <!-- Инпут с курсом доллара -->
+                    <div class="form-group">
+                        <label class="control-label">Курс доллара в рублях:</label>
+                        <input class="form-control valute-course" value="1 доллар = <?= $dollar->value/100 ?> рублей." disabled="">
 
-            <!-- Инпут с пересчетом долларов на рубли -->
-            <div class="form-group">
-                <label class="control-label">Введите интересующее количество долларов:</label>
-                <input class="form-control valute-course" id="dollar-refference" oninput="dollarConventer(this.value)" onchange="dollarConventer(this.value)" value="">
+                        <div class="help-block"></div>
+                    </div>
 
-                <div class="help-block"></div>
-            </div>
+                    <!-- Инпут с пересчетом долларов на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">Введите интересующее количество долларов:</label>
+                        <input class="form-control valute-course" id="dollar-refference" oninput="dollarConventer(this.value)" onchange="dollarConventer(this.value)" value="">
 
-            <!-- Поле перессчета долларов на рубли -->
-            <div class="form-group">
-                <label class="control-label">В рублях это составит:</label>
-                <input class="form-control valute-course" id="outputdollar" value="0 руб." disabled="">
+                        <div class="help-block"></div>
+                    </div>
 
-                <div class="help-block"></div>
-            </div>    
-                
-            </div>
+                    <!-- Поле перессчета долларов на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">В рублях это составит:</label>
+                        <input class="form-control valute-course" id="outputdollar" value="0 руб." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                </div>
             <?php endif; ?>
 
             <?php if($euro->enabled==1): ?>
@@ -192,8 +192,7 @@ use app\components\AlertComponent;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-            
-            
+
         </div>
 
         <!-- Боковая правая колонка -->
@@ -216,8 +215,6 @@ use app\components\AlertComponent;
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
         </div>
-        
-    </div>
-    
+
     </div>
 </div>

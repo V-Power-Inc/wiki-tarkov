@@ -17,8 +17,6 @@ use yii\web\HttpException;
 use yii\helpers\Json;
 use yii\db\Query;
 
-
-
 class LootController extends Controller
 {
     // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)

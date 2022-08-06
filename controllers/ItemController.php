@@ -14,18 +14,12 @@ use Yii;
 
 class ItemController extends Controller
 {
-
-    
     // CSRF валидация POST запросов методов этого контроллера включена
     public $enableCsrfValidation;
 
     // Кешируем все запросы из БД - храним их в кеше
     public function behaviors()
     {
-        // Получаем URL предмета чтобы обновлять кеши по date_update
-        $url= Yii::$app->request->url;
-        $finaladdr = substr((trim(substr($url,strripos($url,'/')),'/')),0,-5);
-
         return [
             [
                 'class' => 'yii\filters\PageCache',
@@ -44,8 +38,9 @@ class ItemController extends Controller
         ];
     }
     
-/** Рендер детальной страницы лута */
-public function actionDetailloot($item) {
+    /** Рендер детальной страницы лута */
+    public function actionDetailloot($item)
+    {
 
     $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
 
@@ -57,8 +52,8 @@ public function actionDetailloot($item) {
     }
 
     /** Рендер страницы предпросмотра детальной страницы лута **/
-    public function actionPreviewloot() {
-
+    public function actionPreviewloot()
+    {
         $this->enableCsrfValidation = false;
 
         if(Yii::$app->user->isGuest !== true) {
@@ -69,5 +64,6 @@ public function actionDetailloot($item) {
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
+
 }
 

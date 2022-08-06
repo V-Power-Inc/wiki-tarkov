@@ -24,7 +24,6 @@ $this->registerMetaTag([
 $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 ?>
-
 <div class="heading-class">
     <div class="container">
         <h1 class="main-site-heading">Список кланов Escape from Tarkov</h1>
@@ -45,7 +44,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
     <hr class="grey-line">
 <?php endif; ?>
 
-
 <div class="container">
     <div class="row">
 
@@ -53,7 +51,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
         <div class="col-lg-12">
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
-
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
 
@@ -125,7 +122,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
 
         </div>
 
-
         <!-- right menu start -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
@@ -142,7 +138,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
             <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
-        
-        
+
     </div>
 </div>

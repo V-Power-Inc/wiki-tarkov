@@ -50,11 +50,6 @@ use app\components\AlertComponent;
 <div class="container">
     <div class="row">
 
-        <!-- no-scale -->
-        <div class="col-lg-12">
-            <!-- ads block -->
-        </div>
-
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="news-shortitem bg-white">
 
@@ -77,24 +72,18 @@ use app\components\AlertComponent;
                     <a class="btn btn-default main-link float-left mobile-btn-margin" href="/quests-of-traders">Вернуться к списку торговцев</a>
                 </p>
 
-
             </div>
-
-            <!-- ads block -->
 
         </div>
 
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
                 <?= $this->render('/other/discord-widget.php'); ?>
             <?php  $this->endCache(); } ?>
-
         </div>
-
 
     </div>
 </div>

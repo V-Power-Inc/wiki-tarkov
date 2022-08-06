@@ -98,7 +98,6 @@ use app\components\AlertComponent;
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
 
-
         </div>
 
         <!-- Боковая правая колонка -->
@@ -119,7 +118,6 @@ use app\components\AlertComponent;
             <?= $this->render('/other/yandex-donate.php'); ?>
         
         </div>
-
 
     </div>
 </div>

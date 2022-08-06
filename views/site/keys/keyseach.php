@@ -16,8 +16,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
-
-
 ?>
     
 

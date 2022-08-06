@@ -40,7 +40,6 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
-
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -54,8 +53,6 @@ use app\components\AlertComponent;
         <h1 class="main-site-heading"><?= $cat->title ?></h1>
     </div>
 </div>
-
-
 
 <hr class="grey-line">
 
@@ -174,9 +171,6 @@ use app\components\AlertComponent;
                     <!-- Нет лута -->
                 <?php else : ?>
 
-                <!-- core from 07-11-2018 -->
-
-
                 <!-- Цикл предметов категории -->
                     <?php foreach($items as $item => $v): ?>
 
@@ -187,7 +181,6 @@ use app\components\AlertComponent;
                                 </div>
                             </div>
                         <?php endif; ?>
-
 
                         <div class="col-lg-12">
                             <div class="item-loot">
@@ -203,10 +196,9 @@ use app\components\AlertComponent;
                                 <?php endif; ?>
                             </div>
                         </div>
-                <?php endforeach; ?>
-                <!-- Окончание цикла предметов -->
-    
-                
+                    <?php endforeach; ?>
+                    <!-- Окончание цикла предметов -->
+
                         <div class="col-lg-12 pagination text-center">
                             <?= LinkPager::widget([
                                 'pagination' => $pagination,
