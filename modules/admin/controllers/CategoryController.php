@@ -6,36 +6,18 @@ use Yii;
 use app\models\Category;
 use app\models\CategorySearch;
 use app\models\Items;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\controllers\AdminController;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends Controller
+class CategoryController extends AdminController
 {
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-
     /**
      * @inheritdoc
      */

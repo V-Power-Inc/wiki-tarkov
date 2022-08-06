@@ -5,34 +5,15 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Barters;
 use app\models\BartersSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * BartersController implements the CRUD actions for Barters model.
  */
-class BartersController extends Controller
+class BartersController extends AdminController
 {
-
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */

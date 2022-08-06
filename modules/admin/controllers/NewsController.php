@@ -5,34 +5,17 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\News;
 use app\models\NewsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\components\ClientdiscordComponent;
 use app\components\Embeddiscord;
+use app\common\controllers\AdminController;
 
 /**
  * NewsController implements the CRUD actions for News model.
  */
-class NewsController extends Controller
+class NewsController extends AdminController
 {
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-    
     /**
      * @inheritdoc
      */

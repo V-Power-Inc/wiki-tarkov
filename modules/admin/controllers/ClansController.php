@@ -5,32 +5,15 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Clans;
 use app\models\ClansSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\HttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * ClansController implements the CRUD actions for Clans model.
  */
-class ClansController extends Controller
+class ClansController extends AdminController
 {
-
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 и KondorMax по ID из таблицы админов сайта  ***/
-    public function beforeAction($action)
-    {
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2 || Yii::$app->user->identity->id === 4) {
-            return self::actionIndex();
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
     /**
      * {@inheritdoc}
      */

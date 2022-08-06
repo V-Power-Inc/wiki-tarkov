@@ -29,7 +29,7 @@ use app\models\Laboratory;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
-use app\controllers\common\AdvancedController;
+use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;

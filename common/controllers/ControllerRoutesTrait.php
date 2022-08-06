@@ -6,7 +6,7 @@
  * Time: 20:55
  */
 
-namespace app\controllers\common;
+namespace app\common\controllers;
 
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;

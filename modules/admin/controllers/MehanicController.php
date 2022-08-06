@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Mehanic;
 use app\models\MehanicSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * MehanicController implements the CRUD actions for Mehanic model.
  */
-class MehanicController extends Controller
+class MehanicController extends AdminController
 {
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';

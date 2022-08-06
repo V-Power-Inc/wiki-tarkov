@@ -6,35 +6,16 @@ use Yii;
 use app\models\Catskills;
 use app\models\Skills;
 use app\models\CatskillsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use app\common\controllers\AdminController;
 
 /**
  * CatskillsController implements the CRUD actions for Catskills model.
  */
-class CatskillsController extends Controller
+class CatskillsController extends AdminController
 {
-
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-    
     /**
      * @inheritdoc
      */

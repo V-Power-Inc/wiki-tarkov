@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Info;
 use app\models\InfoSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * InfoController implements the CRUD actions for Info model.
  */
-class InfoController extends Controller
+class InfoController extends AdminController
 {
 
     /** Подключаем отдельный layout для админки сайта **/

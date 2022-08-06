@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Lyjnic;
 use app\models\LyjnicSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * LyjnicController implements the CRUD actions for Lyjnic model.
  */
-class LyjnicController extends Controller
+class LyjnicController extends AdminController
 {
 
     /** Подключаем отдельный layout для админки сайта **/

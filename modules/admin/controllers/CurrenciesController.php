@@ -5,34 +5,15 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Currencies;
 use app\models\CurrenciesSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * CurrenciesController implements the CRUD actions for Currencies model.
  */
-class CurrenciesController extends Controller
+class CurrenciesController extends AdminController
 {
-
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-    
     /**
      * @inheritdoc
      */

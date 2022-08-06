@@ -13,6 +13,7 @@ use app\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use app\modules\admin\controllers\DefaultController;
 
 AdminAsset::register($this);
 ?>
@@ -45,7 +46,7 @@ AdminAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Авторизация', 'url' => ['/site/login']]
+                    ['label' => 'Авторизация', 'url' => [DefaultController::ACTION_LOGIN]]
                 ],
             ]);
             NavBar::end();
@@ -59,11 +60,11 @@ AdminAsset::register($this);
                 ['label' => 'База ключей', 'url' => ['/site/keys'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 ['label' => 'Список новостей', 'url' => ['/site/news'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => [DefaultController::ACTION_LOGIN]]
                 ) : 
                     (
                     '<li>'
-                    . Html::beginForm(['default/logout'], 'post')
+                    . Html::beginForm([DefaultController::ACTION_LOGOUT], 'post')
                     . Html::submitButton(
                         'Выход (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'btn btn-link logout']

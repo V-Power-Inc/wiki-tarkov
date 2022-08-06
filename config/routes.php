@@ -4,6 +4,8 @@
 
 use app\controllers\SiteController;
 
+use app\modules\admin\controllers\DefaultController;
+
 return [
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
     'savereview' => 'site/savereview',
@@ -14,7 +16,8 @@ return [
     'admin/ass-destroyer' => 'admin/moderator/index',
     'barter/preview' => 'site/barters-preview',
     'trader/preview' => 'site/previewtrader',
-    'admin/login' => 'admin/default/logout',
+    'admin/login' => DefaultController::routeId(DefaultController::ACTION_LOGIN),
+    'admin/logout' => DefaultController::routeId(DefaultController::ACTION_LOGOUT),
     'maps' => 'site/locations',
     'maps/zavod-location' => 'site/zavod',
     'maps/forest-location' => 'site/forest',

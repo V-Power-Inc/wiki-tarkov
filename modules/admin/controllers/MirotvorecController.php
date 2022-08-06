@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Mirotvorec;
 use app\models\MirotvorecSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * MirotvorecController implements the CRUD actions for Mirotvorec model.
  */
-class MirotvorecController extends Controller
+class MirotvorecController extends AdminController
 {
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';

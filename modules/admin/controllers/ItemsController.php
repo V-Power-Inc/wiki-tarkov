@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Items;
 use app\models\ItemsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * ItemsController implements the CRUD actions for Items model.
  */
-class ItemsController extends Controller
+class ItemsController extends AdminController
 {
     /** Подключаем отдельный layout для админки сайта **/
     public $layout = 'admin';

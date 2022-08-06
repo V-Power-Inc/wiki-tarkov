@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Doorkeys;
 use app\models\DoorkeysSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * DoorkeysController implements the CRUD actions for Doorkeys model.
  */
-class DoorkeysController extends Controller
+class DoorkeysController extends AdminController
 {
     /** Подключаем отдельный layout для CRUD моделей **/
     public $layout = 'admin';

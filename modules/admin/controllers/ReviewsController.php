@@ -5,35 +5,15 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Reviews;
 use app\models\ReviewsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * ReviewsController implements the CRUD actions for Reviews model.
  */
-class ReviewsController extends Controller
+class ReviewsController extends AdminController
 {
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        // Проверяем в том числе - если пользователь является вакантным участником, то редиректим его в админку
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } elseif(Yii::$app->user->identity->id === 5) {
-            return $this->redirect('/admin');
-        } else {
-            return self::actionIndex();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -9,22 +9,21 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\web\HttpException;
 use app\models\Admins;
 use app\components\MessagesComponent;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\controllers\AdminController;
 
 
 /*** Это контроллер модерации пользователей админки - всех неверных наказывают тут ***/
-class ModeratorController extends Controller
+class ModeratorController extends AdminController
 {
 
-    /*** Подключаем отдельный layout для админской страницы моделей ***/
-    public $layout = 'admin';
-
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 ***/
+    /** Пускаем в этот контроллер только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
+     *  от унаследованного из AdminController
+     */
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {

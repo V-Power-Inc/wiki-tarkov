@@ -5,14 +5,14 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Forest;
 use app\models\ForestSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\controllers\AdminController;
 
 /**
  * ForestController implements the CRUD actions for Forest model.
  */
-class ForestController extends Controller
+class ForestController extends AdminController
 {
 
     /** Подключаем отдельный layout для CRUD моделей **/
