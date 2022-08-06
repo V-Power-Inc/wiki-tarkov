@@ -8,6 +8,7 @@ use app\models\ArticlesSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\common\controllers\AdminController;
+use app\common\interfaces\CrudInterface;
 
 /**
  * ArticlesController implements the CRUD actions for Articles model.
