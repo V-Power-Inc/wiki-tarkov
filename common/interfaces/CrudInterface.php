@@ -14,6 +14,8 @@ use yii\data\ActiveDataProvider;
 interface CrudInterface
 {
     /** Описание индексной странички со списком объектов
+     *  Должен возвращать ActiveDataProvider для адекватной работы
+     *  с объектами в виде удобных таблиц с фильтрацией
      *  @return ActiveDataProvider
      */
     public function actionIndex(): ActiveDataProvider;
@@ -22,7 +24,7 @@ interface CrudInterface
      * @param string $id - id параметр
      * @return string
      */
-    public function actionView(? string $id): string;
+    public function actionView($id);
 
     /** Описание метода для создания нового объекта
      *  @return mixed
@@ -34,13 +36,13 @@ interface CrudInterface
      * @param string $id - id параметр
      * @return mixed
      */
-    public function actionUpdate(string $id);
+    public function actionUpdate($id);
 
     /**
      * Описание метода, удаляющего объекты по параметру
      * @param string $id - id параметр
      * @return mixed
      */
-    public function actionDelete(string $id);
+    public function actionDelete($id);
 
 }
