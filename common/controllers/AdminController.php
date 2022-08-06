@@ -12,41 +12,39 @@
 namespace app\common\controllers;
 
 use Yii;
-
-// todo: Сюда еще вернемся для константного подхода в маршрутизации
-
+use yii\web\Response;
 
 class AdminController extends \yii\web\Controller
 {
     use ControllerRoutesTrait;
 
-    const ACTION_INDEX = 'index';
+    /** @var string LOGIN_URL Константа урла для логина */
+    const LOGIN_URL = '/admin/login';
 
-    /** Подключаем отдельный layout для CRUD моделей **/
+    /** @var string LOGOUT_URL Константа урла для разлогинивания */
+    const LOGOUT_URL = '/admin/logout';
+
+    /** @var string $layout - Подключаем отдельный layout для CRUD контроллеров */
     public $layout = 'admin';
 
     /**
      * Проверяем пользователя на авторизацию, если не авторизован редирект на страницу логина
      * Предотвращаем доступ в админку и соблюдаем DRY паттерн таким образом
+     * @param string $action - ID экшена
+     * @return Response|$this
      */
     public function beforeAction($action)
     {
+        /** Сразу разлогиниваем забаненных */
         if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
+            return $this->redirect(AdminController::LOGOUT_URL);
         }
 
+        /** Сначала редиректим неавторизованного на страницу логина */
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return AdminController::ACTION_INDEX;
+            return $this->redirect(AdminController::LOGIN_URL);
         }
+
+        return $this;
     }
-
-    /** Заглушка для дальнейшего наследования */
-    public function actionIndex()
-    {}
-
-
-
-
 }

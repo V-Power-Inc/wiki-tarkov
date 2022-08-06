@@ -13,7 +13,7 @@ use app\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use app\modules\admin\controllers\DefaultController;
+use app\common\controllers\AdminController;
 
 AdminAsset::register($this);
 ?>
@@ -32,7 +32,8 @@ AdminAsset::register($this);
     <body>
     <?php $this->beginBody() ?>
     
-    
+    <!-- todo: Подрубить сюда константные урлы -->
+
     <div class="wrap">
         <?php
         NavBar::begin([
@@ -46,7 +47,7 @@ AdminAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Авторизация', 'url' => [DefaultController::ACTION_LOGIN]]
+                    ['label' => 'Авторизация', 'url' => [AdminController::LOGIN_URL]]
                 ],
             ]);
             NavBar::end();
@@ -59,12 +60,9 @@ AdminAsset::register($this);
                 ['label' => 'Справочник квестов', 'url' => ['/site/quests'], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 ['label' => 'База ключей', 'url' => ['/site/keys'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 ['label' => 'Список новостей', 'url' => ['/site/news'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => [DefaultController::ACTION_LOGIN]]
-                ) : 
-                    (
+                (
                     '<li>'
-                    . Html::beginForm([DefaultController::ACTION_LOGOUT], 'post')
+                    . Html::beginForm([AdminController::LOGOUT_URL], 'post')
                     . Html::submitButton(
                         'Выход (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'btn btn-link logout']

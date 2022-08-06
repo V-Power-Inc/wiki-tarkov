@@ -14,24 +14,6 @@ use app\common\controllers\AdminController;
  */
 class LyjnicController extends AdminController
 {
-
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
     /**
      * @inheritdoc
      */
