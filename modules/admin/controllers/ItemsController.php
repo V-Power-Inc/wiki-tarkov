@@ -15,12 +15,11 @@ use app\common\controllers\AdminController;
  */
 final class ItemsController extends AdminController implements CrudInterface
 {
-    /*** Ускоряем контроллер кешами ***/
-    
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

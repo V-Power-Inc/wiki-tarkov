@@ -20,9 +20,10 @@ use app\common\controllers\AdminController;
 final class CategoryController extends AdminController implements CrudInterface
 {
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [

@@ -17,12 +17,12 @@ use yii\widgets\ActiveForm;
 use app\common\controllers\AdminController;
 
 
-/*** Это контроллер модерации пользователей админки - всех неверных наказывают тут ***/
+/*** Это контроллер модерации пользователей админки ***/
 final class ModeratorController extends AdminController
 {
 
-    /** Пускаем в этот контроллер только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
-     *  от унаследованного из AdminController
+    /** Пускаем сюда только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
+     *  от унаследованной для большинства CRUD из AdminController
      */
     public function beforeAction($action)
     {
