@@ -7,12 +7,13 @@ use app\models\Items;
 use app\models\ItemsSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * ItemsController implements the CRUD actions for Items model.
  */
-class ItemsController extends AdminController
+final class ItemsController extends AdminController implements CrudInterface
 {
     /*** Ускоряем контроллер кешами ***/
     
@@ -33,9 +34,9 @@ class ItemsController extends AdminController
 
     /**
      * Lists all Items models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ItemsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -49,9 +50,10 @@ class ItemsController extends AdminController
     /**
      * Displays a single Items model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -79,10 +81,11 @@ class ItemsController extends AdminController
     /**
      * Updates an existing Items model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -107,27 +110,23 @@ class ItemsController extends AdminController
     /**
      * Deletes an existing Items model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            // $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the Items model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Items the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Items::findOne($id)) !== null) {
             return $model;

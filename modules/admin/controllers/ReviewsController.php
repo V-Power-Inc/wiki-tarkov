@@ -7,12 +7,13 @@ use app\models\Reviews;
 use app\models\ReviewsSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * ReviewsController implements the CRUD actions for Reviews model.
  */
-class ReviewsController extends AdminController
+final class ReviewsController extends AdminController implements CrudInterface
 {
     /**
      * {@inheritdoc}
@@ -31,9 +32,9 @@ class ReviewsController extends AdminController
 
     /**
      * Lists all Reviews models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ReviewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -50,7 +51,7 @@ class ReviewsController extends AdminController
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -78,11 +79,11 @@ class ReviewsController extends AdminController
     /**
      * Updates an existing Reviews model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
 
@@ -98,25 +99,24 @@ class ReviewsController extends AdminController
     /**
      * Deletes an existing Reviews model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
     /**
      * Finds the Reviews model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Reviews the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Reviews::findOne($id)) !== null) {
             return $model;

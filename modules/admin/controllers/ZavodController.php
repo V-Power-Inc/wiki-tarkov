@@ -7,12 +7,13 @@ use app\models\Zavod;
 use app\models\ZavodSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * ZavodController implements the CRUD actions for Zavod model.
  */
-class ZavodController extends AdminController
+final class ZavodController extends AdminController implements CrudInterface
 {
     /**
      * @inheritdoc
@@ -31,9 +32,9 @@ class ZavodController extends AdminController
 
     /**
      * Lists all Zavod models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ZavodSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -47,9 +48,10 @@ class ZavodController extends AdminController
     /**
      * Displays a single Zavod model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -78,10 +80,11 @@ class ZavodController extends AdminController
     /**
      * Updates an existing Zavod model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -101,27 +104,24 @@ class ZavodController extends AdminController
     /**
      * Deletes an existing Zavod model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the Zavod model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Zavod the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Zavod::findOne($id)) !== null) {
             return $model;

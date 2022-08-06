@@ -7,12 +7,13 @@ use app\models\Info;
 use app\models\InfoSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * InfoController implements the CRUD actions for Info model.
  */
-class InfoController extends AdminController
+final class InfoController extends AdminController implements CrudInterface
 {
     /**
      * @inheritdoc
@@ -31,9 +32,9 @@ class InfoController extends AdminController
 
     /**
      * Lists all Info models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new InfoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -47,9 +48,10 @@ class InfoController extends AdminController
     /**
      * Displays a single Info model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -78,10 +80,11 @@ class InfoController extends AdminController
     /**
      * Updates an existing Info model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -98,10 +101,11 @@ class InfoController extends AdminController
     /**
      * Deletes an existing Info model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id = null)
+    public function actionDelete(int $id)
     {
         return $this->redirect(['index']);
     }
@@ -109,11 +113,11 @@ class InfoController extends AdminController
     /**
      * Finds the Info model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Info the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Info::findOne($id)) !== null) {
             return $model;

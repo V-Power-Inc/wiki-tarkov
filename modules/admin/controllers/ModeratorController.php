@@ -18,7 +18,7 @@ use app\common\controllers\AdminController;
 
 
 /*** Это контроллер модерации пользователей админки - всех неверных наказывают тут ***/
-class ModeratorController extends AdminController
+final class ModeratorController extends AdminController
 {
 
     /** Пускаем в этот контроллер только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается

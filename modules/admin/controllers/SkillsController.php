@@ -9,12 +9,13 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * SkillsController implements the CRUD actions for Skills model.
  */
-class SkillsController extends AdminController
+final class SkillsController extends AdminController implements CrudInterface
 {
     /**
      * @inheritdoc
@@ -33,9 +34,9 @@ class SkillsController extends AdminController
 
     /**
      * Lists all Skills models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new SkillsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -49,9 +50,10 @@ class SkillsController extends AdminController
     /**
      * Displays a single Skills model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -85,10 +87,11 @@ class SkillsController extends AdminController
     /**
      * Updates an existing Skills model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -105,27 +108,24 @@ class SkillsController extends AdminController
     /**
      * Deletes an existing Skills model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the Skills model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Skills the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Skills::findOne($id)) !== null) {
             return $model;

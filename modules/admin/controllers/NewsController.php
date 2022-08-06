@@ -9,12 +9,13 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\components\ClientdiscordComponent;
 use app\components\Embeddiscord;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * NewsController implements the CRUD actions for News model.
  */
-class NewsController extends AdminController
+final class NewsController extends AdminController implements CrudInterface
 {
     /**
      * @inheritdoc
@@ -33,9 +34,9 @@ class NewsController extends AdminController
 
     /**
      * Lists all News models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -49,9 +50,10 @@ class NewsController extends AdminController
     /**
      * Displays a single News model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -62,6 +64,7 @@ class NewsController extends AdminController
      * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws
      */
     public function actionCreate()
     {
@@ -90,10 +93,11 @@ class NewsController extends AdminController
     /**
      * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -110,27 +114,24 @@ class NewsController extends AdminController
     /**
      * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = News::findOne($id)) !== null) {
             return $model;

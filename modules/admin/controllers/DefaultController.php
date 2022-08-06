@@ -9,7 +9,7 @@ use app\models\Login;
 /**
  * Default controller for the `admin` module
  */
-class DefaultController extends AdminController
+final class DefaultController extends AdminController
 {
     const ACTION_INDEX  = 'index';
     const ACTION_LOGIN  = 'login';

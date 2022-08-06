@@ -11,12 +11,13 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends AdminController
+final class CategoryController extends AdminController implements CrudInterface
 {
     /**
      * @inheritdoc
@@ -35,9 +36,9 @@ class CategoryController extends AdminController
 
     /**
      * Lists all Category models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -51,9 +52,10 @@ class CategoryController extends AdminController
     /**
      * Displays a single Category model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -86,10 +88,11 @@ class CategoryController extends AdminController
     /**
      * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
 
@@ -110,39 +113,38 @@ class CategoryController extends AdminController
     /**
      * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-            $model = $this->findModel($id);
-            $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
-            $Items = new Items();
-            $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
-            $ItemsMainCategories = ArrayHelper::getColumn($Items->getAllItems(), 'maincat_id');
-            $LockedID = $model->id;
-            $MainCategoryRelation = in_array($LockedID, $ItemsMainCategories);
-            $CategoryRelation = in_array($LockedID, $CategoriesArray);
-            $ItemRelation = in_array($LockedID, $ItemsCategories);
-            /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
-            if ($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
-                return $this->redirect(['index?dp-1-sort=sortir']);
-            } else {
-                $this->findModel($id)->delete();
-                return $this->redirect(['index?dp-1-sort=sortir']);
-            }
+        $model = $this->findModel($id);
+        $CategoriesArray = ArrayHelper::getColumn($model->getChildCategories(), 'parent_category');
+        $Items = new Items();
+        $ItemsCategories = ArrayHelper::getColumn($Items->getAllItems(), 'parentcat_id');
+        $ItemsMainCategories = ArrayHelper::getColumn($Items->getAllItems(), 'maincat_id');
+        $LockedID = $model->id;
+        $MainCategoryRelation = in_array($LockedID, $ItemsMainCategories);
+        $CategoryRelation = in_array($LockedID, $CategoriesArray);
+        $ItemRelation = in_array($LockedID, $ItemsCategories);
+        /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
+        if ($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
+            return $this->redirect(['index?dp-1-sort=sortir']);
+        } else {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index?dp-1-sort=sortir']);
         }
     }
 
     /**
      * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Category::findOne($id)) !== null) {
             return $model;
