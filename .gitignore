@@ -40,9 +40,6 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 
-# no db
-config/db.php
-
 # ignore images
 web/img/upload
 
@@ -54,3 +51,8 @@ web/index.php
 
 # Ignore sql dump if exists sometimes
 sql_dump.sql
+
+# ignore environment variables
+/.env
+
+composer.lock
