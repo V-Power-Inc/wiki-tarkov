@@ -17,30 +17,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Карта Леса Тарков, Карта таможни Тарков, Escape from tarkov интерактивные карты',
 ]);
-
-use app\components\AlertComponent;
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Карты локаций Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <!-- Gorizontal information -->
 <div class="row">
     <div class="container">

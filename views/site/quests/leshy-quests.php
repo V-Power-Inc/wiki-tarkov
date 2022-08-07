@@ -17,30 +17,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Квесты Лешего в Escape from Tarkov, квесты леший Тарков',
 ]);
-
-use app\components\AlertComponent;
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Квесты Лешего</h1>
-    </div>
-</div>
-
-<hr class="grey-line" style="border-top: 0;">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 

@@ -24,5 +24,17 @@ class AlertComponent extends Component
         $bitkoin = Info::find()->where(['id' => 1])->one();
         return $bitkoin;
     }
-    
+
+    /**
+     * Метод проверяет активность компонента, если компонент активен - то будет рендер вьюхи
+     * @return bool
+     */
+    public static function AlertView(): bool
+    {
+        if((AlertComponent::alert()->enabled !== 0)) {
+            return true;
+        }
+
+        return false;
+    }
 }

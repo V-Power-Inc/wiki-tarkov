@@ -26,30 +26,6 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsse
 
 use yii\bootstrap\ActiveForm;
 ?>
-
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Квестовые предметы Escape from Tarkov</h1>
-    </div>
-</div>
-
-
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 

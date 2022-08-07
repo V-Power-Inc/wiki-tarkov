@@ -8,7 +8,7 @@
 
 use yii\widgets\LinkPager;
 
-$this->title = 'Полезные статьи по Escape from Tarkov.';
+$this->title = 'Полезные статьи по Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Полезные статьи по онлайн шутеру Escape from Tarkov.',
@@ -18,30 +18,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Полезные статьи Escape from Tarkov, Полезные статьи в Таркове',
 ]);
-
-use app\components\AlertComponent;
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Полезная информация по Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
