@@ -11,7 +11,6 @@ use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
-use app\components\AlertComponent;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 

@@ -7,7 +7,6 @@
  */
 
 use app\components\LeftmenuWidget;
-use app\components\AlertComponent;
 
 $this->title = 'Квестовые предметы Escape from Tarkov';
 
