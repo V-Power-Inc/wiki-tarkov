@@ -55,4 +55,7 @@ sql_dump.sql
 # ignore environment variables
 /.env
 
+# ignore main-local.php config
+/config/web-local.php
+
 composer.lock
