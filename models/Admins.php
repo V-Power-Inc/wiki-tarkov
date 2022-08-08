@@ -21,6 +21,18 @@ use \yii\web\IdentityInterface;
  */
 class Admins extends ActiveRecord implements IdentityInterface
 {
+    /** Константы атрибутов Active Recoed модели */
+    const ATTR_ID          = 'id';
+    const ATTR_BANNED      = 'banned';
+    const ATTR_USER        = 'user';
+    const ATTR_PASSWORD    = 'password';
+    const ATTR_CAPTCHA     = 'captcha';
+    const ATTR_REMEMBER_ME = 'remember_me';
+    const ATTR_ROLE        = 'role';
+    const ATTR_NAME        = 'name';
+    const ATTR_DATE_END    = 'date_end';
+    const ATTR_BANN_REASON = 'bann_reason';
+
     /**
      * @inheritdoc
      */
