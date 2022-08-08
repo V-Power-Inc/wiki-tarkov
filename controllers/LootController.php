@@ -17,6 +17,10 @@ use yii\web\HttpException;
 use yii\helpers\Json;
 use yii\db\Query;
 
+/**
+ * Class LootController
+ * @package app\controllers
+ */
 class LootController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */

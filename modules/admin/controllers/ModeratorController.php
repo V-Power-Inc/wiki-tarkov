@@ -16,7 +16,12 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\common\controllers\AdminController;
 
-/*** Это контроллер модерации пользователей админки ***/
+/**
+ * Это контроллер модерации пользователей админки
+ *
+ * Class ModeratorController
+ * @package app\modules\admin\controllers
+ */
 final class ModeratorController extends AdminController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
