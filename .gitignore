@@ -58,4 +58,5 @@ sql_dump.sql
 # ignore main-local.php config
 /config/web-local.php
 
-composer.lock
+# Ignore auto changed file associated with composer
+/composer.lock

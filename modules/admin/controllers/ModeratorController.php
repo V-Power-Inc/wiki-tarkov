@@ -16,10 +16,13 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\common\controllers\AdminController;
 
-
 /*** Это контроллер модерации пользователей админки ***/
 final class ModeratorController extends AdminController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX = 'index';
+    const ACTION_USER_SAVE = 'user-save';
+    const ACTION_USER_BAN = 'user-ban';
 
     /** Пускаем сюда только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
      *  от унаследованной для большинства CRUD из AdminController

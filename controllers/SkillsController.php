@@ -7,22 +7,34 @@
  */
 
 namespace app\controllers;
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\models\Catskills;
 use app\models\Skills;
 use yii;
 
-
-class SkillsController extends Controller
+/**
+ * Class SkillsController
+ * @package app\controllers
+ */
+class SkillsController extends AdvancedController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_MAINSKILLS     = 'mainskills';
+    const ACTION_SKILLSCATEGORY = 'skillscategory';
+    const ACTION_SKILLSDETAIL   = 'skillsdetail';
+
     /** Кеширование по секундам с различными сроками **/
     const WEEK_CACHE = 604800;
     const TWO_DAYS = 172800;
     const ONE_DAY = 86400;
 
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
+    /**
+     * Массив поведения контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [

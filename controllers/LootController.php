@@ -8,7 +8,7 @@
 /** Этот контроллер отвечает за вывод категорий и лута предметов из Escape from Tarkov  **/
 namespace app\controllers;
 
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use yii;
 use app\models\Category;
 use app\models\Items;
@@ -17,10 +17,20 @@ use yii\web\HttpException;
 use yii\helpers\Json;
 use yii\db\Query;
 
-class LootController extends Controller
+class LootController extends AdvancedController
 {
-    // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
-    public function behaviors()
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_MAINLOOT  = 'mainloot';
+    const ACTION_CATEGORY  = 'category';
+    const ACTION_QUESTLOOT = 'questloot';
+    const ACTION_LOOTJSON  = 'lootjson';
+
+    /**
+     * Массив поведения контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [

@@ -10,10 +10,6 @@ use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
-use app\models\Leshy;
-use app\models\Warden;
-use app\models\Bashkir;
-use app\models\Khokhol;
 use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
@@ -35,12 +31,66 @@ use yii\data\Pagination;
 use yii\db\Query;
 use yii\web\Cookie;
 
-
+/**
+ * Class SiteController
+ * @package app\controllers
+ */
 class SiteController extends AdvancedController
 {
-    const ACTION_INDEX = 'index';
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX                  = 'index';
+    const ACTION_QUESTS                 = 'quests';
+    const ACTION_TRADERSDETAIL          = 'tradersdetail';
+    const ACTION_PRAPORPAGE             = 'praporpage';
+    const ACTION_TERAPEVTPAGE           = 'terapevtpage';
+    const ACTION_SKYPCHIKPAGE           = 'skypchikpage';
+    const ACTION_LYJNICPAGE             = 'lyjnicpage';
+    const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
+    const ACTION_MEHANICPAGE            = 'mehanicpage';
+    const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
+    const ACTION_LOCATIONS              = 'locations';
+    const ACTION_ZAVODMARKERS           = 'zavodmarkers';
+    const ACTION_FORESTMARKERS          = 'forestmarkers';
+    const ACTION_TAMOJNYAMARKERS        = 'tamojnyamarkers';
+    const ACTION_BEREGMARKERS           = 'beregmarkers';
+    const ACTION_RAZVYAZKAMARKERS       = 'razvyazkamarkers';
+    const ACTION_LABORATORYMARKERS      = 'laboratorymarkers';
+    const ACTION_ZAVOD                  = 'zavod';
+    const ACTION_FOREST                 = 'forest';
+    const ACTION_TAMOJNYA               = 'tamojnya';
+    const ACTION_BEREG                  = 'bereg';
+    const ACTION_RAZVYAZKA              = 'razvyazka';
+    const ACTION_LABORATORYTERRA        = 'laboratoryterra';
+    const ACTION_REZERV                 = 'rezerv';
+    const ACTION_LIGHTHOUSE             = 'lighthouse';
+    const ACTION_TABLE_PATRONS          = 'table-patrons';
+    const ACTION_KEYS                   = 'keys';
+    const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
+    const ACTION_NEWS                   = 'news';
+    const ACTION_NEWSDETAIL             = 'newsdetail';
+    const ACTION_ARTICLES               = 'articlers';
+    const ACTION_ARTICLESARTICLESDETAIL = 'articlesdetail';
+    const ACTION_QUESTIONS              = 'questions';
+    const ACTION_KEYSJSON               = 'keysjson';
+    const ACTION_CURRENCIES             = 'currencies';
+    const ACTION_JSONVALUTE             = 'jsonvalute';
+    const ACTION_BARTERS_PREVIEW        = 'barters-preview';
+    const ACTION_PREVIEWTRADER          = 'previewtrader';
+    const ACTION_CLSALERT               = 'clsalert';
+    const ACTION_JSDISABLED             = 'jsdisabled';
 
-    public function behaviors()
+    /** Кеширование по секундам с различными сроками **/
+    const ONE_HOUR = 3600;
+
+    /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
+    public $enableCsrfValidation;
+
+    /**
+     * Массив поведения данного контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [
@@ -57,12 +107,6 @@ class SiteController extends AdvancedController
         ];
     }
 
-    /** Кеширование по секундам с различными сроками **/
-    const ONE_HOUR = 3600;
-
-    // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
-    public $enableCsrfValidation;
-
     /** Рендер главной страницы сайта  **/
     public function actionIndex()
     {
@@ -73,11 +117,6 @@ class SiteController extends AdvancedController
     public function actionQuests() {
         $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
         return $this->render('quests/quests-main.php', ['traders' => $traders]);
-    }
-
-    /*** Заглушка для страницы Traders ***/
-    public function actionTraders301() {
-        return $this->redirect('/quests-of-traders', 301);
     }
 
     /** Рендер детальной страницы торговца **/
@@ -140,34 +179,6 @@ class SiteController extends AdvancedController
         $query =  Baraholshik::find();
         $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
-    }
-
-    /** Рендер страницы квестов Лешего **/
-    public function actionLeshypage() {
-        $query =  Leshy::find();
-        $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/leshy-quests.php', ['leshy'=>$leshy,]);
-    }
-
-    /** Рендер страницы квестов Смотрителя (Перевод зависит от локализации разработчиков) **/
-    public function actionWardenpage() {
-        $query =  Warden::find();
-        $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
-    }
-
-    /** Рендер страницы квестов Башкира **/
-    public function actionBashkirpage() {
-        $query =  Bashkir::find();
-        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/bashkir-quests.php', ['bashkir'=>$bashkir,]);
-    }
-
-    /** Рендер страницы квестов Хохла **/
-    public function actionKhokholpage() {
-        $query =  Khokhol::find();
-        $khokhol = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/khokhol-quests.php', ['khokhol'=>$khokhol,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
@@ -490,9 +501,13 @@ class SiteController extends AdvancedController
     public function actionJsdisabled() {
         return $this->render('/site/offedjs');
     }
-    
-    /** Обработчик ошибок - отображает статусы ответа сервера **/
-    public function actions()
+
+    /**
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
     {
         return [
             'error' => [

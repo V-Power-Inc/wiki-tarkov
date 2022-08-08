@@ -7,18 +7,30 @@
  */
 
 namespace app\controllers;
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\models\Items;
 use Yii;
 
-class ItemController extends Controller
+/**
+ * Class ItemController
+ * @package app\controllers
+ */
+class ItemController extends AdvancedController
 {
-    // CSRF валидация POST запросов методов этого контроллера включена
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_DETAILLOOT = 'detailloot';
+    const ACTION_PREVIEWLOOT = 'previewloot';
+
+    /** CSRF валидация POST запросов методов этого контроллера включена */
     public $enableCsrfValidation;
 
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
+    /**
+     * Кешируем все запросы из БД - храним их в кеше (Массив поведения контроллера)
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [

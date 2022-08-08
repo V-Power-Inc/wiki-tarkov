@@ -7,7 +7,7 @@
  */
 
 namespace app\controllers;
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use app\models\Clans;
 use yii\web\HttpException;
 use app\components\MessagesComponent;
@@ -17,8 +17,18 @@ use yii\helpers\Json;
 use yii\db\Query;
 use Yii;
 
-class ClanController extends Controller {
-    
+/**
+ * Class ClanController
+ * @package app\controllers
+ */
+class ClanController extends AdvancedController
+{
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX      = 'index';
+    const ACTION_ADDCLAN    = 'addclan';
+    const ACTION_SAVE       = 'save';
+    const ACTION_CLANSEARCH = 'clansearch';
+
     /*** Количество заявок для обработки в день ***/
     const ticketsDayLimit = 10;
     
