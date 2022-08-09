@@ -27,20 +27,20 @@ use Imagine\Image\Box;
 class Traders extends \yii\db\ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID = 'id';
-    const ATTR_TITLE = 'title';
-    const ATTR_PREVIEW = 'preview';
-    const ATTR_CONTENT = 'content';
-    const ATTR_URLTOQUESTS = 'urltoquests';
+    const ATTR_ID            = 'id';
+    const ATTR_TITLE         = 'title';
+    const ATTR_PREVIEW       = 'preview';
+    const ATTR_CONTENT       = 'content';
+    const ATTR_URLTOQUESTS   = 'urltoquests';
     const ATTR_BUTTON_QUESTS = 'button_quests';
     const ATTR_BUTTON_DETAIL = 'button_detail';
-    const ATTR_BG_STYLE = 'bg_style';
-    const ATTR_FULLCONTENT = 'fullcontent';
-    const ATTR_DESCRIPTION = 'description';
-    const ATTR_KEYWORDS = 'keywords';
-    const ATTR_URL = 'url';
-    const ATTR_SORTIR = 'sortir';
-    const ATTR_ENABLED = 'enabled';
+    const ATTR_BG_STYLE      = 'bg_style';
+    const ATTR_FULLCONTENT   = 'fullcontent';
+    const ATTR_DESCRIPTION   = 'description';
+    const ATTR_KEYWORDS      = 'keywords';
+    const ATTR_URL           = 'url';
+    const ATTR_SORTIR        = 'sortir';
+    const ATTR_ENABLED       = 'enabled';
 
     public $file=null;
     
