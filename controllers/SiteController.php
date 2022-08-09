@@ -3,17 +3,12 @@
 namespace app\controllers;
 
 use app\models\Mehanic;
-use app\models\Razvyazka;
 use app\models\Skypshik;
 use app\models\Lyjnic;
 use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
-use app\models\Zavod;
-use app\models\Forest;
-use app\models\Tamojnya;
-use app\models\Bereg;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -21,7 +16,6 @@ use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
 use app\models\Barters;
-use app\models\Laboratory;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
@@ -49,21 +43,6 @@ class SiteController extends AdvancedController
     const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
     const ACTION_MEHANICPAGE            = 'mehanicpage';
     const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
-    const ACTION_LOCATIONS              = 'locations';
-    const ACTION_ZAVODMARKERS           = 'zavodmarkers';
-    const ACTION_FORESTMARKERS          = 'forestmarkers';
-    const ACTION_TAMOJNYAMARKERS        = 'tamojnyamarkers';
-    const ACTION_BEREGMARKERS           = 'beregmarkers';
-    const ACTION_RAZVYAZKAMARKERS       = 'razvyazkamarkers';
-    const ACTION_LABORATORYMARKERS      = 'laboratorymarkers';
-    const ACTION_ZAVOD                  = 'zavod';
-    const ACTION_FOREST                 = 'forest';
-    const ACTION_TAMOJNYA               = 'tamojnya';
-    const ACTION_BEREG                  = 'bereg';
-    const ACTION_RAZVYAZKA              = 'razvyazka';
-    const ACTION_LABORATORYTERRA        = 'laboratoryterra';
-    const ACTION_REZERV                 = 'rezerv';
-    const ACTION_LIGHTHOUSE             = 'lighthouse';
     const ACTION_TABLE_PATRONS          = 'table-patrons';
     const ACTION_KEYS                   = 'keys';
     const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
@@ -187,126 +166,6 @@ class SiteController extends AdvancedController
         $query =  Baraholshik::find();
         $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
-    }
-
-    /** Рендер страницы со списком интерактивных карт **/
-    public function actionLocations()
-    {
-          return $this->render('maps/maps.php');
-    }
-
-    /** JSON данные с координатами маркеров Завода **/
-    public function actionZavodmarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Леса **/
-    public function actionForestmarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Таможни **/
-    public function actionTamojnyamarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Берега **/
-    public function actionBeregmarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
-    /** JSON данные с координатами маркеров Развязки **/
-    public function actionRazvyazkamarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Лаборатории **/
-    public function actionLaboratorymarkers()
-    {
-        if(Yii::$app->request->isAjax) {
-            $markers = Laboratory::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** Рендер страницы с картой завода **/
-    public function actionZavod()
-    {
-        return $this->render('maps/zavod-location.php');
-    }
-
-    /** Рендер страницы с картой Леса **/
-    public function actionForest()
-    {
-        return $this->render('maps/forest-location.php');
-    }
-
-    /** Рендер страницы с картой Таможни **/
-    public function actionTamojnya()
-    {
-        return $this->render('maps/tamojnya-location.php');
-    }
-
-    /** Рендер страницы с картой Берега **/
-    public function actionBereg()
-    {
-        return $this->render('maps/bereg-location.php');
-    }
-    
-    /** Рендер страницы с картой Развязки **/
-    public function actionRazvyazka()
-    {
-        return $this->render('maps/razvyazka-location.php');
-    }
-
-    /** Рендер страницы с картой лаборатории TerraGroup **/
-    public function actionLaboratoryterra()
-    {
-        return $this->render('maps/laboratory-location.php');
-    }
-
-    /** Рендер страницы с картой Резерва **/
-    public function actionRezerv()
-    {
-        return $this->render('maps/rezerv.php');
-    }
-
-    /** Рендер страницы с картой Резерва **/
-    public function actionLighthouse()
-    {
-        return $this->render('maps/lighthouse.php');
     }
 
     /** Рендер страницы с картой Резерва **/

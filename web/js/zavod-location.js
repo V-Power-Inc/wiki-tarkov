@@ -203,7 +203,7 @@ var token = $('meta[name=csrf-token]').attr("content");
 
 /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
     $.ajax({
-        url: '/site/zavodmarkers',
+        url: '/maps/zavodmarkers',
         dataType: 'json',
         data: {param: param, token : token},
         async: false,

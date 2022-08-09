@@ -1,6 +1,3 @@
-/** Вызываем заглушку для страницы в самом начале **/
-$('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
-
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
     center: [67, -5],
@@ -205,19 +202,6 @@ $(document).ready(function() {
     /*** Объявляем проверочные токены для Ajax ***/
     var param = $('meta[name=csrf-param]').attr("content");
     var token = $('meta[name=csrf-token]').attr("content");
-
-    /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
-    $.ajax({
-        url: '/site/forestmarkers',
-        dataType: 'json',
-        data: {param: param, token : token},
-        async: false,
-        context: document.body,
-        success: function(markers) {
-            markersData = markers;
-            $('.loader-maps-background').fadeOut();
-        }
-    });
 
     /** Отключаем на минимальном зуме кнопку минуса **/
     $('a.leaflet-control-zoom-out').addClass('leaflet-disabled');

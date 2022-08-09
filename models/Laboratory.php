@@ -19,6 +19,23 @@ namespace app\models;
  */
 class Laboratory extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID           = 'id';
+    const ATTR_NAME         = 'name';
+    const ATTR_MARKER_GROUP = 'marker_group';
+    const ATTR_COORDS_X     = 'coords_x';
+    const ATTR_COORDS_Y     = 'coords_y';
+    const ATTR_CONTENT      = 'content';
+    const ATTR_ENABLED      = 'enabled';
+    const ATTR_CUSTOMICON   = 'customicon';
+    const ATTR_EXITS_GROUP  = 'exits_group';
+    const ATTR_EXIT_ANYWAY  = 'exit_anyway';
+    const ATTR_DATE_UPDATE  = 'date_update';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     /**
      * {@inheritdoc}
      */

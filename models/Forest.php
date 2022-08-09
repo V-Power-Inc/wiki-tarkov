@@ -36,6 +36,10 @@ class Forest extends \yii\db\ActiveRecord
     const ATTR_EXIT_ANYWAY  = 'exit_anyway';
     const ATTR_DATE_UPDATE  = 'date_update';
 
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     public $file = null;
     /**
      * @inheritdoc

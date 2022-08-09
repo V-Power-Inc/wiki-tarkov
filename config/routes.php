@@ -6,6 +6,7 @@ use app\controllers\SkillsController;
 use app\controllers\ClanController;
 use app\controllers\LootController;
 use app\controllers\ItemController;
+use app\controllers\MapsController;
 
 use app\components\UrlComponent;
 use app\components\SkillsurlComponent;
@@ -24,15 +25,15 @@ return [
     'offed-js' => SiteController::routeId(SiteController::ACTION_JSDISABLED),
     'barter/preview' => SiteController::routeId(SiteController::ACTION_BARTERS_PREVIEW),
     'trader/preview' => SiteController::routeId(SiteController::ACTION_PREVIEWTRADER),
-    'maps' => SiteController::routeId(SiteController::ACTION_LOCATIONS),
-    'maps/zavod-location' => SiteController::routeId(SiteController::ACTION_ZAVOD),
-    'maps/forest-location' => SiteController::routeId(SiteController::ACTION_FOREST),
-    'maps/tamojnya-location' => SiteController::routeId(SiteController::ACTION_TAMOJNYA),
-    'maps/bereg-location' => SiteController::routeId(SiteController::ACTION_BEREG),
-    'maps/razvyazka-location' => SiteController::routeId(SiteController::ACTION_RAZVYAZKA),
-    'maps/terragroup-laboratory-location' => SiteController::routeId(SiteController::ACTION_LABORATORYTERRA),
-    'maps/rezerv-location' => SiteController::routeId(SiteController::ACTION_REZERV),
-    'maps/lighthouse-location' => SiteController::routeId(SiteController::ACTION_LIGHTHOUSE),
+    'maps' => MapsController::routeId(MapsController::ACTION_LOCATIONS),
+    'maps/zavod-location' => MapsController::routeId(MapsController::ACTION_ZAVOD),
+    'maps/forest-location' => MapsController::routeId(MapsController::ACTION_FOREST),
+    'maps/tamojnya-location' => MapsController::routeId(MapsController::ACTION_TAMOJNYA),
+    'maps/bereg-location' => MapsController::routeId(MapsController::ACTION_BEREG),
+    'maps/razvyazka-location' => MapsController::routeId(MapsController::ACTION_RAZVYAZKA),
+    'maps/terragroup-laboratory-location' => MapsController::routeId(MapsController::ACTION_LABORATORYTERRA),
+    'maps/rezerv-location' => MapsController::routeId(MapsController::ACTION_REZERV),
+    'maps/lighthouse-location' => MapsController::routeId(MapsController::ACTION_LIGHTHOUSE),
     'quests-of-traders' => SiteController::routeId(SiteController::ACTION_QUESTS),
     'quests-of-traders/prapor-quests' => SiteController::routeId(SiteController::ACTION_PRAPORPAGE),
     'quests-of-traders/terapevt-quests' => SiteController::routeId(SiteController::ACTION_TERAPEVTPAGE),
