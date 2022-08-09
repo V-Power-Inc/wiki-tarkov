@@ -6,11 +6,9 @@
  * Time: 18:12
  */
 
-namespace common\yii\validators;
+namespace app\common\validators;
 
 /**
- * Валидатор уникальности
- *
  * Class UniqueValidator
  * @package common\yii\validators
  */
