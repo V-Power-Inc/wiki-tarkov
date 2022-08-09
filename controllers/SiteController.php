@@ -29,9 +29,10 @@ use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
-use yii\web\Cookie;
 
 /**
+ * todo: Рефакторинг этого контроллера уже на подходе
+ *
  * Class SiteController
  * @package app\controllers
  */
@@ -76,7 +77,6 @@ class SiteController extends AdvancedController
     const ACTION_JSONVALUTE             = 'jsonvalute';
     const ACTION_BARTERS_PREVIEW        = 'barters-preview';
     const ACTION_PREVIEWTRADER          = 'previewtrader';
-    const ACTION_CLSALERT               = 'clsalert';
     const ACTION_JSDISABLED             = 'jsdisabled';
 
     /** Кеширование по секундам с различными сроками **/
@@ -114,14 +114,15 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер главной страницы с квестами **/
-    public function actionQuests() {
+    public function actionQuests()
+    {
         $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
         return $this->render('quests/quests-main.php', ['traders' => $traders]);
     }
 
     /** Рендер детальной страницы торговца **/
-    public function actionTradersdetail($id) {
-
+    public function actionTradersdetail($id)
+    {
         $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
 
         if($trader) {
@@ -133,63 +134,71 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер страницы квестов Прапора **/
-    public function actionPraporpage() {
+    public function actionPraporpage()
+    {
         $query =  Prapor::find();
         $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
     }
     
     /** Рендер страницы квестов Терапевта **/
-    public function actionTerapevtpage() {
+    public function actionTerapevtpage()
+    {
         $query =  Terapevt::find();
         $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
     }
 
     /** Рендер страницы квестов Скупщика **/
-    public function actionSkypchikpage() {
+    public function actionSkypchikpage()
+    {
         $query =  Skypshik::find();
         $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(30)->all();
         return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
     }
 
     /** Рендер страницы квестов Лыжника **/
-    public function actionLyjnicpage() {
+    public function actionLyjnicpage()
+    {
         $query =  Lyjnic::find();
         $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
     }
 
     /** Рендер страницы квестов Миротворца **/
-    public function actionMirotvorecpage() {
+    public function actionMirotvorecpage()
+    {
         $query =  Mirotvorec::find();
         $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
     }
 
     /** Рендер страницы квестов Механика **/
-    public function actionMehanicpage() {
+    public function actionMehanicpage()
+    {
         $query =  Mehanic::find();
         $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
     }
 
     /** Рендер страницы квестов Барахольщика **/
-    public function actionBaraholshikpage() {
+    public function actionBaraholshikpage()
+    {
         $query =  Baraholshik::find();
         $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
     }
 
     /** Рендер страницы со списком интерактивных карт **/
-    public function actionLocations() {
+    public function actionLocations()
+    {
           return $this->render('maps/maps.php');
     }
 
     /** JSON данные с координатами маркеров Завода **/
-    public function actionZavodmarkers() {
+    public function actionZavodmarkers()
+    {
         if(Yii::$app->request->isAjax) {
-          //  $dependency = Zavod::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -198,9 +207,9 @@ class SiteController extends AdvancedController
     }
 
     /** JSON данные с координатами маркеров Леса **/
-    public function actionForestmarkers() {
+    public function actionForestmarkers()
+    {
         if(Yii::$app->request->isAjax) {
-          //  $dependency = Forest::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -209,9 +218,9 @@ class SiteController extends AdvancedController
     }
 
     /** JSON данные с координатами маркеров Таможни **/
-    public function actionTamojnyamarkers() {
+    public function actionTamojnyamarkers()
+    {
         if(Yii::$app->request->isAjax) {
-          //  $dependency = Tamojnya::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -220,9 +229,9 @@ class SiteController extends AdvancedController
     }
 
     /** JSON данные с координатами маркеров Берега **/
-    public function actionBeregmarkers() {
+    public function actionBeregmarkers()
+    {
         if(Yii::$app->request->isAjax) {
-          //  $dependency = Bereg::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
             $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
         } else {
@@ -231,7 +240,8 @@ class SiteController extends AdvancedController
     }
     
     /** JSON данные с координатами маркеров Развязки **/
-    public function actionRazvyazkamarkers() {
+    public function actionRazvyazkamarkers()
+    {
         if(Yii::$app->request->isAjax) {
             $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
@@ -241,7 +251,8 @@ class SiteController extends AdvancedController
     }
 
     /** JSON данные с координатами маркеров Лаборатории **/
-    public function actionLaboratorymarkers() {
+    public function actionLaboratorymarkers()
+    {
         if(Yii::$app->request->isAjax) {
             $markers = Laboratory::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
             return Json::encode($markers);
@@ -251,47 +262,56 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер страницы с картой завода **/
-    public function actionZavod() {
+    public function actionZavod()
+    {
         return $this->render('maps/zavod-location.php');
     }
 
     /** Рендер страницы с картой Леса **/
-    public function actionForest() {
+    public function actionForest()
+    {
         return $this->render('maps/forest-location.php');
     }
 
     /** Рендер страницы с картой Таможни **/
-    public function actionTamojnya() {
+    public function actionTamojnya()
+    {
         return $this->render('maps/tamojnya-location.php');
     }
 
     /** Рендер страницы с картой Берега **/
-    public function actionBereg() {
+    public function actionBereg()
+    {
         return $this->render('maps/bereg-location.php');
     }
     
     /** Рендер страницы с картой Развязки **/
-    public function actionRazvyazka(){
+    public function actionRazvyazka()
+    {
         return $this->render('maps/razvyazka-location.php');
     }
 
     /** Рендер страницы с картой лаборатории TerraGroup **/
-    public function actionLaboratoryterra() {
+    public function actionLaboratoryterra()
+    {
         return $this->render('maps/laboratory-location.php');
     }
 
     /** Рендер страницы с картой Резерва **/
-    public function actionRezerv() {
+    public function actionRezerv()
+    {
         return $this->render('maps/rezerv.php');
     }
 
     /** Рендер страницы с картой Резерва **/
-    public function actionLighthouse() {
+    public function actionLighthouse()
+    {
         return $this->render('maps/lighthouse.php');
     }
 
     /** Рендер страницы с картой Резерва **/
-    public function actionTablePatrons() {
+    public function actionTablePatrons()
+    {
         $patrons = Patrons::find()->orderBy(['id' => SORT_DESC])->asArray()->cache(self::ONE_HOUR)->all();
         return $this->render('/site/patrons', ['patrons' => $patrons]);
     }
@@ -355,7 +375,8 @@ class SiteController extends AdvancedController
     }
     
     /** Рендер страницы списка новостей **/
-    public function actionNews() {
+    public function actionNews()
+    {
         $query =  News::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
         $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
@@ -364,7 +385,8 @@ class SiteController extends AdvancedController
     }
     
     /** Рендер детальной страницы новости **/
-    public function actionNewsdetail($id) {
+    public function actionNewsdetail($id)
+    {
         $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
             return $this->render('news/detail.php',['model' => $models]);
@@ -374,7 +396,8 @@ class SiteController extends AdvancedController
     }
     
     /** Рендер страницы списка полезных статей  **/
-    public function actionArticles() {
+    public function actionArticles()
+    {
         $query =  Articles::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
         $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
@@ -383,7 +406,8 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер детальной страницы полезной статьи **/
-    public function actionArticledetail($id) {
+    public function actionArticledetail($id)
+    {
         $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
             return $this->render('articles/detail.php',['model' => $models]);
@@ -393,7 +417,8 @@ class SiteController extends AdvancedController
     }
     
     /*** Рендер страницы справочника вопрос-ответ ***/
-    public function actionQuestions() {
+    public function actionQuestions()
+    {
         $model = Questions::find()->where(['enabled' => 1]);
 
         $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
@@ -404,7 +429,8 @@ class SiteController extends AdvancedController
     }
     
     /*** Данные о доступных ключах от дверей в формате Json - выборка только по включенным ***/
-    public function actionKeysjson($q = null) {
+    public function actionKeysjson($q = null)
+    {
         if(Yii::$app->request->isAjax) {
             $query = new Query;
 
@@ -431,7 +457,8 @@ class SiteController extends AdvancedController
     }
 
     /*** Рендер страницы справочника валют ***/
-    public function actionCurrencies() {
+    public function actionCurrencies()
+    {
         $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::ONE_HOUR)->One();
         $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::ONE_HOUR)->One();
         $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::ONE_HOUR)->One();
@@ -440,7 +467,8 @@ class SiteController extends AdvancedController
     }
     
     /*** Отдаем валюты из базы в JSON формате ***/
-    public function actionJsonvalute() {
+    public function actionJsonvalute()
+    {
         if(Yii::$app->request->isAjax) {
             $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
             return Json::encode($valutes);
@@ -450,7 +478,8 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер страницы предпросмотра детальной страницы торговца **/
-    public function actionPreviewtrader() {
+    public function actionPreviewtrader()
+    {
         if(Yii::$app->user->isGuest !== true) {
             // Отключаем CSRF валидацию POST запросов
             $this->enableCsrfValidation=false;
@@ -463,11 +492,11 @@ class SiteController extends AdvancedController
     }
 
     /*** Рендер страницы предпросмотра бартера торговцев ***/
-    public function actionBartersPreview() {
+    public function actionBartersPreview()
+    {
         if(Yii::$app->user->isGuest !== true) {
             $barter = new Barters;
             $barter->load(Yii::$app->request->post());
-
             $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
 
             return $this->render('traders/barter-preview.php', ['barter' => $barter, 'id' => $id]);
@@ -476,29 +505,9 @@ class SiteController extends AdvancedController
         }
     }
 
-    /*** Устанавливаем кукис отключающий появление уведомления в нижней части экрана ***/
-    public function actionClsalert() {
-        if(Yii::$app->request->isAjax) {
-            $cookies = Yii::$app->request->cookies;
-            $addcook = Yii::$app->response->cookies;
-
-            if(!isset($cookies['as-remind'])) {
-                $addcook->add(new Cookie([
-                    'name' => 'as-remind',
-                    'value' => 1,
-                    'expire' => time() + (10 * 365 * 24 * 60 * 60),
-                    'secure' => true,
-                ]));
-            } else {
-                throw new HttpException(404 ,'Такая страница не существует');
-            }
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
     /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
-    public function actionJsdisabled() {
+    public function actionJsdisabled()
+    {
         return $this->render('/site/offedjs');
     }
 
