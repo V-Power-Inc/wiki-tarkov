@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+// Todo: Класс возможо будет удален
 /**
  * This is the model class for table "usercoockies".
  *

@@ -22,6 +22,18 @@ use Imagine\Image\Box;
  */
 class News extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_URL         = 'url';
+    const ATTR_PREVIEW     = 'preview';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_ENABLED     = 'enabled';
+    const ATTR_DESCRIPTION = 'description';
+    const ATTR_KEYWORDS    = 'keywords';
+    const ATTR_SHORTDESC   = 'shortdesc';
+
     public $file=null;
     /**
      * @inheritdoc

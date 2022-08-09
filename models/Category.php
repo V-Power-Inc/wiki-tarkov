@@ -22,6 +22,20 @@ use yii\helpers\ArrayHelper;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID              = 'id';
+    const ATTR_TITLE           = 'title';
+    const ATTR_PARENT_CATEGORY = 'parent_category';
+    const ATTR_URL             = 'url';
+    const ATTR_CONTENT         = 'content';
+    const ATTR_DESCRIPTION     = 'description';
+    const ATTR_KEYWORDS        = 'keywords';
+    const ATTR_ENABLED         = 'enabled';
+    const ATTR_SORTIR          = 'sortir';
+
+    /** Константы связей таблицы */
+    const RELATION_ITEMS       = 'items';
+
     /**
      * @inheritdoc
      */

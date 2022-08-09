@@ -19,7 +19,16 @@ use yii\imagine\Image;
  */
 class Clans extends \yii\db\ActiveRecord
 {
-    
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_DESCRIPTION = 'description';
+    const ATTR_PREVIEW     = 'preview';
+    const ATTR_LINK        = 'link';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_DATE_UPDATE = 'date_update';
+    const ATTR_MODERATED   = 'moderated';
+
     public $searchclan;
     public $file;
     public $reCaptcha = false;

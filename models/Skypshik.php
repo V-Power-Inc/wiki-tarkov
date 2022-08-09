@@ -19,6 +19,15 @@ use Imagine\Image\Box;
  */
 class Skypshik extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TAB_NUMBER  = 'tab_number';
+    const ATTR_TITLE       = 'title';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_DATE_EDIT   = 'date_edit';
+    const ATTR_PREVIEW     = 'preview';
+
     public $file=null;
     /**
      * {@inheritdoc}

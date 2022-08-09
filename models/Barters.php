@@ -15,6 +15,15 @@ namespace app\models;
  */
 class Barters extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID           = 'id';
+    const ATTR_TITLE        = 'title';
+    const ATTR_SITE_TITLE   = 'site_title';
+    const ATTR_TRADER_GROUP = 'trader_group';
+    const ATTR_CONTENT      = 'content';
+    const ATTR_DATE_CREATE  = 'date_create';
+    const ATTR_ENABLED      = 'enabled';
+
     /**
      * {@inheritdoc}
      */

@@ -26,17 +26,33 @@ use yii\web\UploadedFile;
  * @property string $module_weapon
  * @property string $creator
  *
- * @property ItemsToDoorkeys[] $itemsToDoorkeys
- * @property ItemsToLyjnic[] $itemsToLyjnics
- * @property ItemsToMechanik[] $itemsToMechaniks
- * @property ItemsToMirotvorec[] $itemsToMirotvorecs
- * @property ItemsToPrapor[] $itemsToPrapors
- * @property ItemsToTerapevt[] $itemsToTerapevts
  * @property Category $parentcat
  * @property Category $maintcat
  */
 class Items extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID            = 'id';
+    const ATTR_TITLE         = 'title';
+    const ATTR_PREVIEW       = 'preview';
+    const ATTR_SHORTDESC     = 'shortdesc';
+    const ATTR_CONTENT       = 'content';
+    const ATTR_DATE_CREATE   = 'date_create';
+    const ATTR_DATE_UPDATE   = 'date_update';
+    const ATTR_ACTIVE        = 'active';
+    const ATTR_URL           = 'url';
+    const ATTR_DESCRIPTION   = 'description';
+    const ATTR_KEYWORDS      = 'keywords';
+    const ATTR_PARENTCAT_ID  = 'parentcat_id';
+    const ATTR_QUEST_ITEM    = 'quest_item';
+    const ATTR_TRADER_GROUP  = 'trader_group';
+    const ATTR_SEARCH_WORDS  = 'search_words';
+    const ATTR_MODULE_WEAPON = 'module_weapon';
+    const ATTR_CREATOR       = 'creator';
+
+    /** Константы связей таблицы */
+    const RELATION_PARENTCAT = 'parentcat';
+    const RELATION_MAINCAT   = 'maincat';
 
     public $file = null;
     public $questitem;
@@ -80,7 +96,6 @@ class Items extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    // todo: Продумать функицонал связывающий модуль и пушки, на которые он цепляется
     public function attributeLabels()
     {
         return [
@@ -117,54 +132,6 @@ class Items extends \yii\db\ActiveRecord
             $this->preview = '/' . $catalog;
             Image::getImagine()->open($catalog)->save($catalog);
         }
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToDoorkeys()
-    {
-        return $this->hasMany(ItemsToDoorkeys::class, ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToLyjnics()
-    {
-        return $this->hasMany(ItemsToLyjnic::class, ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToMechaniks()
-    {
-        return $this->hasMany(ItemsToMechanik::class, ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToMirotvorecs()
-    {
-        return $this->hasMany(ItemsToMirotvorec::class, ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToPrapors()
-    {
-        return $this->hasMany(ItemsToPrapor::class, ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToTerapevts()
-    {
-        return $this->hasMany(ItemsToTerapevt::class, ['item_id' => 'id']);
     }
 
     /** Получаем список всех предметов из таблицы справочника лута **/

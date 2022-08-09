@@ -13,6 +13,12 @@ namespace app\models;
  */
 class Currencies extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID      = 'id';
+    const ATTR_TITLE   = 'title';
+    const ATTR_VALUE   = 'value';
+    const ATTR_ENABLED = 'enabled';
+
     /**
      * @inheritdoc
      */

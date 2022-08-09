@@ -23,8 +23,20 @@ use Imagine\Image\Box;
  */
 class Doorkeys extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID           = 'id';
+    const ATTR_NAME         = 'name';
+    const ATTR_MAPGROUP     = 'mapgroup';
+    const ATTR_CONTENT      = 'content';
+    const ATTR_ACTIVE       = 'active';
+    const ATTR_DATE_CREATE  = 'date_create';
+    const ATTR_PREVIEW      = 'preview';
+    const ATTR_SHORTCONTENT = 'shortcontent';
+    const ATTR_URL          = 'url';
+    const ATTR_DESCRIPTION  = 'description';
+    const ATTR_KEYWORDS     = 'keywords';
     
-/** Переменная файла превьюшки ключа **/
+    /** Переменная файла превьюшки ключа **/
     public $file=null;
     public $doorkey;
     

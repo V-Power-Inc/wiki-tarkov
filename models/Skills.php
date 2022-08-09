@@ -24,6 +24,20 @@ use Imagine\Image\Box;
  */
 class Skills extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID            = 'id';
+    const ATTR_TITLE         = 'title';
+    const ATTR_CATEGORY      = 'category';
+    const ATTR_URL           = 'url';
+    const ATTR_ENABLED       = 'enabled';
+    const ATTR_DESCRIPTION   = 'description';
+    const ATTR_KEYWORDS      = 'keywords';
+    const ATTR_PREVIEW       = 'preview';
+    const ATTR_CONTENT       = 'content';
+    const ATTR_SHORT_DESC    = 'short_desc';
+
+    /** Константы связей таблицы */
+    const RELATION_CATEGORY0 = 'category0';
     
     public $file;
     

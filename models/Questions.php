@@ -13,6 +13,13 @@ namespace app\models;
  */
 class Questions extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_ENABLED     = 'enabled';
+
     /**
      * @inheritdoc
      */

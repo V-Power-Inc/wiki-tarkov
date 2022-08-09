@@ -17,6 +17,8 @@ use Imagine\Image\Box;
  * @property string $course
  * @property string $bgstyle
  */
+
+// todo: Проверить, возможно этот класс нужно удалить
 class Info extends \yii\db\ActiveRecord
 {
     
