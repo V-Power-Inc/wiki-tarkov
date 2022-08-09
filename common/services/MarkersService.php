@@ -13,7 +13,6 @@ use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
 use app\models\Bereg;
-use app\models\Laboratory;
 use yii\web\HttpException;
 use yii\helpers\Json;
 use Yii;
