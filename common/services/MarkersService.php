@@ -40,6 +40,7 @@ class MarkersService
 
             $markers = '';
 
+            // todo: Вынести эти запросы в методы моделей и пометить класс как Final
             switch ($map_title) {
                 case 'zavod':
                     $markers = Zavod::find()->asArray()->andWhere([Zavod::ATTR_ENABLED => Zavod::TRUE])->cache(self::ONE_HOUR)->all();
