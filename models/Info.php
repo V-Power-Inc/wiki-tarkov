@@ -18,10 +18,18 @@ use Imagine\Image\Box;
  * @property string $bgstyle
  */
 
-// todo: Проверить, возможно этот класс нужно удалить
+
 class Info extends \yii\db\ActiveRecord
 {
-    
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID      = 'id';
+    const ATTR_TITLE   = 'title';
+    const ATTR_CONTENT = 'content';
+    const ATTR_PREVIEW = 'preview';
+    const ATTR_ENABLED = 'enabled';
+    const ATTR_COURSE  = 'course';
+    const ATTR_BGSTYLE = 'bgstyle';
+
     public $file;
     /**
      * @inheritdoc
