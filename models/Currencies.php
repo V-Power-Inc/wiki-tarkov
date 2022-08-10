@@ -2,7 +2,10 @@
 
 namespace app\models;
 
+use Yii;
 
+use app\common\validators\StringValidator;
+use app\common\validators\IntegerValidator;
 /**
  * This is the model class for table "currencies".
  *
@@ -33,8 +36,9 @@ class Currencies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['value', 'enabled'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [static::ATTR_VALUE, IntegerValidator::class],
+            [static::ATTR_ENABLED, IntegerValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
@@ -52,4 +56,36 @@ class Currencies extends \yii\db\ActiveRecord
             static::ATTR_ENABLED => 'Значение активно'
         ];
     }
+
+    /**
+     * Достаем курс доллара из таблицы
+     *
+     * @return array
+     */
+    public static function takeDollar(): array
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Доллар'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
+    /**
+     * Достаем курс евро из таблицы
+     *
+     * @return array
+     */
+    public static function takeEuro(): array
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Евро'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
+    /**
+     * Достаем курс биткоина из таблицы
+     *
+     * @return array
+     */
+    public static function takeBitkoin(): array
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
+
 }

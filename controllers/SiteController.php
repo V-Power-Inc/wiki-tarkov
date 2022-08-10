@@ -339,14 +339,18 @@ class SiteController extends AdvancedController
         }
     }
 
-    /*** Рендер страницы справочника валют ***/
-    public function actionCurrencies()
+    /**
+     * Рендер страницы справочника валют
+     *
+     * @return string
+     */
+    public function actionCurrencies(): string
     {
-        $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::ONE_HOUR)->One();
-        $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::ONE_HOUR)->One();
-        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::ONE_HOUR)->One();
-        
-        return $this->render('currencies/index.php', ['dollar' => $dollar, 'euro' => $euro, 'bitkoin' => $bitkoin]);
+        return $this->render('currencies/index.php', [
+            'dollar' => Currencies::takeDollar(),
+            'euro' => Currencies::takeEuro(),
+            'bitkoin' => Currencies::takeBitkoin()
+        ]);
     }
     
     /*** Отдаем валюты из базы в JSON формате ***/
