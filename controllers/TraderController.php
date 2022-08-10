@@ -6,6 +6,8 @@
  * Time: 22:23
  */
 
+// todo: Дополнить комментариями последние методы
+
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
@@ -40,7 +42,7 @@ class TraderController extends AdvancedController
     const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
     const ACTION_MEHANICPAGE            = 'mehanicpage';
     const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
-    const ACTION_BARTERS_PREVIEW        = 'barters-preview';
+    const ACTION_BARTERS_PREVIEW        = 'barterspreview';
     const ACTION_PREVIEWTRADER          = 'previewtrader';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
@@ -142,7 +144,7 @@ class TraderController extends AdvancedController
     }
 
     /** Рендер страницы предпросмотра детальной страницы торговца **/
-    public function actionPreviewtrader()
+    public function actionPreviewtrader(): string
     {
         if(Yii::$app->user->isGuest !== true) {
             // Отключаем CSRF валидацию POST запросов
@@ -156,7 +158,7 @@ class TraderController extends AdvancedController
     }
 
     /*** Рендер страницы предпросмотра бартера торговцев ***/
-    public function actionBartersPreview()
+    public function actionBarterspreview(): string
     {
         if(Yii::$app->user->isGuest !== true) {
             $barter = new Barters;

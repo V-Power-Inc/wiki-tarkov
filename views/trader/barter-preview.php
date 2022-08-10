@@ -32,7 +32,7 @@ $this->title = 'Предпросмотр: '.$barter->title;
             <div class="news-shortitem bg-white">
 
                 <div class="text-left">
-                    <p>Тут обычно контент с картинками, не обращаем внимания.</p>
+                    <p>Страница предпросмотра зарендерилась:</p>
                 </div>
 
                 <div class="barters-block">

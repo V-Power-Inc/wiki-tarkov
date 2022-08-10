@@ -20,7 +20,7 @@ return [
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
     'table-patrons' => SiteController::routeId(SiteController::ACTION_TABLE_PATRONS),
     'offed-js' => SiteController::routeId(SiteController::ACTION_JSDISABLED),
-    'barter/preview' => TraderController::routeId(TraderController::ACTION_BARTERS_PREVIEW),
+    'trader/barterspreview' => TraderController::routeId(TraderController::ACTION_BARTERS_PREVIEW),
     'trader/previewtrader' => TraderController::routeId(TraderController::ACTION_PREVIEWTRADER),
     'maps' => MapsController::routeId(MapsController::ACTION_LOCATIONS),
     'maps/zavod-location' => MapsController::routeId(MapsController::ACTION_ZAVOD),

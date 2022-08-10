@@ -57,7 +57,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAss
     <?php ActiveForm::end(); ?>
 
     <!-- Форма для отображения превью -->
-    <form id="prev-form-barters" action="/site/barters-preview" method="post" target="blank">
+    <form id="prev-form-barters" action="/trader/barterspreview" method="post" target="blank">
         <input type="hidden" name="_csrf" value="">
         <input type="hidden" id="trader-id" name="Barters[id]">
         <input type="hidden" id="trader-title" name="Barters[title]">
