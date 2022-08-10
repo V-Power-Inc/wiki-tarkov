@@ -4,6 +4,12 @@ namespace app\models;
 
 use yii\imagine\Image;
 use yii\web\UploadedFile;
+use app\common\validators\RequiredValidator;
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\StringValidator;
+use app\common\validators\ExistValidator;
 
 /**
  * This is the model class for table "items".
@@ -71,18 +77,57 @@ class Items extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'shortdesc', 'url', 'description', 'creator'], 'required'],
-            [['shortdesc', 'content', 'search_words', 'module_weapon'], 'string'],
-            [['date_create', 'date_update', 'keywords', 'trader_group', 'quest_item'], 'safe'],
-            [['file'], 'image'],
-            [['active', 'parentcat_id'], 'integer'],
-            [['title', 'preview', 'creator'], 'string', 'max' => 255],
-            [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['parentcat_id' => 'id']],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SHORTDESC, RequiredValidator::class],
+            [static::ATTR_SHORTDESC, StringValidator::class],
+
+            [static::ATTR_URL, RequiredValidator::class],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+
+            [static::ATTR_CREATOR, RequiredValidator::class],
+            [static::ATTR_CREATOR, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_SEARCH_WORDS, StringValidator::class],
+
+            [static::ATTR_MODULE_WEAPON, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_UPDATE, SafeValidator::class],
+
+            [static::ATTR_KEYWORDS, SafeValidator::class],
+
+            [static::ATTR_TRADER_GROUP, SafeValidator::class],
+
+            [static::ATTR_QUEST_ITEM, SafeValidator::class],
+
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_PARENTCAT_ID, IntegerValidator::class],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_PARENTCAT_ID,
+                ExistValidator::class,
+                ExistValidator::ATTR_SKIP_ON_ERROR => true,
+                ExistValidator::ATTR_TARGET_CLASS => Category::class,
+                ExistValidator::ATTR_TARGET_ATTRIBUTE =>
+                    [static::ATTR_PARENTCAT_ID => Category::ATTR_ID]
+            ],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 

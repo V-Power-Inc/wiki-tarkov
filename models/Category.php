@@ -2,8 +2,10 @@
 
 namespace app\models;
 
-use Yii;
-use yii\helpers\ArrayHelper;
+use app\common\validators\RequiredValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\StringValidator;
+use app\common\validators\UniqueValidator;
 
 /**
  * This is the model class for table "category".
@@ -45,16 +47,34 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'description', 'sortir', 'url'], 'required'],
-            [['parent_category', 'enabled', 'sortir'], 'integer'],
-            [['content'], 'string'],
-            [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
-            [['title', 'url', 'description', 'keywords'], 'string', 'max' => 255],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SORTIR, RequiredValidator::class],
+            [static::ATTR_SORTIR, IntegerValidator::class],
+
+            [static::ATTR_URL, RequiredValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_PARENT_CATEGORY, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
