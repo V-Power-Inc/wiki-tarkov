@@ -107,7 +107,8 @@ class Doorkeys extends \yii\db\ActiveRecord
             static::ATTR_PREVIEW => 'Превьюшка ключа',
             static::ATTR_URL => 'Url адрес',
             static::ATTR_DESCRIPTION => 'Метатег description',
-            static::ATTR_KEYWORDS => 'Метатег keywords'
+            static::ATTR_KEYWORDS => 'Метатег keywords',
+            static::DOORKEY => ''
         ];
     }
 
