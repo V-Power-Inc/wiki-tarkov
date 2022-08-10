@@ -102,7 +102,11 @@ class Articles extends \yii\db\ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек квеста ***/
+    /**
+     * Загрузка и сохранение превьюшек квеста
+     *
+     * @return void
+     */
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');
         if($fileImg !== null) {
