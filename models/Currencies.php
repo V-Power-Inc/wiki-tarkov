@@ -6,6 +6,8 @@ use Yii;
 
 use app\common\validators\StringValidator;
 use app\common\validators\IntegerValidator;
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "currencies".
  *
@@ -60,9 +62,9 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * Достаем курс доллара из таблицы
      *
-     * @return array
+     * @return ActiveRecord
      */
-    public static function takeDollar(): array
+    public static function takeDollar(): ActiveRecord
     {
         return static::find()->where([static::ATTR_TITLE => 'Доллар'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -70,9 +72,9 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * Достаем курс евро из таблицы
      *
-     * @return array
+     * @return ActiveRecord
      */
-    public static function takeEuro(): array
+    public static function takeEuro(): ActiveRecord
     {
         return static::find()->where([static::ATTR_TITLE => 'Евро'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -80,9 +82,9 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * Достаем курс биткоина из таблицы
      *
-     * @return array
+     * @return ActiveRecord
      */
-    public static function takeBitkoin(): array
+    public static function takeBitkoin(): ActiveRecord
     {
         return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }

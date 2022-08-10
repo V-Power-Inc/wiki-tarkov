@@ -6,7 +6,7 @@
  * Time: 17:20
  */
 
-namespace common\yii\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Валидатор Email адресов

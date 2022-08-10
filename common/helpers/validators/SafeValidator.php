@@ -6,7 +6,7 @@
  * Time: 17:54
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Safe валидатор

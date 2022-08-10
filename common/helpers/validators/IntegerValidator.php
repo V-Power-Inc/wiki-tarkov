@@ -6,7 +6,7 @@
  * Time: 17:12
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Integer валидатор

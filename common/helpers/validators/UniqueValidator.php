@@ -6,7 +6,7 @@
  * Time: 18:12
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Class UniqueValidator

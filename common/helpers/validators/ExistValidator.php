@@ -6,7 +6,7 @@
  * Time: 17:32
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Валидатор существования ExistValidator

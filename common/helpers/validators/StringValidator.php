@@ -6,7 +6,7 @@
 * Time: 18:30
 */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Строковый валидатор

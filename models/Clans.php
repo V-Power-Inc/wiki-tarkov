@@ -1,17 +1,15 @@
 <?php
 
-// todo: Разобраться здесь с рекапчка DepreCated классом
-
 namespace app\models;
 
 use yii\web\UploadedFile;
 use yii\imagine\Image;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\StringValidator;
 use himiklab\yii2\recaptcha\ReCaptchaValidator;
-use app\common\validators\SafeValidator;
-use app\common\validators\FileValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\RequiredValidator;
-use app\common\validators\StringValidator;
 
 /**
  * This is the model class for table "clans".
@@ -66,21 +64,16 @@ class Clans extends \yii\db\ActiveRecord
     {
         return [
             [static::ATTR_TITLE, RequiredValidator::class],
-            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
 
             [static::ATTR_DESCRIPTION, RequiredValidator::class],
-            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
-
-            [static::SEARCHCLAN, StringValidator::class],
-            [static::SEARCHCLAN, SafeValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
             [static::ATTR_DATE_UPDATE, SafeValidator::class],
 
             [static::ATTR_MODERATED, IntegerValidator::class],
-
-            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
 
             [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
 

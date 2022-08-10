@@ -6,7 +6,7 @@
  * Time: 18:15
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 use yii\validators\FilterValidator;
 

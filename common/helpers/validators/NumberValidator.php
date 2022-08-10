@@ -6,7 +6,7 @@
  * Time: 17:02
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Числовой валидатор

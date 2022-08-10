@@ -6,7 +6,6 @@
  * Time: 12:24
  */
 
-use app\components\AlertComponent;
 use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Список кланов";

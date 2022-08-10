@@ -6,7 +6,7 @@
  * Time: 18:03
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Required валидатор

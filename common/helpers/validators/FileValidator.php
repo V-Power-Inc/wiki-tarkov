@@ -6,7 +6,7 @@
  * Time: 17:57
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Файловый валидатор

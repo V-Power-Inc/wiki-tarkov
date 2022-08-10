@@ -6,7 +6,7 @@
  * Time: 18:54
  */
 
-namespace app\common\validators;
+namespace app\common\helpers\validators;
 
 /**
  * Валидатор дефолтного значения
