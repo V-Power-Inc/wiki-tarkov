@@ -14,6 +14,7 @@
  * restrictedAlertsUrls - список урлов, на которых не выводится компонент AlertComponent а также заголовок с H1 (
  * В таких урлах это реализовано отдельно)
  *
+ * cacheTime - массив со временем кеширования (Ключ название - значение количество в секундах)
  *
  */
 
@@ -32,5 +33,8 @@ return [
         '/maps/terragroup-laboratory-location',
         '/maps/rezerv-location',
         '/maps/lighthouse-location'
+    ],
+    'cacheTime' => [
+        'one_hour' => 3600
     ]
 ];

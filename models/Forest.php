@@ -5,6 +5,7 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use Yii;
 
 /**
  * This is the model class for table "forest".
@@ -101,4 +102,15 @@ class Forest extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Получаем список маркеров для данной интерактивной карты
+     *
+     * @return array
+     */
+    public static function takeMarkers(): array
+    {
+        return static::find()->asArray()->andWhere([static::ATTR_ENABLED => static::TRUE])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+    }
+
 }

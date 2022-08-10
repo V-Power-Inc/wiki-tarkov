@@ -21,12 +21,10 @@ use Yii;
  * Класс для работы с маркерами для интерактивных карта
  *
  * Class MarkersService
+ * @package app\common\services
  */
-class MarkersService
+final class MarkersService
 {
-    /** @var int - константа кеширования в секундах (1 час) */
-    const ONE_HOUR = 3600;
-
     /**
      * Метод вытаскивает маркеры, по переданному значению
      *
@@ -40,22 +38,21 @@ class MarkersService
 
             $markers = '';
 
-            // todo: Вынести эти запросы в методы моделей и пометить класс как Final
             switch ($map_title) {
                 case 'zavod':
-                    $markers = Zavod::find()->asArray()->andWhere([Zavod::ATTR_ENABLED => Zavod::TRUE])->cache(self::ONE_HOUR)->all();
+                    $markers = Zavod::takeMarkers();
                     break;
                 case 'tamojnya':
-                    $markers = Tamojnya::find()->asArray()->andWhere([Tamojnya::ATTR_ENABLED => Tamojnya::TRUE])->cache(self::ONE_HOUR)->all();
+                    $markers = Tamojnya::takeMarkers();
                     break;
                 case 'forest':
-                    $markers = Forest::find()->asArray()->andWhere([Forest::ATTR_ENABLED => Forest::TRUE])->cache(self::ONE_HOUR)->all();
+                    $markers = Forest::takeMarkers();
                     break;
                 case 'bereg':
-                    $markers = Bereg::find()->asArray()->andWhere([Bereg::ATTR_ENABLED => Bereg::TRUE])->cache(self::ONE_HOUR)->all();
+                    $markers = Bereg::takeMarkers();
                     break;
                 case 'razvyazka':
-                    $markers = Razvyazka::find()->asArray()->andWhere([Razvyazka::ATTR_ENABLED => Razvyazka::TRUE])->cache(self::ONE_HOUR)->all();
+                    $markers = Razvyazka::takeMarkers();
                     break;
             }
 
