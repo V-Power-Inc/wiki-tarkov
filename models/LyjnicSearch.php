@@ -13,7 +13,7 @@ class LyjnicSearch extends Lyjnic
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'tab_number'], 'integer'],

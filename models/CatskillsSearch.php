@@ -13,7 +13,7 @@ class CatskillsSearch extends Catskills
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'sortir', 'enabled'], 'integer'],

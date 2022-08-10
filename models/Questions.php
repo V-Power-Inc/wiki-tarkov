@@ -31,7 +31,7 @@ class Questions extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['content'], 'string'],

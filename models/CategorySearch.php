@@ -13,7 +13,7 @@ class CategorySearch extends Category
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'parent_category', 'enabled'], 'integer'],

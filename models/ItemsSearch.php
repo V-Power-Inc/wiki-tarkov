@@ -13,7 +13,7 @@ class ItemsSearch extends Items
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'active', 'parentcat_id'], 'integer'],

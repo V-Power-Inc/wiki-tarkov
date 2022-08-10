@@ -13,7 +13,7 @@ class BartersSearch extends Barters
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled'], 'integer'],

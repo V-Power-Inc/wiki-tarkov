@@ -13,7 +13,7 @@ class ForestSearch extends Forest
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled'], 'integer'],

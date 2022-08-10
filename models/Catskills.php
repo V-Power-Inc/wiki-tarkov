@@ -54,7 +54,7 @@ class Catskills extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['content', 'bg_style'], 'string'],

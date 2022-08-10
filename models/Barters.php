@@ -40,7 +40,7 @@ class Barters extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title', 'trader_group', 'site_title'], 'required'],

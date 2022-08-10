@@ -13,7 +13,7 @@ class ClansSearch extends Clans
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'moderated'], 'integer'],

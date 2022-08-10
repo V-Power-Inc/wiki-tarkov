@@ -13,7 +13,7 @@ class DoorkeysSearch extends Doorkeys
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'active'], 'integer'],

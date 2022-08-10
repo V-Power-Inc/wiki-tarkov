@@ -13,7 +13,7 @@ class SkillsSearch extends Skills
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'category', 'enabled'], 'integer'],

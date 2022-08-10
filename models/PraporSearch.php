@@ -13,7 +13,7 @@ class PraporSearch extends Prapor
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'tab_number'], 'integer'],

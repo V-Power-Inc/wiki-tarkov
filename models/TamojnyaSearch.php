@@ -13,7 +13,7 @@ class TamojnyaSearch extends Tamojnya
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled', 'exit_anyway'], 'integer'],

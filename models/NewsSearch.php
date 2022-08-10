@@ -13,7 +13,7 @@ class NewsSearch extends News
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled'], 'integer'],

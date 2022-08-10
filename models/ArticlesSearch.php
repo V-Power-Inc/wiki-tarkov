@@ -13,7 +13,7 @@ class ArticlesSearch extends Articles
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled'], 'integer'],

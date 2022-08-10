@@ -13,7 +13,7 @@ class InfoSearch extends Info
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'enabled'], 'integer'],

@@ -13,7 +13,7 @@ class CurrenciesSearch extends Currencies
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['id', 'value', 'enabled'], 'integer'],

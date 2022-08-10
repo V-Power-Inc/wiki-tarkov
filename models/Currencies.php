@@ -33,7 +33,7 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [static::ATTR_VALUE, IntegerValidator::class],
