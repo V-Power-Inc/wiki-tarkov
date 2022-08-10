@@ -25,7 +25,7 @@ use yii\data\Pagination;
 use yii\db\Query;
 
 /**
- * todo: Рефакторинг этого контроллера уже на подходе
+ * Основной контроллер сайта (Изначально существующий)
  *
  * Class SiteController
  * @package app\controllers
@@ -110,7 +110,8 @@ class SiteController extends AdvancedController
         $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
 
         if($trader) {
-            // takeBartersByTitle(Traders::takeTraderByUrl($url)->title)
+            // todo: Узнать сможем ли мы обратиться так как указано в комментарие ниже
+            // Barters::takeBartersByTitle(Traders::takeTraderByUrl($url)->title)
             $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
             return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
         } else {

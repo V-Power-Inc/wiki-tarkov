@@ -2,6 +2,12 @@
 
 namespace app\models;
 
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\NumberValidator;
+use app\common\validators\RequiredValidator;
+use app\common\validators\StringValidator;
+
 /**
  * This is the model class for table "laboratory".
  *
@@ -45,17 +51,33 @@ class Laboratory extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['coords_x', 'coords_y'], 'number'],
-            [['content'], 'string'],
-            [['enabled', 'exit_anyway'], 'integer'],
-            [['date_update'], 'safe'],
-            [['name', 'marker_group', 'exits_group'], 'string', 'max' => 100],
-            [['customicon'], 'string', 'max' => 255],
+            [static::ATTR_NAME, RequiredValidator::class],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+
+            [static::ATTR_COORDS_X, NumberValidator::class],
+
+            [static::ATTR_COORDS_Y, NumberValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+
+            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+
+            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_LENGTH => 50],
+
+            [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
