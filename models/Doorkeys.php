@@ -5,6 +5,11 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use app\common\validators\RequiredValidator;
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\StringValidator;
 
 /**
  * This is the model class for table "doorkeys".
@@ -53,17 +58,33 @@ class Doorkeys extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['name', 'description', 'keywords'], 'required'],
-            [['content','shortcontent', 'url'], 'string'],
-            [['active'], 'integer'],
-            [['date_create', 'mapgroup'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['file'], 'image'],
+            [static::ATTR_NAME, RequiredValidator::class],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+
+            [static::ATTR_KEYWORDS, RequiredValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_SHORTCONTENT, StringValidator::class],
+
+            [static::ATTR_URL, StringValidator::class],
+
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_MAPGROUP, SafeValidator::class],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 

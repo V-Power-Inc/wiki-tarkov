@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\common\validators\RequiredValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\StringValidator;
 use Yii;
 /**
  * This is the model class for table "barters".
@@ -38,18 +42,27 @@ class Barters extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['title', 'trader_group', 'site_title'], 'required'],
-            [['content'], 'string'],
-            [['date_create'], 'safe'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 255],
-            [['site_title'], 'string', 'max' => 255],
-            [['trader_group'], 'string', 'max' => 255],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_TRADER_GROUP, RequiredValidator::class],
+            [static::ATTR_TRADER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SITE_TITLE, RequiredValidator::class],
+            [static::ATTR_SITE_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class]
         ];
     }
 

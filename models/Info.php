@@ -5,6 +5,9 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\StringValidator;
 
 /**
  * This is the model class for table "info".
@@ -43,16 +46,26 @@ class Info extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['content', 'course'], 'string'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 100],
-            [['preview', 'bgstyle'], 'string', 'max' => 200],
-            [['file'], 'image'],
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_COURSE, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 200],
+
+            [static::ATTR_BGSTYLE, StringValidator::class, StringValidator::ATTR_MAX => 200],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
