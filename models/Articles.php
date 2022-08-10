@@ -5,6 +5,10 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use app\common\validators\RequiredValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\StringValidator;
+use app\common\validators\SafeValidator;
 
 /**
  * This is the model class for table "articles".
@@ -47,18 +51,32 @@ class Articles extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'description'], 'required'],
-            [['content', 'shortdesc'], 'string'],
-            [['date_create'], 'safe'],
-            [['enabled'], 'integer'],
-            [['title', 'description', 'keywords'], 'string', 'max' => 255],
-            [['url'], 'string', 'max' => 100],
-            [['preview'], 'string', 'max' => 200],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_SHORTDESC, StringValidator::class],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 200]
         ];
     }
 
