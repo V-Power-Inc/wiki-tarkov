@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\common\validators\RequiredValidator;
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\StringValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -60,16 +64,42 @@ class Traders extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['title', 'sortir'], 'required'],
-            [['bg_style', 'content', 'fullcontent'], 'string'],
-            [['enabled', 'sortir'], 'integer'],
-            [['file'], 'image'],
-            [['title', 'preview', 'urltoquets', 'button_quests', 'button_detail', 'description', 'keywords', 'url'], 'string', 'max' => 255],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SORTIR, RequiredValidator::class],
+            [static::ATTR_SORTIR, IntegerValidator::class],
+
+            [static::ATTR_BG_STYLE, StringValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_FULLCONTENT, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_URLTOQUESTS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_BUTTON_QUESTS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_BUTTON_DETAIL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
