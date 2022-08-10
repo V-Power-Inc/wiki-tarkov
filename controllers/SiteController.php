@@ -93,18 +93,25 @@ class SiteController extends AdvancedController
     }
 
     /** Рендер главной страницы с квестами **/
-    public function actionQuests()
+    public function actionQuests(): string
     {
-        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
-        return $this->render('quests/quests-main.php', ['traders' => $traders]);
+        return $this->render('quests/quests-main.php', ['traders' => Traders::takeTraders()]);
     }
 
-    /** Рендер детальной страницы торговца **/
-    public function actionTradersdetail($id)
+    /**
+     * Рендер детальной страницы торговца
+     *
+     * @param $id - url адрес торговца
+     * @return string
+     * @throws HttpException
+     */
+    public function actionTradersdetail($id): string
     {
+        // Traders::takeTraderByUrl($url)
         $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
 
         if($trader) {
+            // takeBartersByTitle(Traders::takeTraderByUrl($url)->title)
             $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
             return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
         } else {
@@ -112,63 +119,77 @@ class SiteController extends AdvancedController
         }
     }
 
-    /** Рендер страницы квестов Прапора **/
-    public function actionPraporpage()
+    /**
+     * Рендер страницы квестов Прапора
+     *
+     * @return string
+     */
+    public function actionPraporpage(): string
     {
-        $query =  Prapor::find();
-        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
-    }
-    
-    /** Рендер страницы квестов Терапевта **/
-    public function actionTerapevtpage()
-    {
-        $query =  Terapevt::find();
-        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
+        return $this->render('quests/prapor-quests.php', ['prapor'=>Prapor::takeQuests()]);
     }
 
-    /** Рендер страницы квестов Скупщика **/
-    public function actionSkypchikpage()
+    /**
+     * Рендер страницы квестов Терапевта
+     *
+     * @return string
+     */
+    public function actionTerapevtpage(): string
     {
-        $query =  Skypshik::find();
-        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(30)->all();
-        return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
+        return $this->render('quests/terapevt-quests.php', ['terapevt'=>Terapevt::takeQuests()]);
     }
 
-    /** Рендер страницы квестов Лыжника **/
-    public function actionLyjnicpage()
+    /**
+     * Рендер страницы квестов Скупщика
+     *
+     * @return string
+     */
+    public function actionSkypchikpage(): string
     {
-        $query =  Lyjnic::find();
-        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
+        return $this->render('quests/skypshik-quests.php', ['skypshik'=>Skypshik::takeQuests()]);
     }
 
-    /** Рендер страницы квестов Миротворца **/
-    public function actionMirotvorecpage()
+    /**
+     * Рендер страницы квестов Лыжника
+     *
+     * @return string
+     */
+    public function actionLyjnicpage(): string
     {
-        $query =  Mirotvorec::find();
-        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
+        return $this->render('quests/lyjnic-quests.php', ['lyjnic'=>Lyjnic::takeQuests()]);
     }
 
-    /** Рендер страницы квестов Механика **/
-    public function actionMehanicpage()
+    /**
+     * Рендер страницы квестов Миротворца
+     *
+     * @return string
+     */
+    public function actionMirotvorecpage(): string
     {
-        $query =  Mehanic::find();
-        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
+        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>Mirotvorec::takeQuests()]);
     }
 
-    /** Рендер страницы квестов Барахольщика **/
-    public function actionBaraholshikpage()
+    /**
+     * Рендер страницы квестов Механика
+     *
+     * @return string
+     */
+    public function actionMehanicpage(): string
     {
-        $query =  Baraholshik::find();
-        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
+        return $this->render('quests/mehanic-quests.php', ['mehanic'=>Mehanic::takeQuests()]);
     }
 
-    /** Рендер страницы с картой Резерва **/
+    /**
+     * Рендер страницы квестов Барахольщика
+     *
+     * @return string
+     */
+    public function actionBaraholshikpage(): string
+    {
+        return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>Baraholshik::takeQuests()]);
+    }
+
+    /** Рендер страницы с таблицей патронов **/
     public function actionTablePatrons()
     {
         $patrons = Patrons::find()->orderBy(['id' => SORT_DESC])->asArray()->cache(self::ONE_HOUR)->all();

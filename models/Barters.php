@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 /**
  * This is the model class for table "barters".
  *
@@ -23,6 +24,10 @@ class Barters extends \yii\db\ActiveRecord
     const ATTR_CONTENT      = 'content';
     const ATTR_DATE_CREATE  = 'date_create';
     const ATTR_ENABLED      = 'enabled';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
 
     /**
      * {@inheritdoc}
@@ -65,4 +70,22 @@ class Barters extends \yii\db\ActiveRecord
             static::ATTR_ENABLED => 'Активен'
         ];
     }
+
+    /**
+     * Получаем бартеры для торговца по названию торговца title
+     *
+     * @param string $title
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function takeBartersByTitle(string $title): array
+    {
+        return static::find()
+            ->where(['like', static::ATTR_TITLE, $title])
+            ->andWhere([static::ATTR_ENABLED => static::TRUE])
+            ->orderby([static::ATTR_ID=>SORT_ASC])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->asArray()
+            ->all();
+    }
+
 }

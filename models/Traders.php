@@ -5,6 +5,7 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use Yii;
 
 /**
  * This is the model class for table "traders".
@@ -45,6 +46,10 @@ class Traders extends \yii\db\ActiveRecord
     /** @var string $file - Переменная файла превьюшки */
     public $file;
     const FILE = 'file';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
     
     /**
      * @inheritdoc
@@ -104,4 +109,26 @@ class Traders extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(130, 130))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Получаем всех активных торговцев
+     *
+     * @return array
+     */
+    public static function takeTraders(): array
+    {
+        return static::find()->where([static::ATTR_ENABLED => static::TRUE])->orderby([static::ATTR_SORTIR=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->asArray()->all();
+    }
+
+    /**
+     * Ищем активного торговца по параметру url
+     *
+     * @param string $url - url параметр (строка)
+     * @return array
+     */
+    public static function takeTraderByUrl(string $url): array
+    {
+        return static::find()->where([static::ATTR_URL=>$url])->andWhere([static::ATTR_ENABLED => 1])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
 }

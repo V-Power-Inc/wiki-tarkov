@@ -18,7 +18,7 @@ use yii\helpers\Json;
 use Yii;
 
 /**
- * Класс для работы с маркерами для интерактивных карта
+ * Класс для работы с маркерами для интерактивных карт
  *
  * Class MarkersService
  * @package app\common\services

@@ -5,6 +5,7 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use Yii;
 
 /**
  * This is the model class for table "lyjnic".
@@ -83,4 +84,15 @@ class Lyjnic extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Получаем квесты данного торговца
+     *
+     * @return array
+     */
+    public static function takeQuests(): array
+    {
+        return static::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+    }
+
 }
