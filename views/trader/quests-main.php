@@ -36,7 +36,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block; z-index: 100">
                     <h2 class="mobile-text-center">
                         <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
-                            <a href="/trader/<?= $trader['url'] ?>"><?= $trader['title'] ?></a>
+                            <a href="/traders/<?= $trader['url'] ?>"><?= $trader['title'] ?></a>
                         <?php else :?>
                             <a><?= $trader['title'] ?></a>
                         <?php endif; ?>
@@ -45,7 +45,7 @@ $this->registerMetaTag([
                 <div class="col-lg-2 col-md-2 col-sm-2 mobile-text-center">
 
                     <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
-                        <a href="/trader/<?= $trader['url'] ?>"><img class="image-trader" src="<?= $trader['preview'] ?>" style="max-width:100%;" alt="<?= $trader['title'] ?>"></a>
+                        <a href="/traders/<?= $trader['url'] ?>"><img class="image-trader" src="<?= $trader['preview'] ?>" style="max-width:100%;" alt="<?= $trader['title'] ?>"></a>
                     <?php else :?>
                         <a><img class="image-trader" src="<?= $trader['preview'] ?>" style="max-width:100%;" alt="<?= $trader['title'] ?>"></a>
                     <?php endif; ?>
@@ -60,7 +60,7 @@ $this->registerMetaTag([
                         <?php endif; ?>
 
                         <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
-                            <a class="btn btn-default main-link float-left mobile-btn-margin" href="/trader/<?= $trader['url'] ?>"><?= $trader['button_detail'] ?></a>
+                            <a class="btn btn-default main-link float-left mobile-btn-margin" href="/traders/<?= $trader['url'] ?>"><?= $trader['button_detail'] ?></a>
                         <?php endif; ?>
                     </p>
                 </div>

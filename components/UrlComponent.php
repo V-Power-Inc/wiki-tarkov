@@ -33,7 +33,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
                 return ['site/articledetail',['id'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'trader') {
+        } elseif ($ppp[0] == 'traders') {
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
                 return ['trader/tradersdetail',['id'=>$matches[3]]];
             }

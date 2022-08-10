@@ -96,7 +96,7 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
 
 
     <!-- Форма для отображения превью -->
-    <form id="prev-form" action="/trader/previewtrader" method="post" target="blank">
+    <form id="prev-form" action="/traders/previewtrader" method="post" target="blank">
         <input type="hidden" id="text-title" name="Traders[title]">
         <input type="hidden" id="text-preview" name="Traders[preview]" value = '<?=$model->preview?>'>
         <input type="hidden" id="text-content" name="Traders[content]">
