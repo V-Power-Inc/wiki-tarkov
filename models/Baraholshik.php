@@ -6,6 +6,10 @@ use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use Yii;
+use app\common\validators\IntegerValidator;
+use app\common\validators\StringValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\FileValidator;
 
 /**
  * This is the model class for table "baraholshik".
@@ -42,16 +46,26 @@ class Baraholshik extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['tab_number'], 'integer'],
-            [['content'], 'string'],
-            [['date_create', 'date_edit'], 'safe'],
-            [['file'], 'image'],
-            [['title', 'preview'], 'string', 'max' => 100],
+            [static::ATTR_TAB_NUMBER, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_EDIT, SafeValidator::class],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image'],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 100]
         ];
     }
 

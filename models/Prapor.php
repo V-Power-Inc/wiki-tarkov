@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\StringValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -42,16 +46,26 @@ class Prapor extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['content'], 'string'],
-            [['tab_number'], 'integer'],
-            [['date_create', 'date_edit', 'preview'], 'safe'],
-            [['file'], 'image'],
-            [['title'], 'string', 'max' => 100],
+            [static::ATTR_TAB_NUMBER, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_EDIT, SafeValidator::class],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image'],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 100]
         ];
     }
 
