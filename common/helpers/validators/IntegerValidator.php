@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Integer валидатор
  *
  * Class IntegerValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class IntegerValidator extends NumberValidator {
     const ATTR_MIN            = 'min';

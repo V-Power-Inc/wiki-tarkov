@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Валидатор существования ExistValidator
  *
  * Class ExistValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class ExistValidator extends \yii\validators\ExistValidator {
 	const ATTR_TARGET_CLASS              = 'targetClass';

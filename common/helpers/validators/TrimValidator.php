@@ -14,7 +14,7 @@ use yii\validators\FilterValidator;
  * Обрезающий символы валидатор
  *
  * Class TrimValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class TrimValidator extends FilterValidator {
     public $filter      = 'trim';

@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 
-use app\common\validators\StringValidator;
+use app\common\helpers\validators\StringValidator;
 /**
  * This is the model class for table "patrons".
  *

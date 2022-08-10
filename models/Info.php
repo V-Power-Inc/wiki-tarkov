@@ -5,9 +5,9 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
-use app\common\validators\FileValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\StringValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * This is the model class for table "info".

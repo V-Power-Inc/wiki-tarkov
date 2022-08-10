@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Строковый валидатор
  *
  * Class StringValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class StringValidator extends \yii\validators\StringValidator {
 	const ATTR_MIN       = 'min';

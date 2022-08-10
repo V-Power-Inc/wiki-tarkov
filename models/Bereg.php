@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use app\common\validators\RequiredValidator;
-use app\common\validators\NumberValidator;
-use app\common\validators\FileValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\SafeValidator;
-use app\common\validators\StringValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\NumberValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;

@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use app\common\validators\RequiredValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\StringValidator;
-use app\common\validators\UniqueValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\UniqueValidator;
 
 /**
  * This is the model class for table "category".

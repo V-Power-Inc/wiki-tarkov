@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use app\common\validators\RequiredValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\SafeValidator;
-use app\common\validators\StringValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 use Yii;
 /**
  * This is the model class for table "barters".

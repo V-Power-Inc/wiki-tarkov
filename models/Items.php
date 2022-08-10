@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\imagine\Image;
 use yii\web\UploadedFile;
-use app\common\validators\RequiredValidator;
-use app\common\validators\FileValidator;
-use app\common\validators\IntegerValidator;
-use app\common\validators\SafeValidator;
-use app\common\validators\StringValidator;
-use app\common\validators\ExistValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\ExistValidator;
 
 /**
  * This is the model class for table "items".

@@ -4,8 +4,8 @@ namespace app\models;
 
 use Yii;
 
-use app\common\validators\StringValidator;
-use app\common\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\IntegerValidator;
 use yii\db\ActiveRecord;
 
 /**

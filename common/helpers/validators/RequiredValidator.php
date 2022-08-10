@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Required валидатор
  *
  * Class RequiredValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class RequiredValidator extends \yii\validators\RequiredValidator {
 	const ATTR_ON          = 'on';

@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Числовой валидатор
  *
  * Class NumberValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class NumberValidator extends \yii\validators\NumberValidator {
 	const ATTR_MIN            = 'min';

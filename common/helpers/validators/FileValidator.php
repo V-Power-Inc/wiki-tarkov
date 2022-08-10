@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Файловый валидатор
  *
  * Class FileValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class FileValidator extends \yii\validators\FileValidator
 {

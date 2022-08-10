@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Safe валидатор
  *
  * Class SafeValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class SafeValidator extends \yii\validators\SafeValidator {
 	const ATTR_ON = 'on';

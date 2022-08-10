@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Валидатор дефолтного значения
  *
  * Class DefaultValueValidator
- * @package app\common\validators
+ * @package app\common\helpers\validators
  */
 class DefaultValueValidator extends \yii\validators\DefaultValueValidator {
     const ATTR_VALUE = 'value';
