@@ -189,11 +189,14 @@ class SiteController extends AdvancedController
         return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>Baraholshik::takeQuests()]);
     }
 
-    /** Рендер страницы с таблицей патронов **/
-    public function actionTablePatrons()
+    /**
+     * Рендер страницы с таблицей патронов
+     *
+     * @return string
+     */
+    public function actionTablePatrons(): string
     {
-        $patrons = Patrons::find()->orderBy(['id' => SORT_DESC])->asArray()->cache(self::ONE_HOUR)->all();
-        return $this->render('/site/patrons', ['patrons' => $patrons]);
+        return $this->render('/site/patrons', ['patrons' => Patrons::takePatrons()]);
     }
     
     /** Рендер страницы с наборами ключей **/
