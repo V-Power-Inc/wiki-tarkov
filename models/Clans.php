@@ -1,9 +1,17 @@
 <?php
 
+// todo: Разобраться здесь с рекапчка DepreCated классом
+
 namespace app\models;
 
 use yii\web\UploadedFile;
 use yii\imagine\Image;
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
+use app\common\validators\SafeValidator;
+use app\common\validators\FileValidator;
+use app\common\validators\IntegerValidator;
+use app\common\validators\RequiredValidator;
+use app\common\validators\StringValidator;
 
 /**
  * This is the model class for table "clans".
@@ -50,23 +58,33 @@ class Clans extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'description'], 'required'],
-            [['link'], 'string'],
-            [['searchclan'], 'string'],
-            [['searchclan'], 'safe'],
-            [['date_create'], 'safe'],
-            [['date_update'], 'safe'],
-            [['moderated'], 'integer'],
-            [['title'], 'string', 'max' => 100],
-            [['description'], 'string', 'max' => 300],
-            [['preview'], 'string', 'max' => 255],
-            [['file'], 'file', 'extensions' => 'png, jpg'],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::class, 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
+
+            [static::SEARCHCLAN, StringValidator::class],
+            [static::SEARCHCLAN, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_UPDATE, SafeValidator::class],
+
+            [static::ATTR_MODERATED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
+
+            [static::RECAPTCHA, ReCaptchaValidator::class, 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
         ];
     }
 
