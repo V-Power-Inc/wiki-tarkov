@@ -168,7 +168,8 @@ class Items extends \yii\db\ActiveRecord
             static::ATTR_SEARCH_WORDS => 'Слова синонимы (livesearch)',
             static::ATTR_DATE_UPDATE => 'Дата последнего обновления',
             static::ATTR_CREATOR => 'Создан пользователем',
-            static::FILE => 'Превьюшка предмета'
+            static::FILE => 'Превьюшка предмета',
+            static::QUESTITEM => ''
         ];
     }
 

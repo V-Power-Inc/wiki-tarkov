@@ -2,20 +2,11 @@
 
 namespace app\controllers;
 
-use app\models\Mehanic;
-use app\models\Skypshik;
-use app\models\Lyjnic;
-use app\models\Terapevt;
-use app\models\Prapor;
-use app\models\Mirotvorec;
-use app\models\Baraholshik;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
-use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
-use app\models\Barters;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
@@ -34,15 +25,6 @@ class SiteController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX                  = 'index';
-    const ACTION_QUESTS                 = 'quests';
-    const ACTION_TRADERSDETAIL          = 'tradersdetail';
-    const ACTION_PRAPORPAGE             = 'praporpage';
-    const ACTION_TERAPEVTPAGE           = 'terapevtpage';
-    const ACTION_SKYPCHIKPAGE           = 'skypchikpage';
-    const ACTION_LYJNICPAGE             = 'lyjnicpage';
-    const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
-    const ACTION_MEHANICPAGE            = 'mehanicpage';
-    const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
     const ACTION_TABLE_PATRONS          = 'table-patrons';
     const ACTION_KEYS                   = 'keys';
     const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
@@ -53,8 +35,6 @@ class SiteController extends AdvancedController
     const ACTION_QUESTIONS              = 'questions';
     const ACTION_KEYSJSON               = 'keysjson';
     const ACTION_CURRENCIES             = 'currencies';
-    const ACTION_BARTERS_PREVIEW        = 'barters-preview';
-    const ACTION_PREVIEWTRADER          = 'previewtrader';
     const ACTION_JSDISABLED             = 'jsdisabled';
     const ACTION_JSONVALUTE             = 'jsonvalute';
 
@@ -90,104 +70,6 @@ class SiteController extends AdvancedController
     public function actionIndex()
     {
         return $this->render('index');
-    }
-
-    /** Рендер главной страницы с квестами **/
-    public function actionQuests(): string
-    {
-        return $this->render('quests/quests-main.php', ['traders' => Traders::takeTraders()]);
-    }
-
-    /**
-     * Рендер детальной страницы торговца
-     *
-     * @param $id - url адрес торговца
-     * @return string
-     * @throws HttpException
-     */
-    public function actionTradersdetail($id): string
-    {
-        // Traders::takeTraderByUrl($url)
-        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-
-        if($trader) {
-            // todo: Узнать сможем ли мы обратиться так как указано в комментарие ниже
-            // Barters::takeBartersByTitle(Traders::takeTraderByUrl($url)->title)
-            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
-            return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /**
-     * Рендер страницы квестов Прапора
-     *
-     * @return string
-     */
-    public function actionPraporpage(): string
-    {
-        return $this->render('quests/prapor-quests.php', ['prapor'=>Prapor::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Терапевта
-     *
-     * @return string
-     */
-    public function actionTerapevtpage(): string
-    {
-        return $this->render('quests/terapevt-quests.php', ['terapevt'=>Terapevt::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Скупщика
-     *
-     * @return string
-     */
-    public function actionSkypchikpage(): string
-    {
-        return $this->render('quests/skypshik-quests.php', ['skypshik'=>Skypshik::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Лыжника
-     *
-     * @return string
-     */
-    public function actionLyjnicpage(): string
-    {
-        return $this->render('quests/lyjnic-quests.php', ['lyjnic'=>Lyjnic::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Миротворца
-     *
-     * @return string
-     */
-    public function actionMirotvorecpage(): string
-    {
-        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>Mirotvorec::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Механика
-     *
-     * @return string
-     */
-    public function actionMehanicpage(): string
-    {
-        return $this->render('quests/mehanic-quests.php', ['mehanic'=>Mehanic::takeQuests()]);
-    }
-
-    /**
-     * Рендер страницы квестов Барахольщика
-     *
-     * @return string
-     */
-    public function actionBaraholshikpage(): string
-    {
-        return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>Baraholshik::takeQuests()]);
     }
 
     /**
@@ -360,34 +242,6 @@ class SiteController extends AdvancedController
         if(Yii::$app->request->isAjax) {
             $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
             return Json::encode($valutes);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** Рендер страницы предпросмотра детальной страницы торговца **/
-    public function actionPreviewtrader()
-    {
-        if(Yii::$app->user->isGuest !== true) {
-            // Отключаем CSRF валидацию POST запросов
-            $this->enableCsrfValidation=false;
-            $trader = new Traders;
-            $trader->load(Yii::$app->request->post());
-            return $this->render('traders/trader-preview.php', ['trader' => $trader]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /*** Рендер страницы предпросмотра бартера торговцев ***/
-    public function actionBartersPreview()
-    {
-        if(Yii::$app->user->isGuest !== true) {
-            $barter = new Barters;
-            $barter->load(Yii::$app->request->post());
-            $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
-
-            return $this->render('traders/barter-preview.php', ['barter' => $barter, 'id' => $id]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

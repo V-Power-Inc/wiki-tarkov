@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
+use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -36,7 +37,7 @@ class Traders extends \yii\db\ActiveRecord
     const ATTR_TITLE         = 'title';
     const ATTR_PREVIEW       = 'preview';
     const ATTR_CONTENT       = 'content';
-    const ATTR_URLTOQUESTS   = 'urltoquests';
+    const ATTR_URLTOQUETS   = 'urltoquets';
     const ATTR_BUTTON_QUESTS = 'button_quests';
     const ATTR_BUTTON_DETAIL = 'button_detail';
     const ATTR_BG_STYLE      = 'bg_style';
@@ -87,7 +88,7 @@ class Traders extends \yii\db\ActiveRecord
 
             [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_URLTOQUESTS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [static::ATTR_URLTOQUETS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [static::ATTR_BUTTON_QUESTS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
@@ -115,7 +116,7 @@ class Traders extends \yii\db\ActiveRecord
             static::ATTR_TITLE => 'Имя торговца',
             static::ATTR_PREVIEW => 'Превьюшка торговца',
             static::ATTR_CONTENT => 'Содержимое',
-            static::ATTR_URLTOQUESTS => 'Ссылка на квесты',
+            static::ATTR_URLTOQUETS => 'Ссылка на квесты',
             static::ATTR_BUTTON_QUESTS => 'Надпись на ссылке квестов',
             static::ATTR_BUTTON_DETAIL => 'Надпись на ссылке детальной страницы',
             static::ATTR_BG_STYLE => 'Фон блока',
@@ -154,9 +155,9 @@ class Traders extends \yii\db\ActiveRecord
      * Ищем активного торговца по параметру url
      *
      * @param string $url - url параметр (строка)
-     * @return array
+     * @return ActiveRecord
      */
-    public static function takeTraderByUrl(string $url): array
+    public static function takeTraderByUrl(string $url): ? ActiveRecord
     {
         return static::find()->where([static::ATTR_URL=>$url])->andWhere([static::ATTR_ENABLED => 1])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }

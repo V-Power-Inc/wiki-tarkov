@@ -10,6 +10,7 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\FileValidator;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "baraholshik".
@@ -22,7 +23,7 @@ use app\common\helpers\validators\FileValidator;
  * @property string $date_edit
  * @property string $preview
  */
-class Baraholshik extends \yii\db\ActiveRecord
+class Baraholshik extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
@@ -102,9 +103,9 @@ class Baraholshik extends \yii\db\ActiveRecord
     /**
      * Получаем квесты данного торговца
      *
-     * @return array
+     * @return ActiveRecord[]
      */
-    public static function takeQuests(): array
+    public static function takeQuests()
     {
         return static::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }

@@ -77,13 +77,13 @@ class MenuComponent
                     "/quests-of-traders/skypchik-quests",
                     "/quests-of-traders/lyjnic-quests",
                     "/quests-of-traders/mirotvorec-quests",
-                    "/traders/prapor",
-                    "/traders/terapevt",
-                    "/traders/lyjnic",
-                    "/traders/mirotvorec",
-                    "/traders/mehanic",
-                    "/traders/skupshik",
-                    "/traders/baraholshik"
+                    "/trader/prapor",
+                    "/trader/terapevt",
+                    "/trader/lyjnic",
+                    "/trader/mirotvorec",
+                    "/trader/mehanic",
+                    "/trader/skupshik",
+                    "/trader/baraholshik"
         ];
         if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'active';
@@ -166,13 +166,13 @@ class MenuComponent
                      <li class="dropdown '.$pagequests.'">
                       <a href="#" class="dropdown-toggle '.$pagequests.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Торговцы</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="/traders/prapor">Прапор</a></li>
-                        <li><a href="/traders/terapevt">Терапевт</a></li>
-                        <li><a href="/traders/skupshik">Скупщик</a></li>
-                        <li><a href="/traders/lyjnic">Лыжник</a></li>
-                        <li><a href="/traders/mirotvorec">Миротворец</a></li>
-                        <li><a href="/traders/mehanic">Механик</a></li>
-                        <li><a href="/traders/baraholshik">Барахольщик</a></li>
+                        <li><a href="/trader/prapor">Прапор</a></li>
+                        <li><a href="/trader/terapevt">Терапевт</a></li>
+                        <li><a href="/trader/skupshik">Скупщик</a></li>
+                        <li><a href="/trader/lyjnic">Лыжник</a></li>
+                        <li><a href="/trader/mirotvorec">Миротворец</a></li>
+                        <li><a href="/trader/mehanic">Механик</a></li>
+                        <li><a href="/trader/baraholshik">Барахольщик</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/quests-of-traders">Смотреть всех торговцев</a></li>
                       </ul>
