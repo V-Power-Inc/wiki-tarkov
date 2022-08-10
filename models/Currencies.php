@@ -87,5 +87,4 @@ class Currencies extends \yii\db\ActiveRecord
         return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
 
-
 }

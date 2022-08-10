@@ -53,7 +53,6 @@ class SiteController extends AdvancedController
     const ACTION_QUESTIONS              = 'questions';
     const ACTION_KEYSJSON               = 'keysjson';
     const ACTION_CURRENCIES             = 'currencies';
-    const ACTION_JSONVALUTE             = 'jsonvalute';
     const ACTION_BARTERS_PREVIEW        = 'barters-preview';
     const ACTION_PREVIEWTRADER          = 'previewtrader';
     const ACTION_JSDISABLED             = 'jsdisabled';
@@ -351,17 +350,6 @@ class SiteController extends AdvancedController
             'euro' => Currencies::takeEuro(),
             'bitkoin' => Currencies::takeBitkoin()
         ]);
-    }
-    
-    /*** Отдаем валюты из базы в JSON формате ***/
-    public function actionJsonvalute()
-    {
-        if(Yii::$app->request->isAjax) {
-            $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
-            return Json::encode($valutes);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
     }
 
     /** Рендер страницы предпросмотра детальной страницы торговца **/
