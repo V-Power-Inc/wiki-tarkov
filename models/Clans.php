@@ -29,10 +29,18 @@ class Clans extends \yii\db\ActiveRecord
     const ATTR_DATE_UPDATE = 'date_update';
     const ATTR_MODERATED   = 'moderated';
 
+    /** @var string $searchclan - Переменная для поиска клана */
     public $searchclan;
+    const SEARCHCLAN = 'searchclan';
+
+    /** @var string $file - Переменная файла превьюшки */
     public $file;
+    const FILE = 'file';
+
+    /** @var string $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
-    
+    const RECAPTCHA = 'reCaptha';
+
     /**
      * {@inheritdoc}
      */
@@ -63,22 +71,24 @@ class Clans extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название клана',
-            'description' => 'Краткое описание клана',
-            'preview' => 'Превью клана',
-            'file' => 'Превью клана',
-            'link' => 'Ссылка на сообщество клана',
-            'date_create' => 'Дата регистрации',
-            'moderated' => 'Модерация пройдена',
-            'reCaptcha' => 'Защита от спама',
-            'searchclan' => 'Поиска клана по названию',
-            'date_update' => 'Дата обновления'
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название клана',
+            static::ATTR_DESCRIPTION => 'Краткое описание клана',
+            static::ATTR_PREVIEW => 'Превью клана',
+            static::FILE => 'Превью клана',
+            static::ATTR_LINK => 'Ссылка на сообщество клана',
+            static::ATTR_DATE_CREATE => 'Дата регистрации',
+            static::ATTR_MODERATED => 'Модерация пройдена',
+            static::RECAPTCHA => 'Защита от спама',
+            static::SEARCHCLAN => 'Поиска клана по названию',
+            static::ATTR_DATE_UPDATE => 'Дата обновления'
         ];
     }
 

@@ -61,27 +61,29 @@ class Patrons extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'caliber' => 'Калибр',
-            'type' => 'Вид патрона',
-            'damage' => 'Урон',
-            'probitie' => 'Пробитие',
-            'damage_per_defence' => 'Урон по броне',
-            'speed' => 'Скорость м/с',
-            'count' => 'Снаряды кол-во',
-            'tochn' => 'Точность %',
-            'otdacha' => 'Отдача %',
-            'fragmentation' => 'Шанс фрагментации %',
-            'iznos' => 'Доп. износ оружия',
-            'blood_1' => 'Тяжелое кровотечение %',
-            'blood_2' => 'Легкое кровотечение %',
-            'rikochet' => 'Шанс рикошета',
-            'traccer' => 'Трассер',
+            static::ATTR_ID => 'ID',
+            static::ATTR_CALIBER => 'Калибр',
+            static::ATTR_TYPE => 'Вид патрона',
+            static::ATTR_DAMAGE => 'Урон',
+            static::ATTR_PROBITIE => 'Пробитие',
+            static::ATTR_DAMAGE_PER_DEFENCE => 'Урон по броне',
+            static::ATTR_SPEED => 'Скорость м/с',
+            static::ATTR_COUNT => 'Снаряды кол-во',
+            static::ATTR_TOCHN => 'Точность %',
+            static::ATTR_OTDACHA => 'Отдача %',
+            static::ATTR_FRAGMENTATION => 'Шанс фрагментации %',
+            static::ATTR_IZNOS => 'Доп. износ оружия',
+            static::ATTR_BLOOD_1 => 'Тяжелое кровотечение %',
+            static::ATTR_BLOOD_2 => 'Легкое кровотечение %',
+            static::ATTR_RIKOCHET => 'Шанс рикошета',
+            static::ATTR_TRACCER => 'Трассер'
         ];
     }
 }

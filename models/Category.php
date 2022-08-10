@@ -59,20 +59,22 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Имя категории',
-            'parent_category' => 'Родительская категория',
-            'url' => 'Url адрес категории',
-            'content' => 'Содержимое',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'sortir' => 'Сортировка',
-            'enabled' => 'Включен',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Имя категории',
+            static::ATTR_PARENT_CATEGORY => 'Родительская категория',
+            static::ATTR_URL => 'Url адрес категории',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_SORTIR => 'Сортировка',
+            static::ATTR_ENABLED => 'Включен'
         ];
     }
 

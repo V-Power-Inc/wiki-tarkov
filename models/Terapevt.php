@@ -28,7 +28,10 @@ class Terapevt extends \yii\db\ActiveRecord
     const ATTR_DATE_EDIT   = 'date_edit';
     const ATTR_PREVIEW     = 'preview';
 
-    public $file=null;
+    /** @var string $file - Переменная файла превьюшки null  */
+    public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -52,18 +55,21 @@ class Terapevt extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'tab_number' => 'Сортировка',
-            'title' => 'Название квеста',
-            'content' => 'Содержание квеста',
-            'date_create' => 'Дата создания',
-            'date_edit' => 'Дата последнего редактирования',
-            'file' => 'Файл превьюшки',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название квеста',
+            static::ATTR_CONTENT => 'Содержимое квеста',
+            static::ATTR_TAB_NUMBER => 'Сортировка',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_DATE_EDIT => 'Дата последнего редактирования',
+            static::ATTR_PREVIEW => 'Превью картинка квеста',
+            static::FILE => 'Файл превьюшки'
         ];
     }
 

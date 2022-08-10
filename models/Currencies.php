@@ -39,15 +39,17 @@ class Currencies extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название валюты',
-            'value' => 'Эквивалент в копейках (Правильный формат хранения значений валют)',
-            'enabled' => 'Значение активно',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название валюты',
+            static::ATTR_VALUE => 'Эквивалент в копейках (Правильный формат хранения значений валют)',
+            static::ATTR_ENABLED => 'Значение активно'
         ];
     }
 }

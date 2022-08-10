@@ -42,7 +42,9 @@ class Traders extends \yii\db\ActiveRecord
     const ATTR_SORTIR        = 'sortir';
     const ATTR_ENABLED       = 'enabled';
 
-    public $file=null;
+    /** @var string $file - Переменная файла превьюшки */
+    public $file;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -67,26 +69,28 @@ class Traders extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Имя торговца',
-            'preview' => 'Превьюшка торговца',
-            'content' => 'Содержимое',
-            'urltoquets' => 'Ссылка на квесты',
-            'button_quests' => 'Надпись на ссылке квестов',
-            'button_detail' => 'Надпись на ссылке детальной страницы',
-            'bg_style' => 'Фон блока',
-            'enabled' => 'Активен',
-            'file' => 'Файл превьюшки',
-            'sortir' => 'Сортировка',
-            'fullcontent' => 'Детальное содержимое',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'url' => 'Адрес детального раздела торговца',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Имя торговца',
+            static::ATTR_PREVIEW => 'Превьюшка торговца',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_URLTOQUESTS => 'Ссылка на квесты',
+            static::ATTR_BUTTON_QUESTS => 'Надпись на ссылке квестов',
+            static::ATTR_BUTTON_DETAIL => 'Надпись на ссылке детальной страницы',
+            static::ATTR_BG_STYLE => 'Фон блока',
+            static::ATTR_ENABLED => 'Активен',
+            static::ATTR_SORTIR => 'Сортировка',
+            static::ATTR_FULLCONTENT => 'Детальное содержимое',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_URL => 'Адрес детального раздела торговца',
+            static::FILE => 'Файл превьюшки'
         ];
     }
 

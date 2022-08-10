@@ -38,8 +38,10 @@ class Skills extends \yii\db\ActiveRecord
 
     /** Константы связей таблицы */
     const RELATION_CATEGORY0 = 'category0';
-    
+
+    /** @var string $file - Переменная файла превьюшки null */
     public $file;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -65,22 +67,24 @@ class Skills extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Заголовок умения',
-            'category' => 'Родительская категория',
-            'url' => 'URL адрес умения',
-            'enabled' => 'Включен',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'preview' => 'Превьюшка умения',
-            'file' => 'Превьюшка умения',
-            'content' => 'Содержание',
-            'short_desc' => 'Краткое описание',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Заголовок умения',
+            static::ATTR_CATEGORY => 'Родительская категория',
+            static::ATTR_URL => 'URL адрес умения',
+            static::ATTR_ENABLED => 'Включен',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_PREVIEW => 'Превьюшка умения',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_SHORT_DESC => 'Краткое описание',
+            static::FILE => 'Превьюшка умения'
         ];
     }
 

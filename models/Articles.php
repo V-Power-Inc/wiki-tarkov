@@ -34,8 +34,9 @@ class Articles extends \yii\db\ActiveRecord
     const ATTR_KEYWORDS    = 'keywords';
     const ATTR_SHORTDESC   = 'shortdesc';
 
-    /** Переменная файла превьюшки полезной статьи **/
-    public $file=null;
+    /** @var string $file - Переменная файла превьюшки null  */
+    public $file = null;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -62,22 +63,24 @@ class Articles extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Заголовок статьи',
-            'url' => 'Url адрес статьи',
-            'preview' => 'Превью картинка статьи',
-            'content' => 'Содержание',
-            'date_create' => 'Дата создания',
-            'enabled' => 'Статья активна',
-            'description' => 'SEO Описание',
-            'keywords' => 'SEO ключевые слова',
-            'shortdesc' => 'Короткое описание',
-            'file' => 'Превьюшка полезной статьи',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Заголовок статьи',
+            static::ATTR_URL => 'Url адрес статьи',
+            static::ATTR_PREVIEW => 'Превью картинка статьи',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ENABLED => 'Статья активна',
+            static::ATTR_DESCRIPTION => 'SEO Описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_SHORTDESC => 'Короткое описание',
+            static::FILE => 'Превьюшка полезной статьи'
         ];
     }
 

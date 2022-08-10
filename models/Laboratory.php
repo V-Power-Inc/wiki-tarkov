@@ -60,22 +60,23 @@ class Laboratory extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'marker_group' => 'Marker Group',
-            'coords_x' => 'Coords X',
-            'coords_y' => 'Coords Y',
-            'content' => 'Content',
-            'enabled' => 'Enabled',
-            'customicon' => 'Customicon',
-            'exits_group' => 'Exits Group',
-            'exit_anyway' => 'Exit Anyway',
-            'date_update' => 'Date Update',
+            static::ATTR_ID => 'ID',
+            static::ATTR_NAME => 'Имя маркера',
+            static::ATTR_MARKER_GROUP => 'Группа маркера',
+            static::ATTR_COORDS_X => 'Координаты по оси X',
+            static::ATTR_COORDS_Y => 'Координаты по оси Y',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_CUSTOMICON => 'Иконка маркера',
+            static::ATTR_EXITS_GROUP => 'Спавн был в зоне',
+            static::ATTR_ENABLED => 'Включен',
+            static::ATTR_EXIT_ANYWAY => 'Общий выход'
         ];
     }
 }

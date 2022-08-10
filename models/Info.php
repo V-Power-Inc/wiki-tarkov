@@ -30,7 +30,10 @@ class Info extends \yii\db\ActiveRecord
     const ATTR_COURSE  = 'course';
     const ATTR_BGSTYLE = 'bgstyle';
 
-    public $file;
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -54,19 +57,21 @@ class Info extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название',
-            'content' => 'Текст сообщения Таркова',
-            'preview' => 'Превьюшка биткоина',
-            'enabled' => 'Виджет активен',
-            'course' => 'Курс биткоина',
-            'bgstyle' => 'Фон сообщения',
-            'file' => 'Превьюшка биткоина',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название',
+            static::ATTR_CONTENT => 'Текст сообщения Таркова',
+            static::ATTR_PREVIEW => 'Превьюшка биткоина',
+            static::ATTR_ENABLED => 'Виджет активен',
+            static::ATTR_COURSE => 'Курс биткоина',
+            static::ATTR_BGSTYLE => 'Фон сообщения',
+            static::FILE => 'Превьюшка биткоина'
         ];
     }
 

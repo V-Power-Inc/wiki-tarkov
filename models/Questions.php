@@ -42,16 +42,18 @@ class Questions extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название вопроса',
-            'content' => 'Ответ на вопрос',
-            'date_create' => 'Дата создания',
-            'enabled' => 'Включен',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название вопроса',
+            static::ATTR_CONTENT => 'Ответ на вопрос',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ENABLED => 'Включен'
         ];
     }
 }

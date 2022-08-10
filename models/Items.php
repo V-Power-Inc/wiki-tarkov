@@ -54,8 +54,13 @@ class Items extends \yii\db\ActiveRecord
     const RELATION_PARENTCAT = 'parentcat';
     const RELATION_MAINCAT   = 'maincat';
 
+    /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
+    const FILE = 'file';
+
+    /** @var string $questitem - Переменная квестового предмета */
     public $questitem;
+    const QUESTITEM = 'questitem';
 
     /**
      * @inheritdoc
@@ -94,32 +99,31 @@ class Items extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название',
-            'preview' => 'Превьюшка предмета',
-            'shortdesc' => 'Короткое описание',
-            'content' => 'Содержимое',
-            'date_create' => 'Дата создания',
-            'active' => 'Лут активен',
-            'parentcat_id' => 'Родительская категория',
-            'file' => 'Превьюшка предмета',
-            'url' => 'URL адрес',
-            'maincat_id' => 'Корневая категория',
-            'fullurl' => 'Полный URL адрес',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'trader_group' => 'Относится к торговцам',
-            'quest_item' => 'Квестовый предмет',
-            'questitem' => '',
-            'module_weapon' => 'Оружия связанные с модулем',
-            'search_words' => 'Слова синонимы (livesearch)',
-            'date_update' => 'Дата последнего обновления',
-            'creator' => 'Создан пользователем'
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название',
+            static::ATTR_PREVIEW => 'Превьюшка предмета',
+            static::ATTR_SHORTDESC => 'Короткое описание',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ACTIVE => 'Лут активен',
+            static::ATTR_PARENTCAT_ID => 'Родительская категория',
+            static::ATTR_URL => 'URL адрес',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_TRADER_GROUP => 'Относится к торговцам',
+            static::ATTR_QUEST_ITEM => 'Квестовый предмет',
+            static::ATTR_MODULE_WEAPON => 'Оружия связанные с модулем',
+            static::ATTR_SEARCH_WORDS => 'Слова синонимы (livesearch)',
+            static::ATTR_DATE_UPDATE => 'Дата последнего обновления',
+            static::ATTR_CREATOR => 'Создан пользователем',
+            static::FILE => 'Превьюшка предмета'
         ];
     }
 
@@ -146,8 +150,9 @@ class Items extends \yii\db\ActiveRecord
         return $activeLoot;
     }
 
-    /*** Ниже получаем родительскую категорию ***/
     /**
+     * Ниже получаем родительскую категорию
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getParentcat()

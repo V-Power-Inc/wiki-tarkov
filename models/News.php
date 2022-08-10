@@ -34,7 +34,10 @@ class News extends \yii\db\ActiveRecord
     const ATTR_KEYWORDS    = 'keywords';
     const ATTR_SHORTDESC   = 'shortdesc';
 
-    public $file=null;
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -60,22 +63,24 @@ class News extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название новости',
-            'url' => 'Url-адрес',
-            'preview' => 'Превьюшка новости',
-            'content' => 'Содержимое',
-            'date_create' => 'Дата создания',
-            'enabled' => 'Новость активна',
-            'file' => 'Превьюшка новости',
-            'description' => 'Метатег description',
-            'keywords' => 'Метатег keywords',
-            'shortdesc' => 'Краткое описание',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название новости',
+            static::ATTR_URL => 'Url-адрес',
+            static::ATTR_PREVIEW => 'Превьюшка новости',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ENABLED => 'Новость активна',
+            static::ATTR_DESCRIPTION => 'Метатег description',
+            static::ATTR_KEYWORDS => 'Метатег keywords',
+            static::ATTR_SHORTDESC => 'Краткое описание',
+            static::FILE => 'Превьюшка новости'
         ];
     }
 

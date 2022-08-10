@@ -35,10 +35,14 @@ class Doorkeys extends \yii\db\ActiveRecord
     const ATTR_URL          = 'url';
     const ATTR_DESCRIPTION  = 'description';
     const ATTR_KEYWORDS     = 'keywords';
-    
-    /** Переменная файла превьюшки ключа **/
-    public $file=null;
+
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
+
+    /** @var string $doorkey - Переменная doorkey */
     public $doorkey;
+    const DOORKEY = 'doorkey';
     
     /**
      * @inheritdoc
@@ -64,24 +68,25 @@ class Doorkeys extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название ключа',
-            'mapgroup' => 'Используется на картах',
-            'content' => 'Содержание',
-            'shortcontent' => 'Краткое описание',
-            'active' => 'Включен',
-            'date_create' => 'Дата создания',
-            'file' => 'Превьюшка ключа',
-            'preview' => 'Превьюшка ключа',
-            'url' => 'Url адрес',
-            'description' => 'Метатег description',
-            'keywords' => 'Метатег keywords',
-            'doorkey' => '',
+            static::ATTR_ID => 'ID',
+            static::ATTR_NAME => 'Название ключа',
+            static::ATTR_MAPGROUP => 'Используется на картах',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_SHORTCONTENT => 'Краткое описание',
+            static::ATTR_ACTIVE => 'Включен',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::FILE => 'Превьюшка ключа',
+            static::ATTR_PREVIEW => 'Превьюшка ключа',
+            static::ATTR_URL => 'Url адрес',
+            static::ATTR_DESCRIPTION => 'Метатег description',
+            static::ATTR_KEYWORDS => 'Метатег keywords'
         ];
     }
 

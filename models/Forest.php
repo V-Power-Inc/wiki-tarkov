@@ -40,7 +40,10 @@ class Forest extends \yii\db\ActiveRecord
     const TRUE  = 1;
     const FALSE = 0;
 
+    /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -67,22 +70,24 @@ class Forest extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Имя маркера',
-            'marker_group' => 'Группа маркера',
-            'coords_x' => 'Координаты по оси X',
-            'coords_y' => 'Координаты по оси Y',
-            'content' => 'Содержание',
-            'customicon' => 'Иконка маркера',
-            'exits_group' => 'Спавн был в зоне',
-            'file' => 'Иконка маркера',
-            'enabled' => 'Включен',
-            'exit_anyway' => 'Общий выход',
+            static::ATTR_ID => 'ID',
+            static::ATTR_NAME => 'Имя маркера',
+            static::ATTR_MARKER_GROUP => 'Группа маркера',
+            static::ATTR_COORDS_X => 'Координаты по оси X',
+            static::ATTR_COORDS_Y => 'Координаты по оси Y',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_CUSTOMICON => 'Иконка маркера',
+            static::ATTR_EXITS_GROUP => 'Спавн был в зоне',
+            static::ATTR_ENABLED => 'Включен',
+            static::ATTR_EXIT_ANYWAY => 'Общий выход',
+            static::FILE => 'Иконка маркера'
         ];
     }
 

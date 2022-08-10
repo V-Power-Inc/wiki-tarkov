@@ -49,18 +49,20 @@ class Barters extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название',
-            'site_title' => 'Название на сайте',
-            'trader_group' => 'Относится к торговцу',
-            'content' => 'Содержимое',
-            'date_create' => 'Дата создания',
-            'enabled' => 'Активен',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название',
+            static::ATTR_SITE_TITLE => 'Название на сайте',
+            static::ATTR_TRADER_GROUP => 'Относится к торговцу',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ENABLED => 'Активен'
         ];
     }
 }

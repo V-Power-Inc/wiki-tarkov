@@ -39,7 +39,9 @@ class Catskills extends \yii\db\ActiveRecord
     /** Константы связей таблицы */
     const RELATION_SKILLS  = 'skills';
 
-    public $file;
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -64,22 +66,24 @@ class Catskills extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название категории',
-            'content' => 'Содержимое категории',
-            'sortir' => 'Сортировка категории',
-            'url' => 'Url категории',
-            'description' => 'SEO описание категории',
-            'keywords' => 'SEO ключевые слова',
-            'enabled' => 'Категория активна',
-            'preview' => 'Превьюшка категории',
-            'file' => 'Превьюшка категории',
-            'bg_style' => 'Цвет фона',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название категории',
+            static::ATTR_CONTENT => 'Содержимое категории',
+            static::ATTR_SORTIR => 'Сортировка категории',
+            static::ATTR_URL => 'Url категории',
+            static::ATTR_DESCRIPTION => 'SEO описание категории',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_ENABLED => 'Категория активна',
+            static::ATTR_PREVIEW => 'Превьюшка категории',
+            static::ATTR_BG_STYLE => 'Цвет фона',
+            static::FILE => 'Превьюшка категории'
         ];
     }
 
