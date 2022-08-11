@@ -6,6 +6,7 @@
  * Time: 16:51
  */
 use yii\bootstrap\ActiveForm;
+use app\models\Doorkeys;
 
 $this->title = 'Справочник ключей Escape from Tarkov. Ключи от дверей в Таркове';
 $this->registerMetaTag([
@@ -16,6 +17,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
+/** @var $form_model Doorkeys */
 ?>
 <div class="container">
     <div class="row">
@@ -32,6 +34,7 @@ $this->registerMetaTag([
                 <span class="key-selector">Искать ключи на локации:</span>
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['site/keysearch']],'id' => 'mapsearch','method' => 'post',]) ?>
 
+                <!-- todo: Вызвать тут статический метод модели с массивом -->
                 <?= $form->field($form_model, 'doorkey')->dropDownList([
                     'Все ключи' => 'Все ключи',
                     'Лаборатория Terra Group' => 'Лаборатория Terra Group',
@@ -97,6 +100,7 @@ $this->registerMetaTag([
             <!-- Виджет дискорда -->
             <?= $this->render('/other/discord-widget.php'); ?>
 
+            <!-- todo: Это вычистить отовсюду -->
             <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
