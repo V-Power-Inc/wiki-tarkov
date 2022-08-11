@@ -9,6 +9,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use Yii;
 
 /**
  * This is the model class for table "news".
@@ -41,6 +42,10 @@ class News extends \yii\db\ActiveRecord
     /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
     const FILE = 'file';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
 
     /**
      * @inheritdoc
@@ -111,4 +116,20 @@ class News extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(200, 113))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Возвращаем активную новость по параметру url
+     *
+     * @param $id - url адрес
+     * @return array|\yii\db\ActiveRecord|null
+     */
+    public static function findActiveNewsByUrl($id)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$id])
+            ->andWhere([static::ATTR_ENABLED => static::TRUE])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
+
 }

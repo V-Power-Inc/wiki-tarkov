@@ -118,12 +118,11 @@ class SiteController extends AdvancedController
      */
     public function actionDoorkeysdetail($id): string
     {
-        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-            return $this->render('keys/detail-key.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Doorkeys::findActiveKeyByUrl($id)) {
+            return $this->render('keys/detail-key.php',['model' => Doorkeys::findActiveKeyByUrl($id)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**
@@ -149,12 +148,11 @@ class SiteController extends AdvancedController
      */
     public function actionNewsdetail($id): string
     {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-            return $this->render('news/detail.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(News::findActiveNewsByUrl($id)) {
+            return $this->render('news/detail.php',['model' => News::findActiveNewsByUrl($id)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**

@@ -315,4 +315,19 @@ class Doorkeys extends ActiveRecord
             'form_model' => $formModel
         ];
     }
+
+    /**
+     * Получаем активный ключ по параметру URL
+     *
+     * @param string $id - url адрес
+     * @return array|ActiveRecord|null
+     */
+    public static function findActiveKeyByUrl(string $id)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$id])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
 }
