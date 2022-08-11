@@ -86,53 +86,32 @@ class SiteController extends AdvancedController
         return $this->render('/site/patrons', ['patrons' => Patrons::takePatrons()]);
     }
 
-    // todo: С этим беспределом нужно разобраться
-    /** Рендер страницы с наборами ключей **/
-    public function actionKeys()
+    /**
+     * Рендер страницы с наборами ключей
+     *
+     * @return string
+     */
+    public function actionKeys(): string
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $terralab = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лаборатория Terra Group']])->asArray()->cache(60)->orderby(['name' => SORT_STRING])->limit(60)->all();
-       
         $form_model = new Doorkeys();
+
         if ($form_model->load(Yii::$app->request->post())) {
-            if(isset($_POST['Doorkeys']['doorkey'])){
-                $doorkey = $_POST['Doorkeys']['doorkey'];
-            }else{
-                $doorkey = "Все ключи";
-            }
-           
-            $words = ["Лаборатория Terra Group","Берег","Таможня","Завод","Лес","Все ключи", "3-х этажная общага на Таможне", "2-х этажная общага на Таможне", "Восточное крыло санатория", "Западное крыло санатория", "Ключи от техники", "Квестовые ключи", "Ключи от сейфов/помещений с сейфами","Развязка"];
-            /** Если пришел Берег через POST **/
-            if(in_array($doorkey,$words)) {
-                $curentWord =  $words[array_search($doorkey,$words)];
-               if($curentWord == "Все ключи"){
-                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
-               }else{
-                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
-               }
-                
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch' => $result,
-                        'arr' => $curentWord,]);
-            }
-        } else {
-            return $this->render('keys/index.php',
-                [
-                    'terralab'=>$terralab,
-                    'zavod'=>$zavod,
-                    'forest'=>$forest,
-                    'bereg'=>$bereg,
-                    'tamojnya'=>$tamojnya,
-                    'razvyazka' => $razvyazka,
-                    'form_model' => $form_model]);
+
+            $form_model->doorkey = $_POST[Doorkeys::formName][Doorkeys::DOORKEY];
+
+            $result = $form_model->doorkey == "Все ключи" ? Doorkeys::takeActiveKeys() :
+                Doorkeys::takeKeysByCategory(Doorkeys::KeysCategories()[$form_model->doorkey]);
+
+            return $this->render('keys/keyseach.php', [
+                    'form_model' => $form_model,
+                    'keysearch' => $result,
+                    'formValue' => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
+            ]);
         }
+
+        return $this->render('keys/index.php', Doorkeys::KeysDefaultRenderingArray($form_model));
     }
+
 
     /**
      * Рендер детальной страницы для вывода ключей
@@ -145,7 +124,7 @@ class SiteController extends AdvancedController
     {
         $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
-        return $this->render('keys/detail-key.php',['model' => $models]);
+            return $this->render('keys/detail-key.php',['model' => $models]);
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
         }

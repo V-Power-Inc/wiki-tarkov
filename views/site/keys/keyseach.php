@@ -18,6 +18,7 @@ $this->registerMetaTag([
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
 /** @var $form_model Doorkeys */
+/** @var $formValue string */
 ?>
 <div class="container">
     <div class="row">
@@ -52,7 +53,7 @@ $this->registerMetaTag([
                     'Ключи от сейфов/помещений с сейфами' => 'Ключи от сейфов/помещений с сейфами',
                 ],
                 [
-                    'value' => $arr
+                    'value' => $formValue
                 ]);
                 ?>
 

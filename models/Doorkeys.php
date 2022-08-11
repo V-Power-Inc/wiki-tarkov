@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use Yii;
+use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -26,7 +28,7 @@ use app\common\helpers\validators\StringValidator;
  * @property string $description
  * @property string $keywords
  */
-class Doorkeys extends \yii\db\ActiveRecord
+class Doorkeys extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -48,6 +50,13 @@ class Doorkeys extends \yii\db\ActiveRecord
     /** @var string $doorkey - Переменная doorkey */
     public $doorkey;
     const DOORKEY = 'doorkey';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
+    /** @var string Заглушка имени форм */
+    const formName = 'Doorkeys';
     
     /**
      * @inheritdoc
@@ -160,4 +169,150 @@ class Doorkeys extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Возвращаем массив объектов ключей по переданному значению
+     *
+     * @param string $category
+     * @return ActiveRecord[]
+     */
+    public static function takeKeysByCategory(string $category)
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->andWhere(['like', static::ATTR_MAPGROUP, $category])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->all();
+    }
+
+    /**
+     * Возвращаем массив объектов активных ключей
+     *
+     * @param string $category
+     * @return ActiveRecord[]
+     */
+    public static function takeActiveKeys()
+    {
+        return static::find()
+            ->where([static::ATTR_ACTIVE => 1])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Завода
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveZavodKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Завод']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Леса
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveForestKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Лес']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Берега
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveBeregKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Берег']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Таможни
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveTamojnyaKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Таможня']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Развязки
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveRazvyazkaKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Развязка']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Получаем 20 активных маркеров Лаборатории
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveLaboratoryKeys()
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere(['like', static::ATTR_MAPGROUP, ['Лаборатория Terra Group']])
+            ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->orderby([static::ATTR_NAME => SORT_STRING])
+            ->limit(20)
+            ->all();
+    }
+
+    /**
+     * Массив дефолтных загрузок на странице ключей, если категория искогомого ключа
+     * не оказалась явно указанной (Не сабмитнули форму)
+     *
+     * @param Doorkeys $formModel
+     * @return array
+     */
+    public static function KeysDefaultRenderingArray(Doorkeys $formModel): array
+    {
+        return [
+            'terralab'=> Doorkeys::takeActiveLaboratoryKeys(),
+            'zavod'=> Doorkeys::takeActiveZavodKeys(),
+            'forest'=> Doorkeys::takeActiveForestKeys(),
+            'bereg'=> Doorkeys::takeActiveBeregKeys(),
+            'tamojnya'=> Doorkeys::takeActiveTamojnyaKeys(),
+            'razvyazka' => Doorkeys::takeActiveRazvyazkaKeys(),
+            'form_model' => $formModel
+        ];
+    }
 }
