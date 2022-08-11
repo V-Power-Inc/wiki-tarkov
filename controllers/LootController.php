@@ -56,12 +56,11 @@ class LootController extends AdvancedController
     }
 
     /**
-     * Displays homepage.
+     * Рендер страницы списка категорий и общего списка лута
      *
      * @return string
      */
-    /** Рендер страницы списка категорий и общего списка лута  **/
-    public function actionMainloot()
+    public function actionMainloot(): string
     {
         $model = new Items;
         $allitems = $model->getActiveItems();
@@ -73,8 +72,14 @@ class LootController extends AdvancedController
         return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
 
-    /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($name)
+    /**
+     * Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории
+     *
+     * @param string $name - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionCategory(string $name): string
     {
         $cat = Category::find()->where(['url'=>$name])->One();
         if($cat) {
@@ -99,8 +104,12 @@ class LootController extends AdvancedController
 
     }
 
-    /*** Рендер страницы списка предметов для квестов торговцев ***/
-    public function actionQuestloot()
+    /***
+     * Рендер страницы списка предметов для квестов торговцев
+     *
+     * @return string
+     */
+    public function actionQuestloot(): string
     {
         $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->all();
 
@@ -138,10 +147,19 @@ class LootController extends AdvancedController
         }
     }
 
-    /** Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута. **/
-    /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
+    /**
+     * Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута.
+     * Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет
+     * старый символ в поле поиска предметов
+     *
+     * @param string|null $q - поисковый запрос
+     * @return string
+     * @throws HttpException
+     * @throws yii\db\Exception
+     */
 
-    public function actionLootjson($q = null) {
+    public function actionLootjson(string $q = null): string
+    {
         if(Yii::$app->request->isAjax) {
 
             $query = new Query;
@@ -169,8 +187,13 @@ class LootController extends AdvancedController
         }
     }
 
-    /** Обработчик ошибок - отображает статусы ответа сервера **/
-    public function actions()
+    /**
+     * todo: Возможно это можно удалить
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
     {
         return [
             'error' => [

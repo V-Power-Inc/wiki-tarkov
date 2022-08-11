@@ -31,17 +31,25 @@ class ClanController extends AdvancedController
 
     /*** Количество заявок для обработки в день ***/
     const ticketsDayLimit = 10;
-    
-    /*** Рендерим страницу списка кланов ***/
-    public function actionIndex() {
+
+    /**
+     * Рендерим страницу списка кланов
+     *
+     * @return string
+     */
+    public function actionIndex(): string {
         $srcclan = new Clans();
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
         $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->cache(60)->asArray()->limit(20)->all();
         $avialableTickets = self::ticketsDayLimit-$countickets;
         return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
     }
-    
-    /*** Рендерим страницу добавления нового клана ***/
+
+    /**
+     * Рендерим страницу добавления нового клана
+     *
+     * @return string|Response
+     */
     public function actionAddclan() {
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
         $avialableTickets = self::ticketsDayLimit-$countickets;
@@ -56,11 +64,18 @@ class ClanController extends AdvancedController
             return $this->render('/clans/add-clan', ['model' => $model]);
         }
     }
-    
-    /*** Обработчик сохранения данных в БД ***/
-    public function actionSave() {
+
+    /**
+     * Обработчик сохранения данных в БД
+     *
+     * @return array|Response
+     * @throws HttpException
+     */
+    public function actionSave()
+    {
         $model = new Clans();
 
+        /** Ajax валидация */
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
@@ -104,9 +119,17 @@ class ClanController extends AdvancedController
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
-    /*** Функция возвращающая название клана в формате JSON по поисковому запросу пользователя ***/
-    public function actionClansearch($q = null) {
+
+    /**
+     * Функция возвращающая название клана в формате JSON по поисковому запросу пользователя
+     *
+     * @param string|null $q - поисковый запрос
+     * @return string
+     * @throws HttpException
+     * @throws \yii\db\Exception
+     */
+    public function actionClansearch(string $q = null): string
+    {
         if(Yii::$app->request->isAjax) {
 
             $query = new Query;

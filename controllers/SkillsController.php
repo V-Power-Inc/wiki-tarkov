@@ -52,16 +52,26 @@ class SkillsController extends AdvancedController
             ],
         ];
     }
-    
-    /** Рендер страницы списка навыков персонажа **/
-    public function actionMainskills()
+
+    /**
+     * Рендер страницы списка навыков персонажа
+     *
+     * @return string
+     */
+    public function actionMainskills(): string
     {
         $catskills = Catskills::find()->where(['enabled' => 1])->cache(self::ONE_DAY)->asArray()->all();
         return $this->render('/skills/list.php', ['catskills' => $catskills,]);
     }
 
-    /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionSkillscategory($name)
+    /**
+     * Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории
+     *
+     * @param string $name - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionSkillscategory(string $name): string
     {
         $cat = Catskills::find()->where(['url'=>$name])->cache(self::ONE_DAY)->One();
         
@@ -73,9 +83,16 @@ class SkillsController extends AdvancedController
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
-    /*** Рендер детальной страницы умения ***/
-    public function actionSkillsdetail($url) {
+
+    /**
+     * Рендер детальной страницы умения
+     *
+     * @param string $url - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionSkillsdetail(string $url): string
+    {
         $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
 
         if($item) {

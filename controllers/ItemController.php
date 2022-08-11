@@ -49,9 +49,15 @@ class ItemController extends AdvancedController
             ],
         ];
     }
-    
-    /** Рендер детальной страницы лута */
-    public function actionDetailloot($item)
+
+    /**
+     * Рендер детальной страницы лута
+     *
+     * @param $item - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionDetailloot($item): string
     {
 
     $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
@@ -63,8 +69,13 @@ class ItemController extends AdvancedController
         }
     }
 
-    /** Рендер страницы предпросмотра детальной страницы лута **/
-    public function actionPreviewloot()
+    /**
+     * Рендер страницы предпросмотра детальной страницы лута
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionPreviewloot(): string
     {
         $this->enableCsrfValidation = false;
 
