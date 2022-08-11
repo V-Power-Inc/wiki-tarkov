@@ -14,6 +14,7 @@ use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use yii\data\Pagination;
 use yii\db\Query;
+use app\common\services\KeysService;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -97,14 +98,9 @@ class SiteController extends AdvancedController
 
         if ($form_model->load(Yii::$app->request->post())) {
 
-            $form_model->doorkey = $_POST[Doorkeys::formName][Doorkeys::DOORKEY];
-
-            $result = $form_model->doorkey == "Все ключи" ? Doorkeys::takeActiveKeys() :
-                Doorkeys::takeKeysByCategory(Doorkeys::KeysCategories()[$form_model->doorkey]);
-
             return $this->render('keys/keyseach.php', [
                     'form_model' => $form_model,
-                    'keysearch' => $result,
+                    'keysearch' => KeysService::takeResult($form_model),
                     'formValue' => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
             ]);
         }
