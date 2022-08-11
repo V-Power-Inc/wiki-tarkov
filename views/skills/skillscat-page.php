@@ -28,7 +28,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+    'content' => 'https://wiki-tarkov.ru'. Yii::$app->request->url,
 ]);
 
 $this->registerMetaTag([

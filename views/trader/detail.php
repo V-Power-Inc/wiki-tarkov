@@ -28,7 +28,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru/traders/'.$trader->url,
+    'content' => 'https://wiki-tarkov.ru/traders/'.$trader->url,
 ]);
 
 $this->registerMetaTag([
