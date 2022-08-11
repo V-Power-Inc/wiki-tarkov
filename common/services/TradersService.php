@@ -30,6 +30,7 @@ final class TradersService
      *
      * @param string $trader_name
      * @return array
+     * @throws HttpException
      */
     public static function takeQuests(string $trader_name): array
     {

@@ -6,8 +6,6 @@
  * Time: 22:23
  */
 
-// todo: Дополнить комментариями последние методы
-
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
@@ -52,6 +50,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Прапора
      *
      * @return string
+     * @throws HttpException
      */
     public function actionPraporpage(): string
     {
@@ -62,6 +61,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Терапевта
      *
      * @return string
+     * @throws HttpException
      */
     public function actionTerapevtpage(): string
     {
@@ -72,6 +72,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Скупщика
      *
      * @return string
+     * @throws HttpException
      */
     public function actionSkypchikpage(): string
     {
@@ -82,6 +83,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Лыжника
      *
      * @return string
+     * @throws HttpException
      */
     public function actionLyjnicpage(): string
     {
@@ -92,6 +94,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Миротворца
      *
      * @return string
+     * @throws HttpException
      */
     public function actionMirotvorecpage(): string
     {
@@ -102,6 +105,7 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Механика
      *
      * @return string
+     * @throws HttpException
      */
     public function actionMehanicpage(): string
     {
@@ -112,13 +116,18 @@ class TraderController extends AdvancedController
      * Рендер страницы квестов Барахольщика
      *
      * @return string
+     * @throws HttpException
      */
     public function actionBaraholshikpage(): string
     {
         return $this->render('baraholshik-quests', ['baraholshik'=>TradersService::takeQuests(Baraholshik::tableName())]);
     }
 
-    /** Рендер главной страницы с квестами **/
+    /**
+     * Рендер главной страницы с квестами
+     *
+     * @return string
+     */
     public function actionQuests(): string
     {
         return $this->render('quests-main', ['traders' => Traders::takeTraders()]);
@@ -143,7 +152,12 @@ class TraderController extends AdvancedController
         }
     }
 
-    /** Рендер страницы предпросмотра детальной страницы торговца **/
+    /**
+     * Рендер страницы предпросмотра детальной страницы торговца
+     *
+     * @return string
+     * @throws HttpException
+     */
     public function actionPreviewtrader(): string
     {
         if(Yii::$app->user->isGuest !== true) {
@@ -157,7 +171,12 @@ class TraderController extends AdvancedController
         }
     }
 
-    /*** Рендер страницы предпросмотра бартера торговцев ***/
+    /**
+     * Рендер страницы предпросмотра бартера торговцев
+     *
+     * @return string
+     * @throws HttpException
+     */
     public function actionBarterspreview(): string
     {
         if(Yii::$app->user->isGuest !== true) {
