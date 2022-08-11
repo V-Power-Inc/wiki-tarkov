@@ -13,8 +13,8 @@ use yii\helpers\Json;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use yii\data\Pagination;
-use yii\db\Query;
 use app\common\services\KeysService;
+use app\common\services\JsondataService;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -213,28 +213,10 @@ class SiteController extends AdvancedController
     public function actionKeysjson($q = null): string
     {
         if(Yii::$app->request->isAjax) {
-            $query = new Query;
-
-            $query->select('name, mapgroup, preview, url')
-                ->from('doorkeys')
-                ->where('name LIKE "%' . $q . '%"')
-                ->orWhere('keywords LIKE "%' . $q . '%"')
-                ->andWhere(['active' => 1])
-                ->orderBy('name')
-                ->cache(3600);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-
-            $out = [];
-
-            /** Цикл составления готовых данных по запросу пользователя в поиске **/
-            foreach ($data as $d) {
-                $out[] = ['value' => $d['name'], 'name' => $d['name'], 'preview' => $d['preview'], 'url' => $d['url'], 'mapgroup' => $d['mapgroup']];
-            }
-            return Json::encode($out);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            return JsondataService::getKeysJson($q);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**
