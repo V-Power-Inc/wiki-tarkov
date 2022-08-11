@@ -66,8 +66,12 @@ class SiteController extends AdvancedController
         ];
     }
 
-    /** Рендер главной страницы сайта  **/
-    public function actionIndex()
+    /**
+     * Рендер главной страницы сайта
+     *
+     * @return string
+     */
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
@@ -129,9 +133,15 @@ class SiteController extends AdvancedController
                     'form_model' => $form_model]);
         }
     }
-    
-    /** Рендер детальной страницы для вывода ключей  **/
-    public function actionDoorkeysdetail($id)
+
+    /**
+     * Рендер детальной страницы для вывода ключей
+     *
+     * @param $id - параметр url ключа
+     * @return string
+     * @throws HttpException
+     */
+    public function actionDoorkeysdetail($id): string
     {
         $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
@@ -140,9 +150,13 @@ class SiteController extends AdvancedController
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
-    /** Рендер страницы списка новостей **/
-    public function actionNews()
+
+    /**
+     * Рендер страницы списка новостей
+     *
+     * @return string
+     */
+    public function actionNews(): string
     {
         $query =  News::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
@@ -150,9 +164,15 @@ class SiteController extends AdvancedController
         $request = \Yii::$app->request;
         return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
-    
-    /** Рендер детальной страницы новости **/
-    public function actionNewsdetail($id)
+
+    /**
+     * Рендер детальной страницы новости
+     *
+     * @param $id - параметр url новости
+     * @return string
+     * @throws HttpException
+     */
+    public function actionNewsdetail($id): string
     {
         $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
@@ -161,9 +181,13 @@ class SiteController extends AdvancedController
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
-    /** Рендер страницы списка полезных статей  **/
-    public function actionArticles()
+
+    /**
+     * Рендер страницы списка полезных статей
+     *
+     * @return string
+     */
+    public function actionArticles(): string
     {
         $query =  Articles::find()->andWhere(['enabled' => 1]);
         $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
@@ -172,8 +196,14 @@ class SiteController extends AdvancedController
         return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
     }
 
-    /** Рендер детальной страницы полезной статьи **/
-    public function actionArticledetail($id)
+    /**
+     * Рендер детальной страницы полезной статьи
+     *
+     * @param $id - параметр url статьи
+     * @return string
+     * @throws HttpException
+     */
+    public function actionArticledetail($id): string
     {
         $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
         if($models) {
@@ -182,21 +212,32 @@ class SiteController extends AdvancedController
             throw new HttpException(404 ,'Такая страница не существует');
         }
     }
-    
-    /*** Рендер страницы справочника вопрос-ответ ***/
-    public function actionQuestions()
+
+    /**
+     * Рендер страницы справочника вопрос-ответ
+     *
+     * @return string
+     */
+    public function actionQuestions(): string
     {
         $model = Questions::find()->where(['enabled' => 1]);
 
         $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
         $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
         $request = \Yii::$app->request;
-        
+
         return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
     }
-    
-    /*** Данные о доступных ключах от дверей в формате Json - выборка только по включенным ***/
-    public function actionKeysjson($q = null)
+
+    /**
+     * Данные о доступных ключах от дверей в формате Json - выборка только по включенным
+     *
+     * @param null $q - ключевое слово запроса
+     * @return string
+     * @throws HttpException
+     * @throws \yii\db\Exception
+     */
+    public function actionKeysjson($q = null): string
     {
         if(Yii::$app->request->isAjax) {
             $query = new Query;
@@ -252,8 +293,12 @@ class SiteController extends AdvancedController
         throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
-    public function actionJsdisabled()
+    /**
+     * Рендер страницы для тех кто отключил использование JavaScript на сайте
+     *
+     * @return string
+     */
+    public function actionJsdisabled(): string
     {
         return $this->render('/site/offedjs');
     }
@@ -275,5 +320,4 @@ class SiteController extends AdvancedController
             ],
         ];
     }
-
 }
