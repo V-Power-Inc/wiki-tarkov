@@ -67,7 +67,7 @@ class Razvyazka extends \yii\db\ActiveRecord
     {
         return [
             [static::ATTR_NAME, RequiredValidator::class],
-            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => 100],
 
             [static::ATTR_COORDS_X, NumberValidator::class],
 
@@ -79,13 +79,13 @@ class Razvyazka extends \yii\db\ActiveRecord
 
             [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
 
-            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_LENGTH => 100],
+            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 100],
 
-            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_LENGTH => 50],
+            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 50],
 
-            [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
+            [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_LENGTH => StringValidator::VARCHAR_LENGTH],
+            [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
