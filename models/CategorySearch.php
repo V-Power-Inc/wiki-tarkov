@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * CategorySearch represents the model behind the search form about `app\models\Category`.
@@ -11,13 +13,26 @@ use yii\data\ActiveDataProvider;
 class CategorySearch extends Category
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'parent_category', 'enabled'], 'integer'],
-            [['title', 'url', 'content', 'description'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_PARENT_CATEGORY, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_URL, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_DESCRIPTION, SafeValidator::class],
         ];
     }
 

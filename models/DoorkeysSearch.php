@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * DoorkeysSearch represents the model behind the search form about `app\models\Doorkeys`.
@@ -11,13 +13,24 @@ use yii\data\ActiveDataProvider;
 class DoorkeysSearch extends Doorkeys
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'active'], 'integer'],
-            [['name', 'mapgroup', 'content', 'date_create'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_NAME, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_MAPGROUP, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 

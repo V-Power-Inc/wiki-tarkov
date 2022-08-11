@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * CatskillsSearch represents the model behind the search form about `app\models\Catskills`.
@@ -11,13 +13,30 @@ use yii\data\ActiveDataProvider;
 class CatskillsSearch extends Catskills
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'sortir', 'enabled'], 'integer'],
-            [['title', 'content', 'url', 'description', 'keywords', 'preview'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_SORTIR, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_URL, SafeValidator::class],
+
+            [static::ATTR_DESCRIPTION, SafeValidator::class],
+
+            [static::ATTR_KEYWORDS, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class]
         ];
     }
 

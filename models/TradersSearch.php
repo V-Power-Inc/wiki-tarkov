@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * TradersSearch represents the model behind the search form about `app\models\Traders`.
@@ -11,13 +13,28 @@ use yii\data\ActiveDataProvider;
 class TradersSearch extends Traders
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'enabled'], 'integer'],
-            [['title', 'preview', 'urltoquets', 'button_quests', 'button_detail', 'bg_style'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class],
+
+            [static::ATTR_URLTOQUETS, SafeValidator::class],
+
+            [static::ATTR_BUTTON_QUESTS, SafeValidator::class],
+
+            [static::ATTR_BUTTON_DETAIL, SafeValidator::class],
+
+            [static::ATTR_BG_STYLE, SafeValidator::class]
         ];
     }
 

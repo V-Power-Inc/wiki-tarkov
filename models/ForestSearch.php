@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\NumberValidator;
+use app\common\helpers\validators\SafeValidator;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -11,14 +14,32 @@ use yii\data\ActiveDataProvider;
 class ForestSearch extends Forest
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'enabled'], 'integer'],
-            [['name', 'marker_group', 'content'], 'safe'],
-            [['coords_x', 'coords_y'], 'number'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+
+            [static::ATTR_NAME, SafeValidator::class],
+
+            [static::ATTR_MARKER_GROUP, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_CUSTOMICON, SafeValidator::class],
+
+            [static::ATTR_EXITS_GROUP, SafeValidator::class],
+
+            [static::ATTR_COORDS_X, NumberValidator::class],
+
+            [static::ATTR_COORDS_Y, NumberValidator::class]
         ];
     }
 

@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * ClansSearch represents the model behind the search form of `app\models\Clans`.
@@ -11,13 +13,26 @@ use yii\data\ActiveDataProvider;
 class ClansSearch extends Clans
 {
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'moderated'], 'integer'],
-            [['title', 'description', 'preview', 'link', 'date_create'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_MODERATED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_DESCRIPTION, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class],
+
+            [static::ATTR_LINK, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 

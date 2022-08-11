@@ -4,6 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * ItemsSearch represents the model behind the search form about `app\models\Items`.
@@ -11,13 +13,30 @@ use yii\data\ActiveDataProvider;
 class ItemsSearch extends Items
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['id', 'active', 'parentcat_id'], 'integer'],
-            [['title', 'preview', 'shortdesc', 'content', 'date_create', 'creator'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_PARENTCAT_ID, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class],
+
+            [static::ATTR_SHORTDESC, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_CREATOR, SafeValidator::class]
         ];
     }
 
