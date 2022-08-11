@@ -16,6 +16,8 @@
  *
  * cacheTime - массив со временем кеширования (Ключ название - значение количество в секундах)
  *
+ * discordHookNewsUrl - URL веб хука для дискорда
+ *
  */
 
 return [
@@ -36,5 +38,6 @@ return [
     ],
     'cacheTime' => [
         'one_hour' => 3600
-    ]
+    ],
+    'discordHookNewsUrl' => 'https://discord.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO'
 ];

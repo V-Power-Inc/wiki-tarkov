@@ -62,8 +62,9 @@ final class NewsController extends AdminController implements CrudInterface
     }
 
     /**
-     * Creates a new News model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * При сохранении нового объекта новости, должен происходить
+     * Push в Discord канал waki-tarkov через веб-хук дискорда
+     *
      * @return mixed
      * @throws
      */
@@ -74,9 +75,9 @@ final class NewsController extends AdminController implements CrudInterface
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // Отправка уведомления в дискорд канал
+            /** Отправка уведомления в дискорд канал */
             if($_SERVER['SERVER_NAME'] !== 'dev.kfc-it.ru') {
-                $webhook = new ClientdiscordComponent('https://discord.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO');
+                $webhook = new ClientdiscordComponent(Yii::$app->params['discordHookNewsUrl']);
                 $embed = new Embeddiscord();
                 $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
                 $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
