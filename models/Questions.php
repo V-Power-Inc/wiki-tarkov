@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
+
 /**
  * This is the model class for table "questions".
  *
@@ -29,15 +33,20 @@ class Questions extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['content'], 'string'],
-            [['date_create'], 'safe'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 500],
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 500]
         ];
     }
 

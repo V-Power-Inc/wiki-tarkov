@@ -5,6 +5,10 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * This is the model class for table "news".
@@ -47,18 +51,31 @@ class News extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['title', 'description', 'keywords', 'shortdesc'], 'required'],
-            [['content'], 'string'],
-            [['date_create'], 'safe'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 150],
-            [['url'], 'string', 'max' => 255],
-            [['preview'], 'string', 'max' => 100],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 150],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+
+            [static::ATTR_KEYWORDS, RequiredValidator::class],
+
+            [static::ATTR_SHORTDESC, RequiredValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 100]
         ];
     }
 

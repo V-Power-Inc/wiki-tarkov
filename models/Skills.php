@@ -5,6 +5,11 @@ namespace app\models;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use app\common\helpers\validators\UniqueValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\ExistValidator;
 
 /**
  * This is the model class for table "skills".
@@ -52,17 +57,41 @@ class Skills extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
     public function rules(): array
     {
         return [
-            [['category', 'enabled'], 'integer'],
-            [['content', 'short_desc'], 'string'],
-            [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
-            [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
-            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Catskills::class, 'targetAttribute' => ['category' => 'id']],
-            [['file'], 'image'],
+            [static::ATTR_CATEGORY, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_SHORT_DESC, StringValidator::class],
+
+            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_CATEGORY,
+                ExistValidator::class,
+                ExistValidator::ATTR_SKIP_ON_ERROR => true,
+                ExistValidator::ATTR_TARGET_CLASS => CatSkills::class,
+                ExistValidator::ATTR_TARGET_ATTRIBUTE =>
+                    [static::ATTR_CATEGORY => CatSkills::ATTR_ID]
+            ],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
