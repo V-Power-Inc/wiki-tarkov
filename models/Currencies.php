@@ -24,6 +24,10 @@ class Currencies extends \yii\db\ActiveRecord
     const ATTR_VALUE   = 'value';
     const ATTR_ENABLED = 'enabled';
 
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     /**
      * @inheritdoc
      */
@@ -57,6 +61,16 @@ class Currencies extends \yii\db\ActiveRecord
             static::ATTR_VALUE => 'Эквивалент в копейках (Правильный формат хранения значений валют)',
             static::ATTR_ENABLED => 'Значение активно'
         ];
+    }
+
+    /**
+     * Получаем курсы всех активных валют
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveValutes(): array
+    {
+        return static::find()->where([static::ATTR_ENABLED => static::TRUE])->asArray()->all();
     }
 
     /**

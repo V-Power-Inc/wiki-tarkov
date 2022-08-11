@@ -81,7 +81,8 @@ class SiteController extends AdvancedController
     {
         return $this->render('/site/patrons', ['patrons' => Patrons::takePatrons()]);
     }
-    
+
+    // todo: С этим беспределом нужно разобраться
     /** Рендер страницы с наборами ключей **/
     public function actionKeys()
     {
@@ -236,15 +237,19 @@ class SiteController extends AdvancedController
         ]);
     }
 
-    /*** Отдаем валюты из базы в JSON формате ***/
-    public function actionJsonvalute()
+    /**
+     * Отдаем валюты из базы в JSON формате
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionJsonvalute(): string
     {
         if(Yii::$app->request->isAjax) {
-            $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
-            return Json::encode($valutes);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            return Json::encode(Currencies::takeActiveValutes());
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
