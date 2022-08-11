@@ -10,6 +10,12 @@ namespace app\components;
 
 use Yii;
 
+/**
+ * Класс горизонтального меню в верхней части сайта
+ *
+ * Class MenuComponent
+ * @package app\components
+ */
 class MenuComponent
 {
     public static $keys = null;

@@ -11,7 +11,12 @@ namespace app\components;
 use yii\web\UrlRuleInterface;
 use Yii;
 
-
+/**
+ * Класс для маршрутизации категорий и умений для справочника умений
+ *
+ * Class SkillsurlComponent
+ * @package app\components
+ */
 class SkillsurlComponent implements UrlRuleInterface
 {
     /** Урл компонент для маршрутизации каткгорий справочника лута **/

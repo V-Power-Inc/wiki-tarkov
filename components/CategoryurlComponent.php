@@ -12,6 +12,13 @@ use app\models\Category;
 use yii\web\UrlRuleInterface;
 use Yii;
 
+
+/**
+ * Класс для маршрутизации категорий и предметов справочника лута
+ *
+ * Class CategoryurlComponent
+ * @package app\components
+ */
 class CategoryurlComponent implements UrlRuleInterface
 {
 /** Урл компонент для маршрутизации каткгорий справочника лута **/

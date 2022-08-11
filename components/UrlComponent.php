@@ -14,6 +14,13 @@ use app\models\Traders;
 use yii\web\UrlRuleInterface;
 use yii\base\BaseObject;
 
+/**
+ * Url компонент для маршрутизации на детальные страницы некоторых коллекций объектов
+ * (Новости, Ключи, Полезные материалы, Детальные страницы торговцеы)
+ *
+ * Class UrlComponent
+ * @package app\components
+ */
 class UrlComponent extends BaseObject implements UrlRuleInterface
 {
 
