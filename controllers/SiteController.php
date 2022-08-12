@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\common\services\PaginationService;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -162,11 +163,14 @@ class SiteController extends AdvancedController
      */
     public function actionArticles(): string
     {
-        $query =  Articles::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-        return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        $query = Articles::find()->andWhere(['enabled' => 1]);
+        $data = new PaginationService($query);
+        return $this->render('articles/list.php', [
+            'news'=> $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
     /**
