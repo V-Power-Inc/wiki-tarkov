@@ -69,6 +69,13 @@ class Items extends ActiveRecord
     public $questitem;
     const QUESTITEM = 'questitem';
 
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
+    /** @var string Заглушка имени форм */
+    const formName = 'Items';
+
     /**
      * @inheritdoc
      */
@@ -227,4 +234,33 @@ class Items extends ActiveRecord
             ->with('parentcat');
     }
 
+    /**
+     * Получаем список всех активных квестовых предметов
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveQuestItems()
+    {
+        return static::find()
+            ->where([static::ATTR_ACTIVE => static::TRUE])
+            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->orderby([static::ATTR_TITLE => SORT_STRING])
+            ->all();
+    }
+
+    /**
+     * Получаем активные квестовые предметы по категории торговца
+     *
+     * @param string $category
+     * @return array|ActiveRecord[]
+     */
+    public static function takeQuestItemsByTraderCat(string $category)
+    {
+        return Items::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->andWhere(['like', static::ATTR_TRADER_GROUP, [$category]])
+            ->orderby([static::ATTR_TITLE => SORT_STRING])
+            ->all();
+    }
 }

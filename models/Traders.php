@@ -130,6 +130,25 @@ class Traders extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Массив групп существующих торговцев для селектов
+     *
+     * @return array[]
+     */
+    public static function traderGroups(): array
+    {
+        return [
+            "Все предметы" => "Все предметы",
+            "Прапор"       => "Прапор",
+            "Терапевт"     => "Терапевт",
+            "Скупщик"      => "Скупщик",
+            "Лыжник"       => "Лыжник",
+            "Миротворец"   => "Миротворец",
+            "Механик"      => "Механик",
+            "Барахольщик"  => "Барахольщик"
+        ];
+    }
+
     /*** Загрузка и сохранение превьюшек торговца ***/
     public function uploadPreview() {
         $fileImg = UploadedFile::getInstance($this, 'file');

@@ -13,9 +13,10 @@ use app\common\services\JsondataService;
 use yii;
 use app\models\Category;
 use app\models\Items;
-use yii\data\Pagination;
+use app\models\Traders;
 use yii\web\HttpException;
 use app\common\services\PaginationService;
+use app\common\services\TraderService;
 
 /**
  * Class LootController
@@ -107,40 +108,21 @@ class LootController extends AdvancedController
      */
     public function actionQuestloot(): string
     {
-        $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->all();
-
         $form_model = new Items();
+
         if ($form_model->load(Yii::$app->request->post())) {
-            if (isset($_POST['Items']['questitem'])) {
-                $questitem = $_POST['Items']['questitem'];
-            } else {
-                $questitem = "Все предметы";
-            }
 
-
-            $words = ["Все предметы","Прапор","Терапевт","Скупщик","Лыжник","Миротворец","Механик","Барахольщик"];
-
-            /** Если пришли данные через POST **/
-            if(in_array($questitem,$words)) {
-                $curentWord = $words[array_search($questitem, $words)];
-                if ($curentWord == "Все предметы") {
-                    $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->all();
-                } else {
-                    $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->all();
-                }
-
-                return $this->render('quest-page.php',
-                    [
-                        'form_model' => $form_model,
-                        'questsearch' => $result,
-                        'arr' => $curentWord,]);
-            }
-        }  else {
-            return $this->render('quest-page.php',
-                [
-                    'allquestitems' => $allquestitems,
-                    'form_model' => $form_model]);
+            return $this->render('quest-page', [
+                'form_model' => $form_model,
+                'questsearch' => TraderService::takeResult($form_model),
+                'formValue' => (string)Traders::traderGroups()[$form_model->questitem]
+            ]);
         }
+
+        return $this->render('quest-page', [
+                'allquestitems' => Items::takeActiveQuestItems(),
+                'form_model' => $form_model
+        ]);
     }
 
     /**
