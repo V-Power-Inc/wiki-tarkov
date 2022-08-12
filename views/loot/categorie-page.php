@@ -32,7 +32,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://wiki-tarkov.ru'. Yii::$app->request->url,
+    'content' => $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . Yii::$app->request->url,
 ]);
 
 $this->registerMetaTag([

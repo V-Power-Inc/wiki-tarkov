@@ -26,7 +26,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://wiki-tarkov.ru/'.$model['url'],
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model['url'],
 ]);
 
 $this->registerMetaTag([

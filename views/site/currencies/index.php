@@ -24,7 +24,7 @@ $this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::c
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 currencies-content">
 
             <!-- Статичное описание раздела -->
-            <p class="size-16 alert alert-info">В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс. Валюты в игре подразделяются на несколько типов, также каждая валюта необходима для покупки какого либо снаряжения, например у <a href="https://wiki-tarkov.ru/traders/mirotvorec" target="_blanc">Миротворца</a> большинство товаров покупаются за <b>доллары</b>, а у <a href="https://wiki-tarkov.ru/traders/mehanic" target="_blanc">Механика</a> - что то покупается за <b>евро</b> а что то за <b>биткоины</b>. Именно поэтому понимание валютного курса в Escape from Tarkov очень важно.
+            <p class="size-16 alert alert-info">В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс. Валюты в игре подразделяются на несколько типов, также каждая валюта необходима для покупки какого либо снаряжения, например у <a href="<?= $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/traders/mirotvorec' ?>" target="_blank">Миротворца</a> большинство товаров покупаются за <b>доллары</b>, а у <a href="<?= $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/traders/mehanic'?>" target="_blank">Механика</a> - что то покупается за <b>евро</b> а что то за <b>биткоины</b>. Именно поэтому понимание валютного курса в Escape from Tarkov очень важно.
                 <br>
                 <br>
                 На данный момент в игре доступны следующие виды денежных валют:</p>

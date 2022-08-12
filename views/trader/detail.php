@@ -28,7 +28,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://wiki-tarkov.ru/traders/'.$trader->url,
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/traders/'.$trader->url,
 ]);
 
 $this->registerMetaTag([
