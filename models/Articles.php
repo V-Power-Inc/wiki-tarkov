@@ -9,6 +9,8 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles".
@@ -116,4 +118,20 @@ class Articles extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Возвращаем активную полезную статью по url параметру
+     *
+     * @param string $id - url параметр
+     * @return array|ActiveRecord|null
+     */
+    public static function takeActiveArticleById(string $id)
+    {
+        return Articles::find()
+            ->where(['url'=>$id])
+            ->andWhere(['enabled' => 1])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
+
 }

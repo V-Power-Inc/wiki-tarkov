@@ -9,6 +9,8 @@ use app\common\helpers\validators\UniqueValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cat_skills".
@@ -127,4 +129,33 @@ class Catskills extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Skills::class, ['category' => 'id']);
     }
+
+    /**
+     * Возвращаем все активные категории навыков
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveCatSkills()
+    {
+        return static::find()
+            ->where([static::ATTR_ENABLED => 1])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * Получаем активную категорию умений по url адресу
+     *
+     * @param string $name - url адрес
+     * @return array|ActiveRecord|null
+     */
+    public static function takeActiveCategoryByUrl(string $name)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$name])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
+
 }

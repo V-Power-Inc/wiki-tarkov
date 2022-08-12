@@ -39,9 +39,6 @@ class SiteController extends AdvancedController
     const ACTION_JSDISABLED             = 'jsdisabled';
     const ACTION_JSONVALUTE             = 'jsonvalute';
 
-    /** Кеширование по секундам с различными сроками **/
-    const ONE_HOUR = 3600;
-
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;
 
@@ -183,12 +180,11 @@ class SiteController extends AdvancedController
      */
     public function actionArticledetail($id): string
     {
-        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-            return $this->render('articles/detail.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Articles::takeActiveArticleById($id)) {
+            return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleById($id)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**

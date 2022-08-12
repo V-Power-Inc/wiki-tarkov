@@ -10,6 +10,8 @@ use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\ExistValidator;
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "skills".
@@ -27,7 +29,7 @@ use app\common\helpers\validators\ExistValidator;
  *
  * @property CatSkills $category0
  */
-class Skills extends \yii\db\ActiveRecord
+class Skills extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID            = 'id';
@@ -47,6 +49,10 @@ class Skills extends \yii\db\ActiveRecord
     /** @var string $file - Переменная файла превьюшки null */
     public $file;
     const FILE = 'file';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
     
     /**
      * @inheritdoc
@@ -141,4 +147,37 @@ class Skills extends \yii\db\ActiveRecord
         $Items = Skills::find()->asArray()->all();
         return $Items;
     }
+
+    /**
+     *
+     *
+     *
+     * @param $url - url адрес
+     * @return array|ActiveRecord|null
+     */
+    public static function takeSkillByUrl($url)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$url])
+            ->andWhere([static::ATTR_ENABLED => 1])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
+
+    /**
+     * Получаем список категорий по родительской категории
+     * фильтрация на enabled реализована во вьюхе
+     *
+     * @param int $id
+     * @return array|ActiveRecord[]
+     */
+    public static function takeSkillByCategoryId(int $id)
+    {
+        return static::find()
+            ->andWhere(['category' => $id])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->asArray()
+            ->all();
+    }
+
 }

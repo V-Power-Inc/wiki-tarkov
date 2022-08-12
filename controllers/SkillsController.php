@@ -60,8 +60,7 @@ class SkillsController extends AdvancedController
      */
     public function actionMainskills(): string
     {
-        $catskills = Catskills::find()->where(['enabled' => 1])->cache(self::ONE_DAY)->asArray()->all();
-        return $this->render('/skills/list.php', ['catskills' => $catskills,]);
+        return $this->render('/skills/list.php', ['catskills' => Catskills::takeActiveCatSkills()]);
     }
 
     /**
@@ -73,15 +72,14 @@ class SkillsController extends AdvancedController
      */
     public function actionSkillscategory(string $name): string
     {
-        $cat = Catskills::find()->where(['url'=>$name])->cache(self::ONE_DAY)->One();
-        
-        if($cat) {
-            // Здесь мы возвращаем и неактивные элементы, т.к. на них стоит проверка во вьюшке
-            $items = Skills::find()->andWhere(['category' => $cat->id])->cache(self::ONE_DAY)->asArray()->all();
-            return $this->render('/skills/skillscat-page.php', ['cat' => $cat, 'items' => $items]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Catskills::takeActiveCategoryByUrl($name)) {
+            return $this->render('/skills/skillscat-page.php', [
+                'cat' => Catskills::takeActiveCategoryByUrl($name),
+                'items' => Skills::takeSkillByCategoryId(Catskills::takeActiveCategoryByUrl($name)->id)
+            ]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**
@@ -93,12 +91,10 @@ class SkillsController extends AdvancedController
      */
     public function actionSkillsdetail(string $url): string
     {
-        $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
-
-        if($item) {
-            return $this->render('/skills/skill-detail.php', ['item' => $item]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Skills::takeSkillByUrl($url)) {
+            return $this->render('/skills/skill-detail.php', ['item' => Skills::takeSkillByUrl($url)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 }

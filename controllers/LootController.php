@@ -9,13 +9,13 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\services\JsondataService;
 use yii;
 use app\models\Category;
 use app\models\Items;
 use yii\data\Pagination;
 use yii\web\HttpException;
-use yii\helpers\Json;
-use yii\db\Query;
+use app\common\services\PaginationService;
 
 /**
  * Class LootController
@@ -62,14 +62,18 @@ class LootController extends AdvancedController
      */
     public function actionMainloot(): string
     {
-        $model = new Items;
-        $allitems = $model->getActiveItems();
+        $model = new Items();
         $fullitems = Items::find()->where(['active' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-        $request = \Yii::$app->request;
+        $data = new PaginationService($fullitems,50);
 
-        return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        return $this->render('mainpage.php', [
+            'model' => $model,
+            'items' => $data->items,
+            'allitems' => $model->getActiveItems(),
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
     /**
@@ -82,26 +86,18 @@ class LootController extends AdvancedController
     public function actionCategory(string $name): string
     {
         $cat = Category::find()->where(['url'=>$name])->One();
-        if($cat) {
-            $fullitems = Items::find()
-                ->alias( 'i')
-                ->select('i.*')
-                ->leftJoin('category as c1', '`i`.`parentcat_id` = `c1`.`id`')
-                ->andWhere(['c1.url' => $name])
-                ->andWhere(['active' => 1])
-                ->orWhere(['c1.parent_category' => $cat->id])
-                ->andWhere(['active' => 1])
-                ->with('parentcat');
-
-            $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-            $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-            $request = \Yii::$app->request;
-
-            return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1), 'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if ($cat) {
+            $data = new PaginationService(Items::takeItemsWithParentCat($name, $cat->id));
+            return $this->render('categorie-page.php', [
+                'cat' => $cat,
+                'items' => $data->items,
+                'active_page' => Yii::$app->request->get('page',1),
+                'count_pages' => $data->paginator->getPageCount(),
+                'pagination' => $data->paginator
+            ]);
         }
 
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /***
@@ -161,48 +157,10 @@ class LootController extends AdvancedController
     public function actionLootjson(string $q = null): string
     {
         if(Yii::$app->request->isAjax) {
-
-            $query = new Query;
-
-            $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
-                ->from('items')
-                ->where('title LIKE "%' . $q . '%"')
-                ->orWhere('search_words LIKE "%' . $q . '%"')
-                ->andWhere(['active' => 1])
-                ->orderBy('title')
-                ->cache(3600);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-
-            $out = [];
-
-            /** Цикл составления готовых данных по запросу пользователя в поиске **/
-            foreach ($data as $d) {
-                $parencat = Category::find()->where(['id' => $d['parentcat_id']])->cache(3600)->one();
-                $out[] = ['value' => $d['title'], 'title' => $d['title'], 'parentcat_id' => $parencat->title, 'shortdesc' => $d['shortdesc'], 'preview' => $d['preview'], 'url' => $d['url']];
-            }
-            return Json::encode($out);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            return JsondataService::getLootJson($q);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /**
-     * todo: Возможно это можно удалить
-     * Обработчик ошибок - отображает статусы ответа сервера
-     *
-     * @return array
-     */
-    public function actions(): array
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
 }
