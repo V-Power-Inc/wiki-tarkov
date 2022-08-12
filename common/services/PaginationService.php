@@ -45,7 +45,7 @@ final class PaginationService
 
         $this->paginator->setPageSize($pageSize);
 
-        $this->items = $query->offset( $this->paginator->offset)
+        $this->items = $query->offset($this->paginator->offset)
             ->orderby(['date_create'=>SORT_DESC])
             ->limit($this->paginator->limit)
             ->cache(Yii::$app->params['cacheTime']['one_hour'])

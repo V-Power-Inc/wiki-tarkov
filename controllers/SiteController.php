@@ -13,7 +13,6 @@ use Yii;
 use yii\helpers\Json;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
-use yii\data\Pagination;
 use app\common\services\KeysService;
 use app\common\services\JsondataService;
 
@@ -109,7 +108,6 @@ class SiteController extends AdvancedController
         return $this->render('keys/index.php', Doorkeys::KeysDefaultRenderingArray($form_model));
     }
 
-
     /**
      * Рендер детальной страницы для вывода ключей
      *
@@ -134,10 +132,13 @@ class SiteController extends AdvancedController
     public function actionNews(): string
     {
         $query =  News::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-        return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        $data = new PaginationService($query,10);
+        return $this->render('news/list.php', [
+            'news'=>$data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
     /**
@@ -198,12 +199,13 @@ class SiteController extends AdvancedController
     public function actionQuestions(): string
     {
         $model = Questions::find()->where(['enabled' => 1]);
-
-        $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
-        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-
-        return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        $data = new PaginationService($model);
+        return $this->render('questions/list.php', [
+            'questions' => $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
     /**
