@@ -59,14 +59,11 @@ class ItemController extends AdvancedController
      */
     public function actionDetailloot($item): string
     {
-
-    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
-
-    if($loot) {
-            return $this->render('/loot/item-detail.php', ['item' => $loot]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Items::takeActiveItemByUrl($item)) {
+            return $this->render('/loot/item-detail.php', ['item' => Items::takeActiveItemByUrl($item)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**
@@ -80,12 +77,12 @@ class ItemController extends AdvancedController
         $this->enableCsrfValidation = false;
 
         if(Yii::$app->user->isGuest !== true) {
-            $item = new Items;
+            $item = new Items();
             $item->load(Yii::$app->request->post());
             return $this->render('/loot/item-preview.php', ['item' => $item]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
 }

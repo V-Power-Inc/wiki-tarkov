@@ -256,11 +256,26 @@ class Items extends ActiveRecord
      */
     public static function takeQuestItemsByTraderCat(string $category)
     {
-        return Items::find()
+        return static::find()
             ->andWhere([static::ATTR_ACTIVE => 1])
             ->andWhere([static::ATTR_QUEST_ITEM => 1])
             ->andWhere(['like', static::ATTR_TRADER_GROUP, [$category]])
             ->orderby([static::ATTR_TITLE => SORT_STRING])
             ->all();
     }
+
+    /**
+     * Возвращаем активный предмет лута по параметру url
+     *
+     * @param string $item - url параметр
+     * @return array|ActiveRecord|null
+     */
+    public static function takeActiveItemByUrl(string $item)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$item])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->One();
+    }
+
 }

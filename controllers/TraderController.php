@@ -147,9 +147,9 @@ class TraderController extends AdvancedController
                 'trader' => Traders::takeTraderByUrl($id),
                 'barters' => Barters::takeBartersByTitle(Traders::takeTraderByUrl($id)->title)
             ]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**
@@ -166,9 +166,9 @@ class TraderController extends AdvancedController
             $trader = new Traders;
             $trader->load(Yii::$app->request->post());
             return $this->render('trader-preview', ['trader' => $trader]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует!');
         }
+
+        throw new HttpException(404 ,'Такая страница не существует!');
     }
 
     /**
@@ -183,11 +183,10 @@ class TraderController extends AdvancedController
             $barter = new Barters;
             $barter->load(Yii::$app->request->post());
             $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
-
             return $this->render('barter-preview', ['barter' => $barter, 'id' => $id]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
 }
