@@ -5,6 +5,7 @@
  * Date: 07.08.2022
  * Time: 18:21
  * @repo https://github.com/vlucas/phpdotenv
+ * todo: Добавить в файл Required проверки необходмых атрибутов
  */
 
 /**
