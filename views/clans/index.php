@@ -72,7 +72,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
                 <div class="clan-block">
                     <h3 class="clan-title">
                             <?= $clan['title'] ?>
-                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
+                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией <?=$_ENV['DOMAIN']?>"></i>
                     </h3>
 
                    <?php if($clan['preview'] == null): ?>

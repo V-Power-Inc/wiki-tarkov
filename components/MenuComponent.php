@@ -150,7 +150,7 @@ class MenuComponent
             <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
             <div class="collapse navbar-collapse" id="navbar-main">
                 <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://wiki-tarkov.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
+                <a class="navbar-brand relative" href='.$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'].'><img class="logo-img" src="/img/logo-full.png" alt="Логотип '. $_ENV['DOMAIN'].'"></a>
 
                 <ul class="nav navbar-nav">
                     
