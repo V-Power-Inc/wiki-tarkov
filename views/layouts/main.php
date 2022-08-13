@@ -25,7 +25,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="<?=$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] ?>/favicon.png" type="image/png">
+    <link rel="icon" href="<?=$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN']?>/favicon.png" type="image/png">
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 

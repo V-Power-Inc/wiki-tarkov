@@ -60,3 +60,6 @@ sql_dump.sql
 
 # Ignore auto changed file associated with composer
 /composer.lock
+
+# Ignore Sitemaps files in the future
+/sitemaps
