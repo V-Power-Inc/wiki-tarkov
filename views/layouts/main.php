@@ -6,14 +6,7 @@
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
-use Yii;
 use app\components\AlertComponent;
-
-$cookies = Yii::$app->request->cookies;
-$addcook = Yii::$app->response->cookies;
-
-// Получаем статус ответа сервера
-$status_response = Yii::$app->response->getStatusCode();
 
 AppAsset::register($this);
 ?>
