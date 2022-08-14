@@ -20,6 +20,8 @@ class m220814_172404_create_currencies_table extends Migration
             'value' => $this->integer(11)->Null()->defaultValue(null)->comment('Значение валюты'),
             'enabled' => $this->integer(1)->Null()->defaultValue(null)->comment('Активна ли валюта')
         ]);
+
+        $this->addCommentOnTable(static::TABLE_NAME, "В этой таблице хранятся значения валют");
     }
 
     /**
