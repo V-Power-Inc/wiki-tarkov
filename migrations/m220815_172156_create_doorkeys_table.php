@@ -1,11 +1,11 @@
 <?php
 
-/** Файл миграции, необходимо вынести методы в боевую миграцию, когда она будет создана */
-
 use yii\db\Migration;
 
-
-class Doorkeys extends Migration
+/**
+ * Handles the creation of table `{{%doorkeys}}`.
+ */
+class m220815_172156_create_doorkeys_table extends Migration
 {
     const TABLE_NAME = 'doorkeys';
 

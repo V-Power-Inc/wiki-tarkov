@@ -1,11 +1,11 @@
 <?php
 
-/** Файл миграции, необходимо вынести методы в боевую миграцию, когда она будет создана */
-
 use yii\db\Migration;
 
-
-class News extends Migration
+/**
+ * Handles the creation of table `{{%news}}`.
+ */
+class m220815_172032_create_news_table extends Migration
 {
     const TABLE_NAME = 'news';
 

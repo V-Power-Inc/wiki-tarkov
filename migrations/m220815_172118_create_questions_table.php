@@ -1,11 +1,11 @@
 <?php
 
-/** Файл миграции, необходимо вынести методы в боевую миграцию, когда она будет создана */
-
 use yii\db\Migration;
 
-
-class Questions extends Migration
+/**
+ * Handles the creation of table `{{%questions}}`.
+ */
+class m220815_172118_create_questions_table extends Migration
 {
     const TABLE_NAME = 'questions';
 

@@ -1,12 +1,11 @@
 <?php
 
-/** Файл миграции, необходимо вынести методы в боевую миграцию, когда она будет создана */
-/** Также конкретно этому файлу прописать внешний ключ */
-
 use yii\db\Migration;
 
-
-class Skills extends Migration
+/**
+ * Handles the creation of table `{{%skills}}`.
+ */
+class m220815_172303_create_skills_table extends Migration
 {
     const TABLE_NAME = 'skills';
 
@@ -28,6 +27,17 @@ class Skills extends Migration
             'short_desc' => $this->text()->Null()->comment('Короткое описание умения'),
             'date_update' => $this->timestamp()->Null()->comment('Дата создания умения')
         ]);
+
+        /** Внешний ключ на cat_skills - id */
+        $this->addForeignKey(
+            'skills_cat_skills_id_fk',
+            'skills',
+            'category',
+            'cat_skills',
+            'id',
+            'RESTRICT',
+            'RESTRICT'
+        );
 
         $this->addCommentOnTable(static::TABLE_NAME, "В этой таблице хранятся умения персонажа");
     }

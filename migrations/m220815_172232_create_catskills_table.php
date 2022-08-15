@@ -1,11 +1,11 @@
 <?php
 
-/** Файл миграции, необходимо вынести методы в боевую миграцию, когда она будет создана */
-
 use yii\db\Migration;
 
-
-class Cat_skills extends Migration
+/**
+ * Handles the creation of table `{{%catskills}}`.
+ */
+class m220815_172232_create_catskills_table extends Migration
 {
     const TABLE_NAME = 'cat_skills';
 

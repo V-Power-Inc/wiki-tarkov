@@ -42,8 +42,8 @@ class m220814_181556_create_items_table extends Migration
             'parentcat_id',
             'category',
             'id',
-            'CASCADE',
-            'CASCADE'
+            'RESTRICT',
+            'RESTRICT'
         );
 
         /** Индексы */
