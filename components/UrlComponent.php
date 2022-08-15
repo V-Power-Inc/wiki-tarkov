@@ -23,7 +23,12 @@ use yii\base\BaseObject;
  */
 class UrlComponent extends BaseObject implements UrlRuleInterface
 {
-
+    /**
+     * @param \yii\web\UrlManager $manager
+     * @param \yii\web\Request $request
+     * @return array|bool
+     * @throws \yii\base\InvalidConfigException
+     */
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
@@ -48,7 +53,13 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
 
         return false;
     }
-    
+
+    /**
+     * @param \yii\web\UrlManager $manager
+     * @param string $route
+     * @param array $params
+     * @return bool|string
+     */
     public function createUrl($manager, $route, $params)
     {
         if (Doorkeys::find()->where(['url'=> $route])->One()) {

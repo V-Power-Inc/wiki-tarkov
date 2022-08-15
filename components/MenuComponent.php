@@ -32,7 +32,8 @@ class MenuComponent
     public static $questions = null;
     
 
-    public static function Active(){
+    public static function Active()
+    {
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
@@ -50,12 +51,13 @@ class MenuComponent
             case 'questions':self::$questions = 'class="active"'; break;
         }
     }
+
     /**
      * получаем основные пункты меню
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function showMenu(){
-
+    public static function showMenu()
+    {
         /*** Разбивка для страниц карт локаций ***/
         $intermaps = "";
 
@@ -77,24 +79,25 @@ class MenuComponent
        /*** Разбивка для страниц торговцев и их квестов ***/
         $pagequests = "";
         
-        $urlarray = ["/quests-of-traders",
-                    "/quests-of-traders/prapor-quests", 
-                    "/quests-of-traders/terapevt-quests",
-                    "/quests-of-traders/skypchik-quests",
-                    "/quests-of-traders/lyjnic-quests",
-                    "/quests-of-traders/mirotvorec-quests",
-                    "/traders/prapor",
-                    "/traders/terapevt",
-                    "/traders/lyjnic",
-                    "/traders/mirotvorec",
-                    "/traders/mehanic",
-                    "/traders/skupshik",
-                    "/traders/baraholshik"
+        $urlarray = [
+            "/quests-of-traders",
+            "/quests-of-traders/prapor-quests",
+            "/quests-of-traders/terapevt-quests",
+            "/quests-of-traders/skypchik-quests",
+            "/quests-of-traders/lyjnic-quests",
+            "/quests-of-traders/mirotvorec-quests",
+            "/traders/prapor",
+            "/traders/terapevt",
+            "/traders/lyjnic",
+            "/traders/mirotvorec",
+            "/traders/mehanic",
+            "/traders/skupshik",
+            "/traders/baraholshik"
         ];
+
         if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'active';
         }
-        
         
         /*** Разбивка для активных умений ***/
         $skills = '';
@@ -113,27 +116,25 @@ class MenuComponent
         }
 
         /*** Разбивка для пунктов меню - прочее ***/
-
         $other = '';
 
-           if(stristr(Yii::$app->request->url,'/currencies')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/questions')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/news')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/articles')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/clans')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/add-clan')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/table-patrons')){
-               $other = 'active';
-           }
+        if(stristr(Yii::$app->request->url,'/currencies')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/questions')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/news')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/articles')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/clans')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/add-clan')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/table-patrons')) {
+           $other = 'active';
+        }
 
-        /*** Далее пошел габлон отрисовки меню ***/
-
+        /*** Далее пошел шаблон отрисовки меню ***/
         self::Active();
         $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
         <div class="container adaptive-fix">
@@ -227,5 +228,4 @@ class MenuComponent
         return $menu;
     }
 }
-
 ?>

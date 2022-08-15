@@ -116,11 +116,4 @@ class LeftmenuWidget extends Widget {
         include __DIR__ . '/render_views/' .$this->tpl;
         return ob_get_clean();
     }
-
 }
-
-
-
-
-
-
