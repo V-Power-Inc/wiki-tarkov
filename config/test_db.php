@@ -5,5 +5,5 @@ return [
     'dsn' => $_ENV['DB_TEST_DSN'],
     'username' => $_ENV['DB_TEST_USER'],
     'password' => $_ENV['DB_TEST_PASSWORD'],
-    'charset' => $_ENV['DB_TEST_CHARSET'],
+    'charset' => $_ENV['DB_TEST_CHARSET']
 ];
