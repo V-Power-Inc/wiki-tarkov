@@ -70,17 +70,33 @@ class ZavodTest extends \Codeception\Test\Unit
     /** Тестируем получение объекта (select) */
     public function testSelect()
     {
-        $zavod = Zavod::findOne(['id' !== null]);
+        $zavod = Zavod::find()->one();
 
         $this->assertNotNull($zavod, 'Ожидался объект, вернулся null - объект не селектнулся.');
+    }
+
+    /** Тестируем получение всех объектов (select all) */
+    public function testSelectAll()
+    {
+        $zavod = Zavod::find()->all();
+
+        $this->assertTrue(count($zavod) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $zavod = Zavod::findOne(['id' !== null]);
+        $zavod = Zavod::find()->one()->delete();
 
-        $this->assertIsInt($zavod->delete(),'Удаление объекта не случилось, а должно было.');
+        $this->assertIsInt($zavod,'Удаление объекта не случилось, а должно было.');
+    }
+
+    /** Тестируем удаление всех объектов */
+    public function testDeleteAll()
+    {
+        $zavod = Zavod::deleteAll();
+
+        $this->assertIsInt($zavod,'Удаление объекта не случилось, а должно было.');
     }
 
 }

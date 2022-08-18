@@ -10,12 +10,12 @@
 
 namespace app\tests\fixtures;
 
-class ZavodFixture extends \yii\test\ActiveFixture {
+class ForestFixture extends \yii\test\ActiveFixture {
 
-    public $modelClass = 'app\models\Zavod';
+    public $modelClass = 'app\models\Forest';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'zavod';
+    const TABLE_NAME = 'forest';
 
 //    Действие для фикстур после отработки каждого теста
 //    public function afterLoad() {

@@ -2,20 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 16.08.2022
- * Time: 20:49
- *
- * Фикстура маркеров локации Завод
+ * Date: 18.08.2022
+ * Time: 20:24
  */
 
 namespace app\tests\fixtures;
 
-class ZavodFixture extends \yii\test\ActiveFixture {
+class BeregFixture extends \yii\test\ActiveFixture {
 
-    public $modelClass = 'app\models\Zavod';
+    public $modelClass = 'app\models\Bereg';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'zavod';
+    const TABLE_NAME = 'bereg';
 
 //    Действие для фикстур после отработки каждого теста
 //    public function afterLoad() {
