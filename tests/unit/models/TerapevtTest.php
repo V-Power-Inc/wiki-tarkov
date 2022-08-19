@@ -6,7 +6,7 @@ use app\models\Terapevt;
 use app\tests\fixtures\TerapevtFixture;
 
 /**
- * Unit тесты интерактивных маркеров Завода
+ * Unit тесты торговца Терапевт
  *
  * Class TerapevtTest
  * @package models
