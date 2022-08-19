@@ -12,9 +12,9 @@ use app\models\Forest;
 use app\tests\fixtures\ForestFixture;
 
 /**
- * Unit тесты интерактивных маркеров Берега
+ * Unit тесты интерактивных маркеров Леса
  *
- * Class BeregTest
+ * Class ForestTest
  * @package models
  */
 class ForestTest extends \Codeception\Test\Unit
@@ -25,7 +25,7 @@ class ForestTest extends \Codeception\Test\Unit
     protected $tester;
 
     /**
-     * Фикстуры для таблицы zavod
+     * Фикстуры для таблицы forest
      * @return array
      */
     public function _fixtures() {

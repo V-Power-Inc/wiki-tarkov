@@ -25,7 +25,7 @@ class BeregTest extends \Codeception\Test\Unit
     protected $tester;
 
     /**
-     * Фикстуры для таблицы zavod
+     * Фикстуры для таблицы bereg
      * @return array
      */
     public function _fixtures() {
