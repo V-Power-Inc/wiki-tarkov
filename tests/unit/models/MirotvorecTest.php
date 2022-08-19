@@ -6,7 +6,7 @@ use app\models\Mirotvorec;
 use app\tests\fixtures\MirotvorecFixture;
 
 /**
- * Unit тесты торговца Терапевт
+ * Unit тесты торговца Миротворец
  *
  * Class MirotvorecTest
  * @package models

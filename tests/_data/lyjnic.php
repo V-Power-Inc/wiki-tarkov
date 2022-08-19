@@ -3,9 +3,9 @@
  * Created by PhpStorm.
  * User: PC_Principal
  * Date: 20.08.2022
- * Time: 0:05
+ * Time: 0:11
  *
- * Фикстуры для для торговца Миротворец
+ * Фикстуры для торговца Лыжник
  */
 return [
     [
