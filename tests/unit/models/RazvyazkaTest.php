@@ -2,7 +2,7 @@
 
 namespace models;
 
-use app\models\Zavod;
+use app\models\Razvyazka;
 use app\tests\fixtures\RazvyazkaFixture;
 
 /**
@@ -34,7 +34,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем создание нового маркера */
     public function testCreate()
     {
-        $razvyazka = new Zavod();
+        $razvyazka = new Razvyazka();
 
         $razvyazka->name = 'Ящик у выхода с локации';
         $razvyazka->marker_group='Военные ящики';
@@ -52,7 +52,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем обновление маркера */
     public function testUpdate()
     {
-        $razvyazka = Zavod::find()->where(['is not','id',null])->one();
+        $razvyazka = Razvyazka::find()->where(['is not','id',null])->one();
 
         $razvyazka->name = 'Ящик у выхода 234234с локации';
         $razvyazka->marker_group='Военн234234ые ящики';
@@ -70,7 +70,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем получение объекта (select) */
     public function testSelect()
     {
-        $razvyazka = Zavod::find()->one();
+        $razvyazka = Razvyazka::find()->one();
 
         $this->assertNotNull($razvyazka, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
@@ -78,7 +78,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем получение всех объектов (select all) */
     public function testSelectAll()
     {
-        $razvyazka = Zavod::find()->all();
+        $razvyazka = Razvyazka::find()->all();
 
         $this->assertTrue(count($razvyazka) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
     }
@@ -86,7 +86,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $razvyazka = Zavod::find()->one()->delete();
+        $razvyazka = Razvyazka::find()->one()->delete();
 
         $this->assertIsInt($razvyazka,'Удаление объекта не случилось, а должно было.');
     }
@@ -94,7 +94,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
     /** Тестируем удаление всех объектов */
     public function testDeleteAll()
     {
-        $razvyazka = Zavod::deleteAll();
+        $razvyazka = Razvyazka::deleteAll();
 
         $this->assertIsInt($razvyazka,'Удаление объекта не случилось, а должно было.');
     }

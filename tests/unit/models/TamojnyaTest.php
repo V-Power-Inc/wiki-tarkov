@@ -2,7 +2,7 @@
 
 namespace models;
 
-use app\models\Zavod;
+use app\models\Tamojnya;
 use app\tests\fixtures\TamojnyaFixture;
 
 /**
@@ -34,7 +34,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем создание нового маркера */
     public function testCreate()
     {
-        $tamojnya = new Zavod();
+        $tamojnya = new Tamojnya();
 
         $tamojnya->name = 'Ящик у выхода с локации';
         $tamojnya->marker_group='Военные ящики';
@@ -52,7 +52,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем обновление маркера */
     public function testUpdate()
     {
-        $tamojnya = Zavod::find()->where(['is not','id',null])->one();
+        $tamojnya = Tamojnya::find()->where(['is not','id',null])->one();
 
         $tamojnya->name = 'Ящик у выхода 234234с локации';
         $tamojnya->marker_group='Военн234234ые ящики';
@@ -70,7 +70,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем получение объекта (select) */
     public function testSelect()
     {
-        $tamojnya = Zavod::find()->one();
+        $tamojnya = Tamojnya::find()->one();
 
         $this->assertNotNull($tamojnya, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
@@ -78,7 +78,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем получение всех объектов (select all) */
     public function testSelectAll()
     {
-        $tamojnya = Zavod::find()->all();
+        $tamojnya = Tamojnya::find()->all();
 
         $this->assertTrue(count($tamojnya) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
     }
@@ -86,7 +86,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $tamojnya = Zavod::find()->one()->delete();
+        $tamojnya = Tamojnya::find()->one()->delete();
 
         $this->assertIsInt($tamojnya,'Удаление объекта не случилось, а должно было.');
     }
@@ -94,7 +94,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Тестируем удаление всех объектов */
     public function testDeleteAll()
     {
-        $tamojnya = Zavod::deleteAll();
+        $tamojnya = Tamojnya::deleteAll();
 
         $this->assertIsInt($tamojnya,'Удаление объекта не случилось, а должно было.');
     }
