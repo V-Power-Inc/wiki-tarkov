@@ -76,7 +76,7 @@ class BeregTest extends \Codeception\Test\Unit
     /** Тестируем получение объекта (select) */
     public function testSelect()
     {
-        $bereg = Bereg::findOne(['id' !== null]);
+        $bereg = Bereg::find()->one();
 
         $this->assertNotNull($bereg, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
@@ -86,13 +86,13 @@ class BeregTest extends \Codeception\Test\Unit
     {
         $bereg = Bereg::find()->all();
 
-        $this->assertTrue(count($bereg) == 4, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        $this->assertTrue(count($bereg) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $bereg = Bereg::findOne(['id' !== null])->delete();
+        $bereg = Bereg::find()->one()->delete();
 
         $this->assertIsInt($bereg,'Удаление объекта не случилось, а должно было.');
     }
