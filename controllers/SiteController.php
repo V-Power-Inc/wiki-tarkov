@@ -11,6 +11,7 @@ use app\models\Currencies;
 use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
+use yii\web\Cookie;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\common\services\KeysService;
@@ -38,6 +39,7 @@ class SiteController extends AdvancedController
     const ACTION_CURRENCIES             = 'currencies';
     const ACTION_JSDISABLED             = 'jsdisabled';
     const ACTION_JSONVALUTE             = 'jsonvalute';
+    const ACTION_CLOSE_OVERLAY          = 'close-overlay';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;
@@ -58,7 +60,8 @@ class SiteController extends AdvancedController
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
                     Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page')
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];
@@ -258,6 +261,30 @@ class SiteController extends AdvancedController
     public function actionJsdisabled(): string
     {
         return $this->render('/site/offedjs');
+    }
+
+    /**
+     * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
+     * сайта на один день (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
+     *
+     * @return mixed
+     */
+    public function actionCloseOverlay()
+    {
+        if (Yii::$app->request->isAjax) {
+            $cookies = Yii::$app->request->cookies;
+
+            if($cookies->get('overlay') == null) {
+                return Yii::$app->response->cookies->add(new Cookie([
+                    'name' => 'overlay',
+                    'value' => 1,
+                    'expire' => time() + (60 * 60 * 24),
+                ]));
+            }
+
+        }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
     /**

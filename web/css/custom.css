@@ -2126,3 +2126,28 @@ table.patrons-tbl >thead > tr > th {
     background: #515972;
     color: #fff;
 }
+
+.overlay-block {
+    width: 100%;
+    position: fixed;
+    min-height: 200px;
+    height: auto;
+    bottom: 0;
+    background: #d3d2d2;
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.cls-btn {
+    width: 146px;
+    height: 29px;
+    background-color: #c3392c;
+    position: absolute;
+    top: -29px;
+    right: 0;
+    padding: 2px 0 0 0;
+    color: #fff8f6;
+    cursor: pointer;
+}

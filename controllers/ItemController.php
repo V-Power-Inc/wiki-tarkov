@@ -44,7 +44,8 @@ class ItemController extends AdvancedController
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
-                    Yii::$app->response->statusCode
+                    Yii::$app->response->statusCode,
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];

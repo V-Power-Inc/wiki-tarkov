@@ -8,6 +8,8 @@ use app\components\MenuComponent;
 use app\assets\AppAsset;
 use app\components\AlertComponent;
 
+$cookies = Yii::$app->request->cookies;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -99,6 +101,14 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
+
+
+<?php if (!isset($cookies['overlay'])): ?>
+    <div class="overlay-block">
+        <div class="cls-btn" id="cck_close">Закрыть</div>
+        <?= $this->render('/other/yandex-direct-overlay') ?>
+    </div>
+<?php endif; ?>
 
 <span class="visible-md visible-lg"><a href="#" class="scup"><i class="fa fa-angle-up active"></i></a></span>
 

@@ -306,6 +306,11 @@
         cursor: pointer;
     }
 
+    .overlay-block {
+        min-height: 90px;
+        height: auto;
+    }
+
 }
 
 

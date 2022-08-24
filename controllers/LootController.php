@@ -50,7 +50,8 @@ class LootController extends AdvancedController
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
                     Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page')
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];
