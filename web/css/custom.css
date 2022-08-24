@@ -2130,7 +2130,8 @@ table.patrons-tbl >thead > tr > th {
 .overlay-block {
     width: 100%;
     position: fixed;
-    min-height: 200px;
+    max-height: 200px;
+    min-height: 90px;
     height: auto;
     bottom: 0;
     background: #d3d2d2;
