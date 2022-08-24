@@ -11,10 +11,24 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-    ],  
-    'language' => 'en-US',
+    ],
+    'language' => 'ru-RU',
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Admin',
+        ],
+    ],
     'components' => [
         'db' => $db,
+        'cache' => [
+            'class' => 'yii\redis\Cache',
+        ],
+        'redis' => [
+            'class'    => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
         'mailer' => [
             'useFileTransport' => true,
         ],
@@ -22,11 +36,14 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => require __DIR__ . '/routes.php'
         ],
         'user' => [
             'identityClass' => 'app\models\Admins',
-        ],        
+            'enableAutoLogin' => true,
+        ],
         'request' => [
             'cookieValidationKey' => 'test',
             'enableCsrfValidation' => false,
