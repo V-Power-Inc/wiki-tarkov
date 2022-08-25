@@ -8,7 +8,8 @@
 
 namespace Tests\Functional;
 
-use app\controllers\TraderController;
+use app\tests\fixtures\TradersFixture;
+use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страницы детальных торговцев
@@ -18,11 +19,28 @@ use app\controllers\TraderController;
  */
 class TraderCest
 {
+    /**
+     * Грузим фикстуры торговца и инфовиджета, т.к. без них тесты не отработают (ActiveRecord)
+     *
+     * @return array
+     */
+    public function _fixtures() {
+        return [
+            'traders' => [
+                'class' => TradersFixture::class,
+                'dataFile' => codecept_data_dir() . 'traders.php'
+            ],
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
+            ]
+        ];
+    }
+
     /** Мы на странице Прапора */
     public function _before(\FunctionalTester $I)
     {
-        // todo: Проблема
-        $I->amOnRoute('/traders/prapor');
+        $I->amOnRoute('traders/prapor');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
@@ -86,7 +104,7 @@ class TraderCest
     /** Проверяем активность пункта навигации, для текущей страницы */
     public function checkCurrentPageLinkActive(\FunctionalTester $I)
     {
-        $I->seeLink('<b>Торговцы</b><span class="caret"></span>', '#');
+        $I->seeElement('.dropdown-toggle.active');
     }
 
     /**
@@ -100,7 +118,6 @@ class TraderCest
 
         $I->seeElement('.news-shortitem.bg-white');
         $I->seeElement('.barters-block');
-        $I->seeElement('.tab-content');
 
         $I->seeLink('Вернуться к списку торговцев','/quests-of-traders');
         $I->seeLink('Перейти в раздел квестов Прапора','/quests-of-traders/prapor-quests');
@@ -116,12 +133,6 @@ class TraderCest
     public function checkOverlayBlock(\FunctionalTester $I)
     {
         $I->SeeElement('.overlay-block');
-    }
-
-    /** Мы видим что все блоки с рекламой присутствуют на странице */
-    public function checkOtherAdsBlocks(\FunctionalTester $I)
-    {
-        $I->seeElement('.no-adb');
     }
 
 }
