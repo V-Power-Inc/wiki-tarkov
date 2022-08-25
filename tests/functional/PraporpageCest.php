@@ -11,17 +11,18 @@ namespace Tests\Functional;
 use app\controllers\TraderController;
 
 /**
- * Функциональные тесты страницы торговца Прапор
+ * Функциональные тесты страницы детальных торговцев
  *
  * Class PraporpageCest
  * @package Tests\Functional
  */
-class PraporpageCest
+class TraderCest
 {
     /** Мы на странице Прапора */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_PRAPORPAGE));
+        // todo: Проблема
+        $I->amOnRoute('/traders/prapor');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
