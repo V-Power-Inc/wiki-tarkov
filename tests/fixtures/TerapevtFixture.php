@@ -9,15 +9,5 @@
 namespace app\tests\fixtures;
 
 class TerapevtFixture extends \yii\test\ActiveFixture {
-
     public $modelClass = 'app\models\Terapevt';
-
-    /** @var string Имя таблицы */
-    const TABLE_NAME = 'terapevt';
-
-//    Действие для фикстур после отработки каждого теста
-//    public function afterLoad() {
-//        parent::afterLoad();
-//        $this->db->createCommand()->setSql('truncate table .'.static::TABLE_NAME)->execute();
-//    }
 }

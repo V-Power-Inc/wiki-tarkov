@@ -22,5 +22,20 @@ return [
         'description' => 'Прапор. Escape from Tarkov.',
         'keywords' => 'Прапор из Escape from Tarkov, Что продаёт Прапор в Escape from Tarkov, все о торговце Прапоре.',
         'url' => 'prapor'
+    ],
+    [
+        'title' => 'Терапевт',
+        'preview' => '/img/admin/resized/terapevt240218063007.jpg',
+        'urltoquets' => '/quests-of-traders/terapevt-quests',
+        'button_quests' => 'Перейти в раздел квестов Терапевта',
+        'button_detail' => 'Перейти в раздел Терапевта',
+        'bg_style' => 'interback-grey',
+        'enabled' => 1,
+        'content' => '<p><span style="font-size:16px">Терапевт в Escape from Tarkov является персонажем второго плана, она торгует бинтами, аптечками, шинами для переломов, также можно купить еду и воду.</span></p><p><span style="font-size:16px">У терапевта квесты в основном подразумевают поиск предметов на карте, например воды или еды. Они довольно простые, однако репутация с этим торговцем у вас не должна стоять в приоритете. Репутацию с Терапевтом стоит прокачивать в самую последнюю очередь.</span></p>',
+        'sortir' => 2,
+        'fullcontent' => '',
+        'description' => 'Терапевт. Escape from Tarkov.',
+        'keywords' => 'Терапевт из Escape from Tarkov, Что продаёт Терапевт в Escape from Tarkov, все о торговце Терапевте',
+        'url' => 'terapevt'
     ]
 ];
