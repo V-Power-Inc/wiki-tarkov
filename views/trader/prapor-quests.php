@@ -72,10 +72,8 @@ $this->registerMetaTag([
         <!-- Расстояние заглушка -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 height-25"></div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 nulled-pdng">
-            <div class="bordered-recomend">
-                <?= $this->render('/other/google-recommended.php'); ?>
-            </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 nulled-pdng bordered-recomend">
+            <?= $this->render('/other/google-recommended.php'); ?>
         </div>
 
         <!-- Расстояние заглушка -->
@@ -86,7 +84,7 @@ $this->registerMetaTag([
             <?= $this->render('/other/comments');?>
         </div>
 
-        
+
         <div class="recommended-gm-content">
             <?= $this->render('/other/google-recommended.php'); ?>
         </div>
