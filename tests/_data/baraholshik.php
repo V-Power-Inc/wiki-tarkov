@@ -10,20 +10,20 @@
 return [
     [
         'tab_number' => 1,
-        'title' => 'Забудем старые обиды',
+        'title' => 'Только бизнес',
         'content' => '<ol><li><span style="font-size:16px">Найти ключ от 303 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/prostoe-lyubopitstvo030318045933.jpg'
+        'preview' => '/img/admin/resized/800px-Ragpickerbanner170518030742.jpg'
     ],
     [
         'tab_number' => 2,
-        'title' => 'Второй квест',
+        'title' => 'Вернем Ультре былое величие',
         'content' => '<ol><li><span style="font-size:16px">Найти ключ от 303 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/image030318045933.jpg'
+        'preview' => '/img/admin/resized/Make_ULTRA_Great_AgainBanner170518031714.png'
     ],
     [
         'tab_number' => 3,
-        'title' => 'Третий квест',
+        'title' => 'Распродажа',
         'content' => '<ol><li><span style="font-size:16px">Найти ключ от 423 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/thread344318045933.jpg'
+        'preview' => '/img/admin/resized/Make_ULTRA_Great_AgainBanner170518032714.png'
     ]
 ];
