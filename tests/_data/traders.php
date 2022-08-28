@@ -37,5 +37,20 @@ return [
         'description' => 'Терапевт. Escape from Tarkov.',
         'keywords' => 'Терапевт из Escape from Tarkov, Что продаёт Терапевт в Escape from Tarkov, все о торговце Терапевте',
         'url' => 'terapevt'
+    ],
+    [
+        'title' => 'Миротворец',
+        'preview' => '/img/admin/resized/mirotvorec240218063026.jpg',
+        'urltoquets' => '/quests-of-traders/mirotvorec-quests',
+        'button_quests' => 'Перейти в раздел квестов Миротворца',
+        'button_detail' => 'Перейти в раздел Миротворца',
+        'bg_style' => 'interback-white',
+        'enabled' => 1,
+        'content' => '<p><span style="font-size:16px">Миротворец торгует Западными товарами. В арсенале Миротворца в Escape from Tarkov вы можете найти американские автоматы и пистолеты пулеметы, самый покупаемый товар у Миротворца это автомат M4A1. Также у него можно покупать бронежилеты, гранаты М-67, Важный момент заключается в том что Миротворец торгует товарами за доллары, это значит что для того чтобы прокачать с ним репутацию, вам придется продать ему очень много добычи из рейдов но оно того стоит.</span></p>',
+        'sortir' => 5,
+        'fullcontent' => '',
+        'description' => 'Миротворец. Escape from Tarkov.',
+        'keywords' => 'Миротворец из Escape from Tarkov, Что продаёт Миротворец в EFT, все о торговце Миротворец в EFT.',
+        'url' => 'mirotvorec'
     ]
 ];

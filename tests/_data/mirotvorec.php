@@ -10,20 +10,20 @@
 return [
     [
         'tab_number' => 1,
-        'title' => 'Забудем старые обиды',
-        'content' => '<ol><li><span style="font-size:16px">Найти ключ от 303 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/prostoe-lyubopitstvo030318045933.jpg'
+        'title' => 'Рыболовные снасти',
+        'content' => '<p><span style="font-size:16px"><span style="font-size:16px"><strong>Стартовое снаряжение: 1&nbsp;</strong></span></span></p>',
+        'preview' => '/img/admin/resized/1.png'
     ],
     [
         'tab_number' => 2,
-        'title' => 'Второй квест',
-        'content' => '<ol><li><span style="font-size:16px">Найти ключ от 303 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/image030318045933.jpg'
+        'title' => 'Сафари на тигра',
+        'content' => '<p><span style="font-size:16px"><span style="font-size:16px"><strong>Стартовое снаряжение: 2&nbsp;</strong></span></span></p>',
+        'preview' => '/img/admin/resized/2.png'
     ],
     [
         'tab_number' => 3,
-        'title' => 'Третий квест',
-        'content' => '<ol><li><span style="font-size:16px">Найти ключ от 423 комнаты общежития</span></li><li><span style="font-size:16px">Найти ключ ЗБ-014</span></li><li><span style="font-size:16px">Найти ключ от КПП военной базы на Таможне</span></li><li><span style="font-size:16px">Найти ключ склада на заправке</span></li><li><span style="font-size:16px">Передайте ключи Терапевту&nbsp;</span></li></ol>',
-        'preview' => '/img/admin/resized/thread344318045933.jpg'
+        'title' => 'Металлолом',
+        'content' => '<p><span style="font-size:16px"><span style="font-size:16px"><strong>Стартовое снаряжение: 3&nbsp;</strong></span></span></p>',
+        'preview' => '/img/admin/resized/3.png'
     ]
 ];
