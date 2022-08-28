@@ -67,5 +67,20 @@ return [
         'description' => 'Лыжник. Escape from Tarkov.',
         'keywords' => 'Лыжник из Escape from Tarkov, Что продаёт Лыжник в Escape from Tarkov, все о торговце Лыжнике.',
         'url' => 'lyjnic'
+    ],
+    [
+        'title' => 'Скупщик',
+        'preview' => '/img/admin/resized/skupshik240218063039.jpg',
+        'urltoquets' => '/quests-of-traders/skypshik-quests',
+        'button_quests' => 'Перейти в раздел квестов Скупщика',
+        'button_detail' => 'Перейти в раздел Скупщика',
+        'bg_style' => 'interback-white',
+        'enabled' => 1,
+        'content' => '<p><span style="font-size:16px">Скупщик торгует всем подряд, у него постоянно обновляется инвентарь предметов, поэтому всякий раз, когда вы будете обновлять окно торговли со Скупщиком - вы сможете увидеть самые разные предметы. У скупщика можно купить абсолютно все, однако стоит помнить, что другие игроки тоже следят за инвентарем скупщика, поэтому если вы увидите что то ценное - следует немедленно забрать этот предмет себе.</span></p><p>&nbsp;</p>',
+        'sortir' => 3,
+        'fullcontent' => '<p><span style="font-size:16px">С самого зарождения конфликта Скупщик&nbsp;уже начинал действовать, организуя анонимные точки приёма и сбыта товара. Оставаясь инкогнито, смог организовать отлаженную сеть контрабандистов по всей Норвинской области.</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><span style="font-size:16px">Пара скриншотов того, что можно найти у Скупщика.</span></p><p><span style="font-size:16px"><img alt="" class="image-link" src="/img/upload/traders/skupshik/skupshik.png" style="float:left; margin:5px 15px; width:20%" /><img alt="" class="image-link" src="/img/upload/traders/skupshik/skupshik_2.png" style="float:left; margin:5px 15px; width:20%" /></span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><span style="font-size:18px"><strong>Что покупает Скупщик.</strong></span></h2><p><span style="font-size:16px">Скупщик <strong>покупает всё</strong>. Нюанс заключается в том, что <strong>цена</strong>, за которую вы можете продать что-то Скупщику, будет <strong>в 2-3 раза ниже</strong>, чем у других торговцев.​</span></p><h2><span style="font-size:18px"><strong>Что стоит продавать Скупщику.</strong></span></h2><p><span style="font-size:16px">В основном&nbsp;это будут те предметы, которые у вас не купят другие торговцы из-за низкого технического состояния предмета.</span></p><h2><span style="font-size:18px"><strong>Что продаёт Скупщик.</strong></span></h2><p><span style="font-size:16px">В продаже у Скупщика может появиться всё, что угодно. Это может быть ключница, граната Ф-1, шоколад, R11 RSASS, броня 6б43 и т.д. Эти предметы могут появиться в любом техническом состоянии и от этого будет зависеть цена на предмет. <strong>Цена</strong> покупки на все предметы может быть <strong>выше на 15-30%</strong>.</span></p>',
+        'description' => 'Скупщик. Escape from Tarkov.',
+        'keywords' => 'Скупщик из Escape from Tarkov, Что продаёт Скупщик в Escape from tarkov., все о торговце Скупщике.',
+        'url' => 'skupshik'
     ]
 ];

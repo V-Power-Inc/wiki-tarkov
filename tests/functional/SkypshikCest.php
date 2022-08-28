@@ -3,25 +3,25 @@
  * Created by PhpStorm.
  * User: PC_Principal
  * Date: 28.08.2022
- * Time: 17:56
+ * Time: 18:40
  */
 
 namespace Tests\Functional;
 
 use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
-use app\tests\fixtures\MirotvorecFixture;
+use app\tests\fixtures\SkypshikFixture;
 
 /**
  * Функциональные тесты страниц квестов
  *
- * Class MirotvorecCest
+ * Class SkypshikCest
  * @package Tests\Functional
  */
-class MirotvorecCest
+class SkypshikCest
 {
     /**
-     * Фикстуры для таблицы mirotvorec
+     * Фикстуры для таблицы skypshik
      * @return array
      */
     public function _fixtures() {
@@ -30,9 +30,9 @@ class MirotvorecCest
                 'class' => TradersFixture::class,
                 'dataFile' => codecept_data_dir() . 'traders.php'
             ],
-            'mirotvorec' => [
-                'class' => MirotvorecFixture::class,
-                'dataFile' => codecept_data_dir() . 'mirotvorec.php'
+            'skypshik' => [
+                'class' => SkypshikFixture::class,
+                'dataFile' => codecept_data_dir() . 'skypshik.php'
             ]
         ];
     }
@@ -40,14 +40,14 @@ class MirotvorecCest
     /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_MIROTVORECPAGE));
+        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_SKYPCHIKPAGE));
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Миротворца по онлайн-шутеру Escape from Takov.">');
-        $I->seeInSource('<meta name="keywords" content="Квесты миротворца в Escape from Tarkov, квесты миротворец Тарков">');
+        $I->seeInSource('<meta name="description" content="Скупщик. Escape from Tarkov.">');
+        $I->seeInSource('<meta name="keywords" content="Скупщик из Escape from Tarkov, Что продаёт Скупщик в Escape from tarkov., все о торговце Скупщике.">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -55,23 +55,21 @@ class MirotvorecCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.">');
+        $I->seeInSource('<meta property="og:title" content="Квесты Скупщика в Escape from Tarkov. Разбор и прохождение квестов Скупщика.">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.');
+        $I->seeInTitle('Квесты Скупщика в Escape from Tarkov. Разбор и прохождение квестов Скупщика.');
     }
 
     /** Мы видим H1 заголовок и названия квестов а также область контента, что их выводит */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.', 'h1');
-        $I->see('Рыболовные снасти');
-        $I->see('Сафари на тигра');
-        $I->see('Металлолом');
+        $I->see('Квесты Скупщика в Escape from Tarkov. Разбор и прохождение квестов Скупщика.', 'h1');
+        $I->see('Снабженец');
         $I->seeElement('.quests-content');
     }
 
@@ -109,12 +107,6 @@ class MirotvorecCest
         $I->seeLink('Смотреть все умения','/skills');
         $I->seeLink('Справочник лута','/loot');
         $I->seeLink('Справочник ключей','/keys');
-    }
-
-    /** Проверяем что предупреждающее сообщение миротворца прогрузилось */
-    public function checkAlertMessage(\FunctionalTester $I)
-    {
-        $I->seeElement('.alert.alert-danger.size-16');
     }
 
     /** У нас нет куки - скрывающей оверлей с рекламой */

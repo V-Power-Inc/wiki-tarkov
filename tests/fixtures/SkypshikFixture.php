@@ -11,6 +11,7 @@ namespace app\tests\fixtures;
 class SkypshikFixture extends \yii\test\ActiveFixture {
 
     public $modelClass = 'app\models\Skypshik';
+    public $depends = ['app\tests\fixtures\TradersFixture'];
 
     /** @var string Имя таблицы */
     const TABLE_NAME = 'skypshik';
