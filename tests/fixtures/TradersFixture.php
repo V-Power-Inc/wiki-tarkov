@@ -17,8 +17,8 @@ class TradersFixture extends \yii\test\ActiveFixture {
     const TABLE_NAME = 'traders';
 
 //  Действие для фикстур после отработки каждого теста
-//    public function afterLoad() {
-//        parent::afterLoad();
+//    public function beforeUnload() {
+//        parent::beforeUnload();
 //        $this->db->createCommand()->setSql('truncate table .'.static::TABLE_NAME)->execute();
 //    }
 }
