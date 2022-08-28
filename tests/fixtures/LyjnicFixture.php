@@ -11,6 +11,7 @@ namespace app\tests\fixtures;
 class LyjnicFixture extends \yii\test\ActiveFixture {
 
     public $modelClass = 'app\models\Lyjnic';
+    public $depends = ['app\tests\fixtures\TradersFixture'];
 
     /** @var string Имя таблицы */
     const TABLE_NAME = 'lyjnic';

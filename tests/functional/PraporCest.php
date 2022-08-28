@@ -69,9 +69,9 @@ class PraporCest
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Квесты Прапора в Escape from Tarkov. Разбор и прохождение квестов Прапора.', 'h1');
-        $I->see('Забудем старые обиды');
-        $I->see('Второй квест');
-        $I->see('Третий квест');
+        $I->see('Проба пера');
+        $I->see('Проверка на вшивость');
+        $I->see('Пикник со стрельбой');
         $I->seeElement('.quests-content');
     }
 

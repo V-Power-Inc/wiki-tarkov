@@ -2,26 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 26.08.2022
- * Time: 21:56
+ * Date: 28.08.2022
+ * Time: 18:29
  */
 
 namespace Tests\Functional;
 
 use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
-use app\tests\fixtures\TerapevtFixture;
+use app\tests\fixtures\LyjnicFixture;
 
 /**
  * Функциональные тесты страниц квестов
  *
- * Class TerapevtCest
+ * Class LyjnicCest
  * @package Tests\Functional
  */
-class TerapevtCest
+class LyjnicCest
 {
     /**
-     * Фикстуры для таблицы terapevt
+     * Фикстуры для таблицы lyjnic
      * @return array
      */
     public function _fixtures() {
@@ -30,9 +30,9 @@ class TerapevtCest
                 'class' => TradersFixture::class,
                 'dataFile' => codecept_data_dir() . 'traders.php'
             ],
-            'terapevt' => [
-                'class' => TerapevtFixture::class,
-                'dataFile' => codecept_data_dir() . 'terapevt.php'
+            'lyjnic' => [
+                'class' => LyjnicFixture::class,
+                'dataFile' => codecept_data_dir() . 'lyjnic.php'
             ]
         ];
     }
@@ -40,14 +40,14 @@ class TerapevtCest
     /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_TERAPEVTPAGE));
+        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_LYJNICPAGE));
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Терапевта по онлайн-шутеру Escape from Takov.">');
-        $I->seeInSource('<meta name="keywords" content="Квесты терапевта в Escape from Tarkov, квесты терапевт Тарков">');
+        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Лыжника по онлайн-шутеру Escape from Takov.">');
+        $I->seeInSource('<meta name="keywords" content="Квесты лыжника в Escape from Tarkov, квесты лыжник Тарков">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -55,23 +55,23 @@ class TerapevtCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Квесты Терапевта в Escape from Tarkov. Разбор и прохождение квестов Терапевта.">');
+        $I->seeInSource('<meta property="og:title" content="Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Квесты Терапевта в Escape from Tarkov. Разбор и прохождение квестов Терапевта.');
+        $I->seeInTitle('Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.');
     }
 
     /** Мы видим H1 заголовок и названия квестов а также область контента, что их выводит */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Квесты Терапевта в Escape from Tarkov. Разбор и прохождение квестов Терапевта.', 'h1');
-        $I->see('Дефицит');
-        $I->see('Санэпиднадзор часть 1');
-        $I->see('Операция Водолей');
+        $I->see('Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.', 'h1');
+        $I->see('Снабженец');
+        $I->see('Вымогатель');
+        $I->see('Движуха');
         $I->seeElement('.quests-content');
     }
 
