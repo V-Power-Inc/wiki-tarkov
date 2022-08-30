@@ -4,7 +4,6 @@ namespace app\tests\fixtures;
 
 class MehanicFixture extends \yii\test\ActiveFixture
 {
-
     public $modelClass = 'app\models\Mehanic';
 
     /** @var string Имя таблицы */

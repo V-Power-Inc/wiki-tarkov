@@ -10,7 +10,7 @@ namespace app\tests\fixtures;
 
 class MirotvorecFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Mirotvorec';
-    public $depends = ['app\tests\fixtures\TradersFixture'];
+    // public $depends = ['app\tests\fixtures\TradersFixture'];
 
     /** @var string Имя таблицы */
     const TABLE_NAME = 'mirotvorec';

@@ -10,7 +10,7 @@ namespace app\tests\fixtures;
 
 class PraporFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Prapor';
-    public $depends = ['app\tests\fixtures\TradersFixture'];
+   // public $depends = ['app\tests\fixtures\TradersFixture'];
 
     const TABLE_NAME = 'prapor';
 

@@ -10,7 +10,7 @@ namespace app\tests\fixtures;
 
 class TerapevtFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Terapevt';
-    public $depends = ['app\tests\fixtures\TradersFixture'];
+    // public $depends = ['app\tests\fixtures\TradersFixture'];
 
     const TABLE_NAME = 'terapevt';
 
