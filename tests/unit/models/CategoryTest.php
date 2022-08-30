@@ -69,7 +69,7 @@ class CategoryTest extends \Codeception\Test\Unit
         $category->keywords = 'Дочерняя категория, лут, тесты - updated';
         $category->sortir = 2;
 
-        $this->assertIsInt($category->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        $this->assertIsInt($category->update(), 'Ожидался int, вернулся false - объект не обновился.');
     }
 
     /** Тестируем получение объекта (select) */
@@ -103,8 +103,4 @@ class CategoryTest extends \Codeception\Test\Unit
 
         $this->assertIsInt($category,'Удаление объекта не случилось, а должно было.');
     }
-
-
-
-
 }
