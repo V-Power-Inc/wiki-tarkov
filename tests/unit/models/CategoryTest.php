@@ -29,9 +29,10 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         $category = new Category();
 
+        $category->id = 3;
         $category->title = 'Основная категория';
         $category->parent_category = null;
-        $category->url = 'main-category';
+        $category->url = 'main-category3'; // Constraint on this field
         $category->content = '<p>Описание новой основной категории</p>';
         $category->description = 'Seo описание новой основной категории';
         $category->keywords = 'Основная категория, лут, тесты';
@@ -45,8 +46,9 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         $category = new Category();
 
+        $category->id = 4;
         $category->title = 'Дочерняя категория';
-        $category->parent_category = 1;
+        $category->parent_category = 3;
         $category->url = 'child-category';
         $category->content = '<p>Описание дочерней категории</p>';
         $category->description = 'Seo описание дочерней категории';
@@ -85,7 +87,7 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         $category = Category::find()->all();
 
-        $this->assertTrue(count($category) == 2, 'Ожидалось что вернется 2 объекта, что то пошло не так');
+        $this->assertTrue(count($category) == 4, 'Ожидалось что вернется 2 объекта, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */

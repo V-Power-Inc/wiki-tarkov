@@ -25,16 +25,18 @@ class ItemsTest extends \Codeception\Test\Unit
     protected $tester;
 
     /**
-     * Фикстуры для таблиц items и category
-     * @return array
+     * Фикстуры для таблиц items и category (Подгружаем заранее)
+     * @return mixed
      */
-    public function _fixtures() {
-        return [
+    public function _before()
+    {
+        // load fixtures
+        $this->tester->haveFixtures([
             'category' => [
                 'class' => CategoryFixture::class,
                 'dataFile' => codecept_data_dir() . 'category.php'
             ]
-        ];
+        ]);
     }
 
     /** Тестируем создание нового предмета в справочник лута */
@@ -88,7 +90,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         $item = Items::find()->one();
 
-        $this->assertNotNull($$item, 'Ожидался объект, вернулся null - объект не селектнулся.');
+        $this->assertNotNull($item, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
 
     /** Тестируем получение всех объектов (select all) */
