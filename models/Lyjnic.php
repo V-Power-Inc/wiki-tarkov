@@ -105,7 +105,7 @@ class Lyjnic extends ActiveRecord
      *
      * @return ActiveRecord[]
      */
-    public static function takeQuests()
+    public static function takeQuestsLyjnic()
     {
         return static::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }

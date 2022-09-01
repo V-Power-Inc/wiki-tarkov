@@ -54,7 +54,7 @@ class TraderController extends AdvancedController
      */
     public function actionPraporpage(): string
     {
-        return $this->render('prapor-quests', ['prapor'=> TradersService::takeQuests(Prapor::tableName())]);
+        return $this->render('prapor-quests', ['prapor'=> (new TradersService())->takeQuests(Prapor::tableName())]);
     }
 
     /**
@@ -65,7 +65,7 @@ class TraderController extends AdvancedController
      */
     public function actionTerapevtpage(): string
     {
-        return $this->render('terapevt-quests', ['terapevt'=>TradersService::takeQuests(Terapevt::tableName())]);
+        return $this->render('terapevt-quests', ['terapevt'=> (new TradersService())->takeQuests(Terapevt::tableName())]);
     }
 
     /**
@@ -76,7 +76,7 @@ class TraderController extends AdvancedController
      */
     public function actionSkypchikpage(): string
     {
-        return $this->render('skypshik-quests', ['skypshik'=>TradersService::takeQuests(Skypshik::tableName())]);
+        return $this->render('skypshik-quests', ['skypshik'=>(new TradersService())->takeQuests(Skypshik::tableName())]);
     }
 
     /**
@@ -87,7 +87,7 @@ class TraderController extends AdvancedController
      */
     public function actionLyjnicpage(): string
     {
-        return $this->render('lyjnic-quests', ['lyjnic'=>TradersService::takeQuests(Lyjnic::tableName())]);
+        return $this->render('lyjnic-quests', ['lyjnic'=>(new TradersService())->takeQuests(Lyjnic::tableName())]);
     }
 
     /**
@@ -98,7 +98,7 @@ class TraderController extends AdvancedController
      */
     public function actionMirotvorecpage(): string
     {
-        return $this->render('mirotvorec-quests', ['mirotvorec'=>TradersService::takeQuests(Mirotvorec::tableName())]);
+        return $this->render('mirotvorec-quests', ['mirotvorec'=>(new TradersService())->takeQuests(Mirotvorec::tableName())]);
     }
 
     /**
@@ -109,7 +109,7 @@ class TraderController extends AdvancedController
      */
     public function actionMehanicpage(): string
     {
-        return $this->render('mehanic-quests', ['mehanic'=>TradersService::takeQuests(Mehanic::tableName())]);
+        return $this->render('mehanic-quests', ['mehanic'=>(new TradersService())->takeQuests(Mehanic::tableName())]);
     }
 
     /**
@@ -120,7 +120,7 @@ class TraderController extends AdvancedController
      */
     public function actionBaraholshikpage(): string
     {
-        return $this->render('baraholshik-quests', ['baraholshik'=>TradersService::takeQuests(Baraholshik::tableName())]);
+        return $this->render('baraholshik-quests', ['baraholshik'=>(new TradersService())->takeQuests(Baraholshik::tableName())]);
     }
 
     /**

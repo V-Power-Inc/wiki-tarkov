@@ -32,36 +32,32 @@ final class TradersService
      * @return array
      * @throws HttpException
      */
-    public static function takeQuests(string $trader_name): array
+    public function takeQuests(string $trader_name): array
     {
         $trader = null;
 
         switch ($trader_name) {
             case 'mehanic':
-                $trader = Mehanic::takeQuests();
-                break;
+                $mehanic = Mehanic::takeQuestsMehanic();
+                return $mehanic;
             case 'skypshik':
-                $trader = Skypshik::takeQuests();
-                break;
+                $skypshik = Skypshik::takeQuestsSkypshik();
+                return $skypshik;
             case 'lyjnic':
-                $trader = Lyjnic::takeQuests();
-                break;
+                $lyjnic = Lyjnic::takeQuestsLyjnic();
+                return $lyjnic;
             case 'terapevt':
-                $trader = Terapevt::takeQuests();
-                break;
+                $terapevt = Terapevt::takeQuestsTerapevt();
+                return $terapevt;
             case 'prapor':
-                $trader = Prapor::takeQuests();
-                break;
+                $prapor = Prapor::takeQuestsPrapor();
+                return $prapor;
             case 'mirotvorec':
-                $trader = Mirotvorec::takeQuests();
-                break;
+                $mirotvorec = Mirotvorec::takeQuestsMirotvorec();
+                return $mirotvorec;
             case 'baraholshik':
-                $trader = Baraholshik::takeQuests();
-                break;
-        }
-
-        if ($trader) {
-            return $trader;
+                $baraholshik = Baraholshik::takeQuestsBaraholshik();
+                return $baraholshik;
         }
 
         throw new HttpException(404 ,'Такая страница не существует');
