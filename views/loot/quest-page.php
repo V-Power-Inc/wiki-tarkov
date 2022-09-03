@@ -6,10 +6,9 @@
  * Time: 0:06
  */
 
+use app\models\Traders;
 use app\components\LeftmenuWidget;
-use yii\widgets\LinkPager;
-use app\components\AlertComponent;
-use Yii;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Квестовые предметы Escape from Tarkov';
 
@@ -22,37 +21,12 @@ $this->registerMetaTag([
     'content' => 'Квестовы предметы в Таркове, квестовые предметы Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-use yii\bootstrap\ActiveForm;
+
 ?>
-
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Квестовые предметы Escape from Tarkov</h1>
-    </div>
-</div>
-
-
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -99,48 +73,16 @@ use yii\bootstrap\ActiveForm;
 
             <div class="col-lg-12">
 
-            <?php if(!$form_model->load(Yii::$app->request->post())) : ?>
-                
-                <!-- Форма без $_POST -->
                 <span class="key-selector">Искать квестовые предметы по торговцу:</span>
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['loot/questloot']],'id' => 'questloot','method' => 'post',]) ?>
-                <?= $form->field($form_model, 'questitem')->dropDownList([
-                    'Все предметы' => 'Все предметы',
-                    'Прапор' => 'Прапор',
-                    'Терапевт' => 'Терапевт',
-                    'Скупщик' => 'Скупщик',
-                    'Лыжник' => 'Лыжник',
-                    'Миротворец' => 'Миротворец',
-                    'Механик' => 'Механик',
-                    'Барахольщик' => 'Барахольщик'
-                ]);
-                ?>
-                <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
+                    <?= $form->field($form_model, 'questitem')->dropDownList(Traders::traderGroups(),
+                        [
+                            'value' => $formValue??'Все предметы'
+                        ]);
+                    ?>
+                    <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
                 <?php $form = ActiveForm::end() ?>
-                
-            <?php elseif($form_model->load(Yii::$app->request->post())) : ?>
-                
-                <!-- Форма с $_POST -->
-                <span class="key-selector">Искать квестовые предметы по торговцу:</span>
-                <?php $form = ActiveForm::begin(['options' => ['action' => ['loot/questloot']],'id' => 'questloot','method' => 'post',]) ?>
-                <?= $form->field($form_model, 'questitem')->dropDownList([
-                    'Все предметы' => 'Все предметы',
-                    'Прапор' => 'Прапор',
-                    'Терапевт' => 'Терапевт',
-                    'Скупщик' => 'Скупщик',
-                    'Лыжник' => 'Лыжник',
-                    'Миротворец' => 'Миротворец',
-                    'Механик' => 'Механик',
-                    'Барахольщик' => 'Барахольщик'
-                ],
-                [
-                    'value' => $arr
-                ]);
-                ?>
-                <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
-                <?php $form = ActiveForm::end() ?>
-                
-            <?php endif; ?>
+
             </div>
             
         

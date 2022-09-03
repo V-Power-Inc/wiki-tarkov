@@ -17,37 +17,14 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-use app\components\AlertComponent;
+$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Курс валют в Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 currencies-content">
 
             <!-- Статичное описание раздела -->
-            <p class="size-16 alert alert-info">В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс. Валюты в игре подразделяются на несколько типов, также каждая валюта необходима для покупки какого либо снаряжения, например у <a href="https://wiki-tarkov.ru/traders/mirotvorec" target="_blanc">Миротворца</a> большинство товаров покупаются за <b>доллары</b>, а у <a href="https://wiki-tarkov.ru/traders/mehanic" target="_blanc">Механика</a> - что то покупается за <b>евро</b> а что то за <b>биткоины</b>. Именно поэтому понимание валютного курса в Escape from Tarkov очень важно.
+            <p class="size-16 alert alert-info">В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс. Валюты в игре подразделяются на несколько типов, также каждая валюта необходима для покупки какого либо снаряжения, например у <a href="<?= $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/traders/mirotvorec' ?>" target="_blank">Миротворца</a> большинство товаров покупаются за <b>доллары</b>, а у <a href="<?= $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/traders/mehanic'?>" target="_blank">Механика</a> - что то покупается за <b>евро</b> а что то за <b>биткоины</b>. Именно поэтому понимание валютного курса в Escape from Tarkov очень важно.
                 <br>
                 <br>
                 На данный момент в игре доступны следующие виды денежных валют:</p>
@@ -68,43 +45,43 @@ use app\components\AlertComponent;
             <!-- Начало рассчетной части -->
             
             <?php if($dollar->enabled==1): ?>
-            <!-- Строка курса доллара -->
-            <h2 class="curencies-title">Курс Доллара</h2>
-            <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
+                <!-- Строка курса доллара -->
+                <h2 class="curencies-title">Курс Доллара</h2>
+                <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
 
-            <div class="article-stats-padding">
-                <?= $this->render('/other/adsense-article-feed'); ?>
-            </div>
+                <div class="article-stats-padding">
+                    <?= $this->render('/other/adsense-article-feed'); ?>
+                </div>
 
 
-            <!-- Блок рассчета под долларовые поля -->
-            <div style="padding: 10px;">
-                    
-            <!-- Инпут с курсом доллара -->
-            <div class="form-group">
-                <label class="control-label">Курс доллара в рублях:</label>
-                <input class="form-control valute-course" value="1 доллар = <?= $dollar->value/100 ?> рублей." disabled="">
+                <!-- Блок рассчета под долларовые поля -->
+                <div style="padding: 10px;">
 
-                <div class="help-block"></div>
-            </div>
+                    <!-- Инпут с курсом доллара -->
+                    <div class="form-group">
+                        <label class="control-label">Курс доллара в рублях:</label>
+                        <input class="form-control valute-course" value="1 доллар = <?= $dollar->value/100 ?> рублей." disabled="">
 
-            <!-- Инпут с пересчетом долларов на рубли -->
-            <div class="form-group">
-                <label class="control-label">Введите интересующее количество долларов:</label>
-                <input class="form-control valute-course" id="dollar-refference" oninput="dollarConventer(this.value)" onchange="dollarConventer(this.value)" value="">
+                        <div class="help-block"></div>
+                    </div>
 
-                <div class="help-block"></div>
-            </div>
+                    <!-- Инпут с пересчетом долларов на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">Введите интересующее количество долларов:</label>
+                        <input class="form-control valute-course" id="dollar-refference" oninput="dollarConventer(this.value)" onchange="dollarConventer(this.value)" value="">
 
-            <!-- Поле перессчета долларов на рубли -->
-            <div class="form-group">
-                <label class="control-label">В рублях это составит:</label>
-                <input class="form-control valute-course" id="outputdollar" value="0 руб." disabled="">
+                        <div class="help-block"></div>
+                    </div>
 
-                <div class="help-block"></div>
-            </div>    
-                
-            </div>
+                    <!-- Поле перессчета долларов на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">В рублях это составит:</label>
+                        <input class="form-control valute-course" id="outputdollar" value="0 руб." disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                </div>
             <?php endif; ?>
 
             <?php if($euro->enabled==1): ?>
@@ -192,8 +169,7 @@ use app\components\AlertComponent;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-            
-            
+
         </div>
 
         <!-- Боковая правая колонка -->
@@ -216,8 +192,6 @@ use app\components\AlertComponent;
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
         </div>
-        
-    </div>
-    
+
     </div>
 </div>

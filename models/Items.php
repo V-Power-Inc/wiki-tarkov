@@ -2,11 +2,15 @@
 
 namespace app\models;
 
-use Yii;
 use yii\imagine\Image;
-use Imagine\Gd;
-use Imagine\Image\Box;
 use yii\web\UploadedFile;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\ExistValidator;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "items".
@@ -29,20 +33,48 @@ use yii\web\UploadedFile;
  * @property string $module_weapon
  * @property string $creator
  *
- * @property ItemsToDoorkeys[] $itemsToDoorkeys
- * @property ItemsToLyjnic[] $itemsToLyjnics
- * @property ItemsToMechanik[] $itemsToMechaniks
- * @property ItemsToMirotvorec[] $itemsToMirotvorecs
- * @property ItemsToPrapor[] $itemsToPrapors
- * @property ItemsToTerapevt[] $itemsToTerapevts
  * @property Category $parentcat
  * @property Category $maintcat
  */
-class Items extends \yii\db\ActiveRecord
+class Items extends ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID            = 'id';
+    const ATTR_TITLE         = 'title';
+    const ATTR_PREVIEW       = 'preview';
+    const ATTR_SHORTDESC     = 'shortdesc';
+    const ATTR_CONTENT       = 'content';
+    const ATTR_DATE_CREATE   = 'date_create';
+    const ATTR_DATE_UPDATE   = 'date_update';
+    const ATTR_ACTIVE        = 'active';
+    const ATTR_URL           = 'url';
+    const ATTR_DESCRIPTION   = 'description';
+    const ATTR_KEYWORDS      = 'keywords';
+    const ATTR_PARENTCAT_ID  = 'parentcat_id';
+    const ATTR_QUEST_ITEM    = 'quest_item';
+    const ATTR_TRADER_GROUP  = 'trader_group';
+    const ATTR_SEARCH_WORDS  = 'search_words';
+    const ATTR_MODULE_WEAPON = 'module_weapon';
+    const ATTR_CREATOR       = 'creator';
 
+    /** Константы связей таблицы */
+    const RELATION_PARENTCAT = 'parentcat';
+    const RELATION_MAINCAT   = 'maincat';
+
+    /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
+    const FILE = 'file';
+
+    /** @var string $questitem - Переменная квестового предмета */
     public $questitem;
+    const QUESTITEM = 'questitem';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
+    /** @var string Заглушка имени форм */
+    const formName = 'Items';
 
     /**
      * @inheritdoc
@@ -53,18 +85,57 @@ class Items extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'shortdesc', 'url', 'description', 'creator'], 'required'],
-            [['shortdesc', 'content', 'search_words', 'module_weapon'], 'string'],
-            [['date_create', 'date_update', 'keywords', 'trader_group', 'quest_item'], 'safe'],
-            [['file'], 'image'],
-            [['active', 'parentcat_id'], 'integer'],
-            [['title', 'preview', 'creator'], 'string', 'max' => 255],
-            [['parentcat_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parentcat_id' => 'id']],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SHORTDESC, RequiredValidator::class],
+            [static::ATTR_SHORTDESC, StringValidator::class],
+
+            [static::ATTR_URL, RequiredValidator::class],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+
+            [static::ATTR_CREATOR, RequiredValidator::class],
+            [static::ATTR_CREATOR, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_SEARCH_WORDS, StringValidator::class],
+
+            [static::ATTR_MODULE_WEAPON, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_UPDATE, SafeValidator::class],
+
+            [static::ATTR_KEYWORDS, SafeValidator::class],
+
+            [static::ATTR_TRADER_GROUP, SafeValidator::class],
+
+            [static::ATTR_QUEST_ITEM, SafeValidator::class],
+
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_PARENTCAT_ID, IntegerValidator::class],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_PARENTCAT_ID,
+                ExistValidator::class,
+                ExistValidator::ATTR_SKIP_ON_ERROR => true,
+                ExistValidator::ATTR_TARGET_CLASS => Category::class,
+                ExistValidator::ATTR_TARGET_ATTRIBUTE =>
+                    [static::ATTR_PARENTCAT_ID => Category::ATTR_ID]
+            ],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
@@ -81,33 +152,32 @@ class Items extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    // todo: Продумать функицонал связывающий модуль и пушки, на которые он цепляется
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название',
-            'preview' => 'Превьюшка предмета',
-            'shortdesc' => 'Короткое описание',
-            'content' => 'Содержимое',
-            'date_create' => 'Дата создания',
-            'active' => 'Лут активен',
-            'parentcat_id' => 'Родительская категория',
-            'file' => 'Превьюшка предмета',
-            'url' => 'URL адрес',
-            'maincat_id' => 'Корневая категория',
-            'fullurl' => 'Полный URL адрес',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'trader_group' => 'Относится к торговцам',
-            'quest_item' => 'Квестовый предмет',
-            'questitem' => '',
-            'module_weapon' => 'Оружия связанные с модулем',
-            'search_words' => 'Слова синонимы (livesearch)',
-            'date_update' => 'Дата последнего обновления',
-            'creator' => 'Создан пользователем'
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название',
+            static::ATTR_PREVIEW => 'Превьюшка предмета',
+            static::ATTR_SHORTDESC => 'Короткое описание',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ACTIVE => 'Лут активен',
+            static::ATTR_PARENTCAT_ID => 'Родительская категория',
+            static::ATTR_URL => 'URL адрес',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_TRADER_GROUP => 'Относится к торговцам',
+            static::ATTR_QUEST_ITEM => 'Квестовый предмет',
+            static::ATTR_MODULE_WEAPON => 'Оружия связанные с модулем',
+            static::ATTR_SEARCH_WORDS => 'Слова синонимы (livesearch)',
+            static::ATTR_DATE_UPDATE => 'Дата последнего обновления',
+            static::ATTR_CREATOR => 'Создан пользователем',
+            static::FILE => 'Превьюшка предмета',
+            static::QUESTITEM => ''
         ];
     }
 
@@ -122,54 +192,6 @@ class Items extends \yii\db\ActiveRecord
         }
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToDoorkeys()
-    {
-        return $this->hasMany(ItemsToDoorkeys::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToLyjnics()
-    {
-        return $this->hasMany(ItemsToLyjnic::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToMechaniks()
-    {
-        return $this->hasMany(ItemsToMechanik::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToMirotvorecs()
-    {
-        return $this->hasMany(ItemsToMirotvorec::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToPrapors()
-    {
-        return $this->hasMany(ItemsToPrapor::className(), ['item_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItemsToTerapevts()
-    {
-        return $this->hasMany(ItemsToTerapevt::className(), ['item_id' => 'id']);
-    }
-
     /** Получаем список всех предметов из таблицы справочника лута **/
     public function getAllItems() {
         $Items = Items::find()->asArray()->all();
@@ -182,13 +204,78 @@ class Items extends \yii\db\ActiveRecord
         return $activeLoot;
     }
 
-    /*** Ниже получаем родительскую категорию ***/
     /**
+     * Ниже получаем родительскую категорию
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getParentcat()
     {
-        return $this->hasOne(Category::className(), ['id' => 'parentcat_id']);
+        return $this->hasOne(Category::class, ['id' => 'parentcat_id']);
+    }
+
+    /**
+     * Получаем активный лут, связанный с текущей категорией, а также получаем родительскую категорию
+     *
+     * @param string $name - url алрес категории
+     * @param int $id - id родительской категории
+     * @return \yii\db\ActiveQuery
+     */
+    public static function takeItemsWithParentCat(string $name, int $id)
+    {
+        return static::find()
+            ->alias( 'i')
+            ->select('i.*')
+            ->leftJoin('category as c1', '`i`.`parentcat_id` = `c1`.`id`')
+            ->andWhere(['c1.url' => $name])
+            ->andWhere(['active' => 1])
+            ->orWhere(['c1.parent_category' => $id])
+            ->andWhere(['active' => 1])
+            ->with('parentcat');
+    }
+
+    /**
+     * Получаем список всех активных квестовых предметов
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveQuestItems()
+    {
+        return static::find()
+            ->where([static::ATTR_ACTIVE => static::TRUE])
+            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->orderby([static::ATTR_TITLE => SORT_STRING])
+            ->all();
+    }
+
+    /**
+     * Получаем активные квестовые предметы по категории торговца
+     *
+     * @param string $category
+     * @return array|ActiveRecord[]
+     */
+    public static function takeQuestItemsByTraderCat(string $category)
+    {
+        return static::find()
+            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->andWhere(['like', static::ATTR_TRADER_GROUP, [$category]])
+            ->orderby([static::ATTR_TITLE => SORT_STRING])
+            ->all();
+    }
+
+    /**
+     * Возвращаем активный предмет лута по параметру url
+     *
+     * @param string $item - url параметр
+     * @return array|ActiveRecord|null
+     */
+    public static function takeActiveItemByUrl(string $item)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$item])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->One();
     }
 
 }

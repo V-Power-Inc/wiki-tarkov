@@ -195,7 +195,7 @@ $(document).ready(function() {
 
     /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
     $.ajax({
-        url: '/site/razvyazkamarkers',
+        url: '/maps/razvyazkamarkers',
         dataType: 'json',
         data: {param: param, token : token},
         async: false,

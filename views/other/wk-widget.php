@@ -9,8 +9,7 @@
 /*** Вьюха виджета вконтакте сообщества V-Power ***/
 ?>
 
-<!-- VK Widget -->
-<!--<div id="vk_groups" style="margin-bottom: 10px;"></div>-->
-<!--<script type="text/javascript">-->
-<!--    VK.Widgets.Group("vk_groups", {mode: 3, width: "auto", height: "300"}, 162698237);-->
-<!--</script>-->
+<div id="vk_groups"></div>
+<script type="text/javascript">
+    VK.Widgets.Group("vk_groups", {mode: 0, width: "auto"}, 162698237);
+</script>

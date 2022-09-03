@@ -1,59 +1,67 @@
 <?php
+/** Отдельный файл routes - сюда для удобства были вынесены все маршруты */
 
 use app\controllers\SiteController;
+use app\controllers\SkillsController;
+use app\controllers\ClanController;
+use app\controllers\LootController;
+use app\controllers\ItemController;
+use app\controllers\MapsController;
+use app\controllers\TraderController;
+
+use app\modules\admin\controllers\DefaultController;
+use app\modules\admin\controllers\ModeratorController;
 
 return [
+    'admin/login' => DefaultController::routeId(DefaultController::ACTION_LOGIN),
+    'admin/logout' => DefaultController::routeId(DefaultController::ACTION_LOGOUT),
+    'admin/ass-destroyer' => ModeratorController::routeId(ModeratorController::ACTION_INDEX),
+
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
-    // 'donates' => 'site/donates',
-    'savereview' => 'site/savereview',
-    'table-patrons' => 'site/table-patrons',
-    'reviews' => 'site/reviews',
-    'offed-js' => 'site/jsdisabled',
-    'parse-pidors' => 'site/parse-pidors',
-    'admin/ass-destroyer' => 'admin/moderator/index',
-    'barter/preview' => 'site/barters-preview',
-    'trader/preview' => 'site/previewtrader',
-    'admin/login' => 'admin/default/logout',
-    'maps' => 'site/locations',
-    'maps/zavod-location' => 'site/zavod',
-    'maps/forest-location' => 'site/forest',
-    'maps/tamojnya-location' => 'site/tamojnya',
-    'maps/bereg-location' => 'site/bereg',
-    'maps/razvyazka-location' => 'site/razvyazka',
-    'maps/terragroup-laboratory-location' => 'site/laboratoryterra',
-    'maps/rezerv-location' => 'site/rezerv',
-    'maps/lighthouse-location' => 'site/lighthouse',
-    'quests-of-traders' => 'site/quests',
-    'quests-of-traders/prapor-quests' => 'site/praporpage',
-    'quests-of-traders/terapevt-quests' => 'site/terapevtpage',
-    'quests-of-traders/skypshik-quests' => 'site/skypchikpage',
-    'quests-of-traders/lyjnic-quests' => 'site/lyjnicpage',
-    'quests-of-traders/mirotvorec-quests' => 'site/mirotvorecpage',
-    'quests-of-traders/mehanic-quests' => 'site/mehanicpage',
-    'quests-of-traders/baraholshik-quests' => 'site/baraholshikpage',
-    //  'quests-of-traders/leshy-quests' => 'site/leshypage',
-    //  'quests-of-traders/warden-quests' => 'site/wardenpage',
-    //  'quests-of-traders/bashkir-quests' => 'site/bashkirpage',
-    //  'quests-of-traders/khokhol-quests' => 'site/khokholpage',
-    'currencies' => 'site/currencies',
-    'clan/clansearch' => 'clan/clansearch',
-    'clan/save' => 'clan/save',
-    'clans' => 'clan/index',
-    'add-clan' => 'clan/addclan',
-    'keys' => 'site/keys',
-    'news' => 'site/news',
-    'skills' => 'skills/mainskills',
-    'traders' => 'site/traders301',
-    'articles' => 'site/articles',
-    'questions' => 'site/questions',
-    'loot/lootjson' => 'loot/lootjson',
-    'site/keysjson' => 'site/keysjson',
-    'item/preview' => 'item/previewloot',
-    'loot/quest-loot' => 'loot/questloot',
-    'loot' => 'loot/mainloot',
-    'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => 'loot/category',
-    'loot/<name:[\w_\/-]+>' => 'loot/category',
-    // 'development/after-master-push' => 'site/bitbucket-hook',
+    'table-patrons' => SiteController::routeId(SiteController::ACTION_TABLE_PATRONS),
+    'offed-js' => SiteController::routeId(SiteController::ACTION_JSDISABLED),
+    'traders/barterspreview' => TraderController::routeId(TraderController::ACTION_BARTERS_PREVIEW),
+    'traders/previewtrader' => TraderController::routeId(TraderController::ACTION_PREVIEWTRADER),
+    'maps' => MapsController::routeId(MapsController::ACTION_LOCATIONS),
+    'maps/zavod-location' => MapsController::routeId(MapsController::ACTION_ZAVOD),
+    'maps/forest-location' => MapsController::routeId(MapsController::ACTION_FOREST),
+    'maps/tamojnya-location' => MapsController::routeId(MapsController::ACTION_TAMOJNYA),
+    'maps/bereg-location' => MapsController::routeId(MapsController::ACTION_BEREG),
+    'maps/razvyazka-location' => MapsController::routeId(MapsController::ACTION_RAZVYAZKA),
+    'maps/terragroup-laboratory-location' => MapsController::routeId(MapsController::ACTION_LABORATORYTERRA),
+    'maps/rezerv-location' => MapsController::routeId(MapsController::ACTION_REZERV),
+    'maps/lighthouse-location' => MapsController::routeId(MapsController::ACTION_LIGHTHOUSE),
+    'quests-of-traders' => TraderController::routeId(TraderController::ACTION_QUESTS),
+    'quests-of-traders/prapor-quests' => TraderController::routeId(TraderController::ACTION_PRAPORPAGE),
+    'quests-of-traders/terapevt-quests' => TraderController::routeId(TraderController::ACTION_TERAPEVTPAGE),
+    'quests-of-traders/skypshik-quests' => TraderController::routeId(TraderController::ACTION_SKYPCHIKPAGE),
+    'quests-of-traders/lyjnic-quests' => TraderController::routeId(TraderController::ACTION_LYJNICPAGE),
+    'quests-of-traders/mirotvorec-quests' => TraderController::routeId(TraderController::ACTION_MIROTVORECPAGE),
+    'quests-of-traders/mehanic-quests' => TraderController::routeId(TraderController::ACTION_MEHANICPAGE),
+    'quests-of-traders/baraholshik-quests' => TraderController::routeId(TraderController::ACTION_BARAHOLSHIKPAGE),
+    'currencies' => SiteController::routeId(SiteController::ACTION_CURRENCIES),
+    'keys' => SiteController::routeId(SiteController::ACTION_KEYS),
+    'news' => SiteController::routeId(SiteController::ACTION_NEWS),
+    'articles' => SiteController::routeId(SiteController::ACTION_ARTICLES),
+    'questions' => SiteController::routeId(SiteController::ACTION_QUESTIONS),
+    'site/keysjson' => SiteController::routeId(SiteController::ACTION_KEYSJSON),
+
+    'clan/clansearch' => ClanController::routeId(ClanController::ACTION_CLANSEARCH),
+    'clan/save' => ClanController::routeId(ClanController::ACTION_SAVE),
+    'clans' => ClanController::routeId(ClanController::ACTION_INDEX),
+    'add-clan' => ClanController::routeId(ClanController::ACTION_ADDCLAN),
+
+    'skills' => SkillsController::routeId(SkillsController::ACTION_MAINSKILLS),
+
+    'item/preview' => ItemController::routeId(ItemController::ACTION_PREVIEWLOOT),
+
+    'loot/lootjson' => LootController::routeId(LootController::ACTION_LOOTJSON),
+    'loot/quest-loot' => LootController::routeId(LootController::ACTION_QUESTLOOT),
+    'loot' => LootController::routeId(LootController::ACTION_MAINLOOT),
+    'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
+    'loot/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
+
+    // Пока оставляем это так, т.к. в предыдущем варианте компоненты не работали
     [
         'class' => 'app\components\UrlComponent',
     ],
@@ -62,5 +70,5 @@ return [
     ],
     [
         'class' => 'app\components\CategoryurlComponent',
-    ],
+    ]
 ];

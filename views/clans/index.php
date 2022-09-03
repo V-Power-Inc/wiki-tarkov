@@ -6,7 +6,6 @@
  * Time: 12:24
  */
 
-use app\components\AlertComponent;
 use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Список кланов";
@@ -22,30 +21,7 @@ $this->registerMetaTag([
 ]);
 
 $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Список кланов Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
-
 <div class="container">
     <div class="row">
 
@@ -53,7 +29,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
         <div class="col-lg-12">
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
-
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
 
@@ -97,7 +72,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
                 <div class="clan-block">
                     <h3 class="clan-title">
                             <?= $clan['title'] ?>
-                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
+                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией <?=$_ENV['DOMAIN']?>"></i>
                     </h3>
 
                    <?php if($clan['preview'] == null): ?>
@@ -125,7 +100,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
 
         </div>
 
-
         <!-- right menu start -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
@@ -142,7 +116,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
             <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
-        
-        
+
     </div>
 </div>

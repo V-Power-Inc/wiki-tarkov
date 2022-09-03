@@ -6,9 +6,7 @@
  * Time: 13:12
  */
 
-use app\components\LeftmenuWidget;
-use yii\widgets\LinkPager;
-use Yii;
+use app\components\AlertComponent;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -30,7 +28,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+    'content' => $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . Yii::$app->request->url,
 ]);
 
 $this->registerMetaTag([
@@ -38,35 +36,9 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
-
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-$keysBlocks = [8];
-
-use app\components\AlertComponent;
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?= $cat->title ?></h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -93,13 +65,10 @@ use app\components\AlertComponent;
                 <!-- Нет лута -->
             <?php else : ?>
 
-                <!-- core from 07-11-2018 -->
-
-
                 <!-- Цикл предметов категории -->
                 <?php foreach ($items as $item => $v) : ?>
 
-                    <?php if(in_array($item,$keysBlocks)): ?>
+                    <?php if(in_array($item,Yii::$app->params['keysBlocks'])): ?>
                         <div class="col-lg-12 fixible-block">
                             <div class="item-loot h-130">
                                 <?= $this->render('/other/adsense-feed.php'); ?>
@@ -143,8 +112,6 @@ use app\components\AlertComponent;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-
-
 
         </div>
 

@@ -35,7 +35,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'short_desc')->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

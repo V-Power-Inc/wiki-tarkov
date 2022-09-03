@@ -7,9 +7,15 @@
  */
 
 namespace app\components;
-use Yii;
-use app\components\AlertComponent;
 
+use Yii;
+
+/**
+ * Класс горизонтального меню в верхней части сайта
+ *
+ * Class MenuComponent
+ * @package app\components
+ */
 class MenuComponent
 {
     public static $keys = null;
@@ -26,7 +32,8 @@ class MenuComponent
     public static $questions = null;
     
 
-    public static function Active(){
+    public static function Active()
+    {
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
@@ -44,12 +51,13 @@ class MenuComponent
             case 'questions':self::$questions = 'class="active"'; break;
         }
     }
+
     /**
      * получаем основные пункты меню
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function showMenu(){
-
+    public static function showMenu()
+    {
         /*** Разбивка для страниц карт локаций ***/
         $intermaps = "";
 
@@ -71,24 +79,25 @@ class MenuComponent
        /*** Разбивка для страниц торговцев и их квестов ***/
         $pagequests = "";
         
-        $urlarray = ["/quests-of-traders",
-                    "/quests-of-traders/prapor-quests", 
-                    "/quests-of-traders/terapevt-quests",
-                    "/quests-of-traders/skypchik-quests",
-                    "/quests-of-traders/lyjnic-quests",
-                    "/quests-of-traders/mirotvorec-quests",
-                    "/traders/prapor",
-                    "/traders/terapevt",
-                    "/traders/lyjnic",
-                    "/traders/mirotvorec",
-                    "/traders/mehanic",
-                    "/traders/skupshik",
-                    "/traders/baraholshik"
+        $urlarray = [
+            "/quests-of-traders",
+            "/quests-of-traders/prapor-quests",
+            "/quests-of-traders/terapevt-quests",
+            "/quests-of-traders/skypchik-quests",
+            "/quests-of-traders/lyjnic-quests",
+            "/quests-of-traders/mirotvorec-quests",
+            "/traders/prapor",
+            "/traders/terapevt",
+            "/traders/lyjnic",
+            "/traders/mirotvorec",
+            "/traders/mehanic",
+            "/traders/skupshik",
+            "/traders/baraholshik"
         ];
+
         if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'active';
         }
-        
         
         /*** Разбивка для активных умений ***/
         $skills = '';
@@ -107,27 +116,25 @@ class MenuComponent
         }
 
         /*** Разбивка для пунктов меню - прочее ***/
-
         $other = '';
 
-           if(stristr(Yii::$app->request->url,'/currencies')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/questions')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/news')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/articles')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/clans')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/add-clan')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/table-patrons')){
-               $other = 'active';
-           }
+        if(stristr(Yii::$app->request->url,'/currencies')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/questions')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/news')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/articles')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/clans')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/add-clan')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/table-patrons')) {
+           $other = 'active';
+        }
 
-        /*** Далее пошел габлон отрисовки меню ***/
-
+        /*** Далее пошел шаблон отрисовки меню ***/
         self::Active();
         $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
         <div class="container adaptive-fix">
@@ -144,7 +151,7 @@ class MenuComponent
             <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
             <div class="collapse navbar-collapse" id="navbar-main">
                 <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://wiki-tarkov.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
+                <a class="navbar-brand relative" href='.$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'].'><img class="logo-img" src="/img/logo-full.png" alt="Логотип '. $_ENV['DOMAIN'].'"></a>
 
                 <ul class="nav navbar-nav">
                     
@@ -178,7 +185,6 @@ class MenuComponent
                       </ul>
                     </li>
 
-                
                     <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
@@ -222,5 +228,4 @@ class MenuComponent
         return $menu;
     }
 }
-
 ?>

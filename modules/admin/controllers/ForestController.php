@@ -5,43 +5,25 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Forest;
 use app\models\ForestSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
+use app\common\controllers\AdminController;
 
 /**
  * ForestController implements the CRUD actions for Forest model.
  */
-class ForestController extends Controller
+final class ForestController extends AdminController implements CrudInterface
 {
-
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        // Проверяем в том числе - если пользователь является вакантным участником, то редиректим его в админку
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } elseif(Yii::$app->user->identity->id === 5) {
-            return $this->redirect('/admin');
-        } else {
-            return self::actionIndex();
-        }
-    }
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -51,9 +33,9 @@ class ForestController extends Controller
 
     /**
      * Lists all Forest models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ForestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -67,9 +49,10 @@ class ForestController extends Controller
     /**
      * Displays a single Forest model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -98,10 +81,11 @@ class ForestController extends Controller
     /**
      * Updates an existing Forest model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -118,27 +102,24 @@ class ForestController extends Controller
     /**
      * Deletes an existing Forest model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the Forest model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Forest the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Forest::findOne($id)) !== null) {
             return $model;

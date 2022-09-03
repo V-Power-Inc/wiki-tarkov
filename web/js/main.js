@@ -27,15 +27,14 @@ $(document).ready(function() {
     var wikia = $('table.wikitable');
     $(wikia).wrap('<div class="fix-tables"></div>');
 
-/*** Обработчик нажатия на кнопку закрытия уведомлений ***/
-    $('.alert-close-icon').click(function() {
-        $('.about-us').fadeOut();
-
+/*** Обработчик нажатия на кнопку закрытия оверлея ***/
+    $('#cck_close').click(function() {
         $.ajax({
-            url: '/site/clsalert',
+            url: '/site/close-overlay',
             data: {param: param, token : token},
-            success: function($retrn) {
-                $('.about-us').fadeOut();
+            success: function(response) {
+                $('.overlay-block').fadeOut();
+                console.log(response);
             }
         });
     });

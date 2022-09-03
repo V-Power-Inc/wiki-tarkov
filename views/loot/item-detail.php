@@ -20,44 +20,20 @@ $this->registerMetaTag([
     'content' => $item->keywords,
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-use app\components\AlertComponent;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
 ?>
-
 <style>
     img.image-link {
         border: 1px solid white;
         box-shadow: 1px 1px 6px 2px;
     }
 </style>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?= $item->title ?></h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
 
 <div class="container">
     <div class="row">

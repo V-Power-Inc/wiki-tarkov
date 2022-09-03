@@ -1,8 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-$this->registerJsFile('js/owl-init.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/owl-init.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'База знаний Escape from Tarkov. Карты локаций, ключи от дверей, разбор квестов торговцев';
 
 $this->registerMetaTag([
@@ -113,18 +113,13 @@ $this->registerMetaTag([
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
                         <?= $this->render('/other/google-gor.php'); ?>
-                    </div>
 
-                    <div class="col-lg-12">
                         <!-- Виджет Вконтакте -->
                         <div class="vk-widget-styling">
                             <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
 
                             <!-- VK Widget -->
-                            <div id="vk_groups"></div>
-                            <script type="text/javascript">
-                                VK.Widgets.Group("vk_groups", {mode: 0, width: "auto"}, 162698237);
-                            </script>
+                            <?= $this->render('/other/wk-widget'); ?>
                         </div>
                     </div>
 

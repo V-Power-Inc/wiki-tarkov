@@ -8,5 +8,10 @@
 
 /** Блок рекламы после перед комментариями */
 ?>
-<div class="rl_cnt_bg" data-id="298947"></div>
+<div class="col-sm-12">
+    <div class="margins-vertical-20 d-block">
+        <div class="rl_cnt_bg" data-id="298947"></div>
+    </div>
+</div>
+
 
