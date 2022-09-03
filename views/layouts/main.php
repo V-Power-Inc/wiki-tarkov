@@ -102,6 +102,8 @@ AppAsset::register($this);
     </div>
 </footer>
 
+<?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
+
 
 <?php if (!isset($cookies['overlay'])): ?>
     <div class="overlay-block">
