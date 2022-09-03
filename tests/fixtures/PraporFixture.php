@@ -12,7 +12,7 @@ class PraporFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Prapor';
    // public $depends = ['app\tests\fixtures\TradersFixture'];
 
-    const TABLE_NAME = 'prapor';
+    // const TABLE_NAME = 'prapor';
 
 //  Действие для фикстур после отработки каждого теста
 //    public function beforeUnload() {

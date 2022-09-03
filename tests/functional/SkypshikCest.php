@@ -46,8 +46,8 @@ class SkypshikCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Скупщик. Escape from Tarkov.">');
-        $I->seeInSource('<meta name="keywords" content="Скупщик из Escape from Tarkov, Что продаёт Скупщик в Escape from tarkov., все о торговце Скупщике.">');
+        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Скупщика по онлайн-шутеру Escape from Takov.">');
+        $I->seeInSource('<meta name="keywords" content="Квесты скупщика в Escape from Tarkov, квесты скупщика Тарков">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -69,7 +69,7 @@ class SkypshikCest
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Квесты Скупщика в Escape from Tarkov. Разбор и прохождение квестов Скупщика.', 'h1');
-        $I->see('Снабженец');
+        $I->see('Квест на Защищенный контейнер Каппа');
         $I->seeElement('.quests-content');
     }
 
