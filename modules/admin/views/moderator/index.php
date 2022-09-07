@@ -35,8 +35,6 @@ use yii\helpers\ArrayHelper;
 
 <div class="row">
 
-
-
     <?php if (isset(Yii::$app->user->identity->id)): ?>
         <?php if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2): ?>
             <!-- Регистрация нового пользователя -->

@@ -6,8 +6,8 @@
  * Time: 17:02
  */
 
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/spoiler-script.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/spoiler-script.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model['title'];
 $this->registerMetaTag([
     'name' => 'description',
@@ -27,7 +27,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru/'.$model['url'],
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model['url'],
 ]);
 
 $this->registerMetaTag([
@@ -39,38 +39,14 @@ $this->registerMetaTag([
     'property' => 'og:image',
     'content' => $model['preview'],
 ]);
-
 /******** Окончание OpenGraph тегов ************/
-
-use app\components\AlertComponent;
 ?>
-
 <style>
     img.image-link {
     border: 1px solid white;
     box-shadow: 1px 1px 6px 2px;
     }
 </style>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?=$model['title']?></h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
 
 <div class="container">
     <div class="row">

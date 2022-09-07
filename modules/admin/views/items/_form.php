@@ -11,8 +11,8 @@ use app\models\Category;
 /* @var $model app\models\Items */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
 <div class="items-form">
@@ -42,7 +42,7 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
 
     <?= $form->field($model, 'shortdesc')->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>

@@ -2,11 +2,15 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
+use app\common\helpers\validators\UniqueValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cat_skills".
@@ -26,8 +30,24 @@ use Imagine\Image\Box;
  */
 class Catskills extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_SORTIR      = 'sortir';
+    const ATTR_URL         = 'url';
+    const ATTR_DESCRIPTION = 'description';
+    const ATTR_KEYWORDS    = 'keywords';
+    const ATTR_ENABLED     = 'enabled';
+    const ATTR_PREVIEW     = 'preview';
+    const ATTR_BG_STYLE    = 'bg_style';
 
-    public $file;
+    /** Константы связей таблицы */
+    const RELATION_SKILLS  = 'skills';
+
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -38,36 +58,56 @@ class Catskills extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['content', 'bg_style'], 'string'],
-            [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
-            [['sortir', 'enabled'], 'integer'],
-            [['title', 'url', 'description', 'keywords', 'preview'], 'string', 'max' => 255],
-            [['file'], 'image'],
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_BG_STYLE, StringValidator::class],
+
+            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
+
+            [static::ATTR_SORTIR, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название категории',
-            'content' => 'Содержимое категории',
-            'sortir' => 'Сортировка категории',
-            'url' => 'Url категории',
-            'description' => 'SEO описание категории',
-            'keywords' => 'SEO ключевые слова',
-            'enabled' => 'Категория активна',
-            'preview' => 'Превьюшка категории',
-            'file' => 'Превьюшка категории',
-            'bg_style' => 'Цвет фона',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название категории',
+            static::ATTR_CONTENT => 'Содержимое категории',
+            static::ATTR_SORTIR => 'Сортировка категории',
+            static::ATTR_URL => 'Url категории',
+            static::ATTR_DESCRIPTION => 'SEO описание категории',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_ENABLED => 'Категория активна',
+            static::ATTR_PREVIEW => 'Превьюшка категории',
+            static::ATTR_BG_STYLE => 'Цвет фона',
+            static::FILE => 'Превьюшка категории'
         ];
     }
 
@@ -87,6 +127,35 @@ class Catskills extends \yii\db\ActiveRecord
      */
     public function getSkills()
     {
-        return $this->hasMany(Skills::className(), ['category' => 'id']);
+        return $this->hasMany(Skills::class, ['category' => 'id']);
     }
+
+    /**
+     * Возвращаем все активные категории навыков
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveCatSkills()
+    {
+        return static::find()
+            ->where([static::ATTR_ENABLED => 1])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->asArray()
+            ->all();
+    }
+
+    /**
+     * Получаем активную категорию умений по url адресу
+     *
+     * @param string $name - url адрес
+     * @return array|ActiveRecord|null
+     */
+    public static function takeActiveCategoryByUrl(string $name)
+    {
+        return static::find()
+            ->where([static::ATTR_URL=>$name])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->One();
+    }
+
 }

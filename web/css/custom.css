@@ -1697,7 +1697,7 @@ p.auth-info {
 }
 
 .recommended-gm-content {
-
+    margin: 10px auto;
 }
 
 .barters.nav > li > a {
@@ -2125,4 +2125,30 @@ table.patrons-tbl >thead > tr > th {
     z-index: 800;
     background: #515972;
     color: #fff;
+}
+
+.overlay-block {
+    width: 100%;
+    position: fixed;
+    max-height: 200px;
+    min-height: 90px;
+    height: auto;
+    bottom: 0;
+    background: #d3d2d2;
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.cls-btn {
+    width: 146px;
+    height: 29px;
+    background-color: #c3392c;
+    position: absolute;
+    top: -29px;
+    right: 0;
+    padding: 2px 0 0 0;
+    color: #fff8f6;
+    cursor: pointer;
 }

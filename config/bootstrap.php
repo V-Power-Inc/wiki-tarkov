@@ -9,3 +9,5 @@
  */
 
 Yii::setAlias('@app', dirname(__DIR__));
+
+require_once(__DIR__ . '/../common/env.php');

@@ -21,33 +21,7 @@ $this->registerMetaTag([
 ]);
 
 $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
-use app\components\AlertComponent;
-
 ?>
-
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?= $this->title ?></h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
-
 <div class="container">
     <div class="row">
 
@@ -83,18 +57,13 @@ use app\components\AlertComponent;
                     <li>Шанс рикошета</li>
                     <li>Трассер</li>
                 </ul>
-
                 <br>
-
-
                 Используя эти характеристики и данные о каждом виде патрона, вы сможете лучше подготовиться к рейду и учитывать специфику каждого вида патрона. Что повышает ваши шансы на выживания и успешное прохождение рейда.
-
                 <br>
                 <br>
                 <b>Информация актуализирована 10-06-2022г.</b>
 
             </div>
-
 
             <!-- patrons info -->
             <div class="fix-tables patrons-table"><table border="1" cellpadding="1" cellspacing="1" class="loot-tables patrons-tbl" style="width:1400px">
@@ -145,7 +114,6 @@ use app\components\AlertComponent;
                 </table>
             </div>
 
-
             <!-- Расстояние заглушка -->
             <div class="col-lg-12 height-25"></div>
 
@@ -183,7 +151,6 @@ use app\components\AlertComponent;
             <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
-
 
     </div>
 </div>

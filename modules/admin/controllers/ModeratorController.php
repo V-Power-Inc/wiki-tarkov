@@ -9,27 +9,34 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\web\HttpException;
 use app\models\Admins;
 use app\components\MessagesComponent;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\controllers\AdminController;
 
-
-/*** Это контроллер модерации пользователей админки - всех неверных наказывают тут ***/
-class ModeratorController extends Controller
+/**
+ * Это контроллер модерации пользователей админки
+ *
+ * Class ModeratorController
+ * @package app\modules\admin\controllers
+ */
+final class ModeratorController extends AdminController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX = 'index';
+    const ACTION_USER_SAVE = 'user-save';
+    const ACTION_USER_BAN = 'user-ban';
 
-    /*** Подключаем отдельный layout для админской страницы моделей ***/
-    public $layout = 'admin';
-
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 и KondorMax по ID из таблицы админов сайта  ***/
+    /** Пускаем сюда только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
+     *  от унаследованной для большинства CRUD из AdminController
+     */
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
             return $this->redirect('/admin/login');
-        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2 || Yii::$app->user->identity->id === 4) {
+        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2) {
             return self::actionIndex();
         } else {
             throw new HttpException(404 ,'Такая страница не существует');

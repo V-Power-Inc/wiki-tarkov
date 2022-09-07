@@ -6,17 +6,9 @@
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
-use martyn911\adblock\detector\Detector;
-use app\models\Sessions;
-use yii\web\session;
-use yii\web\Cookie;
+use app\components\AlertComponent;
 
 $cookies = Yii::$app->request->cookies;
-$addcook = Yii::$app->response->cookies;
-// $session = Yii::$app->session;
-
-// Получаем статус ответа сервера
-$status_response = Yii::$app->response->getStatusCode();
 
 AppAsset::register($this);
 ?>
@@ -28,10 +20,11 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://wiki-tarkov.ru/favicon.png" type="image/png">
+    <link rel="icon" href="<?=$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN']?>/favicon.png" type="image/png">
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
+    <!-- Banner frames -->
     <script type='text/javascript'>
         rbConfig={start:performance.now(),rbDomain:'rotarb.bid',rotator:'rtpn'};token=localStorage.getItem('rtpn')||(1e6+'').replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));rsdfhse=document.createElement('script');
         rsdfhse.setAttribute('src','//rotarb.bid/rtpn.min.js?'+token);rsdfhse.setAttribute('async','async');rsdfhse.setAttribute('type','text/javascript');document.head.appendChild(rsdfhse);
@@ -41,15 +34,12 @@ AppAsset::register($this);
     <script>window.yaContextCb=window.yaContextCb||[]</script>
     <script src="https://yandex.ru/ads/system/context.js" async></script>
 
-    <?php if(stristr(Yii::$app->request->url,'/keys/')) { 
-    } else if(stristr(Yii::$app->request->url,'/news/')) { 
-    } else if(stristr(Yii::$app->request->url,'/articles/')){
-    } else {?>
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="База знаний Escape from Tarkov">
-        <meta property="og:title" content="<?= Html::encode($this->title) ?>">
-        <meta property="og:image" content="/img/logo-full.png">
-    <?php } ?>
+    <!-- OG tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="База знаний Escape from Tarkov">
+    <meta property="og:title" content="<?= Html::encode($this->title) ?>">
+    <meta property="og:image" content="/img/logo-full.png">
+
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -65,38 +55,62 @@ AppAsset::register($this);
     <div class="h-52"></div>
     
     <!-- Горизонатльное меню - вызываемое компонентом -->
-    <?= MenuComponent::showMenu() ?>
-    
+    <?= MenuComponent::showMenu(); ?>
+
+    <!-- Alert Section -->
+    <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
+
+        <div class="heading-class">
+            <div class="container">
+                <h1 class="main-site-heading"><?= $this->title; ?></h1>
+            </div>
+        </div>
+
+        <hr class="grey-line">
+
+        <?php if((AlertComponent::AlertView())) : ?>
+            <?= $this->render('/other/site-alert'); ?>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
     <?= $content ?>
 
 </div>
 
 <footer>
-    
-        <div class="container nobackground">
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                    <p class="marks">Все права на Escape from Tarkov принадлежат Battlestate Games Limited <br> <a href="https://www.escapefromtarkov.com">Официальный сайт разработчиков</a></p>
-                </div>
-
-                <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
-                    <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
-
-                    <div class="icons-soc">
-                        <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
-                        <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
-<!--                        <a href="###" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>-->
-                    </div>
-
-                    <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
-
-                </div>
-              <span class="col-sm-12 counter-footer"></span>
+    <div class="container nobackground">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <p class="marks">Все права на Escape from Tarkov принадлежат Battlestate Games Limited <br> <a href="https://www.escapefromtarkov.com">Официальный сайт разработчиков</a></p>
             </div>
+
+            <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
+                <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
+
+                <div class="icons-soc">
+                    <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
+                    <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
+<!--                        <a href="###" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>-->
+                </div>
+
+                <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
+
+            </div>
+          <span class="col-sm-12 counter-footer"></span>
         </div>
+    </div>
 </footer>
 
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
+
+
+<?php if (!isset($cookies['overlay'])): ?>
+    <div class="overlay-block">
+        <div class="cls-btn" id="cck_close">Закрыть</div>
+        <?= $this->render('/other/yandex-direct-overlay') ?>
+    </div>
+<?php endif; ?>
 
 <span class="visible-md visible-lg"><a href="#" class="scup"><i class="fa fa-angle-up active"></i></a></span>
 

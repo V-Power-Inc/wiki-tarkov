@@ -6,6 +6,8 @@
  * Time: 21:41
  */
 
+use app\components\AlertComponent;
+
 $this->title = 'Escape from Tarkov: ' .$model['name'];
 $this->registerMetaTag([
     'name' => 'description',
@@ -25,21 +27,17 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru/'.$model['url'],
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model['url'],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:description',
     'content' => $model['description'],
 ]);
-
 /******** Окончание OpenGraph тегов ************/
 
-$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-use app\components\AlertComponent;
+$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-
 <style>
     img.image-link {
         color: black!important;
@@ -47,27 +45,6 @@ use app\components\AlertComponent;
         box-shadow: 0 0 6px 2px;
     }
 </style>
-
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?=$model['name']?></h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
 
 <div class="container">
     <div class="row">
@@ -95,10 +72,6 @@ use app\components\AlertComponent;
                 <div class="recommended-gm-content">
                     <?= $this->render('/other/google-recommended.php'); ?>
                 </div>
-
-                <!-- Расстояние - заглушка -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
-
 
                 <!-- Комментарии -->
                 <?= $this->render('/other/comments');?>

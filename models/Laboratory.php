@@ -2,7 +2,11 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\NumberValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * This is the model class for table "laboratory".
@@ -21,6 +25,23 @@ use Yii;
  */
 class Laboratory extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID           = 'id';
+    const ATTR_NAME         = 'name';
+    const ATTR_MARKER_GROUP = 'marker_group';
+    const ATTR_COORDS_X     = 'coords_x';
+    const ATTR_COORDS_Y     = 'coords_y';
+    const ATTR_CONTENT      = 'content';
+    const ATTR_ENABLED      = 'enabled';
+    const ATTR_CUSTOMICON   = 'customicon';
+    const ATTR_EXITS_GROUP  = 'exits_group';
+    const ATTR_EXIT_ANYWAY  = 'exit_anyway';
+    const ATTR_DATE_UPDATE  = 'date_update';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -30,37 +51,54 @@ class Laboratory extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['coords_x', 'coords_y'], 'number'],
-            [['content'], 'string'],
-            [['enabled', 'exit_anyway'], 'integer'],
-            [['date_update'], 'safe'],
-            [['name', 'marker_group', 'exits_group'], 'string', 'max' => 100],
-            [['customicon'], 'string', 'max' => 255],
+            [static::ATTR_NAME, RequiredValidator::class],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_COORDS_X, NumberValidator::class],
+
+            [static::ATTR_COORDS_Y, NumberValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+
+            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 50],
+
+            [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'marker_group' => 'Marker Group',
-            'coords_x' => 'Coords X',
-            'coords_y' => 'Coords Y',
-            'content' => 'Content',
-            'enabled' => 'Enabled',
-            'customicon' => 'Customicon',
-            'exits_group' => 'Exits Group',
-            'exit_anyway' => 'Exit Anyway',
-            'date_update' => 'Date Update',
+            static::ATTR_ID => 'ID',
+            static::ATTR_NAME => 'Имя маркера',
+            static::ATTR_MARKER_GROUP => 'Группа маркера',
+            static::ATTR_COORDS_X => 'Координаты по оси X',
+            static::ATTR_COORDS_Y => 'Координаты по оси Y',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_CUSTOMICON => 'Иконка маркера',
+            static::ATTR_EXITS_GROUP => 'Спавн был в зоне',
+            static::ATTR_ENABLED => 'Включен',
+            static::ATTR_EXIT_ANYWAY => 'Общий выход'
         ];
     }
 }

@@ -20,31 +20,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Escape from Tarkov: Зарегистрировать новый клан',
 ]);
-
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Регистрация клана Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content special-border">

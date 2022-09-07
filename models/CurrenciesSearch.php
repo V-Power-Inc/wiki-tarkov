@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Currencies;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * CurrenciesSearch represents the model behind the search form of `app\models\Currencies`.
@@ -13,13 +13,20 @@ use app\models\Currencies;
 class CurrenciesSearch extends Currencies
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'value', 'enabled'], 'integer'],
-            [['title'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_VALUE, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class]
         ];
     }
 

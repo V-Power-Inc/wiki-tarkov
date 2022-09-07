@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Skills;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * SkillsSearch represents the model behind the search form about `app\models\Skills`.
@@ -13,13 +13,28 @@ use app\models\Skills;
 class SkillsSearch extends Skills
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'category', 'enabled'], 'integer'],
-            [['title', 'url', 'description', 'keywords', 'preview'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_CATEGORY, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_URL, SafeValidator::class],
+
+            [static::ATTR_DESCRIPTION, SafeValidator::class],
+
+            [static::ATTR_KEYWORDS, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class]
         ];
     }
 

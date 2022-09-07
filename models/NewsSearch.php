@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\News;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * NewsSearch represents the model behind the search form about `app\models\News`.
@@ -13,13 +13,26 @@ use app\models\News;
 class NewsSearch extends News
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'enabled'], 'integer'],
-            [['title', 'url', 'preview', 'content', 'date_create'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_URL, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 
