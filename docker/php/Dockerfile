@@ -27,7 +27,7 @@ RUN pecl install mcrypt-1.0.4 && docker-php-ext-enable mcrypt
 # Install required extensions
 RUN install-php-extensions ldap
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
@@ -40,12 +40,6 @@ RUN set -eux; \
     docker-php-ext-install -j "$(nproc)" \
     		gd
 
-RUN pecl install sqlsrv pdo_sqlsrv
-
-RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr
-
-RUN install-php-extensions pdo_odbc
-
 ENV ACCEPT_EULA=Y
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
@@ -54,12 +48,3 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y --no-install-recommends install apt-utils libxml2-dev gnupg apt-transport-https \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
-# Install MS ODBC Driver for SQL Server
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && apt-get update \
-    && apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev \
-    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
-RUN docker-php-ext-install soap
