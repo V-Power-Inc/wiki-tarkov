@@ -45,7 +45,7 @@ class Clans extends \yii\db\ActiveRecord
 
     /** @var string $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
-    const RECAPTCHA = 'reCaptha';
+    const RECAPTCHA = 'reCaptcha';
 
     /**
      * {@inheritdoc}
@@ -77,7 +77,7 @@ class Clans extends \yii\db\ActiveRecord
 
             [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
 
-            [static::RECAPTCHA, ReCaptchaValidator::class, 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
+            [[static::RECAPTCHA], ReCaptchaValidator::class, 'secret' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
         ];
     }
 

@@ -6,7 +6,6 @@
  * Time: 12:24
  */
 
-use app\components\AlertComponent;
 use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Зарегистрировать новый клан";
@@ -55,7 +54,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'reCaptcha')->widget(
                         \himiklab\yii2\recaptcha\ReCaptcha::class,
-                        ['siteKey' => '6LeP7D0UAAAAALclAz0rCJhO-r00oJ2zkkyW-_sW']
+                        ['siteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF']
                     ) ?>
 
                     <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())])->label('') ?>
