@@ -1,0 +1,44 @@
+version: '3.2'
+
+services:
+
+  web:
+    image: nginx:1.18.0
+    restart: always
+    volumes:
+      - ./docker/conf/nginx/site.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/conf/nginx/ssl:/etc/ssl/private
+      - ./docker/nginx/log/prod-access.log:/var/www/access.log
+      - ./docker/nginx/log/prod-error.log:/var/www/error.log
+      - .:/var/www/wiki-tarkov/html
+    ports:
+      - 80:80
+
+  app:
+    build: docker/php
+    restart: always
+    volumes:
+      - ./docker/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - .:/var/www/wiki-tarkov/html
+    depends_on:
+      - web
+      - db
+    working_dir: /var/www/wiki-tarkov/html
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+  db:
+    image: mariadb:10.15.5
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+volumes:
+  mariadb_data:

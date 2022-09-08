@@ -63,3 +63,7 @@ sql_dump.sql
 
 # Ignore Sitemaps files in the future
 /sitemaps
+
+# Ignore log files - docker Nginx
+docker/nginx/log/prod-error.log
+docker/nginx/log/prod-access.log

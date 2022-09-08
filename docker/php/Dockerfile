@@ -1,4 +1,4 @@
-FROM php:7.4.14-fpm
+FROM php:7.4.28-fpm
 
 # Установка основных модулей PHP
 RUN apt update && apt install -y \
@@ -25,8 +25,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN pecl install mcrypt-1.0.4 && docker-php-ext-enable mcrypt
 
 # Install required extensions
-RUN install-php-extensions ldap
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+RUN docker-php-ext-configure mysqli --with-mysqli=/usr/local/mysql
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
