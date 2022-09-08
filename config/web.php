@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$test_db = require __DIR__ . '/test_db.php';
 
 $config = [
     'id' => 'basic',
@@ -46,7 +47,7 @@ $config = [
         ],
         'redis' => [
             'class'    => 'yii\redis\Connection',
-            'hostname' => 'localhost',
+            'hostname' => $_ENV['REDIS_HOST'],
             'port' => 6379,
             'database' => 0,
         ],

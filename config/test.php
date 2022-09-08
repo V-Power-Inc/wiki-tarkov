@@ -25,7 +25,7 @@ return [
         ],
         'redis' => [
             'class'    => 'yii\redis\Connection',
-            'hostname' => 'localhost',
+            'hostname' => $_ENV['REDIS_HOST'],
             'port' => 6379,
             'database' => 0,
         ],

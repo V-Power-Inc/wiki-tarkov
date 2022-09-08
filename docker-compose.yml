@@ -13,6 +13,7 @@ services:
       - .:/var/www/wiki-tarkov/html
     ports:
       - 80:80
+      - 443:443
 
   app:
     build: docker/php
@@ -30,15 +31,27 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
   db:
-    image: mariadb:10.15.5
+    image: mariadb:10.6
     restart: always
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     environment:
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_DATABASE=${DB_NAME}
       - MARIADB_USER=${DB_USER}
       - MARIADB_PASSWORD=${DB_PASSWORD}
+
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data
+
 volumes:
-  mariadb_data:
+  mariadb:
+  cache:
+    driver: local

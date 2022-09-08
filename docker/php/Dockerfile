@@ -25,7 +25,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN pecl install mcrypt-1.0.4 && docker-php-ext-enable mcrypt
 
 # Install required extensions
-RUN docker-php-ext-configure mysqli --with-mysqli=/usr/local/mysql
+# RUN docker-php-ext-configure mysql
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
