@@ -67,3 +67,6 @@ sql_dump.sql
 # Ignore log files - docker Nginx
 docker/nginx/log/prod-error.log
 docker/nginx/log/prod-access.log
+
+# Mac DS_Store Files
+.DS_Store
