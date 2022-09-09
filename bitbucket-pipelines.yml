@@ -15,7 +15,8 @@ pipelines:
           name: Install Python and docker
           script:
             # Updating everything
-            - pip3 install docker-compose
+            - pip install --upgrade pip
+            - pip install docker-compose
             - docker-compose -v
 
       - step:
