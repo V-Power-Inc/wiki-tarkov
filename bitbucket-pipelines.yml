@@ -19,6 +19,8 @@ pipelines:
             # Add python pip and bash
             - apk add --no-cache py-pip bash
 
+            - pip install utils
+
             # Install docker-compose via pip
             - pip install --no-cache-dir docker-compose
             - docker-compose -v
