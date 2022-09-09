@@ -12,9 +12,17 @@ pipelines:
   branches:
     docker-release:
       - step:
+          name: Install Python and docker
+          script:
+            # Add python pip and bash
+            - apk add --no-cache py-pip bash
+
+            # Install docker-compose via pip
+            - pip install --no-cache-dir docker-compose
+            - docker-compose -v
+      - step:
           name: Build
           script:
-            - dependencies.sh
             - echo "Build an image with current project via docker"
 
             # Запускаем контейнеры приложения в фоновом режиме
