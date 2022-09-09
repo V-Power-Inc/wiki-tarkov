@@ -3,7 +3,7 @@
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
 
-image: docker:stable
+image: python:3.7.2
 
 options:
   docker: true
@@ -15,7 +15,6 @@ pipelines:
           name: Install Python and docker
           script:
             # Updating everything
-            - install python3-pip docker
             - pip3 install docker-compose
             - docker-compose -v
 
