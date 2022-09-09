@@ -2139,6 +2139,7 @@ table.patrons-tbl >thead > tr > th {
     text-align: center;
     color: white;
     font-size: 18px;
+    -webkit-backface-visibility: hidden;
 }
 
 .cls-btn {
