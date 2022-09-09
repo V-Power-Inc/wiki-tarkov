@@ -4,11 +4,12 @@
 # The workflow allows running tests and code linting on the default branch.
 
 pipelines:
-  default:
-    - step:
-        name: Build
-        script:
-          - echo "Build an image with current project via docker"
+  branches:
+    docker-release:
+      - step:
+          name: Build
+          script:
+            - echo "Build an image with current project via docker"
 
-          # Запускаем контейнеры приложения в фоновом режиме
-          - docker-compose up -d
+            # Запускаем контейнеры приложения в фоновом режиме
+            - docker-compose up
