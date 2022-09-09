@@ -3,10 +3,15 @@
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
 
-  pipelines:
-    default:
-      - step:
+pipelines:
+  default:
+    - step:
         name: Build
         script:
-         # Запускаем контейнеры приложения в фоновом режиме
+          - echo "Build an image with current project via docker"
+
+          # Проверяем что находимся на ветке docker-release
+          - if [ "${BITBUCKET_PR_DESTINATION_BRANCH}" = "docker-release" ];
+
+          # Запускаем контейнеры приложения в фоновом режиме
           - docker-compose up -d
