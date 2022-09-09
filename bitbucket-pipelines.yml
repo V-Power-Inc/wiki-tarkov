@@ -7,6 +7,16 @@ pipelines:
   branches:
     docker-release:
       - step:
+          name: Install docker-compose on bitbucket
+          image: python:3.8.1
+          services:
+            - docker
+          caches:
+            - docker
+            - pip
+          script:
+            - pip install docker-compose
+      - step:
           name: Build
           script:
             - echo "Build an image with current project via docker"
