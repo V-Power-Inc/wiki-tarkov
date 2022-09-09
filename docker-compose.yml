@@ -2,12 +2,6 @@ version: '3.2'
 
 services:
 
-  # Эта хрень понадобилась из за битбакета
-  x-custom:
-    volumes:
-      - &static_mariadb ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
-      - &static_redis ${BITBUCKET_CLONE_DIR:-static}:/data
-
   web:
     image: nginx:1.18.0
     restart: always
