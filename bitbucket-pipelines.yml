@@ -5,12 +5,16 @@
 
 image: docker:stable
 
+options:
+  docker: true
+
 pipelines:
   branches:
     docker-release:
       - step:
           name: Build
           script:
+            - dependencies.sh
             - echo "Build an image with current project via docker"
 
             # Запускаем контейнеры приложения в фоновом режиме
