@@ -29,4 +29,5 @@ pipelines:
             - echo "Обновляем зависимости composer"
 
             # Обновляем зависимости композера
-            - docker-compose exec app composer install --no-interaction
+            # TODO: Эта команда не отрабатывала, ждем октября для обнуления лимитов Bitbucket Pipelines
+            - docker-compose exec -T app composer install --no-interaction
