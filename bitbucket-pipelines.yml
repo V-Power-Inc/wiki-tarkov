@@ -24,9 +24,9 @@ pipelines:
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
-            - docker-compose build --force-rm --no-cache --pull
+            - docker-compose build
 
             - echo "Обновляем зависимости composer"
 
             # Обновляем зависимости композера
-            - docker-compose exec app-1 composer install --no-interaction
+            - docker-compose exec app composer install --no-interaction
