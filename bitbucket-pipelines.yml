@@ -12,17 +12,15 @@ pipelines:
   branches:
     docker-release:
       - step:
-          name: Install Python and docker
-          script:
-            # Updating everything
-            - pip install --upgrade pip
-            - pip install docker-compose
-            - docker-compose -v
-
-      - step:
           name: Build
           script:
+            - export DOCKER_COMPOSE_VERSION=1.18.0
+            - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
+            - curl -L $DOCKER_COMPOSE_URL > docker-compose
+            - chmod +x docker-compose
+            - mv docker-compose /usr/local/bin
+
             - echo "Build an image with current project via docker"
 
             # Запускаем контейнеры приложения в фоновом режиме
-            - docker-compose up
+            - docker-compose build --force-rm --no-cache --pull
