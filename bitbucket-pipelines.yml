@@ -10,8 +10,5 @@ pipelines:
         script:
           - echo "Build an image with current project via docker"
 
-          # Проверяем что находимся на ветке docker-release
-          - if [ "${BITBUCKET_PR_DESTINATION_BRANCH}" = "docker-release" ];
-
           # Запускаем контейнеры приложения в фоновом режиме
           - docker-compose up -d
