@@ -42,7 +42,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - *static_mariadb
+      - ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_DATABASE=${DB_NAME}
@@ -55,7 +55,7 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - *static_redis
+      - ${BITBUCKET_CLONE_DIR:-static}:/data
 
 volumes:
   mariadb:
