@@ -6,7 +6,7 @@
  * Time: 13:45
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: Часто задаваемые вопросы';
 $this->registerMetaTag([
     'name' => 'description',
@@ -18,33 +18,9 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov - часто задаваемые вопросы',
 ]);
 
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 use yii\widgets\LinkPager;
-use app\components\AlertComponent;
-
-$keysBlocks = [1,4,7,9];
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Часто задаваемые вопросы</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -60,9 +36,9 @@ $keysBlocks = [1,4,7,9];
     <?php if(!empty($questions)) : ?>
         <?php foreach($questions as $k => $item): ?>
 
-            <?php if(in_array($k,$keysBlocks)): ?>
+            <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
                 <!-- feed recomendations -->
-                <div class="question-block bg-white" style="height: 180px; max-height: 180px;">
+                <div class="question-block bg-white" style="height: auto; min-height: 180px; display: block;">
                     <?= $this->render('/other/adsense-questions-feed.php'); ?>
                 </div>
             <?php endif; ?>

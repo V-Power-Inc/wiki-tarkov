@@ -9,12 +9,21 @@
 namespace app\components;
 use yii\base\Widget;
 use app\models\Category;
-use Yii;
 
+/**
+ * Класс для постройки виджета в левом меню сайта
+ *
+ * Class LeftmenuWidget
+ * @package app\components
+ */
 class LeftmenuWidget extends Widget {
 
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
+    /**
+     * Кешируем все запросы из БД - храним их в кеше
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [
@@ -38,32 +47,37 @@ class LeftmenuWidget extends Widget {
 
     /** Переменная хранит HTML шаблон выстроенный по полученным данным в зависимости от количества категорий в базе */
     public $menuHTML;
-    
-    public function init() {
+
+    public function init()
+    {
         parent::init();
         if($this->tpl === null) {
            $this->tpl = 'leftmenu';
         }
         $this->tpl .='.php';
     }
-    
-    /** Получаем список всех активных категорий  **/
-    public function run() {
-        // Сначала пытаемся получить ранее закешированное меню
-        // $menu = Yii::$app->cache->get('leftmenu');
-        // if($menu) return $menu;
-        
+
+    /**
+     * Получаем список всех активных категорий
+     *
+     * @return string
+     */
+    public function run(): string
+    {
         $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->orderby(['sortir' => SORT_ASC])->asArray()->all();
         $this->tree = $this->getTree();
         $this->menuHTML = $this->getMenuHtml($this->tree);
 
-        // Кэшируем данные
-        // Yii::$app->cache->set('leftmenu', $this->menuHtml, 200);
         return $this->menuHTML;
     }
 
-    /** Создаем массив "Дерево" из активных категорий **/
-    protected function getTree() {
+    /**
+     * Создаем массив "Дерево" из активных категорий
+     *
+     * @return array
+     */
+    protected function getTree(): array
+    {
         $categoryTree = [];
         foreach ($this->data as $id=>&$node) {
             if(!$node['parent_category']) {
@@ -75,8 +89,14 @@ class LeftmenuWidget extends Widget {
         return $categoryTree;
     }
 
-    /** Рендерим шаблон html формы из массива дерева категорий */
-    protected function getMenuHtml($categoryTree) {
+    /**
+     * Рендерим шаблон html формы из массива дерева категорий
+     *
+     * @param array $categoryTree
+     * @return string
+     */
+    protected function getMenuHtml(array $categoryTree): string
+    {
         $resultHTML = '';
         foreach($categoryTree as $category) {
             $resultHTML .= $this->catToTemplate($category);
@@ -84,17 +104,16 @@ class LeftmenuWidget extends Widget {
         return $resultHTML;
     }
 
-    /** Вывод готовой формы с категориями для браузера */
-    protected function catToTemplate($category) {
+    /**
+     * Вывод готовой формы с категориями для браузера
+     *
+     * @param $category
+     * @return false|string
+     */
+    protected function catToTemplate($category)
+    {
         ob_start();
         include __DIR__ . '/render_views/' .$this->tpl;
         return ob_get_clean();
     }
-
 }
-
-
-
-
-
-

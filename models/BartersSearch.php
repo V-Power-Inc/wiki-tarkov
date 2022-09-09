@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Barters;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 
 /**
  * BartersSearch represents the model behind the search form of `app\models\Barters`.
@@ -13,13 +13,26 @@ use app\models\Barters;
 class BartersSearch extends Barters
 {
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'enabled'], 'integer'],
-            [['title', 'content', 'date_create', 'site_title', 'trader_group'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_SITE_TITLE, SafeValidator::class],
+
+            [static::ATTR_TRADER_GROUP, SafeValidator::class]
         ];
     }
 

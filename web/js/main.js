@@ -27,15 +27,14 @@ $(document).ready(function() {
     var wikia = $('table.wikitable');
     $(wikia).wrap('<div class="fix-tables"></div>');
 
-/*** Обработчик нажатия на кнопку закрытия уведомлений ***/
-    $('.alert-close-icon').click(function() {
-        $('.about-us').fadeOut();
-
+/*** Обработчик нажатия на кнопку закрытия оверлея ***/
+    $('#cck_close').click(function() {
         $.ajax({
-            url: '/site/clsalert',
+            url: '/site/close-overlay',
             data: {param: param, token : token},
-            success: function($retrn) {
-                $('.about-us').fadeOut();
+            success: function(response) {
+                $('.overlay-block').fadeOut();
+                console.log(response);
             }
         });
     });
@@ -62,8 +61,6 @@ $(document).ready(function() {
     $('html').on('click','.rfr-page', function() {
         location.reload();
     });
-
-    console.log("%cВам явно стоит убраться отсюда.", "background: orange; padding: 2px 4px; border-radius: 5px; border: 1px solid black; font-size: 16px");
     
     /*** adds code ***/
     var current_date = (new Date()).valueOf().toString();

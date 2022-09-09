@@ -7,23 +7,34 @@
  */
 
 namespace app\controllers;
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\models\Catskills;
 use app\models\Skills;
 use yii;
 
-
-class SkillsController extends Controller
+/**
+ * Class SkillsController
+ * @package app\controllers
+ */
+class SkillsController extends AdvancedController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_MAINSKILLS     = 'mainskills';
+    const ACTION_SKILLSCATEGORY = 'skillscategory';
+    const ACTION_SKILLSDETAIL   = 'skillsdetail';
 
     /** Кеширование по секундам с различными сроками **/
     const WEEK_CACHE = 604800;
     const TWO_DAYS = 172800;
     const ONE_DAY = 86400;
 
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
+    /**
+     * Массив поведения контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [
@@ -36,41 +47,55 @@ class SkillsController extends Controller
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
-                    Yii::$app->request->get('page')
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];
     }
-    
-    /** Рендер страницы списка навыков персонажа **/
-    public function actionMainskills()
+
+    /**
+     * Рендер страницы списка навыков персонажа
+     *
+     * @return string
+     */
+    public function actionMainskills(): string
     {
-        $catskills = Catskills::find()->where(['enabled' => 1])->cache(self::ONE_DAY)->asArray()->all();
-        return $this->render('/skills/list.php', ['catskills' => $catskills,]);
+        return $this->render('/skills/list.php', ['catskills' => Catskills::takeActiveCatSkills()]);
     }
 
-    /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionSkillscategory($name)
+    /**
+     * Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории
+     *
+     * @param string $name - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionSkillscategory(string $name): string
     {
-        $cat = Catskills::find()->where(['url'=>$name])->cache(self::ONE_DAY)->One();
-        
-        if($cat) {
-            // Здесь мы возвращаем и неактивные элементы, т.к. на них стоит проверка во вьюшке
-            $items = Skills::find()->andWhere(['category' => $cat->id])->cache(self::ONE_DAY)->asArray()->all();
-            return $this->render('/skills/skillscat-page.php', ['cat' => $cat, 'items' => $items]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Catskills::takeActiveCategoryByUrl($name)) {
+            return $this->render('/skills/skillscat-page.php', [
+                'cat' => Catskills::takeActiveCategoryByUrl($name),
+                'items' => Skills::takeSkillByCategoryId(Catskills::takeActiveCategoryByUrl($name)->id)
+            ]);
         }
-    }
-    
-    /*** Рендер детальной страницы умения ***/
-    public function actionSkillsdetail($url) {
-        $item = Skills::find()->where(['url'=>$url])->andWhere(['enabled' => 1])->cache(self::ONE_DAY)->One();
 
-        if($item) {
-            return $this->render('/skills/skill-detail.php', ['item' => $item]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(404 ,'Такая страница не существует');
+    }
+
+    /**
+     * Рендер детальной страницы умения
+     *
+     * @param string $url - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionSkillsdetail(string $url): string
+    {
+        if(Skills::takeSkillByUrl($url)) {
+            return $this->render('/skills/skill-detail.php', ['item' => Skills::takeSkillByUrl($url)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 }

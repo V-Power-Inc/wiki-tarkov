@@ -9,7 +9,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Traders */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
 <p class="alert alert-danger size-16 margin-bottom-5">
@@ -50,12 +50,12 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
     <br>
     <br>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '200']),
     ]);
     ?>
 
-    <?php  echo $form->field($model, 'fullcontent')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'fullcontent')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
@@ -96,11 +96,11 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
 
 
     <!-- Форма для отображения превью -->
-    <form id="prev-form" action="/site/previewtrader" method="post" target="blank">
+    <form id="prev-form" action="/traders/previewtrader" method="post" target="blank">
         <input type="hidden" id="text-title" name="Traders[title]">
         <input type="hidden" id="text-preview" name="Traders[preview]" value = '<?=$model->preview?>'>
         <input type="hidden" id="text-content" name="Traders[content]">
-        <input type="hidden" id="text-url" name="Traders[urltoquests]">
+        <input type="hidden" id="text-url" name="Traders[urltoquets]">
         <input type="hidden" id="text-button" name="Traders[button_quests]">
         <input type="hidden" id="text-button-detail" name="Traders[button_detail]">
         <input type="hidden" id="text-fullcontent" name="Traders[fullcontent]">

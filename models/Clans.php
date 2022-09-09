@@ -2,10 +2,14 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Image\Box;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\StringValidator;
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 
 /**
  * This is the model class for table "clans".
@@ -21,11 +25,28 @@ use Imagine\Image\Box;
  */
 class Clans extends \yii\db\ActiveRecord
 {
-    
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_DESCRIPTION = 'description';
+    const ATTR_PREVIEW     = 'preview';
+    const ATTR_LINK        = 'link';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_DATE_UPDATE = 'date_update';
+    const ATTR_MODERATED   = 'moderated';
+
+    /** @var string $searchclan - Переменная для поиска клана */
     public $searchclan;
+    const SEARCHCLAN = 'searchclan';
+
+    /** @var string $file - Переменная файла превьюшки */
     public $file;
+    const FILE = 'file';
+
+    /** @var string $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
-    
+    const RECAPTCHA = 'reCaptcha';
+
     /**
      * {@inheritdoc}
      */
@@ -35,43 +56,50 @@ class Clans extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'description'], 'required'],
-            [['link'], 'string'],
-            [['searchclan'], 'string'],
-            [['searchclan'], 'safe'],
-            [['date_create'], 'safe'],
-            [['date_update'], 'safe'],
-            [['moderated'], 'integer'],
-            [['title'], 'string', 'max' => 100],
-            [['description'], 'string', 'max' => 300],
-            [['preview'], 'string', 'max' => 255],
-            [['file'], 'file', 'extensions' => 'png, jpg'],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeP7D0UAAAAAKyqeAm_ttorHJGS99_gQJ6Fo5me', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_UPDATE, SafeValidator::class],
+
+            [static::ATTR_MODERATED, IntegerValidator::class],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
+
+            [[static::RECAPTCHA], ReCaptchaValidator::class, 'secret' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название клана',
-            'description' => 'Краткое описание клана',
-            'preview' => 'Превью клана',
-            'file' => 'Превью клана',
-            'link' => 'Ссылка на сообщество клана',
-            'date_create' => 'Дата регистрации',
-            'moderated' => 'Модерация пройдена',
-            'reCaptcha' => 'Защита от спама',
-            'searchclan' => 'Поиска клана по названию',
-            'date_update' => 'Дата обновления'
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название клана',
+            static::ATTR_DESCRIPTION => 'Краткое описание клана',
+            static::ATTR_PREVIEW => 'Превью клана',
+            static::FILE => 'Превью клана',
+            static::ATTR_LINK => 'Ссылка на сообщество клана',
+            static::ATTR_DATE_CREATE => 'Дата регистрации',
+            static::ATTR_MODERATED => 'Модерация пройдена',
+            static::RECAPTCHA => 'Защита от спама',
+            static::SEARCHCLAN => 'Поиска клана по названию',
+            static::ATTR_DATE_UPDATE => 'Дата обновления'
         ];
     }
 

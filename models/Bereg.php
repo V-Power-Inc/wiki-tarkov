@@ -2,11 +2,16 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\NumberValidator;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
+use Yii;
 
 /**
  * This is the model class for table "bereg".
@@ -25,8 +30,26 @@ use Imagine\Image\Box;
  */
 class Bereg extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID           = 'id';
+    const ATTR_NAME         = 'name';
+    const ATTR_MARKER_GROUP = 'marker_group';
+    const ATTR_COORDS_X     = 'coords_x';
+    const ATTR_COORDS_Y     = 'coords_y';
+    const ATTR_CONTENT      = 'content';
+    const ATTR_ENABLED      = 'enabled';
+    const ATTR_CUSTOMICON   = 'customicon';
+    const ATTR_EXITS_GROUP  = 'exits_group';
+    const ATTR_EXIT_ANYWAY  = 'exit_anyway';
+    const ATTR_DATE_UPDATE  = 'date_update';
 
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
+    /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
+    const FILE = 'file';
     
     /**
      * @inheritdoc
@@ -37,38 +60,57 @@ class Bereg extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['name'], 'required'],
-            [['coords_x', 'coords_y'], 'number'],
-            [['content'], 'string'],
-            [['enabled', 'exit_anyway'], 'integer'],
-            [['name', 'exits_group'], 'string', 'max' => 100],
-            [['marker_group'], 'string', 'max' => 50],
-            [['customicon', 'date_update'], 'string', 'max' => 255],
+            [static::ATTR_NAME, RequiredValidator::class],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_COORDS_X, NumberValidator::class],
+
+            [static::ATTR_COORDS_Y, NumberValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+
+            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 50],
+
+            [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'name' => 'Имя маркера',
-            'marker_group' => 'Группа маркера',
-            'coords_x' => 'Координаты по оси X',
-            'coords_y' => 'Координаты по оси Y',
-            'content' => 'Содержание',
-            'customicon' => 'Иконка маркера',
-            'exits_group' => 'Спавн был в зоне',
-            'file' => 'Иконка маркера',
-            'enabled' => 'Включен',
-            'exit_anyway' => 'Общий выход',
+            static::ATTR_ID => 'ID',
+            static::ATTR_NAME => 'Имя маркера',
+            static::ATTR_MARKER_GROUP => 'Группа маркера',
+            static::ATTR_COORDS_X => 'Координаты по оси X',
+            static::ATTR_COORDS_Y => 'Координаты по оси Y',
+            static::ATTR_CONTENT => 'Содержание',
+            static::ATTR_CUSTOMICON => 'Иконка маркера',
+            static::ATTR_EXITS_GROUP => 'Спавн был в зоне',
+            static::ATTR_ENABLED => 'Включен',
+            static::ATTR_EXIT_ANYWAY => 'Общий выход',
+            static::FILE => 'Иконка маркера'
         ];
     }
 
@@ -82,4 +124,15 @@ class Bereg extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Получаем список активных маркеров для данной интерактивной карты
+     *
+     * @return array
+     */
+    public static function takeMarkers(): array
+    {
+        return static::find()->asArray()->andWhere([static::ATTR_ENABLED => static::TRUE])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+    }
+
 }

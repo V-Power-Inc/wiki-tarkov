@@ -6,14 +6,13 @@
  * Time: 12:24
  */
 
-use app\components\AlertComponent;
 use yii\widgets\ActiveForm;
 
-$this->title = "Escape from Tarkov: Официальный список кланов";
+$this->title = "Escape from Tarkov: Список кланов";
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Официальный список кланов зарегистрированный игроками по игре Escape from Tarkov',
+    'content' => 'Список кланов зарегистрированный игроками по игре Escape from Tarkov',
 ]);
 
 $this->registerMetaTag([
@@ -22,30 +21,7 @@ $this->registerMetaTag([
 ]);
 
 $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Список кланов Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
-
 <div class="container">
     <div class="row">
 
@@ -53,7 +29,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
         <div class="col-lg-12">
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
-
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
 
@@ -65,7 +40,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
                 На этой странице представлена база кланов собственноручно зарегистрированная игроками Escape from Tarkov. В день рассматривается не больше <?=$countdaylimit?> заявок, также это число является дневным лимитом на количество заявок.
             <br>
             <br>
-                В настоящий момент это наиболее полная <b>официальная база кланов</b> по игре Escape from Tarkov.
+                В настоящий момент это наиболее полная <b>неофициальная база кланов</b> по игре Escape from Tarkov.
             </p>
 
             <?php if($avialableTickets <= 0): ?>
@@ -97,7 +72,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
                 <div class="clan-block">
                     <h3 class="clan-title">
                             <?= $clan['title'] ?>
-                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>
+                        <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией <?=$_ENV['DOMAIN']?>"></i>
                     </h3>
 
                    <?php if($clan['preview'] == null): ?>
@@ -125,7 +100,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
 
         </div>
 
-
         <!-- right menu start -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
@@ -136,13 +110,12 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
 
             <!-- Виджет дискорда -->
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
-                <?php  $this->endCache(); } ?>
+                <?= $this->render('/other/discord-widget.php'); ?>
+            <?php  $this->endCache(); } ?>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
-        
-        
+
     </div>
 </div>

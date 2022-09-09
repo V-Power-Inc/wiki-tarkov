@@ -3,70 +3,39 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Category;
 use app\models\Items;
 use app\models\ItemsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
+use app\common\controllers\AdminController;
 
 /**
  * ItemsController implements the CRUD actions for Items model.
  */
-class ItemsController extends Controller
+final class ItemsController extends AdminController implements CrudInterface
 {
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-
-    /*** Ускоряем контроллер кешами ***/
-    
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-//            'cache' => [
-//                'class' => 'yii\filters\PageCache',
-//                'duration' => 604800,
-//                'dependency' => [
-//                    'class' => 'yii\caching\DbDependency',
-//                    'sql' => 'SELECT COUNT(*) FROM items',
-//                ],
-//                'variations' => [
-//                    Yii::$app->request->url,
-//                    Yii::$app->request->get('page')
-//                ]
-//            ]
         ];
     }
 
     /**
      * Lists all Items models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ItemsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -80,9 +49,10 @@ class ItemsController extends Controller
     /**
      * Displays a single Items model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -110,10 +80,11 @@ class ItemsController extends Controller
     /**
      * Updates an existing Items model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -138,27 +109,23 @@ class ItemsController extends Controller
     /**
      * Deletes an existing Items model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            // $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the Items model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Items the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Items::findOne($id)) !== null) {
             return $model;

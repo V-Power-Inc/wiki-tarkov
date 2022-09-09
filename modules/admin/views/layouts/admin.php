@@ -13,6 +13,7 @@ use app\assets\AdminAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use app\common\controllers\AdminController;
 
 AdminAsset::register($this);
 ?>
@@ -31,7 +32,8 @@ AdminAsset::register($this);
     <body>
     <?php $this->beginBody() ?>
     
-    
+    <!-- todo: Подрубить сюда константные урлы -->
+
     <div class="wrap">
         <?php
         NavBar::begin([
@@ -45,7 +47,7 @@ AdminAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Авторизация', 'url' => ['/site/login']]
+                    ['label' => 'Авторизация', 'url' => [AdminController::LOGIN_URL]]
                 ],
             ]);
             NavBar::end();
@@ -58,12 +60,9 @@ AdminAsset::register($this);
                 ['label' => 'Справочник квестов', 'url' => ['/site/quests'], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 ['label' => 'База ключей', 'url' => ['/site/keys'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 ['label' => 'Список новостей', 'url' => ['/site/news'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-                ) : 
-                    (
+                (
                     '<li>'
-                    . Html::beginForm(['default/logout'], 'post')
+                    . Html::beginForm([AdminController::LOGOUT_URL], 'post')
                     . Html::submitButton(
                         'Выход (' . Yii::$app->user->identity->user . ')',
                         ['class' => 'btn btn-link logout']
@@ -132,9 +131,9 @@ AdminAsset::register($this);
         </div>
     </footer>
 
-    <!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter47100633 = new Ya.Metrika({ id:47100633, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/47100633" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
-    
-    <?php $this->endBody() ?>
+    <!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(47100633, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/47100633" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
     </body>
+    <?php $this->endBody() ?>
+
     </html>
 <?php $this->endPage() ?>

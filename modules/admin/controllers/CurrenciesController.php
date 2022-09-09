@@ -5,42 +5,25 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Currencies;
 use app\models\CurrenciesSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
+use app\common\controllers\AdminController;
 
 /**
  * CurrenciesController implements the CRUD actions for Currencies model.
  */
-class CurrenciesController extends Controller
+final class CurrenciesController extends AdminController implements CrudInterface
 {
-
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-    
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -50,9 +33,9 @@ class CurrenciesController extends Controller
 
     /**
      * Lists all Currencies models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new CurrenciesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -69,7 +52,7 @@ class CurrenciesController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -97,11 +80,11 @@ class CurrenciesController extends Controller
     /**
      * Updates an existing Currencies model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
 
@@ -117,25 +100,24 @@ class CurrenciesController extends Controller
     /**
      * Deletes an existing Currencies model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
     /**
      * Finds the Currencies model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Currencies the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Currencies::findOne($id)) !== null) {
             return $model;

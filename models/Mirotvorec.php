@@ -2,11 +2,15 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
+use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "mirotvorec".
@@ -19,9 +23,21 @@ use Imagine\Image\Box;
  * @property string $date_edit
  * @property string $preview
  */
-class Mirotvorec extends \yii\db\ActiveRecord
+class Mirotvorec extends ActiveRecord
 {
-    public $file=null;
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TAB_NUMBER  = 'tab_number';
+    const ATTR_TITLE       = 'title';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_DATE_EDIT   = 'date_edit';
+    const ATTR_PREVIEW     = 'preview';
+
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -31,33 +47,45 @@ class Mirotvorec extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['tab_number'], 'integer'],
-            [['content'], 'string'],
-            [['date_create', 'date_edit', 'preview'], 'safe'],
-            [['title'], 'string', 'max' => 100],
-            [['file'], 'image'],
+            [static::ATTR_TAB_NUMBER, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_EDIT, SafeValidator::class],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image'],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 100]
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название квеста',
-            'content' => 'Содержимое квеста',
-            'tab_number' => 'Сортировка',
-            'date_create' => 'Дата создания',
-            'date_edit' => 'Дата последнего редактирования',
-            'preview' => 'Превью картинка квеста',
-            'file' => 'Файл превьюшки',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название квеста',
+            static::ATTR_CONTENT => 'Содержимое квеста',
+            static::ATTR_TAB_NUMBER => 'Сортировка',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_DATE_EDIT => 'Дата последнего редактирования',
+            static::ATTR_PREVIEW => 'Превью картинка квеста',
+            static::FILE => 'Файл превьюшки'
         ];
     }
 
@@ -71,4 +99,15 @@ class Mirotvorec extends \yii\db\ActiveRecord
             Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
         }
     }
+
+    /**
+     * Получаем квесты данного торговца
+     *
+     * @return ActiveRecord[]
+     */
+    public static function takeQuestsMirotvorec()
+    {
+        return static::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+    }
+
 }

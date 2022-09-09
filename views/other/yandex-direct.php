@@ -4,52 +4,15 @@
  * User: comp
  * Date: 21.04.2018
  * Time: 7:59
- * View of Google adsense - used as compact short link in main views with render
+ * Блок рекламы в боковом меню сайта
  */
 ?>
 
 
-<?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && Yii::$app->request->url !== '/loot/modules/pistol-grip' && !stristr(Yii::$app->request->url,'/loot/modules?page') && Yii::$app->request->url !== '/loot/modules/trunk' && Yii::$app->request->url !== '/loot/modules'): ?>
-
-<div class="no-adb">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5071904663034434"
-         data-ad-slot="1963713047"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-    
-<div class="no-adb">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5071904663034434"
-         data-ad-slot="1963713047"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+<div class="margins-vertical-20">
+    <div class="rl_cnt_bg" data-id="298945"></div>
 </div>
 
-<div class="no-adb fortunite-block">
-
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5071904663034434"
-         data-ad-slot="1963713047"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
+<div class="margins-vertical-20">
+    <div class="rl_cnt_bg" data-id="298946"></div>
 </div>
-
-<?php endif; ?>

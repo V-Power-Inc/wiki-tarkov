@@ -19,6 +19,6 @@ $(document).ready(function() {
             $(this).parent().children('div.slide').animate({height: 'hide'}, 500);
             $(this).append('<span>Развернуть</span>');
             $(this).children('em').remove();
-        };
+        }
     });
 });

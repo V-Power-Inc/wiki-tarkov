@@ -2,7 +2,9 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * This is the model class for table "questions".
@@ -15,6 +17,13 @@ use Yii;
  */
 class Questions extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID          = 'id';
+    const ATTR_TITLE       = 'title';
+    const ATTR_CONTENT     = 'content';
+    const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_ENABLED     = 'enabled';
+
     /**
      * @inheritdoc
      */
@@ -24,29 +33,36 @@ class Questions extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['content'], 'string'],
-            [['date_create'], 'safe'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 500],
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 500]
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название вопроса',
-            'content' => 'Ответ на вопрос',
-            'date_create' => 'Дата создания',
-            'enabled' => 'Включен',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название вопроса',
+            static::ATTR_CONTENT => 'Ответ на вопрос',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ENABLED => 'Включен'
         ];
     }
 }

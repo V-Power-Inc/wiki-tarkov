@@ -14,9 +14,21 @@ use app\models\Traders;
 use yii\web\UrlRuleInterface;
 use yii\base\BaseObject;
 
+/**
+ * Url компонент для маршрутизации на детальные страницы некоторых коллекций объектов
+ * (Новости, Ключи, Полезные материалы, Детальные страницы торговцеы)
+ *
+ * Class UrlComponent
+ * @package app\components
+ */
 class UrlComponent extends BaseObject implements UrlRuleInterface
 {
-
+    /**
+     * @param \yii\web\UrlManager $manager
+     * @param \yii\web\Request $request
+     * @return array|bool
+     * @throws \yii\base\InvalidConfigException
+     */
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
@@ -35,13 +47,19 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
             }
         } elseif ($ppp[0] == 'traders') {
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
-                return ['site/tradersdetail',['id'=>$matches[3]]];
+                return ['trader/tradersdetail',['id'=>$matches[3]]];
             }
         }
 
         return false;
     }
-    
+
+    /**
+     * @param \yii\web\UrlManager $manager
+     * @param string $route
+     * @param array $params
+     * @return bool|string
+     */
     public function createUrl($manager, $route, $params)
     {
         if (Doorkeys::find()->where(['url'=> $route])->One()) {

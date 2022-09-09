@@ -7,7 +7,6 @@
  */
 
 namespace app\components;
-use Yii;
 /**
  * Embed is an embed object to be included in a webhook message
  */

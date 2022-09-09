@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Админка tarkov-wiki';
+$this->title = 'Админка '. $_ENV['DOMAIN']?>;
 ?>
 <div class="col-lg-12 text-center">
     <h1 class="admin-title-main">Главная админская страница</h1>
@@ -12,9 +12,6 @@ $this->title = 'Админка tarkov-wiki';
         </div>
     <?php endif; ?>
 <?php endif; ?>
-
-
-<?php if(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id !== 3 && Yii::$app->user->identity->id !== 4 && Yii::$app->user->identity->id !== 5 && Yii::$app->user->identity->id !== 9 && Yii::$app->user->identity->id !== 10): ?>
 
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
@@ -36,10 +33,6 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
         <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
         <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
-        <li><a href="/admin/leshy/" class="admin-tabs w-100-important">Квесты Лешего</a></li>
-        <li><a href="/admin/warden/" class="admin-tabs w-100-important">Квесты Смотрителя</a></li>
-        <li><a href="/admin/bashkir/" class="admin-tabs w-100-important">Квесты Башкира</a></li>
-        <li><a href="/admin/khokhol/" class="admin-tabs w-100-important">Квесты Хохла</a></li>
         <!-- disabled for now -->
 <!--        <li><a href="#" class="admin-tabs w-100-important unactive">Next trader</a></li>-->
     </ul>
@@ -53,13 +46,6 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/tamojnya" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
         <li><a href="/admin/bereg" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
         <li><a href="/admin/razvyazka" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
-        <!-- disabled -->
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Улицы Таркова</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации лаб. TerraGroup</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Пригород</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Поселок</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Маяк</a></li>
-        <li><a href="#" class="admin-tabs w-100-important unactive">Маркеры на локации Терминал</a></li>
     </ul>
 </div>
 
@@ -80,23 +66,8 @@ $this->title = 'Админка tarkov-wiki';
         <li><a href="/admin/articles" class="admin-tabs w-100-important">Полезные статьи</a></li>
         <li><a href="/admin/currencies" class="admin-tabs w-100-important">Курсы валют</a></li>
         <!-- disabled -->
-        <!-- link to /admin/mapstaticcontent -->
         <li><a href="#" class="admin-tabs w-100-important unactive">Контент в описаниях маркеров</a></li>
     </ul>
 </div>
-
-<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 4) : ?>
-    <!-- Kondor View -->
-    <?=$this->render('working-lotttables'); ?>
-<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id === 10) : ?>
-    <!-- Asik View -->
-    <?=$this->render('maps-user'); ?>
-<?php elseif(isset(Yii::$app->user->identity->id) && Yii::$app->user->identity->id == 3) : ?>
-    <!-- Koles0 View -->
-    <?=$this->render('dmitry-loot'); ?>
-<?php else : ?>
-    <!-- Other View -->
-    <?=$this->render('workingview-nomaps'); ?>
-<?php endif; ?>
 
 

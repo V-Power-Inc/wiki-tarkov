@@ -7,12 +7,13 @@
  */
 
 namespace app\components;
+use Yii;
 /**
  * Client generates the payload and sends the webhook payload to Discord
  */
 class ClientdiscordComponent
 {
-    protected $url = 'https://discordapp.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO';
+    protected $url = (string)Yii::$app->params['discordHookNewsUrl'];
     protected $username = 'wiki-tarkov.ru';
     protected $avatar;
     protected $message;

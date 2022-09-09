@@ -2,10 +2,10 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\SafeValidator;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Mirotvorec;
 
 /**
  * MirotvorecSearch represents the model behind the search form about `app\models\Mirotvorec`.
@@ -13,13 +13,26 @@ use app\models\Mirotvorec;
 class MirotvorecSearch extends Mirotvorec
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'tab_number'], 'integer'],
-            [['title', 'content', 'date_create', 'date_edit', 'preview'], 'safe'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_TAB_NUMBER, IntegerValidator::class],
+
+            [static::ATTR_TITLE, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_DATE_CREATE, SafeValidator::class],
+
+            [static::ATTR_DATE_EDIT, SafeValidator::class],
+
+            [static::ATTR_PREVIEW, SafeValidator::class]
         ];
     }
 

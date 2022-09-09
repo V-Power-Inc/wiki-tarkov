@@ -16,11 +16,7 @@ $this->registerMetaTag([
 ]);
 
 $this->registerJsFile('js/js-ok.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
 ?>
-
-
-
 <div class="heading-class">
     <div class="container">
         <h1 class="main-site-heading text-center">Необходимо включить JavaScript</h1>
@@ -28,7 +24,6 @@ $this->registerJsFile('js/js-ok.js', ['depends' => [\yii\web\JqueryAsset::class]
 </div>
 
 <hr class="grey-line">
-
 
 <div class="container">
     <div class="row">
@@ -44,5 +39,3 @@ $this->registerJsFile('js/js-ok.js', ['depends' => [\yii\web\JqueryAsset::class]
         </div>
     </div>
 </div>
-
-

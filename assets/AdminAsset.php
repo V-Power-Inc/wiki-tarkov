@@ -16,8 +16,6 @@ class AdminAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-    //    'css/owl-css/owl.carousel.css',
-    //    'css/owl-css/owl.theme.default.min.css',
         'css/font-awesome/font-awesome.min.css',
         'css/custom.css',
         'css/admin.css',
