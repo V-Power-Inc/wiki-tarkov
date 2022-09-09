@@ -14,6 +14,8 @@ pipelines:
       - step:
           name: Install Python and docker
           script:
+            - set -eu
+
             # Add python pip and bash
             - apk add --no-cache py-pip bash
 
