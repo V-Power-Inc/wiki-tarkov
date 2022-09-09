@@ -58,9 +58,6 @@ sql_dump.sql
 # ignore main-local.php config
 /config/web-local.php
 
-# Ignore auto changed file associated with composer
-/composer.lock
-
 # Ignore Sitemaps files in the future
 /sitemaps
 

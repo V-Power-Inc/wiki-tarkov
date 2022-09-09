@@ -21,7 +21,12 @@ pipelines:
             - chmod +x docker-compose
             - mv docker-compose /usr/local/bin
 
-            - echo "Build an image with current project via docker"
+            - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose build --force-rm --no-cache --pull
+
+            - echo "Обновляем зависимости composer"
+
+            # Обновляем зависимости композера
+            - docker-compose exec app composer install --no-interaction
