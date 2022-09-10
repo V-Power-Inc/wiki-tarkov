@@ -90,7 +90,7 @@ $(document).ready(function() {
 
     if (document.body.clientWidth <= '768')  {
         $('.outer-button').click(function () {
-            $(".optins_layerstability").animate({ right: -327}, 800);
+            $(".optins_layerstability").animate({ right: -246}, 800);
             $.wait(function(){$(".outer-button").hide()} ,1);
             $.wait(function(){$(".inner-button").show()} ,1);
         });

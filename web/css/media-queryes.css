@@ -249,20 +249,21 @@
         text-align: center;
     }
 
+    /* Old value - right: -246px; */
     .optins_layerstability {
         top: 174px;
-        right: -246px;
+        right: 0;
         width: 246px;
         height: 747px;
         z-index: 900;
     }
 
     .outer-button {
-        display: none;
+        display: block;
     }
 
     .inner-button {
-        display: block;
+        display: none;
     }
 
     h1 {
