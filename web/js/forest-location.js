@@ -499,30 +499,5 @@ $(document).ready(function() {
     function markerOnClick() {
         AddRelations();
     }
-            
 
-    /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
-    $.wait = function( callback, seconds){
-        return window.setTimeout(callback, seconds * 800 );
-    };
-
-    $('.outer-button').click(function () {
-        $(".optins_layerstability").animate({ right: -540}, 800);
-        $.wait(function(){$(".outer-button").hide()} ,1);
-        $.wait(function(){$(".inner-button").show()} ,1);
-    });
-
-    $('.inner-button').click(function () {
-        $(".optins_layerstability").animate({ right: 0 }, 800);
-        $.wait(function(){$(".inner-button").hide()} ,1);
-        $.wait(function(){$(".outer-button").show()} ,1);
-    });
-
-    if (document.body.clientWidth <= '768')  {
-        $('.outer-button').click(function () {
-            $(".optins_layerstability").animate({ right: -327}, 800);
-            $.wait(function(){$(".outer-button").hide()} ,1);
-            $.wait(function(){$(".inner-button").show()} ,1);
-        });
-    }
 });

@@ -107,8 +107,10 @@ use yii\web\JsExpression;
                 </div>
 
                 <h2>Интерактивная карта локации Маяк</h2>
-                <p>Интерактивная карта локации Маяк из Escape from Tarkov.</p>
-                <?= $this->render('/other/google-gor.php'); ?>
+                <p class="maps-mobile-hidden-value">Интерактивная карта локации Маяк из Escape from Tarkov.</p>
+                <div class="maps-mobile-hidden-value">
+                    <?= $this->render('/other/yandex-direct-bottom-intermaps'); ?>
+                </div>
             </div>
 
         </div>
