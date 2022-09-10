@@ -26,7 +26,7 @@ use yii\web\JsExpression;
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
     <div class="container">
-        <h1 class="main-site-heading">Карта локации лаборатория Terra Group</h1>
+        <h1 class="main-site-heading m-size-25">Карта локации лаборатория Terra Group</h1>
     </div>
 </div>
 

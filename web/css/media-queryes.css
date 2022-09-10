@@ -270,6 +270,10 @@
         font-size: 28px;
     }
 
+    .m-size-25 {
+        font-size: 25px;
+    }
+
     .item-key div.item-content {
         max-width: 580px;
     }
