@@ -251,9 +251,9 @@
 
     .optins_layerstability {
         top: 174px;
-        right: -321px;
-        width: 325px;
-        height: auto;
+        right: -246px;
+        width: 246px;
+        height: 747px;
         z-index: 900;
     }
 
@@ -333,6 +333,14 @@
         max-width: 700px;
         height: 100%;
         max-height: 360px;
+    }
+
+    .maps-mobile-hidden-value {
+        display: none;
+    }
+
+    .static-description h2 {
+        font-size: 26px;
     }
 
 }
