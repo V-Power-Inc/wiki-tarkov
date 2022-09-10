@@ -512,7 +512,7 @@ h2.white {
     height: 747px;
     background: black;
     display: block;
-    z-index: 999;
+    z-index: 900;
     border-left: 2px solid #c3392c;
 }
 
