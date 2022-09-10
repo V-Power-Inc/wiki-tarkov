@@ -1,3 +1,5 @@
+# Не при каких раскладах не добавляем сюда файл composer.lock - используется Snyk
+
 # phpstorm project files
 .idea
 
@@ -40,11 +42,26 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 
-# no db
-config/db.php
-
 # ignore images
 web/img/upload
 
 # no index.php in web directory
 web/index.php
+
+# Ignore well known
+.well-known
+
+# Ignore sql dump if exists sometimes
+sql_dump.sql
+
+# ignore environment variables
+/.env
+
+# ignore main-local.php config
+/config/web-local.php
+
+# Ignore auto changed file associated with composer
+/composer.lock
+
+# Ignore Sitemaps files in the future
+/sitemaps

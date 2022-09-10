@@ -5,40 +5,25 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Clans;
 use app\models\ClansSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\HttpException;
 use yii\filters\VerbFilter;
+use app\common\interfaces\CrudInterface;
+use app\common\controllers\AdminController;
 
 /**
  * ClansController implements the CRUD actions for Clans model.
  */
-class ClansController extends Controller
+final class ClansController extends AdminController implements CrudInterface
 {
-
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 и KondorMax по ID из таблицы админов сайта  ***/
-    public function beforeAction($action)
-    {
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2 || Yii::$app->user->identity->id === 4) {
-            return self::actionIndex();
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
     /**
-     * {@inheritdoc}
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -48,9 +33,9 @@ class ClansController extends Controller
 
     /**
      * Lists all Clans models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new ClansSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -67,7 +52,7 @@ class ClansController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -95,11 +80,11 @@ class ClansController extends Controller
     /**
      * Updates an existing Clans model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -116,26 +101,24 @@ class ClansController extends Controller
     /**
      * Deletes an existing Clans model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws
      */
-    
-    // Выключили, специально - чтобы записи не удаляли
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-       // $this->findModel($id)->delete();
+        $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
     /**
      * Finds the Clans model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return Clans the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Clans::findOne($id)) !== null) {
             return $model;

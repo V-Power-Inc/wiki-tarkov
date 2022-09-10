@@ -3,32 +3,18 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
-use app\models\Admins;
+use app\common\controllers\AdminController;
 use app\models\Login;
+
 /**
  * Default controller for the `admin` module
  */
-class DefaultController extends Controller
+final class DefaultController extends AdminController
 {
-    /** Подключаем отдельный layout для админки сайта **/
-    public $layout = 'admin';
-    
+    const ACTION_INDEX  = 'index';
+    const ACTION_LOGIN  = 'login';
+    const ACTION_LOGOUT = 'logout';
 
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-           return self::actionIndex();
-        }
-    }
-    
     /** Рендер главной страницы админки **/
     public function actionIndex()
     {
@@ -36,7 +22,6 @@ class DefaultController extends Controller
     }
 
     /** Рендер страницы авторизации **/
-
     public function actionLogin()
     {
         if(!Yii::$app->user->isGuest){
@@ -51,15 +36,13 @@ class DefaultController extends Controller
                 return $this->redirect('/admin');
             }
         }
-        return $this->render('login', [ 'model' => $model,]);
+        return $this->render('login', ['model' => $model]);
     }
 
+    /** При заходе в этот экшен - мы разлогиниваем и дериректим на главную страницу */
     public function actionLogout()
     {
         Yii::$app->user->logout();
         return self::actionLogin();
     }
-    
-    
-    
 }

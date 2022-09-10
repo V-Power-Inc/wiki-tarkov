@@ -27,7 +27,7 @@ $('#clans-searchclan').on('keyup paste',function() {
                     var strdata = '<div class="clan-block">' +
                                         '<h3 class="clan-title">'
                                             +data[i].title+
-                                            '<i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией tarkov-wiki.ru"></i>' +
+                                            '<i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией сайта"></i>' +
                                         '</h3>'
     
                                         if (data[i].preview == null || data[i].preview=='') {

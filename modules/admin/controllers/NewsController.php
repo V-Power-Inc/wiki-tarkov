@@ -5,46 +5,27 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\News;
 use app\models\NewsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Gd;
-use Imagine\Image\Box;
 use app\components\ClientdiscordComponent;
 use app\components\Embeddiscord;
+use app\common\interfaces\CrudInterface;
+use app\common\controllers\AdminController;
 
 /**
  * NewsController implements the CRUD actions for News model.
  */
-class NewsController extends Controller
+final class NewsController extends AdminController implements CrudInterface
 {
-    /** Подключаем отдельный layout для CRUD моделей **/
-    public $layout = 'admin';
-
-    /** Проверка пользователя на гостя  **/
-    public function beforeAction($action)
-    {
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
-            return $this->redirect('/admin/default/logout');
-        }
-
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
-            return $this->redirect('/admin/login');
-        } else {
-            return self::actionIndex();
-        }
-    }
-    
     /**
-     * @inheritdoc
+     * Описание метода указывающего разрешения (Наследуется от Yii)
+     * @return array
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -54,9 +35,9 @@ class NewsController extends Controller
 
     /**
      * Lists all News models.
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -70,9 +51,10 @@ class NewsController extends Controller
     /**
      * Displays a single News model.
      * @param integer $id
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id): string
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -80,9 +62,11 @@ class NewsController extends Controller
     }
 
     /**
-     * Creates a new News model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * При сохранении нового объекта новости, должен происходить
+     * Push в Discord канал waki-tarkov через веб-хук дискорда
+     *
      * @return mixed
+     * @throws
      */
     public function actionCreate()
     {
@@ -91,9 +75,9 @@ class NewsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // Отправка уведомления в дискорд канал
+            /** Отправка уведомления в дискорд канал */
             if($_SERVER['SERVER_NAME'] !== 'dev.kfc-it.ru') {
-                $webhook = new ClientdiscordComponent('https://discordapp.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO');
+                $webhook = new ClientdiscordComponent(Yii::$app->params['discordHookNewsUrl']);
                 $embed = new Embeddiscord();
                 $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
                 $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
@@ -111,10 +95,11 @@ class NewsController extends Controller
     /**
      * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
         $model->uploadPreview();
@@ -131,27 +116,24 @@ class NewsController extends Controller
     /**
      * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return mixed
+     * @throws
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
-        if(Yii::$app->user->identity->id !== 3) {
-
-            $this->findModel($id)->delete();
-
-            return $this->redirect(['index']);
-        }
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
      * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id - id параметр
      * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = News::findOne($id)) !== null) {
             return $model;

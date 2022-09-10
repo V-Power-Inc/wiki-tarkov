@@ -2,8 +2,10 @@
 
 namespace app\models;
 
-use Yii;
-use yii\helpers\ArrayHelper;
+use app\common\helpers\validators\RequiredValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\UniqueValidator;
 
 /**
  * This is the model class for table "category".
@@ -22,6 +24,20 @@ use yii\helpers\ArrayHelper;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID              = 'id';
+    const ATTR_TITLE           = 'title';
+    const ATTR_PARENT_CATEGORY = 'parent_category';
+    const ATTR_URL             = 'url';
+    const ATTR_CONTENT         = 'content';
+    const ATTR_DESCRIPTION     = 'description';
+    const ATTR_KEYWORDS        = 'keywords';
+    const ATTR_ENABLED         = 'enabled';
+    const ATTR_SORTIR          = 'sortir';
+
+    /** Константы связей таблицы */
+    const RELATION_ITEMS       = 'items';
+
     /**
      * @inheritdoc
      */
@@ -31,34 +47,54 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['title', 'description', 'sortir', 'url'], 'required'],
-            [['parent_category', 'enabled', 'sortir'], 'integer'],
-            [['content'], 'string'],
-            [['url'], 'unique', 'message' => 'Значение url не является уникальным'],
-            [['title', 'url', 'description', 'keywords'], 'string', 'max' => 255],
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_SORTIR, RequiredValidator::class],
+            [static::ATTR_SORTIR, IntegerValidator::class],
+
+            [static::ATTR_URL, RequiredValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_PARENT_CATEGORY, IntegerValidator::class],
+
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Имя категории',
-            'parent_category' => 'Родительская категория',
-            'url' => 'Url адрес категории',
-            'content' => 'Содержимое',
-            'description' => 'SEO описание',
-            'keywords' => 'SEO ключевые слова',
-            'sortir' => 'Сортировка',
-            'enabled' => 'Включен',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Имя категории',
+            static::ATTR_PARENT_CATEGORY => 'Родительская категория',
+            static::ATTR_URL => 'Url адрес категории',
+            static::ATTR_CONTENT => 'Содержимое',
+            static::ATTR_DESCRIPTION => 'SEO описание',
+            static::ATTR_KEYWORDS => 'SEO ключевые слова',
+            static::ATTR_SORTIR => 'Сортировка',
+            static::ATTR_ENABLED => 'Включен'
         ];
     }
 
@@ -85,12 +121,12 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Items::className(), ['parentcat_id' => 'id']);
+        return $this->hasMany(Items::class, ['parentcat_id' => 'id']);
     }
 
     /*** Связь таблицы сама на себя - получаем родительскую категорию ***/
     public function getParentcat()
     {
-        return $this->hasOne(Category::className(), ['id' => 'parent_category']);
+        return $this->hasOne(Category::class, ['id' => 'parent_category']);
     }
 }

@@ -8,28 +8,40 @@
 /** Этот контроллер отвечает за вывод категорий и лута предметов из Escape from Tarkov  **/
 namespace app\controllers;
 
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
+use app\common\services\JsondataService;
 use yii;
 use app\models\Category;
 use app\models\Items;
-use yii\data\Pagination;
+use app\models\Traders;
 use yii\web\HttpException;
-use yii\helpers\Json;
-use yii\db\Query;
+use app\common\services\PaginationService;
+use app\common\services\TraderService;
 
-
-
-class LootController extends Controller
+/**
+ * Class LootController
+ * @package app\controllers
+ */
+class LootController extends AdvancedController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_MAINLOOT  = 'mainloot';
+    const ACTION_CATEGORY  = 'category';
+    const ACTION_QUESTLOOT = 'questloot';
+    const ACTION_LOOTJSON  = 'lootjson';
 
-    // Кешируем все запросы из БД - храним их в кеше (Путь в Variations позволяет корректно кэшировать категории)
-    public function behaviors()
+    /**
+     * Массив поведения контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
         return [
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => 604800,
-                'only' => ['mainloot','category','questloot'],
+                'only' => ['mainloot','category'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
@@ -38,137 +50,100 @@ class LootController extends Controller
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
                     Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page')
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];
     }
 
     /**
-     * Displays homepage.
+     * Рендер страницы списка категорий и общего списка лута
      *
      * @return string
      */
-    /** Рендер страницы списка категорий и общего списка лута  **/
-    public function actionMainloot()
+    public function actionMainloot(): string
     {
-        $model = new Items;
-        $allitems = $model->getActiveItems();
+        $model = new Items();
         $fullitems = Items::find()->where(['active' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-        $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-        $request = \Yii::$app->request;
+        $data = new PaginationService($fullitems,50);
 
-        return $this->render('mainpage.php', ['model' => $model, 'items' => $items, 'allitems' => $allitems,'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        return $this->render('mainpage.php', [
+            'model' => $model,
+            'items' => $data->items,
+            'allitems' => $model->getActiveItems(),
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
-    /** Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории */
-    public function actionCategory($name)
+    /**
+     * Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории
+     *
+     * @param string $name - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionCategory(string $name): string
     {
         $cat = Category::find()->where(['url'=>$name])->One();
-        if($cat) {
-            $fullitems = Items::find()
-                ->alias( 'i')
-                ->select('i.*')
-                ->leftJoin('category as c1', '`i`.`parentcat_id` = `c1`.`id`')
-                ->andWhere(['c1.url' => $name])
-                ->andWhere(['active' => 1])
-                ->orWhere(['c1.parent_category' => $cat->id])
-                ->andWhere(['active' => 1])
-                ->with('parentcat');
-
-            $pagination = new Pagination(['defaultPageSize' => 50,'totalCount' => $fullitems->count(),]);
-            $items = $fullitems->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->all();
-            $request = \Yii::$app->request;
-
-            return $this->render('categorie-page.php', ['cat' => $cat, 'items' => $items, 'active_page' => $request->get('page',1), 'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if ($cat) {
+            $data = new PaginationService(Items::takeItemsWithParentCat($name, $cat->id));
+            return $this->render('categorie-page.php', [
+                'cat' => $cat,
+                'items' => $data->items,
+                'active_page' => Yii::$app->request->get('page',1),
+                'count_pages' => $data->paginator->getPageCount(),
+                'pagination' => $data->paginator
+            ]);
         }
 
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /*** Рендер страницы списка предметов для квестов торговцев ***/
-    public function actionQuestloot()
+    /***
+     * Рендер страницы списка предметов для квестов торговцев
+     *
+     * @return string
+     */
+    public function actionQuestloot(): string
     {
-        $allquestitems = Items::find()->where(['quest_item' => 1])->andWhere(['active' => 1])->all();
-
         $form_model = new Items();
+
         if ($form_model->load(Yii::$app->request->post())) {
-            if (isset($_POST['Items']['questitem'])) {
-                $questitem = $_POST['Items']['questitem'];
-            } else {
-                $questitem = "Все предметы";
-            }
 
-
-            $words = ["Все предметы","Прапор","Терапевт","Скупщик","Лыжник","Миротворец","Механик","Барахольщик"];
-
-            /** Если пришли данные через POST **/
-            if(in_array($questitem,$words)) {
-                $curentWord = $words[array_search($questitem, $words)];
-                if ($curentWord == "Все предметы") {
-                    $result = Items::find()->where(['active' => 1])->andWhere(['quest_item' => 1])->orderby(['title' => SORT_STRING])->all();
-                } else {
-                    $result = Items::find()->andWhere(['active' => 1])->andWhere(['quest_item' => 1])->andWhere(['like', 'trader_group', [$curentWord]])->orderby(['title' => SORT_STRING])->all();
-                }
-
-                return $this->render('quest-page.php',
-                    [
-                        'form_model' => $form_model,
-                        'questsearch' => $result,
-                        'arr' => $curentWord,]);
-            }
-        }  else {
-            return $this->render('quest-page.php',
-                [
-                    'allquestitems' => $allquestitems,
-                    'form_model' => $form_model]);
+            return $this->render('quest-page', [
+                'form_model' => $form_model,
+                'questsearch' => TraderService::takeResult($form_model),
+                'formValue' => (string)Traders::traderGroups()[$form_model->questitem]
+            ]);
         }
+
+        return $this->render('quest-page', [
+                'allquestitems' => Items::takeActiveQuestItems(),
+                'form_model' => $form_model
+        ]);
     }
 
-    /** Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута. **/
-    /** Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет старый символ в поле поиска предметов **/
+    /**
+     * Экшон возвращает в Json формате данные, совпадающие с набором в поиске на страницах справочника лута.
+     * Запрос к базе происходит всякий раз когда пользователь печатает новый или удаляет
+     * старый символ в поле поиска предметов
+     *
+     * @param string|null $q - поисковый запрос
+     * @return string
+     * @throws HttpException
+     * @throws yii\db\Exception
+     */
 
-    public function actionLootjson($q = null) {
-        if(Yii::$app->request->isAjax) {
-
-            $query = new Query;
-
-            $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
-                ->from('items')
-                ->where('title LIKE "%' . $q . '%"')
-                ->orWhere('search_words LIKE "%' . $q . '%"')
-                ->andWhere(['active' => 1])
-                ->orderBy('title')
-                ->cache(3600);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-
-            $out = [];
-
-            /** Цикл составления готовых данных по запросу пользователя в поиске **/
-            foreach ($data as $d) {
-                $parencat = Category::find()->where(['id' => $d['parentcat_id']])->cache(3600)->one();
-                $out[] = ['value' => $d['title'], 'title' => $d['title'], 'parentcat_id' => $parencat->title, 'shortdesc' => $d['shortdesc'], 'preview' => $d['preview'], 'url' => $d['url']];
-            }
-            return Json::encode($out);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** Обработчик ошибок - отображает статусы ответа сервера **/
-    public function actions()
+    public function actionLootjson(string $q = null): string
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
+        if(Yii::$app->request->isAjax) {
+            return JsondataService::getLootJson($q);
+        }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
+
 }

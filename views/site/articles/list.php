@@ -8,7 +8,7 @@
 
 use yii\widgets\LinkPager;
 
-$this->title = 'Полезные статьи по Escape from Tarkov.';
+$this->title = 'Полезные статьи по Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Полезные статьи по онлайн шутеру Escape from Tarkov.',
@@ -18,32 +18,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Полезные статьи Escape from Tarkov, Полезные статьи в Таркове',
 ]);
-
-$keysBlocks = [2];
-
-use app\components\AlertComponent;
 ?>
-
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Полезная информация по Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -62,7 +37,7 @@ use app\components\AlertComponent;
             <!--- Новостной блок -->
             <?php foreach($news as $k => $item): ?>
 
-                <?php if(in_array($k,$keysBlocks)): ?>
+                <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
                     <!-- feed recomendations -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="news-shortitem static-height-afm">
@@ -117,7 +92,7 @@ use app\components\AlertComponent;
 
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+            <?= $this->render('/other/discord-widget.php'); ?>
 
             <?= $this->render('/other/yandex-donate.php'); ?>
 

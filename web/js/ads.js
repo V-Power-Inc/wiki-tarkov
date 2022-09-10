@@ -1,1 +1,0 @@
-canRunAds = true;

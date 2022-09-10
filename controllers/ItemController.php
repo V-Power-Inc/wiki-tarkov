@@ -7,24 +7,31 @@
  */
 
 namespace app\controllers;
-use yii\web\Controller;
+use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\models\Items;
 use Yii;
 
-class ItemController extends Controller {
+/**
+ * Class ItemController
+ * @package app\controllers
+ */
+class ItemController extends AdvancedController
+{
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_DETAILLOOT = 'detailloot';
+    const ACTION_PREVIEWLOOT = 'previewloot';
 
-    
-    // CSRF валидация POST запросов методов этого контроллера включена
+    /** CSRF валидация POST запросов методов этого контроллера включена */
     public $enableCsrfValidation;
 
-    // Кешируем все запросы из БД - храним их в кеше
-    public function behaviors()
+    /**
+     * Кешируем все запросы из БД - храним их в кеше (Массив поведения контроллера)
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
     {
-        // Получаем URL предмета чтобы обновлять кеши по date_update
-        $url= Yii::$app->request->url;
-        $finaladdr = substr((trim(substr($url,strripos($url,'/')),'/')),0,-5);
-
         return [
             [
                 'class' => 'yii\filters\PageCache',
@@ -37,36 +44,47 @@ class ItemController extends Controller {
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
-                    Yii::$app->response->statusCode
+                    Yii::$app->response->statusCode,
+                    Yii::$app->request->cookies->get('overlay')
                 ]
             ],
         ];
     }
-    
-/** Рендер детальной страницы лута */
-public function actionDetailloot($item) {
 
-    $loot = Items::find()->where(['url'=>$item])->andWhere(['active' => 1])->One();
-
-    if($loot) {
-            return $this->render('/loot/item-detail.php', ['item' => $loot]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+    /**
+     * Рендер детальной страницы лута
+     *
+     * @param $item - url адрес
+     * @return string
+     * @throws HttpException
+     */
+    public function actionDetailloot($item): string
+    {
+        if(Items::takeActiveItemByUrl($item)) {
+            return $this->render('/loot/item-detail.php', ['item' => Items::takeActiveItemByUrl($item)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /** Рендер страницы предпросмотра детальной страницы лута **/
-    public function actionPreviewloot() {
-
+    /**
+     * Рендер страницы предпросмотра детальной страницы лута
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionPreviewloot(): string
+    {
         $this->enableCsrfValidation = false;
 
         if(Yii::$app->user->isGuest !== true) {
-            $item = new Items;
+            $item = new Items();
             $item->load(Yii::$app->request->post());
             return $this->render('/loot/item-preview.php', ['item' => $item]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
+
 }
 

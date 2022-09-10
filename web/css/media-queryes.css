@@ -249,24 +249,29 @@
         text-align: center;
     }
 
+    /* Old value - right: -246px; */
     .optins_layerstability {
         top: 174px;
-        right: -321px;
-        width: 325px;
-        height: auto;
-        z-index: 9991;
+        right: 0;
+        width: 246px;
+        height: 747px;
+        z-index: 900;
     }
 
     .outer-button {
-        display: none;
+        display: block;
     }
 
     .inner-button {
-        display: block;
+        display: none;
     }
 
     h1 {
         font-size: 28px;
+    }
+
+    .m-size-25 {
+        font-size: 25px;
     }
 
     .item-key div.item-content {
@@ -306,6 +311,12 @@
         cursor: pointer;
     }
 
+    .overlay-block {
+        min-height: 90px;
+        max-height: 120px;
+        height: auto;
+    }
+
 }
 
 
@@ -327,6 +338,14 @@
         max-width: 700px;
         height: 100%;
         max-height: 360px;
+    }
+
+    .maps-mobile-hidden-value {
+        display: none;
+    }
+
+    .static-description h2 {
+        font-size: 26px;
     }
 
 }

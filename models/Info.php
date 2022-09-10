@@ -2,11 +2,12 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
-use Imagine\Gd;
 use Imagine\Image\Box;
+use app\common\helpers\validators\FileValidator;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * This is the model class for table "info".
@@ -19,10 +20,23 @@ use Imagine\Image\Box;
  * @property string $course
  * @property string $bgstyle
  */
+
+
 class Info extends \yii\db\ActiveRecord
 {
-    
-    public $file;
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID      = 'id';
+    const ATTR_TITLE   = 'title';
+    const ATTR_CONTENT = 'content';
+    const ATTR_PREVIEW = 'preview';
+    const ATTR_ENABLED = 'enabled';
+    const ATTR_COURSE  = 'course';
+    const ATTR_BGSTYLE = 'bgstyle';
+
+    /** @var string $file - Переменная файла превьюшки null */
+    public $file = null;
+    const FILE = 'file';
+
     /**
      * @inheritdoc
      */
@@ -32,33 +46,45 @@ class Info extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['content', 'course'], 'string'],
-            [['enabled'], 'integer'],
-            [['title'], 'string', 'max' => 100],
-            [['preview', 'bgstyle'], 'string', 'max' => 200],
-            [['file'], 'image'],
+            [static::ATTR_CONTENT, StringValidator::class],
+
+            [static::ATTR_COURSE, StringValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 200],
+
+            [static::ATTR_BGSTYLE, StringValidator::class, StringValidator::ATTR_MAX => 200],
+
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название',
-            'content' => 'Текст сообщения Таркова',
-            'preview' => 'Превьюшка биткоина',
-            'enabled' => 'Виджет активен',
-            'course' => 'Курс биткоина',
-            'bgstyle' => 'Фон сообщения',
-            'file' => 'Превьюшка биткоина',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название',
+            static::ATTR_CONTENT => 'Текст сообщения Таркова',
+            static::ATTR_PREVIEW => 'Превьюшка биткоина',
+            static::ATTR_ENABLED => 'Виджет активен',
+            static::ATTR_COURSE => 'Курс биткоина',
+            static::ATTR_BGSTYLE => 'Фон сообщения',
+            static::FILE => 'Превьюшка биткоина'
         ];
     }
 

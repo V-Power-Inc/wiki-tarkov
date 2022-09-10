@@ -7,9 +7,15 @@
  */
 
 namespace app\components;
-use Yii;
-use app\components\AlertComponent;
 
+use Yii;
+
+/**
+ * Класс горизонтального меню в верхней части сайта
+ *
+ * Class MenuComponent
+ * @package app\components
+ */
 class MenuComponent
 {
     public static $keys = null;
@@ -26,7 +32,8 @@ class MenuComponent
     public static $questions = null;
     
 
-    public static function  Active(){
+    public static function Active()
+    {
         $activeAction = \Yii::$app->controller->action->id;
         // case аналогично $activeAction == 'index'
         switch ($activeAction){
@@ -44,12 +51,13 @@ class MenuComponent
             case 'questions':self::$questions = 'class="active"'; break;
         }
     }
+
     /**
      * получаем основные пункты меню
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function showMenu(){
-
+    public static function showMenu()
+    {
         /*** Разбивка для страниц карт локаций ***/
         $intermaps = "";
 
@@ -59,7 +67,9 @@ class MenuComponent
             "/maps/bereg-location",
             "/maps/forest-location",
             "/maps/tamojnya-location",
-            "/maps/terragroup-laboratory-location"
+            "/maps/terragroup-laboratory-location",
+            "/maps/rezerv-location",
+            "/maps/lighthouse-location"
         ];
 
         if (in_array(Yii::$app->request->url, $mapsurls)) {
@@ -69,24 +79,25 @@ class MenuComponent
        /*** Разбивка для страниц торговцев и их квестов ***/
         $pagequests = "";
         
-        $urlarray = ["/quests-of-traders",
-                    "/quests-of-traders/prapor-quests", 
-                    "/quests-of-traders/terapevt-quests",
-                    "/quests-of-traders/skypchik-quests",
-                    "/quests-of-traders/lyjnic-quests",
-                    "/quests-of-traders/mirotvorec-quests",
-                    "/traders/prapor",
-                    "/traders/terapevt",
-                    "/traders/lyjnic",
-                    "/traders/mirotvorec",
-                    "/traders/mehanic",
-                    "/traders/skupshik",
-                    "/traders/baraholshik"
+        $urlarray = [
+            "/quests-of-traders",
+            "/quests-of-traders/prapor-quests",
+            "/quests-of-traders/terapevt-quests",
+            "/quests-of-traders/skypchik-quests",
+            "/quests-of-traders/lyjnic-quests",
+            "/quests-of-traders/mirotvorec-quests",
+            "/traders/prapor",
+            "/traders/terapevt",
+            "/traders/lyjnic",
+            "/traders/mirotvorec",
+            "/traders/mehanic",
+            "/traders/skupshik",
+            "/traders/baraholshik"
         ];
+
         if (in_array(Yii::$app->request->url, $urlarray)) {
             $pagequests = 'active';
         }
-        
         
         /*** Разбивка для активных умений ***/
         $skills = '';
@@ -105,25 +116,25 @@ class MenuComponent
         }
 
         /*** Разбивка для пунктов меню - прочее ***/
-
         $other = '';
 
-           if(stristr(Yii::$app->request->url,'/currencies')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/questions')) {
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/news')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/articles')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/clans')){
-               $other = 'active';
-            } else if(stristr(Yii::$app->request->url,'/add-clan')){
-               $other = 'active';
-            }
+        if(stristr(Yii::$app->request->url,'/currencies')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/questions')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/news')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/articles')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/clans')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/add-clan')) {
+           $other = 'active';
+        } else if(stristr(Yii::$app->request->url,'/table-patrons')) {
+           $other = 'active';
+        }
 
-        /*** Далее пошел габлон отрисовки меню ***/
-
+        /*** Далее пошел шаблон отрисовки меню ***/
         self::Active();
         $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
         <div class="container adaptive-fix">
@@ -140,7 +151,7 @@ class MenuComponent
             <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
             <div class="collapse navbar-collapse" id="navbar-main">
                 <!-- Содержимое основной части -->
-                <a class="navbar-brand relative" href="https://tarkov-wiki.ru"><img class="logo-img" src="/img/logo-full.png" alt="Логотип tarkov-wiki.ru"></a>
+                <a class="navbar-brand relative" href='.$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'].'><img class="logo-img" src="/img/logo-full.png" alt="Логотип '. $_ENV['DOMAIN'].'"></a>
 
                 <ul class="nav navbar-nav">
                     
@@ -174,14 +185,11 @@ class MenuComponent
                       </ul>
                     </li>
 
-                
                     <!-- Other lists of menu selects -->                 
                     <li '.self::$lootcat.' '.self::$mainloot.' '.self::$loot.' '.self::$questloot.'><a href="/loot">Справочник лута</a></li>
                     <li '.self::$keys.' '.self::$detaikey.'><a href="/keys">Справочник ключей</a></li>
-                    
-                    
-                    <!-- dropdown list map locations -->
-                                         
+     
+                    <!-- dropdown list map locations -->              
                      <li class="dropdown '.$intermaps.'">
                       <a href="#" class="dropdown-toggle '.$intermaps.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Карты локаций</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
@@ -190,8 +198,9 @@ class MenuComponent
                         <li><a href="/maps/forest-location#3/72.50/-9.58">Лес</a></li>
                         <li><a href="/maps/bereg-location#3/60.93/-10.81">Берег</a></li>
                         <li><a href="/maps/razvyazka-location#3/75.32/-44.38">Развязка</a></li>
-                        <li><a href="/maps/terragroup-laboratory-location#2/41.0/-1.2">Лаборатория Terra Group</a></li>
-                        
+                        <li><a href="/maps/terragroup-laboratory-location#2/41.0/-1.2">Лаборатория Terra Group</a></li>   
+                        <li><a href="/maps/rezerv-location#2/64.6/41.0">Резерв</a></li>
+                        <li><a href="/maps/lighthouse-location#2/74.0/65.2">Маяк</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/maps">Смотреть список доступных карт</a></li>
                       </ul>
@@ -205,7 +214,8 @@ class MenuComponent
                         <li><a href="/articles">Полезная информация</a></li>
                         <li><a href="/news">Новости</a></li>
                         <li><a href="/questions">Частые вопросы</a></li>
-                        <li><a href="/clans">Официальный список кланов</a></li>
+                        <li><a href="/table-patrons">Таблица патронов</a></li>
+                        <li><a href="/clans">Список кланов</a></li>
                       </ul>
                     </li>
                      
@@ -218,5 +228,4 @@ class MenuComponent
         return $menu;
     }
 }
-
 ?>

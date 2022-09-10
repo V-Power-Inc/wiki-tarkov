@@ -211,7 +211,7 @@ $(document).ready(function() {
 
     /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
     $.ajax({
-        url: '/site/tamojnyamarkers',
+        url: '/maps/tamojnyamarkers',
         dataType: 'json',
         data: {param: param, token : token},
         async: false,
@@ -484,45 +484,13 @@ $(document).ready(function() {
 
     /*** function add special blocks with dop.content to users when inits click on market ***/
     function AddRelations() {
-        $('.leaflet-popup-content').append('<br><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\n' +
-            '<ins class="adsbygoogle"\n' +
-            '     style="display:block; text-align:center;"\n' +
-            '     data-ad-layout="in-article"\n' +
-            '     data-ad-format="fluid"\n' +
-            '     data-ad-client="ca-pub-5071904663034434"\n' +
-            '     data-ad-slot="9226765946"></ins>\n' +
-            '<script>\n' +
-            '     (adsbygoogle = window.adsbygoogle || []).push({});\n' +
-            '</script>');
+
+        // Ads were In AppendBlock
+        $('.leaflet-popup-content').append('<div class="rl_cnt_bg" data-id="298961"></div>');
     }
 
     function markerOnClick() {
         AddRelations();
     }
 
-
-    /** Убираем и показываем боковое меню при клике на стрелочки а также проверки разрешения окна браузера клиента **/
-    $.wait = function( callback, seconds){
-        return window.setTimeout(callback, seconds * 800 );
-    };
-
-    $('.outer-button').click(function () {
-        $(".optins_layerstability").animate({ right: -540}, 800);
-        $.wait(function(){$(".outer-button").hide()} ,1);
-        $.wait(function(){$(".inner-button").show()} ,1);
-    });
-
-    $('.inner-button').click(function () {
-        $(".optins_layerstability").animate({ right: 0 }, 800);
-        $.wait(function(){$(".inner-button").hide()} ,1);
-        $.wait(function(){$(".outer-button").show()} ,1);
-    });
-
-    if (document.body.clientWidth <= '768')  {
-        $('.outer-button').click(function () {
-            $(".optins_layerstability").animate({ right: -327}, 800);
-            $.wait(function(){$(".outer-button").hide()} ,1);
-            $.wait(function(){$(".inner-button").show()} ,1);
-        });
-    }
 });

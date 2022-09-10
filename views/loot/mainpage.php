@@ -10,9 +10,7 @@ use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
-use app\components\AlertComponent;
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 
@@ -26,34 +24,10 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov: Полная база данных лута',
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
-
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading">Справочник лута Escape from Tarkov</h1>
-    </div>
-</div>
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -79,7 +53,7 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <?= $this->render('/other/discord-widget.php'); ?>
             </div>
 
             <!--Yandex direct -->
@@ -95,8 +69,7 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
            В категории c оружием вы сможете найти всю информацию о таких редких винтовках как ВСС Вал или ДВЛ-10, а также узнать немало нового о тех видах вооружения, о которых вы уже наслышаны. <br><br>
            Используйте наш умный поиск предметов, для того чтобы быстро найти то что вас интересует, также через этот поиск вы можете искать <b>ключи от дверей</b>.</p>
             
-            <!-- ajax поиск предметов в справочнике лута -->
-
+             <!-- ajax поиск предметов в справочнике лута -->
              <?php
              // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
              echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
@@ -143,8 +116,6 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
                  ],
              ]);
              ?>
-
-           
          </div>   
             
             <div class="row">
@@ -158,46 +129,42 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
                     <!-- Нет лута -->
                 <?php else : ?>
 
-                <!-- core from 07-11-2018 -->
+                    <?php foreach($items as $item => $v): ?>
 
-
-                <?php foreach($items as $item => $v): ?>
-
-                    <?php if(in_array($item,$keysBlocks)): ?>
-                        <div class="col-lg-12 fixible-block">
-                            <div class="item-loot h-130">
-                                <?= $this->render('/other/adsense-feed.php'); ?>
+                        <?php if(in_array($item,Yii::$app->params['keysBlocks'])): ?>
+                            <div class="col-lg-12 fixible-block">
+                                <div class="item-loot h-130">
+                                    <?= $this->render('/other/adsense-feed.php'); ?>
+                                </div>
                             </div>
-                        </div>
-                    <?php endif; ?>
-
-                <div class="col-lg-12">
-                    <div class="item-loot">
-                        <h2 class="item-loot-title"><a href="/loot/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
-                        <a class="loot-link" href="/loot/<?= $v['url'] ?>.html">
-                            <div class="fixies-float-image">
-                                <img class="loot-image" alt="название предмета" src="<?= $v['preview'] ?>">
-                            </div>
-                        </a>
-                        <p class="loot-description"><?= $v['shortdesc'] ?></p>
-                        <?php if($v['quest_item'] == 1) : ?>
-                            <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
                         <?php endif; ?>
-                    </div>
-                </div>
-                <?php endforeach ?>
-                <!-- Окончание цикла -->
 
-                <div class="col-lg-12 pagination text-center">
-                    <?= LinkPager::widget([
-                        'pagination' => $pagination,
-                    ]);
-                    ?>
-                </div>
+                    <div class="col-lg-12">
+                        <div class="item-loot">
+                            <h2 class="item-loot-title"><a href="/loot/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
+                            <a class="loot-link" href="/loot/<?= $v['url'] ?>.html">
+                                <div class="fixies-float-image">
+                                    <img class="loot-image" alt="название предмета" src="<?= $v['preview'] ?>">
+                                </div>
+                            </a>
+                            <p class="loot-description"><?= $v['shortdesc'] ?></p>
+                            <?php if($v['quest_item'] == 1) : ?>
+                                <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach ?>
+                    <!-- Окончание цикла -->
+
+                    <div class="col-lg-12 pagination text-center">
+                        <?= LinkPager::widget([
+                            'pagination' => $pagination,
+                        ]);
+                        ?>
+                    </div>
                 <?php endif; ?>
                 
             </div>
-
 
             <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>
@@ -208,25 +175,11 @@ $keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
 
             <!-- Комментарии -->
             <?php if(empty($_GET)) : ?>
-                <div id="mc-container" class="kek-recustom"></div>
-                <script type="text/javascript">
-                    cackle_widget = window.cackle_widget || [];
-                    cackle_widget.push({widget: 'Comment', id: 57165});
-                    (function() {
-                        var mc = document.createElement('script');
-                        mc.type = 'text/javascript';
-                        mc.async = true;
-                        mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                    })();
-                </script>
+                <?= $this->render('/other/comments');?>
             <?php endif; ?>
-
 
         </div>
 
-
-   
 
     </div>
 </div>

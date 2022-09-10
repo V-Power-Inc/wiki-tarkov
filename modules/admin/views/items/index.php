@@ -80,7 +80,7 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                 'attribute' => 'url',
                 'format' => 'raw',
                 'value' => function($url) {
-                    return 'https://tarkov-wiki.ru/loot/<b>'.$url->url.'</b>.html';
+                    return 'https://wiki-tarkov.ru/loot/<b>'.$url->url.'</b>.html';
                 },
             ],
             // 'shortdesc:ntext',

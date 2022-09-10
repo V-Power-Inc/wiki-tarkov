@@ -1,6 +1,9 @@
 <?php
-$db = require __DIR__ . '/db.php';
-// test database! Important not to run tests on production or development databases
-$db['dsn'] = 'mysql:host=localhost;dbname=yii2_basic_tests';
-
-return $db;
+/** Конфиг для работы с тестированием */
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => $_ENV['DB_TEST_DSN'],
+    'username' => $_ENV['DB_TEST_USER'],
+    'password' => $_ENV['DB_TEST_PASSWORD'],
+    'charset' => $_ENV['DB_TEST_CHARSET']
+];

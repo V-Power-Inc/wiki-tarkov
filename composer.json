@@ -14,17 +14,18 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.5",
-        "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "php": ">=7.4",
+        "yiisoft/yii2": "~2.0.43",
+        "yiisoft/yii2-bootstrap": "~2.0.4",
+        "yiisoft/yii2-swiftmailer": "~2.1.0",
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
         "himiklab/yii2-recaptcha-widget" : "*",
         "yiisoft/yii2-imagine": "~2.1.0",
         "kartik-v/yii2-widget-typeahead": "*",
         "yiisoft/yii2-redis": "~2.0.0",
-        "martyn911/yii2-adblock-detector":"*"
+        "martyn911/yii2-adblock-detector":"*",
+        "vlucas/phpdotenv": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -42,6 +43,9 @@
                 "npm-asset-library": "vendor/npm",
                 "bower-asset-library": "vendor/bower"
             }
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "scripts": {

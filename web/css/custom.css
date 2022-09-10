@@ -28,13 +28,13 @@ body {
     border-color: #000000;
 }
 
-/** Edited 13-10-2018 **/
+/** Edited 10-09-2022 **/
 .navbar {
     border-radius: 0;
     border: 0;
     border-bottom: 2px solid #c3392c;
     box-shadow: 0px 1px 4px;
-    z-index: 999;
+    z-index: 1001;
 }
 
 .relative {
@@ -72,6 +72,7 @@ body {
     text-align: center;
 }
 
+/** 172px **/
 footer {
     background-color: #272727;
     color: #fff;
@@ -364,7 +365,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content, .keys-content, .clans-content {
+.quests-content, .keys-content, .clans-content, .donates-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
@@ -508,10 +509,10 @@ h2.white {
     position: absolute;
     right: 0;
     top: 183px;
-    height: 746px;
+    height: 747px;
     background: black;
     display: block;
-    z-index: 999;
+    z-index: 900;
     border-left: 2px solid #c3392c;
 }
 
@@ -1272,6 +1273,17 @@ img.w-100-auto {
     background-color: #fff0;
 }
 
+::-webkit-scrollbar-button:vertical:increment {
+    background-image: url(/img/navigation/bottom-arrow.png);
+    background-position: -1px;
+    background-color: #fff0;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url(/img/navigation/top-arrow.png);
+    background-color: #fff0;
+}
+
 .unactive-skill {
     margin-left: 90px;
 }
@@ -1685,17 +1697,7 @@ p.auth-info {
 }
 
 .recommended-gm-content {
-    float: left;
-    width: 100%;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    display: block;
-    margin: 20px 0;
-    border: 1px solid white;
-    background: #ffffff;
-    border-radius: 5px;
+    margin: 10px auto;
 }
 
 .barters.nav > li > a {
@@ -1996,7 +1998,7 @@ html>div>div{
     width: 100%;
     max-width: 700px;
     height: 100%;
-    max-height: 280px;
+    max-height: 320px;
     margin: auto;
     /* margin:400px auto 0px auto;
     width:50%;
@@ -2021,4 +2023,133 @@ html>div>div{
     color: #6689da;
     font-weight: bold;
     letter-spacing: 1px;
+}
+
+.donate-info {
+    padding: 0 0 15px 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.donate-info a {
+    color: #7289da;
+    font-weight: bold;
+}
+
+.reviews-form {
+    margin: 15px 0 25px 0;
+}
+
+#reviews-comment {
+    max-width: 807px;
+    width: 100%;
+}
+
+.navbar-default .navbar-nav > li.unusial-link > a, .navbar-default .navbar-nav > li.unusial-link > a {
+    background: #c3392c82;
+    font-weight: bold;
+    color: white;
+    transition: .2s;
+}
+
+.navbar-default .navbar-nav > li.unusial-link > a:hover, .navbar-default .navbar-nav > li.unusial-link > a:focus {
+    background: #c3392c82;
+    font-weight: bold;
+    color: #8fa3ea;
+    transition: .2s;
+}
+
+.size-donates {
+    font-size: 30px;
+}
+
+.size-donates span {
+    color: green;
+}
+
+table.patrons-tbl >thead > tr > th {
+    text-align: center;
+    padding: 5px 15px;
+}
+
+.patrons-tbl.loot-tables tbody tr:first-child {
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+}
+
+.patrons-table, .patrons-tbl {
+    height: 500px;
+}
+
+.patrons-table .fix-tables {
+    height: 500px;
+}
+
+.sticky-pos {
+    position: sticky;
+    top: -1px;
+    z-index:999;
+}
+
+.patrons-tbl.loot-tables tr td {
+    padding: 10px;
+    border: 2px solid #7284c1;
+}
+
+.pos-sticky-left {
+    position: sticky;
+    left:-1px;
+    z-index: 1000;
+    background: #515972;
+}
+
+.pos-sticky-left-2 {
+    position: sticky;
+    left:91px;
+    z-index: 1000;
+    background: #515972;
+}
+
+.apt-pos-sticky-left {
+    position: sticky;
+    left:-1px;
+    z-index: 800;
+    background: #515972;
+    color: #fff;
+}
+
+.apt-pos-sticky-left-2 {
+    position: sticky;
+    left:90px;
+    z-index: 800;
+    background: #515972;
+    color: #fff;
+}
+
+.overlay-block {
+    width: 100%;
+    position: fixed;
+    max-height: 200px;
+    min-height: 90px;
+    height: auto;
+    bottom: 0;
+    background: #d3d2d2;
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    -webkit-backface-visibility: hidden;
+}
+
+.cls-btn {
+    width: 146px;
+    height: 29px;
+    background-color: #c3392c;
+    position: absolute;
+    top: -29px;
+    right: 0;
+    padding: 2px 0 0 0;
+    color: #fff8f6;
+    cursor: pointer;
 }

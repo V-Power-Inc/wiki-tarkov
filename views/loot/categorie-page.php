@@ -10,9 +10,7 @@ use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
 use yii\web\JsExpression;
-use Yii;
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -34,7 +32,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => 'https://tarkov-wiki.ru'. Yii::$app->request->url,
+    'content' => $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . Yii::$app->request->url,
 ]);
 
 $this->registerMetaTag([
@@ -42,38 +40,10 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
-
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJsFile('js/conv.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
-$keysBlocks = [3,6,9,12,16,19,22,25,29,33,36,39,43,46,49];
-
-use app\components\AlertComponent;
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-<div class="heading-class">
-    <div class="container">
-        <h1 class="main-site-heading"><?= $cat->title ?></h1>
-    </div>
-</div>
-
-
-
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-<?php endif; ?>
-
 <div class="container">
     <div class="row">
 
@@ -101,7 +71,7 @@ use app\components\AlertComponent;
 
             <!-- Виджет Discord -->
             <div class="margin-top-20">
-                <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
+                <?= $this->render('/other/discord-widget.php'); ?>
             </div>
 
             <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
@@ -177,20 +147,16 @@ use app\components\AlertComponent;
                     <!-- Нет лута -->
                 <?php else : ?>
 
-                <!-- core from 07-11-2018 -->
-
-
                 <!-- Цикл предметов категории -->
                     <?php foreach($items as $item => $v): ?>
 
-                        <?php if(in_array($item,$keysBlocks)): ?>
+                        <?php if(in_array($item,Yii::$app->params['keysBlocks'])): ?>
                             <div class="col-lg-12 fixible-block">
                                 <div class="item-loot h-130">
                                     <?= $this->render('/other/adsense-feed.php'); ?>
                                 </div>
                             </div>
                         <?php endif; ?>
-
 
                         <div class="col-lg-12">
                             <div class="item-loot">
@@ -206,10 +172,9 @@ use app\components\AlertComponent;
                                 <?php endif; ?>
                             </div>
                         </div>
-                <?php endforeach; ?>
-                <!-- Окончание цикла предметов -->
-    
-                
+                    <?php endforeach; ?>
+                    <!-- Окончание цикла предметов -->
+
                         <div class="col-lg-12 pagination text-center">
                             <?= LinkPager::widget([
                                 'pagination' => $pagination,
@@ -236,18 +201,7 @@ use app\components\AlertComponent;
 
                 <!-- Комментарии -->
                 <?php if(empty($_GET)) : ?>
-                    <div id="mc-container" class="kek-recustom"></div>
-                    <script type="text/javascript">
-                        cackle_widget = window.cackle_widget || [];
-                        cackle_widget.push({widget: 'Comment', id: 57165});
-                        (function() {
-                            var mc = document.createElement('script');
-                            mc.type = 'text/javascript';
-                            mc.async = true;
-                            mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
-                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-                        })();
-                    </script>
+                    <?= $this->render('/other/comments');?>
                 <?php endif; ?>
 
             </div>

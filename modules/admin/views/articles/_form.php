@@ -35,12 +35,12 @@ use mihaildev\elfinder\ElFinder;
 
     <?= $form->field($model, 'shortdesc')->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::className(),[
+    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->widget(\yii\jui\DatePicker::className(), [
+    <?= $form->field($model, 'date_create')->widget(\yii\jui\DatePicker::class, [
         'language' => 'ru',
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>

@@ -6,7 +6,6 @@
  * Time: 23:17
  */
 
-//$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->title = 'Пассивные умения персонажа Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
@@ -17,60 +16,25 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Пассивные умения в Escape from Tarkov',
 ]);
-
-use app\components\AlertComponent;
 ?>
-
-<div class="heading-class">
+<div class="interback-white">
     <div class="container">
-        <h1 class="main-site-heading">Пассивные умения в Escape from Tarkov</h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="alert alert-info size-16 margin-bottom-0">
+                    В Escape from Tarkov каждый персонаж обладает особыми навыками. Пассивные навыки разделяются на несколько категорий, <b>каждый навык дает вашему персонажу определенные преимущества</b>, также стоит понимать - что в бою и при ранениях шансы на выживание гораздо выше у персонажа с прокачанными навыками.
+                    <br>
+                    <br>
+                    Кроме того, навыки влияют на большое количество характеристик, в том числе таких как выносливость, количество времени в течение которого вы можете обходиться без еды и воды, а также <b>могут значительно уменьшить шанс вашей смерти при критическом уроне</b>.
+                    <br>
+                    <br>
+                    В этом разделе вы узнаете все о пассивных навыках персонажа в Escape from Tarkov, сможете найти рекомендации о том какие навыки стоит прокачивать в первую очередь, а также узнаете <b>нестандартные способы их ускоренной прокачки</b>.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 
-<hr class="grey-line">
-
-<?php if((AlertComponent::alert()->enabled !== 0)) : ?>
-    <!-- Информационная строка -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 <?= AlertComponent::alert()->bgstyle ?>">
-                <marquee style="font-size: 16px; color: white; font-weight: bold; margin-top: 4px;"><?= AlertComponent::alert()->content ?></marquee>
-            </div>
-        </div>
-    </div>
-    <hr class="grey-line">
-
-    <!-- Gorizontal information -->
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-12 gor-pds">
-                <?= $this->render('/other/google-gor'); ?>
-            </div>
-        </div>
-    </div>
-
-    <hr class="grey-line">
-
-
-<?php endif; ?>
-
-    <div class="interback-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="alert alert-info size-16 margin-bottom-0">
-                        В Escape from Tarkov каждый персонаж обладает особыми навыками. Пассивные навыки разделяются на несколько категорий, <b>каждый навык дает вашему персонажу определенные преимущества</b>, также стоит понимать - что в бою и при ранениях шансы на выживание гораздо выше у персонажа с прокачанными навыками.
-                        <br>
-                        <br>
-                        Кроме того, навыки влияют на большое количество характеристик, в том числе таких как выносливость, количество времени в течение которого вы можете обходиться без еды и воды, а также <b>могут значительно уменьшить шанс вашей смерти при критическом уроне</b>.
-                        <br>
-                        <br>
-                        В этом разделе вы узнаете все о пассивных навыках персонажа в Escape from Tarkov, сможете найти рекомендации о том какие навыки стоит прокачивать в первую очередь, а также узнаете <b>нестандартные способы их ускоренной прокачки</b>.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 <hr class="grey-line">
 
     <!-- Список активных категорий умений -->

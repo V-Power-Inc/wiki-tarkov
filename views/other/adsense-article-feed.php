@@ -6,19 +6,8 @@
  * Time: 20:51
  */
 
-/*** Это вьюха рекламного блока для статьи - используется на странице валют ***/
+/*** Вьюха рекламного кода для статей ***/
 
 ?>
 
-<?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles' && Yii::$app->request->url !== '/loot/weapons/pistols' && !stristr(Yii::$app->request->url,'/loot/modules?page')): ?>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5071904663034434"
-     data-ad-slot="9226765946"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<?php endif; ?>
+<div class="rl_cnt_bg" data-id="298949"></div>

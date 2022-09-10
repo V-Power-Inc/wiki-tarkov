@@ -2,10 +2,11 @@
 
 namespace app\models;
 
-use Yii;
+use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\NumberValidator;
+use app\common\helpers\validators\SafeValidator;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Razvyazka;
 
 /**
  * RazvyazkaSearch represents the model behind the search form of `app\models\Razvyazka`.
@@ -13,14 +14,32 @@ use app\models\Razvyazka;
 class RazvyazkaSearch extends Razvyazka
 {
     /**
-     * @inheritdoc
+     * Массив валидаций этой модели
+     *
+     * @return array|array[]
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['id', 'enabled', 'exit_anyway'], 'integer'],
-            [['name', 'marker_group', 'content', 'customicon', 'exits_group'], 'safe'],
-            [['coords_x', 'coords_y'], 'number'],
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_ENABLED, IntegerValidator::class],
+
+            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+
+            [static::ATTR_NAME, SafeValidator::class],
+
+            [static::ATTR_MARKER_GROUP, SafeValidator::class],
+
+            [static::ATTR_CONTENT, SafeValidator::class],
+
+            [static::ATTR_CUSTOMICON, SafeValidator::class],
+
+            [static::ATTR_EXITS_GROUP, SafeValidator::class],
+
+            [static::ATTR_COORDS_X, NumberValidator::class],
+
+            [static::ATTR_COORDS_Y, NumberValidator::class]
         ];
     }
 

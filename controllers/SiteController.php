@@ -2,486 +2,297 @@
 
 namespace app\controllers;
 
-use app\models\Mehanic;
-use app\models\Razvyazka;
-use app\models\Skypshik;
-use app\models\Lyjnic;
-use app\models\Terapevt;
-use app\models\Prapor;
-use app\models\Mirotvorec;
-use app\models\Baraholshik;
-use app\models\Leshy;
-use app\models\Warden;
-use app\models\Bashkir;
-use app\models\Khokhol;
-use app\models\Zavod;
-use app\models\Forest;
-use app\models\Tamojnya;
-use app\models\Bereg;
+use app\common\services\PaginationService;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
-use app\models\Traders;
 use app\models\Questions;
 use app\models\Currencies;
-use app\models\Barters;
-use app\models\Laboratory;
+use app\models\Patrons;
 use Yii;
 use yii\helpers\Json;
-use yii\web\Controller;
-use yii\web\HttpException;
-use yii\data\Pagination;
-use yii\db\Query;
 use yii\web\Cookie;
+use app\common\controllers\AdvancedController;
+use yii\web\HttpException;
+use app\common\services\KeysService;
+use app\common\services\JsondataService;
 
-
-class SiteController extends Controller
+/**
+ * Основной контроллер сайта (Изначально существующий)
+ *
+ * Class SiteController
+ * @package app\controllers
+ */
+class SiteController extends AdvancedController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX                  = 'index';
+    const ACTION_TABLE_PATRONS          = 'table-patrons';
+    const ACTION_KEYS                   = 'keys';
+    const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
+    const ACTION_NEWS                   = 'news';
+    const ACTION_NEWSDETAIL             = 'newsdetail';
+    const ACTION_ARTICLES               = 'articles';
+    const ACTION_ARTICLESARTICLESDETAIL = 'articlesdetail';
+    const ACTION_QUESTIONS              = 'questions';
+    const ACTION_KEYSJSON               = 'keysjson';
+    const ACTION_CURRENCIES             = 'currencies';
+    const ACTION_JSDISABLED             = 'jsdisabled';
+    const ACTION_JSONVALUTE             = 'jsonvalute';
+    const ACTION_CLOSE_OVERLAY          = 'close-overlay';
 
-    // todo: Конструкции типа SQL Query -> cache() работают некорректно и от них необходимо уходить.
+    /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
+    public $enableCsrfValidation;
 
     /**
-     * Displays homepage.
+     * Массив поведения данного контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => 3600,
+                'only' => ['index','table-patrons'],
+                'variations' => [
+                    $_SERVER['SERVER_NAME'],
+                    Yii::$app->request->url,
+                    Yii::$app->response->statusCode,
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay')
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * Рендер главной страницы сайта
      *
      * @return string
      */
-
-    /** Кеширование по секундам с различными сроками **/
-    const ONE_HOUR = 3600;
-
-    // CSRF валидация POST запросов методов этого контроллера включена по умолачнию
-    public $enableCsrfValidation;
-
-    /** Рендер главной страницы сайта  **/
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
 
-    /** Рендер главной страницы с квестами **/
-    public function actionQuests() {
-        $traders = Traders::find()->where(['enabled' => 1])->orderby(['sortir'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
-        return $this->render('quests/quests-main.php', ['traders' => $traders]);
-    }
-
-    /*** Заглушка для страницы Traders ***/
-    public function actionTraders301() {
-        return $this->redirect('/quests-of-traders', 301);
-    }
-
-    /** Рендер детальной страницы торговца **/
-    public function actionTradersdetail($id) {
-
-        $trader = Traders::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-
-        if($trader) {
-            $barters = Barters::find()->where(['like', 'title', $trader->title])->andWhere(['enabled' => 1])->orderby(['id'=>SORT_ASC])->cache(self::ONE_HOUR)->asArray()->all();
-            return $this->render('traders/detail.php',['trader' => $trader, 'barters' => $barters]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** Рендер страницы квестов Прапора **/
-    public function actionPraporpage() {
-        $query =  Prapor::find();
-        $prapor = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/prapor-quests.php' ,['prapor'=>$prapor,]);
-    }
-    
-    /** Рендер страницы квестов Терапевта **/
-    public function actionTerapevtpage() {
-        $query =  Terapevt::find();
-        $terapevt = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/terapevt-quests.php',['terapevt'=>$terapevt,]);
-    }
-
-    /** Рендер страницы квестов Скупщика **/
-    public function actionSkypchikpage() {
-        $query =  Skypshik::find();
-        $skypshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/skypshik-quests.php',['skypshik'=>$skypshik,]);
-    }
-
-    /** Рендер страницы квестов Лыжника **/
-    public function actionLyjnicpage() {
-        $query =  Lyjnic::find();
-        $lyjnic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/lyjnic-quests.php',['lyjnic'=>$lyjnic,]);
-    }
-
-    /** Рендер страницы квестов Миротворца **/
-    public function actionMirotvorecpage() {
-        $query =  Mirotvorec::find();
-        $mirotvorec = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/mirotvorec-quests.php', ['mirotvorec'=>$mirotvorec,]);
-    }
-
-    /** Рендер страницы квестов Механика **/
-    public function actionMehanicpage() {
-        $query =  Mehanic::find();
-        $mehanic = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/mehanic-quests.php', ['mehanic'=>$mehanic,]);
-    }
-
-    /** Рендер страницы квестов Барахольщика **/
-    public function actionBaraholshikpage() {
-        $query =  Baraholshik::find();
-        $baraholshik = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/baraholshik-quests.php', ['baraholshik'=>$baraholshik,]);
-    }
-
-    /** Рендер страницы квестов Лешего **/
-    public function actionLeshypage() {
-        $query =  Leshy::find();
-        $leshy = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/leshy-quests.php', ['leshy'=>$leshy,]);
-    }
-
-    /** Рендер страницы квестов Смотрителя (Перевод зависит от локализации разработчиков) **/
-    public function actionWardenpage() {
-        $query =  Warden::find();
-        $warden = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/warden-quests.php', ['warden'=>$warden,]);
-    }
-
-    /** Рендер страницы квестов Башкира **/
-    public function actionBashkirpage() {
-        $query =  Bashkir::find();
-        $bashkir = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/bashkir-quests.php', ['bashkir'=>$bashkir,]);
-    }
-
-    /** Рендер страницы квестов Хохла **/
-    public function actionKhokholpage() {
-        $query =  Khokhol::find();
-        $khokhol = $query->orderby(['tab_number'=>SORT_ASC])->cache(self::ONE_HOUR)->all();
-        return $this->render('quests/khokhol-quests.php', ['khokhol'=>$khokhol,]);
-    }
-
-    /** Рендер страницы со списком интерактивных карт **/
-    public function actionLocations() {
-          return $this->render('maps/maps.php');
-    }
-
-    /** Прилетают данные о статичном контенте описаний маркеров **/
-//    public function actionStatic() {
-//        if(Yii::$app->request->isAjax) {
-//            $staticcontent = Mapstaticcontent::find()->asArray()->all();
-//            return Json::encode($staticcontent);
-//        } else {
-//            throw new HttpException(404 ,'Такая страница не существует');
-//        }
-//    }
-
-    /** JSON данные с координатами маркеров Завода **/
-    public function actionZavodmarkers() {
-        if(Yii::$app->request->isAjax) {
-          //  $dependency = Zavod::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Zavod::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Леса **/
-    public function actionForestmarkers() {
-        if(Yii::$app->request->isAjax) {
-          //  $dependency = Forest::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Forest::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Таможни **/
-    public function actionTamojnyamarkers() {
-        if(Yii::$app->request->isAjax) {
-          //  $dependency = Tamojnya::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Tamojnya::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Берега **/
-    public function actionBeregmarkers() {
-        if(Yii::$app->request->isAjax) {
-          //  $dependency = Bereg::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Bereg::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
-    /** JSON данные с координатами маркеров Развязки **/
-    public function actionRazvyazkamarkers() {
-        if(Yii::$app->request->isAjax) {
-         //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Razvyazka::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** JSON данные с координатами маркеров Лаборатории **/
-    public function actionLaboratorymarkers() {
-        if(Yii::$app->request->isAjax) {
-            //   $dependency = Razvyazka::find()->select('date_update')->orderBy(['date_update' => SORT_DESC])->scalar();
-            $markers = Laboratory::find()->asArray()->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->all();
-            return Json::encode($markers);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /** Рендер страницы с картой завода **/
-    public function actionZavod() {
-        return $this->render('maps/zavod-location.php');
-    }
-
-    /** Рендер страницы с картой Леса **/
-    public function actionForest() {
-        return $this->render('maps/forest-location.php');
-    }
-
-    /** Рендер страницы с картой Таможни **/
-    public function actionTamojnya() {
-        return $this->render('maps/tamojnya-location.php');
-    }
-
-    /** Рендер страницы с картой Берега **/
-    public function actionBereg() {
-        return $this->render('maps/bereg-location.php');
-    }
-    
-    /** Рендер страницы с картой Развязки **/
-    public function actionRazvyazka(){
-        return $this->render('maps/razvyazka-location.php');
-    }
-
-    /** Рендер страницы с картой лаборатории TerraGroup **/
-    public function actionLaboratoryterra() {
-        return $this->render('maps/laboratory-location.php');
-    }
-    
-    /** Рендер страницы с наборами ключей **/
-    public function actionKeys()
+    /**
+     * Рендер страницы с таблицей патронов
+     *
+     * @return string
+     */
+    public function actionTablePatrons(): string
     {
-        $zavod = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Завод']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $forest = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Лес']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $bereg = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Берег']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $tamojnya = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Таможня']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
-        $razvyazka = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', ['Развязка']])->asArray()->cache(self::ONE_HOUR)->orderby(['name' => SORT_STRING])->limit(20)->all();
+        return $this->render('/site/patrons', ['patrons' => Patrons::takePatrons()]);
+    }
+
+    /**
+     * Рендер страницы с наборами ключей
+     *
+     * @return string
+     */
+    public function actionKeys(): string
+    {
         $form_model = new Doorkeys();
+
         if ($form_model->load(Yii::$app->request->post())) {
-            if(isset($_POST['Doorkeys']['doorkey'])){
-                $doorkey = $_POST['Doorkeys']['doorkey'];
-            }else{
-                $doorkey = "Все ключи";
-            }
-           
-            $words = ["Берег","Таможня","Завод","Лес","Все ключи", "3-х этажная общага на Таможне", "2-х этажная общага на Таможне", "Восточное крыло санатория", "Западное крыло санатория", "Ключи от техники", "Квестовые ключи", "Ключи от сейфов/помещений с сейфами","Развязка"];
-            /** Если пришел Берег через POST **/
-            if(in_array($doorkey,$words)) {
-                $curentWord =  $words[array_search($doorkey,$words)];
-               if($curentWord == "Все ключи"){
-                   $result = Doorkeys::find()->where(['active' => 1])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
-               }else{
-                   $result = Doorkeys::find()->andWhere(['active' => 1])->andWhere(['like', 'mapgroup', [$curentWord]])->orderby(['name' => SORT_STRING])->cache(self::ONE_HOUR)->all();
-               }
-                
-                return $this->render('keys/keyseach.php',
-                    [
-                        'form_model' => $form_model,
-                        'keysearch' => $result,
-                        'arr' => $curentWord,]);
-            }
-        } else {
-            return $this->render('keys/index.php',
-                [
-                    'zavod'=>$zavod,
-                    'forest'=>$forest,
-                    'bereg'=>$bereg,
-                    'tamojnya'=>$tamojnya,
-                    'razvyazka' => $razvyazka,
-                    'form_model' => $form_model]);
+
+            return $this->render('keys/keyseach.php', [
+                    'form_model' => $form_model,
+                    'keysearch' => KeysService::takeResult($form_model),
+                    'formValue' => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
+            ]);
         }
+
+        return $this->render('keys/index.php', Doorkeys::KeysDefaultRenderingArray($form_model));
     }
-    
-    /** Рендер детальной страницы для вывода ключей  **/
-    public function actionDoorkeysdetail($id)
+
+    /**
+     * Рендер детальной страницы для вывода ключей
+     *
+     * @param $id - параметр url ключа
+     * @return string
+     * @throws HttpException
+     */
+    public function actionDoorkeysdetail($id): string
     {
-        $models = Doorkeys::find()->where(['url'=>$id])->andWhere(['active' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-        return $this->render('keys/detail-key.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        if(Doorkeys::findActiveKeyByUrl($id)) {
+            return $this->render('keys/detail-key.php',['model' => Doorkeys::findActiveKeyByUrl($id)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
-    
-    /** Рендер страницы списка новостей **/
-    public function actionNews() {
+
+    /**
+     * Рендер страницы списка новостей
+     *
+     * @return string
+     */
+    public function actionNews(): string
+    {
         $query =  News::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-        return $this->render('news/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
-    }
-    
-    /** Рендер детальной страницы новости **/
-    public function actionNewsdetail($id) {
-        $models = News::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-            return $this->render('news/detail.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-    
-    /** Рендер страницы списка полезных статей  **/
-    public function actionArticles() {
-        $query =  Articles::find()->andWhere(['enabled' => 1]);
-        $pagination = new Pagination(['defaultPageSize' => 10,'totalCount' => $query->count(),]);
-        $news = $query->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-        return $this->render('articles/list.php', ['news'=>$news, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination,]);
+        $data = new PaginationService($query,10);
+        return $this->render('news/list.php', [
+            'news'=>$data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
 
-    /** Рендер детальной страницы полезной статьи **/
-    public function actionArticledetail($id) {
-        $models = Articles::find()->where(['url'=>$id])->andWhere(['enabled' => 1])->cache(self::ONE_HOUR)->One();
-        if($models) {
-            return $this->render('articles/detail.php',['model' => $models]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+    /**
+     * Рендер детальной страницы новости
+     *
+     * @param $id - параметр url новости
+     * @return string
+     * @throws HttpException
+     */
+    public function actionNewsdetail($id): string
+    {
+        if(News::findActiveNewsByUrl($id)) {
+            return $this->render('news/detail.php',['model' => News::findActiveNewsByUrl($id)]);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
-    
-    /*** Рендер страницы справочника вопрос-ответ ***/
-    public function actionQuestions() {
+
+    /**
+     * Рендер страницы списка полезных статей
+     *
+     * @return string
+     */
+    public function actionArticles(): string
+    {
+        $query = Articles::find()->andWhere(['enabled' => 1]);
+        $data = new PaginationService($query);
+        return $this->render('articles/list.php', [
+            'news'=> $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
+    }
+
+    /**
+     * Рендер детальной страницы полезной статьи
+     *
+     * @param $id - параметр url статьи
+     * @return string
+     * @throws HttpException
+     */
+    public function actionArticledetail($id): string
+    {
+        if(Articles::takeActiveArticleById($id)) {
+            return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleById($id)]);
+        }
+
+        throw new HttpException(404 ,'Такая страница не существует');
+    }
+
+    /**
+     * Рендер страницы справочника вопрос-ответ
+     *
+     * @return string
+     */
+    public function actionQuestions(): string
+    {
         $model = Questions::find()->where(['enabled' => 1]);
-
-        $pagination = new Pagination(['defaultPageSize' => 20,'totalCount' => $model->count(),]);
-        $questions = $model->offset($pagination->offset)->orderby(['date_create'=>SORT_DESC])->limit($pagination->limit)->cache(self::ONE_HOUR)->all();
-        $request = \Yii::$app->request;
-        
-        return $this->render('questions/list.php', ['questions' => $questions, 'active_page' => $request->get('page',1),'count_pages' => $pagination->getPageCount(), 'pagination' => $pagination]);
+        $data = new PaginationService($model);
+        return $this->render('questions/list.php', [
+            'questions' => $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator
+        ]);
     }
-    
-    /*** Данные о доступных ключах от дверей в формате Json - выборка только по включенным ***/
-    public function actionKeysjson($q = null) {
+
+    /**
+     * Данные о доступных ключах от дверей в формате Json - выборка только по включенным
+     *
+     * @param null $q - ключевое слово запроса
+     * @return string
+     * @throws HttpException
+     * @throws \yii\db\Exception
+     */
+    public function actionKeysjson($q = null): string
+    {
         if(Yii::$app->request->isAjax) {
-            $query = new Query;
-
-            $query->select('name, mapgroup, preview, url')
-                ->from('doorkeys')
-                ->where('name LIKE "%' . $q . '%"')
-                ->orWhere('keywords LIKE "%' . $q . '%"')
-                ->andWhere(['active' => 1])
-                ->orderBy('name')
-                ->cache(3600);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-
-            $out = [];
-
-            /** Цикл составления готовых данных по запросу пользователя в поиске **/
-            foreach ($data as $d) {
-                $out[] = ['value' => $d['name'], 'name' => $d['name'], 'preview' => $d['preview'], 'url' => $d['url'], 'mapgroup' => $d['mapgroup']];
-            }
-            return Json::encode($out);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            return JsondataService::getKeysJson($q);
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /*** Рендер страницы справочника валют ***/
-    public function actionCurrencies() {
-        $dollar = Currencies::find()->where(['title' => 'Доллар'])->cache(self::ONE_HOUR)->One();
-        $euro = Currencies::find()->where(['title' => 'Евро'])->cache(self::ONE_HOUR)->One();
-        $bitkoin = Currencies::find()->where(['title' => 'Биткоин'])->cache(self::ONE_HOUR)->One();
-        
-        return $this->render('currencies/index.php', ['dollar' => $dollar, 'euro' => $euro, 'bitkoin' => $bitkoin]);
+    /**
+     * Рендер страницы справочника валют
+     *
+     * @return string
+     */
+    public function actionCurrencies(): string
+    {
+        return $this->render('currencies/index.php', [
+            'dollar' => Currencies::takeDollar(),
+            'euro' => Currencies::takeEuro(),
+            'bitkoin' => Currencies::takeBitkoin()
+        ]);
     }
-    
-    /*** Отдаем валюты из базы в JSON формате ***/
-    public function actionJsonvalute() {
+
+    /**
+     * Отдаем валюты из базы в JSON формате
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionJsonvalute(): string
+    {
         if(Yii::$app->request->isAjax) {
-            $valutes = Currencies::find()->where(['enabled' => 1])->asArray()->all();
-            return Json::encode($valutes);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+            return Json::encode(Currencies::takeActiveValutes());
         }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /** Рендер страницы предпросмотра детальной страницы торговца **/
-    public function actionPreviewtrader() {
-        if(Yii::$app->user->isGuest !== true) {
-            // Отключаем CSRF валидацию POST запросов
-            $this->enableCsrfValidation=false;
-            $trader = new Traders;
-            $trader->load(Yii::$app->request->post());
-            return $this->render('traders/trader-preview.php', ['trader' => $trader]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /*** Рендер страницы предпросмотра бартера торговцев ***/
-    public function actionBartersPreview() {
-        if(Yii::$app->user->isGuest !== true) {
-            $barter = new Barters;
-            $barter->load(Yii::$app->request->post());
-
-            $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
-
-            return $this->render('traders/barter-preview.php', ['barter' => $barter, 'id' => $id]);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /*** Устанавливаем кукис отключающий появление уведомления в нижней части экрана ***/
-    public function actionClsalert() {
-        if(Yii::$app->request->isAjax) {
-            $cookies = Yii::$app->request->cookies;
-            $addcook = Yii::$app->response->cookies;
-
-            if(!isset($cookies['as-remind'])) {
-                $addcook->add(new Cookie([
-                    'name' => 'as-remind',
-                    'value' => 1,
-                    'expire' => time() + (10 * 365 * 24 * 60 * 60),
-                    'secure' => true,
-                ]));
-            } else {
-                throw new HttpException(404 ,'Такая страница не существует');
-            }
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
-        }
-    }
-
-    /*** Рендер страницы для тех кто отключил использование JavaScript на сайте ***/
-    public function actionJsdisabled() {
+    /**
+     * Рендер страницы для тех кто отключил использование JavaScript на сайте
+     *
+     * @return string
+     */
+    public function actionJsdisabled(): string
+    {
         return $this->render('/site/offedjs');
     }
 
-    // todo: Доделать функционал, который будет проверять пользователей по сессиям
-    /*** Проверяем через этот экшен включен ли у пользователя JavaScript ***/
-    public function actionCheckerScr() {
-        return 'good';
+    /**
+     * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
+     * сайта на один день (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
+     *
+     * @return mixed
+     */
+    public function actionCloseOverlay()
+    {
+        if (Yii::$app->request->isAjax) {
+            $cookies = Yii::$app->request->cookies;
+
+            if($cookies->get('overlay') == null) {
+                return Yii::$app->response->cookies->add(new Cookie([
+                    'name' => 'overlay',
+                    'value' => 1,
+                    'expire' => time() + (60 * 60 * 24),
+                ]));
+            }
+
+        }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    
-    /** Обработчик ошибок - отображает статусы ответа сервера **/
-    public function actions()
+    /**
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
     {
         return [
             'error' => [
@@ -493,5 +304,4 @@ class SiteController extends Controller
             ],
         ];
     }
-
 }

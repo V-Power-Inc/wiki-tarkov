@@ -4,6 +4,10 @@ namespace app\models;
 
 use Yii;
 
+use app\common\helpers\validators\StringValidator;
+use app\common\helpers\validators\IntegerValidator;
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "currencies".
  *
@@ -14,6 +18,16 @@ use Yii;
  */
 class Currencies extends \yii\db\ActiveRecord
 {
+    /** Константы атрибутов Active Record модели */
+    const ATTR_ID      = 'id';
+    const ATTR_TITLE   = 'title';
+    const ATTR_VALUE   = 'value';
+    const ATTR_ENABLED = 'enabled';
+
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     /**
      * @inheritdoc
      */
@@ -25,24 +39,68 @@ class Currencies extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['value', 'enabled'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [static::ATTR_VALUE, IntegerValidator::class],
+            [static::ATTR_ENABLED, IntegerValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
     /**
-     * @inheritdoc
+     * Переводы атрибутов
+     *
+     * @return array|string[]
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'id' => 'ID',
-            'title' => 'Название валюты',
-            'value' => 'Эквивалент в копейках (Правильный формат хранения значений валют)',
-            'enabled' => 'Значение активно',
+            static::ATTR_ID => 'ID',
+            static::ATTR_TITLE => 'Название валюты',
+            static::ATTR_VALUE => 'Эквивалент в копейках (Правильный формат хранения значений валют)',
+            static::ATTR_ENABLED => 'Значение активно'
         ];
     }
+
+    /**
+     * Получаем курсы всех активных валют
+     *
+     * @return array|ActiveRecord[]
+     */
+    public static function takeActiveValutes(): array
+    {
+        return static::find()->where([static::ATTR_ENABLED => static::TRUE])->asArray()->all();
+    }
+
+    /**
+     * Достаем курс доллара из таблицы
+     *
+     * @return ActiveRecord
+     */
+    public static function takeDollar(): ActiveRecord
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Доллар'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
+    /**
+     * Достаем курс евро из таблицы
+     *
+     * @return ActiveRecord
+     */
+    public static function takeEuro(): ActiveRecord
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Евро'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
+    /**
+     * Достаем курс биткоина из таблицы
+     *
+     * @return ActiveRecord
+     */
+    public static function takeBitkoin(): ActiveRecord
+    {
+        return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
+    }
+
 }

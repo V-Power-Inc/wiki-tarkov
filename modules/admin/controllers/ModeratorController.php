@@ -9,27 +9,34 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\web\HttpException;
 use app\models\Admins;
 use app\components\MessagesComponent;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use app\common\controllers\AdminController;
 
-
-/*** Это контроллер модерации пользователей админки - всех неверных наказывают тут ***/
-class ModeratorController extends Controller
+/**
+ * Это контроллер модерации пользователей админки
+ *
+ * Class ModeratorController
+ * @package app\modules\admin\controllers
+ */
+final class ModeratorController extends AdminController
 {
+    /** Константы для передачи в маршрутизатор /config/routes.php */
+    const ACTION_INDEX = 'index';
+    const ACTION_USER_SAVE = 'user-save';
+    const ACTION_USER_BAN = 'user-ban';
 
-    /*** Подключаем отдельный layout для админской страницы моделей ***/
-    public $layout = 'admin';
-
-    /*** Пускаем в этот экшон только пользователей PC_Principal, Enslaver45 и KondorMax по ID из таблицы админов сайта  ***/
+    /** Пускаем сюда только пользователей PC_Principal, Enslaver45 - оставляем проверку такой, т.к. она отличается
+     *  от унаследованной для большинства CRUD из AdminController
+     */
     public function beforeAction($action)
     {
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
             return $this->redirect('/admin/login');
-        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2 || Yii::$app->user->identity->id === 4) {
+        } else if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id === 2) {
             return self::actionIndex();
         } else {
             throw new HttpException(404 ,'Такая страница не существует');
@@ -96,24 +103,16 @@ class ModeratorController extends Controller
 
           $usrtofind = Admins::find()->where(['id' => $bannuser->name])->one();
 
-          // PC_Principal - Enslaver45 - KondorMax
-          if($usrtofind->id == 1 || $usrtofind->id == 2 || $usrtofind->id == 4) {
-              $name = Yii::$app->user->identity->name;
-              $messages = new MessagesComponent();
-              $message =  "<p class='alert alert-danger size-16 margin-top-20'>Неплохая попытка, $name</p>";
-              $messages->setMessages($message);
-              return $this->redirect('/admin/ass-destroyer');
-          } else {
-              $usrtofind->user = 'banned-'.date('Y-m-d H:i:s');
-              $usrtofind->password = 'Need to regenerate';
-              $usrtofind->banned = 1;
-              $usrtofind->bann_reason = $bannuser->bann_reason;
-              $usrtofind->save(false);
-              $messages = new MessagesComponent();
-              $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был успешно наказан!</p>";
-              $messages->setMessages($message);
-              return $this->redirect('/admin/ass-destroyer');
-          }
+          $usrtofind->user = 'banned-'.date('Y-m-d H:i:s');
+          $usrtofind->password = 'Need to regenerate';
+          $usrtofind->banned = 1;
+          $usrtofind->bann_reason = $bannuser->bann_reason;
+          $usrtofind->save(false);
+          $messages = new MessagesComponent();
+          $message =  "<p class='alert alert-success size-16 margin-top-20'>Пользователь <b>$usrtofind->name</b> был забанен!</p>";
+          $messages->setMessages($message);
+          return $this->redirect('/admin/ass-destroyer');
+
         } else {
             $messages = new MessagesComponent();
             $message =  "<p class='alert alert-danger size-16 margin-top-20'>Возникла неизвестная ошибка.</p>";
