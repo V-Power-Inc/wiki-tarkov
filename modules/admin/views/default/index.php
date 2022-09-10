@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Админка '. $_ENV['DOMAIN']?>;
+$this->title = 'Админка '. $_ENV['DOMAIN'];
 ?>
 <div class="col-lg-12 text-center">
     <h1 class="admin-title-main">Главная админская страница</h1>

@@ -28,13 +28,13 @@ body {
     border-color: #000000;
 }
 
-/** Edited 13-10-2018 **/
+/** Edited 10-09-2022 **/
 .navbar {
     border-radius: 0;
     border: 0;
     border-bottom: 2px solid #c3392c;
     box-shadow: 0px 1px 4px;
-    z-index: 999;
+    z-index: 1001;
 }
 
 .relative {
@@ -512,7 +512,7 @@ h2.white {
     height: 747px;
     background: black;
     display: block;
-    z-index: 999;
+    z-index: 900;
     border-left: 2px solid #c3392c;
 }
 
