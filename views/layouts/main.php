@@ -40,7 +40,12 @@ AppAsset::register($this);
     <meta property="og:title" content="<?= Html::encode($this->title) ?>">
     <meta property="og:image" content="/img/logo-full.png">
 
+    <!-- VK -->
     <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
+
+    <!-- JivoSite -->
+    <script src="//code.jivosite.com/widget/ueSiX6cbtP" async></script>
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
