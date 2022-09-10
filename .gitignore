@@ -42,8 +42,11 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 
-# ignore images
+# ignore images - that uploaded through Elfinder
 web/img/upload
+
+# ignore images - that uploaded as preview
+web/img/admin
 
 # no index.php in web directory
 web/index.php
