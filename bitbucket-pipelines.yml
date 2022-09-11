@@ -12,6 +12,8 @@ pipelines:
     docker-release:
       - step:
           name: Build
+          caches:
+            docker-compose
           runs-on:
             - self.hosted
             - linux
