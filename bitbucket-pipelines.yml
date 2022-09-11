@@ -19,6 +19,11 @@ pipelines:
             - chmod +x docker-compose
             - mv docker-compose /usr/local/bin
 
+            # Экспоритруем переменные зашитые в битбакет для разветки
+            - DB_NAME=$DB_NAME
+            - DB_USER=$DB_USER
+            - DB_PASSWORD=$DB_PASSWORD
+
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
