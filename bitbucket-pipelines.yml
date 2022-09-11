@@ -3,24 +3,15 @@
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
 
-image: python:3.7.2
-
-options:
-  docker: true
-
 pipelines:
   branches:
     docker-release:
       - step:
           name: Build
+          runs-on:
+            - self.hosted
+            - linux
           script:
-            # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию)
-            - export DOCKER_COMPOSE_VERSION=1.18.0
-            - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
-            - curl -L $DOCKER_COMPOSE_URL > docker-compose
-            - chmod +x docker-compose
-            - mv docker-compose /usr/local/bin
-
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
@@ -29,5 +20,4 @@ pipelines:
             - echo "Обновляем зависимости composer"
 
             # Обновляем зависимости композера
-            # TODO: Эта команда не отрабатывала, ждем октября для обнуления лимитов Bitbucket Pipelines
             - docker-compose exec -T app composer install --no-interaction
