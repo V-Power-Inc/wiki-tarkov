@@ -38,7 +38,7 @@ services:
     volumes:
       # Это нужно битбакету - раньше было mariadb:/var/lib/mysql
       # ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
-      - mariadb:/var/lib/mysql
+      - ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
       - MARIADB_DATABASE=${DB_NAME}
@@ -53,7 +53,7 @@ services:
     volumes:
       # Это нужно битбакету - раньше было cache:/data
       # ${BITBUCKET_CLONE_DIR:-static}:/data
-      - cache:/data
+      - ${BITBUCKET_CLONE_DIR:-static}:/data
 
 volumes:
   mariadb:
