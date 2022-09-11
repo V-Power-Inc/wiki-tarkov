@@ -8,16 +8,13 @@ pipelines:
     docker-release:
       - step:
           name: Build
+          image: python:3.8.1
           runs-on:
             - self.hosted
             - linux
           script:
             # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию, Runner тоже в этом нуждается)
-            - export DOCKER_COMPOSE_VERSION=2.4.1
-            - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
-            - sudo curl -L $DOCKER_COMPOSE_URL > docker-compose
-            - sudo chmod +x docker-compose
-            - sudo mv docker-compose /usr/local/bin
+            - pip install docker-compose
 
             # Экспоритруем переменные зашитые в битбакет для разветки
             - echo DB_NAME=$DB_NAME > .env
@@ -27,8 +24,7 @@ pipelines:
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
-            - # sudo docker-compose up -d
-            - docker build .
+            - sudo docker-compose up -d
 
             - echo "Обновляем зависимости composer"
 
