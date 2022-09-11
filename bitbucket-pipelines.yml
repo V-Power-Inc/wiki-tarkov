@@ -32,6 +32,9 @@ pipelines:
             - echo DB_CHARSET=$DB_CHARSET >> .env
             - echo DOMAIN=$DOMAIN >> .env
             - echo DOMAIN_PROTOCOL=$DOMAIN_PROTOCOL >> .env
+            - echo DB_TEST_NAME=$DB_TEST_NAME >> .env
+            - echo DB_TEST_USER=$DB_TEST_USER >> .env
+            - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
 
             - echo "Собираем Docker контейнеры"
 
