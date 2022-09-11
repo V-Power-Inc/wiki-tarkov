@@ -12,6 +12,18 @@ pipelines:
             - self.hosted
             - linux
           script:
+            # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию, Runner тоже в этом нуждается)
+            - export DOCKER_COMPOSE_VERSION=1.18.0
+            - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
+            - curl -L $DOCKER_COMPOSE_URL > docker-compose
+            - chmod +x docker-compose
+            - mv docker-compose /usr/local/bin
+
+            # Экспоритруем переменные зашитые в битбакет для разветки
+            - export DB_NAME=$DB_NAME
+            - export DB_USER=$DB_USER
+            - export DB_PASSWORD=$DB_PASSWORD
+
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
