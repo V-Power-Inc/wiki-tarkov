@@ -2,12 +2,15 @@
 
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
+image: docker:stable
 
 pipelines:
   branches:
     docker-release:
       - step:
           name: Build
+          caches:
+            - docker
           runs-on:
             - self.hosted
             - linux
@@ -24,9 +27,6 @@ pipelines:
             - echo DB_PASSWORD=$DB_PASSWORD >> .env
 
             - echo "Собираем Docker контейнеры"
-
-            # todo: Runner BitBucket не видит и не хочет запускать docker-compose
-            - sudo docker restart
 
             # Запускаем контейнеры приложения в фоновом режиме
             - sudo docker-compose up -d
