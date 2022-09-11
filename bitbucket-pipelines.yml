@@ -2,7 +2,6 @@
 
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
-image: docker:stable
 
 pipelines:
   branches:
@@ -18,11 +17,11 @@ pipelines:
             - linux
           script:
             # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию, Runner тоже в этом нуждается)
-#            - sudo apt -y install curl
-#            - sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-#            - sudo chmod +x /usr/local/bin/docker-compose
-#            - sudo docker start
-#            - sudo docker-compose --version
+            - sudo apt -y install curl
+            - sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            - sudo chmod +x /usr/local/bin/docker-compose
+            - sudo docker start
+            - sudo docker-compose --version
 
             # Экспоритруем переменные зашитые в битбакет для разветки
             - echo DB_NAME=$DB_NAME > .env
@@ -32,7 +31,7 @@ pipelines:
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
-            - docker-compose up -d
+            - sudo docker-compose up -d
 
             - echo "Обновляем зависимости composer"
 
