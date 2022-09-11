@@ -37,7 +37,7 @@ pipelines:
             - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
 
             # Смотрим список запущенных сервисов docker-compose
-            - docker compose ls
+            - docker-compose ls
 
             - echo "Собираем Docker контейнеры"
 
