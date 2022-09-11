@@ -20,14 +20,18 @@ pipelines:
             - self.hosted
             - linux
           script:
-            # Экспоритруем переменные зашитые в битбакет для разветки
+            # Экспоритруем переменные зашитые в битбакет для развертки
+            - echo "Экспоритруем переменные зашитые в битбакет для развертки"
             - echo DB_NAME=$DB_NAME > .env
             - echo DB_USER=$DB_USER >> .env
             - echo DB_PASSWORD=$DB_PASSWORD >> .env
             - echo REDIS_HOST=$REDIS_HOST >> .env
-
-            # Тестируем что смогли прочитать переменную из bitBucket
-            - echo $REDIS_HOST
+            - echo DB_DSN=$DB_DSN >> .env
+            - echo DB_TEST_DSN=$DB_TEST_DSN >> .env
+            - echo DB_TEST_CHARSET=$DB_TEST_CHARSET >> .env
+            - echo DB_CHARSET=$DB_CHARSET >> .env
+            - echo DOMAIN=$DOMAIN >> .env
+            - echo DOMAIN_PROTOCOL=$DOMAIN_PROTOCOL >> .env
 
             - echo "Собираем Docker контейнеры"
 
@@ -40,10 +44,10 @@ pipelines:
             - docker-compose exec -T app composer install --no-interaction
 
             # Накатываем миграции на dev_eft
-            - docker-compose exec app php yii migrate --interactive=0
+            - docker-compose exec -T app php yii migrate --interactive=0
 
             # Создаем нового юзера MySQL и даем ему все необходимые права, а также создаем новую базу для миграций
-            - docker-compose exec db mysql -u root -p $DB_PASSWORD
+            - docker-compose exec -T db mysql -u root -p $DB_PASSWORD
             - use dev_eft;
             - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
             - GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
@@ -53,4 +57,4 @@ pipelines:
             - quit;
 
             # Накатываем миграции
-            - docker-compose exec app php yii migrate --interactive=0
+            - docker-compose exec -T app php yii migrate --interactive=0
