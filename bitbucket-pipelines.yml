@@ -24,6 +24,10 @@ pipelines:
             - echo DB_NAME=$DB_NAME > .env
             - echo DB_USER=$DB_USER >> .env
             - echo DB_PASSWORD=$DB_PASSWORD >> .env
+            - echo REDIS_HOST=$REDIS_HOST >> .env
+
+            # Тестируем что смогли прочитать переменную из bitBucket
+            - echo $REDIS_HOST
 
             - echo "Собираем Docker контейнеры"
 
@@ -34,3 +38,5 @@ pipelines:
 
             # Обновляем зависимости композера
             - docker-compose exec -T app composer install --no-interaction
+
+            # todo: Перейти к выкату миграций
