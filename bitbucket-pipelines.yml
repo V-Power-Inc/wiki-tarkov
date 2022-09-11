@@ -25,6 +25,7 @@ pipelines:
 
             - echo "Собираем Docker контейнеры"
 
+            # todo: Runner BitBucket не видит и не хочет запускать docker-compose
             - sudo docker restart
 
             # Запускаем контейнеры приложения в фоновом режиме
