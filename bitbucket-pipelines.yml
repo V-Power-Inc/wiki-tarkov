@@ -39,4 +39,18 @@ pipelines:
             # Обновляем зависимости композера
             - docker-compose exec -T app composer install --no-interaction
 
-            # todo: Перейти к выкату миграций
+            # Накатываем миграции на dev_eft
+            - docker-compose exec app php yii migrate --interactive=0
+
+            # Создаем нового юзера MySQL и даем ему все необходимые права, а также создаем новую базу для миграций
+            - docker-compose exec db mysql -u root -p $DB_PASSWORD
+            - use dev_eft;
+            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
+            - CREATE DATABASE test_migrations_db;
+            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
+            - quit;
+
+            # Накатываем миграции
+            - docker-compose exec app php yii migrate --interactive=0
