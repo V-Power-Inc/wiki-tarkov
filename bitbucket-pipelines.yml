@@ -2,6 +2,7 @@
 
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
+
 pipelines:
   branches:
     docker-release:
