@@ -36,6 +36,9 @@ pipelines:
             - echo DB_TEST_USER=$DB_TEST_USER >> .env
             - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
 
+            # Смотрим список запущенных сервисов docker-compose
+            - docker compose ls
+
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
@@ -62,4 +65,4 @@ pipelines:
             # Накатываем миграции
             - docker-compose exec -T app php yii migrate --interactive=0
 
-            # todo: Пробуем накатить тут миграции
+            # todo: Пробуем накатить тут миграции (В bitbucket сейчас dsn_db установлено как db_1 - по умолчанию db)
