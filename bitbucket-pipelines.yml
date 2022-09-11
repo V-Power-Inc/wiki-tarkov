@@ -61,3 +61,5 @@ pipelines:
 
             # Накатываем миграции
             - docker-compose exec -T app php yii migrate --interactive=0
+
+            # todo: Пробуем накатить тут миграции
