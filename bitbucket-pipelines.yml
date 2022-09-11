@@ -13,10 +13,11 @@ pipelines:
             - linux
           script:
             # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию, Runner тоже в этом нуждается)
-            - sudo apt -y install curl
-            - sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            - sudo chmod +x /usr/local/bin/docker-compose
-            - sudo docker-compose --version
+            - export DOCKER_COMPOSE_VERSION=2.4.1
+            - export DOCKER_COMPOSE_URL=https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)
+            - sudo curl -L $DOCKER_COMPOSE_URL > docker-compose
+            - sudo chmod +x docker-compose
+            - sudo mv docker-compose /usr/local/bin
 
             # Экспоритруем переменные зашитые в битбакет для разветки
             - echo DB_NAME=$DB_NAME > .env
