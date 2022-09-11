@@ -8,10 +8,6 @@ pipelines:
     docker-release:
       - step:
           name: Build
-          caches:
-            - docker
-          services:
-            - docker
           runs-on:
             - self.hosted
             - linux
