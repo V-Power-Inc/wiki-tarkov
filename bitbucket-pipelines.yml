@@ -8,14 +8,11 @@ pipelines:
     docker-release:
       - step:
           name: Build
-          image: python:3.8.1
+          image: docker/compose
           runs-on:
             - self.hosted
             - linux
           script:
-            # Без строк ниже ничего не сработает (В битбакете нету docker-compose по умолчанию, Runner тоже в этом нуждается)
-            - composer install --no-interaction
-
             # Экспоритруем переменные зашитые в битбакет для разветки
             - echo DB_NAME=$DB_NAME > .env
             - echo DB_USER=$DB_USER >> .env
