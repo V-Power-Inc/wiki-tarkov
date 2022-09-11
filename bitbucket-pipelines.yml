@@ -19,14 +19,13 @@ pipelines:
             - sudo docker-compose -v
 
             # Экспоритруем переменные зашитые в битбакет для разветки
-            - DB_NAME=$DB_NAME
-            - DB_USER=$DB_USER
-            - DB_PASSWORD=$DB_PASSWORD
+            - export DB_NAME=$DB_NAME
+            - export DB_USER=$DB_USER
+            - export DB_PASSWORD=$DB_PASSWORD
 
             - echo "Собираем Docker контейнеры"
 
             - sudo start docker
-            - sudo dockerd
 
             # Запускаем контейнеры приложения в фоновом режиме
             - sudo docker-compose up -d
