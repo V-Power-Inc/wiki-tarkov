@@ -25,7 +25,7 @@ pipelines:
 
             - echo "Собираем Docker контейнеры"
 
-            - sudo service docker restart
+            - sudo docker restart
 
             # Запускаем контейнеры приложения в фоновом режиме
             - sudo docker-compose up -d
