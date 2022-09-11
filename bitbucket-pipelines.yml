@@ -20,9 +20,9 @@ pipelines:
             - mv docker-compose /usr/local/bin
 
             # Экспоритруем переменные зашитые в битбакет для разветки
-            - echo $DB_NAME
-            - echo $DB_USER
-            - echo $DB_PASSWORD
+            - DB_NAME=$DB_NAME
+            - DB_USER=$DB_USER
+            - DB_PASSWORD=$DB_PASSWORD
 
             - echo "Собираем Docker контейнеры"
 
