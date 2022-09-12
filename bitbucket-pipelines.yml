@@ -53,13 +53,13 @@ pipelines:
 
             # Даем prod_user MySQL все необходимые права, а также создаем новую базу для миграций
             - docker-compose exec -T db mysql -u root -p$DB_PASSWORD
-            - docker-compose exec -T db use dev_eft;
-            - docker-compose exec -T db GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker-compose exec -T db GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
-            - docker-compose exec -T db CREATE DATABASE test_migrations_db;
-            - docker-compose exec -T db GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker-compose exec -T db GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker-compose exec -T db quit;
+            - docker-compose exec -T db sh use dev_eft;
+            - docker-compose exec -T db sh GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker-compose exec -T db sh GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
+            - docker-compose exec -T db sh CREATE DATABASE test_migrations_db;
+            - docker-compose exec -T db sh GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker-compose exec -T db sh GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker-compose exec -T db sh quit;
 
             # Накатываем миграции на dev_eft
             - docker-compose exec -T app php yii migrate --interactive=0
