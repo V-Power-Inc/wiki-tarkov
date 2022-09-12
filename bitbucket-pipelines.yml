@@ -101,30 +101,22 @@ pipelines:
             # Начинаем тестирование
             - echo "Functional и Unit тестирование"
 
-            - echo "Начинаем гонять тесты - сначала UNIT"
-
-           # - docker-compose exec -T redis redis-cli flushall
+            - echo "Проверка Unit тестами"
 
             - docker-compose exec -T app vendor/bin/codecept run unit
 
-            # Чистим кеш и теперь FunctiOnal тесты - сначала самые проблемные
-#            - docker-compose exec -T redis redis-cli flushall
-#
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
-            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
-#
+            # Теперь Functional - сначала самые проблемные
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
+#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
+
+            # Общий прогон функциональных тестов
+            - echo "Проверка Functional тестами"
+            -
             - docker-compose exec -T app vendor/bin/codecept run functional
-            - docker-compose exec -T app vendor/bin/codecept run
-
-            # Чистим кеш перед Unit тестированием
-            # - docker-compose exec -T redis redis-cli flushall
-
-            # Теперь гоняем все функциональные разо
-            # - docker-compose exec -T app vendor/bin/codecept run unit
