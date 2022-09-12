@@ -56,6 +56,6 @@ services:
       - ${BITBUCKET_CLONE_DIR:-static}:/data
 
 volumes:
-  db:
+  mariadb:
   cache:
     driver: local
