@@ -52,16 +52,16 @@ pipelines:
             - echo "Даем больше прав юзеру MySQL для создания триггеров"
 
             # Даем prod_user MySQL все необходимые права, а также создаем новую базу для миграций
-            - docker exec -t db /bin/bash
-            - docker exec mysql -u root -p$DB_PASSWORD
-            - docker exec use dev_eft;
-            - docker exec GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker exec GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
-            - docker exec CREATE DATABASE test_migrations_db;
-            - docker exec GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker exec GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
-            - docker exec quit;
-            - docker exec exit;
+            # - docker exec -t db /bin/bash
+            - docker exec -t db /bin/bash mysql -u root -p$DB_PASSWORD
+            - docker exec -t db /bin/bash use dev_eft;
+            - docker exec -t db /bin/bash GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker exec -t db /bin/bash GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
+            - docker exec -t db /bin/bash CREATE DATABASE test_migrations_db;
+            - docker exec -t db /bin/bash GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker exec -t db /bin/bash GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
+            - docker exec -t db /bin/bash quit;
+
 
             # Накатываем миграции на dev_eft
             - docker-compose exec -T app php yii migrate --interactive=0
