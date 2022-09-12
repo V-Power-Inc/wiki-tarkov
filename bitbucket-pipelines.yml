@@ -232,7 +232,7 @@ pipelines:
 
             - docker-compose exec -T app vendor/bin/codecept run functional
 
-  # Автодеплой в мастер на Prod
+  # Автодеплой в мастер на Prod!
   branches:
     master:
       - step:
