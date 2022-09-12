@@ -31,6 +31,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
   db:
+    container_name: db
     image: mariadb:10.6
     restart: always
     ports:
