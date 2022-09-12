@@ -130,6 +130,6 @@ pipelines:
           script:
             - mkdir -p ~/.ssh
             - cat deploy_known_hosts >> ~/.ssh/known_hosts
-            - (umask  077 ; echo $DEPLOY_SSH_KEY | base64 -di > ~/.ssh/id_rsa)
+            - (umask 077 ; echo $DEPLOY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
             - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin master'
             - echo "Затянули ветку master с BitBucket успешно"
