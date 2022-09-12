@@ -52,7 +52,7 @@ pipelines:
             - echo "Даем больше прав юзеру MySQL для создания триггеров"
 
             # Даем prod_user MySQL все необходимые права, а также создаем новую базу для миграций
-            - docker-compose exec -T db mysql -u root -p$DB_PASSWORD
+            - docker-compose exec -T db /bin/bash -c mysql -u root -p$DB_PASSWORD
             - docker-compose exec -T db /bin/bash -c use dev_eft;
             - docker-compose exec -T db /bin/bash -c GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
             - docker-compose exec -T db /bin/bash -c GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
