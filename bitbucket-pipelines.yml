@@ -231,6 +231,8 @@ pipelines:
             - echo "Проверка Functional тестами"
 
             - docker-compose exec -T app vendor/bin/codecept run functional
+
+  # Автодеплой в мастер на Prod
   branches:
     master:
       - step:
