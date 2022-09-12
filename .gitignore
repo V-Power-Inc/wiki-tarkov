@@ -48,9 +48,6 @@ web/img/upload
 # ignore images - that uploaded as preview
 web/img/admin
 
-# no index.php in web directory
-web/index.php
-
 # Ignore well known
 .well-known
 
@@ -63,8 +60,12 @@ sql_dump.sql
 # ignore main-local.php config
 /config/web-local.php
 
-# Ignore auto changed file associated with composer
-/composer.lock
-
 # Ignore Sitemaps files in the future
 /sitemaps
+
+# Ignore log files - docker Nginx
+docker/nginx/log/prod-error.log
+docker/nginx/log/prod-access.log
+
+# Mac DS_Store Files
+.DS_Store

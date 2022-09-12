@@ -11,6 +11,7 @@ namespace Tests\Functional;
 use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
 use app\tests\fixtures\MirotvorecFixture;
+use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страниц квестов
@@ -33,6 +34,10 @@ class MirotvorecCest
             'mirotvorec' => [
                 'class' => MirotvorecFixture::class,
                 'dataFile' => codecept_data_dir() . 'mirotvorec.php'
+            ],
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

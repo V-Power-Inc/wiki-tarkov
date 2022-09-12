@@ -11,6 +11,7 @@ namespace Tests\Functional;
 use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
 use app\tests\fixtures\BaraholshikFixture;
+use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страниц квестов
@@ -33,6 +34,10 @@ class BaraholshikCest
             'baraholshik' => [
                 'class' => BaraholshikFixture::class,
                 'dataFile' => codecept_data_dir() . 'baraholshik.php'
+            ],
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }
