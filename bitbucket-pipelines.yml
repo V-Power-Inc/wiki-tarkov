@@ -122,6 +122,7 @@ pipelines:
   branches:
     master:
       - step:
+          image: debian:8.6
           name: Deploy master to Prod
           runs-on:
             - self.hosted
