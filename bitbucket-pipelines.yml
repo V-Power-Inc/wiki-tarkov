@@ -44,12 +44,6 @@ pipelines:
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
 
-            # Смотрим список запущенных сервисов docker-compose
-            # - docker-compose ps
-
-            # Checking networks list
-            # - docker network ls
-
             - echo "Обновляем зависимости composer"
 
             # Обновляем зависимости композера
