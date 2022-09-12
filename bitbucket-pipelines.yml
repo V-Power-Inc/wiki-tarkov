@@ -36,13 +36,13 @@ pipelines:
             - echo DB_TEST_USER=$DB_TEST_USER >> .env
             - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
 
-            # Смотрим список запущенных сервисов docker-compose
-            - docker-compose ps
-
             - echo "Собираем Docker контейнеры"
 
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
+
+            # Смотрим список запущенных сервисов docker-compose
+            - docker-compose ps
 
             - echo "Обновляем зависимости composer"
 
