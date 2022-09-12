@@ -119,7 +119,7 @@ pipelines:
           - echo "Проверка Functional тестами"
 
           - docker-compose exec -T app vendor/bin/codecept run functional
-  branches:
+  pull-requests:
     master:
       - step:
           name: Deploy master to Prod
