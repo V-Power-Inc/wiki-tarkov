@@ -68,8 +68,14 @@ pipelines:
 
 
             # Накатываем миграции на dev_eft
+            - echo "Накатываем миграции на dev_eft"
+
             - docker-compose exec -T app php yii migrate --interactive=0
 
+            # Накатываем миграции на test_migrations_db
+            - echo "Накатываем миграции на test_migrations_db"
+
+            - docker-compose exec -T app php yii migrate --db test_db --interactive=0;
 
             # Накатываем миграции
             # todo: Пробуем накатить тут миграции (В bitbucket сейчас dsn_db установлено как db_1 - по умолчанию db)
