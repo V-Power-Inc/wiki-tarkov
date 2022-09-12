@@ -41,14 +41,14 @@ pipelines:
             # Build docker containers
             - docker-compose build
 
-            # Disable auto-restart on db container
-            - docker update --restart=no db
-
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
 
             # Смотрим список запущенных сервисов docker-compose
             - docker-compose ps
+
+            # Disable auto-restart on db container
+            - docker update --restart=no db
 
             - echo "Обновляем зависимости composer"
 
