@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$db_test = require __DIR__ . '/test_db.php';
 
 $config = [
     'id' => 'basic-console',
@@ -21,6 +22,9 @@ $config = [
             ],
         ],
         'db' => $db,
+
+        /** Тестовая база, нужна здесь для наката миграций в Docker */
+        'db_test' => $db_test,
     ],
     'params' => $params,
 ];

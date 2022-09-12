@@ -1,0 +1,1 @@
+COPY . /var/www/wiki-tarkov/html
