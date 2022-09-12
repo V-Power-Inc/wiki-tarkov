@@ -124,4 +124,4 @@ pipelines:
             - docker-compose exec -T redis redis-cli flushall
 
             # Теперь гоняем все функциональные разо
-            - docker-compose exec -T app vendor/bin/codecept functional
+            - docker-compose exec -T app vendor/bin/codecept run unit
