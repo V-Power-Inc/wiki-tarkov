@@ -4,8 +4,8 @@
 # The workflow allows running tests and code linting on the default branch.
 image: docker/compose:latest
 
-options:
-  docker: true
+#options:
+#  docker: true
 
 pipelines:
   branches:
