@@ -43,7 +43,7 @@ tests/_support/_generated
 # ignore images
 web/img/upload
 
-# todo: Index надо отсюда убрать, т.к. он будет нужен в тестировании!
+# todo: Index надо отсюда убрать, т.к. он будет нужен в тестировании
 # no index.php in web directory
 web/index.php
 
