@@ -44,6 +44,9 @@ pipelines:
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
 
+            # Очистка неиспользуемых сетей
+            - docker network prune
+
             # Смотрим список запущенных сервисов docker-compose
             # - docker-compose ps
 
