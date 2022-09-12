@@ -123,6 +123,9 @@ pipelines:
     master:
       - step:
           name: Deploy master to Prod
+          runs-on:
+            - self.hosted
+            - linux
           deployment: Production
           script:
             - mkdir -p ~/.ssh
