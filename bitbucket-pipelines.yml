@@ -41,6 +41,8 @@ pipelines:
             # Build docker containers
             - docker-compose build
 
+            - docker update --restart=no $(docker ps -a -q)
+
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
 
@@ -53,7 +55,7 @@ pipelines:
             - docker-compose exec -T app composer install --no-interaction
 
             # Накатываем миграции на dev_eft
-            - docker-compose exec -T php yii migrate --interactive=0
+            - docker-compose exec -T app php yii migrate --interactive=0
 
             # Создаем нового юзера MySQL и даем ему все необходимые права, а также создаем новую базу для миграций
             - docker-compose exec -T db mysql -u root -p $DB_PASSWORD
