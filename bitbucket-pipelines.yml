@@ -119,6 +119,118 @@ pipelines:
           - echo "Проверка Functional тестами"
 
           - docker-compose exec -T app vendor/bin/codecept run functional
+  custom:
+    Build-action:
+      - step:
+          name: Build (Docker-compose up & composer-update)
+          services:
+            - docker
+          caches:
+            - docker
+          runs-on:
+            - self.hosted
+            - linux
+          script:
+            # Экспоритруем переменные зашитые в битбакет для развертки
+            - echo "Экспоритруем переменные зашитые в битбакет для развертки"
+            - echo DB_NAME=$DB_NAME > .env
+            - echo DB_USER=$DB_USER >> .env
+
+            # Build docker containers (Пока убрали чтобы сборки быстрее проходили)
+            - echo "Билдим контейнеры через docker-compose"
+
+            - docker-compose build
+
+            # Поднимаем все контейнеры через docker-compose
+            - echo "Поднимаем все контейнеры через docker-compose"
+            - docker-compose up -d
+
+            # Обновляем зависимости композера
+            - echo "Обновляем зависимости composer"
+
+            - docker-compose exec -T app composer install --no-interaction
+    Testing-action:
+      - step:
+          name: Tests (Applying migrations &Unit/Functional tests)
+          services:
+            - docker
+          caches:
+            - docker
+          runs-on:
+            - self.hosted
+            - linux
+          script:
+            # Экспоритруем переменные зашитые в битбакет для развертки
+            - echo "Экспоритруем переменные зашитые в битбакет для развертки"
+            - echo DB_NAME=$DB_NAME > .env
+            - echo DB_USER=$DB_USER >> .env
+            - echo DB_PASSWORD=$DB_PASSWORD >> .env
+            - echo REDIS_HOST=$REDIS_HOST >> .env
+            - echo DB_DSN=$DB_DSN >> .env
+            - echo DB_TEST_DSN=$DB_TEST_DSN >> .env
+            - echo DB_TEST_CHARSET=$DB_TEST_CHARSET >> .env
+            - echo DB_CHARSET=$DB_CHARSET >> .env
+            - echo DOMAIN=$DOMAIN >> .env
+            - echo DOMAIN_PROTOCOL=$DOMAIN_PROTOCOL >> .env
+            - echo DB_TEST_NAME=$DB_TEST_NAME >> .env
+            - echo DB_TEST_USER=$DB_TEST_USER >> .env
+            - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
+
+            # Build docker containers (Пока убрали чтобы сборки быстрее проходили)
+            - echo "Билдим контейнеры через docker-compose"
+
+            - docker-compose build
+
+            # Поднимаем все контейнеры через docker-compose
+            - echo "Поднимаем все контейнеры через docker-compose"
+            - docker-compose up -d
+
+            - echo "Обновляем зависимости composer"
+
+            # Обновляем зависимости композера
+            - docker-compose exec -T app composer install --no-interaction
+
+            - echo "Даем больше прав юзеру MySQL для создания триггеров"
+
+            # Даем prod_user MySQL все необходимые права, а также создаем новую базу для миграций
+            - docker exec -t db mysql -u root -p$DB_PASSWORD --execute "use dev_eft;
+              CREATE DATABASE test_migrations_db;
+              GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
+              GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
+              GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
+
+            # Накатываем миграции на dev_eft
+            - echo "Накатываем миграции на dev_eft"
+
+            - docker-compose exec -T app php yii migrate --interactive=0
+
+            # Накатываем миграции на test_migrations_db
+            - echo "Накатываем миграции на test_migrations_db"
+
+            - docker-compose exec -T app php yii migrate --db db_test --interactive=0;
+
+            # Начинаем тестирование
+            - echo "Functional и Unit тестирование"
+
+            - echo "Проверка Unit тестами"
+
+            - docker-compose exec -T app vendor/bin/codecept run unit
+
+            # Теперь Functional - сначала самые проблемные
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
+
+            # Общий прогон функциональных тестов
+            - echo "Проверка Functional тестами"
+
+            - docker-compose exec -T app vendor/bin/codecept run functional
   branches:
     master:
       - step:
@@ -131,6 +243,6 @@ pipelines:
           script:
             - mkdir -p ~/.ssh
             - cat deploy_known_hosts >> ~/.ssh/known_hosts
-            - (umask  077 ; echo $DEPLOY_SSH_KEY | base64 -di > ~/.ssh/id_rsa)
+            - (umask 077 ; echo $DEPLOY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
             - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin master'
             - echo "Затянули ветку master с BitBucket успешно"
