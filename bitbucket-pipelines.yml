@@ -59,7 +59,7 @@ pipelines:
             - docker-compose exec -T app composer install --no-interaction
 
             # Накатываем миграции на dev_eft
-            - docker-compose exec app php yii migrate
+            - docker-compose exec -T app php yii migrate --interactive=0
 
             # Создаем нового юзера MySQL и даем ему все необходимые права, а также создаем новую базу для миграций
             - docker-compose exec -T db mysql -u root -p $DB_PASSWORD
