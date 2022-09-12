@@ -120,8 +120,5 @@ pipelines:
             - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
             - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
 
-            # Снова чистим кеш
-            - docker-compose exec -T redis redis-cli flushall
-
             # Теперь гоняем все функциональные разо
             - docker-compose exec -T app vendor/bin/codecept functional
