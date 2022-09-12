@@ -107,9 +107,11 @@ use yii\web\JsExpression;
                 </div>
 
                 <h2>Интерактивная карта локации Резерв</h2>
-                <p>Интерактивная карта локации Резерв из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации лаборатория Terra Group, узнать о местонахождении оружейных и военных ящиков. </p>
-                <p></p>
-                <?= $this->render('/other/google-gor.php'); ?>
+                <p class="maps-mobile-hidden-value">Интерактивная карта локации Резерв из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации лаборатория Terra Group, узнать о местонахождении оружейных и военных ящиков. </p>
+                <p class="maps-mobile-hidden-value"></p>
+                <div class="maps-mobile-hidden-value">
+                    <?= $this->render('/other/yandex-direct-bottom-intermaps'); ?>
+                </div>
             </div>
 
         </div>
