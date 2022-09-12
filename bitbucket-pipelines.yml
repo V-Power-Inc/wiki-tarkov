@@ -120,7 +120,7 @@ pipelines:
             - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
             - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
 #
-            - docker-compose exec -T app vendor/bin/codecept run
+            - docker-compose exec -T app vendor/bin/codecept run functional
 
             # Чистим кеш перед Unit тестированием
             # - docker-compose exec -T redis redis-cli flushall
