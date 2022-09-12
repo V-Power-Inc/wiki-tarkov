@@ -45,13 +45,10 @@ pipelines:
             - docker-compose up -d
 
             # Смотрим список запущенных сервисов docker-compose
-            - docker-compose ps
+            # - docker-compose ps
 
             # Checking networks list
-            - docker network ls
-
-            # Disable auto-restart on db container (named build_db_1 in runners)
-            - docker update --restart=no build_db_1
+            # - docker network ls
 
             - echo "Обновляем зависимости composer"
 
