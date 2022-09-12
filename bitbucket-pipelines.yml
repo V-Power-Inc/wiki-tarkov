@@ -50,19 +50,19 @@ pipelines:
             - docker-compose exec -T app composer install --no-interaction
 
             # Накатываем миграции на dev_eft
-            - docker-compose exec -T app php yii migrate --interactive=0
+#            - docker-compose exec -T app php yii migrate --interactive=0
 
             # Создаем нового юзера MySQL и даем ему все необходимые права, а также создаем новую базу для миграций
-            - docker-compose exec -T db mysql -u root -p $DB_PASSWORD
-            - use dev_eft;
-            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
-            - CREATE DATABASE test_migrations_db;
-            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
-            - GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
-            - quit;
+#            - docker-compose exec -T db mysql -u root -p $DB_PASSWORD
+#            - use dev_eft;
+#            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+#            - GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION; (Супер права)
+#            - CREATE DATABASE test_migrations_db;
+#            - GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
+#            - GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;
+#            - quit;
 
             # Накатываем миграции
-            - docker-compose exec -T app php yii migrate --interactive=0
+#            - docker-compose exec -T app php yii migrate --interactive=0
 
             # todo: Пробуем накатить тут миграции (В bitbucket сейчас dsn_db установлено как db_1 - по умолчанию db)
