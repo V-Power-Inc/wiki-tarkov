@@ -42,7 +42,7 @@ pipelines:
             # - docker-compose build
 
             # Запускаем контейнеры приложения в фоновом режиме
-            - docker-compose up
+            - docker-compose up -d
 
             - echo "Обновляем зависимости composer"
 
