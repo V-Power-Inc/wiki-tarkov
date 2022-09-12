@@ -41,7 +41,8 @@ pipelines:
             # Build docker containers
             - docker-compose build
 
-            - docker update --restart=no $(docker ps -a -q)
+            # Disable auto-restart on db container
+            - docker update --restart=no db
 
             # Запускаем контейнеры приложения в фоновом режиме
             - docker-compose up -d
