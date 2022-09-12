@@ -47,7 +47,7 @@ pipelines:
             # Смотрим список запущенных сервисов docker-compose
             - docker-compose ps
 
-            # Disable auto-restart on db container
+            # Disable auto-restart on db container (named build_db_1 in runner)
             - docker update --restart=no build_db_1
 
             - echo "Обновляем зависимости composer"
