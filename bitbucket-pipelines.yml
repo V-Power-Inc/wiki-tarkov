@@ -110,17 +110,17 @@ pipelines:
             # Чистим кеш и теперь FunctiOnal тесты - сначала самые проблемные
 #            - docker-compose exec -T redis redis-cli flushall
 #
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
-#            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
+            - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
 #
-#            - docker-compose exec -T app vendor/bin/codecept run
+            - docker-compose exec -T app vendor/bin/codecept run
 
             # Чистим кеш перед Unit тестированием
             # - docker-compose exec -T redis redis-cli flushall
