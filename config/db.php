@@ -8,8 +8,8 @@ return [
     'charset' => $_ENV['DB_CHARSET'],
 
     // Schema cache options (for production environment)
-    'enableSchemaCache' => true,
-    'schemaCacheDuration' => 3600,
-    'schemaCache' => 'cache',
+//    'enableSchemaCache' => true,
+//    'schemaCacheDuration' => 3600,
+//    'schemaCache' => 'cache',
 ];
 ?>
