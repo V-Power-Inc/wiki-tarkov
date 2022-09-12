@@ -52,7 +52,7 @@ pipelines:
             - echo "Даем больше прав юзеру MySQL для создания триггеров"
 
             # Даем prod_user MySQL все необходимые права, а также создаем новую базу для миграций
-            - docker exec -it -T db /bin/bash
+            - docker exec -t db /bin/bash
             - docker exec mysql -u root -p$DB_PASSWORD
             - docker exec use dev_eft;
             - docker exec GRANT SUPER ON . to 'prod_user'@'%' WITH GRANT OPTION;
