@@ -87,7 +87,7 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         $category = Category::find()->all();
 
-        $this->assertTrue(count($category) == 4, 'Ожидалось что вернется 2 объекта, что то пошло не так');
+        $this->assertTrue(count($category) > 0, 'Ожидалось что вернется больше 2-х объектов, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */
