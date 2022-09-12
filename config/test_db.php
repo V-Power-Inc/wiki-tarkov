@@ -7,3 +7,4 @@ return [
     'password' => $_ENV['DB_TEST_PASSWORD'],
     'charset' => $_ENV['DB_TEST_CHARSET']
 ];
+?>

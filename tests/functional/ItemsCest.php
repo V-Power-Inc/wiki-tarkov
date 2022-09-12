@@ -8,10 +8,8 @@
 
 namespace Tests\Functional;
 
-use app\controllers\ItemController;
-use app\tests\fixtures\CategoryFixture;
 use app\tests\fixtures\ItemsFixture;
-use yii\helpers\Url;
+use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты детальной страницы лута
@@ -30,6 +28,10 @@ class ItemsCest
             'items' => [
                 'class' => ItemsFixture::class,
                 'dataFile' => codecept_data_dir() . 'items.php'
+            ],
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

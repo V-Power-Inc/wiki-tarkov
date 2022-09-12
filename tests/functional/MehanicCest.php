@@ -10,6 +10,7 @@ namespace Tests\Functional;
 
 use app\controllers\TraderController;
 use app\tests\fixtures\MehanicFixture;
+use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страниц квестов
@@ -29,6 +30,10 @@ class MehanicCest
             'mehanic' => [
                 'class' => MehanicFixture::class,
                 'dataFile' => codecept_data_dir() . 'mehanic.php'
+            ],
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

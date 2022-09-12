@@ -1,0 +1,62 @@
+version: '3.2'
+
+services:
+
+  web:
+    image: nginx:1.18.0
+    restart: always
+    volumes:
+      - ./docker/conf/nginx/site.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/conf/nginx/ssl:/etc/ssl/private
+      - ./docker/nginx/log/prod-access.log:/var/www/access.log
+      - ./docker/nginx/log/prod-error.log:/var/www/error.log
+      - .:/var/www/wiki-tarkov/html
+    ports:
+      - 80:80
+      - 443:443
+
+  app:
+    build: docker/php
+    restart: always
+    volumes:
+      - ./docker/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - .:/var/www/wiki-tarkov/html
+    depends_on:
+      - web
+      - db
+    working_dir: /var/www/wiki-tarkov/html
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+  db:
+    container_name: db
+    image: mariadb:10.6
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      # Это нужно битбакету - раньше было mariadb:/var/lib/mysql
+      # ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
+      - $BITBUCKET_CLONE_DIR/mariab:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      # Это нужно битбакету - раньше было cache:/data
+      # ${BITBUCKET_CLONE_DIR:-static}:/data
+      - $BITBUCKET_CLONE_DIR/redis:/data
+
+volumes:
+  mariadb:
+  cache:
+    driver: local
