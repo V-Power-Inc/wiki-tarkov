@@ -124,6 +124,8 @@ Unit тестирование было написано исключительн
     
     vendor/bin/codecept run
 ![enter image description here](https://wiki-tarkov.ru/img/admin/testing.gif)
+
+
 Тестирование было разработано для следующего функционала:
 
  - Интерактивные карты
