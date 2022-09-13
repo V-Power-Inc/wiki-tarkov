@@ -143,7 +143,7 @@ pipelines:
           name: Build on Master (Docker-compose up & composer-update)
       - step:
           <<: *Test
-          name: Tests on Master (Applying migrations &Unit/Functional tests)
+          name: Tests on Master (Apply migrations & Unit/Functional tests)
       - step:
           image: atlassian/default-image:latest
           name: Deploy master to Prod
