@@ -6,7 +6,14 @@
  * Time: 17:30
  */
 
+/**
+ * @var $dollar Currencies - AR объект доллара
+ * @var $euro Currencies - AR объект евро
+ * @var $bitkoin Currencies - AR объект биткоина
+ */
+
 use yii\web\JqueryAsset;
+use app\models\Currencies;
 
 $this->title = 'Курс валют в Escape from Tarkov';
 $this->registerMetaTag([
@@ -18,8 +25,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
-
-// todo: Рефакторинг комментов для валютных переменных
 
 $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+use yii\web\JqueryAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -9,7 +10,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Barters */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class]]);
 
 ?>
 
@@ -23,8 +24,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAss
 
     <label class="label label-info margin-bottom-20 adm">Название на сайте должно быть например следующим - LVL 1, или например LVL 2.</label>
 
-    <?= $form->field($model, 'trader_group')
-        ->dropDownList([
+    <?= $form->field($model, 'trader_group')->dropDownList([
             'Прапор' => 'Прапор',
             'Терапевт' => 'Терапевт',
             'Скупщик' => 'Скупщик',
@@ -33,7 +33,6 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [\yii\web\JqueryAss
             'Механик' => 'Механик',
             'Барахольщик' => 'Барахольщик',
         ])
-        // todo: Добавлять сюда торговцев по мере необходимости, когда они будут выходит
     ?>
 
     <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[

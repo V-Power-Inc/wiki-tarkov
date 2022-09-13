@@ -22,7 +22,6 @@ $this->registerMetaTag([
  * @var string $formValue
  * @var Doorkeys $keysearch
  */
-
 ?>
 <div class="container">
     <div class="row">
@@ -39,27 +38,8 @@ $this->registerMetaTag([
                 <span class="key-selector">Искать ключи на локации:</span>
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['site/keysearch']],'id' => 'mapsearch','method' => 'post',]) ?>
 
-                <!-- todo: Вызвать тут статический метод модели с массивом -->
-                <?= $form->field($form_model, 'doorkey')->dropDownList([
-                    'Все ключи' => 'Все ключи',
-                    'Лаборатория Terra Group' => 'Лаборатория Terra Group',
-                    'Таможня' => 'Таможня',
-                    'Берег' => 'Берег',
-                    'Лес' => 'Лес',
-                    'Завод' => 'Завод',
-                    'Развязка' => 'Развязка',
-                    '3-х этажная общага на Таможне' => '3-х этажная общага на Таможне',
-                    '2-х этажная общага на Таможне' => '2-х этажная общага на Таможне',
-                    'Восточное крыло санатория' => 'Восточное крыло санатория',
-                    'Западное крыло санатория' => 'Западное крыло санатория',
-                    'Ключи от техники' => 'Ключи от техники',
-                    'Квестовые ключи' => 'Квестовые ключи',
-                    'Ключи от сейфов/помещений с сейфами' => 'Ключи от сейфов/помещений с сейфами',
-                ],
-                [
-                    'value' => $formValue
-                ]);
-                ?>
+                <!-- Форма поиска ключей по фильтрам -->
+                <?= $form->field($form_model, Doorkeys::DOORKEY)->dropDownList(Doorkeys::KeysCategories(), ['value' => $formValue]); ?>
 
                 <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
 

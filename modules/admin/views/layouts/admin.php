@@ -4,6 +4,8 @@
  * User: comp
  * Date: 24.10.2017
  * Time: 14:26
+ *
+ * Админский layout сайта
  */
 
 /* @var $this \yii\web\View */
@@ -14,6 +16,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\common\controllers\AdminController;
+use app\controllers\SiteController;
+use app\controllers\TraderController;
 
 AdminAsset::register($this);
 ?>
@@ -31,8 +35,6 @@ AdminAsset::register($this);
     </head>
     <body>
     <?php $this->beginBody() ?>
-    
-    <!-- todo: Подрубить сюда константные урлы -->
 
     <div class="wrap">
         <?php
@@ -56,10 +58,10 @@ AdminAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Открыть сайт', 'url' => ['/site/index'], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'Справочник квестов', 'url' => ['/site/quests'], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'База ключей', 'url' => ['/site/keys'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'Список новостей', 'url' => ['/site/news'] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Открыть сайт', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_INDEX)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Справочник квестов', 'url' => [TraderController::getUrlRoute(TraderController::ACTION_QUESTS)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'База ключей', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_KEYS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Список новостей', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_NEWS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 (
                     '<li>'
                     . Html::beginForm([AdminController::LOGOUT_URL], 'post')
@@ -76,18 +78,6 @@ AdminAsset::register($this);
     }
         ?>
 
-
-    <?php if(isset(Yii::$app->user->identity->user)): ?>
-        <?php if(Yii::$app->user->identity->id == 3): ?>
-            <!-- Style for moderator -->
-            <style>
-                [title='Удалить'], .btn.btn-danger {
-                    display: none;
-                }
-            </style>
-        <?php endif; ?>
-    <?php endif; ?>
-
         <div id="particles-js"></div>
         
         <div class="container padding-top-110">
@@ -98,7 +88,7 @@ AdminAsset::register($this);
                 <div style="display: none;">
                     <div class="row">
                         <div class="col-lg-12 auth-info relative">
-                            <div class="exit"><img class="exits-icon-admin" src="/img/exits-krest.png"></div>
+                            <div class="exit"><img class="exits-icon-admin" alt="Close-icon" src="/img/exits-krest.png"></div>
                             <p class="text-center auth-title">Учетные данные авторизованного пользователя</p>
                             <p class="auth-info">Логин: <span><?= Yii::$app->user->identity->user ?></span></p>
                             <p class="auth-info">Имя: <span><?= Yii::$app->user->identity->name ?></span></p>
@@ -119,14 +109,12 @@ AdminAsset::register($this);
     </div>
 
     <footer>
-
         <div class="container nobackground">
             <div class="row">
                 <div class="col-sm-12">
                     <p class="copyright text-right">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
                 </div>
-<span class="col-sm-12 counter-footer">
-</span>
+                <span class="col-sm-12 counter-footer"></span>
             </div>
         </div>
     </footer>
