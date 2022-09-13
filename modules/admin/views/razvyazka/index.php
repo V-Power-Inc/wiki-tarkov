@@ -27,8 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
             'name',
             [
                 'attribute' => 'marker_group',
@@ -43,8 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return  $data->customicon;
                 },
             ],
-            // 'content:ntext',
-            // 'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="baraholshik-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Создать новый квест', ['create'], ['class' => 'btn btn-success']) ?>
@@ -25,11 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
             'tab_number',
             'title',
-//            'content:ntext',
             'preview' => [
                 'format' => 'image',
                 'value' => function($data) {
@@ -37,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'date_create',
-            //           'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
