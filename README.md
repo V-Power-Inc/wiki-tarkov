@@ -1,212 +1,46 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+# Wiki Tarkov Project
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+## Описание
+Проект Wiki Tarkov - это версия базы знаний по игре Escape From Tarkov. Разрабатывался с 10 октября 2017г., претерпел множество изменений на пути своего становления. В августе 2022г. был проведен глобальный рефакторинг проекта. В настоящий момент пример проекта можно увидеть на домене: https://wiki-tarkov.ru
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+Проект реализован на фреймворке Yii2, в качестве веб-сервера используется Nginx. База данных на MariaDb. Реализована концепция CI/CD и автодеплой с помощью в Production ветку bitbucket pipelines. В проекте также присутствует docker инструкция для развертывания в том числе на локальном устройстве.
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+Проект приносит прибыль с помощью показов рекламы, полученной от РСЯ (Рекламная сеть Яндекса)
 
-DIRECTORY STRUCTURE
--------------------
+Проект включает в себя следующие модули:
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+- Описания торговцев по игре Escape From Tarkov. Детальные таблицы торговцев с предметами, которые вы можете купить у них на 4-х уровнях репутации.
+- Квесты, которые необходимо выполнять для торговцев для повышения репутации.
+- Справочник лута, который включает в себя более 900 позиций с детальной 2-х уровневой категоризацией и привязкой позиций к квестам торговцев.
+- Справочник ключей - база знаний с детальной информацией о видах ключей, для открывания различных помещений.
+- Справочник умений - содержит в себе подробную информацию о доступных умениях, влияниях умений а также различных способах их прокачки.
+- Новостной раздел - раздел новостей на сайте, с вебхуком для пуша новости в специальный раздел сервера Discord.
+- Интерактивные карты локаций - карты локаций по игре, с огромным количеством различных маркеров с информацией по различным секретным местам.
+- Список кланов - раздел, позволяющий зарегистрировать на сайте свой собственный клан с логотипом и ссылкой на сообщество. Также поддерживается возможность смотреть уже добавленные кланы (Только те, которые прошли модерацию).
+- Раздел "Часто задаваемые вопросы" - содержит список всех часто задаваемых вопросов и ответы на них.
+- Курсы валют - раздел для просмотра курсов валют евро, биткоина и доллара во внутриигровом мире, используется JS для мгновенного получения результата без перезагрузки страницы.
+- Админка - написанная с нуля модульная Yii2 админка, которая необходима для администрирования сайта.
+## Yii2 basic reworked 
+В процессе разработки использовалась Yii2 basic, однако под нужды проекта она была доработана, в связи с чем в проекте появились некоторые нюансы.
 
+> ``Важно:`` Была создана папка **common** в корне проекта (по аналогии с Yii2 Advanced шаблоном), куда были вынесены все необходимые изменения
 
+В папке common структура папок следующая:
+- controllers - контроллеры и трейты наследованные от базовых Yii'шных контроллеров
+- services - сервисы, для реализации различной логики
+- interfaces - папка с интерфейсами собственного производства
+- helpers - собственные классы хелперов наследованные от базовых Yii'шных
 
-REQUIREMENTS
-------------
+Также в папке common присутствует env.php файл, который помогает инициализировать DotEnv и указывает, какие переменные проекта являются критичными.
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+> ``Важно:``  В директорию config/web был добавлен файл bootstrap.php, в котором прописана логика, которая должна стать доступна до инициализации приложения.
 
+Вышеупомянутое стало возможно благодаря добавлению кода:
 
-INSTALLATION
-------------
+    require __DIR__ . '/config/bootstrap.php';
 
-### Install via Composer
+В файл yii.php до секций:
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-CONFIGURATION
--------------
-
-### Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
-```
-
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
-
-
-
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-```
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+    $application = new yii\console\Application($config);
+    $exitCode = $application->run();
+Это позволяет запустить файл с предустановками до инициализации приложения, такой подход пригодился в том числе по той причине, что был изменен стандартный Url менеджер на более продвинутый, с собственными доработками.  
