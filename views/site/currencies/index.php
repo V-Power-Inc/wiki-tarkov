@@ -6,6 +6,15 @@
  * Time: 17:30
  */
 
+/**
+ * @var $dollar Currencies - AR объект доллара
+ * @var $euro Currencies - AR объект евро
+ * @var $bitkoin Currencies - AR объект биткоина
+ */
+
+use yii\web\JqueryAsset;
+use app\models\Currencies;
+
 $this->title = 'Курс валют в Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
@@ -17,7 +26,7 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
@@ -186,8 +195,6 @@ $this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::c
                     <?= $this->render('/other/discord-widget.php'); ?>
                 <?php  $this->endCache(); } ?>
             </div>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>

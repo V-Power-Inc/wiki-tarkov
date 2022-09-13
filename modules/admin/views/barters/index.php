@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p class="alert alert-danger size-16"><b>Создавать записи нужно последоватьльно</b>, например если начали делать записи, <b>сначала нужно заполнить записи всех уровней конкретного торговца</b>, а только потом браться за другого - сортировка <b>по дате создания</b>.</p>
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Создать новую запись', ['create'], ['class' => 'btn btn-success']) ?>

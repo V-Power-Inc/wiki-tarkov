@@ -45,9 +45,6 @@ use mihaildev\elfinder\ElFinder;
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
 
-    <!-- Виджет datePicker тестируется - ниже стабильная строка для вывода даты -->
-    <?php // $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => false]) ?>
-
     <?= $form->field($model, 'enabled')->checkbox([
         'label' => 'Статья активна',
     ]); ?>

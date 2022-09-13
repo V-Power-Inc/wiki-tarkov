@@ -6,7 +6,10 @@
  * Time: 13:12
  */
 
-use app\components\AlertComponent;
+use yii\web\JqueryAsset;
+use \app\models\CatSkills;
+
+/* @var CatSkills $cat - объект категории справочника умений */
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -36,8 +39,8 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

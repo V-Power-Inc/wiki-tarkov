@@ -17,14 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 /*** Массив значений справочника лута для вывода разного количества записей ***/
 $values = [10,15, 25, 50, 75, 100, 150, 200, 250, 500];
 
+/** Даем возможность на этой странице изменять количество отображаемых предметов справочника лута */
 if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
     $dataProvider->pagination->pageSize=$_GET['per-page'];
 } else {
     $dataProvider->pagination->pageSize=10;
 }
-
-// todo: После работы Оружейника необходимо вернуть вьюху к нормальному состоянию
-
 ?>
 
 <style>
@@ -43,8 +41,6 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
 <div class="items-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Создать новый предмет', ['create'], ['class' => 'btn btn-success']) ?>
@@ -53,11 +49,14 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
 
     <div class="margins-vertical-20 custom-items-list-search">
         <label>Выберите количество записей для отображения:</label>
+
+        <!-- Даем возможность на этой странице менять количество отображаемых предметов из справочника лута -->
         <select class="form-control" onchange="location = this.value;">
             <?php foreach ($values as $value): ?>
                 <option value="<?= Html::encode(Url::current(['per-page' => $value, 'page' => null])) ?>" <?php if ($dataProvider->pagination->pageSize == $value): ?>selected="selected"<?php endif; ?>><?= $value ?></option>
             <?php endforeach; ?>
         </select>
+
     </div>
 
     <?= GridView::widget([
@@ -80,7 +79,7 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                 'attribute' => 'url',
                 'format' => 'raw',
                 'value' => function($url) {
-                    return 'https://wiki-tarkov.ru/loot/<b>'.$url->url.'</b>.html';
+                    return $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/loot/<b>'.$url->url.'</b>.html';
                 },
             ],
             // 'shortdesc:ntext',

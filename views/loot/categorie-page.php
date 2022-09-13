@@ -6,11 +6,15 @@
  * Time: 0:17
  */
 
+use yii\web\JqueryAsset;
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+use app\models\Category;
+
+/* @var Category $cat - AR объект категории справочника лута */
 
 $this->title = "Escape from Tarkov: " . $cat['title'];
 
@@ -40,9 +44,9 @@ $this->registerMetaTag([
     'content' => $cat['description'],
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

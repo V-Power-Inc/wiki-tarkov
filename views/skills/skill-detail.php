@@ -6,6 +6,11 @@
  * Time: 19:19
  */
 
+use yii\web\JqueryAsset;
+use app\models\Items;
+
+/* @var Items $item - объект справочника лута */
+
 /** Преобразуем title в нижний регистр **/
 $lowertitle = mb_strtolower($item->title);
 
@@ -21,9 +26,9 @@ $this->registerMetaTag([
     'content' => $item->keywords,
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

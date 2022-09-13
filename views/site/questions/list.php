@@ -6,7 +6,12 @@
  * Time: 13:45
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use yii\widgets\LinkPager;
+use yii\data\Pagination;
+
+/* @var Pagination $pagination - объекта класса пагинации */
+
 $this->title = 'Escape from Tarkov: Часто задаваемые вопросы';
 $this->registerMetaTag([
     'name' => 'description',
@@ -18,8 +23,8 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov - часто задаваемые вопросы',
 ]);
 
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-use yii\widgets\LinkPager;
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
@@ -31,47 +36,45 @@ use yii\widgets\LinkPager;
 
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
 
-            <!-- Стиль текста для вопросов и ответов -->
             <!-- question-content -->
-    <?php if(!empty($questions)) : ?>
-        <?php foreach($questions as $k => $item): ?>
+            <?php if(!empty($questions)) : ?>
+                <?php foreach($questions as $k => $item): ?>
 
-            <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
-                <!-- feed recomendations -->
-                <div class="question-block bg-white" style="height: auto; min-height: 180px; display: block;">
-                    <?= $this->render('/other/adsense-questions-feed.php'); ?>
-                </div>
-            <?php endif; ?>
+                    <?php if(in_array($k,Yii::$app->params['keysBlocks'])): ?>
+                        <!-- feed recomendations -->
+                        <div class="question-block bg-white" style="height: auto; min-height: 180px; display: block;">
+                            <?= $this->render('/other/adsense-questions-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
 
-            <div class="question-block bg-white">
-                <h2 class="question-title"><?=$item['title'] ?></h2>
-                
-                <div class="toggle-block slide">
-                    <div class="js-slide-hidden slide" style="display: none;">
-                        <?=$item['content'] ?>
+                    <div class="question-block bg-white">
+                        <h2 class="question-title"><?=$item['title'] ?></h2>
+
+                        <div class="toggle-block slide">
+                            <div class="js-slide-hidden slide" style="display: none;">
+                                <?=$item['content'] ?>
+                            </div>
+                            <a class="btn btn-default main-link float-right mobile-btn-margin opener" href="javascript:void(0)"><span>Читать ответ</span><em>Скрыть ответ</em></a>
+                        </div>
                     </div>
-                    <a class="btn btn-default main-link float-right mobile-btn-margin opener" href="javascript:void(0)" display="block"><span>Читать ответ</span><em>Скрыть ответ</em></a>
-                </div>
-            </div>
-        <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        <div class="col-lg-12 pagination text-center">
-            <?= LinkPager::widget([
-                'pagination' => $pagination,
-                'firstPageLabel' => 'первая',
-                'lastPageLabel' => 'последняя',
-                'prevPageLabel' => '&laquo;',
-                'prevPageLabel' => '&laquo;',
-            ]);
-            ?>
-        </div>
-    <?php elseif(empty($questions)): ?>
-            <div class="question-block bg-white">
-                <div class="col-lg-12" style="margin-top: 27px;">
-                    <p class="alert alert-danger size-16">Данный раздел находится на стадии заполнения.</p>
+                <div class="col-lg-12 pagination text-center">
+                    <?= LinkPager::widget([
+                        'pagination' => $pagination,
+                        'firstPageLabel' => 'первая',
+                        'lastPageLabel' => 'последняя',
+                        'prevPageLabel' => '&laquo;'
+                    ]);
+                    ?>
                 </div>
-            </div>
-    <?php endif; ?>
+            <?php elseif(empty($questions)): ?>
+                    <div class="question-block bg-white">
+                        <div class="col-lg-12" style="margin-top: 27px;">
+                            <p class="alert alert-danger size-16">Данный раздел находится на стадии заполнения.</p>
+                        </div>
+                    </div>
+            <?php endif; ?>
 
             <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>
@@ -79,7 +82,6 @@ use yii\widgets\LinkPager;
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-
 
         </div>
 
@@ -96,13 +98,9 @@ use yii\widgets\LinkPager;
 
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
-            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>
-
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
+            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true"></iframe>
 
         </div>
-
 
     </div>
 </div>

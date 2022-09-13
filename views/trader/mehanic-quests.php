@@ -6,7 +6,12 @@
  * Time: 13:20
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use app\models\Mehanic;
+
+/* @var Mehanic[] $mehanic - объект квестов механика */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Механика в Escape from Tarkov. Разбор и прохождение квестов Механика.';
 $this->registerMetaTag([
     'name' => 'description',

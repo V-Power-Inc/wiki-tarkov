@@ -1,8 +1,10 @@
 <?php
 
+use yii\web\JqueryAsset;
+
 /* @var $this yii\web\View */
-$this->registerJsFile('js/owl-init.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/owl-init.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'База знаний Escape from Tarkov. Карты локаций, ключи от дверей, разбор квестов торговцев';
 
 $this->registerMetaTag([
@@ -19,23 +21,23 @@ $this->registerMetaTag([
 <div class="owl-carousel owl-theme">
 
     <div class="owl-item">
-        <img src="/img/slider/eft-2.jpg">
+        <img src="/img/slider/eft-2.jpg" alt="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-1.jpg">
+        <img src="/img/slider/eft-1.jpg" alt="Escape from Tarkov: Игровые скриншоты">
     </div>
     
     <div class="owl-item">
-        <img src="/img/slider/eft-3.jpg">
+        <img src="/img/slider/eft-3.jpg" alt="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-4.jpg">
+        <img src="/img/slider/eft-4.jpg" alt="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-5.jpg">
+        <img src="/img/slider/eft-5.jpg" alt="Escape from Tarkov: Игровые скриншоты">
     </div>
     
 </div>
@@ -123,26 +125,16 @@ $this->registerMetaTag([
                         </div>
                     </div>
 
-
                     <!-- Виджет Discord -->
-                    
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
                         <div class="margin-top-20">
-                            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true" frameborder="0"></iframe>
+                            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true"></iframe>
                         </div>
 
                         <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
-
                     </div>
                     
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                        <div style="margin-top: 11px;">
-                            <?= $this->render('/other/yandex-donate.php'); ?>
-                        </div>
-                    </div>
-
-
+                    <!-- Dop. content block -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
                         <?= $this->render('/other/google-gor.php'); ?>
                     </div>

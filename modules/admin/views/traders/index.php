@@ -38,8 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
             'title',
             'sortir',
             'preview' => [
@@ -50,12 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'content',
             'enabled',
-            //'urltoquets:url',
-            //'urltodetail:url',
-            // 'button_quests',
-            // 'button_detail',
-            // 'bg_style:ntext',
-            // 'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

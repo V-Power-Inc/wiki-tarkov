@@ -25,14 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'urltodetail') ?>
 
-    <?php // echo $form->field($model, 'button_quests') ?>
-
-    <?php // echo $form->field($model, 'button_detail') ?>
-
-    <?php // echo $form->field($model, 'bg_style') ?>
-
-    <?php // echo $form->field($model, 'enabled') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
