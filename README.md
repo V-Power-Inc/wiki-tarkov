@@ -107,7 +107,23 @@
 ## Functional&Unit тестирование
 В проекте реализовано функциональное и Unit тестирование с использованием Codeception. Всего написано 260 методов тестирования с 1057 ожиданиями определенных результатов. В процессе тестирования использовались фикстуры для баз данных, как независимые, так и взаимосвязанные.
 Unit тестирование было написано исключительно для таблиц баз данных. Функциональное для проверки работоспособности функционала как ожидается (Рендеринг страниц, определенные результаты на ней, реклама и кукисы).
+Запуск Unit тестов возможен стандартной командой в корневой директории проекта, однако - чтобы не было проблем рекомендуется такая последовательность, на выходе все тесты пройдут (13_09_2022):
 
+    redis-cli flushall  
+    vendor/bin/codecept run tests/functional/PraporCest  
+    vendor/bin/codecept run tests/functional/MirotvorecCest  
+    vendor/bin/codecept run tests/functional/MehanicCest  
+    vendor/bin/codecept run tests/functional/TerapevtCest  
+    vendor/bin/codecept run tests/functional/LyjnicCest  
+    vendor/bin/codecept run tests/functional/SkypshikCest  
+    vendor/bin/codecept run tests/functional/BaraholshikCest  
+    vendor/bin/codecept run tests/functional/ItemsCest  
+    vendor/bin/codecept run tests/functional/LootMainpageCest
+    
+    vendor/bin/codecept run unit
+    
+    vendor/bin/codecept run
+![enter image description here](https://wiki-tarkov.ru/img/admin/testing.gif)
 Тестирование было разработано для следующего функционала:
 
  - Интерактивные карты
@@ -118,5 +134,70 @@ Unit тестирование было написано исключительн
  - Детальные страницы справочника лута
 
 Вышеупомянутый функционал составляет примерно 70% проекта.
+## Развертывание проекта через docker-compose up
 
+Перед тем как локально развертывать проект, вам необходимо установить docker и docker-compose, в качестве альтернативы на личном устройстве можно использовать DockerDesktop.
+Также на устройстве должен быть установлен Git.
+Подробнее про Docker: https://www.docker.com/products/docker-desktop/
+Подробнее про Git: https://git-scm.com/download
 
+Дальнейшая инструкция подразумевает что у вас уже установлено необходимое ПО.
+
+Первым делом клонируем репозиторий, например так:
+
+    git clone https://PC_Principal@bitbucket.org/PC_Principal/eft-locations-map.git
+
+Создаем в корне проекта файл .env и заполняем его например вот так (Можно и своими данными, слева обязательные переменные):
+
+    # Environment  
+    ENVIRONMENT=dev  
+      
+    # Debug status  
+    DEBUG_STATUS=true  
+      
+    # Database  
+    # ---------------------  
+    DB_DSN=mysql:host=db;dbname=dev_db 
+    DB_NAME=dev_db 
+    DB_USER=usr_test  
+    DB_PASSWORD=passworDed
+    DB_CHARSET=utf8  
+      
+    # Database - unit tests  
+    DB_TEST_DSN=mysql:host=db;dbname=for_test_db  
+    DB_TEST_NAME=for_test_db    
+    DB_TEST_USER=usr_test  
+    DB_TEST_PASSWORD=passworDed 
+    DB_TEST_CHARSET=utf8  
+      
+    # Redis Host  
+    REDIS_HOST='redis'  
+      
+    # Domain Credentials  
+    DOMAIN_PROTOCOL=https://  
+    DOMAIN=wiki-tarkov.ru
+Домен и протокол можно указать и свои, это для продакшена. Мы все равно будем на localhost.
+
+Теперь переходим в корень проекта и запускам следующую команду (Docker должен быть уже запущен):
+
+    docker-compose up
+У нас начнется продолжительный процесс инициализации докер контейнеров, после того как все будет готово у нас будут контейнеры со следующими именами:
+- app - отсюда запускаем yii и php комманды
+- db - здесь можем залогиниться и выполнять команды от пользователя MariaDB
+- redis - сюда заходить для команд с RedisCache
+- web - здесь работает веб-сервер Nginx, обычно сюда не надо
+
+>  Важно помнить что докер в процессе работы создает свою рабочую сеть, поэтому **здесь можно забыть про обращения к сервисам по localhost**. Как localhost в браузере доступен только наш сайт, потому что в конфиге docker-compose.yml ему был проброшен 80 порт, для работы с другими службами нужно обращаться к ним только через терминал по имени службы.
+
+Как только докер закончит скачку необходимых образов и будет готов к работе, выполняем команду:
+
+- docker-compose exec -T app php yii migrate
+
+Таким образом мы применим миграции к for_test_db внутри докер контейнера. Если есть необходимость создать дополнительную базу для тестов, ее нужно называть в соответствии с DB_TEST_NAME из .env файла.
+
+Все остальные команды можно запускать аналогично вышеупомянутому примеру.
+## Заключение
+
+В рамках работы над этим проектом были сильно повышены навыки, применение миграций, создание CI/CD концепции развития продукта, а также строгие комментарии и следование PSR стандартам делают этот репозиторий неплохим учебным развитием для любителей обучаться новым и продвинутым технологиям.
+
+Конечно в проекте не все идеально, но т.к. это pet-project - здесь для любой ситуации возможны исключения, так или иначе проект регулярно дорабатывается по мере необходимости.
