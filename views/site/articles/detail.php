@@ -6,7 +6,9 @@
  * Time: 14:19
  */
 
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+
+$this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model['title'];
 $this->registerMetaTag([
     'name' => 'description',
@@ -90,8 +92,6 @@ $this->registerMetaTag([
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
         
         </div>
 

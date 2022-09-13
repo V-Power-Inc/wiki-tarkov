@@ -6,6 +6,7 @@
  * Time: 12:24
  */
 
+use yii\web\JqueryAsset;
 use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Список кланов";
@@ -20,7 +21,7 @@ $this->registerMetaTag([
     'content' => 'Список кланов Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
@@ -112,8 +113,6 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [\yii\web\JqueryAsset::
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
                 <?= $this->render('/other/discord-widget.php'); ?>
             <?php  $this->endCache(); } ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
 

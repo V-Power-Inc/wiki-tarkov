@@ -17,8 +17,12 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
-/** @var $form_model Doorkeys */
-/** @var $formValue string */
+/**
+ * @var Doorkeys $form_model
+ * @var string $formValue
+ * @var Doorkeys $keysearch
+ */
+
 ?>
 <div class="container">
     <div class="row">
@@ -80,7 +84,7 @@ $this->registerMetaTag([
 
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$keys['url']?>"><?=$keys['name']?></a></p>
-                        <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$keys['preview']?>"></a>
+                        <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" alt="<?=$keys['name']?>" src="<?=$keys['preview']?>"></a>
                         <div class="item-content"><?=$keys['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -100,9 +104,6 @@ $this->registerMetaTag([
 
             <!-- Виджет дискорда -->
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <!-- todo: Это вычистить отовсюду -->
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
     </div>

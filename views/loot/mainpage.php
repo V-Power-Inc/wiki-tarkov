@@ -6,11 +6,15 @@
  * Time: 19:19
  */
 
+use yii\web\JqueryAsset;
 use app\components\LeftmenuWidget;
 use yii\widgets\LinkPager;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+use app\models\Items;
+
+/** @var Items[] $items - массив AR объектов справочника лута */
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";
 
@@ -24,9 +28,9 @@ $this->registerMetaTag([
     'content' => 'Escape from Tarkov: Полная база данных лута',
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

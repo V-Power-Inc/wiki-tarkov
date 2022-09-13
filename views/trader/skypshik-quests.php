@@ -6,7 +6,12 @@
  * Time: 22:38
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use app\models\Skypshik;
+
+/* @var Skypshik[] $skypshik - объект квестов скупщика */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Скупщика в Escape from Tarkov. Разбор и прохождение квестов Скупщика.';
 $this->registerMetaTag([
     'name' => 'description',

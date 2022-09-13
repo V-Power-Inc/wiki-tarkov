@@ -6,6 +6,8 @@
  * Time: 17:30
  */
 
+use yii\web\JqueryAsset;
+
 $this->title = 'Курс валют в Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',
@@ -17,7 +19,9 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+// todo: Рефакторинг комментов для валютных переменных
+
+$this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
@@ -186,8 +190,6 @@ $this->registerJsFile('js/currencies.js', ['depends' => [\yii\web\JqueryAsset::c
                     <?= $this->render('/other/discord-widget.php'); ?>
                 <?php  $this->endCache(); } ?>
             </div>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>

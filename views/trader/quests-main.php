@@ -5,6 +5,11 @@
  * Date: 22.10.2017
  * Time: 15:15
  */
+
+use app\models\Traders;
+
+/* @var Traders[] $traders - массив объектов трейдеров */
+
 $this->title = 'Торговцы в Escape from Tarkov - описания торговцев и разбор квестов';
 
 $this->registerMetaTag([

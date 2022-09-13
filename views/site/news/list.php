@@ -6,7 +6,14 @@
  * Time: 14:28
  */
 
+use yii\data\Pagination;
 use yii\widgets\LinkPager;
+use app\models\News;
+
+/**
+ * @var News[] $news - массив AR объектов класса новостей
+ * @var Pagination $pagination - объект пагинации
+ */
 
 $this->title = 'Новости по онлайн-шутеру Escape from Tarkov.';
 $this->registerMetaTag([
@@ -65,8 +72,7 @@ $this->registerMetaTag([
                         'pagination' => $pagination,
                         'firstPageLabel' => 'первая',
                         'lastPageLabel' => 'последняя',
-                        'prevPageLabel' => '&laquo;',
-                        'prevPageLabel' => '&laquo;',
+                        'prevPageLabel' => '&laquo;'
                     ]);
                     ?>
                 </div>
@@ -87,8 +93,6 @@ $this->registerMetaTag([
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
         

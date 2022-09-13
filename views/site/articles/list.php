@@ -7,6 +7,13 @@
  */
 
 use yii\widgets\LinkPager;
+use app\models\Articles;
+use yii\data\Pagination;
+
+/**
+ * @var Articles[] $news - массив AR объектов полезных материалов
+ * @var Pagination $pagination - объект пагинации
+ */
 
 $this->title = 'Полезные статьи по Escape from Tarkov';
 $this->registerMetaTag([
@@ -71,8 +78,7 @@ $this->registerMetaTag([
                         'pagination' => $pagination,
                         'firstPageLabel' => 'первая',
                         'lastPageLabel' => 'последняя',
-                        'prevPageLabel' => '&laquo;',
-                        'prevPageLabel' => '&laquo;',
+                        'prevPageLabel' => '&laquo;'
                     ]);
                     ?>
                 </div>
@@ -93,8 +99,6 @@ $this->registerMetaTag([
             <!-- Виджет дискорда -->
             <div class="margin-top-20"></div>
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
         

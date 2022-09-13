@@ -1,6 +1,11 @@
 <?php
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use app\models\Mirotvorec;
+
+/* @var Mirotvorec[] $mirotvorec - объект квестов миротворца */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Миротворца в Escape from Tarkov. Разбор и прохождение квестов Миротворца.';
 $this->registerMetaTag([
     'name' => 'description',

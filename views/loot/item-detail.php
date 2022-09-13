@@ -6,7 +6,14 @@
  * Time: 19:19
  */
 
+use yii\web\JqueryAsset;
 use app\components\LeftmenuWidget;
+use kartik\typeahead\Typeahead;
+use yii\helpers\Url;
+use yii\web\JsExpression;
+use app\models\Items;
+
+/* @var Items $item - AR объект предмета справочника лута */
 
 $this->title = "Escape from Tarkov: $item->title";
 
@@ -20,13 +27,9 @@ $this->registerMetaTag([
     'content' => $item->keywords,
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
-use kartik\typeahead\Typeahead;
-use yii\helpers\Url;
-use yii\web\JsExpression;
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <style>
     img.image-link {

@@ -6,7 +6,12 @@
  * Time: 13:51
  */
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use app\models\Baraholshik;
+
+/* @var Baraholshik[] $baraholshik - объект квестов барахольщка */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Барахольщика в Escape from Tarkov. Разбор и прохождение квестов Барахольщика.';
 $this->registerMetaTag([
     'name' => 'description',
