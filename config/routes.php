@@ -66,9 +66,6 @@ return [
         'class' => 'app\components\UrlComponent',
     ],
     [
-        'class' => 'app\components\SkillsurlComponent',
-    ],
-    [
         'class' => 'app\components\CategoryurlComponent',
     ]
 ];
