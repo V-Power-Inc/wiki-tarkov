@@ -55,6 +55,14 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
             } elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
                 return ['skills/skillscategory',['name'=>$matches[3]]];
             }
+        } elseif ($ppp[0] == 'loot') {
+            if(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+                return ['loot/category',['name'=>$matches[5]]];
+            } elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+                return ['loot/category',['name'=>$matches[3]]];
+            } elseif(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+                return ['item/detailloot', ['item' => $matches[3]]];
+            }
         }
 
         return false;
