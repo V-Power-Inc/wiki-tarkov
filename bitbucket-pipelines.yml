@@ -156,4 +156,6 @@ pipelines:
             - cat known_hosts >> ~/.ssh/known_hosts
             - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
             - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin master'
+            # Этого мы не делаем, т.к. изначально Prod накатывался SQL дампом
+            # - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && php yii migrate --interactive=0'
             - echo "Затянули ветку master с BitBucket успешно"
