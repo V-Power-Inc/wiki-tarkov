@@ -28,8 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
             'title',
             'site_title',
             [
@@ -37,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'trader_group',
                 'filter' => Html::activeDropDownList($searchModel,'trader_group',ArrayHelper::map(Barters::find()->asArray()->all(), 'trader_group', 'trader_group'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
             ],
-            // 'content:ntext',
             'date_create',
             'enabled',
 

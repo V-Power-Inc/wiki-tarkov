@@ -4,6 +4,9 @@ namespace app\modules\admin;
 
 /**
  * admin module definition class
+ *
+ * Class Admin
+ * @package app\modules\admin
  */
 class Admin extends \yii\base\Module
 {
@@ -18,7 +21,5 @@ class Admin extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-        // custom initialization code goes here
     }
 }

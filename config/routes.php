@@ -61,14 +61,8 @@ return [
     'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
     'loot/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
 
-    // Пока оставляем это так, т.к. в предыдущем варианте компоненты не работали
+    /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',
-    ],
-    [
-        'class' => 'app\components\SkillsurlComponent',
-    ],
-    [
-        'class' => 'app\components\CategoryurlComponent',
     ]
 ];

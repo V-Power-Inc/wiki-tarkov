@@ -161,8 +161,6 @@ class TraderController extends AdvancedController
     public function actionPreviewtrader(): string
     {
         if(Yii::$app->user->isGuest !== true) {
-            // Отключаем CSRF валидацию POST запросов
-            $this->enableCsrfValidation=false;
             $trader = new Traders;
             $trader->load(Yii::$app->request->post());
             return $this->render('trader-preview', ['trader' => $trader]);

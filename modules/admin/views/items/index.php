@@ -64,8 +64,6 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-           // 'id',
             'title',
             'preview' => [
                 'attribute' => 'preview',
@@ -82,8 +80,6 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                     return $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/loot/<b>'.$url->url.'</b>.html';
                 },
             ],
-            // 'shortdesc:ntext',
-            // 'quest_item',
             'date_create',
             'date_update',
             'creator' => [
@@ -96,18 +92,10 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                         return '<span class="not-set">Не определен</span>';
                     }
                 },
-                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Items::find()->where(['is not','creator',null])->asArray()->all(), 'creator', 'creator'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
+                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Items::find()->where(['is not','creator',null])->groupBy(['creator'])->asArray()->all(), 'creator', 'creator'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
             ],
-            // 'trader_group',
-            // 'content:ntext',
-            // 'active',
             
-// Ниже узнаем по связи название родительской категории из связанной таблицы
-//            [
-//                'attribute' => 'parentcat_id',
-//                'value' => 'parentcat.title',
-//            ],
-
+            /** Ниже узнаем по связи название родительской категории из связанной таблицы */
             [
                 'attribute' => 'parentcat_id',
                 'value' => 'parentcat.title',
