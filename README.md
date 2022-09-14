@@ -60,7 +60,7 @@
     public static function getUrlRoute(string $action, array $params = []): array
     public static function routeId(string $action): string
 
-**getUrlRoute** при мередаче ему имени экшена, создает урлы вида controllerId/ActionId, также отлично работает и с модульными путями, его мы всегда будет вызывать при указании маршрутов в логике.
+**getUrlRoute** при мередаче ему имени экшена, создает урлы вида controllerId/ActionId, также отлично работает и с модульными путями, его мы всегда будем вызывать при указании маршрутов в логике.
 
 **routeId** - этот метод делает тоже самое, что и верхний, но используется исключительно в файле маршрутов.
 
