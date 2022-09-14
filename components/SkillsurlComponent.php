@@ -20,7 +20,7 @@ use Yii;
 class SkillsurlComponent implements UrlRuleInterface
 {
     /**
-     * Урл компонент для маршрутизации каткгорий справочника лута
+     * Урл компонент для маршрутизации категорий справочника умений
      *
      * @param \yii\web\UrlManager $manager
      * @param \yii\web\Request $request
@@ -28,6 +28,7 @@ class SkillsurlComponent implements UrlRuleInterface
      */
     public function parseRequest($manager, $request)
     {
+        // todo: Отрефакторить это, уверен без этого можно обойтись
         $site = stristr(Yii::$app->request->url,'/site/'); // Проверка на контроллер site
         $admin = stristr(Yii::$app->request->url,'/admin/'); // Проверка на модуль админа
         $maps = stristr(Yii::$app->request->url,'/maps/'); // Проверка на интерактивные карты
@@ -55,6 +56,7 @@ class SkillsurlComponent implements UrlRuleInterface
      */
     public function createUrl($manager, $route, $params)
     {
-        return false; // Данное правило неприменимо
+        /** Возаращем false в этом методе */
+        return false;
     }
 }

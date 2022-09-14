@@ -68,8 +68,6 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
 
     <?= $form->field($model, 'search_words')->textInput(['maxlength' => true])->textarea(['rows' => 6]) ?>
 
-    <?php // $form->field($model, 'module_weapon')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'date_create')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'active')->checkbox([

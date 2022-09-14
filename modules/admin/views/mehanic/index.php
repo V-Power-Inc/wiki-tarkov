@@ -23,11 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-//            'id',
             'tab_number',
             'title',
-//            'content:ntext',
             'preview' => [
                 'format' => 'image',
                 'value' => function($data) {
@@ -35,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'date_create',
-            //           'date_edit',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

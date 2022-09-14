@@ -90,7 +90,7 @@ final class DoorkeysController extends AdminController implements CrudInterface
         $model = $this->findModel($id);
         $model->uploadPreview();
         
-        //Преобразуем строку employees в массив
+        /** Преобразуем строку с группой карт в массив */
         $nn=preg_split('/\s*,\s*/',trim($model->mapgroup),-1,PREG_SPLIT_NO_EMPTY);
         $mapgroup=array();
         foreach ($nn as $pr) {

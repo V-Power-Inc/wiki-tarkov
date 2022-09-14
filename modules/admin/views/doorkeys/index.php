@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="doorkeys-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Добавить новый ключ', ['create'], ['class' => 'btn btn-success']) ?>
@@ -36,8 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'url',
-            // 'active',
-            // 'date_create',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -58,10 +58,10 @@ AdminAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Открыть сайт', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_INDEX)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'Справочник квестов', 'url' => [TraderController::getUrlRoute(TraderController::ACTION_QUESTS)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'База ключей', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_KEYS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
-                ['label' => 'Список новостей', 'url' => [SiteController::getUrlRoute(SiteController::ACTION_NEWS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Открыть сайт', 'url' => ['/' . SiteController::routeId(SiteController::ACTION_INDEX)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Справочник квестов', 'url' => ['/' . TraderController::routeId(TraderController::ACTION_QUESTS)], 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'База ключей', 'url' => ['/' . SiteController::routeId(SiteController::ACTION_KEYS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
+                ['label' => 'Список новостей', 'url' => ['/' . SiteController::routeId(SiteController::ACTION_NEWS)] , 'linkOptions' => ['target' => '_blank', 'style'=>'width: 170px;']],
                 (
                     '<li>'
                     . Html::beginForm([AdminController::LOGOUT_URL], 'post')

@@ -25,10 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'link') ?>
 
-    <?php // echo $form->field($model, 'date_create') ?>
-
-    <?php // echo $form->field($model, 'moderated') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
