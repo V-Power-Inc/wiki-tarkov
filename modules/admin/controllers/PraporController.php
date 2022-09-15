@@ -32,7 +32,7 @@ final class PraporController extends AdminController implements CrudInterface
     }
 
     /**
-     * Lists all Prapor models.
+     * Lists all Prapor models
      * @return string
      */
     public function actionIndex(): string
