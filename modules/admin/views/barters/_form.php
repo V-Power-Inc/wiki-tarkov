@@ -24,6 +24,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
 
     <label class="label label-info margin-bottom-20 adm">Название на сайте должно быть например следующим - LVL 1, или например LVL 2.</label>
 
+    <!-- todo: Хардкод списки -->
     <?= $form->field($model, 'trader_group')->dropDownList([
             'Прапор' => 'Прапор',
             'Терапевт' => 'Терапевт',
@@ -32,6 +33,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
             'Миротворец' => 'Миротворец',
             'Механик' => 'Механик',
             'Барахольщик' => 'Барахольщик',
+            'Егерь' => 'Егерь'
         ])
     ?>
 
