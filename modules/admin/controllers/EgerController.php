@@ -66,6 +66,7 @@ final class EgerController extends AdminController implements CrudInterface
     public function actionCreate()
     {
         $model = new Eger();
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -86,6 +87,7 @@ final class EgerController extends AdminController implements CrudInterface
     public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
+        $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

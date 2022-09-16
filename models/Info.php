@@ -65,7 +65,7 @@ class Info extends \yii\db\ActiveRecord
 
             [static::ATTR_BGSTYLE, StringValidator::class, StringValidator::ATTR_MAX => 200],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
         ];
     }
 
