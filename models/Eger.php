@@ -13,17 +13,17 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "terapevt".
+ * This is the model class for table "eger".
  *
- * @property integer $id
- * @property integer $tab_number
- * @property string $title
- * @property string $content
- * @property string $date_create
- * @property string $date_edit
- * @property string $preview
+ * @property int $id ID primary key
+ * @property int $tab_number Номер таба квеста
+ * @property string $title Название квеста
+ * @property string $content Содержимое квеста
+ * @property string $date_create Дата создания квеста
+ * @property string $date_edit Дата обновления квеста
+ * @property string $preview Превьюшка квеста
  */
-class Terapevt extends ActiveRecord
+class Eger extends \yii\db\ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
@@ -43,7 +43,7 @@ class Terapevt extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'terapevt';
+        return 'eger';
     }
 
     /**
@@ -105,9 +105,8 @@ class Terapevt extends ActiveRecord
      *
      * @return ActiveRecord[]
      */
-    public static function takeQuestsTerapevt()
+    public static function takeQuestsEger()
     {
-        return static::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+        return Eger::find()->orderby([static::ATTR_TAB_NUMBER=>SORT_ASC])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }
-
 }

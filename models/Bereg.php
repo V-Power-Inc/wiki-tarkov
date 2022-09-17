@@ -88,7 +88,7 @@ class Bereg extends \yii\db\ActiveRecord
 
             [static::ATTR_DATE_UPDATE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
         ];
     }
 

@@ -135,7 +135,7 @@ class Items extends ActiveRecord
                     [static::ATTR_PARENTCAT_ID => Category::ATTR_ID]
             ],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
         ];
     }
 

@@ -15,6 +15,7 @@ use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
+use app\models\Eger;
 use yii\web\HttpException;
 
 /**
@@ -57,6 +58,9 @@ final class TradersService
                 return $mirotvorec;
             case 'baraholshik':
                 $baraholshik = Baraholshik::takeQuestsBaraholshik();
+                return $baraholshik;
+            case 'eger':
+                $baraholshik = Eger::takeQuestsEger();
                 return $baraholshik;
         }
 

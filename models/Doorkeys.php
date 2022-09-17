@@ -93,7 +93,7 @@ class Doorkeys extends ActiveRecord
 
             [static::ATTR_MAPGROUP, SafeValidator::class],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
         ];
     }
 
