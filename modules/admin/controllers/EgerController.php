@@ -3,27 +3,26 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Prapor;
-use app\models\PraporSearch;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use app\models\Eger;
+use app\models\EgerSearch;
 use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * PraporController implements the CRUD actions for Prapor model.
+ * EgerController implements the CRUD actions for Eger model.
  */
-final class PraporController extends AdminController implements CrudInterface
+final class EgerController extends AdminController implements CrudInterface
 {
     /**
-     * Описание метода указывающего разрешения (Наследуется от Yii)
-     * @return array
+     * {@inheritdoc}
      */
     public function behaviors(): array
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -32,12 +31,12 @@ final class PraporController extends AdminController implements CrudInterface
     }
 
     /**
-     * Lists all Prapor models
-     * @return string
+     * Lists all Eger models.
+     * @return mixed
      */
     public function actionIndex(): string
     {
-        $searchModel = new PraporSearch();
+        $searchModel = new EgerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,9 +46,9 @@ final class PraporController extends AdminController implements CrudInterface
     }
 
     /**
-     * Displays a single Prapor model.
+     * Displays a single Eger model.
      * @param integer $id
-     * @return string
+     * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id): string
@@ -60,27 +59,28 @@ final class PraporController extends AdminController implements CrudInterface
     }
 
     /**
-     * Creates a new Prapor model.
+     * Creates a new Eger model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prapor();
+        $model = new Eger();
         $model->uploadPreview();
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Prapor model.
+     * Updates an existing Eger model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id - id параметр
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -91,39 +91,40 @@ final class PraporController extends AdminController implements CrudInterface
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Prapor model.
+     * Deletes an existing Eger model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id - id параметр
+     * @param integer $id
      * @return mixed
-     * @throws
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Prapor model based on its primary key value.
+     * Finds the Eger model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id - id параметр
-     * @return Prapor the loaded model
+     * @param integer $id
+     * @return Eger the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel(int $id)
     {
-        if (($model = Prapor::findOne($id)) !== null) {
+        if (($model = Eger::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -97,7 +97,7 @@ class Skills extends ActiveRecord
                     [static::ATTR_CATEGORY => CatSkills::ATTR_ID]
             ],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
         ];
     }
 
