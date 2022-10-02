@@ -16,9 +16,9 @@ definitions:
           - docker
         caches:
           - docker
-        runs-on:
-          - self.hosted
-          - linux
+#        runs-on:
+#          - self.hosted
+#          - linux
         script:
           # Экспоритруем переменные зашитые в битбакет для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
@@ -46,9 +46,9 @@ definitions:
           - docker
         caches:
           - docker
-        runs-on:
-          - self.hosted
-          - linux
+#        runs-on:
+#          - self.hosted
+#          - linux
         script:
           # Экспортируем переменные зашитые в битбакет для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
@@ -125,9 +125,9 @@ definitions:
 
 # Все виды конвейеров
 pipelines:
-  default:
-  - step: *Build
-  - step: *Test
+#  default:
+#  - step: *Build
+#  - step: *Test
 
   # Кастомные экшены - дублируют основные
   custom:
@@ -148,9 +148,9 @@ pipelines:
       - step:
           image: atlassian/default-image:latest
           name: Deploy master to Prod
-          runs-on:
-            - self.hosted
-            - linux
+#          runs-on:
+#            - self.hosted
+#            - linux
           deployment: Production
           script:
             - mkdir -p ~/.ssh
