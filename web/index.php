@@ -1,7 +1,7 @@
 <?php
 
-// comment out the following two lines when deployed to production
-defined('YII_DEBUG') or define('YII_DEBUG', true);
+// Это переменные окружения приложения, работают через DotEnv файл
+defined('YII_DEBUG') or define('YII_DEBUG', filter_var($_ENV['DEBUG_STATUS'], FILTER_VALIDATE_BOOLEAN));
 defined('YII_ENV') or define('YII_ENV', $_ENV['ENVIRONMENT']);
 
 require __DIR__ . '/../vendor/autoload.php';
