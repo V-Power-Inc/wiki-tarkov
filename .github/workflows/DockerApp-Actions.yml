@@ -2,14 +2,14 @@ name: DockerApp Actions with Project
 
 on:
   push:
-    branches: [ "github-pipelines" ]
+    branches: *
   pull_request:
-    branches: [ "github-pipelines" ]
+    branches: ["dev","master"]
 
 # Существующие задачи 
 jobs:
   # Собираем проект
-  build:
+  Build (Docker-compose up & composer-update):
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
@@ -35,11 +35,11 @@ jobs:
           echo "Обновляем зависимости composer"
 
           docker-compose exec -T app composer install --no-interaction
-  test:
+  Tests (Applying migrations & Unit/Functional tests):
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: Tests (Applying migrations &Unit/Functional tests)
+    - name: Tests (Applying migrations & Unit/Functional tests)
       shell: bash
       env:
         DB_NAME: ${{ secrets.DB_NAME }}
