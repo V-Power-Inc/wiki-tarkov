@@ -12,7 +12,7 @@ on:
 # Существующие задачи 
 jobs:
   # Собираем проект
-  Build (Docker-compose up & composer-update):
+  Build:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
           echo "Обновляем зависимости composer"
 
           docker-compose exec -T app composer install --no-interaction
-  Tests (Applying migrations & Unit/Functional tests):
+  Tests:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
