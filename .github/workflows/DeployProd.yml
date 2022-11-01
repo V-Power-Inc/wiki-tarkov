@@ -1,5 +1,7 @@
 name: Deploy on Prod
 
+# Настройка автодеплоя
+
 on:
   pull_request:
     branches:
