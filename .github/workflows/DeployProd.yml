@@ -22,9 +22,9 @@ jobs:
         SSH_USER: ${{secrets.SSH_USER}}
         SSH_KEY_PATH: ${{ github.workspace }}/../private.key
       run: |
-        mkdir -p ~/.ssh
+        mkdir -p ~/.ssh/
         echo "$SSH_PRIVATE_KEY" > ../private.key
         sudo chmod 600 ../private.key
-        echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+        echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
         ssh -i "$SSH_KEY_PATH" "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
 
