@@ -89,7 +89,7 @@ final class ItemsController extends AdminController implements CrudInterface
         $model = $this->findModel($id);
         $model->uploadPreview();
 
-        //Преобразуем строку employees в массив
+        /** Преобразуем строку с группой торговцев в массив */
         $nn=preg_split('/\s*,\s*/',trim($model->trader_group),-1,PREG_SPLIT_NO_EMPTY);
         $tradergroup=array();
         foreach ($nn as $pr) {

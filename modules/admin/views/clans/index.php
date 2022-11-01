@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'link:ntext',
-            //'date_create',
             [
                 'attribute' => 'moderated',
                 'format' => 'raw',

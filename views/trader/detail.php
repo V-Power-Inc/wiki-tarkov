@@ -6,9 +6,14 @@
  * Time: 17:49
  */
 
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/questions.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/barter-tabs.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use yii\web\JqueryAsset;
+use app\models\Traders;
+
+/* @var Traders $trader - AR объект торговца */
+
+$this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/barter-tabs.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Торговцы Escape from Tarkov: ' .$trader->title;
 $this->registerMetaTag([
     'name' => 'description',
@@ -143,8 +148,6 @@ $this->registerMetaTag([
 
             <!-- Виджет дискорда -->
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
             
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>

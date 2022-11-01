@@ -1,8 +1,9 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
+use yii\web\View;
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
@@ -76,8 +77,8 @@ AppAsset::register($this);
         <?php if((AlertComponent::AlertView())) : ?>
             <?= $this->render('/other/site-alert'); ?>
         <?php endif; ?>
-    <?php endif; ?>
 
+    <?php endif; ?>
 
     <?= $content ?>
 
@@ -96,7 +97,6 @@ AppAsset::register($this);
                 <div class="icons-soc">
                     <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
                     <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
-<!--                        <a href="###" target="_blank"><img alt="V-Power официальный сайт сообщества" src="/img/soc/v-power-edited.jpg"></a>-->
                 </div>
 
                 <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
@@ -125,6 +125,3 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
-
-
-

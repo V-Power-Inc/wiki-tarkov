@@ -33,6 +33,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
         <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
         <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
         <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
+        <li><a href="/admin/eger/" class="admin-tabs w-100-important">Квесты Егеря</a></li>
         <!-- disabled for now -->
 <!--        <li><a href="#" class="admin-tabs w-100-important unactive">Next trader</a></li>-->
     </ul>

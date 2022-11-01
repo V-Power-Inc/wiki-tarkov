@@ -86,6 +86,7 @@ class MenuComponent
             "/quests-of-traders/skypchik-quests",
             "/quests-of-traders/lyjnic-quests",
             "/quests-of-traders/mirotvorec-quests",
+            "/quests-of-traders/eger-quests",
             "/traders/prapor",
             "/traders/terapevt",
             "/traders/lyjnic",
@@ -180,6 +181,7 @@ class MenuComponent
                         <li><a href="/traders/mirotvorec">Миротворец</a></li>
                         <li><a href="/traders/mehanic">Механик</a></li>
                         <li><a href="/traders/baraholshik">Барахольщик</a></li>
+                        <li><a href="/traders/eger">Егерь</a></li>
                             <li role="separator" class="divider"></li>
                         <li><a href="/quests-of-traders">Смотреть всех торговцев</a></li>
                       </ul>

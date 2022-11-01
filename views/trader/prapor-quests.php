@@ -5,7 +5,13 @@
  * Date: 22.10.2017
  * Time: 15:15
  */
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
+use yii\web\JqueryAsset;
+use app\models\Prapor;
+
+/* @var Prapor[] $prapor - объект квестов прапора */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Прапора в Escape from Tarkov. Разбор и прохождение квестов Прапора.';
 $this->registerMetaTag([
     'name' => 'description',

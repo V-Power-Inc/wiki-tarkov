@@ -113,7 +113,7 @@ class Clans extends \yii\db\ActiveRecord
             $this->preview = '/' . $catalog;
             Image::getImagine()->open($catalog)->save($catalog , ['quality' => 70]);
 
-            $imginfo = getimagesize('https://'.$_SERVER['SERVER_NAME'].$this->preview);
+            $imginfo = getimagesize($_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . $this->preview);
 
             // Проверяем размеры изображения, если они некорректны - то удаляем его.
             if($imginfo[0] !== 100 && $imginfo[1] !== 100) {

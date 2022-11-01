@@ -86,7 +86,7 @@ class ItemsSearch extends Items
             ->andFilterWhere(['like', 'preview', $this->preview])
             ->andFilterWhere(['like', 'shortdesc', $this->shortdesc])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'creator', $this->creator]);
+            ->andFilterWhere(['creator' => $this->creator]);
         return $dataProvider;
     }
 }

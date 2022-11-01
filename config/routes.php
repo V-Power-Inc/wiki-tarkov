@@ -39,6 +39,7 @@ return [
     'quests-of-traders/mirotvorec-quests' => TraderController::routeId(TraderController::ACTION_MIROTVORECPAGE),
     'quests-of-traders/mehanic-quests' => TraderController::routeId(TraderController::ACTION_MEHANICPAGE),
     'quests-of-traders/baraholshik-quests' => TraderController::routeId(TraderController::ACTION_BARAHOLSHIKPAGE),
+    'quests-of-traders/eger-quests' => TraderController::routeId(TraderController::ACTION_EGERPAGE),
     'currencies' => SiteController::routeId(SiteController::ACTION_CURRENCIES),
     'keys' => SiteController::routeId(SiteController::ACTION_KEYS),
     'news' => SiteController::routeId(SiteController::ACTION_NEWS),
@@ -61,14 +62,8 @@ return [
     'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
     'loot/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
 
-    // Пока оставляем это так, т.к. в предыдущем варианте компоненты не работали
+    /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',
-    ],
-    [
-        'class' => 'app\components\SkillsurlComponent',
-    ],
-    [
-        'class' => 'app\components\CategoryurlComponent',
     ]
 ];

@@ -19,7 +19,15 @@ $this->registerMetaTag([
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
 
-/** @var $form_model Doorkeys */
+/**
+ * @var $form_model Doorkeys
+ * @var $terralab Doorkeys - ключи от дверей для локации лаборатория TerraGroup
+ * @var $tamojnya Doorkeys - ключи от дверей для локации лаборатория Таможня
+ * @var $zavod Doorkeys - ключи от дверей для локации лаборатория Завод
+ * @var $forest Doorkeys - ключи от дверей для локации лаборатория Лес
+ * @var $bereg Doorkeys - ключи от дверей для локации лаборатория Берег
+ * @var $razvyazka Doorkeys - ключи от дверей для локации лаборатория Развязка
+ */
 ?>
 <div class="container">
     <div class="row">
@@ -67,7 +75,7 @@ $this->registerMetaTag([
                 <!-- Оконачание контентной части ключей -->
             </div>
 
-    <!-- Блок контента - ключи на локации Таможня -->
+            <!-- Блок контента - ключи на локации Таможня -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Таможня</h2>
                 <!-- Контентная часть ключей -->
@@ -89,7 +97,7 @@ $this->registerMetaTag([
                 <!-- Оконачание контентной части ключей -->
             </div>
             
-    <!-- Блок контента ключи на локации Завод -->
+            <!-- Блок контента ключи на локации Завод -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Завод</h2>
                 <!-- Контентная часть ключей -->
@@ -111,7 +119,7 @@ $this->registerMetaTag([
                 <!-- Оконачание контентной части ключей -->
             </div>
             
-    <!-- Блок контента ключи на локации Лес -->
+            <!-- Блок контента ключи на локации Лес -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Лес</h2>
                 <!-- Контентная часть ключей -->
@@ -133,7 +141,7 @@ $this->registerMetaTag([
                 <!-- Оконачание контентной части ключей -->
             </div>
             
-    <!-- Блок контента ключи на локации Берег -->
+            <!-- Блок контента ключи на локации Берег -->
             <div class="col-lg-12">
                 <h2 class="keys-titles">Ключи на локации Берег</h2>
                 <!-- Контентная часть ключей -->
@@ -156,32 +164,32 @@ $this->registerMetaTag([
             </div>
        
 
-        <!-- Блок контента ключи на локации Развязка -->
-        <div class="col-lg-12">
-            <h2 class="keys-titles">Ключи на локации Развязка</h2>
-            <!-- Контентная часть ключей -->
-            <?php foreach ($razvyazka as $zrazvyazka => $k_razvyazka): ?>
+            <!-- Блок контента ключи на локации Развязка -->
+            <div class="col-lg-12">
+                <h2 class="keys-titles">Ключи на локации Развязка</h2>
+                <!-- Контентная часть ключей -->
+                <?php foreach ($razvyazka as $zrazvyazka => $k_razvyazka): ?>
 
-                <?php if(in_array($zrazvyazka,Yii::$app->params['keysBlocks'])): ?>
-                    <!-- feed recomendations -->
-                    <div class="col-lg-12 item-key fix-block">
-                        <?= $this->render('/other/adsense-feed.php'); ?>
+                    <?php if(in_array($zrazvyazka,Yii::$app->params['keysBlocks'])): ?>
+                        <!-- feed recomendations -->
+                        <div class="col-lg-12 item-key fix-block">
+                            <?= $this->render('/other/adsense-feed.php'); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="col-lg-12 item-key">
+                        <p class="item-name"><a href="/keys/<?=$k_razvyazka['url']?>"><?=$k_razvyazka['name']?></a></p>
+                        <a href="/keys/<?=$k_razvyazka['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka['preview']?>"></a>
+                        <div class="item-content"><?=$k_razvyazka['shortcontent']?></div>
                     </div>
-                <?php endif; ?>
-
-                <div class="col-lg-12 item-key">
-                    <p class="item-name"><a href="/keys/<?=$k_razvyazka['url']?>"><?=$k_razvyazka['name']?></a></p>
-                    <a href="/keys/<?=$k_razvyazka['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka['preview']?>"></a>
-                    <div class="item-content"><?=$k_razvyazka['shortcontent']?></div>
-                </div>
-            <?php endforeach; ?>
-            <!-- Оконачание контентной части ключей -->
-        </div>
+                <?php endforeach; ?>
+                <!-- Оконачание контентной части ключей -->
+            </div>
             
-        <div class="col-lg-12">
-            <?= $this->render('/other/google-recommended.php'); ?>
+            <div class="col-lg-12">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
         </div>
-    </div>
         
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
@@ -197,16 +205,8 @@ $this->registerMetaTag([
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
                 <?= $this->render('/other/discord-widget.php'); ?>
             <?php  $this->endCache(); } ?>
-
-            <?= $this->render('/other/yandex-donate.php'); ?>
-
         </div>
 
-        
-        
-        
-        </div>
-        
     </div>
 </div>
 

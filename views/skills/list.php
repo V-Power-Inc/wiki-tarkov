@@ -6,6 +6,10 @@
  * Time: 23:17
  */
 
+use app\models\Catskills;
+
+/* @var Catskills[] $catskills - массив AR объектов категорий умений */
+
 $this->title = 'Пассивные умения персонажа Escape from Tarkov';
 $this->registerMetaTag([
     'name' => 'description',

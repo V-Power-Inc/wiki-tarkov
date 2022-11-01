@@ -48,10 +48,6 @@ web/img/upload
 # ignore images - that uploaded as preview
 web/img/admin
 
-# todo: Index надо отсюда убрать, т.к. он будет нужен в тестировании
-# no index.php in web directory
-web/index.php
-
 # Ignore well known
 .well-known
 

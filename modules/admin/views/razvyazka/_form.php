@@ -1,5 +1,6 @@
 <?php
 
+use yii\web\JqueryAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -9,7 +10,7 @@ use mihaildev\elfinder\ElFinder;
 /* @var $model app\models\Razvyazka */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/adminscript.js', ['depends' => [JqueryAsset::class]]);
 ?>
 
 <div class="razvyazka-form">
@@ -42,7 +43,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
     <br>
     <br>
 
-    <!-- todo: Привести в порядок когда станут известны точки спавнов -->
+    <!-- Upd 13_09_2022 - Карта не готова до конца, выходы пока не известны -->
     <?= $form->field($model, 'exits_group')
         ->dropDownList([
             'Неизвестная зона 1' => 'Неизвестная зона 1',

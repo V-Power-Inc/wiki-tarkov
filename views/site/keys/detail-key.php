@@ -6,7 +6,7 @@
  * Time: 21:41
  */
 
-use app\components\AlertComponent;
+use yii\web\JqueryAsset;
 
 $this->title = 'Escape from Tarkov: ' .$model['name'];
 $this->registerMetaTag([
@@ -36,7 +36,7 @@ $this->registerMetaTag([
 ]);
 /******** Окончание OpenGraph тегов ************/
 
-$this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/keys-scripts.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <style>
     img.image-link {
@@ -90,9 +90,6 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [\yii\web\JqueryAsset:
 
                 <!-- Виджет дискорда -->
                 <?= $this->render('/other/discord-widget.php'); ?>
-
-
-                <?= $this->render('/other/yandex-donate.php'); ?>
 
             </div>
         </div>

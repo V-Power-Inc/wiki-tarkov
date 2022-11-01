@@ -25,12 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'enabled') ?>
 
-    <?php // echo $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'keywords(255)') ?>
-
-    <?php // echo $form->field($model, 'preview') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

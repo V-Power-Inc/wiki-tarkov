@@ -17,8 +17,11 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Ключ от комнаты Тарков, Тарков база ключей, база ключей Escape from Tarkov',
 ]);
-/** @var $form_model Doorkeys */
-/** @var $formValue string */
+/**
+ * @var Doorkeys $form_model
+ * @var string $formValue
+ * @var Doorkeys $keysearch
+ */
 ?>
 <div class="container">
     <div class="row">
@@ -35,27 +38,8 @@ $this->registerMetaTag([
                 <span class="key-selector">Искать ключи на локации:</span>
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['site/keysearch']],'id' => 'mapsearch','method' => 'post',]) ?>
 
-                <!-- todo: Вызвать тут статический метод модели с массивом -->
-                <?= $form->field($form_model, 'doorkey')->dropDownList([
-                    'Все ключи' => 'Все ключи',
-                    'Лаборатория Terra Group' => 'Лаборатория Terra Group',
-                    'Таможня' => 'Таможня',
-                    'Берег' => 'Берег',
-                    'Лес' => 'Лес',
-                    'Завод' => 'Завод',
-                    'Развязка' => 'Развязка',
-                    '3-х этажная общага на Таможне' => '3-х этажная общага на Таможне',
-                    '2-х этажная общага на Таможне' => '2-х этажная общага на Таможне',
-                    'Восточное крыло санатория' => 'Восточное крыло санатория',
-                    'Западное крыло санатория' => 'Западное крыло санатория',
-                    'Ключи от техники' => 'Ключи от техники',
-                    'Квестовые ключи' => 'Квестовые ключи',
-                    'Ключи от сейфов/помещений с сейфами' => 'Ключи от сейфов/помещений с сейфами',
-                ],
-                [
-                    'value' => $formValue
-                ]);
-                ?>
+                <!-- Форма поиска ключей по фильтрам -->
+                <?= $form->field($form_model, Doorkeys::DOORKEY)->dropDownList(Doorkeys::KeysCategories(), ['value' => $formValue]); ?>
 
                 <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
 
@@ -80,7 +64,7 @@ $this->registerMetaTag([
 
                     <div class="col-lg-12 item-key">
                         <p class="item-name"><a href="/keys/<?=$keys['url']?>"><?=$keys['name']?></a></p>
-                        <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$keys['preview']?>"></a>
+                        <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" alt="<?=$keys['name']?>" src="<?=$keys['preview']?>"></a>
                         <div class="item-content"><?=$keys['shortcontent']?></div>
                     </div>
                 <?php endforeach; ?>
@@ -100,9 +84,6 @@ $this->registerMetaTag([
 
             <!-- Виджет дискорда -->
             <?= $this->render('/other/discord-widget.php'); ?>
-
-            <!-- todo: Это вычистить отовсюду -->
-            <?= $this->render('/other/yandex-donate.php'); ?>
 
         </div>
     </div>

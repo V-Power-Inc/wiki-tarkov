@@ -1,4 +1,4 @@
-# Bitbucket Pipeline file!
+# Bitbucket Pipeline file
 
 # This template allows you to validate your PHP application.
 # The workflow allows running tests and code linting on the default branch.
@@ -7,22 +7,24 @@ image: docker/compose:latest
 options:
   docker: true
 
-pipelines:
-  default:
-    - step:
+# Описание возможных тестов (Задаем Definitions для использования в анкорах)
+definitions:
+  steps:
+    - step: &Build
         name: Build (Docker-compose up & composer-update)
         services:
           - docker
         caches:
           - docker
-        runs-on:
-          - self.hosted
-          - linux
+#        runs-on:
+#          - self.hosted
+#          - linux
         script:
           # Экспоритруем переменные зашитые в битбакет для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
           - echo DB_NAME=$DB_NAME > .env
           - echo DB_USER=$DB_USER >> .env
+          - echo DB_PASSWORD=$DB_PASSWORD >> .env
 
           # Build docker containers (Пока убрали чтобы сборки быстрее проходили)
           - echo "Билдим контейнеры через docker-compose"
@@ -38,17 +40,17 @@ pipelines:
 
           - docker-compose exec -T app composer install --no-interaction
 
-    - step:
+    - step: &Test
         name: Tests (Applying migrations &Unit/Functional tests)
         services:
           - docker
         caches:
           - docker
-        runs-on:
-          - self.hosted
-          - linux
+#        runs-on:
+#          - self.hosted
+#          - linux
         script:
-          # Экспоритруем переменные зашитые в битбакет для развертки
+          # Экспортируем переменные зашитые в битбакет для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
           - echo DB_NAME=$DB_NAME > .env
           - echo DB_USER=$DB_USER >> .env
@@ -112,6 +114,7 @@ pipelines:
           - docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
           - docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
           - docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
+          - docker-compose exec -T app vendor/bin/codecept run tests/functional/EgerCest
           - docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
           - docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
 
@@ -119,14 +122,41 @@ pipelines:
           - echo "Проверка Functional тестами"
 
           - docker-compose exec -T app vendor/bin/codecept run functional
+
+# Все виды конвейеров
+pipelines:
+#  default:
+#  - step: *Build
+#  - step: *Test
+
+  # Кастомные экшены - дублируют основные
+  custom:
+    Build-action:
+      - step: *Build
+    Testing-action:
+      - step: *Test
+
+  # Автодеплой в мастер на Prod а также дополнительный прогон всех остальных тестов, как выше
   branches:
     master:
       - step:
+          <<: *Build
+          name: Build on Master (Docker-compose up & composer-update)
+      - step:
+          <<: *Test
+          name: Tests on Master (Apply migrations & Unit/Functional tests)
+      - step:
+          image: atlassian/default-image:latest
           name: Deploy master to Prod
+#          runs-on:
+#            - self.hosted
+#            - linux
           deployment: Production
           script:
             - mkdir -p ~/.ssh
-            - cat deploy_known_hosts >> ~/.ssh/known_hosts
-            - (umask  077 ; echo $DEPLOY_SSH_KEY | base64 -di > ~/.ssh/id_rsa)
+            - cat known_hosts >> ~/.ssh/known_hosts
+            - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
             - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin master'
+            # Этого мы не делаем, т.к. изначально Prod накатывался SQL дампом
+            # - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && php yii migrate --interactive=0'
             - echo "Затянули ветку master с BitBucket успешно"

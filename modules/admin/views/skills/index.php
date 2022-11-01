@@ -33,17 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
-
             [
                 'attribute' => 'category',
                 'value' => 'category0.title',
                 'filter' => Html::activeDropDownList($searchModel,'category',ArrayHelper::map(Catskills::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
             ],
-            
-            
             'url:url',
             'preview' => [
                 'format' => 'image',
@@ -52,11 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'enabled',
-            // 'description',
-            // 'keywords',
-            // 'preview',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn']
         ],
     ]); ?>
 </div>

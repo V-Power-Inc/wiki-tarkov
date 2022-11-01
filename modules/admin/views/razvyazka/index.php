@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="razvyazka-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Создать новый маркер', ['create'], ['class' => 'btn btn-success']) ?>
@@ -27,8 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
             'name',
             [
                 'attribute' => 'marker_group',
@@ -43,8 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return  $data->customicon;
                 },
             ],
-            // 'content:ntext',
-            // 'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

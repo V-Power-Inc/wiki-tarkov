@@ -16,6 +16,7 @@ use app\models\Terapevt;
 use app\models\Prapor;
 use app\models\Mirotvorec;
 use app\models\Baraholshik;
+use app\models\Eger;
 use app\models\Barters;
 use app\models\Traders;
 use app\common\services\TradersService;
@@ -40,6 +41,7 @@ class TraderController extends AdvancedController
     const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
     const ACTION_MEHANICPAGE            = 'mehanicpage';
     const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
+    const ACTION_EGERPAGE               = 'egerpage';
     const ACTION_BARTERS_PREVIEW        = 'barterspreview';
     const ACTION_PREVIEWTRADER          = 'previewtrader';
 
@@ -124,6 +126,17 @@ class TraderController extends AdvancedController
     }
 
     /**
+     * Рендер страницы квестов Егеря
+     *
+     * @return string
+     * @throws HttpException
+     */
+    public function actionEgerpage(): string
+    {
+        return $this->render('eger-quests', ['eger'=>(new TradersService())->takeQuests(Eger::tableName())]);
+    }
+
+    /**
      * Рендер главной страницы с квестами
      *
      * @return string
@@ -161,8 +174,6 @@ class TraderController extends AdvancedController
     public function actionPreviewtrader(): string
     {
         if(Yii::$app->user->isGuest !== true) {
-            // Отключаем CSRF валидацию POST запросов
-            $this->enableCsrfValidation=false;
             $trader = new Traders;
             $trader->load(Yii::$app->request->post());
             return $this->render('trader-preview', ['trader' => $trader]);

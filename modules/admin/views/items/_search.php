@@ -25,14 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'shortdesc') ?>
 
-    <?php // echo $form->field($model, 'content') ?>
-
-    <?php // echo $form->field($model, 'date_create') ?>
-
-    <?php // echo $form->field($model, 'active') ?>
-
-    <?php // echo $form->field($model, 'parentcat_id') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>

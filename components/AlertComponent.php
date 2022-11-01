@@ -7,6 +7,7 @@
  */
 
 namespace app\components;
+
 use yii\base\Component;
 use app\models\Info;
 use yii\db\ActiveRecord;

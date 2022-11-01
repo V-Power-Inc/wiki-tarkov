@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-           // 'id',
             'title',
             [
                 'attribute' => 'parent_category',
@@ -42,8 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'url:url',
             'sortir',
-            // 'description',
-            // 'enabled',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

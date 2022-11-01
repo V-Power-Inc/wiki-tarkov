@@ -6,17 +6,20 @@
  * Time: 10:47
  */
 
-use app\components\LeftmenuWidget;
-
-$this->title = 'Предпросмотр: '.$item->title;
-
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/news.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
+use yii\web\JqueryAsset;
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+use app\components\LeftmenuWidget;
+use app\models\Items;
+
+/* @var Items $item - AR объект предмета справочника лута */
+
+$this->title = 'Предпросмотр: '.$item->title;
+
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <style>
     img.image-link {

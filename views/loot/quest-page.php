@@ -6,9 +6,13 @@
  * Time: 0:06
  */
 
+use yii\web\JqueryAsset;
 use app\models\Traders;
 use app\components\LeftmenuWidget;
 use yii\bootstrap\ActiveForm;
+use app\models\Items;
+
+/** @var Items $form_model - AR объект Items, форма в данном случае */
 
 $this->title = 'Квестовые предметы Escape from Tarkov';
 
@@ -21,11 +25,9 @@ $this->registerMetaTag([
     'content' => 'Квестовы предметы в Таркове, квестовые предметы Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-
-
+$this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

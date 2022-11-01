@@ -10,7 +10,12 @@ namespace app\common\interfaces;
 
 use yii\web\NotFoundHttpException;
 
-/** Интерфейс описывающий какие методы должны быть обязательно реализованы в проекте для CRUD функционала */
+/**
+ * Интерфейс описывающий какие методы должны быть обязательно реализованы в проекте для CRUD функционала
+ *
+ * Interface CrudInterface
+ * @package app\common\interfaces
+ */
 interface CrudInterface
 {
     /**

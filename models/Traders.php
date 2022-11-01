@@ -37,7 +37,7 @@ class Traders extends \yii\db\ActiveRecord
     const ATTR_TITLE         = 'title';
     const ATTR_PREVIEW       = 'preview';
     const ATTR_CONTENT       = 'content';
-    const ATTR_URLTOQUETS   = 'urltoquets';
+    const ATTR_URLTOQUETS    = 'urltoquets';
     const ATTR_BUTTON_QUESTS = 'button_quests';
     const ATTR_BUTTON_DETAIL = 'button_detail';
     const ATTR_BG_STYLE      = 'bg_style';
@@ -100,7 +100,7 @@ class Traders extends \yii\db\ActiveRecord
 
             [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'image']
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => 'jpg,png,jpeg']
         ];
     }
 

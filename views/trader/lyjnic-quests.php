@@ -1,6 +1,11 @@
 <?php
 
-$this->registerJsFile('js/tabs-quests.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+use app\models\Lyjnic;
+use yii\web\JqueryAsset;
+
+/* @var Lyjnic[] $lyjnic - объект квестов лыжника */
+
+$this->registerJsFile('js/tabs-quests.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.';
 $this->registerMetaTag([
     'name' => 'description',
