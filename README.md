@@ -1,4 +1,5 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
+[![Deploy on Prod](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg?branch=master)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
 ![Stable Version](https://img.shields.io/badge/version-v2.2.0-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
