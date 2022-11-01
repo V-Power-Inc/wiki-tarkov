@@ -102,7 +102,7 @@ class LootController extends AdvancedController
         throw new HttpException(404 ,'Такая страница не существует');
     }
 
-    /***
+    /**
      * Рендер страницы списка предметов для квестов торговцев
      *
      * @return string
@@ -136,7 +136,6 @@ class LootController extends AdvancedController
      * @throws HttpException
      * @throws yii\db\Exception
      */
-
     public function actionLootjson(string $q = null): string
     {
         if(Yii::$app->request->isAjax) {
