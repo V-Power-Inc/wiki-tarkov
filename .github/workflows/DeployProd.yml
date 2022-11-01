@@ -21,7 +21,7 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
         SSH_USER: ${{secrets.SSH_USER}}
       run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        install -m 600 -D /dev/null /home/runner/.ssh/id_rsa
+        echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_rsa
         ssh-keyscan wiki-tarkov.ru >> /home/runner/.ssh/known_hosts
-        ssh -i ~/.ssh/id_rsa "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
+        ssh -i /home/runner/.ssh/id_rsa "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
