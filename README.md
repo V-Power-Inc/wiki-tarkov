@@ -1,10 +1,12 @@
-![example workflow](https://github.com/github/docs/actions/workflows/DockerApp-Actions.yml/badge.svg?branch=master)
-![Tests status](https://img.shields.io/badge/Tests%20status-passing-success)
+![Site status](https://img.shields.io/badge/site%20status-works-success)
+![Build Status](https://img.shields.io/badge/build-passing-success)
+![Tests status](https://img.shields.io/badge/tests%20status-passing-success)
 ![Stable Version](https://img.shields.io/badge/version-v2.2.0-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
-![Tests Count](https://img.shields.io/badge/tests-1017-informational)
+![Tests Count](https://img.shields.io/badge/tests%20count-1017-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-75%25-yellowgreen)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
+![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 
 # Wiki Tarkov Project
 
