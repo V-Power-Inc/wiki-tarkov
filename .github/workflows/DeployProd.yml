@@ -20,9 +20,8 @@ jobs:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
         SSH_USER: ${{secrets.SSH_USER}}
-        SSH_KEY_PATH: ${{ github.workspace }}/../private.key
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_rsa
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-        ssh -i "$SSH_KEY_PATH" "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
+        ssh -i ~/.ssh/id_rsa "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
