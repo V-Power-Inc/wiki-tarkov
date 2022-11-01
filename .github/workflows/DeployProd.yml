@@ -11,7 +11,7 @@ on:
 
 jobs:
   Deploy:
-    # if: github.event.pull_request.merged == true 1
+    # if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - name: Deploy on Prod
