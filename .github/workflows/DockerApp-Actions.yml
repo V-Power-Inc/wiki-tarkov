@@ -1,4 +1,4 @@
-name: DockerApp Actions with Project
+name: GitHub Actions
 
 on:
   push:
