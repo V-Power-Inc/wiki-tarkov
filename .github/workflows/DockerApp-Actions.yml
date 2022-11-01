@@ -33,7 +33,7 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run:     echo "Экспоритруем переменные зашитые в битбакет для развертки"
       - run:     echo DB_NAME=${{ secrets.DB_NAME }} > .env
       - run:     echo DB_USER=${{ secrets.DB_USER }} >> .env
