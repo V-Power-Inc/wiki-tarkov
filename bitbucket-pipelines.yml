@@ -1,7 +1,4 @@
-# Bitbucket Pipeline file
-
-# This template allows you to validate your PHP application.
-# The workflow allows running tests and code linting on the default branch.
+# Пайплайны битбакета
 image: docker/compose:latest
 
 options:
@@ -154,7 +151,7 @@ pipelines:
           deployment: Production
           script:
             - mkdir -p ~/.ssh
-            - cat known_hosts >> ~/.ssh/known_hosts
+            - ssh-keyscan wiki-tarkov.ru >> ~/.ssh/known_hosts
             - (umask  077 ; echo $MY_SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
             - ssh -i ~/.ssh/id_rsa $SSH_USER@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin master'
             # Этого мы не делаем, т.к. изначально Prod накатывался SQL дампом
