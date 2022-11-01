@@ -2,7 +2,7 @@ name: DockerApp Actions with Project
 
 on:
   push:
-    branches: *
+    branches: [*]
   pull_request:
     branches: [dev,master]
 
