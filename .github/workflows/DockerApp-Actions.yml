@@ -12,6 +12,23 @@ on:
 
 # Существующие задачи 
 jobs:
+  # Прогоняем проект на поиск уязвимостей - Snyk
+  snyk-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/php@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+
+
   # Собираем проект
   Build:
     runs-on: ubuntu-22.04
@@ -39,6 +56,7 @@ jobs:
           echo "Обновляем зависимости composer"
 
           docker-compose exec -T app composer install --no-interaction
+  # Прогоняем проект тестами
   Tests:
     runs-on: ubuntu-22.04
     steps:
