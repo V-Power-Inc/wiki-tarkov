@@ -12,10 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: docker/compose:latest
     - name: Build (Docker-compose up & composer-update)
       run: |
-        # Экспоритруем переменные зашитые в битбакет для развертки
+        # Экспоритруем переменные зашитые в GitHub для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
           - echo DB_NAME=${{ secrets.DB_NAME }} > .env
           - echo DB_USER=${{ secrets.DB_USER }} >> .env
@@ -37,10 +37,10 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
+    - uses: docker/compose:latest
     - name: Tests (Applying migrations &Unit/Functional tests)
       run: |
-        # Экспортируем переменные зашитые в битбакет для развертки
+        # Экспортируем переменные зашитые в GitHub для развертки
           - echo "Экспоритруем переменные зашитые в битбакет для развертки"
           - echo DB_NAME=${{ secrets.DB_NAME }} > .env
           - echo DB_USER=${{ secrets.DB_USER }} >> .env
