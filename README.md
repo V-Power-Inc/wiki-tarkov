@@ -1,6 +1,5 @@
+[![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
-![Build Status](https://img.shields.io/badge/build-passing-success)
-![Tests status](https://img.shields.io/badge/tests%20status-passing-success)
 ![Stable Version](https://img.shields.io/badge/version-v2.2.0-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-1017-informational)
