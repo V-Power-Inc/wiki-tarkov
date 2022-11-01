@@ -3,11 +3,11 @@ name: Deploy on Prod
 # Настройка автодеплоя
 
 on:
-  pull_request:
+  push:
     branches:
       - "master"
-    types:
-      - closed
+#    types:
+#      - closed
 
 jobs:
   Deploy:
@@ -22,7 +22,7 @@ jobs:
         SSH_USER: ${{secrets.SSH_USER}}
       run: |
         mkdir -p ~/.ssh
-        cat "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+        "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
         (umask  077 ; echo "$SSH_PRIVATE_KEY" | base64 --decode > ~/.ssh/id_rsa)
         ssh -i ~/.ssh/id_rsa "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
 
