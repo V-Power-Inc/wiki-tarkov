@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: docker/compose@v3
+    - uses: actions/checkout@v3
     - name: Build (Docker-compose up & composer-update)
       run: |
         # Экспоритруем переменные зашитые в GitHub для развертки
@@ -34,10 +34,11 @@ jobs:
           - echo "Обновляем зависимости composer"
 
           - docker-compose exec -T app composer install --no-interaction
+      shell: bash
   test:
     runs-on: ubuntu-22.04
     steps:
-    - uses: docker/compose@v3
+    - uses: actions/checkout@v3
     - name: Tests (Applying migrations &Unit/Functional tests)
       run: |
         # Экспортируем переменные зашитые в GitHub для развертки
@@ -112,3 +113,4 @@ jobs:
           - echo "Проверка Functional тестами"
 
           - docker-compose exec -T app vendor/bin/codecept run functional
+      shell: bash
