@@ -1,17 +1,16 @@
 name: Deploy on Prod
 
-# Настройка автодеплоя
-
+# Автодеплой на PROD - Только ветка Master, только при удачных мержах
 on:
-  push:
+  pull_request:
     branches:
       - "master"
-#    types:
-#      - closed
+    types:
+      - closed
 
 jobs:
   Deploy:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
     - name: Deploy on Prod
