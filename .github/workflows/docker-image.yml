@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - uses: docker/compose@latest
+    - uses: docker/compose@v2
     - name: Build (Docker-compose up & composer-update)
       run: |
         # Экспоритруем переменные зашитые в GitHub для развертки
@@ -37,7 +37,7 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
-    - uses: docker/compose@latest
+    - uses: docker/compose@v2
     - name: Tests (Applying migrations &Unit/Functional tests)
       run: |
         # Экспортируем переменные зашитые в GitHub для развертки
