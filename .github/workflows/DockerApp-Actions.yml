@@ -28,7 +28,6 @@ jobs:
         with:
           sarif_file: snyk.sarif
 
-
   # Собираем проект
   Build:
     runs-on: ubuntu-22.04
