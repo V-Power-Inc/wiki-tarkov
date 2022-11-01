@@ -34,66 +34,66 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-      - run:     echo "Экспоритруем переменные зашитые в битбакет для развертки"
-      - run:     echo DB_NAME=${{ secrets.DB_NAME }} > .env
-      - run:     echo DB_USER=${{ secrets.DB_USER }} >> .env
-      - run:     echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
-      - run:     echo REDIS_HOST=${{ secrets.REDIS_HOST }} >> .env
-      - run:     echo DB_DSN=${{ secrets.DB_DSN }} >> .env
-      - run:     echo DB_TEST_DSN=${{ secrets.DB_TEST_DSN }} >> .env
-      - run:     echo DB_TEST_CHARSET=${{ secrets.DB_TEST_CHARSET }} >> .env
-      - run:     echo DB_CHARSET=${{ secrets.DB_CHARSET }} >> .env
-      - run:     echo DOMAIN=${{ secrets.DOMAIN }} >> .env
-      - run:     echo DOMAIN_PROTOCOL=${{ secrets.DOMAIN_PROTOCOL }} >> .env
-      - run:     echo DB_TEST_NAME=${{ secrets.DB_TEST_NAME }} >> .env
-      - run:     echo DB_TEST_USER=${{ secrets.DB_TEST_USER }} >> .env
-      - run:     echo DB_TEST_PASSWORD=${{ secrets.DB_TEST_PASSWORD }} >> .env
+    - run:     echo "Экспоритруем переменные зашитые в битбакет для развертки"
+    - run:     echo DB_NAME=${{ secrets.DB_NAME }} > .env
+    - run:     echo DB_USER=${{ secrets.DB_USER }} >> .env
+    - run:     echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+    - run:     echo REDIS_HOST=${{ secrets.REDIS_HOST }} >> .env
+    - run:     echo DB_DSN=${{ secrets.DB_DSN }} >> .env
+    - run:     echo DB_TEST_DSN=${{ secrets.DB_TEST_DSN }} >> .env
+    - run:     echo DB_TEST_CHARSET=${{ secrets.DB_TEST_CHARSET }} >> .env
+    - run:     echo DB_CHARSET=${{ secrets.DB_CHARSET }} >> .env
+    - run:     echo DOMAIN=${{ secrets.DOMAIN }} >> .env
+    - run:     echo DOMAIN_PROTOCOL=${{ secrets.DOMAIN_PROTOCOL }} >> .env
+    - run:     echo DB_TEST_NAME=${{ secrets.DB_TEST_NAME }} >> .env
+    - run:     echo DB_TEST_USER=${{ secrets.DB_TEST_USER }} >> .env
+    - run:     echo DB_TEST_PASSWORD=${{ secrets.DB_TEST_PASSWORD }} >> .env
 
-      - run:     echo "Билдим контейнеры через docker-compose"
+    - run:     echo "Билдим контейнеры через docker-compose"
 
-      - run:     docker-compose build
+    - run:     docker-compose build
 
-      - run:     echo "Поднимаем все контейнеры через docker-compose"
-      - run:     docker-compose up -d
+    - run:     echo "Поднимаем все контейнеры через docker-compose"
+    - run:     docker-compose up -d
 
-      - run:     echo "Обновляем зависимости composer"
+    - run:     echo "Обновляем зависимости composer"
 
-      - run:     docker-compose exec -T app composer install --no-interaction
+    - run:     docker-compose exec -T app composer install --no-interaction
 
-      - run:     echo "Даем больше прав юзеру MySQL для создания триггеров"
+    - run:     echo "Даем больше прав юзеру MySQL для создания триггеров"
 
-      - run:     docker exec -t db mysql -u root -p${{ secrets.DB_PASSWORD }} --execute "use dev_eft;
-            CREATE DATABASE test_migrations_db;
-            GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
-            GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
-            GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
+    - run:     docker exec -t db mysql -u root -p${{ secrets.DB_PASSWORD }} --execute "use dev_eft;
+          CREATE DATABASE test_migrations_db;
+          GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
+          GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
+          GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
 
-      - run:     echo "Накатываем миграции на dev_eft"
+    - run:     echo "Накатываем миграции на dev_eft"
 
-      - run:     docker-compose exec -T app php yii migrate --interactive=0
+    - run:     docker-compose exec -T app php yii migrate --interactive=0
 
-      - run:     echo "Накатываем миграции на test_migrations_db"
+    - run:     echo "Накатываем миграции на test_migrations_db"
 
-      - run:     docker-compose exec -T app php yii migrate --db db_test --interactive=0;
+    - run:     docker-compose exec -T app php yii migrate --db db_test --interactive=0;
 
-      - run:     echo "Functional и Unit тестирование"
+    - run:     echo "Functional и Unit тестирование"
 
-      - run:    echo "Проверка Unit тестами"
+    - run:    echo "Проверка Unit тестами"
 
-      - run:     docker-compose exec -T app vendor/bin/codecept run unit
+    - run:     docker-compose exec -T app vendor/bin/codecept run unit
 
-      - run:    docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/EgerCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
-      - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
+    - run:    docker-compose exec -T app vendor/bin/codecept run tests/functional/PraporCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/MirotvorecCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/MehanicCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/TerapevtCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/LyjnicCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/SkypshikCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/BaraholshikCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/EgerCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
+    - run:     docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
 
-      - run:     echo "Проверка Functional тестами"
+    - run:     echo "Проверка Functional тестами"
 
-      - run:     docker-compose exec -T app vendor/bin/codecept run functional
+    - run:     docker-compose exec -T app vendor/bin/codecept run functional
       shell: bash
