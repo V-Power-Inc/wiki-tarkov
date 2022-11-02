@@ -1,12 +1,11 @@
 /**
  * Created by comp on 23.10.2017.
+ *
+ * Скрипт для корректной работы табов на страницах торговцев (Списки лута на разных уровнях репутации)
  */
-
-
 $(document).ready(function() {
 
     /** Убираем инфо подсказку в разделе с квестами при клике на любой вертикальный таб а также при наличии хэша **/
-
     $('.nav.nav-list.bs-docs-sidenav.affix li').click(function() {
         $('#info-alert-prapor').fadeOut();
     });
@@ -16,7 +15,6 @@ $(document).ready(function() {
     }
 
     /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
-
     var MagnificImg = $('.image-link');
 
     if (MagnificImg) {
@@ -32,7 +30,8 @@ $(document).ready(function() {
                 showCloseBtn: true,
                 mainClass: 'image-link'
             });
-  
+
+    /** Оборачивание всех картинок в контейнере parent-conteiner gallery классом для попапа **/
     $('.parent-container').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
             delegate: 'a', // the selector for gallery item
@@ -61,7 +60,6 @@ $(document).ready(function() {
 });
 
 /** Добавляем и проверям хэш урла, для корректной работы табов на квестах торговцев **/
-
 $(function() {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
         window.location.hash = $(this).attr('href');

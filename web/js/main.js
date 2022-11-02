@@ -1,12 +1,16 @@
 /**
  * Created by comp on 22.10.2017.
+ *
+ * Основной JS файл проекта (ClientSide)
  */
 
 var param = $('meta[name=csrf-param]').attr("content");
 var token = $('meta[name=csrf-token]').attr("content");
 
-/** Скорлл кнопка до верхней части сайта **/
+
 $(document).ready(function() {
+
+    /** Обработка скролла страницы до верхней части **/
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {
             $('.scup').fadeIn();
@@ -14,20 +18,22 @@ $(document).ready(function() {
             $('.scup').fadeOut();
         }
     });
+
+    /** Обработка клика по кнопке, которая отскроллит страницу вверх **/
     $('.scup').click(function(){
         $("html, body").animate({ scrollTop: 0 }, 900);
         return false;
     });
     
-/*** Оборачиваем все таблицы с классом loot-tables специальным дивом со скроллом ***/
+    /*** Оборачиваем все таблицы с классом loot-tables специальным дивом со скроллом ***/
     var tables = $('.loot-tables');
     $(tables).wrap('<div class="fix-tables"></div>');
 
-/*** Обрачиваем Wiki таблицы специальным дивом со скроллом ***/
+    /*** Обрачиваем Wiki таблицы специальным дивом со скроллом ***/
     var wikia = $('table.wikitable');
     $(wikia).wrap('<div class="fix-tables"></div>');
 
-/*** Обработчик нажатия на кнопку закрытия оверлея ***/
+    /*** Обработчик нажатия на кнопку закрытия оверлея ***/
     $('#cck_close').click(function() {
         $.ajax({
             url: '/site/close-overlay',
@@ -55,6 +61,7 @@ $(document).ready(function() {
         $('#alert-clans').fadeOut();
     }
 
+    /** TimeOut функция для закрытия уведомления **/
     setTimeout(clsalerttommorow, 4000);
 
     /*** Перезагружаем страницу при клике на кнопку обновить ***/
@@ -76,18 +83,21 @@ $(document).ready(function() {
         return window.setTimeout(callback, seconds * 800 );
     };
 
+    /** Обработка кликов по сворачиванию/разворачиванию бокового меню на интерактивных картах **/
     $('.outer-button').click(function () {
         $(".optins_layerstability").animate({ right: -540}, 800);
         $.wait(function(){$(".outer-button").hide()} ,1);
         $.wait(function(){$(".inner-button").show()} ,1);
     });
 
+    /** Обработка кликов по сворачиванию/разворачиванию бокового меню на интерактивных картах **/
     $('.inner-button').click(function () {
         $(".optins_layerstability").animate({ right: 0 }, 800);
         $.wait(function(){$(".inner-button").hide()} ,1);
         $.wait(function(){$(".outer-button").show()} ,1);
     });
 
+    /** Хотфикс бокового меню для некоторых разрешений **/
     if (document.body.clientWidth <= '768')  {
         $('.outer-button').click(function () {
             $(".optins_layerstability").animate({ right: -246}, 800);
@@ -95,7 +105,6 @@ $(document).ready(function() {
             $.wait(function(){$(".inner-button").show()} ,1);
         });
     }
-
 });
 
 
