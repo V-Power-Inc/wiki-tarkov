@@ -1,5 +1,4 @@
 /*** Фиксим проблемы изображений превью в справочнике лута при рендеринге ***/
-
 function Fiximg() {
 
     $( ".loot-image" ).each(function( index ) {
@@ -10,7 +9,7 @@ function Fiximg() {
             $(this).closest('.item-loot').css({'height': heightParent+calc+80})
         }
     })
-
 }
 
+/** Таймаут, для прогрузки всех изображений **/
 setTimeout(Fiximg, 650);
