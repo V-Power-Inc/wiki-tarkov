@@ -8,18 +8,15 @@ $(document).ready(function() {
         $(this).children('em').remove();
 
         if ($(this).parent().children('div.slide').css('display') == 'none')  {
-
             $(this).parent().children('div.slide').animate({height: 'show'}, 500);
             $(this).children('span').remove('*').attr("id","1");
             $(this).append('<em>Скрыть текст</em>');
             $(this).children('em').css('display','block');
-        }
-        else
-        {
+        } else {
             $( ".opener" ).attr("display","block");
             $(this).parent().children('div.slide').animate({height: 'hide'}, 500);
             $(this).append('<span>Читать ответ</span>');
             $(this).children('em').remove();
-        };
+        }
     });
 });

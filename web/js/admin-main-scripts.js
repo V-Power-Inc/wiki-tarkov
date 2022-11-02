@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    /*** Скрываем в админку спустя время - учтеные данные авторизованного пользователя ***/
+    /*** Скрываем в админку спустя время - учетные данные авторизованного пользователя ***/
     setTimeout(function () {
         $('.col-lg-12.auth-info.relative').fadeOut();
     }, 15000);
@@ -9,6 +9,5 @@ $(document).ready(function() {
     $('.exit').click(function() {
         $('.col-lg-12.auth-info.relative').fadeOut();
     });
-
 });
 

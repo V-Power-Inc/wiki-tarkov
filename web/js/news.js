@@ -5,7 +5,6 @@
 $(document).ready(function() {
 
     /** Указываем оборачивать все изображения в popup окнах классом JS Magnific - отлавливаем ошибки на несуществующие классы **/
-
     var MagnificImg = $('.image-link');
     var MagnificGal = $('.parent-container a img');
 
@@ -16,12 +15,11 @@ $(document).ready(function() {
     }
 
     /** Попап для увеличения картинок в квестах **/
-    $('.image-link').magnificPopup(
-        {
+    $('.image-link').magnificPopup({
             type: 'image',
             showCloseBtn: true,
             mainClass: 'image-link'
-        });
+    });
 
     $('.parent-container').each(function () { // the containers for all your galleries
         $(this).magnificPopup({
@@ -32,5 +30,4 @@ $(document).ready(function() {
             }
         });
     });
-
 });

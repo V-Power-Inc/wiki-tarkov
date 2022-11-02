@@ -11,8 +11,6 @@ if((window.location.href.indexOf('forest')) > -1) {
         if($('#forest-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-forest-exits_group').fadeIn();
             $('.form-group.field-forest-file').fadeIn();
-         //   $('#forest-exit_anyway').val('');
-         //   $('.form-group.field-forest-exit_anyway input').val('');
         } else if ($('#forest-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeOut();
@@ -40,8 +38,6 @@ if((window.location.href.indexOf('forest')) > -1) {
             $('.form-group.field-forest-exits_group').fadeIn();
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeIn();
-         //   $('#forest-exit_anyway').val('');
-         //   $('.form-group.field-forest-exit_anyway input').val('');
         } else if ($('#forest-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-forest-file').fadeIn();
             $('.form-group.field-forest-exit_anyway').fadeOut();
@@ -98,8 +94,6 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
         if($('#tamojnya-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-tamojnya-exits_group').fadeIn();
             $('.form-group.field-tamojnya-file').fadeIn();
-         //   $('#tamojnya-exit_anyway').val('');
-         //   $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#tamojnya-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-tamojnya-file').fadeIn();
             $('.form-group.field-tamojnya-exit_anyway').fadeOut();
@@ -127,8 +121,6 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
             $('.form-group.field-tamojnya-exits_group').fadeIn();
             $('.form-group.field-tamojnya-file').fadeIn();
             $('.form-group.field-tamojnya-exit_anyway').fadeIn();
-         //   $('#tamojnya-exit_anyway').val('');
-         //  $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#tamojnya-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-tamojnya-file').fadeIn();
             $('.form-group.field-tamojnya-exit_anyway').fadeOut();
@@ -137,7 +129,6 @@ else if ((window.location.href.indexOf('tamojnya')) > -1) {
             $('#tamojnya-exit_anyway').val('');
             $('#tamojnya-exits_group').val('');
         } else if ($('#tamojnya-marker_group option:selected').text() === "Интересные места" || $('#tamojnya-marker_group option:selected').text() === "Военные ящики") {
-            // todo: Придумать метод по удалению изображения.
             $('.form-group.field-tamojnya-exits_group').fadeOut();
             $('.form-group.field-tamojnya-file').fadeIn();
             $('.form-group.field-tamojnya-exit_anyway').fadeOut();
@@ -160,8 +151,6 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
         if($('#bereg-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-bereg-exits_group').fadeIn();
             $('.form-group.field-bereg-file').fadeIn();
-            //   $('#tamojnya-exit_anyway').val('');
-            //   $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#bereg-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-bereg-file').fadeIn();
             $('.form-group.field-bereg-exit_anyway').fadeOut();
@@ -191,8 +180,6 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             $('.form-group.field-bereg-exits_group').fadeIn();
             $('.form-group.field-bereg-file').fadeIn();
             $('.form-group.field-bereg-exit_anyway').fadeIn();
-            //   $('#tamojnya-exit_anyway').val('');
-            //  $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#bereg-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-bereg-file').fadeIn();
             $('.form-group.field-bereg-exit_anyway').fadeOut();
@@ -221,8 +208,6 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
         if($('#razvyazka-marker_group option:selected').text() === "Маркеры выходов") {
             $('.form-group.field-razvyazka-exits_group').fadeIn();
             $('.form-group.field-razvyazka-file').fadeIn();
-            //   $('#razvyazka-exit_anyway').val('');
-            //   $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#razvyazka-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-razvyazka-file').fadeIn();
             $('.form-group.field-razvyazka-exit_anyway').fadeOut();
@@ -252,8 +237,6 @@ else if ((window.location.href.indexOf('bereg')) > -1) {
             $('.form-group.field-razvyazka-exits_group').fadeIn();
             $('.form-group.field-razvyazka-file').fadeIn();
             $('.form-group.field-razvyazka-exit_anyway').fadeIn();
-            //   $('#tamojnya-exit_anyway').val('');
-            //  $('.form-group.field-tamojnya-exit_anyway input').val('');
         } else if ($('#razvyazka-marker_group option:selected').text() === "Выходы за Диких") {
             $('.form-group.field-razvyazka-file').fadeIn();
             $('.form-group.field-razvyazka-exit_anyway').fadeOut();
