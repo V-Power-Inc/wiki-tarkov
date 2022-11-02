@@ -5,7 +5,7 @@
 /** Вызываем заглушку для страницы в самом начале **/
 $('body').before('<div class="loader-maps-background"><img class="preloader_map" src="/img/load.gif"><p class="alert alert-info text-preloader">Идет загрузка...</p></div>');
 
-/** Вызов карты и указание центра координат **/
+/** Вызов карты и указание центра координат и параметров зума **/
 const map = L.map('map', {
     center: [67, -70],
     maxzoom: 4,
@@ -24,7 +24,6 @@ var hash = new L.Hash(map);
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setMaxZoom(4);
 map.setMinZoom(2);
-// map.setZoom(2);
 
 /** Получаем текщие координаты по местонахождению мышки **/
 function onMouseMove(e) {
@@ -42,33 +41,33 @@ var PolkiIcon = L.icon({
     iconUrl: '/img/mapicons/quest_icon2.png',
     iconSize: [30, 30]
 });
+/** Иконка спавнов Диких **/
 var DikieIcon = L.icon({
     iconUrl: '/img/mapicons/dikie.png',
     iconSize: [30, 30]
 });
+/** Иконка ключей **/
 var KeysIcon = L.icon({
     iconUrl: '/img/mapicons/keys.png',
     iconSize: [30, 30]
 });
-// var ExitsIcon = L.icon({
-//     iconUrl: '/img/mapicons/exits.png',
-//     iconSize: [30, 30]
-// });
+/** Иконка спавнов ЧВК **/
 var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
 });
-
+/** Иконка интересных мест **/
 var PlacesInt = L.icon({
     iconUrl: '/img/mapicons/whatis.png',
     iconSize: [28, 27]
 });
 
+/** События по Document Ready **/
 $(document).ready(function() {
 
-    /*** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров ****/
+    /** Отображаем количество маркеров каждого типа при клике на кнопку - показать количество маркеров **/
     $('body').on('click','.count-on', function() {
-        // Сначада пробуем удалить существующие блоки в HTML 
+        // Сначала пробуем удалить существующие блоки в HTML
         try {
             $('.count-markers-global').each(function() {
                 $(this).remove();
@@ -115,10 +114,9 @@ $(document).ready(function() {
         $('.polki-b').append('<span class="count-markers-global">'+questscount+'</span>');
         $('.keys-b').append('<span class="count-markers-global">'+keyscount+'</span>');
         $('.places-b').append('<span class="count-markers-global">'+interestcount+'</span>');
-
     });
 
-    /*** Скрываем количества каждого типа маркеров при клике на кнопку скрыть количество ***/
+    /*** Скрываем количество каждого типа маркеров при клике на кнопку скрыть количество ***/
     $('body').on('click','.count-off', function() {
         try {
             $('.count-markers-global').each(function() {
@@ -188,7 +186,6 @@ $('body').on('click','.map_buttons p', function() {
 
 /** Зачеркиваем кнопки маркеров, по которым нажали **/
 $('body').on('click','.map_buttons p.unthrough', function() {
-    // console.log($(this).attr('id').length);
     if ($(this).hasClass('unthrough') == true)  {
         $(this).removeClass('unthrough');
     }
@@ -228,7 +225,6 @@ var token = $('meta[name=csrf-token]').attr("content");
 
     /***************** Принимаем координаты всех маркеров с помощью циклов со всеми проверками *****************/
     // Принимаем координаты по ajax
-    // Циклы в этом скрипте ненмого отличаются от вывода маркеров в Лесу, необходимо внимательно проверить в чем разница (14_01_2018)
     $.each(markersData, function(i) {
         if (markersData[i].marker_group == "Маркеры выходов") {
             var ExitsIcon = L.icon({
@@ -276,6 +272,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".bandits-b").attr('id', 'active-bandits-v');
     });
 
+    /** Обработка клика по кнопке отключения маркеров Выходов для диких **/
     $('body').on('click','#active-bandits-v', function(){
         map.removeLayer(dikieexits);
         $(this).attr('id', '');
@@ -287,6 +284,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".places-b").attr('id', 'active-places-v');
     });
 
+    /** Обработка клика по кнопке отключения интересных мест **/
     $('body').on('click','#active-places-v', function(){
         map.removeLayer(interstplaces);
         $(this).attr('id', '');
@@ -298,6 +296,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".voenka-b").attr('id' , 'active-bounds-v');
     });
 
+    /** Обработка клика по кнопке военных ящиков для их отключения **/
     $('body').on('click','#active-bounds-v', function(){
         map.removeLayer(voenloot);
         $(this).attr('id', '');
@@ -309,6 +308,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".dikie-b").attr('id', 'active-dikie-v');
     });
 
+    /** Обработка клика по кнопке - Спавны Диких для их отключения **/
     $('body').on('click','#active-dikie-v', function(){
         map.removeLayer(dikiy);
         $(this).attr('id', '');
@@ -320,19 +320,20 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".polki-b").attr('id', 'active-polki-v');
     });
 
+    /** Обработка клика для отключения маркеров квестов **/
     $('body').on('click','#active-polki-v', function(){
         map.removeLayer(polki);
         $(this).attr('id', '');
     });
 
     /** Обработка клика по кнопке выбора маркеров выходов с карты **/
-    // todo: На Заводе есть только 1 сторона спавна (Это общий спавн всех игроков), поэтому обработчик вывода спавнов не был переделан
     $('body').on('click','.exits-b', function(){
         $('#exitsmarker').fadeIn();
         exits.addTo(map);
         $(".exits-b").attr('id', 'active-exits-v');
     });
 
+    /** Обработка клика по кнопке отключения выходов для ЧВК **/
     $('body').on('click','#active-exits-v', function(){
         map.removeLayer(exits);
         $(this).attr('id', '');
@@ -344,6 +345,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".keys-b").attr('id', 'active-keys-v');
     });
 
+    /** Обработка клика по кнопке для отключения слоев с ключами для дверей **/
     $('body').on('click','#active-keys-v', function(){
         map.removeLayer(keys);
         $(this).attr('id', '');
@@ -355,6 +357,7 @@ var token = $('meta[name=csrf-token]').attr("content");
         $(".gamers-b").attr('id', 'active-players-v');
     });
 
+    /** Обработка клика по кнопке спавнов ЧВК для их отключения **/
     $('body').on('click','#active-players-v', function(){
         map.removeLayer(chvk);
         $(this).attr('id', '');
@@ -413,7 +416,6 @@ var token = $('meta[name=csrf-token]').attr("content");
     function markerOnClick() {
          AddRelations();
     }
-
 });
 
 
