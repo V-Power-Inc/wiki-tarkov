@@ -19,7 +19,6 @@ $this->registerMetaTag([
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
-
 ?>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -46,6 +45,7 @@ use yii\web\JsExpression;
             <div class="option-buttons">
                 <h2 class="map-title">Маркеры</h2>
 
+                <!-- Основные кнопки -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 map_buttons">
                     <p class="dikie-b" id="spawns-dikie-zavod"><i class="dikie-spawns"></i>Спавны диких</p>
                     <p class="gamers-b" id="spawns-chvk-zavod"><i class="chvk-spawns"></i>Спавны ЧВК</p>
@@ -128,7 +128,6 @@ use yii\web\JsExpression;
                     <h2>Интерактивная карта Завода</h2>
                     <p class="maps-mobile-hidden-value">Интерактивная карта локации Завод из Escape from Tarkov - на данной карте, вы сможете увидеть выходы за диких и ЧВК с локации Завод, узнать о местонахождении оружейных и военных ящиков, а также многое другое. </p>
                     <p class="maps-mobile-hidden-value">Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Завод, производственного лута и квестовых предметов необходимых для прохождения заданий от торговцев.</p>
-<!--                    <p>Есть возможность узнать спавны ЧВК и Диких на карте Завод, с картинками их месторасположений, а также комментариями о различных особенностях этих спавнов. </p>-->
                     <p class="alert alert-info maps-mobile-hidden-value">Информацию о спавне <b>ключа от Выхода с Завода</b> и открываемым этим ключом дверям вы <b><a href="/keys/key-of-exit-zavod" style="color: #d9534f;" target="_blank">сможете найти в нашей статье.</a></b> </p>
                     <p></p>
 
