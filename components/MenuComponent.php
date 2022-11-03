@@ -30,8 +30,13 @@ class MenuComponent
     public static $skillsdetail = null;
     public static $questloot = null;
     public static $questions = null;
-    
+    public static $bosses = null;
+    public static $view = null;
 
+    /**
+     * Case в этом методе должен быть совпадением с Action, потому не рекомендуется называть экшены в контроллерах IndexAction
+     * Устаревший функционал, который нуждается в замене (Но видимо заменен не будет, т.к. есть более важные вещи)
+     */
     public static function Active()
     {
         $activeAction = \Yii::$app->controller->action->id;
@@ -46,9 +51,11 @@ class MenuComponent
             case 'category': self::$lootcat = 'class="active"'; break;
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
-            case 'skillsdetail':self::$skillsdetail = 'active'; break;
-            case 'questloot':self::$questloot = 'class="active"'; break;
-            case 'questions':self::$questions = 'class="active"'; break;
+            case 'skillsdetail': self::$skillsdetail = 'active'; break;
+            case 'questloot': self::$questloot = 'class="active"'; break;
+            case 'questions': self::$questions = 'class="active"'; break;
+            case 'index': self::$bosses = 'class="active"'; break;
+            case 'view': self::$view = 'class="active"'; break;
         }
     }
 
@@ -220,6 +227,9 @@ class MenuComponent
                         <li><a href="/clans">Список кланов</a></li>
                       </ul>
                     </li>
+                    
+                    
+                    <li '.self::$bosses.self::$view.'><a href="/bosses">Боссы на локациях</a></li>
                      
                 </ul>
 

@@ -54,11 +54,11 @@ class BossesController extends AdvancedController
         $api = new ApiService();
 
         /** Дергаем метод, который вернет нам детальную страницу Боссов */
-        $boss = $api->getBosses($url);
+        $bosses = $api->getBosses($url);
 
         /** Рендерим вьюху */
         return $this->render('view', [
-            'boss' => $boss,
+            'bosses' => $bosses,
             'map_title' => Bosses::findMapTitleByUrl($url)
         ]);
     }

@@ -59,6 +59,7 @@ final class ApiService implements ApiInterface
                 bosses {
                   name
                   spawnChance
+                  spawnTimeRandom
                   spawnLocations {
                     name
                   }
@@ -209,31 +210,6 @@ final class ApiService implements ApiInterface
         }
 
         return true;
-    }
-
-    /**
-     * Массив с ключами в виде названия карт и значений изображения, которое для них используется
-     *
-     * @param string $map_name - Название карты
-     * @return string
-     */
-    public static function mapImages(string $map_name): string
-    {
-        /** Массив с ключами виде названий карт и значениями в виде названия */
-        $array = [
-            'Таможня' => '/img/maps/karta_tamozhnya_preview.png',
-            'Завод' => '/img/maps/zavod_prev.jpg',
-            'Ночной Завод' => '/img/maps/zavod_prev.jpg',
-            'Развязка' => '/img/maps/razvyazka_small.jpg',
-            'Маяк' => '/img/maps/lighthouse.jpg',
-            'Берег' => '/img/maps/karta_bereg_preview.png',
-            'Лаборатория' => '/img/maps/terra-group.png',
-            'Резерв' => '/img/maps/rezerv.jpg',
-            'Лес' => '/img/maps/forest_prev.jpg'
-        ];
-
-        /** Возвращаем значение массива по полученному в виде параметра ключу */
-        return $array[$map_name];
     }
 
 }

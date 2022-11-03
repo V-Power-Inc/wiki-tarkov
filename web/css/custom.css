@@ -2167,3 +2167,23 @@ table.patrons-tbl >thead > tr > th {
     height: 100%;
     max-height: 190px;
 }
+
+/** Стили для изображения босса **/
+.boss-image {
+    max-width: 150px;
+    border: 1px solid #ff212140;
+    box-shadow: 1px 1px 1px;
+}
+
+/** Подложка для босса - нужна для адекватного вида контента **/
+.boss-page-bg {
+    padding: 15px;
+    background: #80808042;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.boss-page-text {
+    font-size: 20px;
+}
