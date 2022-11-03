@@ -95,7 +95,7 @@ use yii\helpers\Url;
 
             <!-- Relation -->
             <div class="recommended-gm-content">
-                <!-- $this->render('/other/google-recommended.php'); -->
+               <?= $this->render('/other/google-recommended.php'); ?>
             </div>
 
             <!-- Комментарии -->
