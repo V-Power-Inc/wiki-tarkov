@@ -24,9 +24,6 @@ class BossesController extends AdvancedController
     const ACTION_INDEX = 'index';
     const ACTION_VIEW  = 'view';
 
-    /** @var string - параметр URL для просмотра детальной вьюхи */
-    const PARAM_URL = 'url';
-
     /**
      * Метод выводит список карт и отображает все атрибуты о боссах, которые известны
      *

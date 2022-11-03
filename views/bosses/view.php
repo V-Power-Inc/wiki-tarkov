@@ -120,7 +120,7 @@ use yii\helpers\Url;
             <!-- Виджет дискорда -->
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
                 <?= $this->render('/other/discord-widget.php'); ?>
-                <?php  $this->endCache(); } ?>
+            <?php  $this->endCache(); } ?>
         </div>
     </div>
 </div>

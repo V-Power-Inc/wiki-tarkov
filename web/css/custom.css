@@ -365,7 +365,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content, .keys-content, .clans-content, .donates-content {
+.quests-content, .keys-content, .clans-content, .donates-content, .api-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
