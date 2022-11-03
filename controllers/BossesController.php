@@ -27,9 +27,14 @@ class BossesController extends AdvancedController
     {
         $api = new ApiService();
 
+
+        $bosses = $api->getBosses();
+
+
         echo '<pre>';
-        echo print_r($api->getBosses('Таможня'));
+        echo print_r($bosses);
         exit;
         echo '</pre>';
+
     }
 }

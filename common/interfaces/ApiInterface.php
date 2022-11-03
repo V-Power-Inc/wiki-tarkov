@@ -8,8 +8,6 @@
 
 namespace app\common\interfaces;
 
-use app\models\Bosses;
-
 /**
  * Интерфейс сервиса для работы с API tarkov.dev
  *
@@ -22,8 +20,8 @@ interface ApiInterface
      * Метод должен возращать AR объект класса Bosses для рендеринга
      * в конечном счете во вьюхе для отображения на сайте
      *
-     * @param string $map_name - имя локации
-     * @return Bosses
+     * @param string|null $map_name - имя локации
+     * @return mixed
      */
-    function getBosses(string $map_name): Bosses;
+    function getBosses(string $map_name = null);
 }

@@ -18,6 +18,9 @@ use yii\helpers\Json;
  *
  * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev/___graphql)
  *
+ * UPD. 03-11-2022 - В настоящий момент сервис работает только с получением информации о боссах на локациях,
+ * в дальнейшем этот функционал может быть расширен
+ *
  * Class ApiService
  * @package app\common\services
  */
@@ -38,15 +41,15 @@ final class ApiService implements ApiInterface
     /**
      * Метод по получению информации о боссах Escape From Tarkov
      *
-     * @param string $map_name - Название карты
-     * @return Bosses
+     * @param string|null $map_name - Название карты (Параметр может отсутствовать)
+     * @return mixed
      */
-    public function getBosses(string $map_name): Bosses
+    public function getBosses(string $map_name = null)
     {
         /** Проверяем, если записи о боссах устарели - проводим следующие операции */
-        if($this->isOldBosses()) {
+        if($this->isOldBosses() | $this->isEmptyBosses()) {
 
-            /** Удаляем устаревших боссов */
+            /** Удаляем устаревшую информацию - если даже 1 босс устарел, обновляем всю таблицу */
             $this->removeOldBosses();
 
             /** Задаем тело запроса для получения информации о боссах */
@@ -75,7 +78,11 @@ final class ApiService implements ApiInterface
             $this->saveData($content);
         }
 
-        return $this->getDbData($map_name);
+        /** Проходим существующие данные и ставим флаги устаревания по мере необходимости */
+        $this->setOldBosses();
+
+
+        return !empty($map_name) ? Bosses::getDbData($map_name) : Bosses::getMapNames();
     }
 
     /**
@@ -97,14 +104,25 @@ final class ApiService implements ApiInterface
     }
 
     /**
-     * Метод удаляет устаревших боссов
+     * Функция проверяет - пуста ли таблица с данными о боссах и возвращает bool результат
+     *
+     * @return bool
+     */
+    private function isEmptyBosses(): bool
+    {
+        return empty(Bosses::find()->all()) ? true : false;
+    }
+
+    /**
+     * Метод удаляет всю информацию из таблицы
      *
      * @return mixed
+     * @throws
      */
     private function removeOldBosses()
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
-        $bosses = Bosses::findAll([Bosses::ATTR_OLD => Bosses::TRUE]);
+        $bosses = Bosses::find()->all();
 
         /** В цикле проходим всех устаревших боссов и удаляем их */
         foreach ($bosses as $boss) {
@@ -159,13 +177,33 @@ final class ApiService implements ApiInterface
     }
 
     /**
-     * Метод возвращаем AR объект из таблицы Bosses по имени карты
+     * Метод проверяет актуальность данных и если они устарели - помечает их на удаление
      *
-     * @param string $map_name - Название карты
-     * @return Bosses
+     * @return bool
      */
-    private function getDbData(string $map_name): Bosses
+    private function setOldBosses(): bool
     {
-        return Bosses::findOne([Bosses::ATTR_MAP => $map_name]);
+        /** Задаем переменную с выборкой боссов, которые еще актуальны */
+        $bosses = Bosses::findAll([Bosses::ATTR_OLD => Bosses::FALSE]);
+
+        /** В цикле проходим все соответствующие записи */
+        foreach ($bosses as $boss) {
+
+            /** Дата устаревания записи */
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +1 month'));
+
+            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
+            if ($date < date("Y-m-d H:i:s",time())) {
+
+                /** Устанавливаем флаг старой записи */
+                $boss->old = Bosses::TRUE;
+
+                /** Сохраняем изменения */
+                $boss->save();
+            }
+        }
+
+        return true;
     }
+
 }

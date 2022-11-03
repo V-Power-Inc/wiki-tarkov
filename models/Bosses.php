@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "bosses".
@@ -76,4 +77,26 @@ class Bosses extends \yii\db\ActiveRecord
             static::ATTR_OLD => 'Old'
         ];
     }
+
+    /**
+     * Метод возвращаем AR объект из таблицы Bosses по имени карты
+     *
+     * @param string $map_name - Название карты
+     * @return Bosses
+     */
+    public static function getDbData(string $map_name): Bosses
+    {
+        return Bosses::findOne([Bosses::ATTR_MAP => $map_name]);
+    }
+
+    /**
+     * Метод возвращает массив имен карт из таблицы Bosses
+     *
+     * @return array
+     */
+    public static function getMapNames(): array
+    {
+        return ArrayHelper::getColumn(Bosses::find()->all(), static::ATTR_MAP);
+    }
+
 }
