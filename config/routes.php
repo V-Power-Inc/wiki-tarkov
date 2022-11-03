@@ -66,6 +66,9 @@ return [
     /** URL до страницы со списком боссов */
     'bosses' => BossesController::routeId(BossesController::ACTION_INDEX),
 
+    /** URL до детальной страницы с боссами */
+    'bosses/<url:[\w_\/-]+>' => BossesController::routeId(BossesController::ACTION_VIEW),
+
     /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',

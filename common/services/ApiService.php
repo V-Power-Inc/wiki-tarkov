@@ -32,7 +32,7 @@ final class ApiService implements ApiInterface
     /** @var string - Атрибут с телом запроса */
     private $query = '';
 
-    /** @var string - Атрибут с основным адресов для получения API */
+    /** @var string - Атрибут с основным адресом для получения API */
     private $api_url = 'https://api.tarkov.dev/graphql';
 
     /** @var string - Атрибут с видом запроса (GET,POST и т.д.) */
@@ -84,7 +84,7 @@ final class ApiService implements ApiInterface
         /** Возвращаем результат - если в параметр прилетело название карты, возвращаем набор информации о боссах
          * на этой карте, если параметра не было - возвращаем массив со списком карт и Url адресов до карт
          */
-        return !empty($map_name) ? Bosses::getDbData($map_name) : Bosses::getMapData();
+        return !empty($map_name) ? Bosses::getBossData($map_name) : Bosses::getMapData();
     }
 
     /**
@@ -172,7 +172,7 @@ final class ApiService implements ApiInterface
             $model->bosses = Json::encode($map['bosses']);
 
             /** Передаем название карты в генератор Url */
-            $model->url = $this->mapUrlCreator($map['name']);
+            $model->url = TranslateService::mapUrlCreator($map['name']);
 
             /** Сохраняем новый объект данных о боссе */
             $model->save();
@@ -212,48 +212,15 @@ final class ApiService implements ApiInterface
     }
 
     /**
-     * Метод по полученному параметру создает название карты - возвращает строку
-     * Если вхождения не было - вернет null
-     *
-     * @param string $map - название карты
-     * @return string|null
-     */
-    private function mapUrlCreator(string $map): string
-    {
-        /** В свитче перебираем все известные названия карт и возвращаем транслит в виде строки */
-        switch ($map) {
-            case 'Таможня':
-                return 'tamojnya';
-            case 'Завод':
-                return 'zavod';
-            case 'Развязка':
-                return 'razvyazka';
-            case 'Маяк':
-                return 'lighthouse';
-            case 'Резерв':
-                return 'rezerv';
-            case 'Ночной Завод':
-                return 'night-zavod';
-            case 'Берег':
-                return 'bereg';
-            case 'Лаборатория':
-                return 'terragroup-laboratory';
-            case 'Лес':
-                return 'forest';
-        }
-
-        /** Возвращаем null только если не попали не в 1 из кейсов */
-        return null;
-    }
-
-    /**
      * Массив с ключами в виде названия карт и значений изображения, которое для них используется
      *
-     * @return array
+     * @param string $map_name - Название карты
+     * @return string
      */
-    public static function mapImages(): array
+    public static function mapImages(string $map_name): string
     {
-        return [
+        /** Массив с ключами виде названий карт и значениями в виде названия */
+        $array = [
             'Таможня' => '/img/maps/karta_tamozhnya_preview.png',
             'Завод' => '/img/maps/zavod_prev.jpg',
             'Ночной Завод' => '/img/maps/zavod_prev.jpg',
@@ -264,6 +231,9 @@ final class ApiService implements ApiInterface
             'Резерв' => '/img/maps/rezerv.jpg',
             'Лес' => '/img/maps/forest_prev.jpg'
         ];
+
+        /** Возвращаем значение массива по полученному в виде параметра ключу */
+        return $array[$map_name];
     }
 
 }

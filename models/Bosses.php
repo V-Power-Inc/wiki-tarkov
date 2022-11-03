@@ -84,14 +84,14 @@ class Bosses extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращаем AR объект из таблицы Bosses по имени карты
+     * Метод возвращаем AR объект из таблицы Bosses по url адресу карты
      *
-     * @param string $map_name - Название карты
+     * @param string $map_url - url адрес карты
      * @return Bosses
      */
-    public static function getDbData(string $map_name): Bosses
+    public static function getBossData(string $map_url): Bosses
     {
-        return Bosses::findOne([Bosses::ATTR_MAP => $map_name]);
+        return Bosses::findOne([Bosses::ATTR_URL => $map_url]);
     }
 
     /**
@@ -103,5 +103,4 @@ class Bosses extends \yii\db\ActiveRecord
     {
         return Bosses::find()->select('map,url')->all();
     }
-
 }

@@ -7,6 +7,7 @@
  *
  * Это страница со списком карт, на которых можно встретить различных боссов
  *
+ * @var $this yii\web\View
  * @var $maps Bosses - Объект боссов, в данном случае возвращает список карт из таблицы Bosses
  */
 
@@ -53,7 +54,7 @@ use app\common\services\ApiService;
         <?php foreach($maps as $map): ?>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-top-30 text-center">
                 <h2 class="text-center boss-map-heading">Боссы на локации <?= $map->map ?></h2>
-                <a href="/bosses/<?= $map->url ?>"><img class="boss-maps-img" src="<?= ApiService::mapImages()[$map->map] ?>"></a>
+                <a href="/bosses/<?= $map->url ?>"><img class="boss-maps-img" src="<?= ApiService::mapImages($map->map) ?>"></a>
                 <br>
                 <br>
                 <a class="btn btn-default main-link" href="/bosses/<?= $map->url ?>">Перейти к боссам локации <?= $map->map ?></a>

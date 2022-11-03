@@ -45,9 +45,17 @@ class BossesController extends AdvancedController
      * Метод рендерит конкретную карту и выводит всю доступную информацию о боссах
      *
      * @param string $url - URL адрес до детальной странице с боссами на конкретной карте
+     * @return string
      */
-    public function actionView(string $url)
+    public function actionView(string $url): string
     {
-        // todo: Сделать
+        /** Создаем объект класса ApiService */
+        $api = new ApiService();
+
+        /** Дергаем метод, который вернет нам детальную страницу Боссов */
+        $boss = $api->getBosses($url);
+
+        /** Рендерим вьюху */
+        return $this->render('view', ['boss' => $boss]);
     }
 }
