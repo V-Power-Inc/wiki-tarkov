@@ -27,6 +27,7 @@ $this->registerMetaTag([
 use app\common\services\ImageService;
 use yii\helpers\ArrayHelper;
 use app\common\services\ArrayService;
+use app\common\services\TranslateService;
 ?>
 
 <!-- Gorizontal information -->
@@ -47,7 +48,7 @@ use app\common\services\ArrayService;
             <p class="alert alert-info size-16">В этом разделе вы узнаете какие есть отряды и боссы на локации <?= $map_title->map ?>. О боссах представлено много информации, внешний вид - свита и ее количество, вероятность спавна и прочие полезные атрибуты.
                 <br>
                 <br>
-
+                Самое полезное, это наличие всех зон спавна для всех боссов присутствующих на карте <?= $map_title->map ?>. Это позволит планировать рейды таким образом, чтобы не встретиться с боссами или наоборт - выследить их с целью получить награду.
             </p>
         </div>
     </div>
@@ -68,11 +69,10 @@ use app\common\services\ArrayService;
                     <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>">
                 </div>
 
-                <!-- todo: Сделать метод, который на лету переведет английские вариации -->
                 <!-- Attributes -->
                 <div class="col-sm-10">
                     <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] ?>%</b></p>
-                    <p class="boss-page-text boss-spawn-locations">Шанс спавна: <b><?= implode(', ', ArrayHelper::getColumn($boss['spawnLocations'], 'name')) ?></b>
+                    <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                     <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
                     <p class="boss-page-text boss-spawn-time">Спавнится при определенных условиях или ночью: <b><?= ($boss['spawnTimeRandom'] == 'true') ? 'Да' : 'Нет' ?></b>
 
