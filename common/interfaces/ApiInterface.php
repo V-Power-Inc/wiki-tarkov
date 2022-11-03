@@ -24,4 +24,13 @@ interface ApiInterface
      * @return mixed
      */
     function getBosses(string $map_name = null);
+
+    /**
+     * Метод для получения данных о предмете, метод должен реализовывать отдачу необходимых для
+     * рендеринга страницы данных
+     *
+     * @param string $itemName - имя предмета
+     * @return mixed
+     */
+    function getItem(string $itemName);
 }

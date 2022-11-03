@@ -212,4 +212,76 @@ final class ApiService implements ApiInterface
         return true;
     }
 
+    /**
+     * Метод посылает запрос на сервер и получает набор данных для работы с БД
+     *
+     * todo: Метод и последовательности в разработке (Придумать как назвать контроллер - пока мысль ApiController)
+     *
+     * @param string $itemName - имя предмета
+     * @return mixed|void
+     */
+    public function getItem(string $itemName)
+    {
+        /** Задаем тело запроса для получения информации о боссах */
+        $this->query = '{
+          items(name: '. $itemName . ', lang: ru, limit: 10) {
+            name
+            width
+            height
+            weight
+            description
+            category {
+              name
+            }
+            inspectImageLink
+            sellFor {
+              vendor {
+                name
+              }
+              price
+              currency
+              currencyItem {
+                name
+              }
+              priceRUB
+            }
+            buyFor {
+              vendor {
+                name
+              }
+              price
+              currency
+              currencyItem {
+                name
+              }
+              priceRUB
+            }
+            bartersFor {
+              trader {
+                name
+              }
+              level
+              taskUnlock {
+                name
+              }
+              requiredItems {
+                item {
+                  name
+                }
+                count
+                quantity
+              }
+            }
+          } 
+        }';
+
+        echo '<pre>';
+        echo print_r($this->getApiData($this->query));
+        exit;
+        echo '</pre>';
+    }
+
+
+
+
 }

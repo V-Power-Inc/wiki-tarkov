@@ -8,7 +8,7 @@ use app\common\helpers\validators\SafeValidator;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "bosses".
+ * AR модель для работы с записями боссов, полученными через API
  *
  * @property int $id ID primary key
  * @property string $map Название карты спавна
