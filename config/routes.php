@@ -9,6 +9,7 @@ use app\controllers\ItemController;
 use app\controllers\MapsController;
 use app\controllers\TraderController;
 use app\controllers\BossesController;
+use app\controllers\ApiController;
 
 use app\modules\admin\controllers\DefaultController;
 use app\modules\admin\controllers\ModeratorController;
@@ -68,6 +69,9 @@ return [
 
     /** URL до детальной страницы с боссами */
     'bosses/<url:[\w_\/-]+>' => BossesController::routeId(BossesController::ACTION_VIEW),
+
+    /** URL до основной страницы API */
+    'items/list' => ApiController::routeId(ApiController::ACTION_LIST),
 
     /** Кастомный урл компонент */
     [
