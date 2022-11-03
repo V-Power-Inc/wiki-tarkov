@@ -25,7 +25,7 @@ final class ArrayService
     public static function getAmountEscorts(array $detachment): int
     {
         /** Изначальное количество отряда */
-        $cnt = 1;
+        $cnt = 0;
 
         /** Вычисляем итоговое число отряда с помощью глубокого многомерного массива */
         foreach ($detachment as $item) {

@@ -82,7 +82,7 @@ use app\common\services\TranslateService;
                         $cnt = ArrayService::getAmountEscorts($boss['escorts']);
                     }
                     ?>
-                        <p class="boss-page-text boss-group-count">Всего в отряде: <b>1 - <?= $cnt ?></b></p>
+                        <p class="boss-page-text boss-group-count">Всего в отряде сопровождения: <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
                     <?php endif; ?>
 
                     </p>
