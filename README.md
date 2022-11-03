@@ -1,7 +1,7 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg?branch=master)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
-![Stable Version](https://img.shields.io/badge/version-v2.5.2-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v2.8.1-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-1017-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-75%25-yellowgreen)
@@ -30,6 +30,7 @@
 - Раздел "Часто задаваемые вопросы" - содержит список всех часто задаваемых вопросов и ответы на них.
 - Курсы валют - раздел для просмотра курсов валют евро, биткоина и доллара во внутриигровом мире, используется JS для мгновенного получения результата без перезагрузки страницы.
 - Админка - написанная с нуля модульная Yii2 админка, которая необходима для администрирования сайта.
+- API с сервиса tarkov.dev, которое позволяет получать актуальную информацию о боссах, которые могут спавниться на локациях.
 ## Yii2 basic reworked 
 В процессе разработки использовалась Yii2 basic, однако под нужды проекта она была доработана, в связи с чем в проекте появились некоторые нюансы.
 

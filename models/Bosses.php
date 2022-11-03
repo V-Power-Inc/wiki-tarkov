@@ -5,7 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
-use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "bosses".
@@ -84,14 +84,14 @@ class Bosses extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращаем AR объект из таблицы Bosses по url адресу карты
+     * Метод возвращаем string - полученый из атрибута bosses текущего объекта
      *
      * @param string $map_url - url адрес карты
-     * @return Bosses
+     * @return string
      */
-    public static function getBossData(string $map_url): Bosses
+    public static function getBossData(string $map_url): string
     {
-        return Bosses::findOne([Bosses::ATTR_URL => $map_url]);
+        return Bosses::find()->select(static::ATTR_BOSSES)->where([Bosses::ATTR_URL => $map_url])->scalar();
     }
 
     /**
@@ -101,6 +101,17 @@ class Bosses extends \yii\db\ActiveRecord
      */
     public static function getMapData()
     {
-        return Bosses::find()->select('map,url')->all();
+        return Bosses::find()->select([Bosses::ATTR_MAP, Bosses::ATTR_URL])->all();
+    }
+
+    /**
+     * Метод возвращает русское название карты по url адресу (AR Bosses)
+     *
+     * @param string $url - Url адрес до локации с боссами
+     * @return ActiveRecord
+     */
+    public static function findMapTitleByUrl(string $url): ActiveRecord
+    {
+        return Bosses::find()->select(Bosses::ATTR_MAP)->where([Bosses::ATTR_URL => $url])->one();
     }
 }

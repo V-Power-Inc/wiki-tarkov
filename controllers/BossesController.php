@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
+use app\models\Bosses;
 
 /**
  * Class BossesController
@@ -56,6 +57,9 @@ class BossesController extends AdvancedController
         $boss = $api->getBosses($url);
 
         /** Рендерим вьюху */
-        return $this->render('view', ['boss' => $boss]);
+        return $this->render('view', [
+            'boss' => $boss,
+            'map_title' => Bosses::findMapTitleByUrl($url)
+        ]);
     }
 }

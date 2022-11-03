@@ -84,7 +84,7 @@ final class ApiService implements ApiInterface
         /** Возвращаем результат - если в параметр прилетело название карты, возвращаем набор информации о боссах
          * на этой карте, если параметра не было - возвращаем массив со списком карт и Url адресов до карт
          */
-        return !empty($map_name) ? Bosses::getBossData($map_name) : Bosses::getMapData();
+        return !empty($map_name) ? JsondataService::getBossData($map_name) : Bosses::getMapData();
     }
 
     /**
