@@ -8,6 +8,7 @@
 
 namespace app\common\services;
 
+use app\common\interfaces\ApiInterface;
 use app\models\Bosses;
 use yii\helpers\Json;
 
@@ -20,7 +21,7 @@ use yii\helpers\Json;
  * Class ApiService
  * @package app\common\services
  */
-final class ApiService
+final class ApiService implements ApiInterface
 {
     /** @var array - Атрибут с заголовками запроса */
     private $headers = ['Content-Type: application/json'];
@@ -67,17 +68,8 @@ final class ApiService
               }
             }';
 
-            /** Устанавливаем атрибуты запроса */
-            $data = @file_get_contents($this->api_url, false, stream_context_create([
-                'http' => [
-                    'method' => $this->method,
-                    'header' => $this->headers,
-                    'content' => Json::encode(['query' => $this->query]),
-                ]
-            ]));
-
             /** Присваиваем результат запроса переменной */
-            $content = Json::decode($data, true);
+            $content = $this->getApiData($this->query);
 
             /** Сохраняем все новые объекты о боссах */
             $this->saveData($content);
@@ -109,7 +101,8 @@ final class ApiService
      *
      * @return mixed
      */
-    private function removeOldBosses() {
+    private function removeOldBosses()
+    {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $bosses = Bosses::findAll([Bosses::ATTR_OLD => Bosses::TRUE]);
 
@@ -117,6 +110,27 @@ final class ApiService
         foreach ($bosses as $boss) {
             $boss->delete();
         }
+    }
+
+    /**
+     * Метод получает данные из удаленного источника по переданному параметру запроса
+     *
+     * @param string $query - запрос к GraphQl
+     * @return array
+     */
+    private function getApiData(string $query): array
+    {
+        /** Устанавливаем атрибуты запроса */
+        $data = @file_get_contents($this->api_url, false, stream_context_create([
+            'http' => [
+                'method' => $this->method,
+                'header' => $this->headers,
+                'content' => Json::encode(['query' => $this->query]),
+            ]
+        ]));
+
+        /** Возвращаем раскодированный из Json результат в виде массива*/
+        return Json::decode($data, true);
     }
 
     /**
