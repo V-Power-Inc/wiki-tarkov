@@ -63,3 +63,15 @@ use app\common\services\ImageService;
     </div>
 
 </div>
+
+
+<hr class="grey-line">
+
+<!-- Gorizontal information -->
+<div class="row margin-top-30">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>

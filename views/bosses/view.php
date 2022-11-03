@@ -24,10 +24,12 @@ $this->registerMetaTag([
     'content' => 'Боссы, ' . $map_title->map . ', Escape from Tarkov'
 ]);
 
+use app\controllers\BossesController;
 use app\common\services\ImageService;
-use yii\helpers\ArrayHelper;
 use app\common\services\ArrayService;
 use app\common\services\TranslateService;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 ?>
 
 <!-- Gorizontal information -->
@@ -56,39 +58,69 @@ use app\common\services\TranslateService;
     <!-- Main Page Content -->
     <div class="row">
 
-        <!-- Cycle with all bosses on the map -->
-        <?php foreach($bosses as $boss): ?>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
+            <!-- Cycle with all bosses on the map -->
+            <?php foreach($bosses as $boss): ?>
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
-                <!-- Name -->
-                <h2 class="text-left"><?= $boss['name'] ?></h2>
+                    <!-- Name -->
+                    <h2 class="text-left"><?= $boss['name'] ?></h2>
 
-                <!-- Image -->
-                <div class="col-sm-2">
-                    <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>">
+                    <!-- Image -->
+                    <div class="col-sm-2">
+                        <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>">
+                    </div>
+
+                    <!-- Attributes -->
+                    <div class="col-sm-10">
+                        <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] ?>%</b></p>
+                        <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
+                        <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
+                        <p class="boss-page-text boss-spawn-time">Спавнится при определенных условиях или ночью: <b><?= ($boss['spawnTimeRandom'] == 'true') ? 'Да' : 'Нет' ?></b>
+
+                            <!-- Check of boss has escort -->
+                            <?php if(!empty($boss['escorts'])): {
+                                /** Выводим количество людей в составе отряда босса */
+                                $cnt = ArrayService::getAmountEscorts($boss['escorts']);
+                            }
+                            ?>
+                                <p class="boss-page-text boss-group-count">Всего в отряде сопровождения: <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
+                            <?php endif; ?>
+
+                        </p>
+                    </div>
                 </div>
+            <?php endforeach;?>
 
-                <!-- Attributes -->
-                <div class="col-sm-10">
-                    <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] ?>%</b></p>
-                    <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
-                    <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
-                    <p class="boss-page-text boss-spawn-time">Спавнится при определенных условиях или ночью: <b><?= ($boss['spawnTimeRandom'] == 'true') ? 'Да' : 'Нет' ?></b>
-
-                    <!-- Check of boss has escort -->
-                    <?php if(!empty($boss['escorts'])): {
-                        /** Выводим количество людей в составе отряда босса */
-                        $cnt = ArrayService::getAmountEscorts($boss['escorts']);
-                    }
-                    ?>
-                        <p class="boss-page-text boss-group-count">Всего в отряде сопровождения: <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
-                    <?php endif; ?>
-
-                    </p>
-                </div>
+            <!-- Relation -->
+            <div class="recommended-gm-content">
+                <?= $this->render('/other/google-recommended.php'); ?>
             </div>
 
-        <?php endforeach;?>
+            <!-- Комментарии -->
+            <?= $this->render('/other/comments');?>
+
+            <!-- back to main bosses page -->
+            <a href="<?= Url::to(BossesController::getUrlRoute(BossesController::ACTION_INDEX)) ?>"><button type="button" class="btn btn-primary margin-top-15">Вернуться к списку локаций</button></a>
+
+        </div>
+
+        <!-- left block -->
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+            <!--Yandex direct -->
+            <?= $this->render('/other/yandex-direct.php'); ?>
+
+            <!-- Виджет Вконтакте -->
+            <div class="vk-widget-styling">
+                <?= $this->render('/other/wk-widget'); ?>
+            </div>
+
+            <!-- Виджет дискорда -->
+            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
+                <?= $this->render('/other/discord-widget.php'); ?>
+                <?php  $this->endCache(); } ?>
+        </div>
     </div>
 </div>
