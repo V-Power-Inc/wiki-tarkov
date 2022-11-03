@@ -2153,3 +2153,17 @@ table.patrons-tbl >thead > tr > th {
     color: #fff8f6;
     cursor: pointer;
 }
+
+/** Заголовки для названий карт на страницах боссов **/
+.boss-map-heading {
+    color: #c3392c;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/** Стили для изображений локаций на страницах боссов **/
+.boss-maps-img {
+    max-width: 300px;
+    height: 100%;
+    max-height: 190px;
+}

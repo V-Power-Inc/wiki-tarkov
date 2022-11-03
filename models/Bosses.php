@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string $date_create Дата создания записи о боссах
  * @property int $active Флаг активности записи
  * @property int $old Флаг возраста записи, если стоит 1, пора удалять
+ * @property string $url Url адрес до карты с боссами
  */
 class Bosses extends \yii\db\ActiveRecord
 {
@@ -26,6 +27,7 @@ class Bosses extends \yii\db\ActiveRecord
     const ATTR_DATE_CREATE = 'date_create';
     const ATTR_ACTIVE = 'active';
     const ATTR_OLD = 'old';
+    const ATTR_URL = 'url';
 
     /** Константы bool значений */
     const TRUE = 1;
@@ -57,7 +59,9 @@ class Bosses extends \yii\db\ActiveRecord
 
             [static::ATTR_OLD, IntegerValidator::class],
 
-            [static::ATTR_MAP, StringValidator::class, StringValidator::ATTR_MAX => 100]
+            [static::ATTR_MAP, StringValidator::class, StringValidator::ATTR_MAX => 100],
+
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
@@ -70,11 +74,12 @@ class Bosses extends \yii\db\ActiveRecord
     {
         return [
             static::ATTR_ID => 'ID',
-            static::ATTR_MAP => 'Map',
-            static::ATTR_BOSSES => 'Bosses',
-            static::ATTR_DATE_CREATE => 'Date Create',
-            static::ATTR_ACTIVE => 'Active',
-            static::ATTR_OLD => 'Old'
+            static::ATTR_MAP => 'Карта',
+            static::ATTR_BOSSES => 'Боссы',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ACTIVE => 'Активность',
+            static::ATTR_OLD => 'Устаревшая информация',
+            static::ATTR_URL => 'Url адрес до локации с боссами'
         ];
     }
 
@@ -92,11 +97,11 @@ class Bosses extends \yii\db\ActiveRecord
     /**
      * Метод возвращает массив имен карт из таблицы Bosses
      *
-     * @return array
+     * @return Bosses[]
      */
-    public static function getMapNames(): array
+    public static function getMapData()
     {
-        return ArrayHelper::getColumn(Bosses::find()->all(), static::ATTR_MAP);
+        return Bosses::find()->select('map,url')->all();
     }
 
 }

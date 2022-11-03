@@ -30,7 +30,7 @@ final class ApiService implements ApiInterface
     private $headers = ['Content-Type: application/json'];
 
     /** @var string - Атрибут с телом запроса */
-    private $query;
+    private $query = '';
 
     /** @var string - Атрибут с основным адресов для получения API */
     private $api_url = 'https://api.tarkov.dev/graphql';
@@ -81,8 +81,10 @@ final class ApiService implements ApiInterface
         /** Проходим существующие данные и ставим флаги устаревания по мере необходимости */
         $this->setOldBosses();
 
-
-        return !empty($map_name) ? Bosses::getDbData($map_name) : Bosses::getMapNames();
+        /** Возвращаем результат - если в параметр прилетело название карты, возвращаем набор информации о боссах
+         * на этой карте, если параметра не было - возвращаем массив со списком карт и Url адресов до карт
+         */
+        return !empty($map_name) ? Bosses::getDbData($map_name) : Bosses::getMapData();
     }
 
     /**
@@ -169,6 +171,9 @@ final class ApiService implements ApiInterface
             $model->map = $map['name'];
             $model->bosses = Json::encode($map['bosses']);
 
+            /** Передаем название карты в генератор Url */
+            $model->url = $this->mapUrlCreator($map['name']);
+
             /** Сохраняем новый объект данных о боссе */
             $model->save();
         }
@@ -204,6 +209,61 @@ final class ApiService implements ApiInterface
         }
 
         return true;
+    }
+
+    /**
+     * Метод по полученному параметру создает название карты - возвращает строку
+     * Если вхождения не было - вернет null
+     *
+     * @param string $map - название карты
+     * @return string|null
+     */
+    private function mapUrlCreator(string $map): string
+    {
+        /** В свитче перебираем все известные названия карт и возвращаем транслит в виде строки */
+        switch ($map) {
+            case 'Таможня':
+                return 'tamojnya';
+            case 'Завод':
+                return 'zavod';
+            case 'Развязка':
+                return 'razvyazka';
+            case 'Маяк':
+                return 'lighthouse';
+            case 'Резерв':
+                return 'rezerv';
+            case 'Ночной Завод':
+                return 'night-zavod';
+            case 'Берег':
+                return 'bereg';
+            case 'Лаборатория':
+                return 'terragroup-laboratory';
+            case 'Лес':
+                return 'forest';
+        }
+
+        /** Возвращаем null только если не попали не в 1 из кейсов */
+        return null;
+    }
+
+    /**
+     * Массив с ключами в виде названия карт и значений изображения, которое для них используется
+     *
+     * @return array
+     */
+    public static function mapImages(): array
+    {
+        return [
+            'Таможня' => '/img/maps/karta_tamozhnya_preview.png',
+            'Завод' => '/img/maps/zavod_prev.jpg',
+            'Ночной Завод' => '/img/maps/zavod_prev.jpg',
+            'Развязка' => '/img/maps/razvyazka_small.jpg',
+            'Маяк' => '/img/maps/lighthouse.jpg',
+            'Берег' => '/img/maps/karta_bereg_preview.png',
+            'Лаборатория' => '/img/maps/terra-group.png',
+            'Резерв' => '/img/maps/rezerv.jpg',
+            'Лес' => '/img/maps/forest_prev.jpg'
+        ];
     }
 
 }
