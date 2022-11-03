@@ -114,4 +114,14 @@ class Bosses extends \yii\db\ActiveRecord
     {
         return Bosses::find()->select(Bosses::ATTR_MAP)->where([Bosses::ATTR_URL => $url])->one();
     }
+
+    /**
+     * По параметру URL определяем существует ли запись в БД
+     *
+     * @param string $url - Строка с URL адресом
+     * @return bool
+     */
+    public static function isExists(string $url): bool {
+        return Bosses::findOne([static::ATTR_URL => $url]) ? true : false;
+    }
 }

@@ -10,7 +10,9 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
+use app\common\services\ArrayService;
 use app\models\Bosses;
+use yii\web\HttpException;
 
 /**
  * Class BossesController
@@ -46,20 +48,37 @@ class BossesController extends AdvancedController
      * Метод рендерит конкретную карту и выводит всю доступную информацию о боссах
      *
      * @param string $url - URL адрес до детальной странице с боссами на конкретной карте
-     * @return string
+     * @return mixed
      */
-    public function actionView(string $url): string
+    public function actionView(string $url)
     {
         /** Создаем объект класса ApiService */
         $api = new ApiService();
 
-        /** Дергаем метод, который вернет нам детальную страницу Боссов */
-        $bosses = $api->getBosses($url);
+        /** Проверяем есть ли в БД страница с таким URL адресом */
+        if($url && Bosses::isExists($url) == true) {
 
-        /** Рендерим вьюху */
-        return $this->render('view', [
-            'bosses' => $bosses,
-            'map_title' => Bosses::findMapTitleByUrl($url)
-        ]);
+            /** Дергаем метод, который вернет нам детальную страницу Боссов */
+            $bosses = $api->getBosses($url);
+
+            /** Рендерим вьюху */
+            return $this->render('view', [
+                'bosses' => $bosses,
+                'map_title' => Bosses::findMapTitleByUrl($url)
+            ]);
+        }
+
+        /** Проверяем в статичном массиве, был ли такой Url адрес раньше */
+        if(in_array($url, ArrayService::existingMapNames())) {
+
+            /** Дергаем метод по обновлению боссов */
+            $api->getBosses($url);
+
+            /** Редиректим на главную страницу боссов */
+            return $this->redirect(BossesController::getUrlRoute(BossesController::ACTION_INDEX));
+        }
+
+        /** Exception на всякий случай */
+        throw new HttpException(404, 'Такая страница не существует');
     }
 }

@@ -39,4 +39,24 @@ final class ArrayService
         /** Возвращаем результат в виде числа */
         return $cnt;
     }
+
+    /**
+     * Массив с известными URL адресами карт локаций для боссов
+     *
+     * @return array
+     */
+    public static function existingMapNames(): array
+    {
+        return [
+            'tamojnya',
+            'zavod',
+            'razvyazka',
+            'lighthouse',
+            'night-zavod',
+            'rezerv',
+            'bereg',
+            'terragroup-laboratory',
+            'forest'
+        ];
+    }
 }
