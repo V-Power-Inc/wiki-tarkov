@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\services\ApiService;
 
 /**
  * Class BossesController
@@ -24,6 +25,11 @@ class BossesController extends AdvancedController
      */
     public function actionIndex()
     {
-        // todo: Реализовать логику вывода страницы со списком боссов
+        $api = new ApiService();
+
+        echo '<pre>';
+        echo print_r($api->getBosses('Таможня'));
+        exit;
+        echo '</pre>';
     }
 }

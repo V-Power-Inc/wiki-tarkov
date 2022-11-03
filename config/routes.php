@@ -8,6 +8,7 @@ use app\controllers\LootController;
 use app\controllers\ItemController;
 use app\controllers\MapsController;
 use app\controllers\TraderController;
+use app\controllers\BossesController;
 
 use app\modules\admin\controllers\DefaultController;
 use app\modules\admin\controllers\ModeratorController;
@@ -61,6 +62,9 @@ return [
     'loot' => LootController::routeId(LootController::ACTION_MAINLOOT),
     'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
     'loot/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
+
+    /** URL до страницы со списком боссов */
+    'bosses' => BossesController::routeId(BossesController::ACTION_INDEX),
 
     /** Кастомный урл компонент */
     [

@@ -26,6 +26,10 @@ class Bosses extends \yii\db\ActiveRecord
     const ATTR_ACTIVE = 'active';
     const ATTR_OLD = 'old';
 
+    /** Константы bool значений */
+    const TRUE = 1;
+    const FALSE = 0;
+
     /**
      * Метод возвращающий имя текущей таблицы
      *
