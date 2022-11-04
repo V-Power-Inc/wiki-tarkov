@@ -98,17 +98,6 @@ class ApiLoot extends \yii\db\ActiveRecord
     }
 
     /**
-     * Функция аналогичная представленной выше, но не является статической
-     *
-     * @param string $name - имя предмета
-     * @return ApiLoot[]
-     */
-    public function objFindItemsByName(string $name)
-    {
-        return ApiLoot::find()->where(['like', ApiLoot::ATTR_NAME, $name])->all();
-    }
-
-    /**
      * Ищем все записи по имени предмета и с флагом устаревания
      *
      * @param string $name - Имя предмета
