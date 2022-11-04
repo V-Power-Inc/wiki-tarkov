@@ -161,10 +161,12 @@ use yii\widgets\ActiveForm;
                 <?= $this->render('/other/wk-widget'); ?>
             </div>
 
+            <br>
+
             <!-- Виджет дискорда -->
             <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
                 <?= $this->render('/other/discord-widget.php'); ?>
-                <?php  $this->endCache(); } ?>
+            <?php  $this->endCache(); } ?>
         </div>
 
 

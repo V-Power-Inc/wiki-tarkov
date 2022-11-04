@@ -2178,7 +2178,7 @@ table.patrons-tbl >thead > tr > th {
 
 /** Стили для изображения иконки **/
 .item-page-image {
-    max-width: 66px;
+    max-width: 104px;
     border: 1px solid #ff212140;
     box-shadow: 1px 1px 1px;
     width: 100%;
@@ -2214,4 +2214,29 @@ table.patrons-tbl >thead > tr > th {
     background: #80808029;
     border: 2px solid #c3392c;
     border-radius: 5px;
+}
+
+/**  Стили для картинки на детальной странице лута **/
+.detail-item-image {
+    max-width: 400px;
+    width: 100%;
+}
+
+/** Описание на детальных страницах лута **/
+.detail-item-text {
+    vertical-align: top;
+    font-size: 18px;
+    margin: 0 0 15px 15px;
+}
+
+/** Стили для трейдера на детальной странице лута **/
+.detail-item-trader {
+    max-width: 80px;
+}
+
+/** Блок купли и продажи **/
+.selling-block, .buying-block {
+    padding: 10px;
+    background: #80808033;
+    margin: 20px auto;
 }

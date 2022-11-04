@@ -394,6 +394,7 @@ final class ApiService implements ApiInterface
 
         /** Если предметы в API нашлись */
         if ($ApiItems !== false) {
+
             /** В цикле проходим весь массив из API и сохраняем в БД новые данные */
             foreach ($ApiItems['data']['items'] as $data) {
 
