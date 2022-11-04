@@ -9,6 +9,7 @@
 namespace app\models\forms;
 
 use app\common\helpers\validators\StringValidator;
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use yii\base\Model;
 
 /**
@@ -23,7 +24,9 @@ class ApiForm extends Model
     public $item_name;
     const ATTR_ITEM_NAME = 'item_name';
 
-    // todo: Тут вероятно надо будет еще использовать Рекапчу, чтобы не засрали базу запросами
+    /** @var string - Переменная для рекапчи false */
+    public $recaptcha = false;
+    const ATTR_RECAPTCHA = 'recaptcha';
 
     /**
      * Правила валидации модели
@@ -33,7 +36,9 @@ class ApiForm extends Model
     public function rules()
     {
         return [
-            [static::ATTR_ITEM_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
+            [static::ATTR_ITEM_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [[static::ATTR_RECAPTCHA], ReCaptchaValidator::class, 'secret' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum', 'uncheckedMessage' => 'Подтвердите что вы не робот.']
         ];
     }
 
@@ -45,7 +50,8 @@ class ApiForm extends Model
     public function attributeLabels()
     {
         return [
-            static::ATTR_ITEM_NAME => 'Название предмета'
+            static::ATTR_ITEM_NAME => 'Название предмета',
+            static::ATTR_RECAPTCHA => 'Проверка'
         ];
     }
 }

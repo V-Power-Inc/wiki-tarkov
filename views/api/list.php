@@ -6,6 +6,8 @@
  * Time: 22:36
  *
  * Страница со списком имеющегося у нас в API количества уникальных предметов
+ *
+ * @var ApiForm $form_model - Объект формы для загрузки поискового запроса
  */
 
 $this->title = 'Справочник лута в Escape from Tarkov';
@@ -20,6 +22,10 @@ $this->registerMetaTag([
     'content' => 'Справочник лута Escape From Tarkov'
 ]);
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use app\models\forms\ApiForm;
+use himiklab\yii2\recaptcha\ReCaptcha;
 // todo: Пропихнуть сюда рекламу
 
 // todo: Я остановился на верстке этой странице - мне здесь нужна форма, для дальнейшей передачи параметра в API
@@ -28,6 +34,14 @@ $this->registerMetaTag([
 
 <!-- Main page content -->
 <div class="container">
+
+    <div class="row">
+        <!-- Flash info -->
+        <?php  if(Yii::$app->getSession()->getFlash('message')):?>
+            <?=Yii::$app->getSession()->getFlash('message')?>
+        <?php endif;?>
+    </div>
+
     <div class="row">
         <div class="col-xs-12 alert alert-info size-16">
             Актуальный справочник лута Escape from tarkov, который постоянно актуализирует данные - воспользуйтесь поиском, чтобы узнать актуальную информацию о предмете, который вас интересует. Посмотреть информацию можно об абсолютно любом предмете, который вас интересует.
@@ -53,7 +67,18 @@ $this->registerMetaTag([
 
         <!-- Main content Block -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
+            <?php $form = ActiveForm::begin() ?>
 
+                <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME) ?>
+
+                <?= $form->field($form_model, ApiForm::ATTR_RECAPTCHA)->widget(
+                    ReCaptcha::class,
+                    ['siteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF']
+                ) ?>
+
+                <?= Html::submitButton('Осуществить поиск', ['class' => 'btn btn-success']) ?>
+
+            <?php ActiveForm::end() ?>
         </div>
 
 

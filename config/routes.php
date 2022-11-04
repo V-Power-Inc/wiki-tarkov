@@ -71,7 +71,7 @@ return [
     'bosses/<url:[\w_\/-]+>' => BossesController::routeId(BossesController::ACTION_VIEW),
 
     /** URL до основной страницы API */
-    'items/list' => ApiController::routeId(ApiController::ACTION_LIST),
+    'items' => ApiController::routeId(ApiController::ACTION_LIST),
 
     /** Кастомный урл компонент */
     [

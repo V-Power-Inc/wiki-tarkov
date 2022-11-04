@@ -9,8 +9,12 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\models\ApiLoot;
 use app\models\Bosses;
+use app\models\forms\ApiForm;
 use yii\helpers\Json;
+use app\components\MessagesComponent;
+use Yii;
 
 /**
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
@@ -46,7 +50,7 @@ final class ApiService implements ApiInterface
     public function getBosses(string $map_name = null)
     {
         /** Проверяем, если записи о боссах устарели - проводим следующие операции */
-        if($this->isOldBosses() | $this->isEmptyBosses()) {
+        if ($this->isOldBosses() | $this->isEmptyBosses()) {
 
             /** Удаляем устаревшую информацию - если даже 1 босс устарел, обновляем всю таблицу */
             $this->removeOldBosses();
@@ -116,6 +120,16 @@ final class ApiService implements ApiInterface
     }
 
     /**
+     * Функция проверяет - пуста ли таблицы с данными о предметах
+     *
+     * @return bool
+     */
+    private function isEmptyItems(): bool
+    {
+        return empty(ApiLoot::find()->all()) ? true : false;
+    }
+
+    /**
      * Метод удаляет всю информацию из таблицы
      *
      * @return mixed
@@ -135,10 +149,9 @@ final class ApiService implements ApiInterface
     /**
      * Метод получает данные из удаленного источника по переданному параметру запроса
      *
-     * @param string $query - запрос к GraphQl
      * @return array
      */
-    private function getApiData(string $query): array
+    private function getApiData(): array
     {
         /** Устанавливаем атрибуты запроса */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
@@ -208,23 +221,25 @@ final class ApiService implements ApiInterface
             }
         }
 
+        /** Возвращаем true если все прошло успешно */
         return true;
     }
 
     /**
-     * Метод посылает запрос на сервер и получает набор данных для работы с БД
+     * Метод задает тело запроса, для получения данных о предметах
      *
      * todo: Метод и последовательности в разработке (Придумать как назвать контроллер - пока мысль ApiController)
      *
      * @param string $itemName - имя предмета
      * @return mixed|void
      */
-    public function getItem(string $itemName)
+    public function setItemQuery(string $itemName)
     {
         /** Задаем тело запроса для получения информации о боссах */
         $this->query = '{
-          items(name: '. $itemName . ', lang: ru, limit: 10) {
+          items(name: "'. $itemName . '", lang: ru, limit: 20) {
             name
+            normalizedName
             width
             height
             weight
@@ -273,13 +288,188 @@ final class ApiService implements ApiInterface
             }
           } 
         }';
-
-        echo '<pre>';
-        echo print_r($this->getApiData($this->query));
-        exit;
-        echo '</pre>';
     }
 
+    /**
+     * В этом методе, мы обрабатываем поисковый запрос на получение предмета и решаем как с ним поступать
+     *
+     * Обработаны следующие кейсы:
+     * - Предмета нет в базе и в API
+     * - Предмета нет в базе но есть в API
+     *
+     * @param ApiForm $model - поисковый запрос на получение предмета
+     * @return mixed
+     * @throws
+     */
+    public function proccessSearchItem(ApiForm $model)
+    {
+        /** Проверка - если в БД у нас нет этой записи, тогда должны спарсить и создать */
+        if (!ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+            if ($this->createNewItems($model)) {
+
+                /** Проставляем предметам флаги устаревания - после создания новых предметов */
+                $this->setOldItems();
+
+                /** Возвращаем в контроллер набор данных, который искали ранее */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем False в контроллер, если в API нет данных */
+            return false;
+        }
+
+        /** Проверка - если мы нашли у нас в базе устаревшие записи */
+        if (ApiLoot::findOldItemsByName($model->item_name)) {
+
+            /** В цикле проходим все старые записи и удаляем их */
+            $this->removeOldItemsByName($model);
+
+            /** Пробуем создать новые предметы, если получилось - возвращаем в контроллер набор данных **/
+            if ($this->createNewItems($model)) {
+
+                /** Проставляем предметам флаги устаревания - после создания новых предметов */
+                $this->setOldItems();
+
+                /** Возращаем в контроллер конечные данные с запрашиваемым набором */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем false, если предметы не были сохранены по какой то причине */
+            return false;
+        }
+
+        /** Проверка, если API нашел у нас в базе нужные предметы */
+        if (ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Проставляем предметам флаги устаревания - после создания новых предметов */
+            $this->setOldItems();
+
+            /** Удаляем старые предметы - если получили запись из базы */
+            return ApiLoot::findItemsByName($model->item_name);
+        }
+
+    }
+
+    /**
+     * Метод обращается к API с поисковым запросом и либо создает новые AR объекты ApiLoot
+     * либо возвращает false, если массив был пустой
+     *
+     * @param ApiForm $model
+     * @return mixed
+     */
+    private function getNewItems(ApiForm $model)
+    {
+        /** Задаем тело запроса в API - указывая сделать поиск по параметру полученному из формы */
+        $this->setItemQuery($model->item_name);
+
+        /** Задаем переменную с данными полученными по API о предметах */
+        $item = $this->getApiData();
+
+        /** Пуляем запрос и проверяем - если ничего, надо делать SetFlash */
+        if (empty($item['data']['items'])) {
+
+            /** Возвращаем уведомление, что не смогли найти искомый предмет */
+            $messages = new MessagesComponent();
+            $message = "<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению мы не смогли ничего найти по вашему запросу, попробуйте другой запрос.</b></p>";
+            $messages->setMessages($message);
+
+            /** Возвращаем false - если не смогли найти результат даже по APIшке */
+            return false;
+        }
+
+        /** Возвращаем результат запроса если все хорошо */
+        return $item;
+    }
+
+    /**
+     * Метод создает новые записи о предметах в базе, если массив полученный от API не пустой
+     * возвращает true в случае успеха сохранения или false, если массив API был пуст
+     *
+     * @param ApiForm $model - объект ApiForm
+     * @return bool
+     */
+    private function createNewItems(ApiForm $model)
+    {
+        /** Переменная с запросом для получения данных по луту из API */
+        $ApiItems = $this->getNewItems($model);
+
+        /** Если предметы в API нашлись */
+        if ($ApiItems !== false) {
+            /** В цикле проходим весь массив из API и сохраняем в БД новые данные */
+            foreach ($ApiItems['data']['items'] as $data) {
+
+                /** Создаем новый объект AR класса ApiLoot */
+                $newItem = new ApiLoot();
+
+                /** Присваиваем необходимые атрибуты */
+                $newItem->name = $data['name'];
+                $newItem->url = $data['normalizedName'];
+                $newItem->json = Json::encode($data);
+
+                /** Сохраняем новые объекты */
+                $newItem->save();
+            }
+
+            /** Возвращаем true если предметы сохранились */
+            return true;
+        }
+
+        /** Возвращаем false - если предметы не сохранились */
+        return false;
+    }
+
+    /**
+     * Метод проставляющий устаревание для предметов, полученных по API
+     *
+     * @return bool
+     */
+    private function setOldItems(): bool
+    {
+        /** Выбираем в базе все записи, которые не помечены флагом устаревания */
+        $items = ApiLoot::findAll([ApiLoot::ATTR_OLD => ApiLoot::FALSE]);
+
+        /** В цикле проходим все соответствующие записи */
+        foreach ($items as $item) {
+
+            /** Дата устаревания записи */
+            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +1 month'));
+
+            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
+            if ($date < date("Y-m-d H:i:s",time())) {
+
+                /** Устанавливаем флаг старой записи */
+                $item->old = ApiLoot::TRUE;
+
+                /** Сохраняем изменения */
+                $item->save();
+            }
+        }
+
+        /** Возвращаем true если все прошло успешно */
+        return true;
+    }
+
+    /**
+     * Метод осуществляющий удаление устаревших предметов API по имени предметов через like
+     *
+     * @param ApiForm $model - объект формы ApiForm
+     * @throws
+     */
+    private function removeOldItemsByName(ApiForm $model)
+    {
+        /** Задаем SQL запрос переменной - ищем устаревшие записи */
+        $items = ApiLoot::find()
+            ->where([ApiLoot::ATTR_OLD => ApiLoot::TRUE])
+            ->where(['like', ApiLoot::ATTR_NAME, $model->item_name])
+            ->all();
+
+        /** В цикле проходим всех устаревших боссов и удаляем их */
+        foreach ($items as $item) {
+            $item->delete();
+        }
+    }
 
 
 

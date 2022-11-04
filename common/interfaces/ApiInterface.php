@@ -26,11 +26,10 @@ interface ApiInterface
     function getBosses(string $map_name = null);
 
     /**
-     * Метод для получения данных о предмете, метод должен реализовывать отдачу необходимых для
-     * рендеринга страницы данных
+     * Метод для получения данных о предмете, метод должен задавать новое тело запроса для API получения предметов
      *
-     * @param string $itemName - имя предмета
+     * @param string $itemName - имя предмета полученние из ApiForm
      * @return mixed
      */
-    function getItem(string $itemName);
+    function setItemQuery(string $itemName);
 }

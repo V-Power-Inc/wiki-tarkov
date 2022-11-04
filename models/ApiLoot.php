@@ -51,12 +51,6 @@ class ApiLoot extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'json', 'url'], 'required'],
-            [['json'], 'string'],
-            [['date_create'], 'safe'],
-            [['active', 'old'], 'integer'],
-            [['name', 'url'], 'string', 'max' => 255],
-
             [static::ATTR_NAME, RequiredValidator::class],
             [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
@@ -91,4 +85,55 @@ class ApiLoot extends \yii\db\ActiveRecord
             static::ATTR_ACTIVE => 'Старые записи'
         ];
     }
+
+    /**
+     * Метод ищет по названию предметы в таблице ApiLoot - возвращает AR объект ApiLoot или null если не нашел
+     *
+     * @param string $name - имя предмета
+     * @return ApiLoot[]
+     */
+    public static function findItemsByName(string $name)
+    {
+        return ApiLoot::find()->where(['like', ApiLoot::ATTR_NAME, $name])->all();
+    }
+
+    /**
+     * Функция аналогичная представленной выше, но не является статической
+     *
+     * @param string $name - имя предмета
+     * @return ApiLoot[]
+     */
+    public function objFindItemsByName(string $name)
+    {
+        return ApiLoot::find()->where(['like', ApiLoot::ATTR_NAME, $name])->all();
+    }
+
+    /**
+     * Ищем все записи по имени предмета и с флагом устаревания
+     *
+     * @param string $name - Имя предмета
+     * @return ApiLoot[]
+     */
+    public static function findOldItemsByName(string $name)
+    {
+        return ApiLoot::find()
+            ->where(['like', ApiLoot::ATTR_NAME, $name])
+            ->andWhere([ApiLoot::ATTR_OLD => ApiLoot::TRUE])
+            ->all();
+    }
+
+    /**
+     * Метод возвращает массив объектов ApiLoot - 30 актуальных записей
+     *
+     * @return ApiLoot[]
+     */
+    public static function findActualItems()
+    {
+        return ApiLoot::find()
+            ->where([ApiLoot::ATTR_OLD => ApiLoot::FALSE])
+            ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
+            ->limit(30)
+            ->all();
+    }
+
 }
