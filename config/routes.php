@@ -73,6 +73,9 @@ return [
     /** URL до основной страницы API */
     'items' => ApiController::routeId(ApiController::ACTION_LIST),
 
+    /** URL до детального предмета API */
+    'item/<url:[\w_\/-]+>.html' => ApiController::routeId(ApiController::ACTION_ITEM),
+
     /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',

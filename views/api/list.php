@@ -8,6 +8,7 @@
  * Страница со списком имеющегося у нас в API количества уникальных предметов
  *
  * @var ApiForm $form_model - Объект формы для загрузки поискового запроса
+ * @var ApiLoot[] $items - массив AR объектов ApiLoot
  */
 
 $this->title = 'Справочник лута в Escape from Tarkov';
@@ -22,16 +23,15 @@ $this->registerMetaTag([
     'content' => 'Справочник лута Escape From Tarkov'
 ]);
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use app\common\services\ImageService;
+use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\Html;
 use yii\helpers\Json;
-use app\common\services\ImageService;
+use yii\widgets\ActiveForm;
 
 // todo: Пропихнуть сюда рекламу
-
-// todo: Я остановился на верстке этой странице - мне здесь нужна форма, для дальнейшей передачи параметра в API
 ?>
 <hr class="grey-line">
 
@@ -61,16 +61,18 @@ use app\common\services\ImageService;
                 <li>Кому из Торговцев можно продать предмет</li>
                 <li>Узнаете какие есть бартеры на предмет у Торговцев как на получение так и на продажу</li>
             </ul>
+
+            <br>
+            <b>Важно!!! Это справочник с актуальной информацией, который обновляется регулярно.</b>
         </div>
     </div>
-
 
     <!-- Main Page Content -->
     <div class="row">
 
         <!-- Main content Block -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
-            <?php $form = ActiveForm::begin() ?>
+            <?php $form = ActiveForm::begin(['options' => ['class' => 'form-search-block']]) ?>
 
                 <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME) ?>
 
@@ -88,42 +90,44 @@ use app\common\services\ImageService;
             <?php if (!empty($items)): ?>
 
                 <!-- Items blocks -->
-                <?php foreach ($items as $item) : $item->json = Json::decode($item->json) ?>
+                <?php foreach ($items as $item) : ?>
+
+                    <?php $item->json = Json::decode($item->json) ?>
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
+                        <i class="fa fa-check-circle checked-by-admins" title="Актуальная информация"></i>
+
                         <!-- Name -->
                         <h2 class="text-left">
-                            <!-- todo: Ссылка в деталку -->
-                            <a href="#">
+                            <a href="/item/<?= $item->url ?>.html">
                                 <?= $item->json['name'] ?>
                             </a>
                         </h2>
 
                         <!-- Image -->
                         <div class="col-sm-2">
-                            <!-- todo: Ссылка в деталку -->
-                            <a href="#">
+                            <a href="/item/<?= $item->url ?>.html">
                                 <img class="item-page-image" src="<?= $item->json['iconLink'] ?>">
                             </a>
                         </div>
 
                         <!-- Attributes -->
                         <div class="col-sm-10">
-                            <p class="item-page-text">Категория: <b><?= $item->json['category']['name'] ?>%</b></p>
+                            <p class="item-page-text">Категория: <b><?= $item->json['category']['name'] ?></b></p>
                             <p class="item-page-text">Вес: <b><?= $item->json['weight'] ?> кг.</b></p>
                             <p class="item-page-text">Где можно купить:</p>
 
                             <!-- Where we can buy -->
                             <?php foreach ($item->json['buyFor'] as $trader) : ?>
-                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>">
+                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>" title="<?=$trader['vendor']['name'] ?>">
                             <?php endforeach; ?>
 
                             <p class="item-page-text">Где можно продать:</p>
 
                             <!-- Where we can sell -->
                             <?php foreach ($item->json['sellFor'] as $trader) : ?>
-                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>">
+                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>">
                             <?php endforeach; ?>
 
                         </div>
@@ -132,7 +136,16 @@ use app\common\services\ImageService;
 
                 <?php endforeach; ?>
 
-            <?php endif;?>
+            <?php else : ?>
+
+                <br>
+
+                <p class="alert alert-danger size-16">К сожалению в настоящий момент нет доступных предметов, попробуйте зайти позже</p>
+
+            <?php endif; ?>
+
+            <!-- Комментарии -->
+            <?= $this->render('/other/comments');?>
 
         </div>
 

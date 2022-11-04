@@ -2207,3 +2207,11 @@ table.patrons-tbl >thead > tr > th {
 .item-page-trader {
     max-width: 60px;
 }
+
+/** Оформление формы поиска предметов **/
+.form-search-block {
+    padding: 15px;
+    background: #80808029;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}

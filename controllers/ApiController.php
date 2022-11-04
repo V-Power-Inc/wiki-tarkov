@@ -13,6 +13,7 @@ use app\common\services\ApiService;
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use Yii;
+use yii\web\HttpException;
 use yii\web\ServerErrorHttpException;
 
 /**
@@ -65,17 +66,30 @@ class ApiController extends AdvancedController
         /** Рендер страницы со списком предметов */
         return $this->render('list', [
             'form_model' => $form_model,
-
-            // TODO - во вьюхе проверять на Empty - т.к. может быть false
             'items' => $items
         ]);
     }
 
-
-    public function actionItem()
+    /**
+     * Экшен для рендеринга страницы с детальной информацией о предмете
+     *
+     * @param string $url - строка с Url адресом
+     * @return string
+     * @throws HttpException
+     */
+    public function actionItem(string $url): string
     {
-        // Todo: Заготовка для детальной страницы лута (Не будем тут проверять устаревание предметов, чтобы не перегружать функционал)
+        /** Создаем переменную с объектом ApiLoot по параметру url адреса */
+        $item = ApiLoot::findItemByUrl($url);
+
+        /** Пробуем найти, если нашли - рендеринг вьюхи */
+        if ($item) {
+
+            /** Ренденирг данных */
+            return $this->render('item', ['item' => $item]);
+        }
+
+        /** Если в базе нет предмета - возвращаем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не существует');
     }
-
-
 }

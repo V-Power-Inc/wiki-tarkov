@@ -88,14 +88,14 @@ class ApiLoot extends \yii\db\ActiveRecord
 
     /**
      * Метод ищет по названию предметы в таблице ApiLoot - возвращает AR объект ApiLoot или null если не нашел
-     *
+     * Селектим Json и Url
      * @param string $name - имя предмета
      * @return ApiLoot[]
      */
     public static function findItemsByName(string $name)
     {
         return ApiLoot::find()
-            ->select(ApiLoot::ATTR_JSON)
+            ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
             ->where(['like', ApiLoot::ATTR_NAME, $name])
             ->all();
     }
@@ -116,18 +116,31 @@ class ApiLoot extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает массив объектов ApiLoot - 30 актуальных записей
-     * Селектим только строку с Json'ом
+     * Селектим только строку с Json'ом и URL
      *
      * @return ApiLoot[]
      */
     public static function findActualItems()
     {
         return ApiLoot::find()
-            ->select(ApiLoot::ATTR_JSON)
+            ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
             ->where([ApiLoot::ATTR_OLD => ApiLoot::FALSE])
             ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
             ->limit(30)
             ->all();
     }
 
+    /**
+     * Метод ищет запись по Url адресу и возвращает AR объект ApiLoot или null
+     * если не был найден объект
+     *
+     * todo: Возможно тут придется шаманить
+     *
+     * @param string $url
+     * @return ApiLoot|null
+     */
+    public static function findItemByUrl(string $url)
+    {
+        return ApiLoot::findOne([ApiLoot::ATTR_URL => $url]);
+    }
 }

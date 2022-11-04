@@ -14,15 +14,12 @@ use app\models\Bosses;
 use app\models\forms\ApiForm;
 use yii\helpers\Json;
 use app\components\MessagesComponent;
-use Yii;
 
 /**
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
  * различного рода запросов к GraphQl
  *
  * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev/___graphql)
- *
- * UPD 04-11-2022 - Сервис расширяется, ведется разработка функционала по загрузке предметов по API
  *
  * Class ApiService
  * @package app\common\services
@@ -228,8 +225,6 @@ final class ApiService implements ApiInterface
     /**
      * Метод задает тело запроса, для получения данных о предметах
      *
-     * todo: Метод и последовательности в разработке (Придумать как назвать контроллер - пока мысль ApiController)
-     *
      * @param string $itemName - имя предмета
      * @return mixed|void
      */
@@ -248,6 +243,7 @@ final class ApiService implements ApiInterface
               name
             }
             iconLink
+            inspectImageLink
             sellFor {
               vendor {
                 name
@@ -296,6 +292,7 @@ final class ApiService implements ApiInterface
      * Обработаны следующие кейсы:
      * - Предмета нет в базе и в API
      * - Предмета нет в базе но есть в API
+     * - Есть предмет в базе
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
      * @return mixed
@@ -471,7 +468,4 @@ final class ApiService implements ApiInterface
             $item->delete();
         }
     }
-
-
-
 }
