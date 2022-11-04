@@ -247,7 +247,7 @@ final class ApiService implements ApiInterface
             category {
               name
             }
-            inspectImageLink
+            iconLink
             sellFor {
               vendor {
                 name
@@ -404,6 +404,7 @@ final class ApiService implements ApiInterface
                 $newItem = new ApiLoot();
 
                 /** Присваиваем необходимые атрибуты */
+                // todo: Есть строки с обратными слешами в имени - надо разобраться
                 $newItem->name = $data['name'];
                 $newItem->url = $data['normalizedName'];
                 $newItem->json = Json::encode($data);

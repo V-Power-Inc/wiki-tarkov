@@ -26,6 +26,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\forms\ApiForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\Json;
+use app\common\services\ImageService;
+
 // todo: Пропихнуть сюда рекламу
 
 // todo: Я остановился на верстке этой странице - мне здесь нужна форма, для дальнейшей передачи параметра в API
@@ -79,6 +82,58 @@ use himiklab\yii2\recaptcha\ReCaptcha;
                 <?= Html::submitButton('Осуществить поиск', ['class' => 'btn btn-success']) ?>
 
             <?php ActiveForm::end() ?>
+
+
+            <!-- Items -->
+            <?php if (!empty($items)): ?>
+
+                <!-- Items blocks -->
+                <?php foreach ($items as $item) : $item->json = Json::decode($item->json) ?>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
+
+                        <!-- Name -->
+                        <h2 class="text-left">
+                            <!-- todo: Ссылка в деталку -->
+                            <a href="#">
+                                <?= $item->json['name'] ?>
+                            </a>
+                        </h2>
+
+                        <!-- Image -->
+                        <div class="col-sm-2">
+                            <!-- todo: Ссылка в деталку -->
+                            <a href="#">
+                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>">
+                            </a>
+                        </div>
+
+                        <!-- Attributes -->
+                        <div class="col-sm-10">
+                            <p class="item-page-text">Категория: <b><?= $item->json['category']['name'] ?>%</b></p>
+                            <p class="item-page-text">Вес: <b><?= $item->json['weight'] ?> кг.</b></p>
+                            <p class="item-page-text">Где можно купить:</p>
+
+                            <!-- Where we can buy -->
+                            <?php foreach ($item->json['buyFor'] as $trader) : ?>
+                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>">
+                            <?php endforeach; ?>
+
+                            <p class="item-page-text">Где можно продать:</p>
+
+                            <!-- Where we can sell -->
+                            <?php foreach ($item->json['sellFor'] as $trader) : ?>
+                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>">
+                            <?php endforeach; ?>
+
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            <?php endif;?>
+
         </div>
 
 

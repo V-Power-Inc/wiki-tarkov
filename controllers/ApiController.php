@@ -13,7 +13,7 @@ use app\common\services\ApiService;
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use Yii;
-use yii\web\HttpException;
+use yii\web\ServerErrorHttpException;
 
 /**
  * Контроллер обеспечивает работоспособность API по получению лута со стороннего источника tarkov.dev
@@ -29,13 +29,12 @@ class ApiController extends AdvancedController
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LIST = 'list';
     const ACTION_RESULT = 'result';
-    const ACTION_DETAIL_ITEM = 'detail-item';
+    const ACTION_ITEM = 'item';
 
     /**
      * Метод рендерит главную страницу API справочника
      *
-     * todo: Метод подлежит доработке
-     *
+     * @throws ServerErrorHttpException
      * @return string
      */
     public function actionList(): string
@@ -46,11 +45,18 @@ class ApiController extends AdvancedController
         /** Проверяем - если запрос пришел через POST и загружен в модель - создаем объект API и дальнейшие дела */
         if (Yii::$app->request->isPost && $form_model->load(Yii::$app->request->post())) {
 
-            /** Создаем объект класса API */
-            $api = new ApiService();
+            /** Валидируем загруженные в форму данные */
+            if($form_model->validate()) {
 
-            /** Присваиваем переменной результат работы APIшки */
-            $items = $api->proccessSearchItem($form_model);
+                /** Создаем объект класса API */
+                $api = new ApiService();
+
+                /** Присваиваем переменной результат работы APIшки */
+                $items = $api->proccessSearchItem($form_model);
+            } else {
+                /** Выкидываем ошибку сервера, если модель не прошла валидацию */
+                throw new ServerErrorHttpException('Error - try again later');
+            }
         } else {
             /** Если массив не $_POST - вернем 30 актуальных записей из нашей базы */
             $items = ApiLoot::findActualItems();
@@ -61,8 +67,15 @@ class ApiController extends AdvancedController
             'form_model' => $form_model,
 
             // TODO - во вьюхе проверять на Empty - т.к. может быть false
-            'items' => $items,
+            'items' => $items
         ]);
     }
+
+
+    public function actionItem()
+    {
+        // Todo: Заготовка для детальной страницы лута (Не будем тут проверять устаревание предметов, чтобы не перегружать функционал)
+    }
+
 
 }

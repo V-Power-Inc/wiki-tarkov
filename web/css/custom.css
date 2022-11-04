@@ -2176,6 +2176,14 @@ table.patrons-tbl >thead > tr > th {
     width: 100%;
 }
 
+/** Стили для изображения иконки **/
+.item-page-image {
+    max-width: 66px;
+    border: 1px solid #ff212140;
+    box-shadow: 1px 1px 1px;
+    width: 100%;
+}
+
 /** Подложка для босса - нужна для адекватного вида контента **/
 .boss-page-bg {
     padding: 15px;
@@ -2185,6 +2193,17 @@ table.patrons-tbl >thead > tr > th {
     margin: 15px 0;
 }
 
-.boss-page-text {
+/** Стили для отображения страниц с лутом **/
+.boss-page-text, .item-page-text {
     font-size: 20px;
+}
+
+/** Стили для отображения страниц с лутом **/
+.item-page-text.small-v {
+    font-size: 14px;
+}
+
+/** Изображения торговца для страницы лута **/
+.item-page-trader {
+    max-width: 60px;
 }

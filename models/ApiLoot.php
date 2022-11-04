@@ -94,7 +94,10 @@ class ApiLoot extends \yii\db\ActiveRecord
      */
     public static function findItemsByName(string $name)
     {
-        return ApiLoot::find()->where(['like', ApiLoot::ATTR_NAME, $name])->all();
+        return ApiLoot::find()
+            ->select(ApiLoot::ATTR_JSON)
+            ->where(['like', ApiLoot::ATTR_NAME, $name])
+            ->all();
     }
 
     /**
@@ -113,12 +116,14 @@ class ApiLoot extends \yii\db\ActiveRecord
 
     /**
      * Метод возвращает массив объектов ApiLoot - 30 актуальных записей
+     * Селектим только строку с Json'ом
      *
      * @return ApiLoot[]
      */
     public static function findActualItems()
     {
         return ApiLoot::find()
+            ->select(ApiLoot::ATTR_JSON)
             ->where([ApiLoot::ATTR_OLD => ApiLoot::FALSE])
             ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
             ->limit(30)

@@ -60,10 +60,35 @@ final class ImageService
             'Рейдер' => '/img/bosses/raider.jpg',
             'Санитар' => '/img/bosses/sanitar.jpg',
             'Тагилла' => '/img/bosses/tagilla.jpg',
-            'Отступник' => '/img/bosses/rogue.jpg',
+            'Отступник' => '/img/bosses/rogue.jpg'
         ];
 
         /** Возвращаем значение массива по полученному в виде параметра ключу */
         return $array[$boss];
+    }
+
+    /**
+     * Метод возвращает URL адрес изображения по имени торговца
+     *
+     * @param string $trader - имя торговца
+     * @return string
+     */
+    public static function traderImages(string $trader): string
+    {
+        /** Массив с ключами в виде имен торговцев и значениями в виде адресов URL изображений */
+        $array = [
+            'Прапор' => '/img/admin/resized/p2240218062615.jpg',
+            'Терапевт' => '/img/admin/resized/terapevt240218063007.jpg',
+            'Скупщик' => '/img/admin/resized/skupshik240218063039.jpg',
+            'Лыжник' => '/img/admin/resized/lyjnic240218063018.jpg',
+            'Миротворец' => '/img/admin/resized/mirotvorec240218063026.jpg',
+            'Механик' => '/img/admin/resized/mehanik_icon230218052228.png',
+            'Барахольщик' => '/img/admin/resized/barakholshik050518061242.png',
+            'Егерь' => '/img/admin/resized/EGER150922040216.jpg',
+            'Барахолка' => '/img/baraholka.jpg'
+        ];
+
+        /** Возвращаем значение по ключу или - если его не нашли дефолтную картинку с вопросом */
+        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
     }
 }
