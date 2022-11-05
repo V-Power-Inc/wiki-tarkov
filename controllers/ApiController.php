@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\models\ApiLoot;
+use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
 use Yii;
 use yii\web\HttpException;
@@ -29,7 +30,6 @@ class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LIST = 'list';
-    const ACTION_RESULT = 'result';
     const ACTION_ITEM = 'item';
 
     /**
@@ -39,15 +39,20 @@ class ApiController extends AdvancedController
      *
      * @throws ServerErrorHttpException
      * @throws \Exception
-     * @return string
+     * @return mixed
      */
-    public function actionList(): string
+    public function actionList()
     {
         /** Создаем объект формы ApiForm */
         $form_model = new ApiForm();
 
         /** Проверяем - если запрос пришел через POST и загружен в модель - создаем объект API и дальнейшие дела */
         if (Yii::$app->request->isPost && $form_model->load(Yii::$app->request->post())) {
+
+            /** Если кто-то пытается 2 раза пролезть с 1-им кодом рекапчи, рефрешим страницу */
+            if (ApiSearchLogs::findCaptchaCode($form_model->recaptcha)) {
+                return $this->refresh();
+            }
 
             /** Валидируем загруженные в форму данные */
             if ($form_model->validate()) {
@@ -60,14 +65,14 @@ class ApiController extends AdvancedController
 
                 /** Присваиваем переменной результат работы APIшки */
                 $items = $api->proccessSearchItem($form_model);
-            } else {
-                /** Выкидываем ошибку сервера, если модель не прошла валидацию */
-                throw new ServerErrorHttpException('Error - try again later');
             }
         } else {
             /** Если массив не $_POST - вернем 30 актуальных записей из нашей базы */
             $items = ApiLoot::findActualItems();
         }
+
+        /** Создаем объект формы ApiForm */
+        $form_model = new ApiForm();
 
         /** Рендер страницы со списком предметов */
         return $this->render('list', [

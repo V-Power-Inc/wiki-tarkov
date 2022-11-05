@@ -11,6 +11,9 @@
  * @var $maps Bosses - Объект боссов, в данном случае возвращает список карт из таблицы Bosses
  */
 
+use app\models\Bosses;
+use app\common\services\ImageService;
+
 $this->title = 'Боссы на локациях Escape from Tarkov';
 
 $this->registerMetaTag([
@@ -22,9 +25,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Боссы на локациях Escape from Tarkov, Escape from tarkov, Виды боссов'
 ]);
-
-use app\models\Bosses;
-use app\common\services\ImageService;
 ?>
 <!-- Gorizontal information -->
 <div class="row">

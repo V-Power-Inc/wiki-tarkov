@@ -12,6 +12,13 @@
  * @var $boss array - Массив с информацией о боссах на конкретной карте (Фактически раскодированный Json)
  */
 
+use app\controllers\BossesController;
+use app\common\services\ImageService;
+use app\common\services\ArrayService;
+use app\common\services\TranslateService;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+
 $this->title = 'Боссы на локации ' . $map_title->map . ' Escape from Tarkov';
 
 $this->registerMetaTag([
@@ -23,15 +30,7 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Боссы, ' . $map_title->map . ', Escape from Tarkov'
 ]);
-
-use app\controllers\BossesController;
-use app\common\services\ImageService;
-use app\common\services\ArrayService;
-use app\common\services\TranslateService;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 ?>
-
 <!-- Gorizontal information -->
 <div class="row">
     <div class="container">

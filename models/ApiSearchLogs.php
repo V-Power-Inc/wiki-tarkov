@@ -60,4 +60,16 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
             static::ATTR_DATE_CREATE => 'Date Create',
         ];
     }
+
+    /**
+     * Ищем капчу в таблице логов и возвраем если нашли или возвращаем null если не нашли
+     *
+     * @param string $captcha
+     * @return ApiSearchLogs|null
+     */
+    public static function findCaptchaCode(string $captcha)
+    {
+        return ApiSearchLogs::findOne([ApiSearchLogs::ATTR_INFO => $captcha]);
+    }
+
 }

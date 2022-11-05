@@ -11,6 +11,16 @@
  * @var ApiLoot[] $items - массив AR объектов ApiLoot
  */
 
+use app\common\services\ImageService;
+use app\models\ApiLoot;
+use app\models\forms\ApiForm;
+use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\widgets\ActiveForm;
+use yii\web\JqueryAsset;
+use Yii;
+
 $this->title = 'Справочник лута в Escape from Tarkov';
 
 $this->registerMetaTag([
@@ -22,14 +32,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Справочник лута Escape From Tarkov'
 ]);
-
-use app\common\services\ImageService;
-use app\models\ApiLoot;
-use app\models\forms\ApiForm;
-use himiklab\yii2\recaptcha\ReCaptcha;
-use yii\helpers\Html;
-use yii\helpers\Json;
-use yii\widgets\ActiveForm;
 ?>
 <!-- Gorizontal information -->
 <div class="row">

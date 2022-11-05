@@ -11,6 +11,11 @@
  * @var ApiLoot $item - AR объект ApiLoot с данными о предмете
  */
 
+use app\models\ApiLoot;
+use yii\helpers\Json;
+use yii\web\JqueryAsset;
+use app\common\services\ImageService;
+
 $this->title = 'Предмет: ' . $item->name .' в Escape from Tarkov';
 
 $this->registerMetaTag([
@@ -22,11 +27,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Escape From Tarkov, лут, ' . $item->name
 ]);
-
-use app\models\ApiLoot;
-use yii\helpers\Json;
-use yii\web\JqueryAsset;
-use app\common\services\ImageService;
 
 /** Декоридуем Json */
 $item->json = Json::decode($item->json);

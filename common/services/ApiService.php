@@ -494,6 +494,9 @@ final class ApiService implements ApiInterface
         /** Записываем в атрибут модели запрос, который осуществил пользователь */
         $log->words = $model->item_name;
 
+        /** Записываем код рекапчи пользователя */
+        $log->info =  $model->recaptcha;
+
         /** Пробуем сохранить */
         return $log->save();
     }
