@@ -30,9 +30,16 @@ use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\ActiveForm;
-
-// todo: Пропихнуть сюда рекламу
 ?>
+<!-- Gorizontal information -->
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
+
 <hr class="grey-line">
 
 <!-- Main page content -->
@@ -154,7 +161,7 @@ use yii\widgets\ActiveForm;
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
             <!--Yandex direct -->
-            <!-- $this->render('/other/yandex-direct.php'); -->
+            <?= $this->render('/other/yandex-direct.php') ?>
 
             <!-- Виджет Вконтакте -->
             <div class="vk-widget-styling">

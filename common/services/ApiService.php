@@ -277,10 +277,17 @@ final class ApiService implements ApiInterface
               requiredItems {
                 item {
                   name
+                  iconLink
                 }
                 count
                 quantity
               }
+            }
+            receivedFromTasks {
+                name
+                trader {
+                  name
+                }
             }
           } 
         }';

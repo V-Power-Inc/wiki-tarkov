@@ -47,7 +47,7 @@ class ApiController extends AdvancedController
         if (Yii::$app->request->isPost && $form_model->load(Yii::$app->request->post())) {
 
             /** Валидируем загруженные в форму данные */
-            if($form_model->validate()) {
+            if ($form_model->validate()) {
 
                 /** Создаем объект класса API */
                 $api = new ApiService();

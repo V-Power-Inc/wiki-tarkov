@@ -2235,8 +2235,30 @@ table.patrons-tbl >thead > tr > th {
 }
 
 /** Блок купли и продажи **/
-.selling-block, .buying-block {
+.selling-block, .buying-block, .barters-block, .received-block {
     padding: 10px;
     background: #80808033;
     margin: 20px auto;
+}
+
+/** Стили для блока бартеров **/
+.barter-items-count {
+    padding: 5px;
+    background: #9ac39b;
+    margin: 5px 0;
+}
+
+/** Стили для промежуточного тайтла на страницах предметов **/
+.title-of-item-block {
+    font-size: 20px;
+    font-weight: bold;
+    background: #e7e7ff;
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+/** Стили для описаний атрибутов предметов и торговцев **/
+.detail-item-barter-info, .detail-item-trader-price {
+    font-size: 16px;
 }
