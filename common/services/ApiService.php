@@ -495,7 +495,7 @@ final class ApiService implements ApiInterface
         $log->words = $model->item_name;
 
         /** Записываем код рекапчи пользователя */
-        $log->info =  $model->recaptcha;
+        $log->info = $model->recaptcha;
 
         /** Пробуем сохранить */
         return $log->save();

@@ -81,7 +81,7 @@ $this->registerMetaTag([
 
         <!-- Main content Block -->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
-            <?php $form = ActiveForm::begin(['options' => ['class' => 'form-search-block']]) ?>
+            <?php $form = ActiveForm::begin(['action' => ['/items'], 'options' => ['class' => 'form-search-block']]) ?>
 
                 <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME) ?>
 
