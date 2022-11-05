@@ -32,7 +32,7 @@ $this->registerMetaTag([
 <div class="container">
     <div class="row white-content">
         <div class="col-lg-12">
-            <p class="alert alert-info size-16">В этом резделе сайта вы можете перейти к интерактивным картам локаций из Escape from Tarkov. На интерактивных картах будут отображены ключи от помещений а также информация о том где эти ключи можно найти.</p>
+            <p class="alert alert-info size-16">В этом разделе сайта вы можете перейти к интерактивным картам локаций из Escape from Tarkov. На интерактивных картах будут отображены ключи от помещений а также информация о том где эти ключи можно найти.</p>
         </div>
         
     <div class="row">

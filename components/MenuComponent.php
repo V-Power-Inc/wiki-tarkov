@@ -30,8 +30,15 @@ class MenuComponent
     public static $skillsdetail = null;
     public static $questloot = null;
     public static $questions = null;
-    
+    public static $bosses = null;
+    public static $view = null;
+    public static $item = null;
+    public static $list = null;
 
+    /**
+     * Case в этом методе должен быть совпадением с Action, потому не рекомендуется называть экшены в контроллерах IndexAction
+     * Устаревший функционал, который нуждается в замене (Но видимо заменен не будет, т.к. есть более важные вещи)
+     */
     public static function Active()
     {
         $activeAction = \Yii::$app->controller->action->id;
@@ -46,9 +53,13 @@ class MenuComponent
             case 'category': self::$lootcat = 'class="active"'; break;
             case 'detailloot': self::$mainloot = 'class="active"'; break;
             case 'mainloot': self::$loot = 'class="active"'; break;
-            case 'skillsdetail':self::$skillsdetail = 'active'; break;
-            case 'questloot':self::$questloot = 'class="active"'; break;
-            case 'questions':self::$questions = 'class="active"'; break;
+            case 'skillsdetail': self::$skillsdetail = 'active'; break;
+            case 'questloot': self::$questloot = 'class="active"'; break;
+            case 'questions': self::$questions = 'class="active"'; break;
+            case 'index': self::$bosses = 'class="active"'; break;
+            case 'view': self::$view = 'class="active"'; break;
+            case 'item': self::$item = 'class="active"'; break;
+            case 'list': self::$list = 'class="active"'; break;
         }
     }
 
@@ -210,7 +221,7 @@ class MenuComponent
 
                      <!-- Other lists of menu selects -->   
                      <li class="dropdown '.$other.'">
-                      <a href="#" class="dropdown-toggle '.$other.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Прочая информация</b><span class="caret"></span></a>
+                      <a href="#" class="dropdown-toggle '.$other.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Информация</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="/currencies">Курсы валют</a></li>
                         <li><a href="/articles">Полезная информация</a></li>
@@ -220,6 +231,10 @@ class MenuComponent
                         <li><a href="/clans">Список кланов</a></li>
                       </ul>
                     </li>
+                    
+                    
+                    <li '.self::$bosses.self::$view.'><a href="/bosses">Боссы на локациях</a></li>
+                    <li '.self::$list.self::$item.'><a href="/items">Актуальный лут</a></li>
                      
                 </ul>
 

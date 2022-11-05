@@ -11,6 +11,7 @@ namespace app\common\services;
 use yii\db\Query;
 use yii\helpers\Json;
 use app\models\Category;
+use app\models\Bosses;
 
 /**
  * Сервис предназначенный для получения и передачи в контроллер необходимых
@@ -84,6 +85,14 @@ final class JsondataService
         return Json::encode($out);
     }
 
-
-
+    /**
+     * Метод по параметру URL адрес возвращает набор данных нужной карты из таблицы Bosses
+     *
+     * @param string $url
+     * @return mixed
+     */
+    public static function getBossData(string $url)
+    {
+        return Json::decode(Bosses::getBossData($url));
+    }
 }
