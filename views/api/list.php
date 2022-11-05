@@ -123,19 +123,24 @@ use yii\widgets\ActiveForm;
                         <div class="col-sm-10">
                             <p class="item-page-text">Категория: <b><?= $item->json['category']['name'] ?></b></p>
                             <p class="item-page-text">Вес: <b><?= $item->json['weight'] ?> кг.</b></p>
-                            <p class="item-page-text">Где можно купить:</p>
 
-                            <!-- Where we can buy -->
-                            <?php foreach ($item->json['buyFor'] as $trader) : ?>
-                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>" title="<?=$trader['vendor']['name'] ?>">
-                            <?php endforeach; ?>
+                            <div class="item-block-variables">
+                                <p class="item-page-text">Где можно купить:</p>
 
-                            <p class="item-page-text">Где можно продать:</p>
+                                <!-- Where we can buy -->
+                                <?php foreach ($item->json['buyFor'] as $trader) : ?>
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>" title="<?=$trader['vendor']['name'] ?>">
+                                <?php endforeach; ?>
+                            </div>
 
-                            <!-- Where we can sell -->
-                            <?php foreach ($item->json['sellFor'] as $trader) : ?>
-                                <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>">
-                            <?php endforeach; ?>
+                            <div class="item-block-variables">
+                                <p class="item-page-text">Где можно продать:</p>
+
+                                <!-- Where we can sell -->
+                                <?php foreach ($item->json['sellFor'] as $trader) : ?>
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>">
+                                <?php endforeach; ?>
+                            </div>
 
                         </div>
 

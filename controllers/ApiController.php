@@ -35,12 +35,15 @@ class ApiController extends AdvancedController
     /**
      * Метод рендерит главную страницу API справочника
      *
+     * // todo: Рекапча не дает перезагрузить страницу, на которую был отправлен $_POST запрос
+     *
      * @throws ServerErrorHttpException
+     * @throws \Exception
      * @return string
      */
     public function actionList(): string
     {
-        /** Объект формы ApiForm */
+        /** Создаем объект формы ApiForm */
         $form_model = new ApiForm();
 
         /** Проверяем - если запрос пришел через POST и загружен в модель - создаем объект API и дальнейшие дела */

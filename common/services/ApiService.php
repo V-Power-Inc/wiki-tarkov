@@ -392,6 +392,9 @@ final class ApiService implements ApiInterface
      * Метод создает новые записи о предметах в базе, если массив полученный от API не пустой
      * возвращает true в случае успеха сохранения или false, если массив API был пуст
      *
+     * Важно!!! Есть некоторые предметы, которые могут пересоздаваться, т.к. LIKE не может их корректно вернуть, в
+     * перспективе это надо будет исправить
+     *
      * @param ApiForm $model - объект ApiForm
      * @return bool
      */
@@ -410,7 +413,6 @@ final class ApiService implements ApiInterface
                 $newItem = new ApiLoot();
 
                 /** Присваиваем необходимые атрибуты */
-                // todo: Есть строки с обратными слешами в имени - надо разобраться
                 $newItem->name = $data['name'];
                 $newItem->url = $data['normalizedName'];
                 $newItem->json = Json::encode($data);

@@ -34,7 +34,7 @@ $item->json = Json::decode($item->json);
 /** Подключаем попапы для картинок */
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
-// todo: Проверить вот это вот, в идеале нужно писать какие именно квесты должны быть выполнены
+// todo: Дополнить taskUnlock кейс во вьюхе, когда будет больше информации
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -65,6 +65,8 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
             <!-- Main content -->
             <div class="col-xs-9">
+
+                <p class="title-of-item-block">Категория: <?= $item->json['category']['name'] ?></p>
 
                 <p class="title-of-item-block">Описание: </p>
 

@@ -134,8 +134,6 @@ class ApiLoot extends \yii\db\ActiveRecord
      * Метод ищет запись по Url адресу и возвращает AR объект ApiLoot или null
      * если не был найден объект
      *
-     * todo: Возможно тут придется шаманить
-     *
      * @param string $url
      * @return ApiLoot|null
      */

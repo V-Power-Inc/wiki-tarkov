@@ -2262,3 +2262,10 @@ table.patrons-tbl >thead > tr > th {
 .detail-item-barter-info, .detail-item-trader-price {
     font-size: 16px;
 }
+
+/** Подложка в списке блоков на главной странице **/
+.item-block-variables {
+    padding: 10px;
+    background: #b7caed;
+    margin: 10px 0;
+}
