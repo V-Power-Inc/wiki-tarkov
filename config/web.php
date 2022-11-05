@@ -91,6 +91,7 @@ $config = [
     'params' => $params,
 ];
 
+/** Если хотим воспользоваться GII - эту проверку убираем, т.к. с DotEnv такое не прокатывает  */
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';

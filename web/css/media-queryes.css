@@ -43,7 +43,7 @@
 
     .navbar-default .navbar-nav > li > a {
         color: #edeef0;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .nav > li > a {
@@ -87,7 +87,6 @@
         cursor: pointer;
     }
 }
-
 
 /*** col-sm screen size (991px) ***/
 @media (max-width: 991px) {

@@ -365,7 +365,7 @@ ul li a.relative i {
     border: 1px solid #9E9E9E;
 }
 
-.quests-content, .keys-content, .clans-content, .donates-content {
+.quests-content, .keys-content, .clans-content, .donates-content, .api-content {
     background: white;
     border-radius: 5px;
     padding: 20px;
@@ -2152,4 +2152,120 @@ table.patrons-tbl >thead > tr > th {
     padding: 2px 0 0 0;
     color: #fff8f6;
     cursor: pointer;
+}
+
+/** Заголовки для названий карт на страницах боссов **/
+.boss-map-heading {
+    color: #c3392c;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/** Стили для изображений локаций на страницах боссов **/
+.boss-maps-img {
+    max-width: 300px;
+    height: 100%;
+    max-height: 190px;
+}
+
+/** Стили для изображения босса **/
+.boss-image {
+    max-width: 150px;
+    border: 1px solid #ff212140;
+    box-shadow: 1px 1px 1px;
+    width: 100%;
+}
+
+/** Стили для изображения иконки **/
+.item-page-image {
+    max-width: 104px;
+    border: 1px solid #ff212140;
+    box-shadow: 1px 1px 1px;
+    width: 100%;
+}
+
+/** Подложка для босса - нужна для адекватного вида контента **/
+.boss-page-bg {
+    padding: 15px;
+    background: #80808042;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+/** Стили для отображения страниц с лутом **/
+.boss-page-text, .item-page-text {
+    font-size: 20px;
+}
+
+/** Стили для отображения страниц с лутом **/
+.item-page-text.small-v {
+    font-size: 14px;
+}
+
+/** Изображения торговца для страницы лута **/
+.item-page-trader {
+    max-width: 60px;
+}
+
+/** Оформление формы поиска предметов **/
+.form-search-block {
+    padding: 15px;
+    background: #80808029;
+    border: 2px solid #c3392c;
+    border-radius: 5px;
+}
+
+/**  Стили для картинки на детальной странице лута **/
+.detail-item-image {
+    max-width: 400px;
+    width: 100%;
+}
+
+/** Описание на детальных страницах лута **/
+.detail-item-text {
+    vertical-align: top;
+    font-size: 18px;
+    margin: 0 0 15px 15px;
+}
+
+/** Стили для трейдера на детальной странице лута **/
+.detail-item-trader {
+    max-width: 80px;
+}
+
+/** Блок купли и продажи **/
+.selling-block, .buying-block, .barters-block, .received-block {
+    padding: 10px;
+    background: #80808033;
+    margin: 20px auto;
+}
+
+/** Стили для блока бартеров **/
+.barter-items-count {
+    padding: 5px;
+    background: #9ac39b;
+    margin: 5px 0;
+}
+
+/** Стили для промежуточного тайтла на страницах предметов **/
+.title-of-item-block {
+    font-size: 20px;
+    font-weight: bold;
+    background: #e7e7ff;
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+/** Стили для описаний атрибутов предметов и торговцев **/
+.detail-item-barter-info, .detail-item-trader-price {
+    font-size: 16px;
+}
+
+/** Подложка в списке блоков на главной странице **/
+.item-block-variables {
+    padding: 10px;
+    background: #b7caed;
+    margin: 10px 0;
 }
