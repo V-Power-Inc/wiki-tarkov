@@ -35,8 +35,6 @@ class ApiController extends AdvancedController
     /**
      * Метод рендерит главную страницу API справочника
      *
-     * // todo: Рекапча не дает перезагрузить страницу, на которую был отправлен $_POST запрос
-     *
      * @throws ServerErrorHttpException
      * @throws \Exception
      * @return mixed
