@@ -52,6 +52,9 @@ class ApiController extends AdvancedController
                 /** Создаем объект класса API */
                 $api = new ApiService();
 
+                /** Логируем поисковый запрос пользователя в таблицу логов */
+                $api->setSearchLog($form_model);
+
                 /** Присваиваем переменной результат работы APIшки */
                 $items = $api->proccessSearchItem($form_model);
             } else {

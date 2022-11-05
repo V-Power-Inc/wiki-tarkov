@@ -8,6 +8,7 @@
 
 namespace app\models\forms;
 
+use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use yii\base\Model;
@@ -36,6 +37,8 @@ class ApiForm extends Model
     public function rules()
     {
         return [
+            [static::ATTR_ITEM_NAME, RequiredValidator::class],
+
             [static::ATTR_ITEM_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [[static::ATTR_RECAPTCHA], ReCaptchaValidator::class, 'secret' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum', 'uncheckedMessage' => 'Подтвердите что вы не робот.']

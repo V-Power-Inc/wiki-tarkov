@@ -10,6 +10,7 @@ namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
 use app\models\ApiLoot;
+use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
 use yii\helpers\Json;
@@ -476,4 +477,23 @@ final class ApiService implements ApiInterface
             $item->delete();
         }
     }
+
+    /**
+     * Метод записывает в ApiSearchLogs данные о поисковых запросах пользователей через ApiForm
+     *
+     * @param ApiForm $model - объект модели ApiForm
+     * @return bool
+     */
+    public function setSearchLog(ApiForm $model): bool
+    {
+        /** Создаем новый Ar объект логирующей запросы модели */
+        $log = new ApiSearchLogs();
+
+        /** Записываем в атрибут модели запрос, который осуществил пользователь */
+        $log->words = $model->item_name;
+
+        /** Пробуем сохранить */
+        return $log->save();
+    }
+
 }

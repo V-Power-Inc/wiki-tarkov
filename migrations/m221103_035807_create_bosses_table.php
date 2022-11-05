@@ -14,7 +14,7 @@ class m221103_035807_create_bosses_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('{{%bosses}}', [
+        $this->createTable(static::TABLE_NAME, [
             'id' => $this->primaryKey()->comment('ID primary key'),
             'map' => $this->string(100)->comment('Название карты спавна'),
             'bosses' => $this->text()->comment('Поле в котором хранится Json с данными о боссах'),
