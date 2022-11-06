@@ -42,7 +42,9 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
-            [static::ATTR_WORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
+            [static::ATTR_WORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+
+            [static::ATTR_INFO, StringValidator::class]
         ];
     }
 
@@ -55,9 +57,9 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
     {
         return [
             static::ATTR_ID => 'ID',
-            static::ATTR_WORDS => 'Words',
-            static::ATTR_INFO => 'Info',
-            static::ATTR_DATE_CREATE => 'Date Create',
+            static::ATTR_WORDS => 'Поисковый запрос',
+            static::ATTR_INFO => 'Капча пользователя',
+            static::ATTR_DATE_CREATE => 'Дата создания'
         ];
     }
 

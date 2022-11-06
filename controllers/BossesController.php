@@ -21,7 +21,7 @@ use yii\web\HttpException;
 class BossesController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_INDEX = 'index';
+    const ACTION_INDEX = 'boss-list';
     const ACTION_VIEW  = 'view';
 
     /**
@@ -29,7 +29,7 @@ class BossesController extends AdvancedController
      *
      * @return string
      */
-    public function actionIndex(): string
+    public function actionBossList(): string
     {
         /** Создаем объект класса ApiService */
         $api = new ApiService();
