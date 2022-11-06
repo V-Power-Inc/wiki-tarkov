@@ -56,7 +56,7 @@ class MenuComponent
             case 'skillsdetail': self::$skillsdetail = 'active'; break;
             case 'questloot': self::$questloot = 'class="active"'; break;
             case 'questions': self::$questions = 'class="active"'; break;
-            case 'index': self::$bosses = 'class="active"'; break;
+            case 'boss-list': self::$bosses = 'class="active"'; break;
             case 'view': self::$view = 'class="active"'; break;
             case 'item': self::$item = 'class="active"'; break;
             case 'list': self::$list = 'class="active"'; break;
