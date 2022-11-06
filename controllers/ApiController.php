@@ -31,6 +31,7 @@ class ApiController extends AdvancedController
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LIST = 'list';
     const ACTION_ITEM = 'item';
+    const ACTION_GET_NAMES = 'get-names';
 
     /**
      * Метод рендерит главную страницу API справочника
@@ -100,5 +101,21 @@ class ApiController extends AdvancedController
 
         /** Если в базе нет предмета - возвращаем 404 ошибку */
         throw new HttpException(404, 'Такая страница не существует');
+    }
+
+
+    public function actionGetNames(string $name)
+    {
+        /** Создаем новый объект API */
+        $api = new ApiService();
+
+        /** Проверяем идет ли запрос через Ajax */
+        if(Yii::$app->request->isAjax) {
+
+            /** Возвращаем массив с названиями возможных вариантов */
+            return $api->getItemNameVariables($name);
+        }
+
+        throw new HttpException(404 ,'Такая страница не существует');
     }
 }

@@ -76,6 +76,9 @@ return [
     /** URL до детального предмета API */
     'item/<url:[\w_\/-]+>.html' => ApiController::routeId(ApiController::ACTION_ITEM),
 
+    /** URL для Ajax запроса на получение вариаций имен предметов */
+    'get-item-names' => ApiController::routeId(ApiController::ACTION_GET_NAMES),
+
     /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',

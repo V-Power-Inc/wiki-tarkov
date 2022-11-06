@@ -13,6 +13,7 @@ use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use app\components\MessagesComponent;
 
@@ -501,4 +502,38 @@ final class ApiService implements ApiInterface
         return $log->save();
     }
 
+    /**
+     * Метод возвращает набор подходящих под описание предметов
+     *
+     * @param string $name - Поисковый запрос
+     * @return string
+     */
+    public function getItemNameVariables(string $name): string
+    {
+        /** Задаем тело запроса */
+        $this->query = '{
+          items(name: "'. $name .'", lang: ru, limit: 10) {
+                name
+            }
+        }';
+
+        /** Переменная с данными их Api **/
+        $apiData = $this->getApiData();
+
+        /** Пустой  массив */
+        $out = [];
+
+        /** Если массив с данными не пустой - пробуем заполнить пустой массив нужными данными */
+        if(!empty($apiData['data']['items'])) {
+
+
+
+            foreach ($apiData['data']['items'] as $data) {
+                $out[] = ['value' => $data['name']];
+            }
+        }
+
+        /** Возвращаем конечные данные */
+        return Json::encode($out);
+    }
 }

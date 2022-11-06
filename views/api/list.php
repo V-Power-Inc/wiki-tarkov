@@ -11,15 +11,16 @@
  * @var ApiLoot[] $items - массив AR объектов ApiLoot
  */
 
+use app\controllers\ApiController;
 use app\common\services\ImageService;
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\web\JqueryAsset;
-use Yii;
+use kartik\typeahead\Typeahead;
 
 $this->title = 'Справочник лута в Escape from Tarkov';
 
@@ -83,7 +84,22 @@ $this->registerMetaTag([
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
             <?php $form = ActiveForm::begin(['action' => ['/items'], 'options' => ['class' => 'form-search-block']]) ?>
 
-                <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME) ?>
+                <!-- $form->field($form_model, ApiForm::ATTR_ITEM_NAME) -->
+
+                <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME)->widget(Typeahead::classname(), [
+                    'options' => ['placeholder' => 'Введите поисковый запрос'],
+                    'pluginOptions' => ['highlight'=>true],
+                    'dataset' => [
+                        [
+                            'remote' => [
+                                'url' => Url::to([ApiController::routeId(ApiCOntroller::ACTION_GET_NAMES)]) . '?name=%QUERY',
+                                'wildcard' => '%QUERY',
+                            ],
+                            'limit' => 10,
+                            'display' => 'value'
+                        ]
+                    ]
+                ]) ?>
 
                 <?= $form->field($form_model, ApiForm::ATTR_RECAPTCHA)->widget(
                     ReCaptcha::class,
