@@ -2235,7 +2235,7 @@ table.patrons-tbl >thead > tr > th {
 }
 
 /** Блок купли и продажи **/
-.selling-block, .buying-block, .barters-block, .received-block {
+.selling-block, .buying-block, .barters-block-actual, .received-block {
     padding: 10px;
     background: #80808033;
     margin: 20px auto;

@@ -73,7 +73,7 @@ $this->registerMetaTag([
 
                     <!-- Attributes -->
                     <div class="col-sm-10">
-                        <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] ?>%</b></p>
+                        <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
                         <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
                         <p class="boss-page-text boss-spawn-time">Спавнится при определенных условиях: <b><?= ($boss['spawnTimeRandom'] == 'true') ? 'Да' : 'Нет' ?></b>

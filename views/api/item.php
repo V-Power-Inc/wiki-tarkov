@@ -123,7 +123,7 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
                 <!-- barters block -->
                 <?php foreach($item->json['bartersFor'] as $barter) : ?>
 
-                    <div class="barters-block row">
+                    <div class="barters-block-actual row">
 
                         <div class="col-sm-2">
                             <img class="detail-item-trader" src="<?= ImageService::traderImages($barter['trader']['name']) ?>" title="<?= $barter['trader']['name'] ?>" alt="<?= $barter['trader']['name'] ?>">
