@@ -91,7 +91,7 @@ class Bosses extends \yii\db\ActiveRecord
      */
     public static function getBossData(string $map_url): string
     {
-        return Bosses::find()->select(static::ATTR_BOSSES)->where([Bosses::ATTR_URL => $map_url])->scalar();
+        return Bosses::find()->select(Bosses::ATTR_BOSSES)->where([Bosses::ATTR_URL => $map_url])->scalar();
     }
 
     /**
