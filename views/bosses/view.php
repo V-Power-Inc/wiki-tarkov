@@ -83,7 +83,7 @@ $this->registerMetaTag([
                     <div class="col-sm-10">
 
                         <!-- More info about custom bosses -->
-                        <?= $boss['name'] === "Death Knight" ? '<p class="alert alert-danger size-16">Отряд The Goons - <b>состоит из 3-х боссов а именно, Death Knight, Big Pipe и Birdeye</b> - это и есть боссы. Дополнительная свита может включать от 1-2х человек фракции отступники.</p>' : ''; ?>
+                        <?= TranslateService::bossesAlertInfo($boss['name']) ?>
 
                         <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss['name']) ?></b></p>
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
