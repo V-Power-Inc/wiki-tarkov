@@ -60,7 +60,7 @@ final class ApiService implements ApiInterface
                 bosses {
                   name
                   spawnChance
-                  spawnTimeRandom
+                  spawnTrigger
                   spawnLocations {
                     name
                   }
