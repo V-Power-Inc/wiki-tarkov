@@ -19,7 +19,7 @@ class MessagesComponent
     /**
      * Метод устанавливает пользовательские сообщения SetFlash по параметру строки
      *
-     * @param string $messageText
+     * @param string $messageText - сообщение, которое будет отображено во вьюхе (Может быть html кодом)
      * @return void
      */
     public function setMessages(string $messageText): void

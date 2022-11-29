@@ -9,12 +9,13 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\components\MessagesComponent;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
+use yii\db\StaleObjectException;
 use yii\helpers\Json;
-use app\components\MessagesComponent;
 
 /**
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
@@ -43,6 +44,9 @@ final class ApiService implements ApiInterface
      * Метод по получению информации о боссах Escape From Tarkov
      *
      * @param string|null $map_name - Название карты (Параметр может отсутствовать)
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
      * @return mixed
      */
     public function getBosses(string $map_name = null)
@@ -74,7 +78,7 @@ final class ApiService implements ApiInterface
             }';
 
             /** Присваиваем результат запроса переменной */
-            $content = $this->getApiData($this->query);
+            $content = $this->getApiData();
 
             /** Сохраняем все новые объекты о боссах */
             $this->saveData($content);
@@ -101,14 +105,18 @@ final class ApiService implements ApiInterface
 
         /** Если найдены устаревшие боссы - возвращаем true, если нет false */
         if (!empty($bosses)) {
+
+            /** Возвращаем true в случае, если в массиве есть боссы */
             return true;
         }
 
+        /** Возвращаем false, если устаревшие боссы не были найдены */
         return false;
     }
 
     /**
      * Функция проверяет - пуста ли таблица с данными о боссах и возвращает bool результат
+     * true - если таблица с боссами пуста и false, если нет
      *
      * @return bool
      */
@@ -119,6 +127,7 @@ final class ApiService implements ApiInterface
 
     /**
      * Функция проверяет - пуста ли таблицы с данными о предметах
+     * true - если таблица с лутом пуста и false, если нет
      *
      * @return bool
      */
@@ -130,10 +139,12 @@ final class ApiService implements ApiInterface
     /**
      * Метод удаляет всю информацию из таблицы
      *
-     * @return mixed
-     * @throws
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
+     * @return bool
      */
-    private function removeOldBosses()
+    private function removeOldBosses(): bool
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $bosses = Bosses::find()->all();
@@ -142,6 +153,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
             $boss->delete();
         }
+
+        /** Возвращаем true - если удаление боссов прошло успешно */
+        return true;
     }
 
     /**
@@ -151,7 +165,7 @@ final class ApiService implements ApiInterface
      */
     private function getApiData(): array
     {
-        /** Устанавливаем атрибуты запроса */
+        /** Устанавливаем атрибуты запроса (Включая подовление любых ошибок) */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
             'http' => [
                 'method' => $this->method,
@@ -189,6 +203,7 @@ final class ApiService implements ApiInterface
             $model->save();
         }
 
+        /** Возвращаем true - если сохранение прошло удачно */
         return true;
     }
 
@@ -227,9 +242,9 @@ final class ApiService implements ApiInterface
      * Метод задает тело запроса, для получения данных о предметах
      *
      * @param string $itemName - имя предмета
-     * @return mixed|void
+     * @return void
      */
-    public function setItemQuery(string $itemName)
+    public function setItemQuery(string $itemName): void
     {
         /** Задаем тело запроса для получения информации о боссах */
         $this->query = '{
@@ -303,8 +318,10 @@ final class ApiService implements ApiInterface
      * - Есть предмет в базе
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
      * @return mixed
-     * @throws
      */
     public function proccessSearchItem(ApiForm $model)
     {
@@ -354,14 +371,13 @@ final class ApiService implements ApiInterface
             /** Удаляем старые предметы - если получили запись из базы */
             return ApiLoot::findItemsByName($model->item_name);
         }
-
     }
 
     /**
      * Метод обращается к API с поисковым запросом и либо создает новые AR объекты ApiLoot
      * либо возвращает false, если массив был пустой
      *
-     * @param ApiForm $model
+     * @param ApiForm $model - единичный объект ApiForm
      * @return mixed
      */
     private function getNewItems(ApiForm $model)
@@ -464,10 +480,12 @@ final class ApiService implements ApiInterface
      * Метод осуществляющий удаление устаревших предметов API по имени предметов через like
      *
      * @param ApiForm $model - объект формы ApiForm
-     * @throws
-     * @return mixed
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
+     * @return bool
      */
-    private function removeOldItemsByName(ApiForm $model)
+    private function removeOldItemsByName(ApiForm $model): bool
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $items = ApiLoot::find()
@@ -479,6 +497,9 @@ final class ApiService implements ApiInterface
         foreach ($items as $item) {
             $item->delete();
         }
+
+        /** Если удаление старых записей прошло удачно - возвращаем true */
+        return true;
     }
 
     /**
@@ -498,7 +519,7 @@ final class ApiService implements ApiInterface
         /** Записываем код рекапчи пользователя */
         $log->info = $model->recaptcha;
 
-        /** Пробуем сохранить */
+        /** Пробуем сохранить и возвращаем bool результат */
         return $log->save();
     }
 }
