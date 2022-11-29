@@ -130,4 +130,31 @@ final class TranslateService
         return $result;
     }
 
+    /**
+     * Метод хранит в себе тексты с триггерами, которые могут повлечь за собой спавн боссов.
+     * Нужен для осуществления переводов английских описаний текстов на русский
+     *
+     * @return array
+     */
+    private static function triggerTexts(): array
+    {
+        return [
+            'Bunker Hermetic Door Power Switch' => 'Открыть гермозатвор бункера',
+            'D-2 Power Switch' => 'Подача электричества на D-2'
+        ];
+    }
+
+    /**
+     * Метод осуществляет перевод английских названий триггеров на русские, при активации события по вызову босса (SpawnTrigger)
+     * Если соответствующего ключа в массиве не было - вернет пустую строку
+     *
+     * @param string $text - Текст описания триггера, для спавна босса
+     * @return string
+     */
+    public static function setSpawnTrigger(string $text): string
+    {
+        return static::triggerTexts()[$text] ?? '';
+    }
+
+
 }

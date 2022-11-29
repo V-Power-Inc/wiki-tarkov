@@ -80,7 +80,7 @@ $this->registerMetaTag([
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
                         <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
-                        <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. $boss['spawnTrigger'] .'</b> </p>' : '' ?>
+                        <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. TranslateService::setSpawnTrigger($boss['spawnTrigger']) .'</b> </p>' : '' ?>
 
                             <!-- Check of boss has escort -->
                             <?php if(!empty($boss['escorts'])): {
