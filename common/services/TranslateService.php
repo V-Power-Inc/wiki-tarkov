@@ -155,4 +155,24 @@ final class TranslateService
     {
         return static::triggerTexts()[$text] ?? '';
     }
+
+    /**
+     * Массив с ключами и переводами на русский фракций боссов, используется с помощью ключа
+     * UPD 29-11-2022 - Используется как хардкод, возможно после релиза нового функционала tarkov.dev дела пойдут лучше
+     * @link https://github.com/the-hideout/tarkov-dev/issues/273
+     *
+     * @param string $boss_name - Строка в виде имени босса
+     * @return string
+     */
+    public static function bossesFactions(string $boss_name): string
+    {
+        $array = [
+            'Death Knight' => 'Отступники',
+            'Рейдер' => 'Рейдеры',
+            'Отступник' => 'Отступники'
+        ];
+
+        /** Если нашли ключ в массиве - возвращаем его значение, если нет - возвращаем строку Дикие */
+        return $array[$boss_name] ?? 'Дикие';
+    }
 }

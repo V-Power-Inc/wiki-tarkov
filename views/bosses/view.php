@@ -30,6 +30,14 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Боссы, ' . $map_title->map . ', Escape from Tarkov'
 ]);
+
+/**
+ * В этой вьюхе появилось довольно большое количество хардкода, в связи с несовершенством API tarkov.dev
+ * по этому поводу был создан тикен у них в репозитории - стоит поглядывать периодически.
+ *
+ * @link https://github.com/the-hideout/tarkov-dev/issues/273
+ */
+
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -77,6 +85,7 @@ $this->registerMetaTag([
                         <!-- More info about custom bosses -->
                         <?= $boss['name'] === "Death Knight" ? '<p class="alert alert-danger size-16">Отряд The Goons - <b>состоит из 3-х боссов а именно, Death Knight, Big Pipe и Birdeye</b> - это и есть боссы. Дополнительная свита может включать от 1-2х человек фракции отступники.</p>' : ''; ?>
 
+                        <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss['name']) ?></b></p>
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
                         <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
