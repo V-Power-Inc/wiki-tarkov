@@ -73,10 +73,14 @@ $this->registerMetaTag([
 
                     <!-- Attributes -->
                     <div class="col-sm-10">
+
+                        <!-- More info about custom bosses -->
+                        <?= $boss['name'] === "Death Knight" ? '<p class="alert alert-danger size-16">Отряд The Goons - <b>состоит из 3-х боссов а именно, Death Knight, Big Pipe и Birdeye</b> - это и есть боссы. Дополнительная свита может включать от 1-2х человек фракции отступники.</p>' : ''; ?>
+
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
                         <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
-                        <p class="boss-page-text boss-spawn-time">Спавнится при определенных условиях: <b><?= ($boss['spawnTimeRandom'] == 'true') ? 'Да' : 'Нет' ?></b>
+                        <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. $boss['spawnTrigger'] .'</b> </p>' : '' ?>
 
                             <!-- Check of boss has escort -->
                             <?php if(!empty($boss['escorts'])): {
@@ -84,7 +88,11 @@ $this->registerMetaTag([
                                 $cnt = ArrayService::getAmountEscorts($boss['escorts']);
                             }
                             ?>
-                                <p class="boss-page-text boss-group-count">Всего в отряде сопровождения: <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
+
+                                <?php if($boss['name'] !== "Death Knight"): ?>
+                                        <p class="boss-page-text boss-group-count">Всего в отряде сопровождения (Размер свиты): <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
+                                <?php endif; ?>
+
                             <?php endif; ?>
 
                         </p>
