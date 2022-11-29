@@ -16,6 +16,7 @@ use app\models\Bosses;
 use app\models\forms\ApiForm;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
+use yii\web\HttpException;
 
 /**
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
@@ -123,17 +124,6 @@ final class ApiService implements ApiInterface
     private function isEmptyBosses(): bool
     {
         return empty(Bosses::find()->all()) ? true : false;
-    }
-
-    /**
-     * Функция проверяет - пуста ли таблицы с данными о предметах
-     * true - если таблица с лутом пуста и false, если нет
-     *
-     * @return bool
-     */
-    private function isEmptyItems(): bool
-    {
-        return empty(ApiLoot::find()->all()) ? true : false;
     }
 
     /**
@@ -371,6 +361,9 @@ final class ApiService implements ApiInterface
             /** Удаляем старые предметы - если получили запись из базы */
             return ApiLoot::findItemsByName($model->item_name);
         }
+
+        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше */
+        throw new HttpException(500, 'Server error code');
     }
 
     /**
@@ -407,9 +400,6 @@ final class ApiService implements ApiInterface
     /**
      * Метод создает новые записи о предметах в базе, если массив полученный от API не пустой
      * возвращает true в случае успеха сохранения или false, если массив API был пуст
-     *
-     * Важно!!! Есть некоторые предметы, которые могут пересоздаваться, т.к. LIKE не может их корректно вернуть, в
-     * перспективе это надо будет исправить
      *
      * @param ApiForm $model - объект ApiForm
      * @return bool
