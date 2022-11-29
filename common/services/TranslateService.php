@@ -155,6 +155,4 @@ final class TranslateService
     {
         return static::triggerTexts()[$text] ?? '';
     }
-
-
 }
