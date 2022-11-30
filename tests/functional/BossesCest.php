@@ -2,32 +2,48 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 28.08.2022
- * Time: 20:00
+ * Date: 30.11.2022
+ * Time: 10:24
  */
 
 namespace Tests\Functional;
 
-use app\controllers\MapsController;
+use app\controllers\BossesController;
+use app\tests\fixtures\BossesFixture;
 
 /**
- * Функциональные тесты интерактивной карты Развязка
+ * Функциональные тесты страницы со списком карт, на которых спавнятся боссы
  *
- * Class RazvyazkaCest
+ * Class BossesCest
  * @package Tests\Functional
  */
-class RazvyazkaCest
+class BossesCest
 {
-    /** Мы на главной странице */
+    /**
+     * Фикстуры для таблицы bosses
+     * @return array
+     */
+    public function _fixtures()
+    {
+        return [
+            'bosses' => [
+                'class' => BossesFixture::class,
+                'dataFile' => codecept_data_dir() . 'bosses.php'
+            ]
+        ];
+    }
+
+    /** Мы на главной странице боссов */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(MapsController::routeId(MapsController::ACTION_RAZVYAZKA));
+        $I->amOnRoute(BossesController::routeId(BossesController::ACTION_INDEX));
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Интерактивная карта локации Развязка из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.">');
+        $I->seeInSource('<meta name="description" content="Боссы, которые встречаются на локациях Escape from Tarkov">');
+        $I->seeInSource('<meta name="keywords" content="Боссы на локациях Escape from Tarkov, Escape from tarkov, Виды боссов">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -35,58 +51,14 @@ class RazvyazkaCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Карта локации Развязка в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей">');
+        $I->seeInSource('<meta property="og:title" content="Боссы на локациях Escape from Tarkov">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Карта локации Развязка в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей');
-    }
-
-    /** Мы видим правое меню, с опциями интерактивной карты */
-    public function checkRightMenuExtsts(\FunctionalTester $I)
-    {
-        $I->seeElement('.optins_layerstability');
-    }
-
-    /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
-    public function checkPageMainData(\FunctionalTester $I)
-    {
-        $I->see('Карта локации Развязка', 'h1');
-        $I->see('Маркеры', 'h2');
-        $I->see('Интерактивная карта Развязки', 'h2');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->seeElement('.search-map-loot');
-    }
-
-    /** Мы видим что фильтрующие кнопки для страницы маркеров присутствуют на странице */
-    public function checkFilterMapButtons(\FunctionalTester $I)
-    {
-        $I->seeElement('.gamers-b');
-        $I->seeElement('.dikie-b');
-        $I->seeElement('.gamers-b');
-        $I->seeElement('.bandits-b');
-        $I->seeElement('.exits-b');
-        $I->seeElement('.voenka-b');
-        $I->seeElement('.polki-b');
-        $I->seeElement('.keys-b');
-        $I->seeElement('.places-b');
-        $I->seeElement('.count-on');
-        $I->seeElement('.markers-on');
-        $I->seeElement('.count-off');
-        $I->seeElement('.markers-off');
-    }
-
-    /** Мы видим описание в нижней части меню-блока интерактивной карты */
-    public function checkDescriptionMapBlock(\FunctionalTester $I)
-    {
-        $I->seeElement('.alert.alert-info');
+        $I->seeInTitle('Боссы на локациях Escape from Tarkov');
     }
 
     /** Мы видим все ссылки горизонтального меню */

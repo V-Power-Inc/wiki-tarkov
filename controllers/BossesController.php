@@ -13,6 +13,7 @@ use app\common\services\ApiService;
 use app\common\services\ArrayService;
 use app\models\Bosses;
 use yii\web\HttpException;
+use yii\db\StaleObjectException;
 
 /**
  * Class BossesController
@@ -27,6 +28,9 @@ class BossesController extends AdvancedController
     /**
      * Метод выводит список карт и отображает все атрибуты о боссах, которые известны
      *
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
      * @return string
      */
     public function actionBossList(): string
@@ -45,6 +49,9 @@ class BossesController extends AdvancedController
      * Метод рендерит конкретную карту и выводит всю доступную информацию о боссах
      *
      * @param string $url - URL адрес до детальной странице с боссами на конкретной карте
+     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
+     * being deleted is outdated.
+     * @throws \Throwable in case delete failed.
      * @return mixed
      */
     public function actionView(string $url)
@@ -71,8 +78,8 @@ class BossesController extends AdvancedController
             /** Дергаем метод по обновлению боссов */
             $api->getBosses($url);
 
-            /** Редиректим на главную страницу боссов */
-            return $this->redirect(BossesController::getUrlRoute(BossesController::ACTION_INDEX));
+            /** Рефрешим страницу, после загрузки боссов */
+            return $this->refresh();
         }
 
         /** Exception на всякий случай */
