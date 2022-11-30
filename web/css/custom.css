@@ -2269,3 +2269,10 @@ table.patrons-tbl >thead > tr > th {
     background: #b7caed;
     margin: 10px 0;
 }
+
+/** Прогресс бар - для отображения здоровья боссов **/
+.custom-bar {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+}

@@ -13,6 +13,7 @@
  */
 
 use app\controllers\BossesController;
+use app\common\services\BossesService;
 use app\common\services\ImageService;
 use app\common\services\ArrayService;
 use app\common\services\TranslateService;
@@ -85,11 +86,16 @@ $this->registerMetaTag([
                         <!-- More info about custom bosses -->
                         <?= TranslateService::bossesAlertInfo($boss['name']) ?>
 
+                        <!-- Info about health bosses -->
+                        <?= !empty(BossesService::healthBosses()[$boss['name']]) ? '<p class="boss-page-text boss-health">Здоровье:</p><div class="progress"><div class="progress-bar progress-bar-danger progress-bar-striped active custom-bar" role="progressbar" style="width: 100%" aria-valuenow="'. BossesService::healthBosses()[$boss['name']] .'" aria-valuemin="0" aria-valuemax="100">'. BossesService::healthBosses()[$boss['name']] .' HP</div></div>' : '' ?>
+
                         <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss['name']) ?></b></p>
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
                         <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
                         <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. TranslateService::setSpawnTrigger($boss['spawnTrigger']) .'</b> </p>' : '' ?>
+
+                        <?= !empty(BossesService::minionsNamesPrefix($boss['name'])) ? '<p class="boss-page-text boss-minions-names">Позывные свиты или префиксы имен: <b>'. BossesService::minionsNamesPrefix($boss['name']) .'</b></p>' : '' ?>
 
                             <!-- Check of boss has escort -->
                             <?php if(!empty($boss['escorts'])): {
@@ -97,6 +103,7 @@ $this->registerMetaTag([
                                 $cnt = ArrayService::getAmountEscorts($boss['escorts']);
                             }
                             ?>
+
 
                                 <?php if($boss['name'] !== "Death Knight"): ?>
                                         <p class="boss-page-text boss-group-count">Всего в отряде сопровождения (Размер свиты): <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
