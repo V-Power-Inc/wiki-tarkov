@@ -43,7 +43,6 @@ class BossesTest extends \Codeception\Test\Unit
     {
         $boss = new Bosses();
 
-        $boss->id = 1;
         $boss->map = 'Таможня';
         $boss->bosses = '[{"name":"Death Knight","spawnChance":0.16,"spawnTrigger":null,"spawnLocations":[{"name":"ScavBase"}],"escorts":[{"amount":[{"count":2}]},{"amount":[{"count":1}]},{"amount":[{"count":1}]}]},{"name":"Решала","spawnChance":0.1,"spawnTrigger":null,"spawnLocations":[{"name":"Dormitory"},{"name":"GasStation"}],"escorts":[{"amount":[{"count":4}]}]},{"name":"Сектант Жрец","spawnChance":0.02,"spawnTrigger":null,"spawnLocations":[{"name":"ScavBase"}],"escorts":[{"amount":[{"count":4}]}]}]';
         $boss->active = 1;
@@ -58,7 +57,6 @@ class BossesTest extends \Codeception\Test\Unit
     {
         $boss = Bosses::find()->where(['is not', 'id', null])->one();
 
-        $boss->id = 2;
         $boss->map = 'Таможня33';
         $boss->bosses = '[{"name":"Death Knight","spawnChance":0.16,"spawnTrigger":null,"spawnLocations":[{"name":"ScavBase"}],"escorts":[{"amount":[{"count":2}]},{"amount":[{"count":1}]},{"amount":[{"count":1}]}]},{"name":"Решала","spawnChance":0.1,"spawnTrigger":null,"spawnLocations":[{"name":"Dormitory"},{"name":"GasStation"}],"escorts":[{"amount":[{"count":4}]}]},{"name":"Сектант Жрец","spawnChance":0.02,"spawnTrigger":null,"spawnLocations":[{"name":"ScavBase"}],"escorts":[{"amount":[{"count":4}]}]}]';
         $boss->active = 0;
@@ -81,7 +79,7 @@ class BossesTest extends \Codeception\Test\Unit
     {
         $boss = Bosses::find()->all();
 
-        $this->assertTrue(count($boss) == 1, 'Ожидалось что вернется 1 объекта, что то пошло не так');
+        $this->assertTrue(!empty($boss), 'Ожидалось что вернется объект, этого не случилось - что-то пошло не так');
     }
 
     /** Тестируем удаление объекта */

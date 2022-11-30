@@ -2,52 +2,46 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 28.08.2022
- * Time: 18:29
+ * Date: 30.11.2022
+ * Time: 10:43
  */
 
 namespace Tests\Functional;
 
-use app\controllers\TraderController;
-use app\tests\fixtures\TradersFixture;
-use app\tests\fixtures\LyjnicFixture;
+use app\tests\fixtures\BossesFixture;
+use app\tests\fixtures\InfoFixture;
 
-/**
- * Функциональные тесты страниц квестов
- *
- * Class LyjnicCest
- * @package Tests\Functional
- */
-class LyjnicCest
+class BossdetailCest
 {
     /**
-     * Фикстуры для таблицы lyjnic
+     * Фикстуры для таблицы bosses
      * @return array
      */
-    public function _fixtures() {
+    public function _fixtures()
+    {
         return [
-            'traders' => [
-                'class' => TradersFixture::class,
-                'dataFile' => codecept_data_dir() . 'traders.php'
+            'boss' => [
+                'class' => BossesFixture::class,
+                'dataFile' => codecept_data_dir() . 'boss.php'
             ],
-            'lyjnic' => [
-                'class' => LyjnicFixture::class,
-                'dataFile' => codecept_data_dir() . 'lyjnic.php'
+            'info' => [
+                'class' => InfoFixture::class,
+                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }
 
-    /** Мы на главной странице */
+    /** Мы на главной странице боссов */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_LYJNICPAGE));
+        $I->amOnRoute('/bosses/rezerv');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Лыжника по онлайн-шутеру Escape from Takov.">');
-        $I->seeInSource('<meta name="keywords" content="Квесты лыжника в Escape from Tarkov, квесты лыжник Тарков">');
+        $I->seeInSource('<meta name="description" content="Боссы, которые встречаются на локации Резерв в Escape from Tarkov">');
+        $I->seeInSource('<meta name="keywords" content="Боссы, Резерв, Escape from Tarkov">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -55,24 +49,23 @@ class LyjnicCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.">');
+        $I->seeInSource('<meta property="og:title" content="Боссы на локации Резерв Escape from Tarkov">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.');
+        $I->seeInTitle('Боссы на локации Резерв Escape from Tarkov');
     }
 
-    /** Мы видим H1 заголовок и названия квестов а также область контента, что их выводит */
+    /** Мы видим H1 заголовок и описание одного из боссов, его заголовок и блок с данными о нем */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Квесты Лыжника в Escape from Tarkov. Разбор и прохождение квестов Лыжника.', 'h1');
-        $I->see('Снабженец');
-        $I->see('Вымогатель');
-        $I->see('Движуха');
-        $I->seeElement('.quests-content');
+        $I->see('Боссы на локации Резерв Escape from Tarkov', 'h1');
+        $I->see('Глухарь');
+        $I->seeElement('.boss-page-bg');
+        $I->seeElement('.alert.alert-danger.size-16');
     }
 
     /** Мы видим все ссылки горизонтального меню */
