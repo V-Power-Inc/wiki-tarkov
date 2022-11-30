@@ -125,6 +125,7 @@ jobs:
           docker-compose exec -T app vendor/bin/codecept run tests/functional/EgerCest
           docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
           docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
+          docker-compose exec -T app vendor/bin/codecept run tests/functional/BossdetailCest
 
           echo "Проверка Functional тестами"
 
