@@ -281,7 +281,6 @@ class SiteController extends AdvancedController
                     'expire' => time() + (60 * 60 * 24),
                 ]));
             }
-
         }
 
         throw new HttpException(404 ,'Такая страница не существует');
