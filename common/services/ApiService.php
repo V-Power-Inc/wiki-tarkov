@@ -418,8 +418,8 @@ final class ApiService implements ApiInterface
                 /** Создаем новый объект AR класса ApiLoot */
                 $newItem = new ApiLoot();
 
-                /** Присваиваем необходимые атрибуты */
-                $newItem->name = $data['name'];
+                /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
+                $newItem->name = trim($data['name']);
                 $newItem->url = $data['normalizedName'];
                 $newItem->json = Json::encode($data);
 
