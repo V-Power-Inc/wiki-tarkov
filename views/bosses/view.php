@@ -73,7 +73,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
                     <!-- Name -->
-                    <h2 class="text-left"><?= $boss['name'] ?></h2>
+                    <h2 class="text-left"><?= ($boss['name'] == 'gifter') ? 'Санта Клаус' : $boss['name'] ?></h2>
 
                     <!-- Image -->
                     <div class="col-sm-2">
