@@ -83,6 +83,7 @@ $this->registerMetaTag([
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
             <?php $form = ActiveForm::begin(['action' => ['/items'], 'options' => ['class' => 'form-search-block']]) ?>
 
+                <?= Html::label('Название предмета') ?>
                 <?= Typeahead::widget([
                     'name' => ApiForm::ATTR_ITEM_NAME,
                     'scrollable' => true,
@@ -101,6 +102,8 @@ $this->registerMetaTag([
                     ]
                 ]);
                 ?>
+
+                <br>
 
                 <?= $form->field($form_model, ApiForm::ATTR_RECAPTCHA)->widget(
                     ReCaptcha::class,
