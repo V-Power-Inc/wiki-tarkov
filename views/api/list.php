@@ -85,7 +85,7 @@ $this->registerMetaTag([
 
                 <?= Html::label('Название предмета') ?>
                 <?= Typeahead::widget([
-                    'name' => ApiForm::ATTR_ITEM_NAME,
+                    'name' => 'ApiForm[item_name]',
                     'scrollable' => true,
                     'options' => ['placeholder' => 'Введите сюда название предмета'],
                     'pluginOptions' => ['hint' => false, 'highlight' => true],
