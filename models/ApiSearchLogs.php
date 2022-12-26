@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
 
@@ -12,6 +13,7 @@ use app\common\helpers\validators\SafeValidator;
  * @property string $words Поисковый запрос, который пользователи отправляли на сервер
  * @property string $info Поле для дополнительной информации - на перспективу
  * @property string $date_create Дата создания записи лога
+ * @property int $flag Флаг для проверки вернулись ли данные по запросу или нет
  */
 class ApiSearchLogs extends \yii\db\ActiveRecord
 {
@@ -20,7 +22,11 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
     const ATTR_WORDS = 'words';
     const ATTR_INFO = 'info';
     const ATTR_DATE_CREATE = 'date_create';
+    const ATTR_FLAG = 'flag';
 
+    /** Константы для проверки Bool значений */
+    const TRUE = 1;
+    const FALSE = 0;
 
     /**
      * {@inheritdoc}
@@ -44,7 +50,9 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
 
             [static::ATTR_WORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_INFO, StringValidator::class]
+            [static::ATTR_INFO, StringValidator::class],
+
+            [static::ATTR_FLAG, IntegerValidator::class]
         ];
     }
 

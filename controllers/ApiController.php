@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
+use app\common\services\JsondataService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
@@ -29,14 +30,16 @@ use yii\web\ServerErrorHttpException;
 class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_LIST = 'list';
-    const ACTION_ITEM = 'item';
+    const ACTION_LIST   = 'list';
+    const ACTION_ITEM   = 'item';
+    const ACTION_SEARCH = 'search';
 
     /**
      * Метод рендерит главную страницу API справочника
      *
      * @throws ServerErrorHttpException
      * @throws \Exception
+     * @throws \Throwable in case delete failed.
      * @return mixed
      */
     public function actionList()
@@ -49,6 +52,8 @@ class ApiController extends AdvancedController
 
             /** Если кто-то пытается 2 раза пролезть с 1-им кодом рекапчи, рефрешим страницу */
             if (ApiSearchLogs::findCaptchaCode($form_model->recaptcha)) {
+
+                /** Перезагружаем страницу */
                 return $this->refresh();
             }
 
@@ -58,11 +63,17 @@ class ApiController extends AdvancedController
                 /** Создаем объект класса API */
                 $api = new ApiService();
 
-                /** Логируем поисковый запрос пользователя в таблицу логов */
-                $api->setSearchLog($form_model);
-
                 /** Присваиваем переменной результат работы APIшки */
                 $items = $api->proccessSearchItem($form_model);
+
+                /** Если $items не пустой - тогда логируем запрос с флагом */
+                if ($items) {
+                    /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
+                    $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
+                } else {
+                    /** Если $items пустой - устанавливаем логирование запроса без флага */
+                    $api->setSearchLog($form_model);
+                }
             }
         } else {
             /** Если массив не $_POST - вернем 30 актуальных записей из нашей базы */
@@ -101,4 +112,16 @@ class ApiController extends AdvancedController
         /** Если в базе нет предмета - возвращаем 404 ошибку */
         throw new HttpException(404, 'Такая страница не существует');
     }
+
+    /**
+     * Метод для возврата поисковых подсказок по луту из API
+     *
+     * @param string $q - поисковый запрос
+     * @return string
+     * @throws \yii\db\Exception
+     */
+    public function actionSearch(string $q): string {
+        return JsondataService::getSearchItem($q);
+    }
+
 }

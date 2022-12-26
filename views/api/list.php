@@ -15,11 +15,11 @@ use app\common\services\ImageService;
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\ActiveForm;
-use yii\web\JqueryAsset;
-use Yii;
+use kartik\typeahead\Typeahead;
 
 $this->title = 'Справочник лута в Escape from Tarkov';
 
@@ -83,7 +83,27 @@ $this->registerMetaTag([
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 api-content">
             <?php $form = ActiveForm::begin(['action' => ['/items'], 'options' => ['class' => 'form-search-block']]) ?>
 
-                <?= $form->field($form_model, ApiForm::ATTR_ITEM_NAME) ?>
+                <?= Html::label('Название предмета') ?>
+                <?= Typeahead::widget([
+                    'name' => ApiForm::ATTR_ITEM_NAME,
+                    'scrollable' => true,
+                    'options' => ['placeholder' => 'Введите сюда название предмета'],
+                    'pluginOptions' => ['hint' => false, 'highlight' => true],
+                    'dataset' => [
+                        [
+                            'remote' => [
+                                'url' => Url::to(['items/search']) . '?q=%QUERY',
+                                'wildcard' => '%QUERY',
+                            ],
+                            'limit' => 50,
+                            'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                            'display' => 'value',
+                        ]
+                    ]
+                ]);
+                ?>
+
+                <br>
 
                 <?= $form->field($form_model, ApiForm::ATTR_RECAPTCHA)->widget(
                     ReCaptcha::class,
@@ -117,7 +137,7 @@ $this->registerMetaTag([
                         <!-- Image -->
                         <div class="col-sm-2">
                             <a href="/item/<?= $item->url ?>.html">
-                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>">
+                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>" alt="<?= $item->json['iconLink'] ?>">
                             </a>
                         </div>
 
@@ -140,7 +160,7 @@ $this->registerMetaTag([
 
                                 <!-- Where we can sell -->
                                 <?php foreach ($item->json['sellFor'] as $trader) : ?>
-                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>">
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>" alt="<?= $trader['vendor']['name'] ?>">
                                 <?php endforeach; ?>
                             </div>
 

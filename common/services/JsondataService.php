@@ -86,6 +86,37 @@ final class JsondataService
     }
 
     /**
+     * Метод осуществляет поиск слов в таблице поисковых логов API, для того чтобы вывести пользователям подсказки
+     * которые точно приведут к нахождению искомых предметов
+     *
+     * @param string|null $q - поисковый запрос
+     * @return string
+     * @throws \yii\db\Exception
+     */
+    public static function getSearchItem(string $q = null): string
+    {
+        $query = new Query;
+
+        $query->select('words')
+            ->from('api_search_logs')
+            ->where('words LIKE "%' . $q . '%"')
+            ->andWhere(['flag' => 1])
+            ->groupBy('words')
+            ->orderBy('date_create')
+            ->cache(3600);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+
+        $out = [];
+
+        /** Цикл составления готовых данных по запросу пользователя в поиске **/
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['words'], 'title' => $d['words']];
+        }
+        return Json::encode($out);
+    }
+
+    /**
      * Метод по параметру URL адрес возвращает набор данных нужной карты из таблицы Bosses
      *
      * @param string $url
