@@ -496,9 +496,10 @@ final class ApiService implements ApiInterface
      * Метод записывает в ApiSearchLogs данные о поисковых запросах пользователей через ApiForm
      *
      * @param ApiForm $model - объект модели ApiForm
+     * @param int $flag - флаг, для проверки - вернулись ли данные по запросу или нет
      * @return bool
      */
-    public function setSearchLog(ApiForm $model): bool
+    public function setSearchLog(ApiForm $model, int $flag = 0): bool
     {
         /** Создаем новый Ar объект логирующей запросы модели */
         $log = new ApiSearchLogs();
@@ -508,6 +509,9 @@ final class ApiService implements ApiInterface
 
         /** Записываем код рекапчи пользователя */
         $log->info = $model->recaptcha;
+
+        /** Устанавливаем значение флага (0 - запрос не помог найти предметы, 1 - запрос помог найти предметы) */
+        $log->flag = $flag;
 
         /** Пробуем сохранить и возвращаем bool результат */
         return $log->save();
