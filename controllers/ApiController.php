@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
+use app\common\services\JsondataService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
@@ -29,8 +30,9 @@ use yii\web\ServerErrorHttpException;
 class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_LIST = 'list';
-    const ACTION_ITEM = 'item';
+    const ACTION_LIST   = 'list';
+    const ACTION_ITEM   = 'item';
+    const ACTION_SEARCH = 'search';
 
     /**
      * Метод рендерит главную страницу API справочника
@@ -110,4 +112,16 @@ class ApiController extends AdvancedController
         /** Если в базе нет предмета - возвращаем 404 ошибку */
         throw new HttpException(404, 'Такая страница не существует');
     }
+
+    /**
+     * Метод для возврата поисковых подсказок по луту из API
+     *
+     * @param string $q - поисковый запрос
+     * @return string
+     * @throws \yii\db\Exception
+     */
+    public function actionSearch(string $q): string {
+        return JsondataService::getSearchItem($q);
+    }
+
 }
