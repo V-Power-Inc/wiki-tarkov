@@ -70,6 +70,9 @@ return [
     /** URL до детальной страницы с боссами */
     'bosses/<url:[\w_\/-]+>' => BossesController::routeId(BossesController::ACTION_VIEW),
 
+    /** URL до страницы, возвращающей запросы с успешными поисками для API */
+    'items/search' => ApiController::routeId(ApiController::ACTION_SEARCH),
+
     /** URL до основной страницы API */
     'items' => ApiController::routeId(ApiController::ACTION_LIST),
 
