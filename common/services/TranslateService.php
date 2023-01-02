@@ -45,6 +45,8 @@ final class TranslateService
                 return 'terragroup-laboratory';
             case 'Лес':
                 return 'forest';
+            case 'Улицы Таркова':
+                return 'streets-of-tarkov';
         }
 
         /** Возвращаем null только если не попали не в 1 из кейсов */

@@ -34,7 +34,8 @@ final class ImageService
             'Берег' => '/img/maps/karta_bereg_preview.png',
             'Лаборатория' => '/img/maps/terra-group.png',
             'Резерв' => '/img/maps/rezerv.jpg',
-            'Лес' => '/img/maps/forest_prev.jpg'
+            'Лес' => '/img/maps/forest_prev.jpg',
+            'Улицы Таркова' => '/img/maps/streets-of-tarkov'
         ];
 
         /** Возвращаем значение массива по полученному в виде параметра ключу */
