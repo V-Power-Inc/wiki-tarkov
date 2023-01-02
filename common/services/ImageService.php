@@ -35,7 +35,7 @@ final class ImageService
             'Лаборатория' => '/img/maps/terra-group.png',
             'Резерв' => '/img/maps/rezerv.jpg',
             'Лес' => '/img/maps/forest_prev.jpg',
-            'Улицы Таркова' => '/img/maps/streets-of-tarkov'
+            'Улицы Таркова' => '/img/maps/streets-of-tarkov.jpg'
         ];
 
         /** Возвращаем значение массива по полученному в виде параметра ключу */
