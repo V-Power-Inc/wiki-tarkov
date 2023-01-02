@@ -106,6 +106,7 @@ class ZavodCest
         $I->seeLink('Лаборатория Terra Group', '/maps/terragroup-laboratory-location#2/41.0/-1.2');
         $I->seeLink('Резерв', '/maps/rezerv-location#2/64.6/41.0');
         $I->seeLink('Маяк', '/maps/lighthouse-location#2/74.0/65.2');
+        $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/8.1/13.9');
         $I->seeLink('Смотреть список доступных карт', '/maps');
         $I->seeLink('Прапор', '/traders/prapor');
         $I->seeLink('Терапевт', '/traders/terapevt');

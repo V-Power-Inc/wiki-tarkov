@@ -124,7 +124,7 @@ $this->registerMetaTag([
             </a>
             <br>
             <br>
-            <a class="btn btn-default main-link" href="/maps/lighthouse-location">Перейти к карте Улицы Таркова</a>
+            <a class="btn btn-default main-link" href="/maps/lighthouse-location">Перейти к карте Маяк</a>
 
         </div>
 
