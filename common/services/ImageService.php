@@ -34,7 +34,8 @@ final class ImageService
             'Берег' => '/img/maps/karta_bereg_preview.png',
             'Лаборатория' => '/img/maps/terra-group.png',
             'Резерв' => '/img/maps/rezerv.jpg',
-            'Лес' => '/img/maps/forest_prev.jpg'
+            'Лес' => '/img/maps/forest_prev.jpg',
+            'Улицы Таркова' => '/img/maps/streets-of-tarkov'
         ];
 
         /** Возвращаем значение массива по полученному в виде параметра ключу */
@@ -43,7 +44,6 @@ final class ImageService
 
     /**
      * Массив с ключами в виде названия боссов и значений изображений, которое для них используется
-     *  todo: UPD 27-12-2022 - Появился новый босс Gifter, ему нужно сюда зашить изображения
      *
      * @param string $boss - Название босса
      * @return string
@@ -62,6 +62,7 @@ final class ImageService
             'Санитар' => '/img/bosses/sanitar.jpg',
             'Тагилла' => '/img/bosses/tagilla.jpg',
             'Отступник' => '/img/bosses/rogue.jpg',
+            'Зрячий' => '/img/bosses/zryachiy.jpg',
             'gifter' => '/img/bosses/gifter.jpg'
         ];
 

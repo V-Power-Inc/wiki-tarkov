@@ -1,48 +1,33 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: PC_Principal
+ * Date: 28.08.2022
+ * Time: 20:06
+ */
 
 namespace Tests\Functional;
 
-use app\controllers\TraderController;
-use app\tests\fixtures\EgerFixture;
-use app\tests\fixtures\InfoFixture;
+use app\controllers\MapsController;
 
 /**
- * Функциональные тесты страниц квестов
+ * Функциональные тесты интерактивной карты Улицы Таркова
  *
- * Class EgerCest
+ * Class StreetsoftarkovCest
  * @package Tests\Functional
  */
-class EgerCest
+class StreetsoftarkovCest
 {
-    /**
-     * Фикстуры для таблицы eger
-     * @return array
-     */
-    public function _fixtures()
-    {
-        return [
-            'eger' => [
-                'class' => EgerFixture::class,
-                'dataFile' => codecept_data_dir() . 'eger.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
-            ]
-        ];
-    }
-
     /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_EGERPAGE));
+        $I->amOnRoute(MapsController::routeId(MapsController::ACTION_STREETS_OF_TARKOV));
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Прохождение и разбор квестов Егеря по онлайн-шутеру Escape from Takov.">');
-        $I->seeInSource('<meta name="keywords" content="Квесты Егеря в Escape from Tarkov, квесты Егерь Тарков">');
+        $I->seeInSource('<meta name="description" content="Интерактивная карта локации Улицы Таркова из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -50,24 +35,33 @@ class EgerCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Квесты Егеря в Escape from Tarkov. Разбор и прохождение квестов Егеря.">');
+        $I->seeInSource('<meta property="og:title" content="Карта локации Улицы Таркова">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Квесты Егеря в Escape from Tarkov. Разбор и прохождение квестов Егеря.');
+        $I->seeInTitle('Карта локации Улицы Таркова');
     }
 
-    /** Мы видим H1 заголовок и названия квестов а также область контента, что их выводит */
+    /** Мы видим правое меню, с опциями интерактивной карты */
+    public function checkRightMenuExtsts(\FunctionalTester $I)
+    {
+        $I->seeElement('.optins_layerstability');
+    }
+
+    /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Квесты Егеря в Escape from Tarkov. Разбор и прохождение квестов Егеря.', 'h1');
-        $I->see('Знакомство');
-        $I->see('Путь выживальщика. Беззащитен, но опасен');
-        $I->see('Путь выживальщика. Запасливый');
-        $I->seeElement('.quests-content');
+        $I->see('Карта локации Резерв', 'h1');
+        $I->see('Интерактивная карта Улицы Таркова', 'h2');
+    }
+
+    /** Мы видим, что поисковое поле поиска лута есть на странице */
+    public function checkSearchLootInput(\FunctionalTester $I)
+    {
+        $I->seeElement('.search-map-loot');
     }
 
     /** Мы видим все ссылки горизонтального меню */

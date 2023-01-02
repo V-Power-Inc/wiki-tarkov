@@ -42,6 +42,7 @@ class MapsController extends AdvancedController
     const ACTION_LABORATORYTERRA   = 'laboratoryterra';
     const ACTION_REZERV            = 'rezerv';
     const ACTION_LIGHTHOUSE        = 'lighthouse';
+    const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
 
     /**
      * Массив поведения данного контроллера
@@ -213,5 +214,15 @@ class MapsController extends AdvancedController
     public function actionLighthouse(): string
     {
         return $this->render('lighthouse');
+    }
+
+    /**
+     * Рендер страницы с картой Улицы Таркова
+     *
+     * @return string
+     */
+    public function actionStreetsOfTarkov(): string
+    {
+        return $this->render('streets-of-tarkov');
     }
 }

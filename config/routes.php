@@ -33,6 +33,7 @@ return [
     'maps/terragroup-laboratory-location' => MapsController::routeId(MapsController::ACTION_LABORATORYTERRA),
     'maps/rezerv-location' => MapsController::routeId(MapsController::ACTION_REZERV),
     'maps/lighthouse-location' => MapsController::routeId(MapsController::ACTION_LIGHTHOUSE),
+    'maps/streets-of-tarkov-location' => MapsController::routeId(MapsController::ACTION_STREETS_OF_TARKOV),
     'quests-of-traders' => TraderController::routeId(TraderController::ACTION_QUESTS),
     'quests-of-traders/prapor-quests' => TraderController::routeId(TraderController::ACTION_PRAPORPAGE),
     'quests-of-traders/terapevt-quests' => TraderController::routeId(TraderController::ACTION_TERAPEVTPAGE),

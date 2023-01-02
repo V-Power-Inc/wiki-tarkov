@@ -128,6 +128,17 @@ $this->registerMetaTag([
 
         </div>
 
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+            <h2 class="text-center map-heading">Карта Улицы Таркова</h2>
+            <a href="/maps/streets-of-tarkov-location">
+                <img class="maps__small" src="/img/maps/streets-of-tarkov.jpg">
+            </a>
+            <br>
+            <br>
+            <a class="btn btn-default main-link" href="/maps/streets-of-tarkov-location">Перейти к карте Улицы Таркова</a>
+
+        </div>
+
     </div>
         
 

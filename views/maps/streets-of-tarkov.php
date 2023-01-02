@@ -1,26 +1,27 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: basil
- * Date: 08.06.2022
- * Time: 18:08
+ * User: PC_Principal
+ * Date: 02.01.2023
+ * Time: 15:13
+ *
+ * Страница с интерактивной картой локации Улицы Таркова
  */
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/rezerv-location.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->title = 'Карта локации Резерв в Escape from Tarkov';
+$this->registerJsFile('js/streets-of-tarkov-location.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->title = 'Карта локации Улицы Таркова';
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Интерактивная карта локации Резерв из игры Escape from Tarkov',
+    'content' => 'Интерактивная карта локации Улицы Таркова из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
 ]);
 
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 ?>
-
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
@@ -46,9 +47,10 @@ use yii\web\JsExpression;
     <div class="outer-button"><img src="/img/maps/button_outer.png"></div>
     <div class="inner-button"><img src="/img/maps/button_inner.png"></div>
 
+
+
     <div class="col-lg-12">
         <div class="option-buttons">
-
 
         </div>
         <!-- Контент страницы -->
@@ -105,8 +107,10 @@ use yii\web\JsExpression;
                     ?>
                 </div>
 
-                <h2>Интерактивная карта локации Резерв</h2>
-                <p class="maps-mobile-hidden-value">Интерактивная карта локации Резерв из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации лаборатория Terra Group, узнать о местонахождении оружейных и военных ящиков. </p>
+                <h2>Интерактивная карта Улицы Таркова</h2>
+                <p class="maps-mobile-hidden-value">Интерактивная карта локации Улицы Таркова из Escape from Tarkov - на данной карте, вы сможете увидеть спавны и выходы за диких и ЧВК с локации Улицы Таркова, узнать о местонахождении оружейных и военных ящиков. </p>
+                <p class="maps-mobile-hidden-value">Также с помощью интерактивной карты вы сможете узнать о местах спавна ключей от помещений и сейфов, которые спавнятся на карте Улицы Таркова. Интерактивная карта локации Улицы Таркова поможет вам очень быстро найти квестовые точки, на которых можно увидеть предметы, или места необходимые для выполнения квестов торговцев.</p>
+                <p class="alert alert-info maps-mobile-hidden-value"><b>Наиболее полная интерактивная карта локации Улицы Таркова с маркерами точек.</b></p>
                 <p class="maps-mobile-hidden-value"></p>
                 <div class="maps-mobile-hidden-value">
                     <?= $this->render('/other/yandex-direct-bottom-intermaps'); ?>
