@@ -43,7 +43,6 @@ final class ImageService
 
     /**
      * Массив с ключами в виде названия боссов и значений изображений, которое для них используется
-     *  todo: UPD 27-12-2022 - Появился новый босс Gifter, ему нужно сюда зашить изображения
      *
      * @param string $boss - Название босса
      * @return string
@@ -62,6 +61,7 @@ final class ImageService
             'Санитар' => '/img/bosses/sanitar.jpg',
             'Тагилла' => '/img/bosses/tagilla.jpg',
             'Отступник' => '/img/bosses/rogue.jpg',
+            'Зрячий' => '/img/bosses/zryachiy.jpg',
             'gifter' => '/img/bosses/gifter.jpg'
         ];
 
