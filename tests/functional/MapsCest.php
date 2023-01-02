@@ -96,13 +96,14 @@ class MapsCest
         $I->see('Карта лаборатории Terra Group', 'H2');
         $I->see('Карта Резерва', 'H2');
         $I->see('Карта Маяка', 'H2');
+        $I->see('Карта Улицы Таркова', 'H2');
     }
 
     /** Проверяем что видим правильное количество превьюшек интерактивных карт */
     public function checkMapsMiniatures(\FunctionalTester $I)
     {
         $I->seeElement('.maps__small');
-        $I->seeNumberOfElements('.maps__small', 8);
+        $I->seeNumberOfElements('.maps__small', 9);
     }
 
     /** Проверяем корректность ссылок на детальные страницы интерактивных карт */
@@ -116,6 +117,7 @@ class MapsCest
         $I->seeLink('Перейти к карте лаборатории Terra Group','/maps/terragroup-laboratory-location#2/41.0/-1.2');
         $I->seeLink('Перейти к карте Резерв','/maps/rezerv-location');
         $I->seeLink('Перейти к карте Маяк','/maps/lighthouse-location');
+        $I->seeLink('Перейти к карте Улицы Таркова','/maps/streets-of-tarkov-location');
     }
 
     /** У нас нет куки - скрывающей оверлей с рекламой */
@@ -129,5 +131,4 @@ class MapsCest
     {
         $I->SeeElement('.overlay-block');
     }
-
 }
