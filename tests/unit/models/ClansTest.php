@@ -47,6 +47,7 @@ class ClansTest extends \Codeception\Test\Unit
         $clan->preview = 'https://sometest.ru/image_prev.png';
         $clan->link = 'https://sometest.ru';
         $clan->moderated = 1;
+        $clan->date_create = '2019-03-29 07:17:10';
         
         $this->assertTrue($clan->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
     }
