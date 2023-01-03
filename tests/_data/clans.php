@@ -13,7 +13,7 @@ return [
         'id' => 1,
         'title' => 'Some Test Clan',
         'description' => 'Description of clan',
-        'preview' => null,
+        'preview' => 'https://vk.com/vector_power/image.png',
         'link' => 'https://vk.com/vector_power',
         'date_create' => '2019-03-29 07:17:10',
         'moderated' => 1,

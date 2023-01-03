@@ -24,19 +24,6 @@ class ClansTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    /**
-     * Фикстуры для таблицы clans
-     * @return array
-     */
-    public function _fixtures() {
-        return [
-            'clans' => [
-                'class' => ClansFixture::class,
-                'dataFile' => codecept_data_dir() . 'clans.php'
-            ]
-        ];
-    }
-
     /** Тестируем создание нового объекта */
     public function testCreate()
     {
@@ -95,6 +82,6 @@ class ClansTest extends \Codeception\Test\Unit
     {
         $clan = Clans::deleteAll();
 
-        $this->assertIsInt($clan,'Удаление объекта не случилось, а должно было.');
+        $this->assertIsInt($clan,'Удаление объектов не случилось, а должно было.');
     }
 }
