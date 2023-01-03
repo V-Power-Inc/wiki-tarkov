@@ -5,13 +5,12 @@
  * Date: 03.01.2023
  * Time: 12:04
  * 
- * Unit тесты для таблицы Clans
+ * Unit тесты для таблицы Clans (Сделано через промежуточную модель из за рекапчи)
  */
 
 namespace models;
 
-use app\models\Clans;
-use app\tests\fixtures\ClansFixture;
+use app\models\ClansForUnit;
 
 /**
  * Class ClansTest
@@ -27,7 +26,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем создание нового объекта */
     public function testCreate()
     {
-        $clan = new Clans();
+        $clan = new ClansForUnit();
 
         $clan->title = 'Second clan';
         $clan->description = 'Secondary desc of clan';
@@ -42,7 +41,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем обновление маркера */
     public function testUpdate()
     {
-        $clan = Clans::find()->where(['is not','id',null])->one();
+        $clan = ClansForUnit::find()->where(['is not','id',null])->one();
 
         $clan->title = 'Changed title';
         $clan->description = 'Changed Secondary desc of clan';
@@ -56,7 +55,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем получение объекта (select) */
     public function testSelect()
     {
-        $clan = Clans::find()->one();
+        $clan = ClansForUnit::find()->one();
 
         $this->assertNotNull($clan, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
@@ -64,7 +63,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем получение всех объектов (select all) */
     public function testSelectAll()
     {
-        $clan = Clans::find()->all();
+        $clan = ClansForUnit::find()->all();
 
         $this->assertTrue(count($clan) == 1, 'Ожидалось что вернется 1 объект, что то пошло не так');
     }
@@ -72,7 +71,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $clan = Clans::find()->one()->delete();
+        $clan = ClansForUnit::find()->one()->delete();
 
         $this->assertIsInt($clan,'Удаление объекта не случилось, а должно было.');
     }
@@ -80,7 +79,7 @@ class ClansTest extends \Codeception\Test\Unit
     /** Тестируем удаление всех объектов */
     public function testDeleteAll()
     {
-        $clan = Clans::deleteAll();
+        $clan = ClansForUnit::deleteAll();
 
         $this->assertIsInt($clan,'Удаление объектов не случилось, а должно было.');
     }
