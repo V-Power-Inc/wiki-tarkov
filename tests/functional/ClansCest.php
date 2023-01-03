@@ -38,7 +38,7 @@ class ClansCest
     /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId(ClanController::routeId(ClanController::ACTION_INDEX)));
+        $I->amOnRoute(ClanController::routeId(ClanController::ACTION_INDEX));
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
