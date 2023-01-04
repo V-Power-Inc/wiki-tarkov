@@ -1734,8 +1734,9 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     padding: 5px;
 }
 
+/** Фон для всех карт сделан - Черно-серый */
 #map {
-    background: url(/img/pattern-light.png) repeat;
+    background: #333;
 }
 
 .fixies-float-image {
