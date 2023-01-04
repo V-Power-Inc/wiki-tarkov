@@ -2279,7 +2279,7 @@ table.patrons-tbl >thead > tr > th {
 }
 
 /** Стили для чекбоксов слоев, на карте Leaflet */
-.scaws-control, .chvk-control {
+.ScawsControl, .ChvkControl, .KeysControl, .ChkafControl {
     margin: 0 5px 0 0!important;
     vertical-align: middle;
 }
