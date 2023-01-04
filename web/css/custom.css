@@ -2283,3 +2283,13 @@ table.patrons-tbl >thead > tr > th {
     margin: 0 5px 0 0!important;
     vertical-align: middle;
 }
+
+/** Отступ от краев элементов управления Leaflet JS */
+.leaflet-control-layers {
+    padding: 10px;
+}
+
+/** Отступ чекбоксов друг от друга внутри Leaflet JS элементов управления */
+.leaflet-control-layers.leaflet-control > .form-control {
+    margin: 10px 0;
+}
