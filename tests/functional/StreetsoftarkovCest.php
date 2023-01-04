@@ -54,7 +54,7 @@ class StreetsoftarkovCest
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Карта локации Резерв', 'h1');
+        $I->see('Карта локации Улицы Таркова', 'h1');
         $I->see('Интерактивная карта Улицы Таркова', 'h2');
     }
 
