@@ -54,7 +54,7 @@ class StreetsoftarkovCest
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Карта локации Резерв', 'h1');
+        $I->see('Карта локации Улицы Таркова', 'h1');
         $I->see('Интерактивная карта Улицы Таркова', 'h2');
     }
 
@@ -81,7 +81,7 @@ class StreetsoftarkovCest
         $I->seeLink('Лаборатория Terra Group', '/maps/terragroup-laboratory-location#2/41.0/-1.2');
         $I->seeLink('Резерв', '/maps/rezerv-location#2/64.6/41.0');
         $I->seeLink('Маяк', '/maps/lighthouse-location#2/74.0/65.2');
-        $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/8.1/13.9');
+        $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/59.2/34.3');
         $I->seeLink('Смотреть список доступных карт', '/maps');
         $I->seeLink('Прапор', '/traders/prapor');
         $I->seeLink('Терапевт', '/traders/terapevt');

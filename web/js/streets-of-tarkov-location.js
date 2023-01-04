@@ -1,13 +1,13 @@
 /** Вызов карты и указание центра координат **/
 const map = L.map('map', {
     center: [67, -5],
-    maxzoom: 2,
+    maxzoom: 4,
     minzoom: 1,
     zoom: 1
 });
 
 /** Обращаемся к слоям зума интерактивной карты **/
-L.tileLayer('https://cdn.tarkov.help/maps/streets/{z}/{x}/{y}.webp', {
+L.tileLayer('/img/streets-of-tarkov/{z}/{x}/{y}.webp', {
     noWrap: true,
 }).addTo(map);
 
@@ -15,7 +15,7 @@ L.tileLayer('https://cdn.tarkov.help/maps/streets/{z}/{x}/{y}.webp', {
 var hash = new L.Hash(map);
 
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 0 а максимальный 2 **/
-map.setMaxZoom(5);
+map.setMaxZoom(4);
 map.setMinZoom(1);
 
 
@@ -40,6 +40,6 @@ $(document).ready(function() {
 
     /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/
     $('body').on('click','.mapcenter', function(){
-        map.panTo(new L.LatLng(67, -70));
+        map.panTo(new L.LatLng(53, -8));
     });
 });
