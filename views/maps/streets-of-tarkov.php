@@ -21,6 +21,8 @@ $this->registerMetaTag([
 use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
+
+// todo: На примере этой карты будет проведен рефакторинг
 ?>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
