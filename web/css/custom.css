@@ -2278,8 +2278,8 @@ table.patrons-tbl >thead > tr > th {
     line-height: 20px;
 }
 
-/** Стили для чекбоксов слоев, на карте Leaflet */
-.ScawsControl, .ChvkControl, .KeysControl, .ChkafControl {
+/** Стили для чекбоксов слоев и элементов управления, на карте Leaflet */
+.ScawsControl, .ChvkControl, .KeysControl, .ChkafControl, .MainControls {
     margin: 0 5px 0 0!important;
     vertical-align: middle;
 }

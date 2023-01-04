@@ -7,11 +7,23 @@
  * - Сетап чекбокса слоев (Константа LayerControls)
  *
  * @link https://mourner.github.io/Leaflet/reference.html - Documentation LeafletJS
+ * @link https://www.obfuscator.io/ - Obfuscate JS
  */
 
 /** Константа с селекторами, для работы с DOM */
 const Selectors = {
-    body: 'body'
+
+    /** Селектор body **/
+    body: 'body',
+
+    /** Селекторы чекбоксов, что отвечают за слои на Leaflet JS */
+    layerControls: '.form-control input#ids-control',
+
+    /** Селектор чекбокса - показать все слои */
+    showLayers:  '#ids-show-all',
+
+    /** Селектор чекбокса - скрыть все слои */
+    hideLayers: '#ids-hide-all'
 };
 
 /** Константа с опциями карты **/
@@ -116,7 +128,10 @@ let MainControl = L.Control.extend({
         div.innerHTML = '<div class="form-control"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
             '<div class="form-control"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
             '<div class="form-control"><input id="ids-control" class="KeysControl" type="checkbox"/>Двери, отпираемые ключами</div>' +
-            '<div class="form-control"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>';
+            '<div class="form-control"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
+            '<div class="leaflet-control-layers-separator"></div>' +
+            '<div class="form-control"><input id="ids-show-all" class="MainControls" type="checkbox"/>Показать все маркеры</div>' +
+            '<div class="form-control"><input id="ids-hide-all" class="MainControls" type="checkbox"/>Скрыть все маркеры</div>';
 
         /** Возвращаем конечный Html результат */
         return div;
@@ -130,16 +145,93 @@ Map.addControl(new MainControl());
  *
  * @param Data - Объект this, с которым произошло событие
  */
-function handleControl(Data) {
+function LayershandleControl(Data) {
 
     /** Переменная с классом чекбокса, который кликнули */
     let _className = $(Data).attr('class');
+
+    /** При взаимодействии с чекбоксом из списка слоев - отключаем чекбокс, показать все маркеры */
+    $(Selectors.showLayers).prop('checked', false);
+
+    /** При взаимодействии с чекбоксом из списка слоев - отключаем чекбокс, скрыть все маркеры */
+    $(Selectors.hideLayers).prop('checked', false);
 
     /** Если чекбокс выбран - делаем активным слой чекбокса, если нет, то отключаем его */
     if (Data.checked === true) {
         Map.addLayer(LayerControls[_className]);
     } else {
         Map.removeLayer(LayerControls[_className]);
+    }
+}
+
+/**
+ * Функция обработчика чекбоксов - Показать и скрыть все слои
+ *
+ * @param Data - Объект this, с которым произошло событие
+ */
+function MainhandleControl(Data) {
+
+    /** Переменная с ID чекбокса, который кликнули */
+    let id = $(Data).attr('id');
+
+    /** В свитче смотрим, какой чекбокс пришел - на показ или на скрытие всех слоев */
+    switch (id) {
+
+        /** Кейс, показать все слои */
+        case 'ids-show-all':
+
+            /** Если чекбокс в true положении, тогда будет дальнейшая логика */
+            if ($(Selectors.showLayers).is(':checked') === true) {
+
+                /** В цикле включаем все слои маркеров на карте */
+                $.each(Layers, function(i) {
+                    Map.addLayer(Layers[i]);
+                });
+
+                /** Проставляем всем чекбоксам слоев атрибут checked - true */
+                $(Selectors.layerControls).each(function() {
+
+                    /** Каждый чекбокс слоев Leaflet с маркерами становится checked - true */
+                    $(this).prop('checked', true);
+
+                    /** Устанавливаем чекбокс - скрыть все слои в false */
+                    $(Selectors.body + ' ' + Selectors.hideLayers).prop('checked', false);
+                });
+
+                /** Прерываем цикл */
+                break;
+            }
+
+            /** Прерываем цикл */
+            break;
+
+        /** Кейс, скрыть все слои */
+        case 'ids-hide-all':
+
+            /** Если чекбокс в true положении, тогда будет дальнейшая логика */
+            if ($(Selectors.hideLayers).is(':checked') === true) {
+
+                /** В цикле выключаем все слои маркеров на карте */
+                $.each(Layers, function(i) {
+                    Map.removeLayer(Layers[i]);
+                });
+
+                /** Проставляем всем чекбоксам слоев атрибут checked - false */
+                $(Selectors.layerControls).each(function() {
+
+                    /** Каждый чекбокс слоев Leaflet с маркерами становится checked - false */
+                    $(this).prop('checked', false);
+
+                    /** Устанавливаем чекбокс - показать все слои в false */
+                    $(Selectors.body + ' ' + Selectors.showLayers).prop('checked', false);
+                });
+
+                /** Прерываем цикл */
+                break;
+            }
+
+            /** Прерываем цикл */
+            break;
     }
 }
 
@@ -151,11 +243,18 @@ function onMouseMove(e) {
 /** Добавление отслеживания движения мышки по карте **/
 Map.on('mousemove', onMouseMove);
 
-/** Добавляем слушатель событий изменения чекбоксов Leaflet */
+/** Добавляем слушатель событий изменения чекбоксов слоев Leaflet */
 $(Selectors.body).on('click', '#ids-control', function() {
 
     /** Вызываем обработчик события и передаем в него this - для дальнейшей работы */
-    handleControl(this);
+    LayershandleControl(this);
+});
+
+/** Добавляем слушатель событий изменения базовых чекбоксов Leaflet */
+$(Selectors.body).on('click', '#ids-show-all, #ids-hide-all', function() {
+
+    /** Вызываем обработчик события и передаем в него this - для дальнейшей работы */
+    MainhandleControl(this);
 });
 
 /** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
