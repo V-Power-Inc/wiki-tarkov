@@ -6,8 +6,6 @@
  * - Сетап слоя (Константа Layers)
  * - Сетап чекбокса слоев (Константа LayerControls)
  *
- * todo: Сделать кнопку, скрывающую боковое меню
- *
  * @link https://mourner.github.io/Leaflet/reference.html - Documentation LeafletJS
  * @link https://www.obfuscator.io/ - Obfuscate JS
  */
@@ -37,7 +35,16 @@ const Selectors = {
     radioLayersMaps: '.map-layers-control',
 
     /** Селектор всех чекбоксов в боковом навигационном меню Leaflet */
-    allMapCheckboxes: '.form-control.map-layers'
+    allMapCheckboxes: '.form-control.map-layers',
+
+    /** Селектор до навигации Leafler JS карты (Все что сгенерено JS'ом) */
+    allMapControls: '.all-map-blocks',
+
+    /** Кнопка - скрыть всю навигацию карт */
+    buttonShowAllMenu: '#show-allcontrols',
+
+    /** Кнопка - показать всю навигацию карт */
+    buttonHideAllMenu: '#hide-allcontrols'
 };
 
 /** Добавляем базовый слой интерактивной карты (С опцией - без повторения карты) */
@@ -46,7 +53,7 @@ let baseTileLayer = L.tileLayer('/img/streets-of-tarkov/{z}/{x}/{y}.webp', {
     tms: false
 });
 
-/** Вспомогательная версия локации */
+/** Вспомогательная версия локации (С опцией - без повторения карты) */
 let AlternativeTileLayers = L.tileLayer('/img/streets-of-tarkov-v2/{z}/{x}/{y}.png', {
     noWrap: true,
     tms: false
@@ -147,7 +154,10 @@ let MainControl = L.Control.extend({
         let div = L.DomUtil.create('div', 'leaflet-control-layers');
 
         /** Создание необходимых Checkbox блоков и радиокнопок - в теле Leaflet */
-        div.innerHTML = '<div class="form-control"><input type="radio" id="FirstMap" class="map-layers-control" name="map-group" checked>Основная версия карты</div>' +
+        div.innerHTML = '<button class="btn btn-primary" id="hide-allcontrols">Скрыть меню</button>' +
+            '<button class="btn btn-success" id="show-allcontrols" style="display: none">Показать меню</button>' +
+            '<div class="all-map-blocks">' +
+            '<div class="form-control"><input type="radio" id="FirstMap" class="map-layers-control" name="map-group" checked>Основная версия карты</div>' +
             '<div class="form-control"><input type="radio" id="SecondMap" class="map-layers-control" name="map-group">Доп. версия карты</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
@@ -156,7 +166,8 @@ let MainControl = L.Control.extend({
             '<div class="form-control map-layers"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
             '<div class="form-control map-layers"><input id="ids-show-all" class="MainControls" type="checkbox"/>Показать все маркеры</div>' +
-            '<div class="form-control map-layers"><input id="ids-hide-all" class="MainControls" type="checkbox"/>Скрыть все маркеры</div>';
+            '<div class="form-control map-layers"><input id="ids-hide-all" class="MainControls" type="checkbox"/>Скрыть все маркеры</div>' +
+            '</div>';
 
         /** Возвращаем конечный Html результат */
         return div;
@@ -376,6 +387,32 @@ $(Selectors.body).on('click', Selectors.radioLayersMaps, function() {
 
     /** Вызываем обработчик события и передаем в него this - для дальнейшей работы */
     radioHandleControl(this);
+});
+
+/** Добавляем слушатель событий - клик по кнопке показа всей навигации Leaflet JS */
+$(Selectors.body).on('click', Selectors.buttonShowAllMenu, function() {
+
+    /** Скрываем кнопку - показать все элементы навигации */
+    $(this).fadeOut();
+
+    /** Показываем кнопку - скрыть все элементы навигации */
+    $(Selectors.buttonHideAllMenu).fadeIn();
+
+    /** Показываем всю навигацию */
+    $(Selectors.allMapControls).fadeIn();
+});
+
+/** Добавляем слушатель событий - клик по кнопке скрытия всей навигации Leaflet JS */
+$(Selectors.body).on('click', Selectors.buttonHideAllMenu, function() {
+
+    /** Скрываем кнопку - скрыть все элементы навигации */
+    $(this).fadeOut();
+
+    /** Показываем кнопку - показать все элементы навигации */
+    $(Selectors.buttonShowAllMenu).fadeIn();
+
+    /** Скрываем всю навигацию */
+    $(Selectors.allMapControls).fadeOut();
 });
 
 /** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
