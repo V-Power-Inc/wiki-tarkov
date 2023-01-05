@@ -316,6 +316,12 @@
         height: auto;
     }
 
+    /** Отступы и размер шрифты для боковой менюшки на мобильных устройствах уменьшены */
+    .leaflet-control-layers.leaflet-control > .form-control {
+        font-size: 9px;
+        margin: 5px 0;
+    }
+
 }
 
 

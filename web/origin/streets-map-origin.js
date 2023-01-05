@@ -6,6 +6,8 @@
  * - Сетап слоя (Константа Layers)
  * - Сетап чекбокса слоев (Константа LayerControls)
  *
+ * todo: Сделать кнопку, скрывающую боковое меню, сделать слой с дополнительной версией карты (Без маркеров)
+ *
  * @link https://mourner.github.io/Leaflet/reference.html - Documentation LeafletJS
  * @link https://www.obfuscator.io/ - Obfuscate JS
  */
@@ -124,8 +126,11 @@ let MainControl = L.Control.extend({
         /** Создание необходимых HTML блоков */
         let div = L.DomUtil.create('div', 'leaflet-control-layers');
 
-        /** Создание необходимых Checkbox блоков - в теле Leaflet */
-        div.innerHTML = '<div class="form-control"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
+        /** Создание необходимых Checkbox блоков и радиокнопок - в теле Leaflet */
+        div.innerHTML = '<div class="form-control"><input type="radio" id="FirstMap" class="FirstMap" checked="checked">Основная версия карты</div>' +
+            '<div class="form-control"><input type="radio" id="SecondMap" class="SecondMap">Доп. версия карты</div>' +
+            '<div class="leaflet-control-layers-separator"></div>' +
+            '<div class="form-control"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
             '<div class="form-control"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
             '<div class="form-control"><input id="ids-control" class="KeysControl" type="checkbox"/>Двери, отпираемые ключами</div>' +
             '<div class="form-control"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
