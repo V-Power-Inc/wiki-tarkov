@@ -6,7 +6,7 @@
  * - Сетап слоя (Константа Layers)
  * - Сетап чекбокса слоев (Константа LayerControls)
  *
- * todo: Сделать кнопку, скрывающую боковое меню, сделать слой с дополнительной версией карты (Без маркеров)
+ * todo: Сделать кнопку, скрывающую боковое меню
  *
  * @link https://mourner.github.io/Leaflet/reference.html - Documentation LeafletJS
  * @link https://www.obfuscator.io/ - Obfuscate JS
@@ -25,8 +25,32 @@ const Selectors = {
     showLayers:  '#ids-show-all',
 
     /** Селектор чекбокса - скрыть все слои */
-    hideLayers: '#ids-hide-all'
+    hideLayers: '#ids-hide-all',
+
+    /** Селектор радиокнопки слоя основной карты (Решетку перед вызовом дописывать) */
+    radioMainMap: 'FirstMap',
+
+    /** Селектор радиокнопки слоя вспомогательной карты (Решетку перед вызовом дописывать) */
+    radioSecondMap: 'SecondMap',
+
+    /** Селектор радиокнопок слоев карт */
+    radioLayersMaps: '.map-layers-control',
+
+    /** Селектор всех чекбоксов в боковом навигационном меню Leaflet */
+    allMapCheckboxes: '.form-control.map-layers'
 };
+
+/** Добавляем базовый слой интерактивной карты (С опцией - без повторения карты) */
+let baseTileLayer = L.tileLayer('/img/streets-of-tarkov/{z}/{x}/{y}.webp', {
+    noWrap: true,
+    tms: false
+});
+
+/** Вспомогательная версия локации */
+let AlternativeTileLayers = L.tileLayer('/img/streets-of-tarkov-v2/{z}/{x}/{y}.png', {
+    noWrap: true,
+    tms: false
+});
 
 /** Константа с опциями карты **/
 const Map = L.map('map', {
@@ -41,7 +65,9 @@ const Map = L.map('map', {
     minzoom: 1,
 
     /** Дефолтный зум карты */
-    zoom: 1
+    zoom: 1,
+
+    layers: [baseTileLayer],
 });
 
 /** Константа с набором иконок для различных маркеров */
@@ -97,12 +123,6 @@ const LayerControls = {
     ChkafControl : Layers.Chkaf
 };
 
-/** Добавляем базовый слой интерактивной карты (С опцией - без повторения карты) **/
-let baseTileLayer = L.tileLayer('/img/streets-of-tarkov/{z}/{x}/{y}.webp', {
-    noWrap: true,
-    tms: false
-}).addTo(Map);
-
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 let hash = new L.Hash(Map);
 
@@ -127,16 +147,16 @@ let MainControl = L.Control.extend({
         let div = L.DomUtil.create('div', 'leaflet-control-layers');
 
         /** Создание необходимых Checkbox блоков и радиокнопок - в теле Leaflet */
-        div.innerHTML = '<div class="form-control"><input type="radio" id="FirstMap" class="FirstMap" checked="checked">Основная версия карты</div>' +
-            '<div class="form-control"><input type="radio" id="SecondMap" class="SecondMap">Доп. версия карты</div>' +
+        div.innerHTML = '<div class="form-control"><input type="radio" id="FirstMap" class="map-layers-control" name="map-group" checked>Основная версия карты</div>' +
+            '<div class="form-control"><input type="radio" id="SecondMap" class="map-layers-control" name="map-group">Доп. версия карты</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
-            '<div class="form-control"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
-            '<div class="form-control"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
-            '<div class="form-control"><input id="ids-control" class="KeysControl" type="checkbox"/>Двери, отпираемые ключами</div>' +
-            '<div class="form-control"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
+            '<div class="form-control map-layers"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
+            '<div class="form-control map-layers"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
+            '<div class="form-control map-layers"><input id="ids-control" class="KeysControl" type="checkbox"/>Двери, отпираемые ключами</div>' +
+            '<div class="form-control map-layers"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
-            '<div class="form-control"><input id="ids-show-all" class="MainControls" type="checkbox"/>Показать все маркеры</div>' +
-            '<div class="form-control"><input id="ids-hide-all" class="MainControls" type="checkbox"/>Скрыть все маркеры</div>';
+            '<div class="form-control map-layers"><input id="ids-show-all" class="MainControls" type="checkbox"/>Показать все маркеры</div>' +
+            '<div class="form-control map-layers"><input id="ids-hide-all" class="MainControls" type="checkbox"/>Скрыть все маркеры</div>';
 
         /** Возвращаем конечный Html результат */
         return div;
@@ -222,14 +242,7 @@ function MainhandleControl(Data) {
                 });
 
                 /** Проставляем всем чекбоксам слоев атрибут checked - false */
-                $(Selectors.layerControls).each(function() {
-
-                    /** Каждый чекбокс слоев Leaflet с маркерами становится checked - false */
-                    $(this).prop('checked', false);
-
-                    /** Устанавливаем чекбокс - показать все слои в false */
-                    $(Selectors.body + ' ' + Selectors.showLayers).prop('checked', false);
-                });
+                disableMapCheckboxes();
 
                 /** Прерываем цикл */
                 break;
@@ -237,6 +250,102 @@ function MainhandleControl(Data) {
 
             /** Прерываем цикл */
             break;
+    }
+}
+
+/**
+ * Функция обработчика изменения состояния радиокнопок
+ * Если в перспективе будет идея пихать несколько слоев карт в 1 страницу, это будет очень кстати
+ *
+ * @param Data - Объект this, с которым произошло событие
+ */
+function radioHandleControl(Data) {
+
+    /** Переменная с ID радиокнопки, который кликнули */
+    let id = $(Data).attr('id');
+
+    /** В свитче смотрим, какой id сюда пришел */
+    switch (id) {
+
+        /** Пришел id основного слоя карты */
+        case Selectors.radioMainMap:
+
+            /** Удаляем слой вспомогательной интерактивной карты */
+            Map.removeLayer(AlternativeTileLayers);
+
+            /** Устанавливаем базовый слой карты */
+            Map.addLayer(baseTileLayer);
+
+            /** Показываем все чекбосы слоев на конкретной карте */
+            $(Selectors.allMapCheckboxes).fadeIn();
+
+            /** Показываем чекбокс - показать все слои */
+            $(Selectors.showLayers).fadeIn();
+
+            /** Показываем чекбокс - скрыть все слои */
+            $(Selectors.hideLayers).fadeIn();
+
+            /** Убираем checked с другого чекбокса */
+            $(Selectors.body + ' ' + '#' +  Selectors.radioSecondMap).val('off');
+
+            /** Прерываем цикл */
+            break;
+
+        /** Пришел id вспомогательного слоя карты */
+        case Selectors.radioSecondMap:
+
+            /** В цикле выключаем все слои маркеров на карте */
+            $.each(Layers, function(i) {
+                Map.removeLayer(Layers[i]);
+            });
+
+            /** Удаляем базовый слой карты */
+            Map.removeLayer(baseTileLayer);
+
+            /** Добавляем альтернативную карту локации */
+            Map.addLayer(AlternativeTileLayers);
+
+            /** Убираем все чекбоксы слоев с карты */
+            $(Selectors.allMapCheckboxes).fadeOut();
+
+            /** Скрываем чекбокс - показать все слои */
+            $(Selectors.showLayers).fadeOut();
+
+            /** Скрываем чекбокс - скрыть все слои */
+            $(Selectors.hideLayers).fadeOut();
+
+            /** Убираем checked с другого чекбокса */
+            $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).val('off');
+
+            /** Удаляем атрибут checked - основному радиобаттону карты */
+            $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).removeAttr('checked');
+
+            /** Проставляем всем чекбоксам слоев атрибут checked - false */
+            disableMapCheckboxes(true);
+
+            /** Прерываем цикл */
+            break;
+    }
+}
+
+/** Функция отключает prop Checked, для всех чекбоксов слоев на интерактивных картах */
+function disableMapCheckboxes(bool = false) {
+
+    /** Проставляем всем чекбоксам слоев атрибут checked - false */
+    $(Selectors.layerControls).each(function() {
+
+        /** Каждый чекбокс слоев Leaflet с маркерами становится checked - false */
+        $(this).prop('checked', false);
+
+        /** Устанавливаем чекбокс - показать все слои в false */
+        $(Selectors.body + ' ' + Selectors.showLayers).prop('checked', false);
+    });
+
+    /** Если прилетел флаг all, тогда ставим checked false и для чекбокса - скрыть все слои */
+    if (bool === true) {
+
+        /** Убираем чекед и для чекбокса - скрыть все маркеры */
+        $(Selectors.body + ' ' + Selectors.hideLayers).prop('checked', false);
     }
 }
 
@@ -260,6 +369,13 @@ $(Selectors.body).on('click', '#ids-show-all, #ids-hide-all', function() {
 
     /** Вызываем обработчик события и передаем в него this - для дальнейшей работы */
     MainhandleControl(this);
+});
+
+/** Добавляем слушатель событий изменения выбранной радиокнопки */
+$(Selectors.body).on('click', Selectors.radioLayersMaps, function() {
+
+    /** Вызываем обработчик события и передаем в него this - для дальнейшей работы */
+    radioHandleControl(this);
 });
 
 /** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
