@@ -317,11 +317,10 @@
     }
 
     /** Отступы и размер шрифты для боковой менюшки на мобильных устройствах уменьшены */
-    .leaflet-control-layers.leaflet-control > .form-control {
-        font-size: 9px;
+    .leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
+        font-size: 10px;
         margin: 5px 0;
     }
-
 }
 
 
