@@ -142,7 +142,7 @@ Map.setMinZoom(1);
 /** Добавляем чекбоксы слоев для Leaflet карты */
 let MainControl = L.Control.extend({
 
-    /** Опции положения элементов управления (Положение на карте) - todo: Чекнуть какие тут есть опции */
+    /** Опции положения элементов управления (Положение на карте) */
     options: {
         position: 'topright'
     },
@@ -162,7 +162,7 @@ let MainControl = L.Control.extend({
             '<div class="leaflet-control-layers-separator"></div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
-            '<div class="form-control map-layers"><input id="ids-control" class="KeysControl" type="checkbox"/>Двери, отпираемые ключами</div>' +
+            '<div class="form-control map-layers"><input id="ids-control" class="KeysControl" type="checkbox"/>Отпираемые двери</div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ChkafControl" type="checkbox"/>Выдвижные ящики</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
             '<div class="form-control map-layers"><input id="ids-show-all" class="MainControls" type="checkbox"/>Показать все маркеры</div>' +
