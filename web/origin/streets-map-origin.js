@@ -31,6 +31,9 @@ const Selectors = {
     /** Селектор радиокнопки слоя вспомогательной карты (Решетку перед вызовом дописывать) */
     radioSecondMap: 'SecondMap',
 
+    /** Селектор радиокнопки слоя вспомогательной карты Jindouz (Решетку перед вызовом дописывать) */
+    radioThirdMap: 'ThirdMap',
+
     /** Селектор радиокнопок слоев карт */
     radioLayersMaps: '.map-layers-control',
 
@@ -59,8 +62,14 @@ let AlternativeTileLayers = L.tileLayer('/img/streets-of-tarkov-v2/{z}/{x}/{y}.p
     tms: false
 });
 
+/** 3-я версия локации (С опцией - без повторения карты) */
+let ThirdTileLayers = L.tileLayer('/img/streets-of-tarkov-v3/{z}/{x}/{y}.png', {
+    noWrap: true,
+    tms: false
+});
+
 /** Константа с опциями карты **/
-const Map = L.map('map', {
+const mainData = L.map('map', {
 
     /** Положение центра карты */
     center: [67, -5],
@@ -131,13 +140,13 @@ const LayerControls = {
 };
 
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
-let hash = new L.Hash(Map);
+let hash = new L.Hash(mainData);
 
 /** Устанавливаем масимальный зум карты - 4 **/
-Map.setMaxZoom(4);
+mainData.setMaxZoom(4);
 
 /** Устанавливаем минимальный зум карты - 4 **/
-Map.setMinZoom(1);
+mainData.setMinZoom(1);
 
 /** Добавляем чекбоксы слоев для Leaflet карты */
 let MainControl = L.Control.extend({
@@ -159,6 +168,7 @@ let MainControl = L.Control.extend({
             '<div class="all-map-blocks">' +
             '<div class="form-control"><input type="radio" id="FirstMap" class="map-layers-control" name="map-group" checked>Основная версия карты</div>' +
             '<div class="form-control"><input type="radio" id="SecondMap" class="map-layers-control" name="map-group">Доп. версия карты</div>' +
+            '<div class="form-control"><input type="radio" id="ThirdMap" class="map-layers-control" name="map-group">Карта Jindouz</div>' +
             '<div class="leaflet-control-layers-separator"></div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ScawsControl" type="checkbox"/>Спавны Диких</div>' +
             '<div class="form-control map-layers"><input id="ids-control" class="ChvkControl" type="checkbox"/>Спавн ЧВК</div>' +
@@ -175,7 +185,7 @@ let MainControl = L.Control.extend({
 });
 
 /** Добавляем на карту интерактивные элементы */
-Map.addControl(new MainControl());
+mainData.addControl(new MainControl());
 
 /** Функция обработчика чекбокса слоев карты (Параметр сюда должен прилететь this)
  *
@@ -194,9 +204,9 @@ function LayershandleControl(Data) {
 
     /** Если чекбокс выбран - делаем активным слой чекбокса, если нет, то отключаем его */
     if (Data.checked === true) {
-        Map.addLayer(LayerControls[_className]);
+        mainData.addLayer(LayerControls[_className]);
     } else {
-        Map.removeLayer(LayerControls[_className]);
+        mainData.removeLayer(LayerControls[_className]);
     }
 }
 
@@ -221,7 +231,7 @@ function MainhandleControl(Data) {
 
                 /** В цикле включаем все слои маркеров на карте */
                 $.each(Layers, function(i) {
-                    Map.addLayer(Layers[i]);
+                    mainData.addLayer(Layers[i]);
                 });
 
                 /** Проставляем всем чекбоксам слоев атрибут checked - true */
@@ -249,7 +259,7 @@ function MainhandleControl(Data) {
 
                 /** В цикле выключаем все слои маркеров на карте */
                 $.each(Layers, function(i) {
-                    Map.removeLayer(Layers[i]);
+                    mainData.removeLayer(Layers[i]);
                 });
 
                 /** Проставляем всем чекбоксам слоев атрибут checked - false */
@@ -282,10 +292,13 @@ function radioHandleControl(Data) {
         case Selectors.radioMainMap:
 
             /** Удаляем слой вспомогательной интерактивной карты */
-            Map.removeLayer(AlternativeTileLayers);
+            mainData.removeLayer(AlternativeTileLayers);
+
+            /** Удаляем Jindouz слой карты */
+            mainData.removeLayer(ThirdTileLayers);
 
             /** Устанавливаем базовый слой карты */
-            Map.addLayer(baseTileLayer);
+            mainData.addLayer(baseTileLayer);
 
             /** Показываем все чекбосы слоев на конкретной карте */
             $(Selectors.allMapCheckboxes).fadeIn();
@@ -307,14 +320,17 @@ function radioHandleControl(Data) {
 
             /** В цикле выключаем все слои маркеров на карте */
             $.each(Layers, function(i) {
-                Map.removeLayer(Layers[i]);
+                mainData.removeLayer(Layers[i]);
             });
 
             /** Удаляем базовый слой карты */
-            Map.removeLayer(baseTileLayer);
+            mainData.removeLayer(baseTileLayer);
+
+            /** Удаляем Jindouz слой карты */
+            mainData.removeLayer(ThirdTileLayers);
 
             /** Добавляем альтернативную карту локации */
-            Map.addLayer(AlternativeTileLayers);
+            mainData.addLayer(AlternativeTileLayers);
 
             /** Убираем все чекбоксы слоев с карты */
             $(Selectors.allMapCheckboxes).fadeOut();
@@ -325,11 +341,43 @@ function radioHandleControl(Data) {
             /** Скрываем чекбокс - скрыть все слои */
             $(Selectors.hideLayers).fadeOut();
 
-            /** Убираем checked с другого чекбокса */
-            $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).val('off');
+            /** Убираем активность радиокнопки основной карты */
+            unCheckMainLayerRadio();
 
-            /** Удаляем атрибут checked - основному радиобаттону карты */
-            $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).removeAttr('checked');
+            /** Проставляем всем чекбоксам слоев атрибут checked - false */
+            disableMapCheckboxes(true);
+
+            /** Прерываем цикл */
+            break;
+
+        /** Пришел id слоя карты Jindouz */
+        case Selectors.radioThirdMap:
+
+            /** В цикле выключаем все слои маркеров на карте */
+            $.each(Layers, function(i) {
+                mainData.removeLayer(Layers[i]);
+            });
+
+            /** Удаляем базовый слой карты */
+            mainData.removeLayer(baseTileLayer);
+
+            /** Удаляем вспомогательный слой карты */
+            mainData.removeLayer(AlternativeTileLayers);
+
+            /** Добавляем альтернативную карту локации */
+            mainData.addLayer(ThirdTileLayers);
+
+            /** Убираем все чекбоксы слоев с карты */
+            $(Selectors.allMapCheckboxes).fadeOut();
+
+            /** Скрываем чекбокс - показать все слои */
+            $(Selectors.showLayers).fadeOut();
+
+            /** Скрываем чекбокс - скрыть все слои */
+            $(Selectors.hideLayers).fadeOut();
+
+            /** Убираем активность радиокнопки основной карты */
+            unCheckMainLayerRadio();
 
             /** Проставляем всем чекбоксам слоев атрибут checked - false */
             disableMapCheckboxes(true);
@@ -360,13 +408,23 @@ function disableMapCheckboxes(bool = false) {
     }
 }
 
+/** Функция убирает выделение радиокнопки основного слоя карты */
+function unCheckMainLayerRadio() {
+
+    /** Убираем checked с другого чекбокса */
+    $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).val('off');
+
+    /** Удаляем атрибут checked - основному радиобаттону карты */
+    $(Selectors.body + ' ' + '#' + Selectors.radioMainMap).removeAttr('checked');
+}
+
 /** Получаем текщие координаты по местонахождению мышки - функция **/
 function onMouseMove(e) {
     $('#mapCoords').text((e.latlng.lat).toFixed(3) + ", " + (e.latlng.lng).toFixed(3));
 }
 
 /** Добавление отслеживания движения мышки по карте **/
-Map.on('mousemove', onMouseMove);
+mainData.on('mousemove', onMouseMove);
 
 /** Добавляем слушатель событий изменения чекбоксов слоев Leaflet */
 $(Selectors.body).on('click', '#ids-control', function() {
@@ -415,34 +473,6 @@ $(Selectors.body).on('click', Selectors.buttonHideAllMenu, function() {
     $(Selectors.allMapControls).fadeOut();
 });
 
-/** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
-L.marker([43.299, -18.457], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких').openPopup().addTo(Layers.Scaws);
-L.marker([28.179, -70.664], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких').openPopup().addTo(Layers.Scaws);
-L.marker([68.986, -36.914], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких').openPopup().addTo(Layers.Scaws);
-L.marker([21.811, 33.047], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких').openPopup().addTo(Layers.Scaws);
-L.marker([34.479, -127.266], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких').openPopup().addTo(Layers.Scaws);
-
-/** Добавляем ЧВК маркеры в группы (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
-L.marker([69.936, 50.273], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-L.marker([78.581, -62.402], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-L.marker([72.586, -104.590], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК в кинотеатре Родина').openPopup().addTo(Layers.Chvk);
-L.marker([67.529, -141.592], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-L.marker([61.211, -121.553], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-L.marker([32.739, 1.758], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК в отеле').openPopup().addTo(Layers.Chvk);
-L.marker([42.241, 12.480], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-L.marker([17.073, -81.387], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
-
-/** Добавляем маркеры дверей, открываемых ключами (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
-L.marker([72.675, 37.266], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от Комнаты охраны Concordia').openPopup().addTo(Layers.Keys);
-L.marker([71.005, 50.361], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от комнаты квартиры Concordia 34 (3 этаж)').openPopup().addTo(Layers.Keys);
-L.marker([71.374, 50.273], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от квартиры 64 в Concordia').openPopup().addTo(Layers.Keys);
-L.marker([63.415, 24.346], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от времянки на стройке').openPopup().addTo(Layers.Keys);
-L.marker([49.014, -12.920], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от железной решетки (3 этаж)').openPopup().addTo(Layers.Keys);
-L.marker([49.758, -108.369], {icon: Icons.KeysIcon}).bindPopup('Нужен Ключ от малого кабинета в финучреждении (2 этаж)').openPopup().addTo(Layers.Keys);
-
-/** Добавляем маркеры выдвижных шкафов */
-L.marker([42.462, -43.506], {icon: Icons.ChkafIcon}).bindPopup('Выдвижной ящик, расположенный на улице').openPopup().addTo(Layers.Chkaf);
-
 /** События по Document Ready */
 $(document).ready(function() {
 
@@ -454,6 +484,39 @@ $(document).ready(function() {
 
     /** Возвращаем пользователя к центру карты, если он кликнул на кнопку **/
     $(Selectors.body).on('click','.mapcenter', function(){
-        Map.panTo(new L.LatLng(53, -8));
+        mainData.panTo(new L.LatLng(53, -8));
     });
+
+    /** function add special blocks with dop.content to users when inits click on marker ***/
+    function AddRelations() {
+        $('.leaflet-popup-content').append('<div class="rl_cnt_bg" data-id="298961"></div>');
+    }
+
+    /** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
+    L.marker([43.299, -18.457], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких - количество в настоящий момент неизвестно <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Scaws);
+    L.marker([28.179, -70.664], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких - количество в настоящий момент неизвестно <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Scaws);
+    L.marker([68.986, -36.914], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких - количество в настоящий момент неизвестно <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Scaws);
+    L.marker([21.811, 33.047], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких - количество в настоящий момент неизвестно <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Scaws);
+    L.marker([34.479, -127.266], {icon: Icons.ScawsIcon}).bindPopup('Спавн диких - количество в настоящий момент неизвестно <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Scaws);
+
+    /** Добавляем ЧВК маркеры в группы (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
+    L.marker([69.936, 50.273], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+    L.marker([78.581, -62.402], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+    L.marker([72.586, -104.590], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК в кинотеатре Родина').openPopup().addTo(Layers.Chvk);
+    L.marker([67.529, -141.592], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+    L.marker([61.211, -121.553], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+    L.marker([32.739, 1.758], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК в отеле').openPopup().addTo(Layers.Chvk);
+    L.marker([42.241, 12.480], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+    L.marker([17.073, -81.387], {icon: Icons.ChvkIcon}).bindPopup('Спавн ЧВК').openPopup().addTo(Layers.Chvk);
+
+    /** Добавляем маркеры дверей, открываемых ключами (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
+    L.marker([72.675, 37.266], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от Комнаты охраны Concordia <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+    L.marker([71.005, 50.361], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от комнаты квартиры Concordia 34 (3 этаж) <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+    L.marker([71.374, 50.273], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от квартиры 64 в Concordia <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+    L.marker([63.415, 24.346], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от времянки на стройке <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+    L.marker([49.014, -12.920], {icon: Icons.KeysIcon}).bindPopup('Нужен ключ от железной решетки (3 этаж) <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+    L.marker([49.758, -108.369], {icon: Icons.KeysIcon}).bindPopup('Нужен Ключ от малого кабинета в финучреждении (2 этаж) <br><br>').on('click', AddRelations).openPopup().addTo(Layers.Keys);
+
+    /** Добавляем маркеры выдвижных шкафов */
+    L.marker([42.462, -43.506], {icon: Icons.ChkafIcon}).bindPopup('Выдвижной ящик, расположенный на улице').on('click', AddRelations).openPopup().addTo(Layers.Chkaf);
 });

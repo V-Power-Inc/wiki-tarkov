@@ -13,27 +13,17 @@ const map = L.map('map', {
     zoom: 3,
 });
 
-// Заготовка на систему ZeroIN
-// var startCoordinate = new L.LatLng(0, -1);
-// var endCoordinate = new L.LatLng(0, 1);
-//
-// var distance = startCoordinate.distanceTo(endCoordinate);
-//
-// console.log(distance);
-
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 var hash = new L.Hash(map);
 
 /** Обращаемся к слоям зума интерактивной карты **/
 L.tileLayer('/img/bereg/{z}/{x}/{y}.png', {
     noWrap: true,
-   // errorTileUrl: '/img/error-bg.jpg',
 }).addTo(map);
 
 /** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
 map.setMaxZoom(6);
 map.setMinZoom(3);
-// map.setZoom(3);
 
 /** Получаем текщие координаты по местонахождению мышки **/
 function onMouseMove(e) {
@@ -59,10 +49,6 @@ var KeysIcon = L.icon({
     iconUrl: '/img/mapicons/keys.png',
     iconSize: [30, 30]
 });
-// var ExitsIcon = L.icon({
-//     iconUrl: '/img/mapicons/exits.png',
-//     iconSize: [30, 30]
-// });
 var ChvkIcon = L.icon({
     iconUrl: '/img/mapicons/chvk.png',
     iconSize: [30, 30]
