@@ -1734,8 +1734,9 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
     padding: 5px;
 }
 
+/** Фон для всех карт сделан - Черно-серый */
 #map {
-    background: url(/img/pattern-light.png) repeat;
+    background: #333;
 }
 
 .fixies-float-image {
@@ -2275,4 +2276,20 @@ table.patrons-tbl >thead > tr > th {
     font-size: 15px;
     font-weight: bold;
     line-height: 20px;
+}
+
+/** Стили для чекбоксов слоев и элементов управления, на карте Leaflet */
+.ScawsControl, .ChvkControl, .KeysControl, .ChkafControl, .MainControls, #FirstMap, #SecondMap, #ThirdMap {
+    margin: 0 5px 0 0!important;
+    vertical-align: middle;
+}
+
+/** Отступ от краев элементов управления Leaflet JS */
+.leaflet-control-layers {
+    padding: 10px;
+}
+
+/** Отступ чекбоксов друг от друга внутри Leaflet JS элементов управления */
+.leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
+    margin: 10px 0;
 }

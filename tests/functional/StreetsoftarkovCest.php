@@ -45,23 +45,10 @@ class StreetsoftarkovCest
         $I->seeInTitle('Карта локации Улицы Таркова');
     }
 
-    /** Мы видим правое меню, с опциями интерактивной карты */
-    public function checkRightMenuExtsts(\FunctionalTester $I)
-    {
-        $I->seeElement('.optins_layerstability');
-    }
-
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Карта локации Улицы Таркова', 'h1');
-        $I->see('Интерактивная карта Улицы Таркова', 'h2');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->seeElement('.search-map-loot');
     }
 
     /** Мы видим все ссылки горизонтального меню */
