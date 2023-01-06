@@ -28,7 +28,7 @@ $this->registerMetaTag([
 
 <!-- Инициализация карты -->
 <div class="w-100">
-    <div id="map" class="map relative">
+    <div id="map" class="map map-alternative relative">
 
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>

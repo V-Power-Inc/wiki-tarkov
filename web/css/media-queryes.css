@@ -319,7 +319,34 @@
     /** Отступы и размер шрифты для боковой менюшки на мобильных устройствах уменьшены */
     .leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
         font-size: 10px;
-        margin: 5px 0;
+        margin: 2px 0;
+        height: 28px;
+    }
+
+    /** Уменьшение шрифта карты, на мобильных устройствах */
+    .mapcenter a.btn.btn-default.main-link {
+        font-size: 13px;
+        padding: 5px;
+        left: 4px;
+    }
+
+    /** Высота интерактивных карт снижена на мобильных устройствах */
+    .map-alternative {
+        height: 546px;
+    }
+
+    /** Отступы интерактивных элементов Leaflet JS уменьшены на интерактивных картах локаций */
+    .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+        padding: 10px;
+    }
+
+    /** Фикс Leaflet JS сепаратора */
+    .leaflet-control-layers-separator {
+        margin: 5px -5px 5px -5px;
+    }
+
+    #mapCoords {
+        display: none;
     }
 }
 
