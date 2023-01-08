@@ -67,6 +67,13 @@ $this->registerMetaTag([
     <div class="row">
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
+
+            <?php if (empty($bosses)): ?>
+
+                <!-- If bosses empty - set message -->
+                <p class="alert alert-danger size-16">На этой локации в настоящее время нет каких-либо боссов.</p>
+            <?php endif; ?>
+
             <!-- Cycle with all bosses on the map -->
             <?php foreach($bosses as $boss): ?>
 
