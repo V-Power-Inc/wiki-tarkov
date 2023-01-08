@@ -196,7 +196,7 @@ final class TranslateService
             case 'Глухарь':
                 return '<p class="alert alert-danger size-16 sm-vertical-margin-20">Очень хорошо экипированный босс с очень опасной свитой - <b>не рекомендуется вступать в бой на ближних дистанциях.</b> Лучшим решением будет атаковать его на дальних дистанциях и не допускать его приближения к вам.</p>';
             case 'Зрячий':
-                return '<p class="alert alert-danger size-16 sm-vertical-margin-20">Обитает на острове на локации Маяк. <br><br> Дорога к боссу также является опасной, т.к. заминирована - как пройти мины можно посмотреть в следующем видео: <b><a href="https://www.youtube.com/watch?v=7WnUtTGrugo" target="_blank">Как пройти на Маяк</a></b></p>';
+                return '<p class="alert alert-danger size-16 sm-vertical-margin-20">Обитает на острове на локации Маяк. <br><br> Дорога к боссу также является опасной, т.к. заминирована - как пройти мины можно посмотреть в следующем видео: <b><a href="https://www.youtube.com/watch?v=7WnUtTGrugo" target="_blank" onclick="ym(47100633,\'reachGoal\',\'youtube_check\')">Как пройти на Маяк</a></b></p>';
         }
 
         /** Возвращаем пустую строку, если не попали в switch */
