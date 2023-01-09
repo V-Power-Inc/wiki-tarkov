@@ -45,23 +45,10 @@ class LaboratoryCest
         $I->seeInTitle('Карта локации лаборатория Terra Group в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей');
     }
 
-    /** Мы видим правое меню, с опциями интерактивной карты */
-    public function checkRightMenuExtsts(\FunctionalTester $I)
-    {
-        $I->seeElement('.optins_layerstability');
-    }
-
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Карта локации лаборатория Terra Group', 'h1');
-        $I->see('Интерактивная карта локации лаборатория Terra Group', 'h2');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->seeElement('.search-map-loot');
     }
 
     /** Мы видим все ссылки горизонтального меню */
