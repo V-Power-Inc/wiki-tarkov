@@ -110,9 +110,9 @@ class MainpageCest
         $I->seeElement('.no-adb');
     }
 
-    /** Мы видим что все 3 рекламных блока на месте */
+    /** Мы видим что все 2 рекламных блока на месте */
     public function checkCountOfAdsBlocks(\FunctionalTester $I)
     {
-        $I->seeNumberOfElements('.no-adb', 3);
+        $I->seeNumberOfElements('.no-adb', 2);
     }
 }
