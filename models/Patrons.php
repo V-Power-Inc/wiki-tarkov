@@ -44,6 +44,7 @@ class Patrons extends \yii\db\ActiveRecord
     const ATTR_BLOOD_2            = 'blood_2';
     const ATTR_RIKOCHET           = 'rikochet';
     const ATTR_TRACCER            = 'traccer';
+    const ATTR_YB                 = 'yb';
 
     /**
      * Имя таблицы
@@ -79,7 +80,8 @@ class Patrons extends \yii\db\ActiveRecord
             [static::ATTR_BLOOD_1, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_BLOOD_2, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_RIKOCHET, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
-            [static::ATTR_TRACCER, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
+            [static::ATTR_TRACCER, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [static::ATTR_YB, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
 
@@ -106,18 +108,19 @@ class Patrons extends \yii\db\ActiveRecord
             static::ATTR_BLOOD_1 => 'Тяжелое кровотечение %',
             static::ATTR_BLOOD_2 => 'Легкое кровотечение %',
             static::ATTR_RIKOCHET => 'Шанс рикошета',
-            static::ATTR_TRACCER => 'Трассер'
+            static::ATTR_TRACCER => 'Трассер',
+            static::ATTR_YB => 'УБ'
         ];
     }
 
     /**
      * Возвращаем все объекты Patrons модели
+     * Кеширование DB запроса на 1 час
      *
      * @return array
      */
     public static function takePatrons(): array
     {
-        return static::find()->orderBy([static::ATTR_ID => SORT_DESC])->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+        return static::find()->orderBy([static::ATTR_ID => SORT_ASC])->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }
-
 }
