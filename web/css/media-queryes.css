@@ -330,11 +330,6 @@
         left: 4px;
     }
 
-    /** Высота интерактивных карт снижена на мобильных устройствах */
-    .map-alternative {
-        height: 546px;
-    }
-
     /** Отступы интерактивных элементов Leaflet JS уменьшены на интерактивных картах локаций */
     .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
         padding: 10px;
@@ -458,10 +453,6 @@
 
     .mapcenter a.btn.btn-default.main-link, #mapCoords {
         z-index: 999;
-    }
-
-    .map#map {
-        height: 356px;
     }
 
     .inner-button, .outer-button {
