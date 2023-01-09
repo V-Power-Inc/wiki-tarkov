@@ -52,7 +52,7 @@ let baseTileLayer = L.tileLayer('/img/tamojnya/{z}/{x}/{y}.png', {
 /** Вызов карты и указание центра координат и параметров зума **/
 const map = L.map('map', {
     center: [67, -70],
-    maxzoom: 4,
+    maxzoom: 6,
     minzoom: 2,
     zoom: 2,
     layers: [baseTileLayer]
@@ -336,8 +336,8 @@ $(Selectors.body).on('click', Selectors.buttonHideAllMenu, function() {
 /** Подключаем хэш в url для учета текущего зума и центра координат пользователя **/
 var hash = new L.Hash(map);
 
-/** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 4 **/
-map.setMaxZoom(4);
+/** Устанавливаем зум карты на 2 также указываем что минимальный зум 2 а максимальный 6 **/
+map.setMaxZoom(6);
 map.setMinZoom(2);
 
 /** Получаем текщие координаты по местонахождению мышки **/
