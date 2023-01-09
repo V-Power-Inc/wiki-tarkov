@@ -46,6 +46,7 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
                     <li>Урон</li>
                     <li>Пробитие</li>
                     <li>Урон по броне</li>
+                    <li>УБ</li>
                     <li>Скорость м/с</li>
                     <li>Снаряды кол-во</li>
                     <li>Точность %</li>
@@ -75,6 +76,7 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
                             <th>Урон</th>
                             <th>Пробитие</th>
                             <th>Урон по броне</th>
+                            <th>УБ</th>
                             <th>Скорость м/с</th>
                             <th>Снаряды кол-во</th>
                             <th>Точность %</th>
@@ -97,6 +99,7 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
                             <td><span style="font-size:14px"><strong><?=$patron['damage']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['probitie']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['damage_per_defence']?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron['yb']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['speed']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['count']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['tochn']?></strong></span></td>
