@@ -7,10 +7,10 @@ Wiki Tarkov Project 💻
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg?branch=master)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
-![Stable Version](https://img.shields.io/badge/version-v3.2.15-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v3.8.41-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
-![Tests Count](https://img.shields.io/badge/tests%20count-1260-informational)
-![Tests Code Coverage](https://img.shields.io/badge/coverage-91%25-yellowgreen)
+![Tests Count](https://img.shields.io/badge/tests%20count-1163-informational)
+![Tests Code Coverage](https://img.shields.io/badge/coverage-93%25-yellowgreen)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 
@@ -151,6 +151,8 @@ Unit тестирование было написано исключительн
  - Справочник лута
  - Категории справочника лута
  - Детальные страницы справочника лута
+ - API по получению информации о боссах и актуальном луте
+ - Страница со списком кланов
 
 Вышеупомянутый функционал составляет примерно 70% проекта.
 ## Snyk анализатор кода 😸

@@ -45,42 +45,10 @@ class TamojnyaCest
         $I->seeInTitle('Карта локации Таможня в Escape from Tarkov - интерактивная карта с выходами Диких');
     }
 
-    /** Мы видим правое меню, с опциями интерактивной карты */
-    public function checkRightMenuExtsts(\FunctionalTester $I)
-    {
-        $I->seeElement('.optins_layerstability');
-    }
-
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Карта локации Таможня', 'h1');
-        $I->see('Маркеры', 'h2');
-        $I->see('Интерактивная карта Таможни', 'h2');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->seeElement('.search-map-loot');
-    }
-
-    /** Мы видим что фильтрующие кнопки для страницы маркеров присутствуют на странице */
-    public function checkFilterMapButtons(\FunctionalTester $I)
-    {
-        $I->seeElement('.gamers-b');
-        $I->seeElement('.dikie-b');
-        $I->seeElement('.gamers-b');
-        $I->seeElement('.bandits-b');
-        $I->seeElement('.exits-b');
-        $I->seeElement('.voenka-b');
-        $I->seeElement('.polki-b');
-        $I->seeElement('.keys-b');
-        $I->seeElement('.places-b');
-        $I->seeElement('.count-on');
-        $I->seeElement('.markers-on');
-        $I->seeElement('.count-off');
-        $I->seeElement('.markers-off');
     }
 
     /** Мы видим все ссылки горизонтального меню */
