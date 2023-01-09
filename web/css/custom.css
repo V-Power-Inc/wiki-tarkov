@@ -2294,3 +2294,9 @@ table.patrons-tbl >thead > tr > th {
 .leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
     margin: 10px 0;
 }
+
+/** Отступы и ресайз для картинок на главной странице */
+.preview-mainpage-desc {
+    margin: 15px 0;
+    max-width: 100%;
+}

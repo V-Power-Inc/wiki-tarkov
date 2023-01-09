@@ -62,13 +62,21 @@ $this->registerMetaTag([
             <div class="row">
                 <div class="col-lg-4">
                     <h2>Задачи у торговцев</h2>
-    
+
+                    <a href="/quests-of-traders">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/traders.png" alt="Задачи у торговцев" title="Задачи у торговцев">
+                    </a>
+
                     <p class="size-16">В этом разделе вы можете найти информацию о всех доступных квестах торговцев в Escape from Tarkov. Здесь собраны рекомендации по прохождению квестов, описания квестов, а также важные нюансы, которые являются неочевидными в процессе прохождения квестов Escape from Tarkov.</p>
     
                     <p><a class="btn btn-default main-link" href="/quests-of-traders">Перейти в раздел квестов EFT</a></p>
                 </div>
                 <div class="col-lg-4">
                     <h2>Ключи от дверей</h2>
+
+                    <a href="/keys">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/keys.png" alt="Ключи от дверей" title="Ключи от дверей">
+                    </a>
     
                     <p class="size-16">В данном разделе - вы сможете найти информацию о любом ключе открывающим двери и помещения в Escape from Tarkov. Вы сможете увидеть где можно найти тот или иной ключ, как выглядят открываемые двери а также увидеть что находится внутри открытых вами помещений.</p>
 
@@ -76,6 +84,10 @@ $this->registerMetaTag([
                 </div>
                 <div class="col-lg-4">
                     <h2>Карты локаций</h2>
+
+                    <a href="/maps">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/maps.png" alt="Карты локаций" title="Карты локаций">
+                    </a>
     
                     <p class="size-16">Здесь вы сможете воспользоваться интерактивными картами локаций Escape from Tarkov - воспользоваться поиском ключей, посмотреть как выглядят карты локаций, сделать пометки по прохождению рейда. Очень полезный инструмент, который пригодится всем игрокам Escape from Tarkov.</p>
     
@@ -85,6 +97,10 @@ $this->registerMetaTag([
                 <div class="col-lg-4">
                     <h2>Справочник лута</h2>
 
+                    <a href="/loot">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/mainloot.png" alt="Справочник лута" title="Справочник лута">
+                    </a>
+
                     <p class="size-16">В этом разделе - вы найдете всю информацию по любому луту из Escape from Tarkov. Тут есть все от бесполезного хлама, до раздела со всем доступным оружием в игре и модулями, а также полная информация по любой экипировке доступной в Таркове.</p>
 
                     <p><a class="btn btn-default main-link" href="/loot">Перейти в справочник лута EFT</a></p>
@@ -93,6 +109,10 @@ $this->registerMetaTag([
                 <div class="col-lg-4">
                     <h2>Справочник умений</h2>
 
+                    <a href="/skills">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/skills.png" alt="Справочник умений" title="Справочник умений">
+                    </a>
+
                     <p class="size-16">В этом разделе - вы найдете всю доступную информацию об умениях персонажа, которые доступны к прокачке. Здесь можно узнать какие умения влияют на вашу выживаемость в мире Таркова. Информация и цифры взяты с официальных документов разработчиков.</p>
 
                     <p><a class="btn btn-default main-link" href="/skills">Перейти в справочник умений EFT</a></p>
@@ -100,6 +120,10 @@ $this->registerMetaTag([
 
                 <div class="col-lg-4">
                     <h2>Квестовый лут</h2>
+
+                    <a href="/loot/quest-loot">
+                        <img class="preview-mainpage-desc" src="/img/mainpage/questloot.png" alt="Квестовый лут" title="Квестовый лут">
+                    </a>
 
                     <p class="size-16">В этом разделе - вы узнаете какой лут обязательно стоит сохранить, т.к. в Таркове есть квесты - необходимо знать какой лут вам пригодится, а какой можно продать - именно тут вы узнаете какие предметы являются квестовыми в Таркове.</p>
 
