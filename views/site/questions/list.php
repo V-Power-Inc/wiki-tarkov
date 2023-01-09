@@ -96,9 +96,9 @@ $this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
                 <?= $this->render('/other/wk-widget'); ?>
             </div>
 
-            <!-- Виджет дискорда -->
+            <!-- Discord place -->
             <div class="margin-top-20"></div>
-            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true"></iframe>
+
 
         </div>
 

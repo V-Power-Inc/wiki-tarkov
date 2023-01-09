@@ -5,7 +5,7 @@
  * Date: 04.06.2022
  * Time: 19:47
  * Виджет дискорда
+ *
+ * 09.01.2023г. UPD - Отключено т.к. не приносит никакой пользы
  */
 ?>
-
-<iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="500" allowtransparency="true" frameborder="0"></iframe>

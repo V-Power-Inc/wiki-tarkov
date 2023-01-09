@@ -6,10 +6,9 @@
  * Time: 20:17
  */
 
-/*** Вьюха виджета вконтакте сообщества V-Power ***/
+/** Вьюха виджета вконтакте сообщества V-Power
+ * 09.01.2023г. UPD - Отключено т.к. не приносит никакой пользы
+ */
 ?>
 
-<div id="vk_groups"></div>
-<script type="text/javascript">
-    VK.Widgets.Group("vk_groups", {mode: 0, width: "auto"}, 162698237);
-</script>
+

@@ -136,27 +136,6 @@ $this->registerMetaTag([
             <div class="margin-top-20">
                     
                 <div class="row margin-top-20">
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
-                        <?= $this->render('/other/google-gor.php'); ?>
-
-                        <!-- Виджет Вконтакте -->
-                        <div class="vk-widget-styling">
-                            <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
-
-                            <!-- VK Widget -->
-                            <?= $this->render('/other/wk-widget'); ?>
-                        </div>
-                    </div>
-
-                    <!-- Виджет Discord -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="margin-top-20">
-                            <iframe src="https://discordapp.com/widget?id=405924890328432652&theme.." width="100%" height="207" allowtransparency="true"></iframe>
-                        </div>
-
-                        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
-                    </div>
                     
                     <!-- Dop. content block -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
