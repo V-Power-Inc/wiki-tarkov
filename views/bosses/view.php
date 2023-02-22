@@ -38,7 +38,6 @@ $this->registerMetaTag([
  *
  * @link https://github.com/the-hideout/tarkov-dev/issues/273
  */
-
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -98,7 +97,7 @@ $this->registerMetaTag([
 
                         <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss['name']) ?></b></p>
                         <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
-                        <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= implode(', ', TranslateService::setZoneNames(ArrayHelper::getColumn($boss['spawnLocations'], 'name'))) ?></b>
+                        <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= !empty($boss['spawnLocations']) ? implode(', ', ArrayHelper::getColumn($boss['spawnLocations'], 'name')) : 'Не определено' ?></b>
                         <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
                         <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. TranslateService::setSpawnTrigger($boss['spawnTrigger']) .'</b> </p>' : '' ?>
 
@@ -110,7 +109,6 @@ $this->registerMetaTag([
                                 $cnt = ArrayService::getAmountEscorts($boss['escorts']);
                             }
                             ?>
-
 
                                 <?php if($boss['name'] !== "Death Knight"): ?>
                                         <p class="boss-page-text boss-group-count">Всего в отряде сопровождения (Размер свиты): <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
