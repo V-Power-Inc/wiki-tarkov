@@ -88,10 +88,11 @@ final class ImageService
             'Механик' => '/img/admin/resized/mehanik_icon230218052228.png',
             'Барахольщик' => '/img/admin/resized/barakholshik050518061242.png',
             'Егерь' => '/img/admin/resized/EGER150922040216.jpg',
+            'Смотритель' => '/img/torgovcy/small/light_keeper.jpg',
             'Барахолка' => '/img/baraholka.jpg'
         ];
 
-        /** Возвращаем значение по ключу или - если его не нашли дефолтную картинку с вопросом */
+        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
         return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
     }
 }
