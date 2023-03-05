@@ -400,7 +400,7 @@ final class ApiService implements ApiInterface
         /** Переменная для вызова API и получения данных о квестах */
         $apiData = $this->getApiData();
 
-
+        /** TODO: Тут остановились - теперь можем превращать сырые данные из API в структурированные модели */
         $result = new TasksResult($apiData);
 
         /** TODO: Тут будет проверка, на уже существующие объекты в БД в будущем */
