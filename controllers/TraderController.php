@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\services\ApiService;
 use app\models\Mehanic;
 use app\models\Skypshik;
 use app\models\Lyjnic;
@@ -54,8 +55,15 @@ class TraderController extends AdvancedController
      * @return string
      * @throws HttpException
      */
-    public function actionPraporpage(): string
+    public function actionPraporpage()
     {
+        $api = new ApiService();
+
+        echo '<pre>';
+        echo print_r($api->getTasks());
+        exit;
+        echo '</pre>';
+
         return $this->render('prapor-quests', ['prapor'=> (new TradersService())->takeQuests(Prapor::tableName())]);
     }
 

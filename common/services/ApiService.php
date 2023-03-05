@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\common\models\tasks\TasksResult;
 use app\components\MessagesComponent;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
@@ -22,7 +23,7 @@ use yii\web\HttpException;
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
  * различного рода запросов к GraphQl
  *
- * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev/___graphql)
+ * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev)
  *
  * Class ApiService
  * @package app\common\services
@@ -155,7 +156,7 @@ final class ApiService implements ApiInterface
      */
     private function getApiData(): array
     {
-        /** Устанавливаем атрибуты запроса (Включая подовление любых ошибок) */
+        /** Устанавливаем атрибуты запроса (Включая подавление любых ошибок) */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
             'http' => [
                 'method' => $this->method,
@@ -298,6 +299,116 @@ final class ApiService implements ApiInterface
           } 
         }';
     }
+
+    /**
+     * Задаем тело запрос, для получения из API информации о квестах торговцев
+     * @return void
+     */
+    private function setTasksQuery(): void
+    {
+        /** Задаем тело запроса для получения информации о квестах */
+        $this->query = 'query {
+          # Передаем сюда языковой код, чтобы все на RU было
+          tasks (lang: ru) {
+            # Название квеста
+            name,
+            # Для какой фракции квест (Bear или USEC или любая)
+            factionName
+            # Минимальный уровень игрока для получения квеста
+            minPlayerLevel,
+            # Задачи квеста, что нужно сделать
+            objectives {
+              # Тип квеста (Убийство, сдача предметов и т.д.)
+              type,
+              # Описание задания
+              description,
+              # Опциональность условия (false - обязательно, true - нет)
+              optional
+            }
+            # Ключи, которые понадобятся для задачи
+            neededKeys {
+              # Массив с ключами
+                    keys {
+                name,
+                iconLink
+              }
+            }
+            # Требования к другим квестам перед выполнением текущего
+            taskRequirements {
+              # Название необходимого квеста
+              task {
+                name
+              }
+              # Требование к статусу квеста
+              status
+            }
+            # Количество получаемого опыта - за выполнение квеста
+            experience,
+            # Название карты, на которой надо выполнить квест
+            map {
+              name
+            }
+            # Торговец, что выдал квест (Имя и изображение)
+            trader {
+              name,
+              imageLink
+            },
+            # Можно ли перепроходить квест несколько раз
+            restartable
+            # Стартовые требования для квеста (Предметы)
+            startRewards {
+              # Предметы для выполнения квеста
+              items {
+                item {
+                  name,
+                  description,
+                  iconLink,
+                  inspectImageLink
+                },
+                # Количество стартовых предметов для квеста
+                count
+              }
+            },
+            # Награда за квест
+            finishRewards {
+              # Предметы выдаваемые в награду за выполнение квеста
+              items {
+                item {
+                  name,
+                  description,
+                  iconLink,
+                  inspectImageLink
+                },
+                # Количество стартовых предметов для квеста
+                count
+              }
+            }
+          }
+        }';
+    }
+
+    /**
+     * todo: Метод будет дорабатываться, пока просто тащит данные
+     *
+     * Вызывая этот метод - получаем JSON с данными о квестах
+     */
+    public function getTasks()
+    {
+        /** Сетапим запрос для API на получение информации о квестах */
+        $this->setTasksQuery();
+
+        /** Переменная для вызова API и получения данных о квестах */
+        $apiData = $this->getApiData();
+
+
+        $result = new TasksResult($apiData);
+
+        /** TODO: Тут будет проверка, на уже существующие объекты в БД в будущем */
+
+        /** Получаем данные о квестах из API */
+        return $result;
+    }
+
 
     /**
      * В этом методе, мы обрабатываем поисковый запрос на получение предмета и решаем как с ним поступать

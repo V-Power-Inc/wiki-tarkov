@@ -40,7 +40,6 @@ class m221104_125926_add_indexes_to_api_loot extends Migration
             static::TABLE_NAME,
             'old, name'
         );
-
     }
 
     /**
