@@ -10,7 +10,6 @@ namespace Tests\Functional;
 
 use app\controllers\LootController;
 use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тестирование главной страницы справочника лута
@@ -30,10 +29,6 @@ class LootMainpageCest
             'category' => [
                 'class' => CategoryFixture::class,
                 'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

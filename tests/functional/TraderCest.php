@@ -9,7 +9,6 @@
 namespace Tests\Functional;
 
 use app\tests\fixtures\TradersFixture;
-use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страницы детальных торговцев
@@ -29,10 +28,6 @@ class TraderCest
             'traders' => [
                 'class' => TradersFixture::class,
                 'dataFile' => codecept_data_dir() . 'traders.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

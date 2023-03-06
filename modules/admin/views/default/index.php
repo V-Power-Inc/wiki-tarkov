@@ -41,7 +41,6 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
         <li><a href="/admin/clans" class="admin-tabs w-100-important">Заявки кланов</a></li>
         <li><a href="/admin/barters" class="admin-tabs w-100-important">Бартеры торговцев</a></li>
         <li><a href="/admin/questions" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>
-        <li><a href="/admin/info" class="admin-tabs w-100-important">Информационные виджеты</a></li>
         <li><a href="/admin/catskills" class="admin-tabs w-100-important">Категории умений</a></li>
         <li><a href="/admin/skills" class="admin-tabs w-100-important">Пассивные умения</a></li>
         <li><a href="/admin/traders/index?dp-1-sort=sortir" class="admin-tabs w-100-important">Торговцы</a></li>

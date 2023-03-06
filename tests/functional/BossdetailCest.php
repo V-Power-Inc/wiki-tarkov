@@ -9,7 +9,6 @@
 namespace Tests\Functional;
 
 use app\tests\fixtures\BossesFixture;
-use app\tests\fixtures\InfoFixture;
 
 class BossdetailCest
 {
@@ -23,10 +22,6 @@ class BossdetailCest
             'boss' => [
                 'class' => BossesFixture::class,
                 'dataFile' => codecept_data_dir() . 'bosses.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

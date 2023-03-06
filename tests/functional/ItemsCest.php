@@ -9,7 +9,6 @@
 namespace Tests\Functional;
 
 use app\tests\fixtures\ItemsFixture;
-use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты детальной страницы лута
@@ -28,10 +27,6 @@ class ItemsCest
             'items' => [
                 'class' => ItemsFixture::class,
                 'dataFile' => codecept_data_dir() . 'items.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }

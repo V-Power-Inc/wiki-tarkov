@@ -8,9 +8,7 @@
 
 namespace Tests\Functional;
 
-use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
-use app\tests\fixtures\InfoFixture;
 use app\tests\fixtures\TasksFixture;
 
 /**
@@ -34,10 +32,6 @@ class TasksCest
             'tasks' => [
                 'class' => TasksFixture::class,
                 'dataFile' => codecept_data_dir() . 'tasks.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }
