@@ -13,6 +13,7 @@ use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\models\Tasks;
 use yii\base\Model;
+use yii\helpers\Json;
 
 /**
  * Модель с атрибутами данных квестов, в которую данные предварительно сетапятся, перед загрузкой в AR
@@ -73,7 +74,7 @@ class TaskModel extends Model
             $this->trader_icon = $task[static::TRADER]['imageLink'];
 
             /** Сетапим полный JSON с данными атрибуту текущей модели */
-            $this->json = $task;
+            $this->json = Json::encode($task);
         }
 
         parent::__construct($config);
