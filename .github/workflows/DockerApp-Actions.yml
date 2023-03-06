@@ -109,7 +109,9 @@ jobs:
 
           docker-compose exec -T app php yii migrate --db db_test --interactive=0;
 
-          echo "Functional и Unit тестирование"
+          echo "Чистим кеши редисом"
+
+          docker-compose exec -T redis redis-cli flushall
 
           echo "Проверка Functional и Unit тестами"
 
