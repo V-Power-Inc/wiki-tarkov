@@ -17,10 +17,10 @@ namespace app\common\models\tasks;
 class TaskRequirementsItem
 {
     /** @var array - название квеста (Далее name в массиве) */
-    private $task;
+    public $task;
 
     /** @var array - Статусы, которые могут быть у текущей задачи (В массиве список статусов) */
-    private $status;
+    public $status;
 
     /** @var TaskRequirementsItem[] - Массив объектов с выполненными заданиями */
     public $_items = [];

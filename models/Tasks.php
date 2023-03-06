@@ -18,6 +18,7 @@ use app\common\helpers\validators\SafeValidator;
  * @property string $date_create Дата создания записи о квесте
  * @property int $active Флаг активности записи
  * @property int $old Флаг возраста записи, если стоит 1, пора удалять
+ * @property string $url Url адрес до квестов конкретного торговца
  */
 class Tasks extends \yii\db\ActiveRecord
 {
@@ -30,6 +31,7 @@ class Tasks extends \yii\db\ActiveRecord
     const ATTR_DATE_CREATE  = 'date_create';
     const ATTR_ACTIVE       = 'active';
     const ATTR_OLD          = 'old';
+    const ATTR_URL          = 'url';
 
     /** Константы True/False для различных поисков */
     const TRUE  = 1;
@@ -69,7 +71,9 @@ class Tasks extends \yii\db\ActiveRecord
 
             [static::ATTR_ACTIVE, IntegerValidator::class],
 
-            [static::ATTR_OLD, IntegerValidator::class]
+            [static::ATTR_OLD, IntegerValidator::class],
+
+            [static::ATTR_URL, StringValidator::class]
         ];
     }
 
@@ -88,7 +92,30 @@ class Tasks extends \yii\db\ActiveRecord
             'json' => 'Json с данными о квести',
             'date_create' => 'Дата создания',
             'active' => 'Активен',
-            'old' => 'Запись устарела'
+            'old' => 'Запись устарела',
+            'url' => 'Url до квестов торговца'
         ];
+    }
+
+    /**
+     * Метод проверяет есть ли записи с квестами конкретного торговца или нет - возвращает bool результат
+     *
+     * @param string $url - Url адрес до квестов торговца
+     * @return bool
+     */
+    public static function isExists(string $url): bool
+    {
+        return Tasks::findAll([static::ATTR_URL => $url]) ? true : false;
+    }
+
+    /**
+     * Метод возвращает все AR объекты квестов для конкретного торговца
+     *
+     * @param string $url - URL адрес до квестов босса
+     * @return mixed
+     */
+    public static function getTasksData(string $url): array
+    {
+        return Tasks::findAll([Tasks::ATTR_URL => $url]) ?? false;
     }
 }

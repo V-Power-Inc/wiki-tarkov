@@ -8,16 +8,6 @@
 
 namespace app\common\services;
 
-use app\models\Mehanic;
-use app\models\Skypshik;
-use app\models\Lyjnic;
-use app\models\Terapevt;
-use app\models\Prapor;
-use app\models\Mirotvorec;
-use app\models\Baraholshik;
-use app\models\Eger;
-use yii\web\HttpException;
-
 /**
  * Класс для работы с сущностями торговцев, включая квесты
  *
@@ -27,44 +17,36 @@ use yii\web\HttpException;
 final class TradersService
 {
     /**
-     * Метод вытаскивает квесты торговца по его имени
+     * По имени торговца, подставляем нужный урл до квестов торговца (Немного хардкода, куда уж без него)
+     * Если появится новый торговец с квестами, этот метод нужно будет расширить и в БД в таблицу traders внести
+     * данные о новом торговце
      *
-     * @param string $trader_name
-     * @return array
-     * @throws HttpException
+     * @param string $trader - имя торговца
+     * @return string
      */
-    public function takeQuests(string $trader_name): array
+    public static function takeApiTasks(string $trader): string
     {
-        $trader = null;
-
-        switch ($trader_name) {
-            case 'mehanic':
-                $mehanic = Mehanic::takeQuestsMehanic();
-                return $mehanic;
-            case 'skypshik':
-                $skypshik = Skypshik::takeQuestsSkypshik();
-                return $skypshik;
-            case 'lyjnic':
-                $lyjnic = Lyjnic::takeQuestsLyjnic();
-                return $lyjnic;
-            case 'terapevt':
-                $terapevt = Terapevt::takeQuestsTerapevt();
-                return $terapevt;
-            case 'prapor':
-                $prapor = Prapor::takeQuestsPrapor();
-                return $prapor;
-            case 'mirotvorec':
-                $mirotvorec = Mirotvorec::takeQuestsMirotvorec();
-                return $mirotvorec;
-            case 'baraholshik':
-                $baraholshik = Baraholshik::takeQuestsBaraholshik();
-                return $baraholshik;
-            case 'eger':
-                $baraholshik = Eger::takeQuestsEger();
-                return $baraholshik;
+        /** В свиче - по имени торговца, подставляем нужный урл до квестов */
+        switch ($trader) {
+            case 'Прапор':
+                return 'prapor-quests';
+            case 'Терапевт':
+                return 'terapevt-quests';
+            case 'Скупщик':
+                return 'skypshik-quests';
+            case 'Лыжник':
+                return 'lyjnic-quests';
+            case 'Миротворец':
+                return 'mirotvorec-quests';
+            case 'Механик':
+                return 'mehanic-quests';
+            case 'Барахольщик':
+                return 'baraholshik-quests';
+            case 'Егерь':
+                return 'eger-quests';
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Если в switch не попали - пишем error, так мы узнаем что есть новый торговец и при этом не вылетит ошибка */
+        return 'error';
     }
-
 }

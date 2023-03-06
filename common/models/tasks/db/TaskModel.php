@@ -11,6 +11,7 @@ namespace app\common\models\tasks\db;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
+use app\common\services\TradersService;
 use app\models\Tasks;
 use yii\base\Model;
 use yii\helpers\Json;
@@ -48,6 +49,10 @@ class TaskModel extends Model
     public $old = 0;
     const ATTR_OLD = 'old';
 
+    /** @var string - Url до квестов торговца */
+    public $url;
+    const ATTR_URL = 'url';
+
     /** @var string - Ключ массива с информацией о торговце */
     const TRADER = 'trader';
 
@@ -59,7 +64,7 @@ class TaskModel extends Model
      * @param array $config
      * @param array|null $task - данные с информацией о квесте (task массив)
      */
-    public function __construct(array $config = [], array $task = null)
+    public function __construct(array $task = null, array $config = [])
     {
         /** Если массив с данными о квесте прилетел */
         if (!empty($task)) {
@@ -75,6 +80,9 @@ class TaskModel extends Model
 
             /** Сетапим полный JSON с данными атрибуту текущей модели */
             $this->json = Json::encode($task);
+
+            /** Сетапим URL до квестов конкретного торговца */
+            $this->url = TradersService::takeApiTasks($task[static::TRADER]['name']);
         }
 
         parent::__construct($config);
@@ -112,7 +120,9 @@ class TaskModel extends Model
 
             [static::ATTR_ACTIVE, IntegerValidator::class],
 
-            [static::ATTR_OLD, IntegerValidator::class]
+            [static::ATTR_OLD, IntegerValidator::class],
+
+            [static::ATTR_URL, StringValidator::class]
         ];
     }
 
@@ -135,6 +145,7 @@ class TaskModel extends Model
             $model->json = $this->json;
             $model->active = $this->active;
             $model->old = $this->old;
+            $model->url = $this->url;
 
             /** Пробуем сохранить данные (Валидация будет при таком подходе) */
             return $model->save();

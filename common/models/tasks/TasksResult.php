@@ -8,6 +8,8 @@
 
 namespace app\common\models\tasks;
 
+use yii\helpers\Json;
+
 /**
  * Класс с набором данных о действующих квестах в игре
  * Используется для создания структурированных объектов данных при вызове API tarkov.dev
@@ -21,26 +23,28 @@ class TasksResult
     /** @var TaskItem[] - Массив объектов квестов TaskItem */
     public $_items = [];
 
-    /** @var string - Первый уровень массива с данными из API */
-    const FIRST_LEVEL = 'data';
+    /** @var string - Ключ поля до Json объекта */
+    const JSON = 'json';
 
-    /** @var string - Второй уровень массива с данными из API */
-    const SECOND_LEVEL = 'tasks';
-
-
-    public function __construct($data)
+    /**
+     * Конструктор для возвращения структурированного массива объектов о квестах
+     *
+     * TasksResult constructor.
+     * @param array $data - полный массив данных обо всех квестах из API (Active Record массив)
+     */
+    public function __construct(array $data)
     {
         /** В цикле проходим каждый квест и создаем структурированный набор данных через объекты */
-        foreach ($data[static::FIRST_LEVEL][static::SECOND_LEVEL] as $task) {
+        foreach ($data as $task) {
 
-            /** Создаем новый объект квеста и закидываем в него данные */
-            $model = new TaskItem($task);
+            /** Создаем новый объект квеста и закидываем в него данные (Предварительно декодировав из Json) а также id квеста из БД */
+            $model = new TaskItem(Json::decode($task[static::JSON]), $task->id);
 
             /** Сетапим данные о квесте в результирующий массив квестов */
             $this->_items[] = $model;
         }
 
+        /** Возвращаем массив объектов с квестами */
         return $this->_items;
     }
-
 }

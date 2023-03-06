@@ -16,6 +16,9 @@ namespace app\common\models\tasks;
  */
 class TaskItem
 {
+    /** @var int - ID квеста из таблицы tasks */
+    public $id;
+
     /** @var string - Имя квеста */
     public $name;
 
@@ -80,10 +83,14 @@ class TaskItem
      * Сетапим данные о квесте атрибутам текущей модели через конструктор
      *
      * TaskItem constructor.
-     * @param array $data
+     * @param array $data - данные (JSON со всеми данными о конкретном квесте)
+     * @param int $id - id квеста из таблицы tasks
      */
-    public function __construct(array $data)
+    public function __construct(array $data, int $id)
     {
+        /** Задаем id квеста */
+        $this->id = $id;
+
         /** Задаем имя квеста */
         $this->name = $data['name'];
 

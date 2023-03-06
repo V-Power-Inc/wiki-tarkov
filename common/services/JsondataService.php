@@ -8,6 +8,7 @@
 
 namespace app\common\services;
 
+use app\models\Tasks;
 use yii\db\Query;
 use yii\helpers\Json;
 use app\models\Category;

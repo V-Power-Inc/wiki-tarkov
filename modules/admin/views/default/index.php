@@ -23,23 +23,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
     </ul>
 </div>
 
-<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 margin-top-30">
-    <ul class="nav nav-pills nav-stacked">
-        <h2 class="text-center">Квесты торговцев</h2>
-        <li><a href="/admin/prapor/" class="admin-tabs w-100-important">Квесты Прапора</a></li>
-        <li><a href="/admin/terapevt/" class="admin-tabs w-100-important">Квесты Терапевта</a></li>
-        <li><a href="/admin/lyjnic/" class="admin-tabs w-100-important">Квесты Лыжника</a></li>
-        <li><a href="/admin/mirotvorec/" class="admin-tabs w-100-important">Квесты Миротворца</a></li>
-        <li><a href="/admin/mehanic/" class="admin-tabs w-100-important">Квесты Механика</a></li>
-        <li><a href="/admin/baraholshik/" class="admin-tabs w-100-important">Квесты Барахольщика</a></li>
-        <li><a href="/admin/skypshik/" class="admin-tabs w-100-important">Квесты Скупщика</a></li>
-        <li><a href="/admin/eger/" class="admin-tabs w-100-important">Квесты Егеря</a></li>
-        <!-- disabled for now -->
-<!--        <li><a href="#" class="admin-tabs w-100-important unactive">Next trader</a></li>-->
-    </ul>
-</div>
-
-<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Маркеры на картах</h2>
         <li><a href="/admin/zavod" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
@@ -50,8 +34,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
     </ul>
 </div>
 
-
-<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 margin-top-30">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
         <li><a href="/admin/reviews" class="admin-tabs w-100-important">Отзывы о сделках</a></li>
@@ -70,5 +53,3 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
         <li><a href="#" class="admin-tabs w-100-important unactive">Контент в описаниях маркеров</a></li>
     </ul>
 </div>
-
-
