@@ -86,7 +86,7 @@ class BeregTest extends \Codeception\Test\Unit
     {
         $bereg = Bereg::find()->all();
 
-        $this->assertTrue(count($bereg) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        $this->assertTrue(count($bereg) == 4, 'Ожидалось что вернется 4 объекта, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */

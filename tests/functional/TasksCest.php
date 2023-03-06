@@ -45,7 +45,8 @@ class TasksCest
     /** Мы на странице квестов Барахольщика (Другие квесты торговцев работают аналогично) */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(TraderController::routeId('baraholshik-quests'));
+        /** Путь до страницы с квестами Барахольщика */
+        $I->amOnRoute('quests-of-traders/baraholshik-quests');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
