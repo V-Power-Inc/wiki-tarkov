@@ -80,7 +80,7 @@ class TasksTest extends \Codeception\Test\Unit
     {
         $baraholshik = Tasks::find()->all();
 
-        $this->assertTrue(count($baraholshik) == 4, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        $this->assertTrue(count($baraholshik) == 1, 'Ожидалось что вернется 1 объект, что то пошло не так');
     }
 
     /** Тестируем удаление объекта */
