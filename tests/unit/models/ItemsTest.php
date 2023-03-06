@@ -116,5 +116,4 @@ class ItemsTest extends \Codeception\Test\Unit
 
         $this->assertIsInt($item,'Удаление объекта не случилось, а должно было.');
     }
-
 }

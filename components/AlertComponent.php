@@ -27,7 +27,7 @@ class AlertComponent extends Component
      */
     public static function alert()
     {
-        $info = Info::find()->where(['id' => 2])->one();
+        $info = Info::find()->where(['id' => 2])->andWhere(['enabled' => 1])->one();
         return $info ?? null;
     }
 
