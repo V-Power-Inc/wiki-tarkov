@@ -22,7 +22,7 @@ class BossdetailCest
         return [
             'boss' => [
                 'class' => BossesFixture::class,
-                'dataFile' => codecept_data_dir() . 'boss.php'
+                'dataFile' => codecept_data_dir() . 'bosses.php'
             ],
             'info' => [
                 'class' => InfoFixture::class,
