@@ -75,9 +75,9 @@ class TasksCest
     public function checkPageMainData(\FunctionalTester $I)
     {
         $I->see('Квесты торговца Барахольщик в Escape from Tarkov. Разбор и прохождение квестов - Барахольщик', 'h1');
-        $I->see('Только бизнес');
-        $I->see('Вернем Ультре былое величие');
-        $I->see('Распродажа');
+        $I->see('Секрет успеха');
+        $I->see('Борода не нужна');
+        $I->see('Меломан');
         $I->seeElement('.quests-content');
     }
 
