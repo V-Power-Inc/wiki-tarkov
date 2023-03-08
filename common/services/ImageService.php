@@ -95,4 +95,29 @@ final class ImageService
         /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
         return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
     }
+
+    /**
+     * Метод возвращает дефолтную картинку списка квестов, до того как был выбран какой-то конкретный квест
+     *
+     * @param string $trader - имя торговца
+     * @return string
+     */
+    public static function questsTraderImages(string $trader): string
+    {
+        $array = [
+            'Прапор' => '/img/torgovcy/prapor-quests/prapor-full.jpg',
+            'Терапевт' => '/img/torgovcy/terapevt-quests/terapevt_full.jpg',
+            'Скупщик' => '/img/torgovcy/skypshik-quests/skupshik-full.jpg',
+            'Лыжник' => '/img/torgovcy/lyjnic-quests/lyjnic_full.jpg',
+            'Миротворец' => '/img/torgovcy/mirotvorec-quests/mirotvorec-full.jpg',
+            'Механик' => '/img/torgovcy/mehanic-quests/mehanic-full.jpg',
+            'Барахольщик' => '/img/torgovcy/baraholshik-quests/baraholshik-full.jpg',
+            'Егерь' => '/img/torgovcy/eger.jpeg',
+            'Смотритель' => '/img/torgovcy/small/light_keeper.jpg',
+        ];
+
+        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
+        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
+    }
+
 }

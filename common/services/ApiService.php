@@ -9,11 +9,14 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\common\models\tasks\db\TaskModel;
+use app\common\models\tasks\TasksResult;
 use app\components\MessagesComponent;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
+use app\models\Tasks;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -22,7 +25,7 @@ use yii\web\HttpException;
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
  * различного рода запросов к GraphQl
  *
- * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev/___graphql)
+ * Подробнее о том как создавать запросы на GraphQl (https://api.tarkov.dev)
  *
  * Class ApiService
  * @package app\common\services
@@ -155,7 +158,7 @@ final class ApiService implements ApiInterface
      */
     private function getApiData(): array
     {
-        /** Устанавливаем атрибуты запроса (Включая подовление любых ошибок) */
+        /** Устанавливаем атрибуты запроса (Включая подавление любых ошибок) */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
             'http' => [
                 'method' => $this->method,
@@ -297,6 +300,141 @@ final class ApiService implements ApiInterface
             }
           } 
         }';
+    }
+
+    /**
+     * Задаем тело запрос, для получения из API информации о квестах торговцев
+     * @return void
+     */
+    private function setTasksQuery(): void
+    {
+        /** Задаем тело запроса для получения информации о квестах */
+        $this->query = 'query {
+          # Передаем сюда языковой код, чтобы все на RU было
+          tasks (lang: ru) {
+            # Название квеста
+            name,
+            # Для какой фракции квест (Bear или USEC или любая)
+            factionName
+            # Минимальный уровень игрока для получения квеста
+            minPlayerLevel,
+            # Задачи квеста, что нужно сделать
+            objectives {
+              # Тип квеста (Убийство, сдача предметов и т.д.)
+              type,
+              # Описание задания
+              description,
+              # Опциональность условия (false - обязательно, true - нет)
+              optional
+            }
+            # Ключи, которые понадобятся для задачи
+            neededKeys {
+              # Массив с ключами
+                    keys {
+                name,
+                iconLink
+              }
+            }
+            # Требования к другим квестам перед выполнением текущего
+            taskRequirements {
+              # Название необходимого квеста
+              task {
+                name
+              }
+              # Требование к статусу квеста
+              status
+            }
+            # Количество получаемого опыта - за выполнение квеста
+            experience,
+            # Название карты, на которой надо выполнить квест
+            map {
+              name
+            }
+            # Торговец, что выдал квест (Имя и изображение)
+            trader {
+              name,
+              imageLink
+            },
+            # Можно ли перепроходить квест несколько раз
+            restartable
+            # Стартовые требования для квеста (Предметы)
+            startRewards {
+              # Предметы для выполнения квеста
+              items {
+                item {
+                  name,
+                  description,
+                  iconLink,
+                  inspectImageLink
+                },
+                # Количество стартовых предметов для квеста
+                count
+              }
+            },
+            # Награда за квест
+            finishRewards {
+              # Предметы выдаваемые в награду за выполнение квеста
+              items {
+                item {
+                  name,
+                  description,
+                  iconLink,
+                  inspectImageLink
+                },
+                # Количество стартовых предметов для квеста
+                count
+              }
+            }
+          }
+        }';
+    }
+
+    /**
+     * Вызывая этот метод - получаем данные о квестах конкретного торговца
+     * - Если квестов в БД нет или устарели, удалим их
+     * - Если квесты есть и нет устаревших, возвращаем их из базы по урлу торговца
+     *
+     * @param string $url - URL до квестов торговцев
+     * @return mixed
+     * @throws StaleObjectException
+     * @throws HttpException
+     * @throws \Throwable
+     */
+    public function getTasks(string $url)
+    {
+        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
+        if ($this->isOldTasks() | $this->isEmptyTasks()) {
+
+            /** Удаляем устаревшие записи о квестах */
+            $this->removeOldTasks();
+
+            /** Сетапим запрос для API на получение информации о квестах */
+            $this->setTasksQuery();
+
+            /** Переменная для получения данных о квестах через API */
+            $data = $this->getApiData();
+
+            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
+            $this->createTasks($data);
+
+        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
+
+            /** Помечаем устаревшие квесты */
+            $this->setOldTasks();
+        }
+
+        /** Получаем данные о квестах из таблицы Tasks */
+        $result = new TasksResult(Tasks::getTasksData($url));
+
+        /** Если есть квесты */
+        if (!empty($result->_items)) {
+
+            /** Возвращаем их во вьюху */
+            return $result->_items;
+        }
+
+        /** Выкидываем 404 ошибку, если нет квестов */
+        throw new HttpException('404', 'Такая страница не существует.')  ;
     }
 
     /**
@@ -515,5 +653,114 @@ final class ApiService implements ApiInterface
 
         /** Пробуем сохранить и возвращаем bool результат */
         return $log->save();
+    }
+
+    /**
+     * Метод проверяет не пуста ли таблица с квестами - возращает bool результат
+     *
+     * @return bool
+     */
+    private function isEmptyTasks(): bool
+    {
+        return empty(Tasks::find()->all()) ? true : false;
+    }
+
+    /**
+     * Метод проверяет есть-ли в таблице квестов устаревшие записи - возращает bool результат
+     *
+     * @return bool
+     */
+    private function isOldTasks(): bool
+    {
+        /** Задаем SQL запрос переменной - ищем устаревшие записи */
+        $tasks = Tasks::findAll([Tasks::ATTR_OLD => Tasks::TRUE]);
+
+        /** Если найдены устаревшие боссы - возвращаем true, если нет false */
+        if (!empty($tasks)) {
+
+            /** Возвращаем true в случае, если в массиве есть боссы */
+            return true;
+        }
+
+        /** Возвращаем false, если устаревшие боссы не были найдены */
+        return false;
+    }
+
+    /**
+     * Метод удаляет все квесты - возвращает bool результат
+     *
+     * @return bool
+     * @throws StaleObjectException
+     * @throws \Throwable
+     */
+    private function removeOldTasks(): bool
+    {
+        /** Задаем SQL запрос переменной - ищем устаревшие записи */
+        $tasks = Tasks::find()->all();
+
+        /** В цикле проходим всех устаревших боссов и удаляем их */
+        foreach ($tasks as $task) {
+            $task->delete();
+        }
+
+        /** Возвращаем true - если удаление боссов прошло успешно */
+        return true;
+    }
+
+    /**
+     * Метод проставляющий квестам дату устаревания - возвращает bool результат
+     *
+     * @return bool
+     */
+    private function setOldTasks(): bool
+    {
+        /** Задаем переменную с выборкой квестов, которые еще актуальны */
+        $tasks = Tasks::findAll([Tasks::ATTR_OLD => Tasks::FALSE]);
+
+        /** В цикле проходим все соответствующие записи */
+        foreach ($tasks as $task) {
+
+            /** Дата устаревания записи */
+            $date = date('Y-m-d H:i:s', strtotime($task->date_create . ' +2 month'));
+
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            if ($date < date("Y-m-d H:i:s",time())) {
+
+                /** Устанавливаем флаг старой записи */
+                $task->old = Tasks::TRUE;
+
+                /** Сохраняем изменения */
+                $task->save();
+            }
+        }
+
+        /** Возвращаем true если все прошло успешно */
+        return true;
+    }
+
+    /**
+     * Сохраняем в базу данных все квесты, полученные из API
+     *
+     * @param array $data - массив с данными обо всех квестах из API
+     * @return bool
+     */
+    private function createTasks(array $data): bool
+    {
+        /** В цикле проходим каждый квест из массив, полученного от API */
+        foreach ($data['data']['tasks'] as $task) {
+
+            /** Задаем каждому объекту квеста атрибуты из массива */
+            $model = new TaskModel($task);
+
+            /** Сохраняем данные в БД (tasks) */
+            if (!$model->save()) {
+
+                /** Если данные не сохранились - вернем false */
+                return false;
+            }
+        }
+
+        /** Возвращаем bool результат если все ок */
+        return true;
     }
 }

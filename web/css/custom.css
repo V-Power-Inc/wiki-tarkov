@@ -427,7 +427,7 @@ ul li a.relative i {
 
 .tab-pane.active p {
     font-size: 16px;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 a.image-link, a.image-link:hover, a.image-link:focus, a.image-link:active {
@@ -2251,7 +2251,7 @@ table.patrons-tbl >thead > tr > th {
 
 /** Стили для промежуточного тайтла на страницах предметов **/
 .title-of-item-block {
-    font-size: 20px;
+    font-size: 20px!important;
     font-weight: bold;
     background: #e7e7ff;
     display: block;
@@ -2299,4 +2299,18 @@ table.patrons-tbl >thead > tr > th {
 .preview-mainpage-desc {
     margin: 15px 0;
     max-width: 100%;
+}
+
+/** Иконка торговца что выдает квест */
+.trader-quest-icon {
+    max-width: 150px;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+/** Отступы для блока с ключами, необходимыми для выполнения квеста */
+.keys-for-quest {
+    padding: 10px;
+    background: #80808033;
+    margin: 10px auto;
 }

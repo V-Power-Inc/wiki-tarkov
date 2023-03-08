@@ -9,17 +9,9 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
-use app\models\Mehanic;
-use app\models\Skypshik;
-use app\models\Lyjnic;
-use app\models\Terapevt;
-use app\models\Prapor;
-use app\models\Mirotvorec;
-use app\models\Baraholshik;
-use app\models\Eger;
+use app\common\services\ApiService;
 use app\models\Barters;
 use app\models\Traders;
-use app\common\services\TradersService;
 use yii\web\HttpException;
 use Yii;
 
@@ -33,15 +25,8 @@ class TraderController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_QUESTS                 = 'quests';
+    const ACTION_QUESTS_DETAIL          = 'quests-detail';
     const ACTION_TRADERSDETAIL          = 'tradersdetail';
-    const ACTION_PRAPORPAGE             = 'praporpage';
-    const ACTION_TERAPEVTPAGE           = 'terapevtpage';
-    const ACTION_SKYPCHIKPAGE           = 'skypchikpage';
-    const ACTION_LYJNICPAGE             = 'lyjnicpage';
-    const ACTION_MIROTVORECPAGE         = 'mirotvorecpage';
-    const ACTION_MEHANICPAGE            = 'mehanicpage';
-    const ACTION_BARAHOLSHIKPAGE        = 'baraholshikpage';
-    const ACTION_EGERPAGE               = 'egerpage';
     const ACTION_BARTERS_PREVIEW        = 'barterspreview';
     const ACTION_PREVIEWTRADER          = 'previewtrader';
 
@@ -49,91 +34,27 @@ class TraderController extends AdvancedController
     public $enableCsrfValidation;
 
     /**
-     * Рендер страницы квестов Прапора
+     * Метод рендерит квесты на детальных страницах торговцев
+     * сами квесты получает из API, после чего сохраняет в БД, далее уже берет из таблицы tasks
+     * Если таблица будет пуста или не будет квестов для определенного торговца
+     * Выкинет 404 ошибку, нужно будет смотреть в tasks, чтобы понять в чем дело
      *
+     * @param string $url - URL до квестов торговца
      * @return string
+     * @throws \Throwable
      * @throws HttpException
+     * @throws \yii\db\StaleObjectException
      */
-    public function actionPraporpage(): string
+    public function actionQuestsDetail(string $url): string
     {
-        return $this->render('prapor-quests', ['prapor'=> (new TradersService())->takeQuests(Prapor::tableName())]);
-    }
+        /** Инициализируем новый объект класса API */
+        $api = new ApiService();
 
-    /**
-     * Рендер страницы квестов Терапевта
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionTerapevtpage(): string
-    {
-        return $this->render('terapevt-quests', ['terapevt'=> (new TradersService())->takeQuests(Terapevt::tableName())]);
-    }
+        /** Пременная - запрос на получение квестов из БД */
+        $tasks = $api->getTasks($url);
 
-    /**
-     * Рендер страницы квестов Скупщика
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionSkypchikpage(): string
-    {
-        return $this->render('skypshik-quests', ['skypshik'=>(new TradersService())->takeQuests(Skypshik::tableName())]);
-    }
-
-    /**
-     * Рендер страницы квестов Лыжника
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionLyjnicpage(): string
-    {
-        return $this->render('lyjnic-quests', ['lyjnic'=>(new TradersService())->takeQuests(Lyjnic::tableName())]);
-    }
-
-    /**
-     * Рендер страницы квестов Миротворца
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionMirotvorecpage(): string
-    {
-        return $this->render('mirotvorec-quests', ['mirotvorec'=>(new TradersService())->takeQuests(Mirotvorec::tableName())]);
-    }
-
-    /**
-     * Рендер страницы квестов Механика
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionMehanicpage(): string
-    {
-        return $this->render('mehanic-quests', ['mehanic'=>(new TradersService())->takeQuests(Mehanic::tableName())]);
-    }
-
-    /**
-     * Рендер страницы квестов Барахольщика
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionBaraholshikpage(): string
-    {
-        return $this->render('baraholshik-quests', ['baraholshik'=>(new TradersService())->takeQuests(Baraholshik::tableName())]);
-    }
-
-    /**
-     * Рендер страницы квестов Егеря
-     *
-     * @return string
-     * @throws HttpException
-     */
-    public function actionEgerpage(): string
-    {
-        return $this->render('eger-quests', ['eger'=>(new TradersService())->takeQuests(Eger::tableName())]);
+        /** Рендер вьюхи */
+        return $this->render('quests', ['tasks' => $tasks]);
     }
 
     /**
@@ -155,13 +76,17 @@ class TraderController extends AdvancedController
      */
     public function actionTradersdetail($id): string
     {
+        /** Есди нашли информацию о торговце по url */
         if (Traders::takeTraderByUrl($id)) {
+
+            /** Рендерим вьюху с данными о нем */
             return $this->render('detail',[
                 'trader' => Traders::takeTraderByUrl($id),
                 'barters' => Barters::takeBartersByTitle(Traders::takeTraderByUrl($id)->title)
             ]);
         }
 
+        /** Если не нашли информацию о торговце, выкидываем 404 ошибку */
         throw new HttpException(404 ,'Такая страница не существует');
     }
 

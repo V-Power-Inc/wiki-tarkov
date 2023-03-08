@@ -8,15 +8,12 @@
 
 namespace app\tests\fixtures;
 
+/**
+ * Фикстура Прапора для тестирования страниц торговцев
+ *
+ * Class PraporFixture
+ * @package app\tests\fixtures
+ */
 class PraporFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Prapor';
-   // public $depends = ['app\tests\fixtures\TradersFixture'];
-
-    // const TABLE_NAME = 'prapor';
-
-//  Действие для фикстур после отработки каждого теста
-//    public function beforeUnload() {
-//        parent::beforeUnload();
-//        $this->db->createCommand()->setSql('truncate table .'.static::TABLE_NAME)->execute();
-//    }
 }

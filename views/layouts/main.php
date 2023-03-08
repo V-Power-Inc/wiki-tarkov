@@ -7,7 +7,6 @@ use yii\web\View;
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
-use app\components\AlertComponent;
 
 $cookies = Yii::$app->request->cookies;
 
@@ -67,10 +66,6 @@ AppAsset::register($this);
         </div>
 
         <hr class="grey-line">
-
-        <?php if((AlertComponent::AlertView())) : ?>
-            <?= $this->render('/other/site-alert'); ?>
-        <?php endif; ?>
 
     <?php endif; ?>
 

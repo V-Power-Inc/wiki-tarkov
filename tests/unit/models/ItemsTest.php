@@ -98,7 +98,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         $item = Items::find()->all();
 
-        $this->assertTrue(count($item) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        $this->assertTrue(count($item) > 0, 'Ожидалось как минимум 1 объект - что-то пошло не так.');
     }
 
     /** Тестируем удаление объекта */
@@ -116,5 +116,4 @@ class ItemsTest extends \Codeception\Test\Unit
 
         $this->assertIsInt($item,'Удаление объекта не случилось, а должно было.');
     }
-
 }

@@ -3,11 +3,7 @@
 namespace Tests\Functional;
 
 use app\controllers\ClanController;
-use app\controllers\SiteController;
-use app\controllers\TraderController;
-use app\modules\admin\controllers\ClansController;
 use app\tests\fixtures\ClansFixture;
-use app\tests\fixtures\InfoFixture;
 
 /**
  * Функциональные тесты страницы кланов
@@ -27,10 +23,6 @@ class ClansCest
             'clans' => [
                 'class' => ClansFixture::class,
                 'dataFile' => codecept_data_dir() . 'clans.php'
-            ],
-            'info' => [
-                'class' => InfoFixture::class,
-                'dataFile' => codecept_data_dir() . 'info.php'
             ]
         ];
     }
