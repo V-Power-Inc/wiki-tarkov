@@ -44,19 +44,19 @@ final class KeysItem
             foreach ($keys as $obj) {
 
                 /** В цикле получаем информацию по ключу */
-                foreach ($obj[static::KEYS] as $key) {
+                foreach ($obj[static::KEYS] as $item_key) {
 
                     /** Создаем новый объект с информацией о ключе */
                     $model = new KeysItem();
 
                     /** Сетапим название ключа */
-                    $model->name = $key['name'];
+                    $model->name = $item_key['name'];
 
                     /** Сетапим иконку ключа */
-                    $model->iconLink = $key['iconLink'];
+                    $model->iconLink = $item_key['iconLink'];
 
                     /** Добавляем объект с информацией о ключе в результирующий массив */
-                    $this->_items[] = $key;
+                    $this->_items[] = $model;
                 }
             }
 

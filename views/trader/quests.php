@@ -107,8 +107,8 @@ $this->registerMetaTag([
 
                                         <div class="barter-items-count">
 
-                                        <?php foreach($task->neededKeys->_items as $_key): ?>
-                                            <img class="items-for-trade" src="<?= $_key['iconLink'] ?>" title="<?= $_key['name'] ?>" alt="<?= $_key['name'] ?>">
+                                        <?php foreach($task->neededKeys->_items as $item_key): ?>
+                                            <img class="items-for-trade" src="<?= $item_key->iconLink ?>" title="<?= $item_key->name ?>" alt="<?= $item_key->name ?>">
                                         <?php endforeach; ?>
 
                                         </div>
