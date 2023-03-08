@@ -23,7 +23,7 @@ use yii\helpers\Json;
  * Class TaskModel
  * @package app\common\models\tasks\db
  */
-class TaskModel extends Model
+final class TaskModel extends Model
 {
     /** @var string - Название квеста */
     public $quest;

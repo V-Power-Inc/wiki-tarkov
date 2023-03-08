@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class TaskItem
  * @package app\common\models\tasks
  */
-class TaskItem
+final class TaskItem
 {
     /** @var int - ID квеста из таблицы tasks */
     public $id;

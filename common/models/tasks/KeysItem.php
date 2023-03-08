@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class KeysItem
  * @package app\common\models\tasks
  */
-class KeysItem
+final class KeysItem
 {
     /** @var string - Имя ключа */
     public $name;

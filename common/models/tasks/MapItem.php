@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class MapItem
  * @package app\common\models\tasks
  */
-class MapItem
+final class MapItem
 {
     /** @var string - Название карты */
     public $name;

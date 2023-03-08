@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class TaskRequirementsItem
  * @package app\common\models\tasks
  */
-class TaskRequirementsItem
+final class TaskRequirementsItem
 {
     /** @var array - название квеста (Далее name в массиве) */
     public $task;

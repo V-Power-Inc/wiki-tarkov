@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class StartRewardsItem
  * @package app\common\models\tasks
  */
-class RewardsItem
+final class RewardsItem
 {
     /** @var string - Название предмета */
     public $name;

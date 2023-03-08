@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class TraderItem
  * @package app\common\models\tasks
  */
-class TraderItem
+final class TraderItem
 {
     /** @var string - Имя торговца */
     public $name;

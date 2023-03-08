@@ -53,7 +53,7 @@ $this->registerMetaTag([
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 quests-content">
             <div class="info-quests" id="info-alert-prapor" style="display: none;">
                 <p class="alert alert-info sm-vertical-margin-20 size-16"> <?= TranslateService::getTraderQuestDesc($trader_name) ?></p>
-                <img class="torgovec-info-quest-image" src="<?= ImageService::questsTraderImages($trader_name) ?>" alt="Квесты торговца <?= $trader_name ?> из Escape from Tarkov">
+                <img class="torgovec-info-quest-image" src="<?= ImageService::questsTraderImages($trader_name) ?>" alt="Квесты торговца <?= $trader_name ?> из Escape from Tarkov" title="Квесты торговца <?= $trader_name ?> из Escape from Tarkov">
             </div>
                 <div class="tab-content">
 

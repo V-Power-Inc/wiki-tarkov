@@ -18,7 +18,7 @@ use yii\helpers\Json;
  * Class TasksResult
  * @package app\common\models\tasks
  */
-class TasksResult
+final class TasksResult
 {
     /** @var TaskItem[] - Массив объектов квестов TaskItem */
     public $_items = [];

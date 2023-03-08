@@ -14,7 +14,7 @@ namespace app\common\models\tasks;
  * Class ObjectivesItem
  * @package app\common\models\tasks
  */
-class ObjectivesItem
+final class ObjectivesItem
 {
     /** @var string - Тип задания (Убийство, сбор вещей, закладки и т.д.) */
     public $type;

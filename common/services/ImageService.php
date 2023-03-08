@@ -107,7 +107,7 @@ final class ImageService
         $array = [
             'Прапор' => '/img/torgovcy/prapor-quests/prapor-full.jpg',
             'Терапевт' => '/img/torgovcy/terapevt-quests/terapevt_full.jpg',
-            'Скупщик' => '#',
+            'Скупщик' => '/img/torgovcy/skypshik-quests/skupshik-full.jpg',
             'Лыжник' => '/img/torgovcy/lyjnic-quests/lyjnic_full.jpg',
             'Миротворец' => '/img/torgovcy/mirotvorec-quests/mirotvorec-full.jpg',
             'Механик' => '/img/torgovcy/mehanic-quests/mehanic-full.jpg',

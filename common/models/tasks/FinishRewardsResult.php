@@ -12,7 +12,7 @@ namespace app\common\models\tasks;
  * Class FinishRewardsResult
  * @package app\common\models\tasks
  */
-class FinishRewardsResult
+final class FinishRewardsResult
 {
     /** @var RewardsItem[] - Массив с предметами для вы */
     public $_items;
