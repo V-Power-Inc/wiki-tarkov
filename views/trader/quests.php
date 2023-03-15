@@ -204,10 +204,5 @@ $this->registerMetaTag([
             <?= $this->render('/other/comments');?>
         </div>
 
-        <!-- Core -->
-        <div class="recommended-gm-content">
-            <?= $this->render('/other/google-recommended.php'); ?>
-        </div>
-
     </div>
 </div>
