@@ -6,8 +6,25 @@
  * Time: 20:51
  */
 
-/*** Вьюха рекламного кода для статей ***/
+/** Вьюха рекламного кода для статей
+ * (В AdFox идет как - ADF - Блок рекламы в фиде) *
+ */
 
 ?>
-
-<div class="rl_cnt_bg" data-id="298949"></div>
+<!--AdFox START-->
+<!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Блок рекламы в фиде-->
+<!--Категория: Основная категория-->
+<!--Тип баннера: ADF - Блок рекламы в фиде-->
+<div id="adfox_167904817037799228"></div>
+<script>
+    window.yaContextCb.push(()=>{
+        Ya.adfoxCode.create({
+            ownerId: 700342,
+            containerId: 'adfox_167904817037799228',
+            params: {
+                p1: 'cxqpq',
+                p2: 'idob'
+            }
+        })
+    })
+</script>

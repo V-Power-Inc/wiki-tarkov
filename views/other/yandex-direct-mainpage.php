@@ -10,5 +10,22 @@
 ?>
 
 <div class="margins-vertical-20">
-    <div class="rl_cnt_bg" data-id="298950"></div>
+    <!--AdFox START-->
+    <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Рекламный блок на главной странице-->
+    <!--Категория: Основная категория-->
+    <!--Тип баннера: ADF - Рекламный блок на главной странице-->
+    <div id="adfox_16790484282095820"></div>
+    <script>
+        window.yaContextCb.push(()=>{
+            Ya.adfoxCode.create({
+                ownerId: 700342,
+                containerId: 'adfox_16790484282095820',
+                params: {
+                    p1: 'cxqpv',
+                    p2: 'idoc'
+                }
+            })
+        })
+    </script>
+
 </div>
