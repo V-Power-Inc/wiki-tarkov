@@ -61,7 +61,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($zterralab,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
@@ -83,7 +83,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($ztamojnya,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
@@ -105,7 +105,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($kzavod,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
@@ -127,7 +127,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($zforest,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
@@ -149,7 +149,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($zbereg,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
@@ -172,7 +172,7 @@ $this->registerMetaTag([
 
                     <?php if(in_array($zrazvyazka,Yii::$app->params['keysBlocks'])): ?>
                         <!-- feed recomendations -->
-                        <div class="col-lg-12 item-key fix-block">
+                        <div class="col-lg-12 item-loot">
                             <?= $this->render('/other/adsense-feed.php'); ?>
                         </div>
                     <?php endif; ?>
