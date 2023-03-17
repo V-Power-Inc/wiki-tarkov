@@ -25,7 +25,7 @@ AppAsset::register($this);
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
     <!-- Yandex.RTB -->
-    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script>window.yaContextCb = window.yaContextCb || []</script>
     <script src="https://yandex.ru/ads/system/context.js" async></script>
 
     <!-- OG tags -->
