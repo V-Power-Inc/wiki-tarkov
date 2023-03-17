@@ -8,4 +8,20 @@
  * Рекламный блок в оверлее
  */
 ?>
-<div class="rl_cnt_bg" data-id="300497"></div>
+<!--AdFox START-->
+<!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Рекламный блок Overlay-->
+<!--Категория: Основная категория-->
+<!--Тип баннера: ADF - Рекламный блок Overlay-->
+<div id="adfox_167904838734514640"></div>
+<script>
+    window.yaContextCb.push(()=>{
+        Ya.adfoxCode.create({
+            ownerId: 700342,
+            containerId: 'adfox_167904838734514640',
+            params: {
+                p1: 'cxqpt',
+                p2: 'idoe'
+            }
+        })
+    })
+</script>

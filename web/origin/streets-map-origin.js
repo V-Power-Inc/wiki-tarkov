@@ -487,9 +487,22 @@ $(document).ready(function() {
         mainData.panTo(new L.LatLng(53, -8));
     });
 
-    /** function add special blocks with dop.content to users when inits click on marker ***/
+    /*** function add special blocks with dop.content to users when inits click on market ***/
     function AddRelations() {
-        $('.leaflet-popup-content').append('<div class="rl_cnt_bg" data-id="298961"></div>');
+        // Ads were In AppendBlock
+        $('.leaflet-popup-content').append('<div id="adfox_167905082194672412"></div>\n' +
+            '<script>\n' +
+            '    window.yaContextCb.push(()=>{\n' +
+            '        Ya.adfoxCode.create({\n' +
+            '            ownerId: 700342,\n' +
+            '            containerId: \'adfox_167905082194672412\',\n' +
+            '            params: {\n' +
+            '                p1: \'cxqpw\',\n' +
+            '                p2: \'idod\'\n' +
+            '            }\n' +
+            '        })\n' +
+            '    })\n' +
+            '</script>');
     }
 
     /** Добавляем в слои карты Маркеры (Данные в хардкоде, в перспективе перенос на Бэкэнд) */
