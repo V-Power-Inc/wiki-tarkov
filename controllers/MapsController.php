@@ -17,6 +17,7 @@ use app\models\Bereg;
 use app\models\Razvyazka;
 use app\models\Laboratory;
 use Yii;
+use yii\web\HttpException;
 
 /**
  * Это контроллер интерактивных карт
@@ -46,6 +47,12 @@ class MapsController extends AdvancedController
 
     /**
      * Массив поведения данного контроллера
+     * В variations указаны вариации страниц, у которых будет раздельный кэш - например:
+     * - URL реквеста
+     * - AJAX или нет
+     * - Код ответа страницы
+     * - Наличие параметра GET page
+     * - Наличие куки Overlay для рекламы
      *
      * @return array|array[]
      */
@@ -58,6 +65,7 @@ class MapsController extends AdvancedController
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
+                    Yii::$app->request->isAjax,
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page'),
                     Yii::$app->request->cookies->get('overlay')
@@ -79,61 +87,115 @@ class MapsController extends AdvancedController
     /**
      * JSON данные с координатами маркеров Завода
      *
+     * @throws HttpException
      * @return string
      */
     public function actionZavodmarkers(): string
     {
-        return MarkersService::takeMarkers(Zavod::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Zavod::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
      * JSON данные с координатами маркеров Леса
      *
+     * @throws HttpException
      * @return string
      */
     public function actionForestmarkers(): string
     {
-        return MarkersService::takeMarkers(Forest::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Forest::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
      * JSON данные с координатами маркеров Таможни
      *
+     * @throws HttpException
      * @return string
      */
     public function actionTamojnyamarkers(): string
     {
-        return MarkersService::takeMarkers(Tamojnya::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Tamojnya::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
      * JSON данные с координатами маркеров Берега
      *
+     * @throws HttpException
      * @return string
      */
     public function actionBeregmarkers(): string
     {
-        return MarkersService::takeMarkers(Bereg::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Bereg::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
      * JSON данные с координатами маркеров Развязки
      *
+     * @throws HttpException
      * @return string
      */
     public function actionRazvyazkamarkers(): string
     {
-        return MarkersService::takeMarkers(Razvyazka::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Razvyazka::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
      * JSON данные с координатами маркеров Лаборатории
      *
+     * @throws HttpException
      * @return string
      */
     public function actionLaboratorymarkers(): string
     {
-        return MarkersService::takeMarkers(Laboratory::tableName());
+        /** Проверяем что запрос идет по Ajax */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем маркеры по названия таблицы в виде JSON */
+            return MarkersService::takeMarkers(Laboratory::tableName());
+        }
+
+        /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
+        throw new HttpException(404, 'Такая страница не найдена');
     }
 
     /**
