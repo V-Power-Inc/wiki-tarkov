@@ -13,9 +13,7 @@ use app\models\Zavod;
 use app\models\Forest;
 use app\models\Tamojnya;
 use app\models\Bereg;
-use yii\web\HttpException;
 use yii\helpers\Json;
-use Yii;
 
 /**
  * Класс для работы с маркерами для интерактивных карт
@@ -28,37 +26,34 @@ final class MarkersService
     /**
      * Метод вытаскивает маркеры, по переданному значению
      *
-     * @param string $map_title - название карты
+     * @param string $map_title - название карты (Совпадает с названием таблицы)
      * @return string
-     * @throws HttpException
      */
     public static function takeMarkers(string $map_title): string
     {
-        if (Yii::$app->request->isAjax) {
+        /** Переменная с маркерами для return'a */
+        $markers = '';
 
-            $markers = '';
-
-            switch ($map_title) {
-                case 'zavod':
-                    $markers = Zavod::takeMarkers();
-                    break;
-                case 'tamojnya':
-                    $markers = Tamojnya::takeMarkers();
-                    break;
-                case 'forest':
-                    $markers = Forest::takeMarkers();
-                    break;
-                case 'bereg':
-                    $markers = Bereg::takeMarkers();
-                    break;
-                case 'razvyazka':
-                    $markers = Razvyazka::takeMarkers();
-                    break;
-            }
-
-            return Json::encode($markers);
+        /** В свиче в зависимости от названия карты вернем нужный набор маркеров */
+        switch ($map_title) {
+            case 'zavod':
+                $markers = Zavod::takeMarkers();
+                break;
+            case 'tamojnya':
+                $markers = Tamojnya::takeMarkers();
+                break;
+            case 'forest':
+                $markers = Forest::takeMarkers();
+                break;
+            case 'bereg':
+                $markers = Bereg::takeMarkers();
+                break;
+            case 'razvyazka':
+                $markers = Razvyazka::takeMarkers();
+                break;
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Возвращает маркеры, приведенные к JSON виду */
+        return Json::encode($markers);
     }
 }
