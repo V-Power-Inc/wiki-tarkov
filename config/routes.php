@@ -12,12 +12,10 @@ use app\controllers\BossesController;
 use app\controllers\ApiController;
 
 use app\modules\admin\controllers\DefaultController;
-use app\modules\admin\controllers\ModeratorController;
 
 return [
     'admin/login' => DefaultController::routeId(DefaultController::ACTION_LOGIN),
     'admin/logout' => DefaultController::routeId(DefaultController::ACTION_LOGOUT),
-    'admin/ass-destroyer' => ModeratorController::routeId(ModeratorController::ACTION_INDEX),
 
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
     'table-patrons' => SiteController::routeId(SiteController::ACTION_TABLE_PATRONS),

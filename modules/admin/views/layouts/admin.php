@@ -78,33 +78,18 @@ AdminAsset::register($this);
     }
         ?>
 
+        <!-- bg on admin login -->
         <div id="particles-js"></div>
         
         <div class="container padding-top-110">
-           <?php if(Yii::$app->request->url == '/admin'): ?>
-                <?php if(isset(Yii::$app->user->identity->user)): ?>
-                <!-- Блок данных об авторизованном пользователе -->
-                <!-- Добавили блок Display-none - функционал временно отключен за ненужностью -->
-                <div style="display: none;">
-                    <div class="row">
-                        <div class="col-lg-12 auth-info relative">
-                            <div class="exit"><img class="exits-icon-admin" alt="Close-icon" src="/img/exits-krest.png"></div>
-                            <p class="text-center auth-title">Учетные данные авторизованного пользователя</p>
-                            <p class="auth-info">Логин: <span><?= Yii::$app->user->identity->user ?></span></p>
-                            <p class="auth-info">Имя: <span><?= Yii::$app->user->identity->name ?></span></p>
-                            <p class="auth-info">Роль: <span style="color:red;"><?= Yii::$app->user->identity->role ?></span></p>
-                            <p class="auth-info">Дата окончания учетной записи: <span><?= (Yii::$app->user->identity->date_end)?Yii::$app->user->identity->date_end:'Учетная запись не лимитирована датой окончания'?></span></p>
-                        </div>
-                    </div>
-                </div>
-                <?php endif; ?>
-           <?php endif; ?>
 
+            <!-- Блок с основным контентом админки -->
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                      <?= $content ?>
                 </div>
             </div>
+
         </div>
     </div>
 
