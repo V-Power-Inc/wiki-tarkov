@@ -1,0 +1,312 @@
+/** CSS с темными стилями сайта */
+
+/** Стиль для бэкграунда сайта */
+body {
+    background: #363535;
+}
+
+/** Стили для заголовков */
+body h1, .jumbotron h1, h1.main-site-heading, .item-loot-title a:hover, .item-loot-title a {
+    color: #9a8866;
+}
+
+/** Стили футера */
+footer {
+    background-color: #272727;
+    color: #fff;
+    height: 140px;
+    border-top: 2px solid #545325;
+    position: relative;
+    box-shadow: 0 0 100px rgba(65,61,52,1), 0 0 6px rgba(232,190,107,0.8);
+}
+
+/** Стили для текста */
+p, p.loot-description {
+    color: #c4c4c4
+}
+
+/** Класс заголовков для */
+.heading-class {
+    padding: 50px 0 10px 0;
+    background: #363535;
+}
+
+/** Линия разделитель */
+.grey-line {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid #6c593c;
+    border-bottom: 1px solid #6c593c;
+    box-shadow: -5px 2px 100px rgba(65,61,52,1), 1px 1px 6px 1px rgb(207 160 69 / 80%);
+}
+
+/** Цвет подложки на страницах сайта */
+.quests-content, .keys-content, .clans-content, .donates-content, .api-content {
+    background: #4e4a4a;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/** Цвет подложки на страницах сайта - верхняя часть */
+.top-content {
+    padding: 20px;
+    background: #363535;
+    border: 1px solid #6c5b3a;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/** Цвет стилей на страницах справочника лута (Блок с контентом) */
+.col-lg-12 .item-loot {
+    min-height: 200px;
+    height: auto;
+    margin: 10px 0;
+    padding: 20px;
+    background: #363535;
+    border-radius: 5px;
+    border: 1px solid #6c5b3a;
+}
+
+/** Стили для изображений справочника лута */
+.loot-image {
+    float: left;
+    margin: 5px 10px 5px 0;
+    border: 1px solid #9a8866;
+    box-shadow: 1px 1px 20px;
+    max-width: 100%;
+    background: #9a8866;
+}
+
+/** Стили навигации */
+.nav.categories {
+    background: #4e4a4a;
+    border-radius: 5px;
+}
+
+/** Стили для ссылок */
+a, a:hover, a:focus {
+    color: #c4c4c4;
+    text-decoration: none;
+}
+
+/** Наведение на ссылку второго уровня в справочнике лута */
+.level-2 a:hover {
+    color: #fdfbfb;
+}
+
+/** Активная вкладка второго уровня */
+li.level-2.active {
+    background: #5171ab;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+}
+
+/** Стили под блок для комментариев */
+.comment-fake-side {
+    background: #363535;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/** Блок уведомлений - оповещения */
+.alert-info {
+    color: #9a8866;
+    background-color: #3c3b3b;
+    border-color: #6c5b3a;
+}
+
+/** Переопределение бутстраповских стилей form-control */
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #484848;
+    background-image: none;
+    border: 1px solid #9a8866;
+    border-radius: 4px;
+}
+
+/** Переопределение стилей navbar */
+.navbar {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid #545325;
+    box-shadow: 0px 1px 4px;
+    z-index: 1001;
+}
+
+/** Переопределение стилей navbar */
+.navbar-default {
+    background-color: #363535;
+    border-color: #000000;
+}
+
+/** Переопределение focus - form-control */
+.form-control:focus {
+    border-color: #9a8866;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(154 136 102);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(154 136 102);
+}
+
+/** Стили под Ajax поиск */
+.tt-input.loading {
+    color: #c4c4c4;
+}
+
+/** Изменены стили подписей инпутов */
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: #c4c4c4;
+}
+
+/** Переопределяем стили подложки в AJAX результатах запроса */
+.tt-menu {
+    background: #484848!important;
+}
+
+/** Переопределение стилей Ajax попапа */
+.ajax-image-preview {
+    max-width: 50px;
+    float: left;
+    margin: 5px 10px;
+    box-shadow: 1px 1px 20px;
+    color: black;
+    border: 1px solid #6c5b3a;
+}
+
+/** Переопределение стилей Ajax попапа */
+.tt-menu .tt-suggestion.tt-cursor, .tt-menu .tt-suggestion.tt-selectable:hover {
+    cursor: default;
+    text-decoration: none;
+    outline: 0;
+    background-color: #2e2c2c;
+    color: #262626;
+}
+
+/** Переопределение стилей Ajax попапа */
+.ajax-preview-title {
+    color: #9a8866;
+    font-size: 16px;
+    padding-top: 2px;
+    font-weight: bold;
+}
+
+/** Переопределение цвета текста в дефолтном состоянии поиска AJAX */
+.tt-input.form-control {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей кнопок с обводками */
+.main-link, .main-inter-link {
+    color: #fff;
+    font-size: 16px;
+    background: #272727;
+    border: 2px solid #9a8866;
+    transition: .5s;
+}
+
+/** Переопределение стилей кнопок с обводками */
+.main-link:hover, .main-inter-link:hover {
+    color: #c4c4c4;
+    background: #363535;
+    border-color: #9a8866;
+    transition: .5s;
+}
+
+/** Стили для селектора ключа */
+span.key-selector {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: #c4c4c4;
+}
+
+/** Селект на странице квестовых */
+#items-questitem {
+    width: 200px;
+    display: inline-block;
+    color: #c4c4c4;
+    cursor: pointer;
+}
+
+#doorkeys-doorkey {
+    color: #c4c4c4;
+    cursor: pointer;
+}
+
+/** Переопределение Primary кнопок */
+.btn-primary {
+    color: #fcffff;
+    background-color: #9a7e50;
+    border-color: #9a8858;
+}
+
+/** Переопределение Primary наведения */
+.btn-primary:hover {
+    color: #f9f9f9;
+    background-color: #9b9283;
+    border-color: #9a8866;
+    cursor: pointer;
+}
+
+/** Переопределение стилей заголовков на интерактивных картах */
+.heading-class.mappage {
+    border-bottom: 2px solid #545325;
+}
+
+/** Переопределение стилей Leaflet */
+.leaflet-control-layers.leaflet-control {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #484848;
+    border-radius: 5px;
+}
+
+/** Переопределение стилей Leaflet */
+.leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
+    margin: 10px 0;
+    color: #d9d7d7;
+}
+
+/** Переопределяем стили страницы ключей */
+.item-key {
+    margin: 5px 0;
+    padding: 10px;
+    background: #363535;
+    border: 1px solid #6c5b3a;
+    border-radius: 5px;
+    max-height: 141px;
+    height: 141px;
+}
+
+/** Переопределение стилей кнопок на страницах ключей */
+p.item-name a {
+    color: #9a8866;
+    font-size: 18px;
+}
+
+/** Переопределение стилей кнопок на страницах ключей */
+p.item-name a:hover {
+    color: #9a8866;
+    text-decoration: underline;
+}
+
+/** Переопределение стилей заголовков на страницах ключей */
+h2.keys-titles, .keys-content h2 {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей active кнопок */
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #c4c4c4;
+    background-color: #6c5b3a;
+    background-image: none;
+    border-color: #6c5b3a;
+}

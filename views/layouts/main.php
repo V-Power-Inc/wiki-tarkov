@@ -47,23 +47,23 @@ AppAsset::register($this);
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
     
-    <!-- Горизонатльное меню - вызываемое компонентом -->
-    <?= MenuComponent::showMenu(); ?>
+        <!-- Горизонатльное меню - вызываемое компонентом -->
+        <?= MenuComponent::showMenu(); ?>
 
-    <!-- Alert Section -->
-    <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
+        <!-- Excluded titles -->
+        <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
 
-        <div class="heading-class">
-            <div class="container">
-                <h1 class="main-site-heading"><?= $this->title; ?></h1>
+            <div class="heading-class">
+                <div class="container">
+                    <h1 class="main-site-heading"><?= $this->title; ?></h1>
+                </div>
             </div>
-        </div>
 
-        <hr class="grey-line">
+            <hr class="grey-line">
 
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <?= $content ?>
+        <?= $content ?>
 
 </div>
 

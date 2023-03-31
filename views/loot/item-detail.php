@@ -143,24 +143,20 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
                 <!-- Расстояние заглушка -->
                 <div class="col-lg-12 height-25"></div>
 
-                <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
-                    <div class="col-lg-12 comment-fake-side">
-                        <div class="recommended-gm-content">
-                            <?= $this->render('/other/google-recommended.php'); ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
+
+                <div class="col-lg-12">
+                    <?= $this->render('/other/google-recommended.php'); ?>
+                </div>
 
                 <!-- Расстояние заглушка -->
                 <div class="col-lg-12 height-25"></div>
 
+                <!-- Комментарии -->
                 <div class="col-lg-12 comment-fake-side">
                     <?= $this->render('/other/comments');?>
                 </div>
-                
-                
-            </div>
 
+            </div>
 
         </div>
 
