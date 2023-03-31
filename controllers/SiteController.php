@@ -254,16 +254,6 @@ class SiteController extends AdvancedController
     }
 
     /**
-     * Рендер страницы для тех кто отключил использование JavaScript на сайте
-     *
-     * @return string
-     */
-    public function actionJsdisabled(): string
-    {
-        return $this->render('/site/offedjs');
-    }
-
-    /**
      * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
      * сайта на один день (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
