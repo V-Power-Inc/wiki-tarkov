@@ -53,7 +53,7 @@ AppAsset::register($this);
     <!-- Заголовки определенных страниц -->
     <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
 
-        <!-- Основное содержимое сайта -->
+        <!-- Заголовки -->
         <div class="heading-class">
             <div class="container">
                 <h1 class="main-site-heading"><?= $this->title; ?></h1>
