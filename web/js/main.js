@@ -117,8 +117,6 @@ $(document).ready(function() {
             data: {param: param, token : token},
             success: function(response) {
 
-                console.log(response);
-
                 if (response === 'light-theme') {
 
                     /** Удаляем иконку луны */
