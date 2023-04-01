@@ -254,35 +254,36 @@ class SiteController extends AdvancedController
     }
 
     /**
-     * Рендер страницы для тех кто отключил использование JavaScript на сайте
-     *
-     * @return string
-     */
-    public function actionJsdisabled(): string
-    {
-        return $this->render('/site/offedjs');
-    }
-
-    /**
      * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
      * сайта на один день (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
+     * time() + (60 * 60 * 24) - 1 день
+     * time() + (60 * 60 * 12) - 12 часов
+     *
      * @return mixed
+     * @throws HttpException - Если без AJAX пытаются сюда лезть прямым запросом
      */
     public function actionCloseOverlay()
     {
+        /** Если запрос отправлен через AJAX */
         if (Yii::$app->request->isAjax) {
+
+            /** Сетапим куки из запроса на сервак в переменную */
             $cookies = Yii::$app->request->cookies;
 
+            /** Если у поступающего сюда запроса не определена кука Overlay */
             if($cookies->get('overlay') == null) {
+
+                /** Создаем ее и задаем срок истечения 12 часов, в течении этого времени блок overlay будет скрыт у посетителя */
                 return Yii::$app->response->cookies->add(new Cookie([
                     'name' => 'overlay',
                     'value' => 1,
-                    'expire' => time() + (60 * 60 * 24),
+                    'expire' => time() + (60 * 60 * 12),
                 ]));
             }
         }
 
+        /** Исключение - в случае если сюда пытались залезть прямым запросом */
         throw new HttpException(404 ,'Такая страница не существует');
     }
 
