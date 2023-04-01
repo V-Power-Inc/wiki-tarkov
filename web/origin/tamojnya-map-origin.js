@@ -290,19 +290,7 @@ function disableMapCheckboxes(bool = false) {
 /*** function add special blocks with dop.content to users when inits click on market ***/
 function AddRelations() {
     // Ads were In AppendBlock
-    $('.leaflet-popup-content').append('<div id="adfox_167905082194672412"></div>\n' +
-        '<script>\n' +
-        '    window.yaContextCb.push(()=>{\n' +
-        '        Ya.adfoxCode.create({\n' +
-        '            ownerId: 700342,\n' +
-        '            containerId: \'adfox_167905082194672412\',\n' +
-        '            params: {\n' +
-        '                p1: \'cxqpw\',\n' +
-        '                p2: \'idod\'\n' +
-        '            }\n' +
-        '        })\n' +
-        '    })\n' +
-        '</script>');
+    $('.leaflet-popup-content');
 }
 
 /** Добавляем слушатель событий изменения базовых чекбоксов Leaflet */
