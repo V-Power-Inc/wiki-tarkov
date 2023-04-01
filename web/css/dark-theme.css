@@ -310,3 +310,116 @@ h2.keys-titles, .keys-content h2 {
     background-image: none;
     border-color: #6c5b3a;
 }
+
+/** Стили для блока курса валют */
+.currencies-content {
+    background: #4e4a4a;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/** Стили для текста курса валют */
+ul.current-images > li {
+    color: #c4c4c4;
+}
+
+/** Стили для заголовкой курса валют */
+.curencies-title {
+    color: #c4c4c4;
+}
+
+/** Стили для инпутов - курсов валют */
+.form-control.valute-course {
+    color: #c4c4c4;
+}
+
+/** Переопределили стили Disabled инпутов */
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #525252;
+    opacity: 1;
+}
+
+/** Стили для страницы курсов валют */
+div.currencies-content p b > span {
+    color: #c4c4c4!important;
+}
+
+/** Стили для страницы курсов валют */
+ul.currens-images > li   {
+    color: #c4c4c4!important;
+}
+
+/** Стили для списков на детальных страницах справочника лута */
+.item-loot > ul, .item-loot > div > ul {
+    color: #c4c4c4!important;;
+}
+
+/** Фоны на страницах торговцев */
+.interback-white {
+    padding: 50px;
+    background: #484848;
+}
+
+/** Фоны на страницах торговцев */
+.interback-grey {
+    padding: 50px;
+    background: #363535;
+}
+
+/** Заголовки и ссылки на страницах торговцев */
+h2 a {
+    color: #c4c4c4;
+    text-decoration: none;
+}
+
+/** Заголовки и ссылки на страницах торговцев */
+h2 a:hover {
+    color: #b6c0c4;
+    text-decoration: none;
+}
+
+/** Фоны на странице торговцев */
+.bg-white {
+    background: #484848;
+}
+
+/** Заголовки табов на странице торговцев */
+.tab-pane.active h3 {
+    color: #b6c0c4;
+}
+
+/** Wiki - таблицы на страницах торговцев */
+table.wikitable {
+    margin: 1em 0;
+    background-color: #363535;
+    border: 1px solid #9a8866;
+    border-collapse: collapse;
+    color: #000;
+    overflow-x: scroll;
+    width: 100%;
+    max-width: 100%;
+    min-width: 823px;
+}
+
+/** Обводка блока с информацией о бартерах на странице торговцев */
+.news-shortitem {
+    padding: 10px;
+    margin: 15px 0 15px 0;
+    background: #484848;
+    height: auto;
+    min-height: 180px;
+    border-radius: 5px;
+    border: 2px solid #9a8866;
+}
+
+/** Указываем цвет текстов в списках табов */
+.tab-pane.active ul {
+    color: #9a8866;
+}
+
+/** Обводки wiki таблиц */
+table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr > th, table.wikitable > * > tr > td {
+    border: 2px solid #9a8866;
+    text-align: center;
+    padding: 5px;
+}
