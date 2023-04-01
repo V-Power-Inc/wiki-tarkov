@@ -109,6 +109,9 @@ $(document).ready(function() {
     /** Функция позволяет менять темы сайта по нажатию на специальную иконку */
     $('.js-change-site-style').click(function() {
 
+        /** Раскомментить код метрики, после окончания работ, чтобы учитывать статистику по этой фиче */
+        // ym(47100633,'reachGoal','site_layout_change')
+
         /** Иконка со стилями */
         var IconStyleChanger = '.js-change-site-style';
 
@@ -148,7 +151,3 @@ $(document).ready(function() {
         })
     });
 });
-
-
-
-

@@ -12,8 +12,6 @@ use yii\web\AssetBundle;
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
- *
- * TODO: dark-theme должна подключаться JS'ом и должна быть возможность менять темы сайта по нажатию специальных иконок темная/светлая
  */
 class AppAsset extends AssetBundle
 {
