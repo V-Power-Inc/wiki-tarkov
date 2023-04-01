@@ -114,6 +114,8 @@ final class JsondataService
         foreach ($data as $d) {
             $out[] = ['value' => $d['words'], 'title' => $d['words']];
         }
+
+        /** Возвращаем конечный массив закодированным в JSON */
         return Json::encode($out);
     }
 
