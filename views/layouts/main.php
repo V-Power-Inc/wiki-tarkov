@@ -37,6 +37,15 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <!-- Check styles, which enabled by user -->
+    <?php if (isset($cookies['dark_theme'])): ?>
+        <link id="dark_theme" href="/css/dark-theme.css" rel="stylesheet">
+    <?php endif; ?>
+
+    <!-- Вынесено сюда из за возможностей менять цветовую тему -->
+    <link href="/css/media-queryes.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -46,7 +55,15 @@ AppAsset::register($this);
 <div class="wrap">
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
-    
+
+
+        <!-- Check styles, which enabled by user -->
+        <?php if (isset($cookies['dark_theme'])): ?>
+            <i class="fa fa-2x fa-sun-o js-change-site-style" title="Включить светлую тему сайта"></i>
+        <?php else: ?>
+            <i class="fa fa-2x fa-moon-o js-change-site-style" title="Включить темную тему сайта"></i>
+        <?php endif; ?>
+
         <!-- Горизонатльное меню - вызываемое компонентом -->
         <?= MenuComponent::showMenu(); ?>
 

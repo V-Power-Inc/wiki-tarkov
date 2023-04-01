@@ -40,6 +40,7 @@ class SiteController extends AdvancedController
     const ACTION_JSDISABLED             = 'jsdisabled';
     const ACTION_JSONVALUTE             = 'jsonvalute';
     const ACTION_CLOSE_OVERLAY          = 'close-overlay';
+    const ACTION_CHANGE_LAYOUT          = 'change-layout';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;
@@ -283,6 +284,47 @@ class SiteController extends AdvancedController
             }
         }
 
+        throw new HttpException(404 ,'Такая страница не существует');
+    }
+
+    /**
+     * Метод определяет, какую тему необходимо отобразить пользователю, в зависимости
+     * от наличия определенного кукиса - либо удаляет существующую куку, либо сетапит ее
+     *
+     * time() + (10 * 365 * 24 * 60 * 60) - максимально возможный срок жизни куки
+     *
+     * @return string
+     * @throws HttpException - Если запрос сюда без Ajax
+     */
+    public function actionChangeLayout(): string
+    {
+        /** Если запрос прилетел как AJAX */
+        if (Yii::$app->request->isAjax) {
+
+            /** Переменная с куками пользователя, которые нам известны */
+            $cookies = Yii::$app->request->cookies;
+
+            /** Если у пользователя нет куки - dark_theme, т.е. темной темы */
+            if ($cookies->get('dark_theme') == null) {
+
+                /** Сетапим ему ее на максимально возможный срок жизни куки */
+                Yii::$app->response->cookies->add(new Cookie([
+                    'name' => 'dark_theme',
+                    'value' => time() + (10 * 365 * 24 * 60 * 60)
+                ]));
+
+                /** Указываем во вьюхе сделать темную тему */
+                return 'dark-theme';
+            }
+
+            /** Удаляем кукис темной темы, если он был при запросе сюда */
+            Yii::$app->response->cookies->remove('dark_theme');
+
+            /** Указываем во вьюхе сделать светлую тему */
+            return 'light-theme';
+        }
+
+        /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
         throw new HttpException(404 ,'Такая страница не существует');
     }
 

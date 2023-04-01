@@ -20,14 +20,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/bootstrap.min.css',
         'css/site.css',
         'css/owl-css/owl.carousel.css',
         'css/owl-css/owl.theme.default.min.css',
         'css/font-awesome/font-awesome.min.css',
         'css/popup/magnific-popup.css',
-        'css/custom.css',
-        'css/dark-theme.css',
-        'css/media-queryes.css',
+        ['css/custom.css', 'id' => 'custom_site_styles'],
     ];
     public $js = [
         'js/bootstrap-js/bootstrap.min.js',

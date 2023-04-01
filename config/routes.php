@@ -12,12 +12,10 @@ use app\controllers\BossesController;
 use app\controllers\ApiController;
 
 use app\modules\admin\controllers\DefaultController;
-use app\modules\admin\controllers\ModeratorController;
 
 return [
     'admin/login' => DefaultController::routeId(DefaultController::ACTION_LOGIN),
     'admin/logout' => DefaultController::routeId(DefaultController::ACTION_LOGOUT),
-    'admin/ass-destroyer' => ModeratorController::routeId(ModeratorController::ACTION_INDEX),
 
     '' => SiteController::routeId(SiteController::ACTION_INDEX),
     'table-patrons' => SiteController::routeId(SiteController::ACTION_TABLE_PATRONS),
@@ -72,6 +70,9 @@ return [
 
     /** URL до детального предмета API */
     'item/<url:[\w_\/-]+>.html' => ApiController::routeId(ApiController::ACTION_ITEM),
+
+    /** URL до экшена, который устанавливает куку, которая запоминает пользователю его цветовую палитру сайта */
+    'change-layout' => SiteController::routeId(SiteController::ACTION_CHANGE_LAYOUT),
 
     /** Кастомный урл компонент */
     [

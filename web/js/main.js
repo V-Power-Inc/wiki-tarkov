@@ -105,6 +105,50 @@ $(document).ready(function() {
             $.wait(function(){$(".inner-button").show()} ,1);
         });
     }
+
+    /** Функция позволяет менять темы сайта по нажатию на специальную иконку */
+    $('.js-change-site-style').click(function() {
+
+        /** Иконка со стилями */
+        var IconStyleChanger = '.js-change-site-style';
+
+        $.ajax({
+            url: '/change-layout',
+            data: {param: param, token : token},
+            success: function(response) {
+
+                console.log(response);
+
+                if (response === 'light-theme') {
+
+                    /** Удаляем иконку луны */
+                    $(IconStyleChanger).removeClass('fa-sun-o');
+
+                    /** Добавляем иконку солнца */
+                    $(IconStyleChanger).addClass('fa-moon-o');
+
+                    /** Меняем тайтл */
+                    $(IconStyleChanger).attr('title', 'Включить темную тему сайта');
+
+                    /** Убираем темные стили */
+                    $('#dark_theme').remove();
+
+                } else if (response === 'dark-theme') {
+                    /** Удаляем иконку луны */
+                    $(IconStyleChanger).removeClass('fa-moon-o');
+
+                    /** Добавляем иконку солнца */
+                    $(IconStyleChanger).addClass('fa-sun-o');
+
+                    /** Меняем тайтл */
+                    $(IconStyleChanger).attr('title', 'Включить светлую тему сайта');
+
+                    /** Включаем темные стили */
+                    $('#custom_site_styles').after('<link id="dark_theme" href="/css/dark-theme.css" rel="stylesheet">');
+                }
+            }
+        })
+    });
 });
 
 

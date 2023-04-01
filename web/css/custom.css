@@ -2314,3 +2314,13 @@ table.patrons-tbl >thead > tr > th {
     background: #80808033;
     margin: 10px auto;
 }
+
+/** Стили для иконки, позволяющей менять стили сайта */
+.js-change-site-style.fa {
+    position: absolute;
+    top: 11px;
+    right: 30px;
+    color: orange;
+    cursor: pointer;
+    z-index: 9999;
+}
