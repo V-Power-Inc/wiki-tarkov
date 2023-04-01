@@ -5,14 +5,6 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
     <h1 class="admin-title-main">Главная админская страница</h1>
 </div>
 
-<?php if(isset(Yii::$app->user->identity->id)): ?>
-    <?php if(Yii::$app->user->identity->id === 1 || Yii::$app->user->identity->id == 2): ?>
-        <div class="col-lg-12 text-center margin-bottom-20">
-            <a class="btn btn-primary gods-btn" href="/admin/ass-destroyer">Модерация для избранных</a>
-        </div>
-    <?php endif; ?>
-<?php endif; ?>
-
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center margin-bottom-30">Работа со справочником лута</h2>
@@ -37,7 +29,6 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
-        <li><a href="/admin/reviews" class="admin-tabs w-100-important">Отзывы о сделках</a></li>
         <li><a href="/admin/clans" class="admin-tabs w-100-important">Заявки кланов</a></li>
         <li><a href="/admin/barters" class="admin-tabs w-100-important">Бартеры торговцев</a></li>
         <li><a href="/admin/questions" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>
