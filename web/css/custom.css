@@ -2187,11 +2187,11 @@ table.patrons-tbl >thead > tr > th {
 
 /** Подложка для босса - нужна для адекватного вида контента **/
 .boss-page-bg {
-    padding: 15px;
+    padding: 10px;
     background: #80808042;
     border: 2px solid #c3392c;
     border-radius: 5px;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
 /** Стили для отображения страниц с лутом **/
@@ -2313,4 +2313,15 @@ table.patrons-tbl >thead > tr > th {
     padding: 10px;
     background: #80808033;
     margin: 10px auto;
+}
+
+/** Стили для заголовка с блоком предмета из списка актуального лута */
+h2.actual-items-block-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/** Стили для иконки - проверено админами из списка актуального лута */
+.fa.checked-by-admins.actual-items-block {
+    margin-left: 16px;
 }
