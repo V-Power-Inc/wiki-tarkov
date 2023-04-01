@@ -54,7 +54,7 @@ $this->registerMetaTag([
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
-            <?= $this->render('/other/yandex-direct-mainpage.php'); ?>
+            <!-- Empty space -->
         </div>
     
         <div class="body-content">
@@ -139,7 +139,7 @@ $this->registerMetaTag([
                     
                     <!-- Dop. content block -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
-                        <?= $this->render('/other/google-gor.php'); ?>
+                        <!-- Empty space -->
                     </div>
 
                 </div>
