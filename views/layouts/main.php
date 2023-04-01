@@ -50,18 +50,14 @@ AppAsset::register($this);
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu(); ?>
 
-    <!-- Alert Section -->
-    <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
-
-        <div class="heading-class">
-            <div class="container">
-                <h1 class="main-site-heading"><?= $this->title; ?></h1>
-            </div>
+    <!-- Основное содержимое сайта -->
+    <div class="heading-class">
+        <div class="container">
+            <h1 class="main-site-heading"><?= $this->title; ?></h1>
         </div>
+    </div>
 
-        <hr class="grey-line">
-
-    <?php endif; ?>
+    <hr class="grey-line">
 
     <?= $content ?>
 
@@ -91,7 +87,6 @@ AppAsset::register($this);
 </footer>
 
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
-
 
 <?php if (!isset($cookies['overlay'])): ?>
     <div class="overlay-block">
