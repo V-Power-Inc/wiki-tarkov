@@ -50,14 +50,19 @@ AppAsset::register($this);
     <!-- Горизонатльное меню - вызываемое компонентом -->
     <?= MenuComponent::showMenu(); ?>
 
-    <!-- Основное содержимое сайта -->
-    <div class="heading-class">
-        <div class="container">
-            <h1 class="main-site-heading"><?= $this->title; ?></h1>
-        </div>
-    </div>
+        <!-- Excluded titles -->
+        <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
 
-    <hr class="grey-line">
+        <!-- Основное содержимое сайта -->
+        <div class="heading-class">
+            <div class="container">
+                <h1 class="main-site-heading"><?= $this->title; ?></h1>
+            </div>
+        </div>
+
+        <hr class="grey-line">
+
+    <?php endif; ?>
 
     <?= $content ?>
 
