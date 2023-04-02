@@ -4,6 +4,8 @@
  * User: comp
  * Date: 23.10.2017
  * Time: 21:11
+ *
+ * Этот компонент является рудиментом, имеет смысл пересмотреть то как он сделан, возможно найдутся более адекватные решения
  */
 
 namespace app\components;
@@ -37,7 +39,7 @@ class MenuComponent
 
     /**
      * Case в этом методе должен быть совпадением с Action, потому не рекомендуется называть экшены в контроллерах IndexAction
-     * Устаревший функционал, который нуждается в замене (Но видимо заменен не будет, т.к. есть более важные вещи)
+     * Устаревший функционал, который нуждается в замене (Но видимо заменен не будет, т.к. есть более важные проблемы)
      */
     public static function Active()
     {
@@ -64,14 +66,16 @@ class MenuComponent
     }
 
     /**
-     * получаем основные пункты меню
-     * @return array|\yii\db\ActiveRecord[]
+     * Получаем основные пункты меню и возвращаем полностью готовое меню в виде строки
+     *
+     * @return string
      */
-    public static function showMenu()
+    public static function showMenu(): string
     {
         /*** Разбивка для страниц карт локаций ***/
         $intermaps = "";
 
+        /** URL адреса связанные с интерактивными картами */
         $mapsurls = [
             "/maps",
             "/maps/zavod-location",
@@ -90,7 +94,8 @@ class MenuComponent
 
        /*** Разбивка для страниц торговцев и их квестов ***/
         $pagequests = "";
-        
+
+        /** URL адреса связанные с торговцами и их квестами */
         $urlarray = [
             "/quests-of-traders",
             "/quests-of-traders/prapor-quests",
@@ -114,7 +119,8 @@ class MenuComponent
         
         /*** Разбивка для активных умений ***/
         $skills = '';
-        
+
+        /** URL адреса связанные со страницами умений */
         $skillsarray = [
             "/skills",
             "/skills/physical",
@@ -149,12 +155,16 @@ class MenuComponent
 
         /*** Далее пошел шаблон отрисовки меню ***/
         self::Active();
-        $menu='    <nav class="navbar navbar-default fixed-navigatsiya">
+        $menu='    <nav class="navbar navbar-default fixed-navigatsiya"> 
+    
+        <!-- Changer of site theme -->
+        '.self::themeToggler().'
+    
         <div class="container adaptive-fix">
             <!-- Заголовок -->
             <div class="navbar-header">
                 <img class="mobile-small-logo" src="/img/logo.png">
-                <a class="mobile-brand" href="/">База знаний Escape from Tarkov</a>
+                <a class="mobile-brand" href="/">База знаний EFT</a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -222,7 +232,7 @@ class MenuComponent
                     </li>
 
                      <!-- Other lists of menu selects -->   
-                     <li class="dropdown '.$other.'">
+                     <li class="dropdown information-nav-block '.$other.'">
                       <a href="#" class="dropdown-toggle '.$other.'" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Информация</b><span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="/currencies">Курсы валют</a></li>
@@ -245,6 +255,28 @@ class MenuComponent
     </nav>';
 
         return $menu;
+    }
+
+    /**
+     * Функция, которая возвращает иконку включения темной или светлой темы, в зависимости
+     * от наличия определенной куки
+     *
+     * @return string
+     */
+    public static function themeToggler(): string
+    {
+        /** Переменная с доступом до кукисов */
+        $cookies = Yii::$app->request->cookies;
+
+        /** Если есть кука - dark_theme */
+        if (isset($cookies['dark_theme'])) {
+
+            /** Отображаем иконку включить светлую тему сайта */
+            return '<i class="fa fa-2x fa-sun-o js-change-site-style" title="Включить светлую тему сайта"></i>';
+        }
+
+        /** Если кука отсутствует - показываем иконку - включить темную тему сайта */
+        return '<i class="fa fa-2x fa-moon-o js-change-site-style" title="Включить темную тему сайта"></i>';
     }
 }
 ?>

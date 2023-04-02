@@ -48,7 +48,8 @@ class SkillsController extends AdvancedController
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
                     Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay')
+                    Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('dark_theme')
                 ]
             ],
         ];

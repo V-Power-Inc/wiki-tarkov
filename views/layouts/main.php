@@ -37,6 +37,15 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <!-- Check styles, which enabled by user -->
+    <?php if (isset($cookies['dark_theme'])): ?>
+        <link id="dark_theme" href="/css/dark-theme.css" rel="stylesheet">
+    <?php endif; ?>
+
+    <!-- Вынесено сюда из за возможностей менять цветовую тему -->
+    <link href="/css/media-queryes.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -46,26 +55,24 @@ AppAsset::register($this);
 <div class="wrap">
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
-    
-    <!-- Горизонатльное меню - вызываемое компонентом -->
-    <?= MenuComponent::showMenu(); ?>
 
-    <!-- Заголовки определенных страниц -->
-    <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
+        <!-- Горизонатльное меню - вызываемое компонентом -->
+        <?= MenuComponent::showMenu(); ?>
 
-        <!-- Заголовки -->
-        <div class="heading-class">
-            <div class="container">
-                <h1 class="main-site-heading"><?= $this->title; ?></h1>
+        <!-- Заголовки определенных страниц -->
+        <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
+
+            <div class="heading-class">
+                <div class="container">
+                    <h1 class="main-site-heading"><?= $this->title; ?></h1>
+                </div>
             </div>
-        </div>
 
-        <hr class="grey-line">
+            <hr class="grey-line">
 
-    <?php endif; ?>
+        <?php endif; ?>
 
-    <?= $content ?>
-
+        <?= $content ?>
 </div>
 
 <footer>

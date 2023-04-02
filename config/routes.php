@@ -71,6 +71,9 @@ return [
     /** URL до детального предмета API */
     'item/<url:[\w_\/-]+>.html' => ApiController::routeId(ApiController::ACTION_ITEM),
 
+    /** URL до экшена, который устанавливает куку, которая запоминает пользователю его цветовую палитру сайта */
+    'change-layout' => SiteController::routeId(SiteController::ACTION_CHANGE_LAYOUT),
+
     /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',

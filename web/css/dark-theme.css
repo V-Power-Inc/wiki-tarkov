@@ -1,0 +1,723 @@
+/** В этом файле стили для отображения сайта в темном цвете
+ *
+ * Created: 2023-03-31
+ * Author: PC_Principal
+ */
+
+/** Стиль для бэкграунда сайта */
+body {
+    background: #363535;
+}
+
+/** Стили для заголовков */
+body h1, .jumbotron h1, h1.main-site-heading, .item-loot-title a:hover, .item-loot-title a {
+    color: #c4c4c4;
+}
+
+/** Стили футера */
+footer {
+    background-color: #272727;
+    color: #fff;
+    height: 140px;
+    border-top: 2px solid #545325;
+    position: relative;
+    box-shadow: 0 0 100px rgba(65,61,52,1), 0 0 6px rgba(232,190,107,0.8);
+}
+
+/** Стили для текста */
+p, p.loot-description {
+    color: #c4c4c4
+}
+
+/** Класс заголовков для */
+.heading-class {
+    padding: 50px 0 10px 0;
+    background: #363535;
+}
+
+/** Линия разделитель */
+.grey-line {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid #6c593c;
+    border-bottom: 1px solid #6c593c;
+    box-shadow: -5px 2px 100px rgba(65,61,52,1), 1px 1px 6px 1px rgb(207 160 69 / 80%);
+}
+
+/** Цвет подложки на страницах сайта */
+.quests-content, .keys-content, .clans-content, .donates-content, .api-content {
+    background: #4e4a4a;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/** Цвет подложки на страницах сайта - верхняя часть */
+.top-content {
+    padding: 20px;
+    background: #363535;
+    border: 1px solid #6c5b3a;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/** Цвет стилей на страницах справочника лута (Блок с контентом) */
+.col-lg-12 .item-loot {
+    min-height: 200px;
+    height: auto;
+    margin: 10px 0;
+    padding: 20px;
+    background: #363535;
+    border-radius: 5px;
+    border: 1px solid #6c5b3a;
+}
+
+/** Стили для изображений справочника лута */
+.loot-image {
+    float: left;
+    margin: 5px 10px 5px 0;
+    border: 1px solid #9a8866;
+    box-shadow: 1px 1px 20px;
+    max-width: 100%;
+    background: #9a8866;
+}
+
+/** Стили навигации */
+.nav.categories {
+    background: #4e4a4a;
+    border-radius: 5px;
+}
+
+/** Стили для ссылок */
+a, a:hover, a:focus {
+    color: #c4c4c4;
+    text-decoration: none;
+}
+
+/** Наведение на ссылку второго уровня в справочнике лута */
+.level-2 a:hover {
+    color: #fdfbfb;
+}
+
+/** Активная вкладка второго уровня */
+li.level-2.active {
+    background: #5171ab;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+}
+
+/** Стили под блок для комментариев */
+.comment-fake-side {
+    background: #363535;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/** Блок уведомлений - оповещения */
+.alert-info {
+    color: #c4c4c4;
+    background-color: #3c3b3b;
+    border-color: #6c5b3a;
+}
+
+/** Переопределение бутстраповских стилей form-control */
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #484848;
+    background-image: none;
+    border: 1px solid #9a8866;
+    border-radius: 4px;
+}
+
+/** Переопределение стилей navbar */
+.navbar {
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid #545325;
+    box-shadow: 0px 1px 4px;
+    z-index: 1001;
+}
+
+/** Переопределение стилей navbar */
+.navbar-default {
+    background-color: #363535;
+    border-color: #9a8866;
+}
+
+/** Переопределение focus - form-control */
+.form-control:focus {
+    border-color: #9a8866;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(154 136 102);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(154 136 102);
+}
+
+/** Стили под Ajax поиск */
+.tt-input.loading {
+    color: #c4c4c4;
+}
+
+/** Изменены стили подписей инпутов */
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: #c4c4c4;
+}
+
+/** Переопределяем стили подложки в AJAX результатах запроса */
+.tt-menu {
+    background: #484848!important;
+}
+
+/** Переопределение стилей Ajax попапа */
+.ajax-image-preview {
+    max-width: 50px;
+    float: left;
+    margin: 5px 10px;
+    box-shadow: 1px 1px 20px;
+    color: black;
+    border: 1px solid #6c5b3a;
+}
+
+/** Переопределение стилей Ajax попапа */
+.tt-menu .tt-suggestion.tt-cursor, .tt-menu .tt-suggestion.tt-selectable:hover {
+    cursor: default;
+    text-decoration: none;
+    outline: 0;
+    background-color: #2e2c2c;
+    color: #262626;
+}
+
+/** Переопределение стилей Ajax попапа */
+.ajax-preview-title {
+    color: #9a8866;
+    font-size: 16px;
+    padding-top: 2px;
+    font-weight: bold;
+}
+
+/** Переопределение цвета текста в дефолтном состоянии поиска AJAX */
+.tt-input.form-control {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей кнопок с обводками */
+.main-link, .main-inter-link {
+    color: #fff;
+    font-size: 16px;
+    background: #272727;
+    border: 2px solid #9a8866;
+    transition: .5s;
+}
+
+/** Переопределение стилей кнопок с обводками */
+.main-link:hover, .main-inter-link:hover {
+    color: #c4c4c4;
+    background: #363535;
+    border-color: #9a8866;
+    transition: .5s;
+}
+
+/** Стили для селектора ключа */
+span.key-selector {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    color: #c4c4c4;
+}
+
+/** Селект на странице квестовых */
+#items-questitem {
+    width: 200px;
+    display: inline-block;
+    color: #c4c4c4;
+    cursor: pointer;
+}
+
+#doorkeys-doorkey {
+    color: #c4c4c4;
+    cursor: pointer;
+}
+
+/** Переопределение Primary кнопок */
+.btn-primary {
+    color: #fcffff;
+    background-color: #9a7e50;
+    border-color: #9a8858;
+}
+
+/** Переопределение Primary наведения */
+.btn-primary:hover {
+    color: #f9f9f9;
+    background-color: #9b9283;
+    border-color: #9a8866;
+    cursor: pointer;
+}
+
+/** Переопределение стилей заголовков на интерактивных картах */
+.heading-class.mappage {
+    border-bottom: 2px solid #545325;
+}
+
+/** Переопределение стилей Leaflet */
+.leaflet-control-layers.leaflet-control {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    background: #484848;
+    border-radius: 5px;
+}
+
+/** Переопределение стилей Leaflet */
+.leaflet-control-layers.leaflet-control > .all-map-blocks > .form-control {
+    margin: 10px 0;
+    color: #d9d7d7;
+}
+
+/** Переопределяем стили страницы ключей */
+.item-key {
+    margin: 5px 0;
+    padding: 10px;
+    background: #363535;
+    border: 1px solid #6c5b3a;
+    border-radius: 5px;
+    max-height: 141px;
+    height: 141px;
+}
+
+/** Переопределение стилей кнопок на страницах ключей */
+p.item-name a {
+    color: #9a8866;
+    font-size: 18px;
+}
+
+/** Переопределение стилей кнопок на страницах ключей */
+p.item-name a:hover {
+    color: #9a8866;
+    text-decoration: underline;
+}
+
+/** Переопределение стилей заголовков на страницах ключей */
+h2.keys-titles, .keys-content h2 {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей active кнопок */
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #c4c4c4;
+    background-color: #6c5b3a;
+    background-image: none;
+    border-color: #6c5b3a;
+}
+
+/** Стили для блока курса валют */
+.currencies-content {
+    background: #4e4a4a;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/** Стили для текста курса валют */
+ul.current-images > li {
+    color: #c4c4c4;
+}
+
+/** Стили для заголовкой курса валют */
+.curencies-title {
+    color: #c4c4c4;
+}
+
+/** Стили для инпутов - курсов валют */
+.form-control.valute-course {
+    color: #c4c4c4;
+}
+
+/** Переопределили стили Disabled инпутов */
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #525252;
+    opacity: 1;
+}
+
+/** Стили для страницы курсов валют */
+div.currencies-content p b > span {
+    color: #c4c4c4!important;
+}
+
+/** Стили для страницы курсов валют */
+ul.currens-images > li   {
+    color: #c4c4c4!important;
+}
+
+/** Стили для списков на детальных страницах справочника лута */
+.item-loot > ul, .item-loot > div > ul {
+    color: #c4c4c4!important;;
+}
+
+/** Фоны на страницах торговцев */
+.interback-white {
+    padding: 50px;
+    background: #484848;
+}
+
+/** Фоны на страницах торговцев */
+.interback-grey {
+    padding: 50px;
+    background: #363535;
+}
+
+/** Заголовки и ссылки на страницах торговцев */
+h2 a {
+    color: #c4c4c4;
+    text-decoration: none;
+}
+
+/** Заголовки и ссылки на страницах торговцев */
+h2 a:hover {
+    color: #b6c0c4;
+    text-decoration: none;
+}
+
+/** Фоны на странице торговцев */
+.bg-white {
+    background: #484848;
+}
+
+/** Заголовки табов на странице торговцев */
+.tab-pane.active h3 {
+    color: #b6c0c4;
+}
+
+/** Wiki - таблицы на страницах торговцев */
+table.wikitable {
+    margin: 1em 0;
+    background-color: #363535;
+    border: 1px solid #9a8866;
+    border-collapse: collapse;
+    color: #000;
+    overflow-x: scroll;
+    width: 100%;
+    max-width: 100%;
+    min-width: 823px;
+}
+
+/** Обводка блока с информацией о бартерах на странице торговцев */
+.news-shortitem {
+    padding: 10px;
+    margin: 15px 0 15px 0;
+    background: #484848;
+    height: auto;
+    min-height: 180px;
+    border-radius: 5px;
+    border: 2px solid #9a8866;
+    color: #c4c4c4;
+}
+
+/** Указываем цвет текстов в списках табов */
+.tab-pane.active ul {
+    color: #9a8866;
+}
+
+/** Обводки wiki таблиц */
+table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr > th, table.wikitable > * > tr > td {
+    border: 2px solid #9a8866;
+    text-align: center;
+    padding: 5px;
+    color: #c4c4c4;
+}
+
+/** Стили оверлея */
+.overlay-block {
+    background: #4e4a4a;
+}
+
+/** Стили навигации на странице квестов */
+.nav.nav-list.bs-docs-sidenav.affix li a, .nav.nav-list.bs-docs-sidenav li a {
+    background: #4e4a4a;
+    color: #c4c4c4;
+}
+
+/** Стили навигации разделителя квестов торговцев */
+.bs-docs-sidenav > li > a {
+    border: 1px solid #9a8866;
+}
+
+/** Стили активного слота квеста торговца */
+.nav.nav-list.bs-docs-sidenav.affix li.active a, .nav.nav-list.bs-docs-sidenav li.active a {
+    background: rgb(216, 216, 216);
+    color: #9a8866;
+}
+
+/** Стили квестового блока */
+.title-of-item-block {
+    font-size: 20px!important;
+    font-weight: bold;
+    background: #363535;
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+/** Стили заглавий на страницах квестов */
+.title-of-item-block span.red {
+    color: #9a8866;
+}
+
+/** Стили блоков - выдываемые предметы за успешное прохождение квестов */
+.barter-items-count {
+    background: #363535;
+}
+
+/** Количество предметов выдаваемых за что-либо (Выполнение квеста или бартеры) */
+.barter-items-count > .count-for-barter > b {
+    color: #c4c4c4;
+}
+
+/** Заголовки в описаниях торговцев */
+h2 > span > strong {
+    color: #998766;
+}
+
+/** Стили активного элемента навигации в верхнем меню */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: rgb(253 253 253);
+    background-color: rgb(108 89 60);
+    font-weight: bold;
+}
+
+/** Иконка напротив категорий в справочнике лута */
+.fa-check-circle {
+    color: #958266;
+    font-size: 16px;
+    padding-right: 5px;
+}
+
+/** Переопределение стилей табов на страницах бартеров торговцев по уровням */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #c4c4c4;
+    cursor: default;
+    background-color: #9a8866;
+    border: 1px solid #9a8866;
+    border-bottom-color: transparent;
+}
+
+/** Переопределны стили наведения на блоки табов на страницах торговцев */
+.nav-tabs > li > a:hover {
+    border-color: #eeeeee #eeeeee #ddd;
+    color: #c4c4c4;
+}
+
+/** Переопределены стили WIKI таблиц */
+.loot-tables tr td {
+    padding: 10px;
+    color: #c4c4bb;
+    border: 2px solid #c4c4bb;
+}
+
+/** Переопределены стили WIKI таблиц - умения */
+.loot-tables tr:first-child {
+    background: #6c593c;
+    color: white;
+    border: 2px solid #6c593c;
+}
+
+/** Переопределение стилей новостей на странице новостей */
+a.news-link {
+    color: #c4c4c4;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+/** Стили даты на странице списка новостей */
+.news-date {
+    color: #c4c4c4;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/** Стили текста новостей на странице списка новостей */
+.news-short-text {
+    font-size: 16px;
+    color: #c4c4c4;
+}
+
+/** Стили заголовков новостей для transition */
+a.news-link:hover {
+    color: #9a8866;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+/** Переопределение стилей дефолтной бутстраповской навигации */
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    color: #f3fbf3;
+    cursor: not-allowed;
+    background-color: #9a8866;
+    border-color: #4d4949;
+}
+
+/** Переопределение стилей дефолтной бутстраповской навигации */
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #3e4042;
+    border-color: #3e4042;
+}
+
+/** Переопределение стилей дефолтной бутстраповской навигации */
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #eff7ef;
+    text-decoration: none;
+    background-color: #978665;
+    border: 1px solid #4d4948;
+}
+
+/** Переопределение стилей подложки на странице списка интерактивных карт */
+.white-content {
+    background: #4e4a4a;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/** Переопределение стилей заголовков на страницах списка интерактивных карт */
+.map-heading {
+    color: #c4c4c4;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/** Переопределение стилей на странице частых вопросов */
+h2.question-title {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей на странице частых вопросов */
+.question-block {
+    border: 2px solid #6c593c;
+}
+
+/** Переопределение стилей на странице частых вопросов */
+.question-block.bg-white {
+    color: #c4c4c4;
+}
+
+/** Задаем стили, что определенные кланы не были найдены */
+.alert-danger {
+    color: #ff6565;
+    background-color: #3c3b3b;
+    border-color: #6c593c;
+}
+
+/** Указываем стили заголовкам кланов */
+h3.clan-title {
+    color: #fdfcfb;
+    text-decoration: none;
+}
+
+/** Переопределяем стили лабелей */
+.label-info, .badge-info {
+    background-color: #91774c;
+}
+
+/** Переопределение стилей блока кланов */
+.clan-block {
+    border: 2px solid #9a8866;
+}
+
+/** Переопределение стилей на странице добавления кланов */
+#reg-new-clan input {
+    color: #c4c4c4;
+}
+
+/** Переопределение стилей на странице добавления кланов */
+.clans-content.special-border {
+    border: 2px solid #9a8866;
+    border-radius: 5px;
+}
+
+/** Переопределение значений - заголовки на страницах списка локаций с боссами */
+.boss-map-heading {
+    color: #c4c4c4;
+}
+
+/** Переопределяем бэкграунды на страницах со списком боссов */
+.boss-page-bg {
+    padding: 10px;
+    background: #80808042;
+    border: 2px solid #9a8866;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+/** Переопределение стилей описания боссов */
+.boss-page-text {
+    font-size: 20px;
+    color: #e1dfdf;
+}
+
+/** Переопределяем стили на странице поиска актуального лута */
+.form-search-block {
+    padding: 15px;
+    background: #80808029;
+    border: 2px solid #9a8866;
+    border-radius: 5px;
+}
+
+/** Переопределяем стили на странице поиска актуального лута */
+.item-block-variables {
+    padding: 10px;
+    background: #363535;
+    margin: 10px 0;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.patrons-tbl.loot-tables tr td {
+    padding: 10px;
+    border: 2px solid #d3c0a4;
+    background: #4e4a4a;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.apt-pos-sticky-left-2 {
+    position: sticky;
+    left: 90px;
+    z-index: 800;
+    background: #515972!important;
+    color: #fff;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.apt-pos-sticky-left {
+    position: sticky;
+    left: -1px;
+    z-index: 800;
+    background: #515972!important;
+    color: #fff;
+}
+
+/** Переопределение угла в таблицах патронов (Пересечение верхнего и горизонтального скроллбаров) */
+.fix-tables::-webkit-scrollbar-corner {
+    background: #4e4a4a!important;
+}
+
+/** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #484848;
+    color: #333;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+/** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
+.leaflet-container a {
+    color: #9a7e50;
+}

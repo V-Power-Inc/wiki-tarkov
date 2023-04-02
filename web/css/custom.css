@@ -1968,9 +1968,10 @@ a.clan-community-link {
 
 .static-height-afm {
     min-height: 180px!important;
-    max-height: 180px!important;;
-    height: 180px!important;
+    max-height: 230px!important;
+    height: auto;
     margin: 15px 0 15px 0!important;
+    display: block;
 }
 
 .col-lg-12.gor-pds {
@@ -2315,13 +2316,23 @@ table.patrons-tbl >thead > tr > th {
     margin: 10px auto;
 }
 
+/** Стили для иконки, позволяющей менять стили сайта */
+.js-change-site-style.fa {
+    position: absolute;
+    top: 11px;
+    right: 30px;
+    color: orange;
+    cursor: pointer;
+    z-index: 9999;
+}
+
 /** Стили для заголовка с блоком предмета из списка актуального лута */
 h2.actual-items-block-title {
     margin-top: 0;
     margin-bottom: 20px;
 }
 
-/** Стили для иконки - проверено админами из списка актуального лута */
+/** Отступ для иконок на страницах справочника актуального лута */
 .fa.checked-by-admins.actual-items-block {
     margin-left: 16px;
 }
