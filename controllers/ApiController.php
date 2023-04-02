@@ -68,9 +68,11 @@ class ApiController extends AdvancedController
 
                 /** Если $items не пустой - тогда логируем запрос с флагом */
                 if ($items) {
+
                     /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
                     $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
                 } else {
+
                     /** Если $items пустой - устанавливаем логирование запроса без флага */
                     $api->setSearchLog($form_model);
                 }

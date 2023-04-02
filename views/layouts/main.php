@@ -59,7 +59,7 @@ AppAsset::register($this);
         <!-- Горизонатльное меню - вызываемое компонентом -->
         <?= MenuComponent::showMenu(); ?>
 
-        <!-- Excluded titles -->
+        <!-- Заголовки определенных страниц -->
         <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
 
             <div class="heading-class">

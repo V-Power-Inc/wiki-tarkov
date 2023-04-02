@@ -125,10 +125,11 @@ $this->registerMetaTag([
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
-                        <i class="fa fa-check-circle checked-by-admins" title="Актуальная информация"></i>
-
                         <!-- Name -->
-                        <h2 class="text-left">
+                        <h2 class="text-left actual-items-block-title">
+
+                            <i class="fa fa-check-circle checked-by-admins actual-items-block" title="Актуальная информация"></i>
+
                             <a href="/item/<?= $item->url ?>.html">
                                 <?= $item->json['name'] ?>
                             </a>
@@ -203,13 +204,6 @@ $this->registerMetaTag([
             <?php  $this->endCache(); } ?>
         </div>
 
-
     </div>
-
-
-
-
-
-
 
 </div>
