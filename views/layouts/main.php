@@ -56,14 +56,6 @@ AppAsset::register($this);
     <!-- Заглушка фиксированного меню -->
     <div class="h-52"></div>
 
-
-        <!-- Check styles, which enabled by user -->
-        <?php if (isset($cookies['dark_theme'])): ?>
-            <i class="fa fa-2x fa-sun-o js-change-site-style" title="Включить светлую тему сайта"></i>
-        <?php else: ?>
-            <i class="fa fa-2x fa-moon-o js-change-site-style" title="Включить темную тему сайта"></i>
-        <?php endif; ?>
-
         <!-- Горизонатльное меню - вызываемое компонентом -->
         <?= MenuComponent::showMenu(); ?>
 
@@ -81,7 +73,6 @@ AppAsset::register($this);
         <?php endif; ?>
 
         <?= $content ?>
-
 </div>
 
 <footer>
@@ -108,7 +99,6 @@ AppAsset::register($this);
 </footer>
 
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
-
 
 <?php if (!isset($cookies['overlay'])): ?>
     <div class="overlay-block">

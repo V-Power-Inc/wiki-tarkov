@@ -166,6 +166,16 @@
 
 }
 
+/** Отключение пункта меню - Информация на определенных разрешениях */
+@media(max-width: 869px) {
+
+    /** Скрываем пункты меню на определенных разрешениях */
+    .navbar-nav > li.information-nav-block {
+        display: none;
+    }
+
+}
+
 /*** col-xs screen size (767px) ***/
 @media (max-width: 767px) {
 
@@ -342,6 +352,21 @@
 
     #mapCoords {
         display: none;
+    }
+
+    /** Стили для иконки, позволяющей менять стили сайта */
+    .js-change-site-style.fa {
+        position: absolute;
+        top: 11px;
+        right: 85px;
+        color: orange;
+        cursor: pointer;
+        z-index: 9999;
+    }
+
+    /** Указываем отображать блок меню с информацией */
+    .navbar-nav > li.information-nav-block {
+        display: block;
     }
 }
 

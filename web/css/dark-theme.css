@@ -1,4 +1,8 @@
-/** В этом файле стили для отображения сайта в темном цвете */
+/** В этом файле стили для отображения сайта в темном цвете
+ *
+ * Created: 2023-03-31
+ * Author: PC_Principal
+ */
 
 /** Стиль для бэкграунда сайта */
 body {
@@ -674,4 +678,46 @@ h3.clan-title {
     padding: 10px;
     background: #363535;
     margin: 10px 0;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.patrons-tbl.loot-tables tr td {
+    padding: 10px;
+    border: 2px solid #d3c0a4;
+    background: #4e4a4a;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.apt-pos-sticky-left-2 {
+    position: sticky;
+    left: 90px;
+    z-index: 800;
+    background: #515972!important;
+    color: #fff;
+}
+
+/** Переопределяем стили на странице таблиц патронов */
+.apt-pos-sticky-left {
+    position: sticky;
+    left: -1px;
+    z-index: 800;
+    background: #515972!important;
+    color: #fff;
+}
+
+/** Переопределение угла в таблицах патронов (Пересечение верхнего и горизонтального скроллбаров) */
+.fix-tables::-webkit-scrollbar-corner {
+    background: #4e4a4a!important;
+}
+
+/** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #484848;
+    color: #333;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+/** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
+.leaflet-container a {
+    color: #9a7e50;
 }

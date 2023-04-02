@@ -62,7 +62,8 @@ class SiteController extends AdvancedController
                     Yii::$app->request->url,
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay')
+                    Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('dark_theme')
                 ]
             ],
         ];
@@ -291,7 +292,7 @@ class SiteController extends AdvancedController
      * Метод определяет, какую тему необходимо отобразить пользователю, в зависимости
      * от наличия определенного кукиса - либо удаляет существующую куку, либо сетапит ее
      *
-     * time() + (10 * 365 * 24 * 60 * 60) - максимально возможный срок жизни куки
+     * time() + 3600 * 24 * 365 - 1 год, срок жизни куки
      *
      * @return string
      * @throws HttpException - Если запрос сюда без Ajax
@@ -307,10 +308,11 @@ class SiteController extends AdvancedController
             /** Если у пользователя нет куки - dark_theme, т.е. темной темы */
             if ($cookies->get('dark_theme') == null) {
 
-                /** Сетапим ему ее на максимально возможный срок жизни куки */
+                /** Сетапим кукис на 1 год */
                 Yii::$app->response->cookies->add(new Cookie([
                     'name' => 'dark_theme',
-                    'value' => time() + (10 * 365 * 24 * 60 * 60)
+                    'value' => 1,
+                    'expire' => time() + 3600 * 24 * 365
                 ]));
 
                 /** Указываем во вьюхе сделать темную тему */

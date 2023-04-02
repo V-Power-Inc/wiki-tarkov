@@ -68,7 +68,8 @@ class MapsController extends AdvancedController
                     Yii::$app->request->isAjax,
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay')
+                    Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('dark_theme')
                 ]
             ],
         ];

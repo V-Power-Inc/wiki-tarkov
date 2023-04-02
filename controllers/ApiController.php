@@ -123,5 +123,4 @@ class ApiController extends AdvancedController
     public function actionSearch(string $q): string {
         return JsondataService::getSearchItem($q);
     }
-
 }

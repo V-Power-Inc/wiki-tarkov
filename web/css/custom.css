@@ -1968,9 +1968,10 @@ a.clan-community-link {
 
 .static-height-afm {
     min-height: 180px!important;
-    max-height: 180px!important;;
-    height: 180px!important;
+    max-height: 230px!important;
+    height: auto;
     margin: 15px 0 15px 0!important;
+    display: block;
 }
 
 .col-lg-12.gor-pds {
