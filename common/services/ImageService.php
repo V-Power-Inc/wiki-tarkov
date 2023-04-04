@@ -113,11 +113,10 @@ final class ImageService
             'Механик' => '/img/torgovcy/mehanic-quests/mehanic-full.jpg',
             'Барахольщик' => '/img/torgovcy/baraholshik-quests/baraholshik-full.jpg',
             'Егерь' => '/img/torgovcy/eger.jpeg',
-            'Смотритель' => '/img/torgovcy/small/light_keeper.jpg',
+            'Смотритель' => '/img/torgovcy/seeker_full.jpg',
         ];
 
         /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
         return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
     }
-
 }
