@@ -62,6 +62,7 @@ class SkillsController extends AdvancedController
      */
     public function actionMainskills(): string
     {
+        /** Рендер вьюхи со списком умений персонажа */
         return $this->render('/skills/list.php', ['catskills' => Catskills::takeActiveCatSkills()]);
     }
 
@@ -74,13 +75,17 @@ class SkillsController extends AdvancedController
      */
     public function actionSkillscategory(string $name): string
     {
+        /** Если нашли по урлу активную категорию умений */
         if(Catskills::takeActiveCategoryByUrl($name)) {
+
+            /** Рендерим вьюху с категорией */
             return $this->render('/skills/skillscat-page.php', [
                 'cat' => Catskills::takeActiveCategoryByUrl($name),
                 'items' => Skills::takeSkillByCategoryId(Catskills::takeActiveCategoryByUrl($name)->id)
             ]);
         }
 
+        /** 404 - Если не нашли страницу с активной категорией */
         throw new HttpException(404 ,'Такая страница не существует');
     }
 
@@ -93,10 +98,14 @@ class SkillsController extends AdvancedController
      */
     public function actionSkillsdetail(string $url): string
     {
+        /** Если нашли активное умение по URL адресу */
         if(Skills::takeSkillByUrl($url)) {
+
+            /** Рендерим вьюху умения */
             return $this->render('/skills/skill-detail.php', ['item' => Skills::takeSkillByUrl($url)]);
         }
 
+        /** 404 - Если не нашли страницу с умением */
         throw new HttpException(404 ,'Такая страница не существует');
     }
 }
