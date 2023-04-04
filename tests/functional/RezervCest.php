@@ -78,7 +78,7 @@ class RezervCest
         $I->seeLink('Механик', '/traders/mehanic');
         $I->seeLink('Барахольщик', '/traders/baraholshik');
         $I->seeLink('Егерь', '/traders/eger');
-        $I->seeLink('Квесты смотрителя', '/quests-of-traders/seeker-quests');
+        $I->seeLink('Квесты Смотрителя', '/quests-of-traders/seeker-quests');
         $I->seeLink('Смотреть всех торговцев', '/quests-of-traders');
         $I->seeLink('Физические умения', '/skills/physical');
         $I->seeLink('Ментальные умения', '/skills/mental');
