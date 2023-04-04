@@ -124,5 +124,4 @@ class TraderController extends AdvancedController
 
         throw new HttpException(404 ,'Такая страница не существует');
     }
-
 }

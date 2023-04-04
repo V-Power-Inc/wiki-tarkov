@@ -44,6 +44,8 @@ final class TradersService
                 return 'baraholshik-quests';
             case 'Егерь':
                 return 'eger-quests';
+            case 'Смотритель':
+                return 'seeker-quests';
         }
 
         /** Если в switch не попали - пишем error, так мы узнаем что есть новый торговец и при этом не вылетит ошибка */

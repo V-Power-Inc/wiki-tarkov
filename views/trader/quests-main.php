@@ -43,7 +43,7 @@ $this->registerMetaTag([
                         <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
                             <a href="/traders/<?= $trader['url'] ?>"><?= $trader['title'] ?></a>
                         <?php else :?>
-                            <a><?= $trader['title'] ?></a>
+                            <p><?= $trader['title'] ?></p>
                         <?php endif; ?>
                     </h2>
                 </div>
@@ -82,5 +82,3 @@ $this->registerMetaTag([
         </div>
     </div>
 </div>
-
-
