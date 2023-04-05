@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 use app\common\controllers\AdvancedController;
+use app\common\interfaces\ResponseStatusInterface;
 use yii\web\HttpException;
 use app\models\Items;
 use Yii;
@@ -16,7 +17,7 @@ use Yii;
  * Class ItemController
  * @package app\controllers
  */
-class ItemController extends AdvancedController
+final class ItemController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_DETAILLOOT = 'detailloot';
@@ -61,11 +62,15 @@ class ItemController extends AdvancedController
      */
     public function actionDetailloot($item): string
     {
-        if(Items::takeActiveItemByUrl($item)) {
+        /** Если смогли по урлу найти лут в БД */
+        if (Items::takeActiveItemByUrl($item)) {
+
+            /** Рендерим страницу с детальной информацией об этом луте */
             return $this->render('/loot/item-detail.php', ['item' => Items::takeActiveItemByUrl($item)]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Выкидываем 404 - если не нашли такой лут в базе */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -76,16 +81,23 @@ class ItemController extends AdvancedController
      */
     public function actionPreviewloot(): string
     {
+        /** Отключаем CSRF валидации, в этом кейсе она мешает */
         $this->enableCsrfValidation = false;
 
+        /** Если пользователь авторизован */
         if(Yii::$app->user->isGuest !== true) {
+
+            /** Создаем AR объект Items */
             $item = new Items();
+
+            /** Грузим в него данные из POST для предпросмотра */
             $item->load(Yii::$app->request->post());
+
+            /** Рендерим вьюху предпросмотра */
             return $this->render('/loot/item-preview.php', ['item' => $item]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Если на эту страницу пытается попасть неавторизованный пользователь - выкидываем 404 ошибку */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
-
 }
-

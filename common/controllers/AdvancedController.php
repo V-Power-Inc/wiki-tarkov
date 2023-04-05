@@ -31,5 +31,4 @@ class AdvancedController extends \yii\web\Controller
             ],
         ];
     }
-
 }

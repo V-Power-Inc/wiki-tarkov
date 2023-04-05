@@ -7,6 +7,7 @@ use yii\web\View;
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
+use app\common\interfaces\ResponseStatusInterface;
 
 $cookies = Yii::$app->request->cookies;
 
@@ -60,7 +61,8 @@ AppAsset::register($this);
         <?= MenuComponent::showMenu(); ?>
 
         <!-- Заголовки определенных страниц -->
-        <?php if(!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])):  ?>
+        <?php if (!in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls']) &&
+            Yii::$app->response->statusCode === ResponseStatusInterface::OK_CODE): ?>
 
             <div class="heading-class">
                 <div class="container">

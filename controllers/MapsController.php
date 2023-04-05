@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\MarkersService;
 use app\models\Forest;
@@ -25,7 +26,7 @@ use yii\web\HttpException;
  * Class MapsController
  * @package app\controllers
  */
-class MapsController extends AdvancedController
+final class MapsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LOCATIONS         = 'locations';
@@ -101,7 +102,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -120,7 +121,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -139,7 +140,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -158,7 +159,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -177,7 +178,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -196,7 +197,7 @@ class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не найдена');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**
@@ -206,6 +207,7 @@ class MapsController extends AdvancedController
      */
     public function actionZavod(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('zavod-location');
     }
 
@@ -216,6 +218,7 @@ class MapsController extends AdvancedController
      */
     public function actionForest(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('forest-location');
     }
 
@@ -226,6 +229,7 @@ class MapsController extends AdvancedController
      */
     public function actionTamojnya(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('tamojnya-location');
     }
 
@@ -236,6 +240,7 @@ class MapsController extends AdvancedController
      */
     public function actionBereg(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('bereg-location');
     }
 
@@ -246,6 +251,7 @@ class MapsController extends AdvancedController
      */
     public function actionRazvyazka(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('razvyazka-location');
     }
 
@@ -256,6 +262,7 @@ class MapsController extends AdvancedController
      */
     public function actionLaboratoryterra(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('laboratory-location');
     }
 
@@ -266,6 +273,7 @@ class MapsController extends AdvancedController
      */
     public function actionRezerv(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('rezerv');
     }
 
@@ -276,6 +284,7 @@ class MapsController extends AdvancedController
      */
     public function actionLighthouse(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('lighthouse');
     }
 
@@ -286,6 +295,7 @@ class MapsController extends AdvancedController
      */
     public function actionStreetsOfTarkov(): string
     {
+        /** Рендерим вьюху с картой */
         return $this->render('streets-of-tarkov');
     }
 }

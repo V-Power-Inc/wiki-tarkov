@@ -8,6 +8,8 @@
 
 namespace app\components;
 
+use Yii;
+
 /**
  * Класс для отображения пользовательских сообщений на сайте через SetFlash
  *
@@ -24,7 +26,10 @@ class MessagesComponent
      */
     public function setMessages(string $messageText): void
     {
-        \Yii::$app->response->cookies->remove('message');
-        \Yii::$app->getSession()->setFlash('message',$messageText);
+        /** Удаляем кукис messages */
+        Yii::$app->response->cookies->remove('message');
+
+        /** Устанавливаем в текущую сессию flash сообщение с текстом */
+        Yii::$app->getSession()->setFlash('message',$messageText);
     }
 }

@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 use app\common\controllers\AdvancedController;
+use app\common\interfaces\ResponseStatusInterface;
 use app\models\Clans;
 use yii\web\HttpException;
 use app\components\MessagesComponent;
@@ -21,7 +22,7 @@ use Yii;
  * Class ClanController
  * @package app\controllers
  */
-class ClanController extends AdvancedController
+final class ClanController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX      = 'index';
@@ -38,10 +39,20 @@ class ClanController extends AdvancedController
      * @return string
      */
     public function actionIndex(): string {
+
+        /** Создаем объект класса - Кланы */
         $srcclan = new Clans();
+
+        /** Получаем число - количество заявок поданных сегодня */
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
+
+        /** Получаем список отмодерированных кланов */
         $clans = Clans::find()->where(['moderated' => 1])->orderBy(['date_create' => SORT_DESC])->cache(60)->asArray()->limit(20)->all();
+
+        /** Вычисляем количество заявок на регистрацию клана, доступных на сегодня */
         $avialableTickets = self::ticketsDayLimit-$countickets;
+
+        /** Рендерим вьюху */
         return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
     }
 
@@ -51,16 +62,30 @@ class ClanController extends AdvancedController
      * @return string|Response
      */
     public function actionAddclan() {
+
+        /** Получаем число - количество заявок поданных сегодня */
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
+
+        /** Вычисляем количество заявок на регистрацию клана, доступных на сегодня */
         $avialableTickets = self::ticketsDayLimit-$countickets;
-        
+
+        /** Если количество доступных для регистрации кланов на сегодня меньше или равно 0 */
         if($avialableTickets <= 0) {
+
+            /** Сетапим флэш сообщение об этом (SetFlash) */
             $messages = new MessagesComponent();
             $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
             $messages->setMessages($message);
-            return $this->redirect('/clans', 301);
-        } else {
+
+            /** Редиректим на страницу со списком кланов */
+            return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+
+        } else { /** Если еще можно подать заявку на регистрацию клана */
+
+            /** Создаем объект кланов */
             $model = new Clans();
+
+            /** Рендерим страницу с полями для регистрации клана */
             return $this->render('/clans/add-clan', ['model' => $model]);
         }
     }
@@ -73,50 +98,84 @@ class ClanController extends AdvancedController
      */
     public function actionSave()
     {
+        /** Создаем новый AR объект кланов */
         $model = new Clans();
 
-        /** Ajax валидация */
+        /** Ajax валидация - если запрос прилетел AJAX и были загружен POST данные в модель */
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+
+            /** Формат ответа - JSON для AJAX валидации */
             Yii::$app->response->format = Response::FORMAT_JSON;
+
+            /** Возвращаем результат валидации ActiveForm */
             return ActiveForm::validate($model);
         }
 
+        /** Если запрос POST пришел и он не AJAX */
         if(Yii::$app->request->isPost && !Yii::$app->request->isAjax) {
 
+            /** Получаем число - количество заявок поданных сегодня */
             $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
+
+            /** Вычисляем количество заявок на регистрацию клана, доступных на сегодня */
             $avialableTickets = self::ticketsDayLimit-$countickets;
 
+            /** Если количество доступных для регистрации кланов на сегодня меньше или равно 0 */
             if($avialableTickets <= 0) {
+
+                /** Сетапим флэш сообщение об этом (SetFlash) */
                 $messages = new MessagesComponent();
                 $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
                 $messages->setMessages($message);
-                return $this->redirect('/clans', 301);
-            } else {
-                
+
+                /** Редиректим на страницу со списком кланов */
+                return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+
+            } else { /** Если клан еще можно зарегистрировать сегодня (Есть свободные тикеты) */
+
+                /** Если модель пыталась загрузить изображение и результат равен false */
                 if($model->uploadPreview() === false) {
+
+                    /** Сетапим флэш сообщение об этом (SetFlash) */
                     $messages = new MessagesComponent();
                     $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>";
                     $messages->setMessages($message);
-                    return $this->redirect('/add-clan', 301);
-                } else {
-                
+
+                    /** Редиректим на страницу со списком кланов */
+                    return $this->redirect('/add-clan', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+
+                } else { /** Если изображение удалось загрузить */
+
+                    /** Грузим в модель остальные данные из POST */
                     $model->load(Yii::$app->request->post());
-    
+
+                    /** Если модель смогла сохраниться (Без валидации) */
                     if ($model->save(false)) {
+
+                        /** Сетапим флэш сообщение об этом (SetFlash) */
                         $messages = new MessagesComponent();
                         $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
                         $messages->setMessages($message);
-                        return $this->redirect('/clans', 301);
-                    } else {
+
+                        /** Редиректим на страницу со списком кланов */
+                        return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+
+                    } else { /** Если данные по каким то причинам не смогли сохраниться */
+
+                        /** Сетапим флэш сообщение об этом (SetFlash) - указываем, что о баге можно сообщить на электронную почту */
                         $messages = new MessagesComponent();
-                        $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом в онлайн-консультант.</b></p>";
+                        $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>";
                         $messages->setMessages($message);
-                        return $this->redirect('/add-clan', 301);
+
+                        /** Редиректим на страницу со списком кланов */
+                        return $this->redirect('/add-clan', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
                     }
                 }
             }
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+        } else { /** Если пришел запрос не подходящий не под один из критериев */
+
+            /** Выкидываем 404 ошибку */
+            throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
         }
     }
 
@@ -130,10 +189,13 @@ class ClanController extends AdvancedController
      */
     public function actionClansearch(string $q = null): string
     {
-        if(Yii::$app->request->isAjax) {
+        /** Если запрос пришел через AJAX */
+        if (Yii::$app->request->isAjax) {
 
+            /** Преподгатавливаем переменную для запроса к БД */
             $query = new Query;
 
+            /** Определяем запрос и ищем клан по названию */
             $query->select('title, description, preview, link, date_create')
                 ->from('clans')
                 ->where('title LIKE "%' . $q . '%"')
@@ -141,19 +203,28 @@ class ClanController extends AdvancedController
                 ->orderBy('date_create DESC')
                 ->limit(30)
                 ->cache(60);
+
+            /** Определяем команду и выполняем запрос */
             $command = $query->createCommand();
+
+            /** Указываем выбрать все нужные записи */
             $data = $command->queryAll();
 
+            /** Массив для резултирующих данных */
             $out = [];
 
-            /** Цикл составления готовых данных по запросу пользователя в поиске **/
+            /** В цикле наполняем массив с результирующими данными - в нужном формате **/
             foreach ($data as $d) {
                 $out[] = ['value' => $d['title'], 'title' => $d['title'], 'description' => $d['description'], 'preview' => $d['preview'], 'link' => $d['link'], 'date_create' => $d['date_create']];
             }
+
+            /** Возвращаем результирующий массив в формате Json */
             return Json::encode($out);
-        } else {
-            throw new HttpException(404 ,'Такая страница не существует');
+
+        } else { /** Если запрос сюда прилетел иным образом */
+
+            /** Выкидываем 404 ошибку */
+            throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
         }
     }
-    
 }

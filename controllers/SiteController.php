@@ -23,7 +23,7 @@ use app\common\services\JsondataService;
  * Class SiteController
  * @package app\controllers
  */
-class SiteController extends AdvancedController
+final class SiteController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX                  = 'index';

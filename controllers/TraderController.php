@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\ApiService;
 use app\models\Barters;
 use app\models\Traders;
@@ -21,7 +22,7 @@ use Yii;
  * Class TraderController
  * @package app\controllers
  */
-class TraderController extends AdvancedController
+final class TraderController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_QUESTS                 = 'quests';
@@ -58,12 +59,13 @@ class TraderController extends AdvancedController
     }
 
     /**
-     * Рендер главной страницы с квестами
+     * Рендер главной страницы со списком торговцев
      *
      * @return string
      */
     public function actionQuests(): string
     {
+        /** Рендер страницы со списком торговцев */
         return $this->render('quests-main', ['traders' => Traders::takeTraders()]);
     }
 
@@ -98,13 +100,21 @@ class TraderController extends AdvancedController
      */
     public function actionPreviewtrader(): string
     {
-        if(Yii::$app->user->isGuest !== true) {
+        /** Если пользователь авторизован в админке */
+        if (Yii::$app->user->isGuest !== true) {
+
+            /** Создаем новый объект торговца */
             $trader = new Traders;
+
+            /** Загружаем в него POST данные */
             $trader->load(Yii::$app->request->post());
+
+            /** Рендерим вьюху со страницей предпросмотра торговца */
             return $this->render('trader-preview', ['trader' => $trader]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует!');
+        /** Выкидываем 404 ошибку, если сюда пытались зайти неавторизованные пользователи */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует.');
     }
 
     /**
@@ -115,14 +125,23 @@ class TraderController extends AdvancedController
      */
     public function actionBarterspreview(): string
     {
-        if(Yii::$app->user->isGuest !== true) {
+        /** Если пользователь авторизован */
+        if (Yii::$app->user->isGuest !== true) {
+
+            /** Создаем новый объект бартера */
             $barter = new Barters;
+
+            /** Грузим в объект данные из POST */
             $barter->load(Yii::$app->request->post());
+
+            /** Находим нужного торговца по ID в БД */
             $id = Barters::find()->select('id')->where(['title' => $barter->title])->scalar();
+
+            /** Рендерим вьюху по торговцу с предпросмотром бартеров */
             return $this->render('barter-preview', ['barter' => $barter, 'id' => $id]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Выкидываем 404 ошибку, если пользователь не авторизован */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
-
 }

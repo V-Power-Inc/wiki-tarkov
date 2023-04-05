@@ -10,7 +10,6 @@ use yii\filters\VerbFilter;
 use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
-
 /**
  * ArticlesController implements the CRUD actions for Articles model.
  */

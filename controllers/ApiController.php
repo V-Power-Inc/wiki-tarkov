@@ -27,7 +27,7 @@ use yii\web\ServerErrorHttpException;
  * Class ApiController
  * @package app\controllers
  */
-class ApiController extends AdvancedController
+final class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LIST   = 'list';

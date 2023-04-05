@@ -16,10 +16,13 @@ use yii\web\HttpException;
 use yii\db\StaleObjectException;
 
 /**
+ * Контроллер обеспечивает работоспособность API по получению информации о боссах со стороннего источника tarkov.dev
+ * Маршрутизация до страниц, получающих данные по API для боссов на локациях
+ *
  * Class BossesController
  * @package app\controllers
  */
-class BossesController extends AdvancedController
+final class BossesController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX = 'boss-list';

@@ -82,5 +82,3 @@ $this->registerMetaTag([
         </div>
     </div>
 </div>
-
-
