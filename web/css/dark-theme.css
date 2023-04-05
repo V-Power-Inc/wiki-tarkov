@@ -29,6 +29,11 @@ p, p.loot-description {
     color: #c4c4c4
 }
 
+/** Цвет стилей заголовков на главной странице сайта */
+.site-index h2 {
+    color: #c4c4c4;
+}
+
 /** Класс заголовков для */
 .heading-class {
     padding: 50px 0 10px 0;
