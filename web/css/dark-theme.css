@@ -713,7 +713,7 @@ h3.clan-title {
 /** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: #484848;
-    color: #333;
+    color: #f3f3f3;
     box-shadow: 0 3px 14px rgba(0,0,0,0.4);
 }
 
