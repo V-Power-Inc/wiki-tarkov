@@ -12,9 +12,12 @@
  */
 
 use app\models\ApiLoot;
+use app\common\services\HighChartsService;
 use yii\helpers\Json;
 use yii\web\JqueryAsset;
+use yii\web\JsExpression;
 use app\common\services\ImageService;
+use miloschuman\highcharts\Highcharts;
 
 $this->title = 'Предмет: ' . $item->name .' в Escape from Tarkov';
 
@@ -31,10 +34,11 @@ $this->registerMetaTag([
 /** Декоридуем Json */
 $item->json = Json::decode($item->json);
 
+/** Объект класса для отображения данных графиков во вьюхе - если есть история цен на предмет, будет выводить графики */
+$highChart = !empty($item->json['historicalPrices']) ? new HighChartsService($item->json['historicalPrices']) : '';
+
 /** Подключаем попапы для картинок */
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
-
-// todo: Дополнить taskUnlock кейс во вьюхе, когда будет больше информации
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -171,6 +175,66 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
 
                 <?php endforeach; ?>
+
+
+                <?php if (!empty($item->json['historicalPrices'])): ?>
+
+                    <!-- История цен на предмет -->
+                    <div class="row received-block">
+                        <div class="col-sm-12">
+                            <?= Highcharts::widget([
+                                'options' => [
+                                    'chart' => [
+                                        'backgroundColor' => HighChartsService::getBackgroundByTheme(),
+                                    ],
+                                    'title' => [
+                                        'text' => 'История последних сделок по предмету',
+                                        'style' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ]
+                                    ],
+                                    'xAxis' => [
+                                        'categories' => $highChart->dates,
+                                        'labels' => [
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ]
+                                    ],
+                                    'yAxis' => [
+                                        'title' => [
+                                            'text' => 'Стоимость',
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ],
+                                        'labels' => [
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ]
+                                    ],
+                                    'legend' => [
+                                            'itemStyle' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ],
+                                            'itemHoverStyle' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ],
+                                    ],
+                                    'series' => [
+                                        [
+                                            'name' => 'Цена сделки - руб.',
+                                            'data' => $highChart->prices,
+                                            'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "orange"')
+                                        ],
+                                    ]
+                                ]
+                            ]) ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
 
             </div>
 

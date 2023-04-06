@@ -298,6 +298,10 @@ final class ApiService implements ApiInterface
                   name
                 }
             }
+            historicalPrices {
+              price
+              timestamp
+            }
           } 
         }';
     }

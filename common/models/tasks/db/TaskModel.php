@@ -135,6 +135,7 @@ final class TaskModel extends Model
     {
         /** Если данные провалидировались текущей моделью */
         if ($this->validate()) {
+
             /** Создаем новый AR объект модели Tasks */
             $model = new Tasks();
 
