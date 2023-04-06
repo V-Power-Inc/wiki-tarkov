@@ -74,6 +74,9 @@ return [
     /** URL до экшена, который устанавливает куку, которая запоминает пользователю его цветовую палитру сайта */
     'change-layout' => SiteController::routeId(SiteController::ACTION_CHANGE_LAYOUT),
 
+    /** URL до экшена, который через AJAX обновит данные графика HighCharts в API предметов */
+    'get-graphs' => ApiController::routeId(ApiController::ACTION_GET_GRAPHS),
+
     /** Кастомный урл компонент */
     [
         'class' => 'app\components\UrlComponent',
