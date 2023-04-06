@@ -154,9 +154,10 @@ final class ApiService implements ApiInterface
     /**
      * Метод получает данные из удаленного источника по переданному параметру запроса
      *
-     * @return array
+     * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
+     * @return mixed
      */
-    private function getApiData(): array
+    private function getApiData(bool $encoded = true)
     {
         /** Устанавливаем атрибуты запроса (Включая подавление любых ошибок) */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
@@ -167,8 +168,8 @@ final class ApiService implements ApiInterface
             ]
         ]));
 
-        /** Возвращаем раскодированный из Json результат в виде массива*/
-        return Json::decode($data, true);
+        /** Возвращаем результат, либо раскодированный из JSON либо нет, в зависимости от переданного сюда флага */
+        return $encoded ? Json::decode($data, true) : $data;
     }
 
     /**
@@ -239,9 +240,10 @@ final class ApiService implements ApiInterface
      */
     public function setItemQuery(string $itemName): void
     {
-        /** Задаем тело запроса для получения информации о боссах */
+        /** Задаем тело запроса для получения информации о предметах */
         $this->query = '{
           items(name: "'. $itemName . '", lang: ru, limit: 20) {
+            id
             name
             normalizedName
             width
@@ -766,5 +768,39 @@ final class ApiService implements ApiInterface
 
         /** Возвращаем bool результат если все ок */
         return true;
+    }
+
+    /**
+     * Метод сетапит запрос для получения исторических цен на лут
+     * Требуется ID предмета из GraphQL базы справочника tarkov.dev
+     *
+     * @param string $id - id предмета из API tarkov.dev
+     * @return bool
+     */
+    private function setGraphsItemQuery(string $id): bool
+    {
+        /** Запрос для получения информацию по графику конкретного предмета (Последние сделки) */
+        $this->query = 'query {
+          historicalItemPrices(id: "'. $id .'") {
+            price
+            timestamp
+          }
+        }';
+
+        /** Возвращаем bool результат */
+        return true;
+    }
+
+    /**
+     * @param string $id - id предмета из API tarkov.dev
+     * @return string
+     */
+    public function getGraphsById(string $id): string
+    {
+        /** Сетапим запрос на получение графиков по конкретному луту */
+        $this->setGraphsItemQuery($id);
+
+        /** Получаем данные о графиках из API в виде JSON */
+        return $this->getApiData(false);
     }
 }

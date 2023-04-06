@@ -34,11 +34,11 @@ $this->registerMetaTag([
 /** Декоридуем Json */
 $item->json = Json::decode($item->json);
 
-/** Объект класса для отображения данных графиков во вьюхе - если есть история цен на предмет, будет выводить графики */
-$highChart = !empty($item->json['historicalPrices']) ? new HighChartsService($item->json['historicalPrices']) : '';
-
 /** Подключаем попапы для картинок */
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
+
+/** Подключаем сюда файл, который AJAX запросом будет генерить правильный график */
+$this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -56,7 +56,7 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
     <div class="row">
 
         <!-- Main Page Content -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content api-item-detail" data-item-id="<?= $item->json['id'] ?>">
 
             <!-- Image block -->
             <div class="col-xs-3">
@@ -173,15 +173,12 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
                 </div>
 
-
                 <?php endforeach; ?>
 
-
-                <?php if (!empty($item->json['historicalPrices'])): ?>
-
-                    <!-- История цен на предмет -->
-                    <div class="row received-block">
-                        <div class="col-sm-12">
+                <!-- История цен на предмет -->
+                <div class="row received-block">
+                    <div class="col-sm-12">
+                        <div class="graphs__of__items">
                             <?= Highcharts::widget([
                                 'options' => [
                                     'chart' => [
@@ -194,7 +191,8 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
                                         ]
                                     ],
                                     'xAxis' => [
-                                        'categories' => $highChart->dates,
+                                        /** Данные сюда JS зааплоадит - HighCharts */
+                                        'categories' => [],
                                         'labels' => [
                                             'style' => [
                                                 'color' => HighChartsService::getTextByTheme()
@@ -215,17 +213,18 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
                                         ]
                                     ],
                                     'legend' => [
-                                            'itemStyle' => [
-                                                'color' => HighChartsService::getTextByTheme()
-                                            ],
-                                            'itemHoverStyle' => [
-                                                'color' => HighChartsService::getTextByTheme()
-                                            ],
+                                        'itemStyle' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ],
+                                        'itemHoverStyle' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ],
                                     ],
                                     'series' => [
                                         [
                                             'name' => 'Цена сделки - руб.',
-                                            'data' => $highChart->prices,
+                                            /** Данные сюда JS зааплоадит - HighCharts */
+                                            'data' => [],
                                             'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "orange"')
                                         ],
                                     ]
@@ -233,7 +232,8 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
                             ]) ?>
                         </div>
                     </div>
-                <?php endif; ?>
+                </div>
+
 
 
             </div>
