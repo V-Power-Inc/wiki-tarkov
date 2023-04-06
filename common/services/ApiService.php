@@ -215,9 +215,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +3 month'));
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +2 month'));
 
-            /** Если дата записи +3 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -581,6 +581,7 @@ final class ApiService implements ApiInterface
 
     /**
      * Метод проставляющий устаревание для предметов, полученных по API
+     * UPD. 06.04.2023 - Сделали дату устаревения записи на 7 день хранения
      *
      * @return bool
      */
@@ -593,9 +594,9 @@ final class ApiService implements ApiInterface
         foreach ($items as $item) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +3 month'));
+            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +2 month'));
 
-            /** Если дата записи +3 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
