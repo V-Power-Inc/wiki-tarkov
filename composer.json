@@ -25,7 +25,8 @@
         "kartik-v/yii2-widget-typeahead": "*",
         "yiisoft/yii2-redis": "~2.0.0",
         "martyn911/yii2-adblock-detector":"*",
-        "vlucas/phpdotenv": "*"
+        "vlucas/phpdotenv": "*",
+        "miloschuman/yii2-highcharts-widget": "^8.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
