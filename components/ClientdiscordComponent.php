@@ -10,6 +10,8 @@ namespace app\components;
 use Yii;
 /**
  * Client generates the payload and sends the webhook payload to Discord
+ *
+ * @see https://github.com/nopjmp/discord-webhooks
  */
 class ClientdiscordComponent
 {

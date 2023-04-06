@@ -13,6 +13,9 @@ use app\models\Articles;
 use app\models\Traders;
 use yii\web\UrlRuleInterface;
 use yii\base\BaseObject;
+use yii\web\UrlManager;
+use yii\web\Request;
+use yii\base\InvalidConfigException;
 
 /**
  * Url компонент для маршрутизации на детальные страницы некоторых коллекций объектов
@@ -23,70 +26,127 @@ use yii\base\BaseObject;
  */
 class UrlComponent extends BaseObject implements UrlRuleInterface
 {
+    /** @var int - Константа, первый элемент массива */
+    const FIRST_ELEMENT = 0;
+
     /**
-     * @param \yii\web\UrlManager $manager
-     * @param \yii\web\Request $request
+     * Метод парсит запрос и возвращает маршрут в зависимости от заданной логики или вернет false
+     * если с помощью указанной логики не смог собрать правильный маршрут
+     *
+     * @param UrlManager $manager
+     * @param Request $request
      * @return array|bool
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      */
     public function parseRequest($manager, $request)
     {
+        /** Информация об URL адресе - все что идет после домена */
         $pathInfo = $request->getPathInfo();
-        $ppp =explode('/',$pathInfo);
-        if($ppp[0] == 'keys'){
+
+        /** Разбиваем строку с урлом по слешам, чтобы выполнить проверки на соответствие разделам */
+        $exploded_url = explode('/',$pathInfo);
+
+        /** Если первый элемента массива - keys, значит мы в разделе ключей */
+        if($exploded_url[static::FIRST_ELEMENT] == 'keys'){
+
+            /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/doorkeysdetail',['id'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'news') {
+        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'news') { /** Если первый элемента массива - news, значит мы в разделе новостей */
+
+            /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/newsdetail',['id'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'articles') {
+        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'articles') { /** Если первый элемента массива - articles, значит мы в разделе статей */
+
+            /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/articledetail',['id'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'traders') {
+        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'traders') { /** Если первый элемента массива - traders, значит мы в разделе торговцев */
+
+            /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action */
                 return ['trader/tradersdetail',['id'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'skills') {
-            if(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'skills') { /** Если первый элемента массива - skills, значит мы в разделе умений */
+
+            /** Регулярка на совпадение - отправит на детальную страницу или категорию, в случае если удастся извлечь нужный параметр */
+            if (preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action - дательная страница умения */
                 return ['skills/skillsdetail', ['url' => $matches[5]]];
-            } elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+            } elseif (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+
+                /** Отправляем в контроллер с нужным параметром для Action - категория */
                 return ['skills/skillscategory',['name'=>$matches[3]]];
             }
-        } elseif ($ppp[0] == 'loot') {
-            if(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'loot') { /** Если первый элемента массива - loot, значит мы в разделе лута */
+
+            /** Регулярка на совпадение - отправит на детальную страницу, категорию или подкатегорию в случае если удастся извлечь нужный параметр */
+            if (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для подкатегории */
+
+                /** Отправляем в контроллер с нужным параметром для Action - подкатегория */
                 return ['loot/category',['name'=>$matches[5]]];
-            } elseif(preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
+            } elseif (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для категории */
+
+                /** Отправляем в контроллер с нужным параметром для Action - категория */
                 return ['loot/category',['name'=>$matches[3]]];
-            } elseif(preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
+            } elseif (preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для детальной страницы лута */
+
+                /** Отправляем в контроллер с нужным параметром для Action - детальная страница лута */
                 return ['item/detailloot', ['item' => $matches[3]]];
             }
         }
 
+        /** Возвращаем false, если вышеупомянутые проверки не прошли должным образом */
         return false;
     }
 
     /**
-     * @param \yii\web\UrlManager $manager
-     * @param string $route
-     * @param array $params
+     * Метод, который создает URL в зависимости от имеющихся параметров
+     * Может вернуть валидный URL, если смог его собрать или false, если не смог собрать валидный URL
+     *
+     * @param UrlManager $manager - URL менеджер
+     * @param string $route - URL маршрут
+     * @param array $params - доп. параметры
      * @return bool|string
      */
     public function createUrl($manager, $route, $params)
     {
-        if (Doorkeys::find()->where(['url'=> $route])->One()) {
+        /** Если смогли найти по урлу - Ключ от двери */
+        if (Doorkeys::find()->where([Doorkeys::ATTR_URL => $route])->One()) {
+
+            /** Возвращаем путь до детальной страницы */
             return 'keys/'.$route;
-        } elseif (News::find()->where(['url'=> $route])->One()){
+
+        } elseif (News::find()->where([News::ATTR_URL => $route])->One()){ /** Если смогли найти по урлу - Новость */
+
+            /** Возвращаем путь до детальной страницы */
             return 'news/'.$route;
-        } elseif(Articles::find()->where(['url'=> $route])->One()) {
+
+        } elseif(Articles::find()->where([Articles::ATTR_URL => $route])->One()) { /** Если смогли найти по урлу - Статья */
+
+            /** Возвращаем путь до детальной страницы */
             return 'articles/' . $route;
-        } elseif(Traders::find()->where(['url'=> $route])->One()) {
+
+        } elseif(Traders::find()->where([Traders::ATTR_URL => $route])->One()) { /** Если смогли найти по урлу - Торговец */
+
+            /** Возвращаем путь до детальной страницы */
             return 'traders/' . $route;
         }
+
+        /** Вернем false - если не одна из вышеупомянутых проверок не сработала */
         return false;
     }
-
-
 }

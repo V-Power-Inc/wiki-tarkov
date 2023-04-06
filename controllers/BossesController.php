@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\ArrayService;
@@ -86,6 +87,6 @@ final class BossesController extends AdvancedController
         }
 
         /** Exception на всякий случай */
-        throw new HttpException(404, 'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 }

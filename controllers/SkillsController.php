@@ -7,6 +7,7 @@
  */
 
 namespace app\controllers;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\models\Catskills;
@@ -86,7 +87,7 @@ final class SkillsController extends AdvancedController
         }
 
         /** 404 - Если не нашли страницу с активной категорией */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -106,6 +107,6 @@ final class SkillsController extends AdvancedController
         }
 
         /** 404 - Если не нашли страницу с умением */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }

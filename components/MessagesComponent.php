@@ -15,6 +15,8 @@ use Yii;
  *
  * Class MessagesComponent
  * @package app\components
+ *
+ * @author Mikhail Dimitrenko
  */
 class MessagesComponent
 {

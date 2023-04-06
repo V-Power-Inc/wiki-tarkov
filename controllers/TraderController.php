@@ -89,7 +89,7 @@ final class TraderController extends AdvancedController
         }
 
         /** Если не нашли информацию о торговце, выкидываем 404 ошибку */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**

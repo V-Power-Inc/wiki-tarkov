@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\JsondataService;
@@ -17,6 +18,7 @@ use app\models\forms\ApiForm;
 use Yii;
 use yii\web\HttpException;
 use yii\web\ServerErrorHttpException;
+use yii\db\Exception;
 
 /**
  * Контроллер обеспечивает работоспособность API по получению лута со стороннего источника tarkov.dev
@@ -112,7 +114,7 @@ final class ApiController extends AdvancedController
         }
 
         /** Если в базе нет предмета - возвращаем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 
     /**
@@ -120,9 +122,11 @@ final class ApiController extends AdvancedController
      *
      * @param string $q - поисковый запрос
      * @return string
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
     public function actionSearch(string $q): string {
+
+        /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
         return JsondataService::getSearchItem($q);
     }
 }

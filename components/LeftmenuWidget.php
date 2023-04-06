@@ -15,6 +15,8 @@ use app\models\Category;
  *
  * Class LeftmenuWidget
  * @package app\components
+ *
+ * @author Mikhail Dimitrenko
  */
 class LeftmenuWidget extends Widget {
 
