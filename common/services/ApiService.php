@@ -579,7 +579,7 @@ final class ApiService implements ApiInterface
 
     /**
      * Метод проставляющий устаревание для предметов, полученных по API
-     * UPD. 06.04.2023 - Сделали дату устаревения записи на 1 день
+     * UPD. 06.04.2023 - Сделали дату устаревения записи на 7 день хранения
      *
      * @return bool
      */
@@ -592,9 +592,9 @@ final class ApiService implements ApiInterface
         foreach ($items as $item) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +1 day'));
+            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +7 day'));
 
-            /** Если дата записи +1 день - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +7 дней - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
