@@ -31,7 +31,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content">
 
             <?php  if(Yii::$app->getSession()->getFlash('message')):?>
                 <?=Yii::$app->getSession()->getFlash('message')?>
@@ -104,20 +104,16 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
 
         </div>
 
-        <!-- right menu start -->
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <!-- Блок комментариев -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
+            <!-- Расстояние - заглушка -->
+            <div class="height-25"></div>
 
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
-
+            <!-- Комментарии -->
+            <?= $this->render('/other/comments');?>
         </div>
+
 
     </div>
 </div>
