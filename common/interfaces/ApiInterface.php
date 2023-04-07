@@ -8,8 +8,14 @@
 
 namespace app\common\interfaces;
 
+use app\models\forms\ApiForm;
+
 /**
  * Интерфейс сервиса для работы с API tarkov.dev
+ * В этом интерфейсе описаны методы, которые должны реализовывать выполнение различных задач
+ * связанных с получением данных из API
+ *
+ * Всегда смотрим сюда, если нужно понять - какого типа данные мы на данный момент забираем из API
  *
  * Interface ApiInterface
  * @package app\common\interfaces
@@ -26,10 +32,27 @@ interface ApiInterface
     function getBosses(string $map_name = null);
 
     /**
-     * Метод для получения данных о предмете, метод должен задавать новое тело запроса для API получения предметов
+     * Метод для получения предметов из API по поисковому запросу из специальной формы
+     * А также обработка кейсов, если предметы лута в БД у нас уже есть
      *
-     * @param string $itemName - имя предмета полученние из ApiForm
+     * @param ApiForm $model - Объект поисковой формы Api
      * @return mixed
      */
-    function setItemQuery(string $itemName);
+    function proccessSearchItem(ApiForm $model);
+
+    /**
+     * Метод для получения квестов торговцев, в качестве параметра используется URL адрес квестов этого приложения
+     *
+     * @param string $url - URL до квестов торговцев
+     * @return mixed
+     */
+    function getTasks(string $url);
+
+    /**
+     * Метод для получения исторических цен по сделкам продажи конкретного лута (предмета)
+     *
+     * @param string $id - id предмета из Api tarkov.dev
+     * @return mixed
+     */
+    function getGraphsById(string $id);
 }
