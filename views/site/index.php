@@ -46,7 +46,7 @@ $this->registerMetaTag([
     <div class="site-index">
     
         <div class="jumbotron jumbotron-main">
-            <h1 class="margin-top-10">База знаний Escape from Tarkov</h1>
+            <h1 class="margin-top-10" style="font-size: 28px;">База знаний Escape from Tarkov</h1>
     
             <p class="lead">Здесь вы найдете информацию о важных аспектах внутриигрового процесса игры Escape from Tarkov. На сайте вы можете найти информацию о квестах торговцев, ключах от дверей и найти рекомендации по прохождению рейдов.</p>
     

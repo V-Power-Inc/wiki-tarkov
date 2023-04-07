@@ -99,7 +99,6 @@ AdminAsset::register($this);
                 <div class="col-sm-12">
                     <p class="copyright text-right">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
                 </div>
-                <span class="col-sm-12 counter-footer"></span>
             </div>
         </div>
     </footer>
