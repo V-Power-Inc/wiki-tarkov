@@ -10,10 +10,7 @@ $(document).ready(function($){
 
     /*** Скрипт раскрытия аккордеона меню при проверке на активную категорию в Url адресе ***/
     $(".relative.active.as-parent-li").find('div.dcjq-icon').trigger('click');
-});  
 
-
-
-
-
-
+    /** На детальных страницах лута - делаем скроллбар для таблиц, если они не помещаются в экране */
+    $('table').closest('div').addClass('fix-tables')
+});
