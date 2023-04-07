@@ -45,6 +45,18 @@ final class ApiService implements ApiInterface
     private $method = 'POST';
 
     /**
+     * Конструктор при инициализации класса задает атрибуту класса объет APIQueries для применения
+     * различных запросов к API
+     *
+     * ApiService constructor.
+     */
+    public function __construct()
+    {
+        /** Сетапим атрибуту класса - объект APIQueries для сетапа запросов к API */
+        $this->query = new ApiQueries();
+    }
+
+    /**
      * Метод по получению информации о боссах Escape From Tarkov
      *
      * @param string|null $map_name - Название карты (Параметр может отсутствовать)
@@ -62,24 +74,7 @@ final class ApiService implements ApiInterface
             $this->removeOldBosses();
 
             /** Задаем тело запроса для получения информации о боссах */
-            $this->query = '{
-               maps(lang: ru) {
-                name
-                bosses {
-                  name
-                  spawnChance
-                  spawnTrigger
-                  spawnLocations {
-                    name
-                  }
-                  escorts {
-                    amount {
-                      count
-                    }
-                  }
-                }
-              }
-            }';
+            $this->query = $this->query->setBossesQuery();
 
             /** Присваиваем результат запроса переменной */
             $content = $this->getApiData();
@@ -241,71 +236,7 @@ final class ApiService implements ApiInterface
     public function setItemQuery(string $itemName): void
     {
         /** Задаем тело запроса для получения информации о предметах */
-        $this->query = '{
-          items(name: "'. $itemName . '", lang: ru, limit: 20) {
-            id
-            name
-            normalizedName
-            width
-            height
-            weight
-            description
-            category {
-              name
-            }
-            iconLink
-            inspectImageLink
-            sellFor {
-              vendor {
-                name
-              }
-              price
-              currency
-              currencyItem {
-                name
-              }
-              priceRUB
-            }
-            buyFor {
-              vendor {
-                name
-              }
-              price
-              currency
-              currencyItem {
-                name
-              }
-              priceRUB
-            }
-            bartersFor {
-              trader {
-                name
-              }
-              level
-              taskUnlock {
-                name
-              }
-              requiredItems {
-                item {
-                  name
-                  iconLink
-                }
-                count
-                quantity
-              }
-            }
-            receivedFromTasks {
-                name
-                trader {
-                  name
-                }
-            }
-            historicalPrices {
-              price
-              timestamp
-            }
-          } 
-        }';
+        $this->query = $this->query->setItemQuery($itemName);
     }
 
     /**
@@ -315,84 +246,7 @@ final class ApiService implements ApiInterface
     private function setTasksQuery(): void
     {
         /** Задаем тело запроса для получения информации о квестах */
-        $this->query = 'query {
-          # Передаем сюда языковой код, чтобы все на RU было
-          tasks (lang: ru) {
-            # Название квеста
-            name,
-            # Для какой фракции квест (Bear или USEC или любая)
-            factionName
-            # Минимальный уровень игрока для получения квеста
-            minPlayerLevel,
-            # Задачи квеста, что нужно сделать
-            objectives {
-              # Тип квеста (Убийство, сдача предметов и т.д.)
-              type,
-              # Описание задания
-              description,
-              # Опциональность условия (false - обязательно, true - нет)
-              optional
-            }
-            # Ключи, которые понадобятся для задачи
-            neededKeys {
-              # Массив с ключами
-                    keys {
-                name,
-                iconLink
-              }
-            }
-            # Требования к другим квестам перед выполнением текущего
-            taskRequirements {
-              # Название необходимого квеста
-              task {
-                name
-              }
-              # Требование к статусу квеста
-              status
-            }
-            # Количество получаемого опыта - за выполнение квеста
-            experience,
-            # Название карты, на которой надо выполнить квест
-            map {
-              name
-            }
-            # Торговец, что выдал квест (Имя и изображение)
-            trader {
-              name,
-              imageLink
-            },
-            # Можно ли перепроходить квест несколько раз
-            restartable
-            # Стартовые требования для квеста (Предметы)
-            startRewards {
-              # Предметы для выполнения квеста
-              items {
-                item {
-                  name,
-                  description,
-                  iconLink,
-                  inspectImageLink
-                },
-                # Количество стартовых предметов для квеста
-                count
-              }
-            },
-            # Награда за квест
-            finishRewards {
-              # Предметы выдаваемые в награду за выполнение квеста
-              items {
-                item {
-                  name,
-                  description,
-                  iconLink,
-                  inspectImageLink
-                },
-                # Количество стартовых предметов для квеста
-                count
-              }
-            }
-          }
-        }';
+        $this->query = $this->query->setTasksQuery();
     }
 
     /**
@@ -781,12 +635,7 @@ final class ApiService implements ApiInterface
     private function setGraphsItemQuery(string $id): bool
     {
         /** Запрос для получения информацию по графику конкретного предмета (Последние сделки) */
-        $this->query = 'query {
-          historicalItemPrices(id: "'. $id .'") {
-            price
-            timestamp
-          }
-        }';
+        $this->query = $this->query->setGraphsItemQuery($id);
 
         /** Возвращаем bool результат */
         return true;
