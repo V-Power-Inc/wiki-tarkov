@@ -126,7 +126,14 @@ final class ApiController extends AdvancedController
      */
     public function actionSearch(string $q): string {
 
-        /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
-        return JsondataService::getSearchItem($q);
+        /** Если запрос пришел через AJAX */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
+            return JsondataService::getSearchItem($q);
+        }
+
+        /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 }

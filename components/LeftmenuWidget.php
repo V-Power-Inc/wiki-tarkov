@@ -20,6 +20,35 @@ use app\models\Category;
  */
 class LeftmenuWidget extends Widget {
 
+    /** @var string - Название файла, который содержит HTML шаблон меню */
+    public $tpl;
+
+    /** Здесь хранятся все активные в базе категории **/
+    public $data;
+
+    /** @var array - Переменная для построения массива дерева с учетом вложенности активных категорий **/
+    public $tree;
+
+    /** @var string - Переменная хранит HTML шаблон выстроенный по полученным данным в зависимости от количества категорий в базе */
+    public $menuHTML;
+
+    /** Метод инициализирует виджет */
+    public function init()
+    {
+        /** Инициализация родительского виджета (Widget) */
+        parent::init();
+
+        /** Если не указан файл шаблона из которого брать меню */
+        if ($this->tpl === null) {
+
+            /** Указываем название файла */
+           $this->tpl = 'leftmenu';
+        }
+
+        /** Указываем расширения файла */
+        $this->tpl .='.php';
+    }
+
     /**
      * Кешируем все запросы из БД - храним их в кеше
      *
@@ -38,38 +67,24 @@ class LeftmenuWidget extends Widget {
             ],
         ];
     }
-    
-    public $tpl;
-
-    /** Здесь хранятся все активные в базе категории **/
-    public $data;
-
-    /** Переменная для построения массива дерева с учетом вложенности активных категорий **/
-    public $tree;
-
-    /** Переменная хранит HTML шаблон выстроенный по полученным данным в зависимости от количества категорий в базе */
-    public $menuHTML;
-
-    public function init()
-    {
-        parent::init();
-        if($this->tpl === null) {
-           $this->tpl = 'leftmenu';
-        }
-        $this->tpl .='.php';
-    }
 
     /**
-     * Получаем список всех активных категорий
+     * Получаем список всех активных категорий и строим корректную последовательность
      *
      * @return string
      */
     public function run(): string
     {
+        /** Сетапи атрибуту класса - запрос на получение данных, активные категории */
         $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->orderby(['sortir' => SORT_ASC])->asArray()->all();
+
+        /** Сетапим атрибуту класса - построить дерево категорий */
         $this->tree = $this->getTree();
+
+        /** Сетапим атрибуту класса - начать генерировать html блоки навигации с помощью готового дерева категорий */
         $this->menuHTML = $this->getMenuHtml($this->tree);
 
+        /** Возвращаем конечный html для вывода на страницу */
         return $this->menuHTML;
     }
 
@@ -80,29 +95,41 @@ class LeftmenuWidget extends Widget {
      */
     protected function getTree(): array
     {
+        /** Массив для возвращение результата */
         $categoryTree = [];
+
+        /** В цикле проходим массив категорий, что сформировать массив категорий - родители и их дочерние категории */
         foreach ($this->data as $id=>&$node) {
-            if(!$node['parent_category']) {
+            if (!$node['parent_category']) {
                 $categoryTree[$id] = &$node;
             } else {
                 $this->data[$node['parent_category']]['childs'][$node['id']] = &$node;
             }
         }
+
+        /** Возвращаем массив с деревом категорий */
         return $categoryTree;
     }
 
     /**
      * Рендерим шаблон html формы из массива дерева категорий
      *
-     * @param array $categoryTree
+     * @param array $categoryTree - массив дерева категорий с родительскими и дочерними элементами
      * @return string
      */
     protected function getMenuHtml(array $categoryTree): string
     {
+        /** Строка для выдачи результата */
         $resultHTML = '';
+
+        /** В цикле проходим массив категорий (Родительских и дочерних )*/
         foreach($categoryTree as $category) {
+
+            /** Нарезаем элементы в html */
             $resultHTML .= $this->catToTemplate($category);
         }
+
+        /** Возвращаем конечный Html */
         return $resultHTML;
     }
 
@@ -114,8 +141,13 @@ class LeftmenuWidget extends Widget {
      */
     protected function catToTemplate($category)
     {
+        /** Используем буферизацию вывода */
         ob_start();
+
+        /** Подключаем и исполняем этот файл (Шаблон левого меню сайта) */
         include __DIR__ . '/render_views/' .$this->tpl;
+
+        /** Получем содержимое текущего буфера, после чего - удаляем его */
         return ob_get_clean();
     }
 }

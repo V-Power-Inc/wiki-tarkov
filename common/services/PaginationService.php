@@ -10,12 +10,11 @@ namespace app\common\services;
 
 use yii\data\Pagination;
 use yii\db\ActiveQuery;
-use Yii;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * Сервис помогает проще реализовывать пагинацию
- * Совместим лишь с частью Active Record моделей
  *
  * Class PaginationService
  * @package app\common\services
@@ -41,16 +40,20 @@ final class PaginationService
      */
     public function __construct(ActiveQuery $query, int $pageSize = self::defaultPageSize)
     {
+        /** Задаем атрибуту класса - экземпляр пагинатора */
         $this->paginator = new Pagination(['totalCount' => $query->count()]);
 
+        /** Задаем пагинатору размер страницы (По-умолчанию 20, если не было параметра) */
         $this->paginator->setPageSize($pageSize);
 
+        /** Сетапим атрибуту этого класса конечный запрос на выборку данных (С кешем на 1 час) */
         $this->items = $query->offset($this->paginator->offset)
             ->orderby(['date_create'=>SORT_DESC])
             ->limit($this->paginator->limit)
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->all();
 
+        /** Возвращаем текущий экземпляр класса */
         return $this;
     }
 }
