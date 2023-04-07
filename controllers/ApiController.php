@@ -32,9 +32,10 @@ use yii\db\Exception;
 final class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_LIST   = 'list';
-    const ACTION_ITEM   = 'item';
-    const ACTION_SEARCH = 'search';
+    const ACTION_LIST       = 'list';
+    const ACTION_ITEM       = 'item';
+    const ACTION_SEARCH     = 'search';
+    const ACTION_GET_GRAPHS = 'get-graphs';
 
     /**
      * Метод рендерит главную страницу API справочника
@@ -135,5 +136,27 @@ final class ApiController extends AdvancedController
 
         /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */
         throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+    }
+
+    /**
+     * Метод возвращает JSON с графиками состояния цен на предмет в прошлых сделках
+     *
+     * @param string $id - id предмета из API tarkov.dev
+     * @return string
+     */
+    public function actionGetGraphs(string $id): string {
+
+        /** Если запрос сюда прилетел AJAXом */
+        if (Yii::$app->request->isAjax) {
+
+            /** Инициализируем Api сервис */
+            $api = new ApiService();
+
+            /** Возвращаем данные о графиках стоимости предмета в прошлых сделках (JSON) */
+            return $api->getGraphsById($id);
+        }
+
+        /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
+        throw new HttpException(404, 'Такая страница не существует.');
     }
 }

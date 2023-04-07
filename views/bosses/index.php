@@ -27,8 +27,8 @@ $this->registerMetaTag([
 ]);
 ?>
 <!-- Gorizontal information -->
-<div class="row">
-    <div class="container">
+<div class="container">
+    <div class="row">
         <div class="col-lg-12 gor-pds">
             <?= $this->render('/other/google-gor'); ?>
         </div>
@@ -68,8 +68,8 @@ $this->registerMetaTag([
 <hr class="grey-line">
 
 <!-- Gorizontal information -->
-<div class="row margin-top-30">
-    <div class="container">
+<div class="container">
+    <div class="row">
         <div class="col-lg-12 gor-pds">
             <?= $this->render('/other/google-gor'); ?>
         </div>

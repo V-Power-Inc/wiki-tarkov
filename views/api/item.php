@@ -12,9 +12,12 @@
  */
 
 use app\models\ApiLoot;
+use app\common\services\HighChartsService;
 use yii\helpers\Json;
 use yii\web\JqueryAsset;
+use yii\web\JsExpression;
 use app\common\services\ImageService;
+use miloschuman\highcharts\Highcharts;
 
 $this->title = 'Предмет: ' . $item->name .' в Escape from Tarkov';
 
@@ -34,7 +37,8 @@ $item->json = Json::decode($item->json);
 /** Подключаем попапы для картинок */
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
-// todo: Дополнить taskUnlock кейс во вьюхе, когда будет больше информации
+/** Подключаем сюда файл, который AJAX запросом будет генерить правильный график */
+$this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::class]]);
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -52,7 +56,7 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
     <div class="row">
 
         <!-- Main Page Content -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content api-item-detail" data-item-id="<?= $item->json['id'] ?>">
 
             <!-- Image block -->
             <div class="col-xs-3">
@@ -169,8 +173,68 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
                 </div>
 
-
                 <?php endforeach; ?>
+
+                <!-- История цен на предмет -->
+                <div class="row received-block">
+                    <div class="col-sm-12">
+                        <div class="graphs__of__items">
+                            <?= Highcharts::widget([
+                                'options' => [
+                                    'chart' => [
+                                        'backgroundColor' => HighChartsService::getBackgroundByTheme(),
+                                    ],
+                                    'title' => [
+                                        'text' => 'История последних сделок по предмету',
+                                        'style' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ]
+                                    ],
+                                    'xAxis' => [
+                                        /** Данные сюда JS зааплоадит - HighCharts */
+                                        'categories' => [],
+                                        'labels' => [
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ]
+                                    ],
+                                    'yAxis' => [
+                                        'title' => [
+                                            'text' => 'Стоимость',
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ],
+                                        'labels' => [
+                                            'style' => [
+                                                'color' => HighChartsService::getTextByTheme()
+                                            ]
+                                        ]
+                                    ],
+                                    'legend' => [
+                                        'itemStyle' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ],
+                                        'itemHoverStyle' => [
+                                            'color' => HighChartsService::getTextByTheme()
+                                        ],
+                                    ],
+                                    'series' => [
+                                        [
+                                            'name' => 'Цена сделки - руб.',
+                                            /** Данные сюда JS зааплоадит - HighCharts */
+                                            'data' => [],
+                                            'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "orange"')
+                                        ],
+                                    ]
+                                ]
+                            ]) ?>
+                        </div>
+                    </div>
+                </div>
+
+
 
             </div>
 

@@ -24,7 +24,7 @@ return [
     'adminEmail' => '#',
     'discordCache' => 1,
     'yandexCache' => 1,
-    'keysBlocks' => [8],
+    'keysBlocks' => [],
     'restrictedAlertsUrls' => [
         '/',
         '/maps/zavod-location',

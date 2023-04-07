@@ -13,7 +13,8 @@ body {
 .fixed-navigatsiya {
     position: fixed;
     width: 100%;
-    top: 0px;
+    left: 0;
+    top: 0;
     z-index: 1000;
 }
 
@@ -1900,7 +1901,7 @@ h3.clan-title {
     margin: 15px auto;
     border: 2px solid #c3392c;
     border-radius: 5px;
-    height: 220px;
+    height: auto;
 }
 
 .clan-img {

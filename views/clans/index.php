@@ -31,7 +31,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content">
 
             <?php  if(Yii::$app->getSession()->getFlash('message')):?>
                 <?=Yii::$app->getSession()->getFlash('message')?>
@@ -42,6 +42,9 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <br>
             <br>
                 В настоящий момент это наиболее полная <b>неофициальная база кланов</b> по игре Escape from Tarkov.
+            <br>
+            <br>
+                <b class="bg-primary" style="padding: 5px;">5 April 2023 - Update:</b>  Все кланы у которых нет ссылки на сообщество будут отключены, новые кланы без ссылки на сообщество клана добавить невозможно. Если ваш клан исчез с этой страницы, напишите на почту <b>tarkov-wiki@ya.ru</b> и укажите название своего клана и ссылку на сообщество, либо заполните форму повторно.
             </p>
 
             <?php if($avialableTickets <= 0): ?>
@@ -101,20 +104,16 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
 
         </div>
 
-        <!-- right menu start -->
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <!-- Блок комментариев -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
+            <!-- Расстояние - заглушка -->
+            <div class="height-25"></div>
 
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
-
+            <!-- Комментарии -->
+            <?= $this->render('/other/comments');?>
         </div>
+
 
     </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\UrlValidator;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use app\common\helpers\validators\SafeValidator;
@@ -69,6 +70,11 @@ class Clans extends \yii\db\ActiveRecord
             [static::ATTR_DESCRIPTION, RequiredValidator::class],
             [static::ATTR_DESCRIPTION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
+            /** Валидация ссылки на клан или сообщество */
+            [static::ATTR_LINK, RequiredValidator::class],
+            [static::ATTR_LINK, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [static::ATTR_LINK, UrlValidator::class],
+
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
             [static::ATTR_DATE_UPDATE, SafeValidator::class],
@@ -120,7 +126,6 @@ class Clans extends \yii\db\ActiveRecord
                 unlink('./'.$this->preview);
                 return false;
             }
-
         }
     }
 }

@@ -45,6 +45,18 @@ final class ApiService implements ApiInterface
     private $method = 'POST';
 
     /**
+     * Конструктор при инициализации класса задает атрибуту класса объет APIQueries для применения
+     * различных запросов к API
+     *
+     * ApiService constructor.
+     */
+    public function __construct()
+    {
+        /** Сетапим атрибуту класса - объект APIQueries для сетапа запросов к API */
+        $this->query = new ApiQueries();
+    }
+
+    /**
      * Метод по получению информации о боссах Escape From Tarkov
      *
      * @param string|null $map_name - Название карты (Параметр может отсутствовать)
@@ -62,24 +74,7 @@ final class ApiService implements ApiInterface
             $this->removeOldBosses();
 
             /** Задаем тело запроса для получения информации о боссах */
-            $this->query = '{
-               maps(lang: ru) {
-                name
-                bosses {
-                  name
-                  spawnChance
-                  spawnTrigger
-                  spawnLocations {
-                    name
-                  }
-                  escorts {
-                    amount {
-                      count
-                    }
-                  }
-                }
-              }
-            }';
+            $this->query = $this->query->setBossesQuery();
 
             /** Присваиваем результат запроса переменной */
             $content = $this->getApiData();
@@ -154,9 +149,10 @@ final class ApiService implements ApiInterface
     /**
      * Метод получает данные из удаленного источника по переданному параметру запроса
      *
-     * @return array
+     * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
+     * @return mixed
      */
-    private function getApiData(): array
+    private function getApiData(bool $encoded = true)
     {
         /** Устанавливаем атрибуты запроса (Включая подавление любых ошибок) */
         $data = @file_get_contents($this->api_url, false, stream_context_create([
@@ -167,8 +163,8 @@ final class ApiService implements ApiInterface
             ]
         ]));
 
-        /** Возвращаем раскодированный из Json результат в виде массива*/
-        return Json::decode($data, true);
+        /** Возвращаем результат, либо раскодированный из JSON либо нет, в зависимости от переданного сюда флага */
+        return $encoded ? Json::decode($data, true) : $data;
     }
 
     /**
@@ -214,9 +210,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +3 month'));
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +2 month'));
 
-            /** Если дата записи +3 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -239,67 +235,8 @@ final class ApiService implements ApiInterface
      */
     public function setItemQuery(string $itemName): void
     {
-        /** Задаем тело запроса для получения информации о боссах */
-        $this->query = '{
-          items(name: "'. $itemName . '", lang: ru, limit: 20) {
-            name
-            normalizedName
-            width
-            height
-            weight
-            description
-            category {
-              name
-            }
-            iconLink
-            inspectImageLink
-            sellFor {
-              vendor {
-                name
-              }
-              price
-              currency
-              currencyItem {
-                name
-              }
-              priceRUB
-            }
-            buyFor {
-              vendor {
-                name
-              }
-              price
-              currency
-              currencyItem {
-                name
-              }
-              priceRUB
-            }
-            bartersFor {
-              trader {
-                name
-              }
-              level
-              taskUnlock {
-                name
-              }
-              requiredItems {
-                item {
-                  name
-                  iconLink
-                }
-                count
-                quantity
-              }
-            }
-            receivedFromTasks {
-                name
-                trader {
-                  name
-                }
-            }
-          } 
-        }';
+        /** Задаем тело запроса для получения информации о предметах */
+        $this->query = $this->query->setItemQuery($itemName);
     }
 
     /**
@@ -309,84 +246,7 @@ final class ApiService implements ApiInterface
     private function setTasksQuery(): void
     {
         /** Задаем тело запроса для получения информации о квестах */
-        $this->query = 'query {
-          # Передаем сюда языковой код, чтобы все на RU было
-          tasks (lang: ru) {
-            # Название квеста
-            name,
-            # Для какой фракции квест (Bear или USEC или любая)
-            factionName
-            # Минимальный уровень игрока для получения квеста
-            minPlayerLevel,
-            # Задачи квеста, что нужно сделать
-            objectives {
-              # Тип квеста (Убийство, сдача предметов и т.д.)
-              type,
-              # Описание задания
-              description,
-              # Опциональность условия (false - обязательно, true - нет)
-              optional
-            }
-            # Ключи, которые понадобятся для задачи
-            neededKeys {
-              # Массив с ключами
-                    keys {
-                name,
-                iconLink
-              }
-            }
-            # Требования к другим квестам перед выполнением текущего
-            taskRequirements {
-              # Название необходимого квеста
-              task {
-                name
-              }
-              # Требование к статусу квеста
-              status
-            }
-            # Количество получаемого опыта - за выполнение квеста
-            experience,
-            # Название карты, на которой надо выполнить квест
-            map {
-              name
-            }
-            # Торговец, что выдал квест (Имя и изображение)
-            trader {
-              name,
-              imageLink
-            },
-            # Можно ли перепроходить квест несколько раз
-            restartable
-            # Стартовые требования для квеста (Предметы)
-            startRewards {
-              # Предметы для выполнения квеста
-              items {
-                item {
-                  name,
-                  description,
-                  iconLink,
-                  inspectImageLink
-                },
-                # Количество стартовых предметов для квеста
-                count
-              }
-            },
-            # Награда за квест
-            finishRewards {
-              # Предметы выдаваемые в награду за выполнение квеста
-              items {
-                item {
-                  name,
-                  description,
-                  iconLink,
-                  inspectImageLink
-                },
-                # Количество стартовых предметов для квеста
-                count
-              }
-            }
-          }
-        }';
+        $this->query = $this->query->setTasksQuery();
     }
 
     /**
@@ -575,6 +435,7 @@ final class ApiService implements ApiInterface
 
     /**
      * Метод проставляющий устаревание для предметов, полученных по API
+     * UPD. 06.04.2023 - Сделали дату устаревения записи на 7 день хранения
      *
      * @return bool
      */
@@ -587,9 +448,9 @@ final class ApiService implements ApiInterface
         foreach ($items as $item) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +3 month'));
+            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +2 month'));
 
-            /** Если дата записи +3 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -762,5 +623,34 @@ final class ApiService implements ApiInterface
 
         /** Возвращаем bool результат если все ок */
         return true;
+    }
+
+    /**
+     * Метод сетапит запрос для получения исторических цен на лут
+     * Требуется ID предмета из GraphQL базы справочника tarkov.dev
+     *
+     * @param string $id - id предмета из API tarkov.dev
+     * @return bool
+     */
+    private function setGraphsItemQuery(string $id): bool
+    {
+        /** Запрос для получения информацию по графику конкретного предмета (Последние сделки) */
+        $this->query = $this->query->setGraphsItemQuery($id);
+
+        /** Возвращаем bool результат */
+        return true;
+    }
+
+    /**
+     * @param string $id - id предмета из API tarkov.dev
+     * @return string
+     */
+    public function getGraphsById(string $id): string
+    {
+        /** Сетапим запрос на получение графиков по конкретному луту */
+        $this->setGraphsItemQuery($id);
+
+        /** Получаем данные о графиках из API в виде JSON */
+        return $this->getApiData(false);
     }
 }

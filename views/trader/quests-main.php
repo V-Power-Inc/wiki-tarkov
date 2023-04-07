@@ -23,8 +23,8 @@ $this->registerMetaTag([
 ]);
 ?>
 <!-- Gorizontal information -->
-<div class="row">
-    <div class="container">
+<div class="container">
+    <div class="row">
         <div class="col-lg-12 gor-pds">
             <?= $this->render('/other/google-gor'); ?>
         </div>
@@ -43,7 +43,7 @@ $this->registerMetaTag([
                         <?php if ($trader['url'] !== '' && $trader['url'] !== null): ?>
                             <a href="/traders/<?= $trader['url'] ?>"><?= $trader['title'] ?></a>
                         <?php else :?>
-                            <a><?= $trader['title'] ?></a>
+                            <p><?= $trader['title'] ?></p>
                         <?php endif; ?>
                     </h2>
                 </div>
@@ -75,8 +75,8 @@ $this->registerMetaTag([
 <?php endforeach; ?>
 
 <!-- Gorizontal information -->
-<div class="row">
-    <div class="container">
+<div class="container">
+    <div class="row">
         <div class="col-lg-12 gor-pds">
             <?= $this->render('/other/google-gor'); ?>
         </div>
