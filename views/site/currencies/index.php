@@ -58,11 +58,6 @@ $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
                 <h2 class="curencies-title">Курс Доллара</h2>
                 <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
 
-                <div class="article-stats-padding">
-                    <?= $this->render('/other/adsense-article-feed'); ?>
-                </div>
-
-
                 <!-- Блок рассчета под долларовые поля -->
                 <div style="padding: 10px;">
 
@@ -97,10 +92,6 @@ $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
                 <!-- Строка курса евро -->
                 <h2 class="curencies-title">Курс Евро</h2>
                 <p class="size-16 alert alert-info">Евро валюта является ходовой у торговца Механика, за нее он продает различные дополнения для вашего оружия в виде модулей, однако не только он продает товары за евро, у Лыжника также можно найти несколько товаров продаваемых за евро.</p>
-
-                <div class="article-stats-padding">
-                    <?= $this->render('/other/adsense-article-feed'); ?>
-                </div>
 
                 <!-- Блок рассчета под евро поля -->
                 <div style="padding: 10px;">
@@ -137,10 +128,6 @@ $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
                 <!-- Строка курса биткоина -->
                 <h2 class="curencies-title">Курс Биткоина</h2>
                 <p class="size-16 alert alert-info">Это самая дорогостоющая валюта, стоимость 1 биткоина в Таркове составляет десятки тысяч рублей. Валюта в ходу у Механика, за нее у него можно купить оружие с отличными боевыми характеристиками. Зачастую ЧВК используют биткоины также для того, чтобы поправить свое финансовое положение - следовательно продавать биткоин тоже очень выгодно.</p>
-
-                <div class="article-stats-padding">
-                    <?= $this->render('/other/adsense-article-feed'); ?>
-                </div>
 
                 <!-- Блок рассчета под евро поля -->
                 <div style="padding: 10px;">

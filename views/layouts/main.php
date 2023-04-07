@@ -93,7 +93,6 @@ AppAsset::register($this);
                 <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
 
             </div>
-          <span class="col-sm-12 counter-footer"></span>
         </div>
     </div>
 </footer>
