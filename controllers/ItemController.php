@@ -35,7 +35,7 @@ class ItemController extends AdvancedController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 604800,
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => ['detailloot'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
