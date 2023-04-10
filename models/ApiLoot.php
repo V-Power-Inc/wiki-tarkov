@@ -115,7 +115,7 @@ class ApiLoot extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращает массив объектов ApiLoot - 30 актуальных записей
+     * Метод возвращает массив объектов ApiLoot - 100 актуальных записей
      * Селектим только строку с Json'ом и URL
      *
      * @return ApiLoot[]
@@ -126,7 +126,7 @@ class ApiLoot extends \yii\db\ActiveRecord
             ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
             ->where([ApiLoot::ATTR_OLD => ApiLoot::FALSE])
             ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
-            ->limit(30)
+            ->limit(100)
             ->all();
     }
 

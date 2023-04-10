@@ -114,8 +114,8 @@ final class ApiController extends AdvancedController
             return $this->render('item', ['item' => $item]);
         }
 
-        /** Если в базе нет предмета - возвращаем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+        /** Если в базе нет предмета - редиректим с временным кодом на страницу со списком актуального лута */
+        return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
     }
 
     /**
