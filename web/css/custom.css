@@ -1902,6 +1902,7 @@ h3.clan-title {
     border: 2px solid #c3392c;
     border-radius: 5px;
     height: auto;
+    min-height: 200px;
 }
 
 .clan-img {
