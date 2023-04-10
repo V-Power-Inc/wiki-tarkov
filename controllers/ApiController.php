@@ -15,10 +15,10 @@ use app\common\services\JsondataService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
-use Yii;
 use yii\web\HttpException;
 use yii\web\ServerErrorHttpException;
 use yii\db\Exception;
+use Yii;
 
 /**
  * Контроллер обеспечивает работоспособность API по получению лута со стороннего источника tarkov.dev
@@ -125,7 +125,8 @@ final class ApiController extends AdvancedController
      * @return string
      * @throws Exception
      */
-    public function actionSearch(string $q): string {
+    public function actionSearch(string $q): string
+    {
 
         /** Если запрос пришел через AJAX */
         if (Yii::$app->request->isAjax) {
@@ -144,7 +145,8 @@ final class ApiController extends AdvancedController
      * @param string $id - id предмета из API tarkov.dev
      * @return string
      */
-    public function actionGetGraphs(string $id): string {
+    public function actionGetGraphs(string $id): string
+    {
 
         /** Если запрос сюда прилетел AJAXом */
         if (Yii::$app->request->isAjax) {

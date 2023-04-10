@@ -38,7 +38,8 @@ final class ClanController extends AdvancedController
      *
      * @return string
      */
-    public function actionIndex(): string {
+    public function actionIndex(): string
+    {
 
         /** Создаем объект класса - Кланы */
         $srcclan = new Clans();
@@ -61,7 +62,8 @@ final class ClanController extends AdvancedController
      *
      * @return string|Response
      */
-    public function actionAddclan() {
+    public function actionAddclan()
+    {
 
         /** Получаем число - количество заявок поданных сегодня */
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
