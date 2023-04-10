@@ -47,6 +47,7 @@ class SiteController extends AdvancedController
 
     /**
      * Массив поведения данного контроллера
+     * Подключаем REDIS кеширование для большинства страниц из этого контроллера
      *
      * @return array|array[]
      */
@@ -55,8 +56,19 @@ class SiteController extends AdvancedController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 3600,
-                'only' => ['index','table-patrons'],
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
+                'only' => [
+                    'index',
+                    'table-patrons',
+                    'keys',
+                    'doorkeysdetail',
+                    'news',
+                    'newsdetail',
+                    'articles',
+                    'articledetail',
+                    'questions',
+                    'currencies'
+                ],
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
                     Yii::$app->request->url,
