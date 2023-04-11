@@ -14,9 +14,9 @@ use app\common\services\JsondataService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
-use Yii;
 use yii\web\HttpException;
 use yii\web\ServerErrorHttpException;
+use Yii;
 
 /**
  * Контроллер обеспечивает работоспособность API по получению лута со стороннего источника tarkov.dev
@@ -72,7 +72,8 @@ class ApiController extends AdvancedController
 
                     /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
                     $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
-                } else {
+
+                } else { /** Если предметы не были найдены, логируем запрос без флага */
 
                     /** Если $items пустой - устанавливаем логирование запроса без флага */
                     $api->setSearchLog($form_model);
