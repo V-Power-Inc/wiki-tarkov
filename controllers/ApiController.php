@@ -159,6 +159,6 @@ final class ApiController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
-        throw new HttpException(404, 'Такая страница не существует.');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.');
     }
 }
