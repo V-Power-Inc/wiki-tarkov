@@ -106,8 +106,14 @@ class ApiController extends AdvancedController
         /** Создаем переменную с объектом ApiLoot по параметру url адреса */
         $item = ApiLoot::findItemByUrl($url);
 
-        /** Пробуем найти, если нашли - рендеринг вьюхи */
+        /** Пробуем найти, если нашли - обновление данных и рендеринг вьюхи */
         if ($item) {
+
+            /** Инициализируем API */
+            $api = new ApiService();
+
+            /** Обновляем данные о предмете через API */
+            $api->renewItemData($item);
 
             /** Ренденирг данных */
             return $this->render('item', ['item' => $item]);

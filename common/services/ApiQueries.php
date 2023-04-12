@@ -14,7 +14,7 @@ namespace app\common\services;
  * Class ApiQueries
  * @package app\common\services
  */
-class ApiQueries
+final class ApiQueries
 {
     /** @var string - запрос, который будет отправляться в API */
     public $query;
@@ -251,4 +251,80 @@ class ApiQueries
         return $this->query;
     }
 
+
+    /**
+     * Метод сетапит атрибуту класса запрос для API, который позволит получить данные по id одного конкретного предмета
+     * из справочника лута в API
+     *
+     * @param string $id - id предмета из API
+     * @return string
+     */
+    public function setSingleItemQuery(string $id): string
+    {
+        /** Сетапим запрос по получению информации о единице лута по id */
+        $this->query = 'query {
+          item (id: "' . $id . '", lang: ru) {
+            id
+            name
+            normalizedName
+            width
+            height
+            weight
+            description
+            category {
+              name
+            }
+            iconLink
+            inspectImageLink
+            sellFor {
+              vendor {
+                name
+              }
+              price
+              currency
+              currencyItem {
+                name
+              }
+              priceRUB
+            }
+            buyFor {
+              vendor {
+                name
+              }
+              price
+              currency
+              currencyItem {
+                name
+              }
+              priceRUB
+            }
+            bartersFor {
+              trader {
+                name
+              }
+              level
+              taskUnlock {
+                name
+              }
+              requiredItems {
+                item {
+                  name
+                  iconLink
+                }
+                count
+                quantity
+              }
+            }
+            receivedFromTasks {
+                name
+                trader {
+                  name
+                }
+            }
+          } 
+        }';
+
+        /** Возвращаем запрос по получению информации о луте по id */
+        return $this->query;
+    }
 }

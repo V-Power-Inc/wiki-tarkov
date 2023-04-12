@@ -16,7 +16,7 @@ use Yii;
  * Class HighChartsService
  * @package app\common\services
  */
-class HighChartsService
+final class HighChartsService
 {
     /**
      * Метод возвращает правильный цвет стилей для HighCharts графика в зависимости от включенной темы на сайте

@@ -418,65 +418,6 @@ final class ApiService implements ApiInterface
     }
 
     /**
-     * Метод проставляющий устаревание для предметов, полученных по API
-     * UPD. 11-04-2023 - Тестируем обновление лута по каждому запросу, пока этот метод не используется, возможно будет удален
-     *
-     * @return bool
-     */
-    private function setOldItems(): bool
-    {
-        /** Выбираем в базе все записи, которые не помечены флагом устаревания */
-        $items = ApiLoot::findAll([ApiLoot::ATTR_OLD => ApiLoot::FALSE]);
-
-        /** В цикле проходим все соответствующие записи */
-        foreach ($items as $item) {
-
-            /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +2 month'));
-
-            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
-            if ($date < date("Y-m-d H:i:s",time())) {
-
-                /** Устанавливаем флаг старой записи */
-                $item->old = ApiLoot::TRUE;
-
-                /** Сохраняем изменения */
-                $item->save();
-            }
-        }
-
-        /** Возвращаем true если все прошло успешно */
-        return true;
-    }
-
-    /**
-     * Метод осуществляющий удаление устаревших предметов API по имени предметов через like
-     * UPD. 11-04-2023 - Тестируем обновление лута по каждому запросу, пока этот метод не используется, возможно будет удален
-     *
-     * @param ApiForm $model - объект формы ApiForm
-     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
-     * being deleted is outdated.
-     * @throws \Throwable in case delete failed.
-     * @return bool
-     */
-    private function removeOldItemsByName(ApiForm $model): bool
-    {
-        /** Задаем SQL запрос переменной - ищем устаревшие записи */
-        $items = ApiLoot::find()
-            ->where([ApiLoot::ATTR_OLD => ApiLoot::TRUE])
-            ->where(['like', ApiLoot::ATTR_NAME, $model->item_name])
-            ->all();
-
-        /** В цикле проходим всех устаревших боссов и удаляем их */
-        foreach ($items as $item) {
-            $item->delete();
-        }
-
-        /** Если удаление старых записей прошло удачно - возвращаем true */
-        return true;
-    }
-
-    /**
      * Метод записывает в ApiSearchLogs данные о поисковых запросах пользователей через ApiForm
      *
      * @param ApiForm $model - объект модели ApiForm
@@ -660,5 +601,24 @@ final class ApiService implements ApiInterface
 
         /** Возвращаем bool результат */
         return true;
+    }
+
+    /**
+     * @param ApiLoot $item - AR объект, лут из API справочника
+     * @return bool
+     */
+    public function renewItemData(ApiLoot $item): bool
+    {
+        /** Декодируя JSON предмета - получаем его id */
+        $item_id = Json::decode($item->json)['id'];
+
+        /** Сетапим запрос API - для обновления данных о предмете */
+        $this->query = $this->query->setSingleItemQuery($item_id);
+
+        /** Сетапим данные из API - переменной */
+        $content = $this->getApiData();
+
+        /** Возвращаем bool результат обновления лута */
+        return $item->updateData($content);
     }
 }
