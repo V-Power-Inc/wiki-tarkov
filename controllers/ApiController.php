@@ -80,7 +80,7 @@ class ApiController extends AdvancedController
                 }
             }
         } else {
-            /** Если массив не $_POST - вернем 30 актуальных записей из нашей базы */
+            /** Если массив не $_POST - вернем 100 актуальных записей из нашей базы */
             $items = ApiLoot::findActualItems();
         }
 
