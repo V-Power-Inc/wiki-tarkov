@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use yii\helpers\Json;
 
 /**
  * AR модель для работы с API, через которое на сайте актуализируется база лута
@@ -16,7 +17,6 @@ use app\common\helpers\validators\StringValidator;
  * @property string $url URL адрес
  * @property string $date_create Дата создания записи о предмете
  * @property int $active Флаг активности записи
- * @property int $old Флаг возраста записи, если стоит 1, пора удалять
  */
 class ApiLoot extends \yii\db\ActiveRecord
 {
@@ -27,7 +27,6 @@ class ApiLoot extends \yii\db\ActiveRecord
     const ATTR_URL  = 'url';
     const ATTR_DATE_CREATE = 'date_create';
     const ATTR_ACTIVE = 'active';
-    const ATTR_OLD = 'old';
 
     /** Константы bool значений */
     const TRUE = 1;
@@ -62,9 +61,7 @@ class ApiLoot extends \yii\db\ActiveRecord
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
-            [static::ATTR_ACTIVE, IntegerValidator::class],
-
-            [static::ATTR_OLD, IntegerValidator::class]
+            [static::ATTR_ACTIVE, IntegerValidator::class]
         ];
     }
 
@@ -101,20 +98,6 @@ class ApiLoot extends \yii\db\ActiveRecord
     }
 
     /**
-     * Ищем все записи по имени предмета и с флагом устаревания
-     *
-     * @param string $name - Имя предмета
-     * @return ApiLoot[]
-     */
-    public static function findOldItemsByName(string $name)
-    {
-        return ApiLoot::find()
-            ->where(['like', ApiLoot::ATTR_NAME, $name])
-            ->andWhere([ApiLoot::ATTR_OLD => ApiLoot::TRUE])
-            ->all();
-    }
-
-    /**
      * Метод возвращает массив объектов ApiLoot - 100 актуальных записей
      * Селектим только строку с Json'ом и URL
      *
@@ -124,7 +107,7 @@ class ApiLoot extends \yii\db\ActiveRecord
     {
         return ApiLoot::find()
             ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
-            ->where([ApiLoot::ATTR_OLD => ApiLoot::FALSE])
+            ->where([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
             ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
             ->limit(100)
             ->all();
@@ -140,5 +123,22 @@ class ApiLoot extends \yii\db\ActiveRecord
     public static function findItemByUrl(string $url)
     {
         return ApiLoot::findOne([ApiLoot::ATTR_URL => $url]);
+    }
+
+    /**
+     * Метод обновляет существующий предмет из API новыми данными
+     *
+     * @param array $api_data - массив с данными о предмете из API
+     * @return bool
+     */
+    public function updateData(array $api_data): bool
+    {
+        /** Сетапим данные AR модели */
+        $this->json = Json::encode($api_data['data']['item']);
+        $this->name = $api_data['data']['item']['name'];
+        $this->date_create = date('Y-m-d H:i:s');
+
+        /** Сохраняем обновленный предмет */
+        return $this->save();
     }
 }

@@ -74,14 +74,15 @@ final class ApiController extends AdvancedController
 
                     /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
                     $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
-                } else {
+
+                } else { /** Если предметы не были найдены, логируем запрос без флага */
 
                     /** Если $items пустой - устанавливаем логирование запроса без флага */
                     $api->setSearchLog($form_model);
                 }
             }
         } else {
-            /** Если массив не $_POST - вернем 30 актуальных записей из нашей базы */
+            /** Если массив не $_POST - вернем 100 актуальных записей из нашей базы */
             $items = ApiLoot::findActualItems();
         }
 
@@ -107,8 +108,14 @@ final class ApiController extends AdvancedController
         /** Создаем переменную с объектом ApiLoot по параметру url адреса */
         $item = ApiLoot::findItemByUrl($url);
 
-        /** Пробуем найти, если нашли - рендеринг вьюхи */
+        /** Пробуем найти, если нашли - обновление данных и рендеринг вьюхи */
         if ($item) {
+
+            /** Инициализируем API */
+            $api = new ApiService();
+
+            /** Обновляем данные о предмете через API */
+            $api->renewItemData($item);
 
             /** Ренденирг данных */
             return $this->render('item', ['item' => $item]);

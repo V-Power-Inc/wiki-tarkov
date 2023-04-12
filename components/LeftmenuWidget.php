@@ -9,6 +9,7 @@
 namespace app\components;
 use yii\base\Widget;
 use app\models\Category;
+use Yii;
 
 /**
  * Класс для постройки виджета в левом меню сайта
@@ -59,7 +60,7 @@ class LeftmenuWidget extends Widget {
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 604800,
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM category',

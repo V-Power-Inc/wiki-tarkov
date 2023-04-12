@@ -35,6 +35,30 @@ final class TraderController extends AdvancedController
     public $enableCsrfValidation;
 
     /**
+     * Массив поведения данного контроллера
+     * Подключаем REDIS кеширование для большинства страниц из этого контроллера
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
+                'variations' => [
+                    $_SERVER['SERVER_NAME'],
+                    Yii::$app->request->url,
+                    Yii::$app->response->statusCode,
+                    Yii::$app->request->get('page'),
+                    Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('dark_theme')
+                ]
+            ],
+        ];
+    }
+
+    /**
      * Метод рендерит квесты на детальных страницах торговцев
      * сами квесты получает из API, после чего сохраняет в БД, далее уже берет из таблицы tasks
      * Если таблица будет пуста или не будет квестов для определенного торговца

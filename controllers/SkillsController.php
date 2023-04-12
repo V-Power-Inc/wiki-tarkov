@@ -40,7 +40,7 @@ final class SkillsController extends AdvancedController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 604800,
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) from skills limit 1',

@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\tasks\db\TaskModel;
 use app\common\models\tasks\TasksResult;
 use app\components\MessagesComponent;
@@ -294,7 +295,7 @@ final class ApiService implements ApiInterface
         }
 
         /** Выкидываем 404 ошибку, если нет квестов */
-        throw new HttpException('404', 'Такая страница не существует.')  ;
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.')  ;
     }
 
     /**
@@ -313,14 +314,14 @@ final class ApiService implements ApiInterface
      */
     public function proccessSearchItem(ApiForm $model)
     {
-        /** Проверка - если в БД у нас нет этой записи, тогда должны спарсить и создать */
-        if (!ApiLoot::findItemsByName($model->item_name)) {
+        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
+        if (ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Сперва удалим существующие записи */
+            $this->removeItemsByQuery($model->item_name);
 
             /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
             if ($this->createNewItems($model)) {
-
-                /** Проставляем предметам флаги устаревания - после создания новых предметов */
-                $this->setOldItems();
 
                 /** Возвращаем в контроллер набор данных, который искали ранее */
                 return ApiLoot::findItemsByName($model->item_name);
@@ -330,38 +331,22 @@ final class ApiService implements ApiInterface
             return false;
         }
 
-        /** Проверка - если мы нашли у нас в базе устаревшие записи */
-        if (ApiLoot::findOldItemsByName($model->item_name)) {
+        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
+        if (!ApiLoot::findItemsByName($model->item_name)) {
 
-            /** В цикле проходим все старые записи и удаляем их */
-            $this->removeOldItemsByName($model);
-
-            /** Пробуем создать новые предметы, если получилось - возвращаем в контроллер набор данных **/
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
             if ($this->createNewItems($model)) {
 
-                /** Проставляем предметам флаги устаревания - после создания новых предметов */
-                $this->setOldItems();
-
-                /** Возращаем в контроллер конечные данные с запрашиваемым набором */
+                /** Возвращаем в контроллер набор данных, который искали ранее */
                 return ApiLoot::findItemsByName($model->item_name);
             }
 
-            /** Возвращаем false, если предметы не были сохранены по какой то причине */
+            /** Возвращаем False в контроллер, если в API нет данных */
             return false;
         }
 
-        /** Проверка, если API нашел у нас в базе нужные предметы */
-        if (ApiLoot::findItemsByName($model->item_name)) {
-
-            /** Проставляем предметам флаги устаревания - после создания новых предметов */
-            $this->setOldItems();
-
-            /** Удаляем старые предметы - если получили запись из базы */
-            return ApiLoot::findItemsByName($model->item_name);
-        }
-
-        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше */
-        throw new HttpException(500, 'Server error code');
+        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
+        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
     }
 
     /**
@@ -431,64 +416,6 @@ final class ApiService implements ApiInterface
 
         /** Возвращаем false - если предметы не сохранились */
         return false;
-    }
-
-    /**
-     * Метод проставляющий устаревание для предметов, полученных по API
-     * UPD. 06.04.2023 - Сделали дату устаревения записи на 7 день хранения
-     *
-     * @return bool
-     */
-    private function setOldItems(): bool
-    {
-        /** Выбираем в базе все записи, которые не помечены флагом устаревания */
-        $items = ApiLoot::findAll([ApiLoot::ATTR_OLD => ApiLoot::FALSE]);
-
-        /** В цикле проходим все соответствующие записи */
-        foreach ($items as $item) {
-
-            /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($item->date_create . ' +2 month'));
-
-            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
-            if ($date < date("Y-m-d H:i:s",time())) {
-
-                /** Устанавливаем флаг старой записи */
-                $item->old = ApiLoot::TRUE;
-
-                /** Сохраняем изменения */
-                $item->save();
-            }
-        }
-
-        /** Возвращаем true если все прошло успешно */
-        return true;
-    }
-
-    /**
-     * Метод осуществляющий удаление устаревших предметов API по имени предметов через like
-     *
-     * @param ApiForm $model - объект формы ApiForm
-     * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
-     * being deleted is outdated.
-     * @throws \Throwable in case delete failed.
-     * @return bool
-     */
-    private function removeOldItemsByName(ApiForm $model): bool
-    {
-        /** Задаем SQL запрос переменной - ищем устаревшие записи */
-        $items = ApiLoot::find()
-            ->where([ApiLoot::ATTR_OLD => ApiLoot::TRUE])
-            ->where(['like', ApiLoot::ATTR_NAME, $model->item_name])
-            ->all();
-
-        /** В цикле проходим всех устаревших боссов и удаляем их */
-        foreach ($items as $item) {
-            $item->delete();
-        }
-
-        /** Если удаление старых записей прошло удачно - возвращаем true */
-        return true;
     }
 
     /**
@@ -652,5 +579,47 @@ final class ApiService implements ApiInterface
 
         /** Получаем данные о графиках из API в виде JSON */
         return $this->getApiData(false);
+    }
+
+    /**
+     * Метод удаляет через like все предметы лута из API, у которых название может совпадать с поисковым запросом
+     *
+     * @param string $query - Часть названия предмета (Поисковый запрос)
+     * @return bool
+     * @throws \Throwable in case delete failed.
+     */
+    private function removeItemsByQuery(string $query): bool
+    {
+        /** Находим весь лут, у которого в названии есть что-то похожее на наш запрос */
+        $items = ApiLoot::find(['like', ApiLoot::ATTR_NAME, $query])->all();
+
+        /** В цикле проходим все предметы похожие на запрос поиска и удаляем их */
+        foreach ($items as $item) {
+
+            /** Удаляем данные о луте */
+            $item->delete();
+        }
+
+        /** Возвращаем bool результат */
+        return true;
+    }
+
+    /**
+     * @param ApiLoot $item - AR объект, лут из API справочника
+     * @return bool
+     */
+    public function renewItemData(ApiLoot $item): bool
+    {
+        /** Декодируя JSON предмета - получаем его id */
+        $item_id = Json::decode($item->json)['id'];
+
+        /** Сетапим запрос API - для обновления данных о предмете */
+        $this->query = $this->query->setSingleItemQuery($item_id);
+
+        /** Сетапим данные из API - переменной */
+        $content = $this->getApiData();
+
+        /** Возвращаем bool результат обновления лута */
+        return $item->updateData($content);
     }
 }
