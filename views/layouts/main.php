@@ -99,7 +99,11 @@ AppAsset::register($this);
 
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
 
-<?php if (isset($cookies['overlay']) && !isset($cookies['sticky'])): ?>
+<?php if (
+    isset($cookies['overlay']) &&
+    !isset($cookies['sticky']) &&
+    !in_array(Yii::$app->request->url,Yii::$app->params['restrictedAlertsUrls'])
+): ?>
     <?= $this->render('/other/yandex-direct-inpage-sticky') ?>
 <?php endif; ?>
 
