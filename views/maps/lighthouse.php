@@ -26,6 +26,17 @@ $this->registerMetaTag([
     </div>
 </div>
 
+<!-- Gorizontal information -->
+<div class="container special-padding">
+    <div class="row">
+        <div class="col-lg-12 gor-pds">
+            <?= $this->render('/other/google-gor'); ?>
+        </div>
+    </div>
+</div>
+
+<hr class="grey-line">
+
 <!-- Инициализация карты -->
 <div class="w-100">
     <div id="map" class="map relative">
