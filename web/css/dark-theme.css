@@ -268,7 +268,7 @@ span.key-selector {
 
 /** Переопределение стилей заголовков на интерактивных картах */
 .heading-class.mappage {
-    border-bottom: 2px solid #545325;
+    border-bottom: 2px solid #9a8866;
 }
 
 /** Переопределение стилей Leaflet */
@@ -725,4 +725,9 @@ h3.clan-title {
 /** Переопределяем стили Leaflet на интерактивных картах (Попап окна) */
 .leaflet-container a {
     color: #9a7e50;
+}
+
+/** Переопределяем стили Leaflet - текст внутри попапа */
+.leaflet-popup-content {
+    color: #cfd0d1;
 }

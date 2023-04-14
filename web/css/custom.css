@@ -2338,3 +2338,8 @@ h2.actual-items-block-title {
 .fa.checked-by-admins.actual-items-block {
     margin-left: 16px;
 }
+
+/** Отступ для горизонтального контейнера на интерактивных картах */
+.container.special-padding {
+    padding: 0 15px 0px;
+}
