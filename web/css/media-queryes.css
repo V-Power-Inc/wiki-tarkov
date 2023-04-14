@@ -368,6 +368,12 @@
     .navbar-nav > li.information-nav-block {
         display: block;
     }
+
+    /** Указываем положение информационного блока на мобильных устройствах */
+    .info-page-fixed-block {
+        bottom: 10px;
+        right: 10px;
+    }
 }
 
 
