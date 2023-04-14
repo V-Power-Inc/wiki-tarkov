@@ -2356,4 +2356,13 @@ h2.actual-items-block-title {
     right: 50px;
     max-height: 315px;
     max-width: 315px;
+    padding: 5px;
+}
+
+/** Задаем информационному блоку явные размеры */
+.sticky_content_on_site {
+    max-width: 300px;
+    max-height: 300px;
+    height: 100%;
+    width: 100%;
 }

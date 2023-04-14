@@ -16,18 +16,17 @@
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] Inpage Sticky Banner-->
     <!--Категория: Основная категория-->
     <!--Тип баннера: ADF - Блок InPage-->
-    <div id="adfox_168147815848537513"></div>
+    <div id="adfox_168147939006289767"></div>
     <script>
         window.yaContextCb.push(()=>{
             Ya.adfoxCode.create({
                 ownerId: 700342,
-                containerId: 'adfox_168147815848537513',
+                containerId: 'adfox_168147939006289767',
                 params: {
                     p1: 'cxyjo',
-                    p2: 'ihxx'
+                    p2: 'ihxx',
                 }
             })
         })
     </script>
-
 </div>
