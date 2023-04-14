@@ -41,6 +41,7 @@ class SiteController extends AdvancedController
     const ACTION_JSONVALUTE             = 'jsonvalute';
     const ACTION_CLOSE_OVERLAY          = 'close-overlay';
     const ACTION_CHANGE_LAYOUT          = 'change-layout';
+    const ACTION_CLOSE_STICKY           = 'close-sticky';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;
@@ -75,6 +76,7 @@ class SiteController extends AdvancedController
                     Yii::$app->response->statusCode,
                     Yii::$app->request->get('page'),
                     Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('sticky'),
                     Yii::$app->request->cookies->get('dark_theme')
                 ]
             ],
@@ -269,7 +271,7 @@ class SiteController extends AdvancedController
 
     /**
      * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
-     * сайта на один день (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
+     * сайта на 12 часов (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
      * time() + (60 * 60 * 24) - 1 день
      * time() + (60 * 60 * 12) - 12 часов
@@ -293,6 +295,39 @@ class SiteController extends AdvancedController
                     'name' => 'overlay',
                     'value' => 1,
                     'expire' => time() + (60 * 60 * 12),
+                ]));
+            }
+        }
+
+        /** Исключение - в случае если сюда пытались залезть прямым запросом */
+        throw new HttpException(404 ,'Такая страница не существует');
+    }
+
+    /**
+     * Этот метод вешает куку sticky - которая скрывает рекламный блок sticky на всех страницах
+     * сайта на 6 часов (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
+     *
+     * time() + (60 * 60 * 6) - 6 часов
+     *
+     * @return mixed
+     * @throws HttpException - Если без AJAX пытаются сюда лезть прямым запросом
+     */
+    public function actionCloseSticky()
+    {
+        /** Если запрос отправлен через AJAX */
+        if (Yii::$app->request->isAjax) {
+
+            /** Сетапим куки из запроса на сервак в переменную */
+            $cookies = Yii::$app->request->cookies;
+
+            /** Если у поступающего сюда запроса не определена кука Overlay */
+            if($cookies->get('sticky') == null) {
+
+                /** Создаем ее и задаем срок истечения 6 часов, в течении этого времени блок overlay будет скрыт у посетителя */
+                return Yii::$app->response->cookies->add(new Cookie([
+                    'name' => 'sticky',
+                    'value' => 1,
+                    'expire' => time() + (60 * 60 * 6),
                 ]));
             }
         }

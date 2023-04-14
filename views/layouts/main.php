@@ -99,6 +99,10 @@ AppAsset::register($this);
 
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
 
+<?php if (isset($cookies['overlay']) && !isset($cookies['sticky'])): ?>
+    <?= $this->render('/other/yandex-direct-inpage-sticky') ?>
+<?php endif; ?>
+
 <?php if (!isset($cookies['overlay'])): ?>
     <div class="overlay-block">
         <div class="cls-btn" id="cck_close">Закрыть</div>
