@@ -35,12 +35,12 @@
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Боковой нижний баннер-->
     <!--Категория: Основная категория-->
     <!--Тип баннера: ADF - Боковой нижний баннер-->
-    <div id="adfox_167904829175092453"></div>
+    <div id="adfox_16815780448977304"></div>
     <script>
         window.yaContextCb.push(()=>{
             Ya.adfoxCode.create({
                 ownerId: 700342,
-                containerId: 'adfox_167904829175092453',
+                containerId: 'adfox_16815780448977304',
                 params: {
                     p1: 'cxqps',
                     p2: 'idny'
@@ -48,5 +48,6 @@
             })
         })
     </script>
+
 
 </div>
