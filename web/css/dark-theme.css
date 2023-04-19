@@ -731,3 +731,9 @@ h3.clan-title {
 .leaflet-popup-content {
     color: #cfd0d1;
 }
+
+/** Темные стили для умений на страницах умений */
+.item-loot > ol > li
+{
+    color: #cfd0d1;
+}
