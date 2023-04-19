@@ -50,6 +50,7 @@ final class SkillsController extends AdvancedController
                     Yii::$app->request->url,
                     Yii::$app->request->get('page'),
                     Yii::$app->request->cookies->get('overlay'),
+                    Yii::$app->request->cookies->get('sticky'),
                     Yii::$app->request->cookies->get('dark_theme')
                 ]
             ],

@@ -2154,8 +2154,10 @@ table.patrons-tbl >thead > tr > th {
     top: -29px;
     right: 0;
     padding: 2px 0 0 0;
-    color: #fff8f6;
     cursor: pointer;
+    color: #fdfffb;
+    font-size: 18px;
+    text-align: center;
 }
 
 /** Заголовки для названий карт на страницах боссов **/
@@ -2337,4 +2339,31 @@ h2.actual-items-block-title {
 /** Отступ для иконок на страницах справочника актуального лута */
 .fa.checked-by-admins.actual-items-block {
     margin-left: 16px;
+}
+
+/** Отступ для горизонтального контейнера на интерактивных картах */
+.container.special-padding {
+    padding: 0 15px 0px;
+}
+
+/** Стили для фиксированного блока */
+.info-page-fixed-block {
+    width: 100%;
+    height: 100%;
+    background: #484847;
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    max-height: 315px;
+    max-width: 315px;
+    padding: 5px;
+    z-index: 10;
+}
+
+/** Задаем информационному блоку явные размеры */
+.sticky_content_on_site {
+    max-width: 300px;
+    max-height: 300px;
+    height: 100%;
+    width: 100%;
 }
