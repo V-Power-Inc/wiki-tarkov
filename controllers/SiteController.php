@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\models\Doorkeys;
 use app\models\News;
@@ -147,7 +148,7 @@ final class SiteController extends AdvancedController
         }
 
         /** В ином случае выкидываем Exception */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -189,7 +190,7 @@ final class SiteController extends AdvancedController
         }
 
         /** В ином случае выкидываем 404 ошибку */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -231,7 +232,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 ошибка - если не нашли такой статьи по урлу */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -274,7 +275,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 - если сюда не AJAX запрос прилетел */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -308,7 +309,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 - Если запрос прилетел не по AJAX */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -342,7 +343,7 @@ final class SiteController extends AdvancedController
         }
 
         /** Исключение - в случае если сюда пытались залезть прямым запросом */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -375,7 +376,7 @@ final class SiteController extends AdvancedController
         }
 
         /** Исключение - в случае если сюда пытались залезть прямым запросом */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -417,7 +418,7 @@ final class SiteController extends AdvancedController
         }
 
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
