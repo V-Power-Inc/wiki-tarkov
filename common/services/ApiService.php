@@ -590,7 +590,7 @@ final class ApiService implements ApiInterface
     private function removeItemsByQuery(string $query): bool
     {
         /** Находим весь лут, у которого в названии есть что-то похожее на наш запрос */
-        $items = ApiLoot::find(['like', ApiLoot::ATTR_NAME, $query])->all();
+        $items = ApiLoot::find()->filterWhere(['like', ApiLoot::ATTR_NAME, $query])->all();
 
         /** В цикле проходим все предметы похожие на запрос поиска и удаляем их */
         foreach ($items as $item) {
