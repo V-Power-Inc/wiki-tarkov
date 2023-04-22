@@ -37,20 +37,32 @@ final class PaginationService
      *
      * @param ActiveQuery $query - базовый запрос на получение данных
      * @param int $pageSize - количество элементов на странице
+     * @param bool $cache - Флаг кеша, по умолчанию активен
      * @return $this
      */
-    public function __construct(ActiveQuery $query, int $pageSize = self::defaultPageSize)
+    public function __construct(ActiveQuery $query, int $pageSize = self::defaultPageSize, bool $cache = true)
     {
+        /** Сетапим атрибуту пагинации - объект пагинации */
         $this->paginator = new Pagination(['totalCount' => $query->count()]);
 
+        /** Сетапим пагинатору размер страницы */
         $this->paginator->setPageSize($pageSize);
 
-        $this->items = $query->offset($this->paginator->offset)
-            ->orderby(['date_create'=>SORT_DESC])
-            ->limit($this->paginator->limit)
-            ->cache(Yii::$app->params['cacheTime']['one_hour'])
-            ->all();
+        /** Если кеш установлен как true - будет запрос с кешированием на 1 час */
+        if ($cache) {
+            $this->items = $query->offset($this->paginator->offset)
+                ->orderby(['date_create'=>SORT_DESC])
+                ->limit($this->paginator->limit)
+                ->cache(Yii::$app->params['cacheTime']['one_hour'])
+                ->all();
+        } else { /** Если флаг кеша как false - показываем данные без кеша */
+            $this->items = $query->offset($this->paginator->offset)
+                ->orderby(['date_create'=>SORT_DESC])
+                ->limit($this->paginator->limit)
+                ->all();
+        }
 
+        /** Возвращаем экземпляр текущего класса */
         return $this;
     }
 }
