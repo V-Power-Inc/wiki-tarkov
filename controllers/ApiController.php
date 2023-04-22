@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\JsondataService;
+use app\common\services\PaginationService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
@@ -80,15 +81,16 @@ class ApiController extends AdvancedController
                 }
             }
         } else {
-            /** Если массив не $_POST - вернем 100 актуальных записей из нашей базы */
-            $items = ApiLoot::findActualItems();
+
+            /** Рендерим вьюху с дефолтным набором данных и пагинацией */
+            return $this->defaultRender();
         }
 
         /** Создаем объект формы ApiForm */
         $form_model = new ApiForm();
 
-        /** Рендер страницы со списком предметов */
-        return $this->render('list', [
+        /** Рендер страницы со списком предметов - стандартный, без пагинации */
+        return $this->render(static::ACTION_LIST, [
             'form_model' => $form_model,
             'items' => $items
         ]);
@@ -116,7 +118,7 @@ class ApiController extends AdvancedController
             $api->renewItemData($item);
 
             /** Ренденирг данных */
-            return $this->render('item', ['item' => $item]);
+            return $this->render(static::ACTION_ITEM, ['item' => $item]);
         }
 
         /** Если в базе нет предмета - возвращаем 404 ошибку */
@@ -154,5 +156,32 @@ class ApiController extends AdvancedController
 
         /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
         throw new HttpException(404, 'Такая страница не существует.');
+    }
+
+    /**
+     * Метод рендерит дефолтный набор данных для страницы списка лута API
+     * Вызывается другим методом в случае соблюдения ряда условий
+     *
+     * @return string
+     */
+    public function defaultRender(): string
+    {
+        /** Выбираем все объекты лута из БД */
+        $items = ApiLoot::findActualItems();
+
+        /** Создаем объект поисковой формы по API луту */
+        $form_model = new ApiForm();
+
+        /** Сетапим пагинацию для дефолтной страницы с лутом */
+        $data = new PaginationService($items, PaginationService::defaultPageSize);
+
+        /** Рендерим вьюху */
+        return $this->render(static::ACTION_LIST, [
+            'items' => $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator,
+            'form_model' => $form_model
+        ]);
     }
 }
