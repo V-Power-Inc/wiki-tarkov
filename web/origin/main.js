@@ -161,7 +161,7 @@ $(document).ready(function() {
                     $(IconStyleChanger).attr('title', 'Включить светлую тему сайта');
 
                     /** Включаем темные стили */
-                    $('#custom_site_styles').after('<link id="dark_theme" href="/css/dark-theme.css" rel="stylesheet">');
+                    $('#custom_site_styles').after('<link id="dark_theme" href="/css/dark-theme.css?v=5.0.13" rel="stylesheet">');
                 }
             }
         })
