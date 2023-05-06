@@ -11,38 +11,67 @@ use app\models\Login;
  */
 final class DefaultController extends AdminController
 {
+    /** @var string - Константы для обращения к методам */
     const ACTION_INDEX  = 'index';
     const ACTION_LOGIN  = 'login';
     const ACTION_LOGOUT = 'logout';
 
-    /** Рендер главной страницы админки **/
-    public function actionIndex()
+    /**
+     * Рендер главной страницы админки
+     *
+     * @return string
+     */
+    public function actionIndex(): string
     {
-        return $this->render('index');
+        /** Рендерим вьюху */
+        return $this->render(static::ACTION_INDEX);
     }
 
     /** Рендер страницы авторизации **/
     public function actionLogin()
     {
+        /** Если пользователь авторизован */
         if(!Yii::$app->user->isGuest){
+
+            /** Возвращаем ему главную страницу админки */
             return self::actionIndex();
         }
-        $model = new Login();
-        if(Yii::$app->request->post('Login')){
-            $model->attributes = Yii::$app->request->post('Login');
 
-            if($model->validate()){
-                \Yii::$app->user->login($model->getUser());
+        /** Создаем объект модели логина */
+        $model = new Login();
+
+        /** Если из POST смогли загрузить данные о пользователе */
+        if(Yii::$app->request->post(Login::CLASS_NAME)){
+
+            /** Присваиваем атрибутам модели логина - данные из POST */
+            $model->attributes = Yii::$app->request->post(Login::CLASS_NAME);
+
+            /** Если данные провалидировались */
+            if ($model->validate()) {
+
+                /** Логиним юзера */
+                Yii::$app->user->login($model->getUser());
+
+                /** Редиректим его на главную страницу админки */
                 return $this->redirect('/admin');
             }
         }
-        return $this->render('login', ['model' => $model]);
+
+        /** Рендерим страницу логина */
+        return $this->render(static::ACTION_LOGIN, ['model' => $model]);
     }
 
-    /** При заходе в этот экшен - мы разлогиниваем и дериректим на главную страницу */
-    public function actionLogout()
+    /**
+     * При заходе в этот экшен - мы разлогиниваем и дериректим на главную страницу
+     *
+     * @return string
+     */
+    public function actionLogout(): string
     {
+        /** Разлогиниваем пользователя */
         Yii::$app->user->logout();
+
+        /** Возвращаем страницу логина разлогиненному пользователю */
         return self::actionLogin();
     }
 }

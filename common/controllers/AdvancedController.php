@@ -12,7 +12,11 @@ namespace app\common\controllers;
 
 class AdvancedController extends \yii\web\Controller
 {
+    /** Используем трейт для множественного наследования */
     use ControllerRoutesTrait;
+
+    /** @var string - Параметр ID */
+    const PARAM_ID = 'id';
 
     /**
      * Обработчик ошибок - отображает статусы ответа сервера
@@ -31,5 +35,4 @@ class AdvancedController extends \yii\web\Controller
             ],
         ];
     }
-
 }
