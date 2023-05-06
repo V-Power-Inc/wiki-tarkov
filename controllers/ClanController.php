@@ -26,7 +26,7 @@ final class ClanController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX      = 'index';
-    const ACTION_ADDCLAN    = 'addclan';
+    const ACTION_ADDCLAN    = 'add-clan';
     const ACTION_SAVE       = 'save';
     const ACTION_CLANSEARCH = 'clansearch';
 
@@ -40,7 +40,6 @@ final class ClanController extends AdvancedController
      */
     public function actionIndex(): string
     {
-
         /** Создаем объект класса - Кланы */
         $srcclan = new Clans();
 
@@ -54,7 +53,7 @@ final class ClanController extends AdvancedController
         $avialableTickets = self::ticketsDayLimit-$countickets;
 
         /** Рендерим вьюху */
-        return $this->render('/clans/index', ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
+        return $this->render(static::ACTION_INDEX, ['clans' => $clans, 'avialableTickets' => $avialableTickets, 'srcclan' => $srcclan, 'countdaylimit' => self::ticketsDayLimit]);
     }
 
     /**
@@ -64,7 +63,6 @@ final class ClanController extends AdvancedController
      */
     public function actionAddclan()
     {
-
         /** Получаем число - количество заявок поданных сегодня */
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
 
@@ -80,7 +78,7 @@ final class ClanController extends AdvancedController
             $messages->setMessages($message);
 
             /** Редиректим на страницу со списком кланов */
-            return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+            return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
         } else { /** Если еще можно подать заявку на регистрацию клана */
 
@@ -88,7 +86,7 @@ final class ClanController extends AdvancedController
             $model = new Clans();
 
             /** Рендерим страницу с полями для регистрации клана */
-            return $this->render('/clans/add-clan', ['model' => $model]);
+            return $this->render(static::ACTION_ADDCLAN, ['model' => $model]);
         }
     }
 
@@ -131,7 +129,7 @@ final class ClanController extends AdvancedController
                 $messages->setMessages($message);
 
                 /** Редиректим на страницу со списком кланов */
-                return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
             } else { /** Если клан еще можно зарегистрировать сегодня (Есть свободные тикеты) */
 
@@ -143,8 +141,8 @@ final class ClanController extends AdvancedController
                     $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>";
                     $messages->setMessages($message);
 
-                    /** Редиректим на страницу со списком кланов */
-                    return $this->redirect('/add-clan', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                    /** Редиректим на страницу добавления кланов */
+                    return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
                 } else { /** Если изображение удалось загрузить */
 
@@ -160,7 +158,7 @@ final class ClanController extends AdvancedController
                         $messages->setMessages($message);
 
                         /** Редиректим на страницу со списком кланов */
-                        return $this->redirect('/clans', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                        return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
                     } else { /** Если данные по каким то причинам не смогли сохраниться */
 
@@ -169,8 +167,8 @@ final class ClanController extends AdvancedController
                         $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>";
                         $messages->setMessages($message);
 
-                        /** Редиректим на страницу со списком кланов */
-                        return $this->redirect('/add-clan', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                        /** Редиректим на страницу добавления кланов */
+                        return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
                     }
                 }
             }

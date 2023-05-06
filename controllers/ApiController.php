@@ -90,7 +90,7 @@ final class ApiController extends AdvancedController
         $form_model = new ApiForm();
 
         /** Рендер страницы со списком предметов */
-        return $this->render('list', [
+        return $this->render(static::ACTION_LIST, [
             'form_model' => $form_model,
             'items' => $items
         ]);
@@ -118,7 +118,7 @@ final class ApiController extends AdvancedController
             $api->renewItemData($item);
 
             /** Ренденирг данных */
-            return $this->render('item', ['item' => $item]);
+            return $this->render(static::ACTION_ITEM, ['item' => $item]);
         }
 
         /** Если в базе нет предмета - редиректим с временным кодом на страницу со списком актуального лута */

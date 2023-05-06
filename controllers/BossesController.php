@@ -46,7 +46,7 @@ final class BossesController extends AdvancedController
         $maps = $api->getBosses();
 
         /** Рендерим вьюху */
-        return $this->render('index', ['maps' => $maps]);
+        return $this->render(static::ACTION_INDEX, ['maps' => $maps]);
     }
 
     /**
@@ -70,7 +70,7 @@ final class BossesController extends AdvancedController
             $bosses = $api->getBosses($url);
 
             /** Рендерим вьюху */
-            return $this->render('view', [
+            return $this->render(static::ACTION_VIEW, [
                 'bosses' => $bosses,
                 'map_title' => Bosses::findMapTitleByUrl($url)
             ]);
