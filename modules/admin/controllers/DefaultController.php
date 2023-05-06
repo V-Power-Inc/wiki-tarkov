@@ -52,8 +52,8 @@ final class DefaultController extends AdminController
                 /** Логиним юзера */
                 Yii::$app->user->login($model->getUser());
 
-                /** Редиректим его на главную страницу админки */
-                return $this->redirect('/admin');
+                /** Возвращаем ему главную страницу админки */
+                return self::actionIndex();
             }
         }
 
