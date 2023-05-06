@@ -12,6 +12,7 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\JsondataService;
+use app\common\services\PaginationService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
@@ -82,14 +83,15 @@ final class ApiController extends AdvancedController
                 }
             }
         } else {
-            /** Если массив не $_POST - вернем 100 актуальных записей из нашей базы */
-            $items = ApiLoot::findActualItems();
+
+            /** Рендерим вьюху с дефолтным набором данных и пагинацией */
+            return $this->defaultRender();
         }
 
         /** Создаем объект формы ApiForm */
         $form_model = new ApiForm();
 
-        /** Рендер страницы со списком предметов */
+        /** Рендер страницы со списком предметов - стандартный, без пагинации */
         return $this->render(static::ACTION_LIST, [
             'form_model' => $form_model,
             'items' => $items
@@ -134,7 +136,6 @@ final class ApiController extends AdvancedController
      */
     public function actionSearch(string $q): string
     {
-
         /** Если запрос пришел через AJAX */
         if (Yii::$app->request->isAjax) {
 
@@ -167,5 +168,32 @@ final class ApiController extends AdvancedController
 
         /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
         throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.');
+    }
+
+    /**
+     * Метод рендерит дефолтный набор данных для страницы списка лута API
+     * Вызывается другим методом в случае соблюдения ряда условий
+     *
+     * @return string
+     */
+    public function defaultRender(): string
+    {
+        /** Выбираем все объекты лута из БД */
+        $items = ApiLoot::findActualItems();
+
+        /** Создаем объект поисковой формы по API луту */
+        $form_model = new ApiForm();
+
+        /** Сетапим пагинацию для дефолтной страницы с лутом */
+        $data = new PaginationService($items, PaginationService::defaultPageSize);
+
+        /** Рендерим вьюху */
+        return $this->render(static::ACTION_LIST, [
+            'items' => $data->items,
+            'active_page' => Yii::$app->request->get('page',1),
+            'count_pages' => $data->paginator->getPageCount(),
+            'pagination' => $data->paginator,
+            'form_model' => $form_model
+        ]);
     }
 }

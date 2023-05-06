@@ -6,7 +6,9 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use yii\db\ActiveQuery;
 use yii\helpers\Json;
+use Yii;
 
 /**
  * AR модель для работы с API, через которое на сайте актуализируется база лута
@@ -85,6 +87,7 @@ class ApiLoot extends \yii\db\ActiveRecord
     /**
      * Метод ищет по названию предметы в таблице ApiLoot - возвращает AR объект ApiLoot или null если не нашел
      * Селектим Json и Url
+     *
      * @param string $name - имя предмета
      * @return ApiLoot[]
      */
@@ -97,19 +100,19 @@ class ApiLoot extends \yii\db\ActiveRecord
     }
 
     /**
-     * Метод возвращает массив объектов ApiLoot - 100 актуальных записей
+     * Метод возвращает массив объектов ApiLoot - все актульные записи справочника лута
      * Селектим только строку с Json'ом и URL
      *
-     * @return ApiLoot[]
+     * Используется с пагинацией
+     *
+     * @return ActiveQuery
      */
     public static function findActualItems()
     {
         return ApiLoot::find()
             ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
             ->where([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
-            ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
-            ->limit(100)
-            ->all();
+            ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC]);
     }
 
     /**

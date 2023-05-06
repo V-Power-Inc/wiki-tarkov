@@ -731,3 +731,34 @@ h3.clan-title {
 .leaflet-popup-content {
     color: #cfd0d1;
 }
+
+/** Темные стили для умений на страницах умений */
+.item-loot > ol > li
+{
+    color: #cfd0d1;
+}
+
+/** Изменение стилей подсказок при поиске лута */
+.tt-menu .tt-suggestion {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #c4c4c4;
+    white-space: nowrap;
+}
+
+/** Переопределение стилей поиска предметов через виджет (при наведении) */
+.tt-menu .tt-suggestion.tt-cursor, .tt-menu .tt-suggestion.tt-selectable:hover {
+    cursor: default;
+    text-decoration: none;
+    outline: 0;
+    background-color: #e9dddd;
+    color: #262626;
+}
+
+/** Стили поисковой строки кланов изменены в соответствии с темной темой сайта */
+#clans-searchclan.form-control {
+    color: #c4c4c4;
+}

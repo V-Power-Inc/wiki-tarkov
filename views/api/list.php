@@ -9,6 +9,7 @@
  *
  * @var ApiForm $form_model - Объект формы для загрузки поискового запроса
  * @var ApiLoot[] $items - массив AR объектов ApiLoot
+ * @var Pagination $pagination - объект пагинации
  */
 
 use app\common\services\ImageService;
@@ -19,6 +20,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
+use yii\data\Pagination;
 use kartik\typeahead\Typeahead;
 
 $this->title = 'Справочник лута в Escape from Tarkov';
@@ -173,6 +176,15 @@ $this->registerMetaTag([
                     </div>
 
                 <?php endforeach; ?>
+
+                <?php if(!empty($pagination)): ?>
+                    <div class="col-lg-12 pagination text-center">
+                        <?= LinkPager::widget([
+                            'pagination' => $pagination,
+                        ]);
+                        ?>
+                    </div>
+                <?php endif; ?>
 
             <?php else : ?>
 
