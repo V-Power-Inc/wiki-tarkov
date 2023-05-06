@@ -757,3 +757,8 @@ h3.clan-title {
     background-color: #e9dddd;
     color: #262626;
 }
+
+/** Стили поисковой строки кланов изменены в соответствии с темной темой сайта */
+#clans-searchclan.form-control {
+    color: #c4c4c4;
+}
