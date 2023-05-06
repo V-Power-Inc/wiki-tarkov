@@ -61,7 +61,7 @@ final class ClanController extends AdvancedController
      *
      * @return string|Response
      */
-    public function actionAddclan()
+    public function actionAddClan()
     {
         /** Получаем число - количество заявок поданных сегодня */
         $countickets = Clans::find()->where(['like', 'date_create', date('Y-m-d')])->count('*');
