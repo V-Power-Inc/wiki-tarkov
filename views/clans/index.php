@@ -8,6 +8,7 @@
 
 use yii\web\JqueryAsset;
 use yii\widgets\ActiveForm;
+use app\models\Clans;
 
 $this->title = "Escape from Tarkov: Список кланов";
 
@@ -22,6 +23,9 @@ $this->registerMetaTag([
 ]);
 
 $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
+
+/** @var int $avialableTickets - Количество доступных для регистрации заявок */
+/** @var Clans $srcclan - AR объект кланов */
 ?>
 <div class="container">
     <div class="row">
