@@ -10,7 +10,8 @@ use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
-use himiklab\yii2\recaptcha\ReCaptchaValidator;
+use himiklab\yii2\recaptcha\ReCaptchaValidator2;
+use Yii;
 
 /**
  * This is the model class for table "clans".
@@ -83,7 +84,12 @@ class Clans extends \yii\db\ActiveRecord
 
             [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
 
-            [[static::RECAPTCHA], ReCaptchaValidator::class, 'secret' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum', 'uncheckedMessage' => 'Подтвердите что вы не бот.']
+            [
+                [static::RECAPTCHA],
+                ReCaptchaValidator2::class,
+                'secret' => Yii::$app->params['recapchaKey'],
+                'uncheckedMessage' => 'Подтвердите что вы не бот.'
+            ]
         ];
     }
 
