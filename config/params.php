@@ -26,7 +26,11 @@ return [
     'discordCache' => 1,
     'yandexCache' => 1,
     'keysBlocks' => [],
+
     'recapchaKey' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum',
+    'recapchaSiteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF',
+
+
     'restrictedAlertsUrls' => [
         '/',
         '/maps/zavod-location',

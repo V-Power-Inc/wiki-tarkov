@@ -26,9 +26,6 @@ robots.txt
 # composer itself is not needed
 composer.phar
 
-# modules-admin igonore view
-modules/admin/views/default/login.php
-
 # Mac DS_Store Files
 .DS_Store
 
