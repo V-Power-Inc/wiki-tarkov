@@ -1,7 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
+use app\models\Articles;
+use app\modules\admin\controllers\DefaultController;
+use app\modules\admin\controllers\ArticlesController;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticlesSearch */
@@ -15,23 +19,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Создать новую полезную статью', ['create'], ['class' => 'btn btn-success']) ?>
-        <a class="btn btn-primary" href="/admin/">Вернуться на главную в админку</a>
+        <?= Html::a('Создать новую полезную статью', [ArticlesController::ACTION_CREATE], ['class' => 'btn btn-success']) ?>
+        <a class="btn btn-primary" href="<?= Url::to(DefaultController::getUrlRoute(DefaultController::ACTION_INDEX)) ?>">Вернуться на главную в админку</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
-            'preview' => [
+            Articles::ATTR_TITLE,
+            Articles::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
                     return  $data->preview;
                 },
             ],
-            'date_create',
-            'enabled',
+            Articles::ATTR_DATE_CREATE,
+            Articles::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
