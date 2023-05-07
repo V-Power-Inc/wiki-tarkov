@@ -124,10 +124,10 @@ final class CatskillsController extends AdminController implements CrudInterface
         $ItemRelation = in_array($LockedID, $ItemsCategories);
         /** Проверяем - привязано ли умение к удаляемой категории */
         if($ItemRelation) {
-            return $this->redirect(['index']);
+            return $this->redirect([static::ACTION_INDEX]);
         } else {
             $this->findModel($id)->delete();
-            return $this->redirect(['index']);
+            return $this->redirect([static::ACTION_INDEX]);
         }
     }
 

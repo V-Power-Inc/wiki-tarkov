@@ -114,7 +114,7 @@ final class CurrenciesController extends AdminController implements CrudInterfac
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        return $this->redirect([static::ACTION_INDEX]);
     }
 
     /**

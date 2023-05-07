@@ -138,10 +138,10 @@ final class CategoryController extends AdminController implements CrudInterface
         $ItemRelation = in_array($LockedID, $ItemsCategories);
         /** Проверяем - если к корневой директории привязаны дочернии, то удаление не произойдет также проверяем не привязан ли предмет к категории */
         if ($CategoryRelation || $ItemRelation || $MainCategoryRelation) {
-            return $this->redirect(['index?dp-1-sort=sortir']);
+            return $this->redirect([static::ACTION_INDEX]);
         } else {
             $this->findModel($id)->delete();
-            return $this->redirect(['index?dp-1-sort=sortir']);
+            return $this->redirect([static::ACTION_INDEX]);
         }
     }
 

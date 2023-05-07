@@ -130,7 +130,7 @@ final class NewsController extends AdminController implements CrudInterface
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        return $this->redirect([static::ACTION_INDEX]);
     }
 
     /**

@@ -122,7 +122,7 @@ final class ItemsController extends AdminController implements CrudInterface
      */
     public function actionDelete(int $id)
     {
-        return $this->redirect(['index']);
+        return $this->redirect([static::ACTION_INDEX]);
     }
 
     /**
