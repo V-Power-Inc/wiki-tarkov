@@ -10,7 +10,7 @@ namespace app\models\forms;
 
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
-use himiklab\yii2\recaptcha\ReCaptchaValidator2;
+use app\common\helpers\validators\ReCaptchaValidator;
 use yii\base\Model;
 use Yii;
 
@@ -44,9 +44,9 @@ class ApiForm extends Model
 
             [
                 [static::ATTR_RECAPTCHA],
-                ReCaptchaValidator2::class,
-                'secret' => Yii::$app->params['recapchaKey'],
-                'uncheckedMessage' => 'Подтвердите что вы не бот.'
+                ReCaptchaValidator::class,
+                ReCaptchaValidator::ATTR_SECRET => Yii::$app->params['recapchaKey'],
+                ReCaptchaValidator::ATTR_UNCHECKED_MESSAGE => 'Подтвердите что вы не бот.'
             ]
         ];
     }

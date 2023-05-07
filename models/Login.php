@@ -4,7 +4,7 @@ namespace app\models;
 
 use app\common\helpers\validators\BooleanValidator;
 use app\common\helpers\validators\RequiredValidator;
-use himiklab\yii2\recaptcha\ReCaptchaValidator2;
+use app\common\helpers\validators\ReCaptchaValidator;
 use yii\base\Model;
 use Yii;
 
@@ -38,6 +38,10 @@ class Login extends Model
     public $reCaptcha = false;
     const ATTR_RECAPTCHA = 'reCaptcha';
 
+    /** @var string - Константы для рекапчи, прописал их здесь, чтобы не городить класс - прослойку ради этого */
+    const ATTR_RECAPTCHA_SECRET = 'secret';
+    const ATTR_RECAPTCHA_UNCHECKED_MESSAGE = 'uncheckedMessage';
+
     /**
      * Массив валидаций текущей модели
      *
@@ -56,9 +60,9 @@ class Login extends Model
 
             [
                 [static::ATTR_RECAPTCHA],
-                ReCaptchaValidator2::class,
-                'secret' => Yii::$app->params['recapchaKey'],
-                'uncheckedMessage' => 'Подтвердите что вы не бот.'
+                ReCaptchaValidator::class,
+                ReCaptchaValidator::ATTR_SECRET => Yii::$app->params['recapchaKey'],
+                ReCaptchaValidator::ATTR_UNCHECKED_MESSAGE => 'Подтвердите что вы не бот.'
             ]
         ];
     }
