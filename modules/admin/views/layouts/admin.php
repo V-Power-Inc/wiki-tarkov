@@ -4,22 +4,24 @@
  * User: comp
  * Date: 24.10.2017
  * Time: 14:26
- *
- * Админский layout сайта
  */
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 use app\assets\AdminAsset;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use app\modules\admin\controllers\DefaultController;
 use app\common\controllers\AdminController;
 use app\controllers\SiteController;
 use app\controllers\TraderController;
 
 AdminAsset::register($this);
+
+/** Админский layout сайта */
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -40,7 +42,7 @@ AdminAsset::register($this);
         <?php
         NavBar::begin([
             'brandLabel' => 'Админка сайта - wiki-tarkov',
-            'brandUrl' => '/admin',
+            'brandUrl' => Url::to(DefaultController::getUrlRoute(DefaultController::ACTION_INDEX)),
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
