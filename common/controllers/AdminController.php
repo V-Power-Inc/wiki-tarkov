@@ -16,7 +16,11 @@ use yii\web\Response;
 
 class AdminController extends \yii\web\Controller
 {
+    /** Используем трейт для множественного наследования */
     use ControllerRoutesTrait;
+
+    /** @var string - Параметр ID */
+    const PARAM_ID = 'id';
 
     /** @var string LOGIN_URL Константа урла для логина */
     const LOGIN_URL = '/admin/login';
@@ -45,6 +49,7 @@ class AdminController extends \yii\web\Controller
             return $this->redirect(AdminController::LOGIN_URL);
         }
 
+        /** Возвращаем экземпляр текущего класса */
         return $this;
     }
 }

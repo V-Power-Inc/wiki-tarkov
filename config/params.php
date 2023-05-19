@@ -11,13 +11,16 @@
  *
  * keysBlocks - флаг для генерации рекламного места, в циклах материалов
  *
+ * recapchaKey - Ключ от капчи, без него, весь функционал связанный с капчей работать не будет
+ *
+ * recapchaSiteKey - Ключ от капчи, без него, весь функционал связанный с капчей работать не будет
+ *
  * restrictedAlertsUrls - список урлов, на которых не выводится компонент AlertComponent а также заголовок с H1 (
  * В таких урлах это реализовано отдельно)
  *
  * cacheTime - массив со временем кеширования (Ключ название - значение количество в секундах)
  *
  * discordHookNewsUrl - URL веб хука для дискорда
- *
  */
 
 return [
@@ -25,6 +28,11 @@ return [
     'discordCache' => 1,
     'yandexCache' => 1,
     'keysBlocks' => [],
+
+    'recapchaKey' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum',
+    'recapchaSiteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF',
+
+
     'restrictedAlertsUrls' => [
         '/',
         '/maps/zavod-location',
