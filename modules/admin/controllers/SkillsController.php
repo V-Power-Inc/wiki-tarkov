@@ -17,6 +17,13 @@ use app\common\controllers\AdminController;
  */
 final class SkillsController extends AdminController implements CrudInterface
 {
+    /** @var string - Константы для обращения к методам */
+    const ACTION_INDEX  = 'index';
+    const ACTION_VIEW   = 'view';
+    const ACTION_CREATE = 'create';
+    const ACTION_UPDATE = 'update';
+    const ACTION_DELETE = 'delete';
+
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array
@@ -42,7 +49,7 @@ final class SkillsController extends AdminController implements CrudInterface
         $searchModel = new SkillsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render(static::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -56,7 +63,7 @@ final class SkillsController extends AdminController implements CrudInterface
      */
     public function actionView($id): string
     {
-        return $this->render('view', [
+        return $this->render(static::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -72,14 +79,14 @@ final class SkillsController extends AdminController implements CrudInterface
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
         } else {
             /** Проверка поля url на уникальность **/
             if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validate($model);
             }
-            return $this->render('create', [
+            return $this->render(static::ACTION_CREATE, [
                 'model' => $model,
             ]);
         }
@@ -98,9 +105,9 @@ final class SkillsController extends AdminController implements CrudInterface
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render(static::ACTION_UPDATE, [
                 'model' => $model,
             ]);
         }
@@ -116,7 +123,7 @@ final class SkillsController extends AdminController implements CrudInterface
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        return $this->redirect([static::ACTION_INDEX]);
     }
 
     /**

@@ -17,6 +17,13 @@ use app\common\controllers\AdminController;
  */
 final class CatskillsController extends AdminController implements CrudInterface
 {
+    /** @var string - Константы для обращения к методам */
+    const ACTION_INDEX  = 'index';
+    const ACTION_VIEW   = 'view';
+    const ACTION_CREATE = 'create';
+    const ACTION_UPDATE = 'update';
+    const ACTION_DELETE = 'delete';
+
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array
@@ -42,7 +49,7 @@ final class CatskillsController extends AdminController implements CrudInterface
         $searchModel = new CatskillsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render(static::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -56,7 +63,7 @@ final class CatskillsController extends AdminController implements CrudInterface
      */
     public function actionView($id): string
     {
-        return $this->render('view', [
+        return $this->render(static::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -72,9 +79,9 @@ final class CatskillsController extends AdminController implements CrudInterface
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->render(static::ACTION_CREATE, [
                 'model' => $model,
             ]);
         }
@@ -93,9 +100,9 @@ final class CatskillsController extends AdminController implements CrudInterface
         $model->uploadPreview();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render(static::ACTION_UPDATE, [
                 'model' => $model,
             ]);
         }
@@ -117,10 +124,10 @@ final class CatskillsController extends AdminController implements CrudInterface
         $ItemRelation = in_array($LockedID, $ItemsCategories);
         /** Проверяем - привязано ли умение к удаляемой категории */
         if($ItemRelation) {
-            return $this->redirect(['index']);
+            return $this->redirect([static::ACTION_INDEX]);
         } else {
             $this->findModel($id)->delete();
-            return $this->redirect(['index']);
+            return $this->redirect([static::ACTION_INDEX]);
         }
     }
 
