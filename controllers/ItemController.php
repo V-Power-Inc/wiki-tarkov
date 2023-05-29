@@ -62,7 +62,7 @@ class ItemController extends AdvancedController
      */
     public function actionDetailloot($item): string
     {
-        if(Items::takeActiveItemByUrl($item)) {
+        if (Items::takeActiveItemByUrl($item)) {
             return $this->render('/loot/item-detail.php', ['item' => Items::takeActiveItemByUrl($item)]);
         }
 

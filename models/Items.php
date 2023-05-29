@@ -266,6 +266,7 @@ class Items extends ActiveRecord
 
     /**
      * Возвращаем активный предмет лута по параметру url
+     * Ищем через like binary, чтобы исключить рендер дублей (разный регистр символов в строке)
      *
      * @param string $item - url параметр
      * @return array|ActiveRecord|null
@@ -273,9 +274,8 @@ class Items extends ActiveRecord
     public static function takeActiveItemByUrl(string $item)
     {
         return static::find()
-            ->where([static::ATTR_URL=>$item])
+            ->where(['like binary', static::ATTR_URL, $item])
             ->andWhere([static::ATTR_ACTIVE => static::TRUE])
-            ->One();
+            ->one();
     }
-
 }
