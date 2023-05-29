@@ -38,6 +38,13 @@ class Category extends \yii\db\ActiveRecord
     /** Константы связей таблицы */
     const RELATION_ITEMS       = 'items';
 
+    /** @var string - Константа, связь до родительской категории */
+    const RELATION_PARENTCAT   = 'parentcat';
+
+    /** Константы bool значений */
+    const TRUE = 1;
+    const FALSE = 0;
+
     /**
      * @inheritdoc
      */
@@ -98,35 +105,51 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
-    /** Получаем все категории которые активны - indexBy заменяет ключ массива на ключ автоинкрементарного id из базы */
+    /**
+     * Получаем все категории которые активны
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getMainCategories() {
-        $categories = Category::find()->where(['enabled' => '1'])->indexBy('id')->asArray()->all();
+
+        /** Выбираем все активные категории из базы */
+        $categories = Category::find()->where([static::ATTR_ENABLED => static::TRUE])->indexBy(static::ATTR_ID)->asArray()->all();
+
+        /** Возвращаем AR объекты в виде массивов со всеми категориями */
         return $categories;
     }
 
-    /** Получаем массив всех категорий, включенных и выключенных */
-    public function getAllCategories() {
-        $Categories = Category::find()->andWhere('parent_category' !== null)->indexBy('id')->asArray()->all();
-        return $Categories;
-    }
-
-    /** Получаем массив всех дочерних категорий, включенных и выключенных */
+    /**
+     * Получаем массив всех дочерних категорий, включенных и выключенных
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getChildCategories() {
-        $Childcategories = Category::find()->andWhere('parent_category' !== null)->indexBy('id')->asArray()->all();
+
+        /** Выбираем все дочерние категории из базы */
+        $Childcategories = Category::find()->andWhere(static::ATTR_PARENT_CATEGORY !== null)->indexBy(static::ATTR_ID)->asArray()->all();
+
+        /** Возвращаем AR объекты в виде массивов с дочерними категориями */
         return $Childcategories;
     }
 
     /**
+     * Связь для получения предметов лута, которые привязаны к категории
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getItems()
     {
-        return $this->hasMany(Items::class, ['parentcat_id' => 'id']);
+        return $this->hasMany(Items::class, [Items::ATTR_PARENTCAT_ID => static::ATTR_ID]);
     }
 
-    /*** Связь таблицы сама на себя - получаем родительскую категорию ***/
+    /**
+     * Связь таблицы сама на себя - получаем родительскую категорию
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getParentcat()
     {
-        return $this->hasOne(Category::class, ['id' => 'parent_category']);
+        return $this->hasOne(Category::class, [static::ATTR_ID => static::ATTR_PARENT_CATEGORY]);
     }
 }

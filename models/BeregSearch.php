@@ -79,18 +79,18 @@ class BeregSearch extends Bereg
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'coords_x' => $this->coords_x,
-            'coords_y' => $this->coords_y,
-            'enabled' => $this->enabled,
-            'exit_anyway' => $this->exit_anyway,
+            static::ATTR_ID => $this->id,
+            static::ATTR_COORDS_X => $this->coords_x,
+            static::ATTR_COORDS_Y => $this->coords_y,
+            static::ATTR_ENABLED => $this->enabled,
+            static::ATTR_EXIT_ANYWAY => $this->exit_anyway,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'marker_group', $this->marker_group])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'customicon', $this->customicon])
-            ->andFilterWhere(['like', 'exits_group', $this->exits_group]);
+        $query->andFilterWhere(['like', static::ATTR_NAME, $this->name])
+            ->andFilterWhere(['like', static::ATTR_MARKER_GROUP, $this->marker_group])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content])
+            ->andFilterWhere(['like', static::ATTR_CUSTOMICON, $this->customicon])
+            ->andFilterWhere(['like', static::ATTR_EXITS_GROUP, $this->exits_group]);
 
         return $dataProvider;
     }

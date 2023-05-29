@@ -72,13 +72,13 @@ class BartersSearch extends Barters
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'date_create' => $this->date_create,
-            'enabled' => $this->enabled,
+            static::ATTR_ID => $this->id,
+            static::ATTR_DATE_CREATE => $this->date_create,
+            static::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content]);
 
         return $dataProvider;
     }

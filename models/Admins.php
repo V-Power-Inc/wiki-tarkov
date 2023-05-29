@@ -165,7 +165,7 @@ class Admins extends ActiveRecord implements IdentityInterface
     {
         if (isset(Yii::$app->user->identity->id)) {
             return static::find()
-                ->where(['is',static::ATTR_BANNED, null])
+                ->where(['is', static::ATTR_BANNED, null])
                 ->andWhere(['!=', static::ATTR_ID, Yii::$app->user->identity->id])
                 ->all();
         } else {

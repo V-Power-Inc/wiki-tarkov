@@ -8,7 +8,6 @@ use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
-use Yii;
 
 /**
  * AR модель для работы с API, через которое на сайте актуализируется база лута
