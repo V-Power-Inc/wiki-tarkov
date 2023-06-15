@@ -3,7 +3,7 @@
  *
  * Основной JS файл проекта (ClientSide)
  *
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.com/Javascript-Obfuscator.aspx - Obfuscate JS
  */
 
 var param = $('meta[name=csrf-param]').attr("content");
@@ -44,17 +44,6 @@ $(document).ready(function() {
             data: {param: param, token : token},
             success: function(response) {
                 $('.overlay-block').fadeOut();
-            }
-        });
-    });
-
-    /*** Обработчик нажатия на кнопку закрытия стики баннера ***/
-    $('#stck_close').click(function() {
-        $.ajax({
-            url: '/site/close-sticky',
-            data: {param: param, token : token},
-            success: function(response) {
-                $('.info-page-fixed-block').fadeOut();
             }
         });
     });
