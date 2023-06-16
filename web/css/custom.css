@@ -2345,25 +2345,3 @@ h2.actual-items-block-title {
 .container.special-padding {
     padding: 0 15px 0px;
 }
-
-/** Стили для фиксированного блока */
-.info-page-fixed-block {
-    width: 100%;
-    height: 100%;
-    background: #484847;
-    position: fixed;
-    bottom: 40px;
-    right: 50px;
-    max-height: 315px;
-    max-width: 315px;
-    padding: 5px;
-    z-index: 10;
-}
-
-/** Задаем информационному блоку явные размеры */
-.sticky_content_on_site {
-    max-width: 300px;
-    max-height: 300px;
-    height: 100%;
-    width: 100%;
-}
