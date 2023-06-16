@@ -8,7 +8,6 @@
  */
 ?>
 
-
 <div class="margins-vertical-20">
     <!--AdFox START-->
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Боковой верхний баннер-->
@@ -48,6 +47,4 @@
             })
         })
     </script>
-
-
 </div>
