@@ -63,7 +63,8 @@ final class ImageService
             'Тагилла' => '/img/bosses/tagilla.jpg',
             'Отступник' => '/img/bosses/rogue.jpg',
             'Зрячий' => '/img/bosses/zryachiy.jpg',
-            'gifter' => '/img/bosses/gifter.jpg'
+            'gifter' => '/img/bosses/gifter.jpg',
+            'Погоня' => '/img/bosses/pogonya.png'
         ];
 
         /** Возвращаем значение массива по полученному в виде параметра ключу или изображение вопроса, если босс не найден */
