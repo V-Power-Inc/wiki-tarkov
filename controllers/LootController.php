@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\JsondataService;
 use yii;
 use app\models\Category;
@@ -22,7 +23,7 @@ use app\common\services\TraderService;
  * Class LootController
  * @package app\controllers
  */
-class LootController extends AdvancedController
+final class LootController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_MAINLOOT  = 'mainloot';
@@ -66,10 +67,16 @@ class LootController extends AdvancedController
      */
     public function actionMainloot(): string
     {
+        /** Создаем объект лута */
         $model = new Items();
+
+        /** Ищем только активный лут */
         $fullitems = Items::find()->where(['active' => 1]);
+
+        /** Передаем запрос с лутом в сервис пагинации */
         $data = new PaginationService($fullitems,50);
 
+        /** Рендерим вьюху */
         return $this->render('mainpage.php', [
             'model' => $model,
             'items' => $data->items,
@@ -89,9 +96,16 @@ class LootController extends AdvancedController
      */
     public function actionCategory(string $name): string
     {
-        $cat = Category::find()->where(['url'=>$name])->One();
+        /** Ищем в БД категорию по URL, только среди активных */
+        $cat = Category::find()->where(['url'=>$name])->andWhere(['enabled' => 1])->One();
+
+        /** Если категория нашлась */
         if ($cat) {
+
+            /** Создаем объект пагинации, в который передаем данные предметов по связке с родительской категорией */
             $data = new PaginationService(Items::takeItemsWithParentCat($name, $cat->id));
+
+            /** Рендерим вьюху */
             return $this->render('categorie-page.php', [
                 'cat' => $cat,
                 'items' => $data->items,
@@ -101,7 +115,8 @@ class LootController extends AdvancedController
             ]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Выкидываем 404 ошибку, если активная категория не нашлась */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -111,10 +126,13 @@ class LootController extends AdvancedController
      */
     public function actionQuestloot(): string
     {
+        /** Создаем объект лута */
         $form_model = new Items();
 
+        /** Если сюда залетели данные через POST */
         if ($form_model->load(Yii::$app->request->post())) {
 
+            /** Рендерим страницу с квестовым лутом по определенному торговцу */
             return $this->render('quest-page', [
                 'form_model' => $form_model,
                 'questsearch' => TraderService::takeResult($form_model),
@@ -122,6 +140,7 @@ class LootController extends AdvancedController
             ]);
         }
 
+        /** Если запроса POST не было, рендерим базовую страницу с квестовым лутом */
         return $this->render('quest-page', [
                 'allquestitems' => Items::takeActiveQuestItems(),
                 'form_model' => $form_model
@@ -140,11 +159,14 @@ class LootController extends AdvancedController
      */
     public function actionLootjson(string $q = null): string
     {
-        if(Yii::$app->request->isAjax) {
+        /** Если запрос о луте прилетел через AJAX */
+        if (Yii::$app->request->isAjax) {
+
+            /** Передаем запрос в сервис работы с JSON, который вернет нам JSON с нужными данными */
             return JsondataService::getLootJson($q);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** Выкидываем 404 ошибку, если запрос прилетел не через AJAX */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
-
 }

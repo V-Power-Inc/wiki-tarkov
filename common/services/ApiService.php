@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\interfaces\ApiInterface;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\tasks\db\TaskModel;
 use app\common\models\tasks\TasksResult;
 use app\components\MessagesComponent;
@@ -294,7 +295,7 @@ final class ApiService implements ApiInterface
         }
 
         /** Выкидываем 404 ошибку, если нет квестов */
-        throw new HttpException('404', 'Такая страница не существует.')  ;
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.')  ;
     }
 
     /**
@@ -345,7 +346,7 @@ final class ApiService implements ApiInterface
         }
 
         /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
-        throw new HttpException(500, 'Server error code');
+        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
     }
 
     /**

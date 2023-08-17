@@ -149,8 +149,7 @@ class Skills extends ActiveRecord
     }
 
     /**
-     *
-     *
+     * Метод находит активное умение по параметру URL и возвращает ActiveRecord запись
      *
      * @param $url - url адрес
      * @return array|ActiveRecord|null
@@ -179,5 +178,4 @@ class Skills extends ActiveRecord
             ->asArray()
             ->all();
     }
-
 }

@@ -132,7 +132,11 @@ class Bereg extends \yii\db\ActiveRecord
      */
     public static function takeMarkers(): array
     {
-        return static::find()->asArray()->andWhere([static::ATTR_ENABLED => static::TRUE])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+        return static::find()
+            ->asArray()
+            ->andWhere([static::ATTR_ENABLED => static::TRUE])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->all();
     }
 
 }

@@ -9,6 +9,8 @@
 namespace app\components;
 /**
  * Embed is an embed object to be included in a webhook message
+ *
+ * @see https://github.com/nopjmp/discord-webhooks
  */
 class Embeddiscord
 {

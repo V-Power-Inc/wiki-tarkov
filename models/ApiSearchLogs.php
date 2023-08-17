@@ -18,11 +18,11 @@ use app\common\helpers\validators\SafeValidator;
 class ApiSearchLogs extends \yii\db\ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID = 'id';
-    const ATTR_WORDS = 'words';
-    const ATTR_INFO = 'info';
-    const ATTR_DATE_CREATE = 'date_create';
-    const ATTR_FLAG = 'flag';
+    const ATTR_ID           = 'id';
+    const ATTR_WORDS        = 'words';
+    const ATTR_INFO         = 'info';
+    const ATTR_DATE_CREATE  = 'date_create';
+    const ATTR_FLAG         = 'flag';
 
     /** Константы для проверки Bool значений */
     const TRUE = 1;
@@ -81,5 +81,4 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
     {
         return ApiSearchLogs::findOne([ApiSearchLogs::ATTR_INFO => $captcha]);
     }
-
 }

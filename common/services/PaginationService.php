@@ -10,8 +10,8 @@ namespace app\common\services;
 
 use yii\data\Pagination;
 use yii\db\ActiveQuery;
-use Yii;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * Сервис помогает проще реализовывать пагинацию
@@ -45,7 +45,7 @@ final class PaginationService
         /** Сетапим атрибуту пагинации - объект пагинации */
         $this->paginator = new Pagination(['totalCount' => $query->count()]);
 
-        /** Сетапим пагинатору размер страницы */
+        /** Сетапим пагинатору размер страницы (По-умолчанию 20, если не было параметра) */
         $this->paginator->setPageSize($pageSize);
 
         /** Если кеш установлен как true - будет запрос с кешированием на 1 час */

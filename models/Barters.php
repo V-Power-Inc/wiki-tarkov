@@ -95,10 +95,9 @@ class Barters extends \yii\db\ActiveRecord
         return static::find()
             ->where(['like', static::ATTR_TITLE, $title])
             ->andWhere([static::ATTR_ENABLED => static::TRUE])
-            ->orderby([static::ATTR_ID=>SORT_ASC])
+            ->orderby([static::ATTR_ID => SORT_ASC])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->asArray()
             ->all();
     }
-
 }

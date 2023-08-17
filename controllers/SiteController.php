@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\models\Doorkeys;
 use app\models\News;
@@ -23,7 +24,7 @@ use app\common\services\JsondataService;
  * Class SiteController
  * @package app\controllers
  */
-class SiteController extends AdvancedController
+final class SiteController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX                  = 'index';
@@ -89,6 +90,7 @@ class SiteController extends AdvancedController
      */
     public function actionIndex(): string
     {
+        /** Рендерим индексную страницу сайта (Главная страница) */
         return $this->render('index');
     }
 
@@ -99,6 +101,7 @@ class SiteController extends AdvancedController
      */
     public function actionTablePatrons(): string
     {
+        /** Рендер страницы с информацией о характеристиках патронов */
         return $this->render('/site/patrons', ['patrons' => Patrons::takePatrons()]);
     }
 
@@ -109,10 +112,13 @@ class SiteController extends AdvancedController
      */
     public function actionKeys(): string
     {
+        /** Новый AR Объект */
         $form_model = new Doorkeys();
 
+        /** Если форма загрузила данные через POST */
         if ($form_model->load(Yii::$app->request->post())) {
 
+            /** Рендерим вьюху с учетом полученных данных из POST */
             return $this->render('keys/keyseach.php', [
                     'form_model' => $form_model,
                     'keysearch' => KeysService::takeResult($form_model),
@@ -120,6 +126,7 @@ class SiteController extends AdvancedController
             ]);
         }
 
+        /** Если POST запроса не было, рендерим обычную вьюху со стандартными данными */
         return $this->render('keys/index.php', Doorkeys::KeysDefaultRenderingArray($form_model));
     }
 
@@ -132,11 +139,15 @@ class SiteController extends AdvancedController
      */
     public function actionDoorkeysdetail($id): string
     {
+        /** Если нашли по URL Детальную страницу ключа */
         if(Doorkeys::findActiveKeyByUrl($id)) {
+
+            /** Рендерим страницу с детальной информацией о ключе */
             return $this->render('keys/detail-key.php',['model' => Doorkeys::findActiveKeyByUrl($id)]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** В ином случае выкидываем Exception */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -146,8 +157,13 @@ class SiteController extends AdvancedController
      */
     public function actionNews(): string
     {
+        /** Ищем активные новости */
         $query =  News::find()->andWhere(['enabled' => 1]);
+
+        /** Задаем параметры пагинации */
         $data = new PaginationService($query,10);
+
+        /** Рендерим вьюху с пагинацией */
         return $this->render('news/list.php', [
             'news'=>$data->items,
             'active_page' => Yii::$app->request->get('page',1),
@@ -165,11 +181,15 @@ class SiteController extends AdvancedController
      */
     public function actionNewsdetail($id): string
     {
+        /** Если по урлу нашли детальную новость  */
         if(News::findActiveNewsByUrl($id)) {
+
+            /** Рендерим вьюху */
             return $this->render('news/detail.php',['model' => News::findActiveNewsByUrl($id)]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** В ином случае выкидываем 404 ошибку */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -179,8 +199,13 @@ class SiteController extends AdvancedController
      */
     public function actionArticles(): string
     {
+        /** Ищем активные статьи */
         $query = Articles::find()->andWhere(['enabled' => 1]);
+
+        /** Задаем объект с пагинацией */
         $data = new PaginationService($query);
+
+        /** Рендерим вьюху с информацией */
         return $this->render('articles/list.php', [
             'news'=> $data->items,
             'active_page' => Yii::$app->request->get('page',1),
@@ -198,11 +223,15 @@ class SiteController extends AdvancedController
      */
     public function actionArticledetail($id): string
     {
+        /** Если нашли статью по урлу */
         if(Articles::takeActiveArticleById($id)) {
+
+            /** Рендерим вьюху с детальной информацией */
             return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleById($id)]);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** 404 ошибка - если не нашли такой статьи по урлу */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -212,8 +241,13 @@ class SiteController extends AdvancedController
      */
     public function actionQuestions(): string
     {
+        /** Ищем активные вопросы */
         $model = Questions::find()->where(['enabled' => 1]);
+
+        /** Задаем объект с пагинацией */
         $data = new PaginationService($model);
+
+        /** Рендерим страницу со списком вопросов */
         return $this->render('questions/list.php', [
             'questions' => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
@@ -232,11 +266,15 @@ class SiteController extends AdvancedController
      */
     public function actionKeysjson($q = null): string
     {
+        /** Если запрос пришел через Ajax */
         if(Yii::$app->request->isAjax) {
+
+            /** Возвращаем информацию в JSON формате о ключе по запросу */
             return JsondataService::getKeysJson($q);
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** 404 - если сюда не AJAX запрос прилетел */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -246,6 +284,7 @@ class SiteController extends AdvancedController
      */
     public function actionCurrencies(): string
     {
+        /** Рендерим страницу с информацией о курсах валют */
         return $this->render('currencies/index.php', [
             'dollar' => Currencies::takeDollar(),
             'euro' => Currencies::takeEuro(),
@@ -261,11 +300,15 @@ class SiteController extends AdvancedController
      */
     public function actionJsonvalute(): string
     {
+        /** Если запрос пришел как AJAX */
         if(Yii::$app->request->isAjax) {
+
+            /** Возвращаем JSON информацию о курсах валют */
             return Json::encode(Currencies::takeActiveValutes());
         }
 
-        throw new HttpException(404 ,'Такая страница не существует');
+        /** 404 - Если запрос прилетел не по AJAX */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -299,7 +342,7 @@ class SiteController extends AdvancedController
         }
 
         /** Исключение - в случае если сюда пытались залезть прямым запросом */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -341,7 +384,7 @@ class SiteController extends AdvancedController
         }
 
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
-        throw new HttpException(404 ,'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**

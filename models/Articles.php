@@ -43,6 +43,10 @@ class Articles extends \yii\db\ActiveRecord
     /** @var string $file - Переменная файла превьюшки null  */
     public $file = null;
     const FILE = 'file';
+
+    /** @var int - Константы True/False для различных валидаций */
+    const TRUE  = 1;
+    const FALSE = 0;
     
     /**
      * @inheritdoc
@@ -128,8 +132,8 @@ class Articles extends \yii\db\ActiveRecord
     public static function takeActiveArticleById(string $id)
     {
         return Articles::find()
-            ->where(['url'=>$id])
-            ->andWhere(['enabled' => 1])
+            ->where([static::ATTR_ID => $id])
+            ->andWhere([static::ATTR_ENABLED => static::TRUE])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->One();
     }

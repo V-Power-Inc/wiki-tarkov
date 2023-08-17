@@ -8,7 +8,6 @@ use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
-use Yii;
 
 /**
  * AR модель для работы с API, через которое на сайте актуализируется база лута
@@ -80,8 +79,7 @@ class ApiLoot extends \yii\db\ActiveRecord
             static::ATTR_JSON => 'Json данные',
             static::ATTR_URL => 'Url адрес',
             static::ATTR_DATE_CREATE => 'Дата создания',
-            static::ATTR_ACTIVE => 'Активность предмета',
-            static::ATTR_ACTIVE => 'Старые записи'
+            static::ATTR_ACTIVE => 'Активность предмета'
         ];
     }
 

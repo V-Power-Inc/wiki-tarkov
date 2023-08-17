@@ -6,9 +6,11 @@
  * Time: 12:24
  */
 
+use app\controllers\ClanController;
 use yii\web\JqueryAsset;
 use yii\widgets\ActiveForm;
 use app\models\Clans;
+use yii\helpers\Url;
 
 $this->title = "Escape from Tarkov: Список кланов";
 
@@ -69,7 +71,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <?php if($avialableTickets <= 0): ?>
                 <button class="btn btn-primary" disabled>Зарегистрировать клан</button>
             <?php else: ?>
-                <a class="btn btn-primary" href="/add-clan">Зарегистрировать клан</a>
+                <a class="btn btn-primary" href="<?= Url::to(ClanController::getUrlRoute(ClanController::ACTION_ADDCLAN)) ?>">Зарегистрировать клан</a>
             <?php endif; ?>
             
             <?php if(empty($clans)): ?>

@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\JsondataService;
@@ -17,6 +18,7 @@ use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
 use yii\web\HttpException;
 use yii\web\ServerErrorHttpException;
+use yii\db\Exception;
 use Yii;
 
 /**
@@ -28,7 +30,7 @@ use Yii;
  * Class ApiController
  * @package app\controllers
  */
-class ApiController extends AdvancedController
+final class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LIST       = 'list';
@@ -121,8 +123,8 @@ class ApiController extends AdvancedController
             return $this->render(static::ACTION_ITEM, ['item' => $item]);
         }
 
-        /** Если в базе нет предмета - возвращаем 404 ошибку */
-        throw new HttpException(404, 'Такая страница не существует');
+        /** Если в базе нет предмета - редиректим с временным кодом на страницу со списком актуального лута */
+        return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
     }
 
     /**
@@ -130,10 +132,19 @@ class ApiController extends AdvancedController
      *
      * @param string $q - поисковый запрос
      * @return string
-     * @throws \yii\db\Exception
+     * @throws Exception
      */
-    public function actionSearch(string $q): string {
-        return JsondataService::getSearchItem($q);
+    public function actionSearch(string $q): string
+    {
+        /** Если запрос пришел через AJAX */
+        if (Yii::$app->request->isAjax) {
+
+            /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
+            return JsondataService::getSearchItem($q);
+        }
+
+        /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 
     /**
@@ -142,7 +153,8 @@ class ApiController extends AdvancedController
      * @param string $id - id предмета из API tarkov.dev
      * @return string
      */
-    public function actionGetGraphs(string $id): string {
+    public function actionGetGraphs(string $id): string
+    {
 
         /** Если запрос сюда прилетел AJAXом */
         if (Yii::$app->request->isAjax) {
@@ -155,7 +167,7 @@ class ApiController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
-        throw new HttpException(404, 'Такая страница не существует.');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.');
     }
 
     /**

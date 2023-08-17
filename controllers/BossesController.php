@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\ArrayService;
@@ -16,10 +17,13 @@ use yii\web\HttpException;
 use yii\db\StaleObjectException;
 
 /**
+ * Контроллер обеспечивает работоспособность API по получению информации о боссах со стороннего источника tarkov.dev
+ * Маршрутизация до страниц, получающих данные по API для боссов на локациях
+ *
  * Class BossesController
  * @package app\controllers
  */
-class BossesController extends AdvancedController
+final class BossesController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX = 'boss-list';
@@ -42,7 +46,7 @@ class BossesController extends AdvancedController
         $maps = $api->getBosses();
 
         /** Рендерим вьюху */
-        return $this->render('index', ['maps' => $maps]);
+        return $this->render(static::ACTION_INDEX, ['maps' => $maps]);
     }
 
     /**
@@ -60,20 +64,20 @@ class BossesController extends AdvancedController
         $api = new ApiService();
 
         /** Проверяем есть ли в БД страница с таким URL адресом */
-        if($url && Bosses::isExists($url) == true) {
+        if ($url && Bosses::isExists($url) == true) {
 
             /** Дергаем метод, который вернет нам детальную страницу Боссов */
             $bosses = $api->getBosses($url);
 
             /** Рендерим вьюху */
-            return $this->render('view', [
+            return $this->render(static::ACTION_VIEW, [
                 'bosses' => $bosses,
                 'map_title' => Bosses::findMapTitleByUrl($url)
             ]);
         }
 
         /** Проверяем в статичном массиве, был ли такой Url адрес раньше */
-        if(in_array($url, ArrayService::existingMapNames())) {
+        if (in_array($url, ArrayService::existingMapNames())) {
 
             /** Дергаем метод по обновлению боссов */
             $api->getBosses($url);
@@ -83,6 +87,6 @@ class BossesController extends AdvancedController
         }
 
         /** Exception на всякий случай */
-        throw new HttpException(404, 'Такая страница не существует');
+        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 }
