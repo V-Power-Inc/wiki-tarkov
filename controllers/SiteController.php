@@ -217,17 +217,17 @@ final class SiteController extends AdvancedController
     /**
      * Рендер детальной страницы полезной статьи
      *
-     * @param $id - параметр url статьи
+     * @param $url - параметр url статьи
      * @return string
      * @throws HttpException
      */
-    public function actionArticledetail($id): string
+    public function actionArticledetail($url): string
     {
         /** Если нашли статью по урлу */
-        if(Articles::takeActiveArticleById($id)) {
+        if(Articles::takeActiveArticleByUrl($url)) {
 
             /** Рендерим вьюху с детальной информацией */
-            return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleById($id)]);
+            return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleByUrl($url)]);
         }
 
         /** 404 ошибка - если не нашли такой статьи по урлу */

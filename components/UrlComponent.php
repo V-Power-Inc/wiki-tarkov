@@ -69,7 +69,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
 
                 /** Отправляем в контроллер с нужным параметром для Action */
-                return ['site/articledetail',['id'=>$matches[3]]];
+                return ['site/articledetail',['url'=>$matches[3]]];
             }
         } elseif ($exploded_url[static::FIRST_ELEMENT] == 'traders') { /** Если первый элемента массива - traders, значит мы в разделе торговцев */
 
