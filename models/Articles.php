@@ -126,16 +126,15 @@ class Articles extends \yii\db\ActiveRecord
     /**
      * Возвращаем активную полезную статью по url параметру
      *
-     * @param string $id - url параметр
+     * @param string $url - GET параметр
      * @return array|ActiveRecord|null
      */
-    public static function takeActiveArticleById(string $id)
+    public static function takeActiveArticleByUrl(string $url)
     {
         return Articles::find()
-            ->where([static::ATTR_ID => $id])
+            ->where([static::ATTR_URL => $url])
             ->andWhere([static::ATTR_ENABLED => static::TRUE])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->One();
     }
-
 }
