@@ -3,7 +3,7 @@
  *
  * Основной JS файл проекта (ClientSide)
  *
- * @link https://javascriptobfuscator.com/Javascript-Obfuscator.aspx - Obfuscate JS
+ * @link https://codebeautify.org/javascript-obfuscator - Obfuscate JS
  */
 
 var param = $('meta[name=csrf-param]').attr("content");
@@ -36,17 +36,6 @@ $(document).ready(function() {
     /*** Обрачиваем Wiki таблицы специальным дивом со скроллом ***/
     var wikia = $('table.wikitable');
     $(wikia).wrap('<div class="fix-tables"></div>');
-
-    /*** Обработчик нажатия на кнопку закрытия оверлея ***/
-    $('#cck_close').click(function() {
-        $.ajax({
-            url: '/site/close-overlay',
-            data: {param: param, token : token},
-            success: function(response) {
-                $('.overlay-block').fadeOut();
-            }
-        });
-    });
 
     /*** Оборачиваем фреймы youtube в специальные блоки для адаптивности ***/
     $('.news-shortitem iframe').each(function () {

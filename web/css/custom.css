@@ -272,7 +272,7 @@ a.scup i {
 
 .scup {
     position: fixed;
-    z-index: 1010;
+    z-index: 100;
     bottom: 80px;
     right: 10px;
     display: none;
