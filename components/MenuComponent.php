@@ -163,9 +163,9 @@ class MenuComponent
         <div class="container adaptive-fix">
             <!-- Заголовок -->
             <div class="navbar-header">
-                <img class="mobile-small-logo" src="/img/logo.png">
+                <img class="mobile-small-logo" alt="Логотип EFT" src="/img/logo.png">
                 <a class="mobile-brand" href="/">База знаний EFT</a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" title="Мобильное меню">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
