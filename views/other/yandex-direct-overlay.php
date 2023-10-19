@@ -12,12 +12,12 @@
 <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Рекламный блок Overlay-->
 <!--Категория: Основная категория-->
 <!--Тип баннера: ADF - Рекламный блок Overlay-->
-<div id="adfox_167904838734514640"></div>
+<div id="adfox_169774239344369137"></div>
 <script>
     window.yaContextCb.push(()=>{
         Ya.adfoxCode.create({
             ownerId: 700342,
-            containerId: 'adfox_167904838734514640',
+            containerId: 'adfox_169774239344369137',
             params: {
                 p1: 'cxqpt',
                 p2: 'idoe'
