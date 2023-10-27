@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\ArticlesQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -136,5 +137,16 @@ class Articles extends \yii\db\ActiveRecord
             ->andWhere([static::ATTR_ENABLED => static::TRUE])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->One();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ArticlesQuery
+     */
+    public static function find(): ArticlesQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ArticlesQuery(get_called_class());
     }
 }

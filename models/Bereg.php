@@ -8,6 +8,7 @@ use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\BeregQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -139,4 +140,14 @@ class Bereg extends \yii\db\ActiveRecord
             ->all();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return BeregQuery
+     */
+    public static function find(): BeregQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new BeregQuery(get_called_class());
+    }
 }

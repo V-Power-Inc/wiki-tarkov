@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
+use app\models\queries\ApiSearchLogsQuery;
 
 /**
  * Поисковая модель, которая хранит в БД логи поисковых запросов пользователей к API и иную полезную информацию
@@ -80,5 +81,16 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
     public static function findCaptchaCode(string $captcha)
     {
         return ApiSearchLogs::findOne([ApiSearchLogs::ATTR_INFO => $captcha]);
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ApiSearchLogsQuery
+     */
+    public static function find(): ApiSearchLogsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ApiSearchLogsQuery(get_called_class());
     }
 }

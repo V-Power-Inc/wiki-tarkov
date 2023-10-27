@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\BartersQuery;
 use Yii;
 /**
  * This is the model class for table "barters".
@@ -99,5 +100,16 @@ class Barters extends \yii\db\ActiveRecord
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->asArray()
             ->all();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return BartersQuery
+     */
+    public static function find(): BartersQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new BartersQuery(get_called_class());
     }
 }

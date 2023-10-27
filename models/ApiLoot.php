@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\ApiLootQuery;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
 
@@ -141,5 +142,16 @@ class ApiLoot extends \yii\db\ActiveRecord
 
         /** Сохраняем обновленный предмет */
         return $this->save();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ApiLootQuery
+     */
+    public static function find(): ApiLootQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ApiLootQuery(get_called_class());
     }
 }

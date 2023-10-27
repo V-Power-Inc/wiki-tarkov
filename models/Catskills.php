@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\CatskillsQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -158,4 +159,14 @@ class Catskills extends \yii\db\ActiveRecord
             ->One();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return CatskillsQuery
+     */
+    public static function find(): CatskillsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new CatskillsQuery(get_called_class());
+    }
 }

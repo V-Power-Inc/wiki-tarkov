@@ -13,7 +13,7 @@ use app\common\helpers\validators\StringValidator;
  * Date: 03.01.2023
  * Time: 12:48
  *
- * Этот класс наследуется от AR Clans, нужен исключительно по причине рекапче в AR модели
+ * Этот класс наследуется от AR Clans, нужен исключительно по причине рекапчи в AR модели
  * todo: Косяк проектирования
  *
  * @property int $id

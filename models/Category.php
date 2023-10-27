@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\UniqueValidator;
+use app\models\queries\CategoryQuery;
 
 /**
  * This is the model class for table "category".
@@ -151,5 +152,16 @@ class Category extends \yii\db\ActiveRecord
     public function getParentcat()
     {
         return $this->hasOne(Category::class, [static::ATTR_ID => static::ATTR_PARENT_CATEGORY]);
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return CategoryQuery
+     */
+    public static function find(): CategoryQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new CategoryQuery(get_called_class());
     }
 }
