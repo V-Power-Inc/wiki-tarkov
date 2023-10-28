@@ -20,6 +20,7 @@ use yii\helpers\Json;
  * @property string $url URL адрес
  * @property string $date_create Дата создания записи о предмете
  * @property int $active Флаг активности записи
+ * @property int $old Флаг возраста записи, если стоит 1, пора удалять
  */
 class ApiLoot extends ActiveRecord
 {
@@ -30,6 +31,7 @@ class ApiLoot extends ActiveRecord
     const ATTR_URL  = 'url';
     const ATTR_DATE_CREATE = 'date_create';
     const ATTR_ACTIVE = 'active';
+    const ATTR_OLD = 'old';
 
     /** Константы bool значений */
     const TRUE = 1;
@@ -64,7 +66,9 @@ class ApiLoot extends ActiveRecord
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
-            [static::ATTR_ACTIVE, IntegerValidator::class]
+            [static::ATTR_ACTIVE, IntegerValidator::class],
+
+            [static::ATTR_OLD, IntegerValidator::class]
         ];
     }
 
