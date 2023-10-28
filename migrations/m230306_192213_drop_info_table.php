@@ -9,6 +9,7 @@ use yii\db\Migration;
  */
 class m230306_192213_drop_info_table extends Migration
 {
+    /** @var string - Название таблицы */
     const TABLE_NAME = 'info';
 
     /**
