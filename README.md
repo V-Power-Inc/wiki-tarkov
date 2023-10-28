@@ -9,8 +9,8 @@ Wiki Tarkov Project 💻
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
 ![Stable Version](https://img.shields.io/badge/version-v5.5.31-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
-![Tests Count](https://img.shields.io/badge/tests%20count-925-informational)
-![Tests Code Coverage](https://img.shields.io/badge/coverage-78%25-yellowgreen)
+![Tests Count](https://img.shields.io/badge/tests%20count-976-informational)
+![Tests Code Coverage](https://img.shields.io/badge/coverage-85%25-yellowgreen)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 
