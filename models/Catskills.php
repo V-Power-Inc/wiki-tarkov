@@ -29,7 +29,7 @@ use yii\db\ActiveRecord;
  *
  * @property Skills[] $skills
  */
-class Catskills extends \yii\db\ActiveRecord
+class Catskills extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';

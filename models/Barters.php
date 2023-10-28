@@ -8,6 +8,7 @@ use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use app\models\queries\BartersQuery;
 use Yii;
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "barters".
  *
@@ -19,7 +20,7 @@ use Yii;
  * @property string $date_create
  * @property int $enabled
  */
-class Barters extends \yii\db\ActiveRecord
+class Barters extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';

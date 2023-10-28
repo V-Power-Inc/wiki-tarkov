@@ -20,7 +20,7 @@ use yii\helpers\Json;
  * @property string $date_create Дата создания записи о предмете
  * @property int $active Флаг активности записи
  */
-class ApiLoot extends \yii\db\ActiveRecord
+class ApiLoot extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID = 'id';

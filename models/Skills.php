@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\SkillsQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -177,5 +178,16 @@ class Skills extends ActiveRecord
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->asArray()
             ->all();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return SkillsQuery
+     */
+    public static function find(): SkillsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new SkillsQuery(get_called_class());
     }
 }

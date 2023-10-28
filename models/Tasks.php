@@ -6,6 +6,8 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
+use app\models\queries\TasksQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "tasks".
@@ -20,7 +22,7 @@ use app\common\helpers\validators\SafeValidator;
  * @property int $old Флаг возраста записи, если стоит 1, пора удалять
  * @property string $url Url адрес до квестов конкретного торговца
  */
-class Tasks extends \yii\db\ActiveRecord
+class Tasks extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -117,5 +119,16 @@ class Tasks extends \yii\db\ActiveRecord
     public static function getTasksData(string $url): array
     {
         return Tasks::findAll([Tasks::ATTR_URL => $url]) ?? false;
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return TasksQuery
+     */
+    public static function find(): TasksQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new TasksQuery(get_called_class());
     }
 }

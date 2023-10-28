@@ -19,7 +19,7 @@ use yii\db\ActiveRecord;
  * @property int $old Флаг возраста записи, если стоит 1, пора удалять
  * @property string $url Url адрес до карты с боссами
  */
-class Bosses extends \yii\db\ActiveRecord
+class Bosses extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID = 'id';

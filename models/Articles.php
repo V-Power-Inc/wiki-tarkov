@@ -27,7 +27,7 @@ use yii\db\ActiveRecord;
  * @property string $keywords
  * @property string $shortdesc
  */
-class Articles extends \yii\db\ActiveRecord
+class Articles extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';

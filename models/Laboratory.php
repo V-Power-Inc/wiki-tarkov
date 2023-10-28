@@ -2,11 +2,12 @@
 
 namespace app\models;
 
-use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\NumberValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\LaboratoryQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "laboratory".
@@ -23,7 +24,7 @@ use app\common\helpers\validators\StringValidator;
  * @property int $exit_anyway
  * @property string $date_update
  */
-class Laboratory extends \yii\db\ActiveRecord
+class Laboratory extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -100,5 +101,16 @@ class Laboratory extends \yii\db\ActiveRecord
             static::ATTR_ENABLED => 'Включен',
             static::ATTR_EXIT_ANYWAY => 'Общий выход'
         ];
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return LaboratoryQuery
+     */
+    public static function find(): LaboratoryQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new LaboratoryQuery(get_called_class());
     }
 }

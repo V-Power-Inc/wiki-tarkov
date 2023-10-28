@@ -2,9 +2,12 @@
 
 namespace app\models;
 
+use app\models\queries\PatronsQuery;
 use Yii;
 
 use app\common\helpers\validators\StringValidator;
+
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "patrons".
  *
@@ -25,7 +28,7 @@ use app\common\helpers\validators\StringValidator;
  * @property string $rikochet
  * @property string $traccer
  */
-class Patrons extends \yii\db\ActiveRecord
+class Patrons extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID                 = 'id';
@@ -122,5 +125,16 @@ class Patrons extends \yii\db\ActiveRecord
     public static function takePatrons(): array
     {
         return static::find()->orderBy([static::ATTR_ID => SORT_ASC])->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return PatronsQuery
+     */
+    public static function find(): PatronsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new PatronsQuery(get_called_class());
     }
 }

@@ -7,10 +7,12 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\NumberValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\RavyazkaQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "razvyazka".
@@ -27,7 +29,7 @@ use Yii;
  * @property int $exit_anyway
  * @property string $date_update
  */
-class Razvyazka extends \yii\db\ActiveRecord
+class Razvyazka extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -134,4 +136,14 @@ class Razvyazka extends \yii\db\ActiveRecord
         return static::find()->asArray()->andWhere([static::ATTR_ENABLED => static::TRUE])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return RavyazkaQuery
+     */
+    public static function find(): RavyazkaQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new RavyazkaQuery(get_called_class());
+    }
 }

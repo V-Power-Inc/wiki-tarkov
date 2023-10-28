@@ -6,6 +6,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\TradersQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
@@ -30,7 +31,7 @@ use Yii;
  * @property integer $sortir
  * @property integer $enabled
  */
-class Traders extends \yii\db\ActiveRecord
+class Traders extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID            = 'id';
@@ -181,4 +182,14 @@ class Traders extends \yii\db\ActiveRecord
         return static::find()->where([static::ATTR_URL=>$url])->andWhere([static::ATTR_ENABLED => 1])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return TradersQuery
+     */
+    public static function find(): TradersQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new TradersQuery(get_called_class());
+    }
 }

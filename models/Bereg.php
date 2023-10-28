@@ -6,13 +6,13 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\NumberValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
-use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use app\models\queries\BeregQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "bereg".
@@ -29,7 +29,7 @@ use Yii;
  * @property integer $exit_anyway
  * @property string $date_update
  */
-class Bereg extends \yii\db\ActiveRecord
+class Bereg extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';

@@ -7,6 +7,7 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\UniqueValidator;
 use app\models\queries\CategoryQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "category".
@@ -23,7 +24,7 @@ use app\models\queries\CategoryQuery;
  *
  * @property Items[] $items
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID              = 'id';
