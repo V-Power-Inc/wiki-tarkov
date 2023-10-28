@@ -8,6 +8,7 @@ use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use app\models\queries\ApiLootQuery;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
