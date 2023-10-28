@@ -38,7 +38,6 @@ class ApilootTest extends \Codeception\Test\Unit
         ];
     }
 
-
     /** Тестируем создание */
     public function testCreate()
     {
@@ -70,7 +69,7 @@ class ApilootTest extends \Codeception\Test\Unit
     {
         $loot = ApiLoot::find()->one();
 
-        $loot->assertNotNull($loot, 'Ожидался объект, вернулся null - объект не селектнулся.');
+        $this->assertNotNull($loot, 'Ожидался объект, вернулся null - объект не селектнулся.');
     }
 
     /** Тестируем получение всех объектов (select all) */
@@ -78,7 +77,7 @@ class ApilootTest extends \Codeception\Test\Unit
     {
         $loot = ApiLoot::find()->all();
 
-        $loot->assertTrue(!empty($loot), 'Ожидалось что вернутся объекты, этого не случилось - что-то пошло не так');
+        $this->assertTrue(!empty($loot), 'Ожидалось что вернутся объекты, этого не случилось - что-то пошло не так');
     }
 
     /** Тестируем удаление объекта */
