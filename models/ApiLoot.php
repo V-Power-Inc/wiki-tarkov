@@ -6,7 +6,9 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\ApiLootQuery;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
@@ -19,7 +21,7 @@ use yii\helpers\Json;
  * @property string $date_create Дата создания записи о предмете
  * @property int $active Флаг активности записи
  */
-class ApiLoot extends \yii\db\ActiveRecord
+class ApiLoot extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID = 'id';
@@ -141,5 +143,16 @@ class ApiLoot extends \yii\db\ActiveRecord
 
         /** Сохраняем обновленный предмет */
         return $this->save();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ApiLootQuery
+     */
+    public static function find(): ApiLootQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ApiLootQuery(get_called_class());
     }
 }

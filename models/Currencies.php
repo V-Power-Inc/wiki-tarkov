@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\CurrenciesQuery;
 use Yii;
 
 use app\common\helpers\validators\StringValidator;
@@ -16,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property int $value
  * @property int $enabled
  */
-class Currencies extends \yii\db\ActiveRecord
+class Currencies extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID      = 'id';
@@ -103,4 +104,14 @@ class Currencies extends \yii\db\ActiveRecord
         return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return CurrenciesQuery
+     */
+    public static function find(): CurrenciesQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new CurrenciesQuery(get_called_class());
+    }
 }

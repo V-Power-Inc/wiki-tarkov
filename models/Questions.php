@@ -5,6 +5,8 @@ namespace app\models;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\QuestionsQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "questions".
@@ -15,7 +17,7 @@ use app\common\helpers\validators\StringValidator;
  * @property string $date_create
  * @property int $enabled
  */
-class Questions extends \yii\db\ActiveRecord
+class Questions extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
@@ -64,5 +66,16 @@ class Questions extends \yii\db\ActiveRecord
             static::ATTR_DATE_CREATE => 'Дата создания',
             static::ATTR_ENABLED => 'Включен'
         ];
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return QuestionsQuery
+     */
+    public static function find(): QuestionsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new QuestionsQuery(get_called_class());
     }
 }

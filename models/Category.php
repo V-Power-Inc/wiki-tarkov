@@ -6,6 +6,8 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\UniqueValidator;
+use app\models\queries\CategoryQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "category".
@@ -22,7 +24,7 @@ use app\common\helpers\validators\UniqueValidator;
  *
  * @property Items[] $items
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID              = 'id';
@@ -151,5 +153,16 @@ class Category extends \yii\db\ActiveRecord
     public function getParentcat()
     {
         return $this->hasOne(Category::class, [static::ATTR_ID => static::ATTR_PARENT_CATEGORY]);
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return CategoryQuery
+     */
+    public static function find(): CategoryQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new CategoryQuery(get_called_class());
     }
 }

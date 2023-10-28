@@ -5,10 +5,11 @@ use yii\db\Migration;
 /**
  * В этой миграции мы дропаем таблицу информационных виджетов (Устаревший функционал)
  *
- * Handles the dropping of table `{{%info}}`.
+ * Handles the dropping of table `info`.
  */
 class m230306_192213_drop_info_table extends Migration
 {
+    /** @var string - Название таблицы */
     const TABLE_NAME = 'info';
 
     /**
@@ -18,7 +19,7 @@ class m230306_192213_drop_info_table extends Migration
      */
     public function safeUp()
     {
-        $this->dropTable('{{%info}}');
+        $this->dropTable(static::TABLE_NAME);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\ItemsQuery;
 use yii\imagine\Image;
 use yii\web\UploadedFile;
 use app\common\helpers\validators\RequiredValidator;
@@ -277,5 +278,16 @@ class Items extends ActiveRecord
             ->where(['like binary', static::ATTR_URL, $item])
             ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->one();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ItemsQuery
+     */
+    public static function find(): ItemsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ItemsQuery(get_called_class());
     }
 }

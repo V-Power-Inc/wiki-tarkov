@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\DoorkeysQuery;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -329,5 +330,16 @@ class Doorkeys extends ActiveRecord
             ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->One();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return DoorkeysQuery
+     */
+    public static function find(): DoorkeysQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new DoorkeysQuery(get_called_class());
     }
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\common\helpers\validators\UrlValidator;
+use app\models\queries\ClansQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use app\common\helpers\validators\SafeValidator;
@@ -12,6 +13,7 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\ReCaptchaValidator;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "clans".
@@ -25,7 +27,7 @@ use Yii;
  * @property string $date_update
  * @property int $moderated
  */
-class Clans extends \yii\db\ActiveRecord
+class Clans extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
@@ -133,5 +135,16 @@ class Clans extends \yii\db\ActiveRecord
                 return false;
             }
         }
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ClansQuery
+     */
+    public static function find(): ClansQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ClansQuery(get_called_class());
     }
 }

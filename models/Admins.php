@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\AdminsQuery;
 use Yii;
 use \yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
@@ -201,5 +202,16 @@ class Admins extends ActiveRecord implements IdentityInterface
     public function takeAllUsers(): array
     {
         return static::find()->asArray()->all();
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return AdminsQuery
+     */
+    public static function find(): AdminsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new AdminsQuery(get_called_class());
     }
 }

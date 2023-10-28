@@ -7,10 +7,12 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\NumberValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\ForestQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "forest".
@@ -27,7 +29,7 @@ use Yii;
  * @property int $exit_anyway
  * @property string $date_update
  */
-class Forest extends \yii\db\ActiveRecord
+class Forest extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -134,4 +136,14 @@ class Forest extends \yii\db\ActiveRecord
         return static::find()->asArray()->andWhere([static::ATTR_ENABLED => static::TRUE])->cache(Yii::$app->params['cacheTime']['one_hour'])->all();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ForestQuery
+     */
+    public static function find(): ForestQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ForestQuery(get_called_class());
+    }
 }

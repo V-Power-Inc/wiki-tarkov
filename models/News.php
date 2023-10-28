@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\queries\NewsQuery;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -10,6 +11,7 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "news".
@@ -25,7 +27,7 @@ use Yii;
  * @property string $keywords
  * @property string $shortdesc
  */
-class News extends \yii\db\ActiveRecord
+class News extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
@@ -132,4 +134,14 @@ class News extends \yii\db\ActiveRecord
             ->One();
     }
 
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return NewsQuery
+     */
+    public static function find(): NewsQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new NewsQuery(get_called_class());
+    }
 }
