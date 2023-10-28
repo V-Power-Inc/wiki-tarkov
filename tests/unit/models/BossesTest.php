@@ -63,7 +63,7 @@ class BossesTest extends \Codeception\Test\Unit
         $boss->old = 1;
         $boss->url = 'tamojnya';
 
-        $this->assertIsInt($boss->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        $this->assertIsInt($boss->update(), 'Ожидался int, вернулся false - объект не обновился.');
     }
 
     /** Тестируем получение объекта (select) */
@@ -79,7 +79,7 @@ class BossesTest extends \Codeception\Test\Unit
     {
         $boss = Bosses::find()->all();
 
-        $this->assertTrue(!empty($boss), 'Ожидалось что вернется объект, этого не случилось - что-то пошло не так');
+        $this->assertTrue(!empty($boss), 'Ожидалось что вернутся объекты, этого не случилось - что-то пошло не так');
     }
 
     /** Тестируем удаление объекта */
