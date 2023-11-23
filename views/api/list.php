@@ -12,6 +12,7 @@
  * @var Pagination $pagination - объект пагинации
  */
 
+use app\common\constants\api\ItemAttributes;
 use app\common\services\ImageService;
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
@@ -120,7 +121,6 @@ $this->registerMetaTag([
 
             <?php ActiveForm::end() ?>
 
-
             <!-- Items -->
             <?php if (!empty($items)): ?>
 
@@ -137,28 +137,28 @@ $this->registerMetaTag([
                             <i class="fa fa-check-circle checked-by-admins actual-items-block" title="Актуальная информация"></i>
 
                             <a href="/item/<?= $item->url ?>.html">
-                                <?= $item->json['name'] ?>
+                                <?= $item->json[ItemAttributes::ATTR_ITEM_NAME] ?>
                             </a>
                         </h2>
 
                         <!-- Image -->
                         <div class="col-sm-2">
                             <a href="/item/<?= $item->url ?>.html">
-                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>" alt="<?= $item->json['name'] ?>" title="<?= $item->json['name'] ?>">
+                                <img class="item-page-image" src="<?= $item->json[ItemAttributes::ATTR_ICON_LINK] ?>" alt="<?= $item->json[ItemAttributes::ATTR_ITEM_NAME] ?>">
                             </a>
                         </div>
 
                         <!-- Attributes -->
                         <div class="col-sm-10">
-                            <p class="item-page-text">Категория: <b><?= $item->json['category']['name'] ?></b></p>
-                            <p class="item-page-text">Вес: <b><?= $item->json['weight'] ?> кг.</b></p>
+                            <p class="item-page-text">Категория: <b><?= $item->json[ItemAttributes::ATTR_CATEGORY][ItemAttributes::ATTR_CATEGORY_NAME] ?></b></p>
+                            <p class="item-page-text">Вес: <b><?= $item->json[ItemAttributes::ATTR_ITEM_WEIGHT] ?> кг.</b></p>
 
                             <div class="item-block-variables">
                                 <p class="item-page-text">Где можно купить:</p>
 
                                 <!-- Where we can buy -->
-                                <?php foreach ($item->json['buyFor'] as $trader) : ?>
-                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?=$trader['vendor']['name'] ?>" title="<?=$trader['vendor']['name'] ?>">
+                                <?php foreach ($item->json[ItemAttributes::ATTR_BUY_FOR] as $trader) : ?>
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" alt="<?=$trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>" title="<?=$trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
                                 <?php endforeach; ?>
                             </div>
 
@@ -166,8 +166,8 @@ $this->registerMetaTag([
                                 <p class="item-page-text">Где можно продать:</p>
 
                                 <!-- Where we can sell -->
-                                <?php foreach ($item->json['sellFor'] as $trader) : ?>
-                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?= $trader['vendor']['name'] ?>" title="<?= $trader['vendor']['name'] ?>">
+                                <?php foreach ($item->json[ItemAttributes::ATTR_SELL_FOR] as $trader) : ?>
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" title="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>" alt="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
                                 <?php endforeach; ?>
                             </div>
 

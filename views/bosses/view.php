@@ -13,6 +13,7 @@
  */
 
 use app\controllers\BossesController;
+use app\common\constants\api\BossAttributes;
 use app\common\services\BossesService;
 use app\common\services\ImageService;
 use app\common\services\ArrayService;
@@ -33,6 +34,8 @@ $this->registerMetaTag([
 ]);
 
 /**
+ * @var mixed $bosses - Массив с данными боссов обитающих на локации
+ *
  * В этой вьюхе появилось довольно большое количество хардкода, в связи с несовершенством API tarkov.dev
  * по этому поводу был создан тикет у них в репозитории - стоит поглядывать периодически.
  *
@@ -79,38 +82,39 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
                     <!-- Name -->
-                    <h2 class="text-left"><?= ($boss['name'] == 'gifter') ? 'Санта Клаус' : $boss['name'] ?></h2>
+                    <h2 class="text-left"><?= ($boss[BossAttributes::ATTR_NAME] == 'gifter') ? 'Санта Клаус' : $boss[BossAttributes::ATTR_NAME] ?></h2>
 
                     <!-- Image -->
                     <div class="col-sm-2">
-                        <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>" alt="<?= $boss['name'] ?>" title="<?= $boss['name'] ?>">
+                        <img class="boss-image" src="<?= ImageService::bossImages($boss[BossAttributes::ATTR_NAME]) ?>" alt="<?= $boss[BossAttributes::ATTR_NAME] ?>" title="<?= $boss[BossAttributes::ATTR_NAME] ?>">
                     </div>
 
                     <!-- Attributes -->
                     <div class="col-sm-10">
 
                         <!-- More info about custom bosses -->
-                        <?= TranslateService::bossesAlertInfo($boss['name']) ?>
+                        <?= TranslateService::bossesAlertInfo($boss[BossAttributes::ATTR_NAME]) ?>
 
                         <!-- Info about health bosses -->
-                        <?= !empty(BossesService::healthBosses()[$boss['name']]) ? '<p class="boss-page-text boss-health">Здоровье:</p><div class="progress"><div class="progress-bar progress-bar-danger progress-bar-striped active custom-bar" role="progressbar" style="width: 100%" aria-valuenow="'. BossesService::healthBosses()[$boss['name']] .'" aria-valuemin="0" aria-valuemax="100">'. BossesService::healthBosses()[$boss['name']] .' HP</div></div>' : '' ?>
+                        <?= !empty(BossesService::healthBosses()[$boss[BossAttributes::ATTR_NAME]]) ? '<p class="boss-page-text boss-health">Здоровье:</p><div class="progress"><div class="progress-bar progress-bar-danger progress-bar-striped active custom-bar" role="progressbar" style="width: 100%" aria-valuenow="'. BossesService::healthBosses()[$boss[BossAttributes::ATTR_NAME]] .'" aria-valuemin="0" aria-valuemax="100">'. BossesService::healthBosses()[$boss[BossAttributes::ATTR_NAME]] .' HP</div></div>' : '' ?>
 
-                        <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss['name']) ?></b></p>
-                        <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss['spawnChance'] * 100 ?>%</b></p>
-                        <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= !empty($boss['spawnLocations']) ? implode(', ', ArrayHelper::getColumn($boss['spawnLocations'], 'name')) : 'Не определено' ?></b>
-                        <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss['escorts']) ? 'Да' : 'Нет' ?></b></p>
-                        <?= !empty($boss['spawnTrigger']) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. $boss['spawnTrigger'] .'</b> </p>' : '' ?>
+                        <p class="boss-page-text boss-faction">Фракция: <b><?= TranslateService::bossesFactions($boss[BossAttributes::ATTR_NAME]) ?></b></p>
+                        <p class="boss-page-text boss-spawn-chance">Шанс спавна: <b><?= $boss[BossAttributes::ATTR_SPAWN_CHANCE] * 100 ?>%</b></p>
+                        <p class="boss-page-text boss-spawn-locations">Зона спавна: <b><?= !empty($boss[BossAttributes::ATTR_SPAWN_LOCATIONS]) ? implode(', ', ArrayHelper::getColumn($boss[BossAttributes::ATTR_SPAWN_LOCATIONS], 'name')) : 'Не определено' ?></b>
+                        <p class="boss-page-text boss-group">Действует в одиночку: <b><?= empty($boss[BossAttributes::ATTR_ESCORTS]) ? 'Да' : 'Нет' ?></b></p>
+                        <?= !empty($boss[BossAttributes::ATTR_SPAWN_TRIGGER]) ? '<p class="boss-page-text boss-trigger">Триггер спавна: <b>'. $boss[BossAttributes::ATTR_SPAWN_TRIGGER] .'</b> </p>' : '' ?>
 
-                        <?= !empty(BossesService::minionsNamesPrefix($boss['name'])) ? '<p class="boss-page-text boss-minions-names">Позывные свиты или префиксы имен: <b>'. BossesService::minionsNamesPrefix($boss['name']) .'</b></p>' : '' ?>
+                        <?= !empty(BossesService::minionsNamesPrefix($boss[BossAttributes::ATTR_NAME])) ? '<p class="boss-page-text boss-minions-names">Позывные свиты или префиксы имен: <b>'. BossesService::minionsNamesPrefix($boss[BossAttributes::ATTR_NAME]) .'</b></p>' : '' ?>
 
                             <!-- Check of boss has escort -->
-                            <?php if(!empty($boss['escorts'])): {
+                            <?php if(!empty($boss[BossAttributes::ATTR_ESCORTS])): {
+
                                 /** Выводим количество людей в составе отряда босса */
-                                $cnt = ArrayService::getAmountEscorts($boss['escorts']);
+                                $cnt = ArrayService::getAmountEscorts($boss[BossAttributes::ATTR_ESCORTS]);
                             }
                             ?>
 
-                                <?php if($boss['name'] !== "Death Knight"): ?>
+                                <?php if($boss[BossAttributes::ATTR_NAME] !== "Death Knight"): ?>
                                         <p class="boss-page-text boss-group-count">Всего в отряде сопровождения (Размер свиты): <b><?= $cnt > 1 ? '1-' . $cnt : '1' ?></b></p>
                                 <?php endif; ?>
 

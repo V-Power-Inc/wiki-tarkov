@@ -12,6 +12,7 @@
  */
 
 use app\models\ApiLoot;
+use app\common\constants\api\ItemAttributes;
 use app\common\services\HighChartsService;
 use yii\helpers\Json;
 use yii\web\JqueryAsset;
@@ -56,13 +57,13 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
     <div class="row">
 
         <!-- Main Page Content -->
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content api-item-detail" data-item-id="<?= $item->json['id'] ?>">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 keys-content api-item-detail" data-item-id="<?= $item->json[ItemAttributes::ATTR_ITEM_ID] ?>">
 
             <!-- Image block -->
             <div class="col-xs-3">
 
-                <a class="image-link" title="<?= $item->name ?>" href="<?= $item->json['inspectImageLink'] ?>">
-                    <img class="detail-item-image image-link" src="<?= $item->json['inspectImageLink'] ?>" alt="<?= $item->name ?>" title="<?= $item->name ?>">
+                <a class="image-link" title="<?= $item->name ?>" href="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>">
+                    <img class="detail-item-image image-link" src="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>" alt="<?= $item->name ?>">
                 </a>
 
             </div>
@@ -70,28 +71,28 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
             <!-- Main content -->
             <div class="col-xs-9">
 
-                <p class="title-of-item-block">Категория: <?= $item->json['category']['name'] ?></p>
+                <p class="title-of-item-block">Категория: <?= $item->json[ItemAttributes::ATTR_CATEGORY][ItemAttributes::ATTR_CATEGORY_NAME] ?></p>
 
                 <p class="title-of-item-block">Описание: </p>
 
-                <p class="size-16">Описание: <?=  $item->json['description'] ?? 'Отсутствует' ?></p>
+                <p class="size-16">Описание: <?= $item->json[ItemAttributes::ATTR_ITEM_DESCRIPTION] ?? 'Отсутствует' ?></p>
 
-                <p class="title-of-item-block">Можно купить: <?= !empty($item->json['buyFor']) ? '' : 'Нет' ?></p>
+                <p class="title-of-item-block">Можно купить: <?= !empty($item->json[ItemAttributes::ATTR_BUY_FOR]) ? '' : 'Нет' ?></p>
 
                 <!-- buying -->
-                <?php foreach($item->json['buyFor'] as $trader): ?>
+                <?php foreach($item->json[ItemAttributes::ATTR_BUY_FOR] as $trader): ?>
 
                     <div class="selling-block row">
 
                         <div class="col-sm-2">
-                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>">
+                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" title="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
                         </div>
 
                         <div class="col-sm-10">
-                            <p class="detail-item-trader-price">За: <?= $trader['price'] ?> <?= $trader['currency'] ?></p>
+                            <p class="detail-item-trader-price">За: <?= $trader[ItemAttributes::ATTR_VENDOR_PRICE] ?> <?= $trader[ItemAttributes::ATTR_VENDOR_CURRENCY] ?></p>
 
                             <!-- More info -->
-                            <?= $trader['currency'] !== 'RUB' ? '<p class="detail-item-trader-price">В рублях: '. $trader['priceRUB'] .'</p>' : '' ?>
+                            <?= $trader[ItemAttributes::ATTR_VENDOR_CURRENCY] !== 'RUB' ? '<p class="detail-item-trader-price">В рублях: '. $trader[ItemAttributes::ATTR_VENDOR_PRICE_RUB] .'</p>' : '' ?>
 
                         </div>
 
@@ -99,22 +100,22 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                 <?php endforeach; ?>
 
 
-                <p class="title-of-item-block">Можно продать: <?= !empty($item->json['sellFor']) ? '' : 'Нет' ?></p>
+                <p class="title-of-item-block">Можно продать: <?= !empty($item->json[ItemAttributes::ATTR_SELL_FOR]) ? '' : 'Нет' ?></p>
 
                 <!-- sells -->
-                <?php foreach($item->json['sellFor'] as $trader): ?>
+                <?php foreach($item->json[ItemAttributes::ATTR_SELL_FOR] as $trader): ?>
 
                     <div class="selling-block row">
 
                         <div class="col-sm-2">
-                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>" alt="<?= $trader['vendor']['name'] ?>">
+                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" title="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>" alt="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
                         </div>
 
                         <div class="col-sm-10">
-                            <p class="detail-item-trader-price">За: <?= $trader['price'] ?> <?= $trader['currency'] ?></p>
+                            <p class="detail-item-trader-price">За: <?= $trader[ItemAttributes::ATTR_VENDOR_PRICE] ?> <?= $trader[ItemAttributes::ATTR_VENDOR_CURRENCY] ?></p>
 
                             <!-- More info -->
-                            <?= $trader['currency'] !== 'RUB' ? '<p class="detail-item-trader-price">В рублях: '. $trader['priceRUB'] .'</p>' : '' ?>
+                            <?= $trader[ItemAttributes::ATTR_VENDOR_CURRENCY] !== 'RUB' ? '<p class="detail-item-trader-price">В рублях: '. $trader[ItemAttributes::ATTR_VENDOR_PRICE_RUB] .'</p>' : '' ?>
 
                         </div>
 
@@ -122,29 +123,29 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                 <?php endforeach; ?>
 
 
-                <p class="title-of-item-block">Можно выменять: <?= !empty($item->json['bartersFor']) ? '' : 'Нет' ?></p>
+                <p class="title-of-item-block">Можно выменять: <?= !empty($item->json[ItemAttributes::ATTR_BARTERS_FOR]) ? '' : 'Нет' ?></p>
 
                 <!-- barters block -->
-                <?php foreach($item->json['bartersFor'] as $barter) : ?>
+                <?php foreach($item->json[ItemAttributes::ATTR_BARTERS_FOR] as $barter) : ?>
 
                     <div class="barters-block-actual row">
 
                         <div class="col-sm-2">
-                            <img class="detail-item-trader" src="<?= ImageService::traderImages($barter['trader']['name']) ?>" title="<?= $barter['trader']['name'] ?>" alt="<?= $barter['trader']['name'] ?>">
+                            <img class="detail-item-trader" src="<?= ImageService::traderImages($barter[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME]) ?>" title="<?= $barter[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME] ?>" alt="<?= $barter[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME] ?>">
                         </div>
 
                         <div class="col-sm-10">
-                            <p class="detail-item-barter-info">Уровень: <?= $barter['level'] ?></p>
+                            <p class="detail-item-barter-info">Уровень: <?= $barter[ItemAttributes::ATTR_TRADER_LEVEL] ?></p>
 
-                            <p class="detail-item-barter-info">Требуются выполненные квесты: <?= !empty($barter['taskUnlock']) ? 'Да' : 'Нет' ?></p>
+                            <p class="detail-item-barter-info">Требуются выполненные квесты: <?= !empty($barter[ItemAttributes::ATTR_TASK_UNLOCK]) ? 'Да' : 'Нет' ?></p>
 
                             <p class="detail-item-barter-info">Для обмена нужны предметы:</p>
 
                             <!-- Required items - block -->
-                            <?php foreach($barter['requiredItems'] as $req_item): ?>
+                            <?php foreach($barter[ItemAttributes::ATTR_REQUIRED_ITEMS] as $req_item): ?>
 
                                 <div class="barter-items-count">
-                                    <span class="count-for-barter"> <b><?= $req_item['count'] ?>x</b></span> <img class="items-for-trade" src="<?= $req_item['item']['iconLink'] ?>" title="<?= $req_item['item']['name'] ?>" alt="<?= $req_item['item']['name'] ?>">
+                                    <span class="count-for-barter"> <b><?= $req_item[ItemAttributes::ATTR_COUNT] ?>x</b></span> <img class="items-for-trade" src="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ICON_LINK] ?>" title="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>" alt="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>">
                                 </div>
 
                             <?php endforeach; ?>
@@ -156,19 +157,19 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                 <?php endforeach; ?>
 
 
-                <p class="title-of-item-block">Можно получить в награду за задания: <?= !empty($item->json['receivedFromTasks']) ? '' : 'Нет' ?></p>
+                <p class="title-of-item-block">Можно получить в награду за задания: <?= !empty($item->json[ItemAttributes::ATTR_RECIEVED_FOR_TASKS]) ? '' : 'Нет' ?></p>
 
                 <!-- Received for Quests -->
-                <?php foreach($item->json['receivedFromTasks'] as $recieved): ?>
+                <?php foreach($item->json[ItemAttributes::ATTR_RECIEVED_FOR_TASKS] as $recieved): ?>
 
                 <div class="received-block row">
 
                     <div class="col-sm-2">
-                        <img class="detail-item-trader" src="<?= ImageService::traderImages($recieved['trader']['name']) ?>" title="<?= $recieved['trader']['name'] ?>" alt="<?= $recieved['trader']['name'] ?>">
+                        <img class="detail-item-trader" src="<?= ImageService::traderImages($recieved[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME]) ?>" title="<?= $recieved[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME] ?>" alt="<?= $recieved[ItemAttributes::ATTR_TRADER][ItemAttributes::ATTR_TRADER_NAME] ?>">
                     </div>
 
                     <div class="col-sm-10">
-                        <p class="detail-item-barter-info">Выдает за выполнение: <b><?= $recieved['name'] ?></b></p>
+                        <p class="detail-item-barter-info">Выдает за выполнение: <b><?= $recieved[ItemAttributes::ATTR_ITEM_NAME] ?></b></p>
                     </div>
 
                 </div>
