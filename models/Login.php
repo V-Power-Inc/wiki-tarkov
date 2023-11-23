@@ -111,7 +111,7 @@ class Login extends Model
         if (!$this->hasErrors()){
 
             /** Ищем в БД пользователя с таким логином */
-            $user =  Admins::findOne([Admins::ATTR_USER => $this->email]);
+            $user = Admins::findOne([Admins::ATTR_USER => $this->email]);
 
             /** Если не нашли такого пользователя или у него неправильный пароль */
             if (!$user || ($user->password !== sha1($this->password))){
@@ -121,7 +121,7 @@ class Login extends Model
             }
 
             /** Если посетитель был забанен */
-            if ($user->banned === 1) {
+            if ($user->banned === Admins::ATTR_BANNED_TRUE) {
 
                 /** Выводим сообщение об этом */
                 return $this->addError($attribute, 'Пользователь деактивирован');

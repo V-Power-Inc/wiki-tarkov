@@ -41,7 +41,7 @@ final class DefaultController extends AdminController
         $model = new Login();
 
         /** Если из POST смогли загрузить данные о пользователе */
-        if(Yii::$app->request->post(Login::CLASS_NAME)){
+        if (Yii::$app->request->post(Login::CLASS_NAME)){
 
             /** Присваиваем атрибутам модели логина - данные из POST */
             $model->attributes = Yii::$app->request->post(Login::CLASS_NAME);

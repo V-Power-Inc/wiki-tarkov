@@ -235,8 +235,6 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                     </div>
                 </div>
 
-
-
             </div>
 
             <!-- Back to items List Page -->

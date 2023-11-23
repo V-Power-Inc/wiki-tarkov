@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
+use app\common\services\redis\RedisVariationsConfig;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -59,26 +60,18 @@ final class SiteController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    'index',
-                    'table-patrons',
-                    'keys',
-                    'doorkeysdetail',
-                    'news',
-                    'newsdetail',
-                    'articles',
-                    'articledetail',
-                    'questions',
-                    'currencies'
+                    static::ACTION_INDEX,
+                    static::ACTION_TABLE_PATRONS,
+                    static::ACTION_KEYS,
+                    static::ACTION_DOORKEYSDETAIL,
+                    static::ACTION_NEWS,
+                    static::ACTION_NEWSDETAIL,
+                    static::ACTION_ARTICLES,
+                    static::ACTION_ARTICLESARTICLESDETAIL,
+                    static::ACTION_QUESTIONS,
+                    static::ACTION_CURRENCIES
                 ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }

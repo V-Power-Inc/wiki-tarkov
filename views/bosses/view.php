@@ -37,7 +37,7 @@ $this->registerMetaTag([
  * @var mixed $bosses - Массив с данными боссов обитающих на локации
  *
  * В этой вьюхе появилось довольно большое количество хардкода, в связи с несовершенством API tarkov.dev
- * по этому поводу был создан тикен у них в репозитории - стоит поглядывать периодически.
+ * по этому поводу был создан тикет у них в репозитории - стоит поглядывать периодически.
  *
  * @link https://github.com/the-hideout/tarkov-dev/issues/273
  */
@@ -86,7 +86,7 @@ $this->registerMetaTag([
 
                     <!-- Image -->
                     <div class="col-sm-2">
-                        <img class="boss-image" src="<?= ImageService::bossImages($boss[BossAttributes::ATTR_NAME]) ?>">
+                        <img class="boss-image" src="<?= ImageService::bossImages($boss[BossAttributes::ATTR_NAME]) ?>" alt="<?= $boss[BossAttributes::ATTR_NAME] ?>" title="<?= $boss[BossAttributes::ATTR_NAME] ?>">
                     </div>
 
                     <!-- Attributes -->

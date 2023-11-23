@@ -48,14 +48,15 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <br>
             <br>
                 В настоящий момент это наиболее полная <b>неофициальная база кланов</b> по игре Escape from Tarkov.
-            <br>
-            <br>
-                <b class="bg-primary" style="padding: 5px;">5 April 2023 - Update:</b>  Все кланы у которых нет ссылки на сообщество будут отключены, новые кланы без ссылки на сообщество клана добавить невозможно. Если ваш клан исчез с этой страницы, напишите на почту <b>tarkov-wiki@ya.ru</b> и укажите название своего клана и ссылку на сообщество, либо заполните форму повторно.
             </p>
 
             <?php if($avialableTickets <= 0): ?>
+                <br>
+                <br>
                 <p class="size-16 alert alert-danger margin-top-20">Лимит заявок на регистрацию уже был достигнут, вы сможете заполнить заявку завтра.</p>
             <?php else: ?>
+                <br>
+                <br>
                 <p class="size-16 alert alert-info margin-top-20">Заявок доступно для отправки - <b style="color: green"><?= $avialableTickets ?></b></p>
             <?php endif; ?>
             

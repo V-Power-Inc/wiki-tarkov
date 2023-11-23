@@ -8,6 +8,7 @@
 
 namespace app\models\queries;
 
+use app\models\Admins;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -39,5 +40,15 @@ class AdminsQuery extends ActiveQuery
     {
         /** Поиск одной записи */
         return parent::one($db);
+    }
+
+    /**
+     * Метод для выбора пользователей, которые не являются забаненными
+     *
+     * @return AdminsQuery
+     */
+    public function notBanned(): AdminsQuery
+    {
+        return $this->andWhere([Admins::TABLE_NAME . '.' . Admins::ATTR_BANNED => Admins::FALSE]);
     }
 }

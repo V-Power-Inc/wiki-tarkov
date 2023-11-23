@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\JsondataService;
+use app\common\services\redis\RedisVariationsConfig;
 use yii;
 use app\models\Category;
 use app\models\Items;
@@ -42,20 +43,15 @@ final class LootController extends AdvancedController
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
-                'only' => ['mainloot','category'],
+                'only' => [
+                    static::ACTION_MAINLOOT,
+                    static::ACTION_CATEGORY
+                ],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }

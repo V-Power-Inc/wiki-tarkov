@@ -9,6 +9,7 @@
 namespace app\controllers;
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
+use app\common\services\redis\RedisVariationsConfig;
 use yii\web\HttpException;
 use app\models\Items;
 use Yii;
@@ -37,19 +38,12 @@ final class ItemController extends AdvancedController
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
-                'only' => ['detailloot'],
+                'only' => [static::ACTION_DETAILLOOT],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
                 ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }

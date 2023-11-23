@@ -29,6 +29,9 @@ use app\common\helpers\validators\SafeValidator;
  */
 class Admins extends ActiveRecord implements IdentityInterface
 {
+    /** @var string - Константа, название таблицы */
+    const TABLE_NAME = 'admins';
+
     /** Константы атрибутов Active Record модели */
     const ATTR_ID          = 'id';
     const ATTR_BANNED      = 'banned';
@@ -44,6 +47,10 @@ class Admins extends ActiveRecord implements IdentityInterface
     /** Константы True/False для различных поисков */
     const TRUE  = 1;
     const FALSE = 0;
+
+    /** Константы True/False для проверки, забанен пользователь или нет */
+    const ATTR_BANNED_TRUE = 1;
+    const ATTR_BANNED_FALSE = 0;
 
     /**
      * Имя таблицы в БД
