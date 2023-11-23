@@ -10,7 +10,9 @@
 
 namespace app\components;
 
+use app\controllers\FeedbackController;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * Класс горизонтального меню в верхней части сайта
@@ -151,14 +153,21 @@ class MenuComponent
            $other = 'active';
         } else if(stristr(Yii::$app->request->url,'/table-patrons')) {
            $other = 'active';
+        } else if (stristr(Yii::$app->request->url, '/feedback-form')) {
+            $other = 'active';
         }
 
         /*** Далее пошел шаблон отрисовки меню ***/
         self::Active();
-        $menu='    <nav class="navbar navbar-default fixed-navigatsiya"> 
+
+        /** HTML шаблон отрисовки меню */
+        $menu='<nav class="navbar navbar-default fixed-navigatsiya"> 
+    
+        <!-- Feedback Form -->
+        ' . self::feedBackform() . ' 
     
         <!-- Changer of site theme -->
-        '.self::themeToggler().'
+        ' . self::themeToggler() . '
     
         <div class="container adaptive-fix">
             <!-- Заголовок -->
@@ -242,9 +251,9 @@ class MenuComponent
                         <li><a href="/questions">Частые вопросы</a></li>
                         <li><a href="/table-patrons">Таблица патронов</a></li>
                         <li><a href="/clans">Список кланов</a></li>
+                        <li><a href="/feedback-form">Обратная связь</a></li>
                       </ul>
                     </li>
-                    
                     
                     <li '.self::$bosses.self::$view.'><a href="/bosses">Боссы на локациях</a></li>
                     <li '.self::$list.self::$item.'><a href="/items">Актуальный лут</a></li>
@@ -278,6 +287,17 @@ class MenuComponent
 
         /** Если кука отсутствует - показываем иконку - включить темную тему сайта */
         return '<i class="fa fa-2x fa-moon-o js-change-site-style" title="Включить темную тему сайта"></i>';
+    }
+
+    /**
+     * Строка с иконкой и ссылкой на форму обратной связи в верхней части страницы
+     *
+     * @return string
+     */
+    public static function feedBackform(): string
+    {
+        /** Возвращаем строку со ссылкой на форму обратной связи на рендер */
+        return '<a href="' . Url::to(FeedbackController::getUrlRoute(FeedbackController::ACTION_INDEX)) . '"><i class="fa fa-2x fa-envelope js-feedback-form" title="Форма обратной связи"></i></a>';
     }
 }
 ?>

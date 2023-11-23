@@ -10,6 +10,7 @@ use app\controllers\MapsController;
 use app\controllers\TraderController;
 use app\controllers\BossesController;
 use app\controllers\ApiController;
+use app\controllers\FeedbackController;
 
 use app\modules\admin\controllers\DefaultController;
 
@@ -76,6 +77,9 @@ return [
 
     /** URL до экшена, который через AJAX обновит данные графика HighCharts в API предметов */
     'get-graphs' => ApiController::routeId(ApiController::ACTION_GET_GRAPHS),
+
+    /** URL до экшена, который рендерит страницу с формой обратной связи */
+    'feedback-form' => FeedbackController::routeId(FeedbackController::ACTION_INDEX),
 
     /** Кастомный урл компонент */
     [
