@@ -26,7 +26,7 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/currencies.js?v=5.5.11', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
@@ -143,7 +143,7 @@ $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
                     <!-- Инпут с пересчетом биткоина на рубли -->
                     <div class="form-group">
                         <label class="control-label">Введите интересующее количество биткоинов:</label>
-                        <input class="form-control valute-course" id="bitkoin-refference" oninput="bitkoinConventer(this.value)" onchange="euroConventer(this.value)" value="">
+                        <input class="form-control valute-course" id="bitkoin-refference" oninput="bitkoinConventer(this.value)" onchange="bitkoinConventer(this.value)" value="">
 
                         <div class="help-block"></div>
                     </div>
@@ -158,6 +158,49 @@ $this->registerJsFile('js/currencies.js', ['depends' => [JqueryAsset::class]]);
 
                 </div>
             <?php endif; ?>
+
+
+            <!-- Блок пересчета с рублей на другие виды валют // todo: Доделать это, валюты должны считаться -->
+            <div style="padding: 10px;">
+
+                <!-- Строка курса биткоина -->
+                <h2 class="curencies-title">С рублей на другие валюты</h2>
+                <p class="size-16 alert alert-info">В этом блоке вы можете ввести количество рублей, чтобы узнать сколько других валют сможете купить по текущим курсам</p>
+
+                <!-- Инпут с пересчетом биткоина на рубли -->
+                <div class="form-group">
+                    <label class="control-label">Введите интересующее количество Рублей:</label>
+                    <input class="form-control valute-course" id="roubles_input" oninput="allValutesConventer(this.value)" onchange="allValutesConventer(this.value)" value="">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <!-- Сколько получите долларов -->
+                <div class="form-group">
+                    <label class="control-label">Сможете купить долларов:</label>
+                    <input class="form-control valute-course" id="dollar_res" value="0 $" disabled="">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <!-- Сколько получите евро -->
+                <div class="form-group">
+                    <label class="control-label">Сможете купить ЕВРО:</label>
+                    <input class="form-control valute-course" id="euro_res" value="0 Евро" disabled="">
+
+                    <div class="help-block"></div>
+                </div>
+
+                <!-- Сколько получите биткоинов -->
+                <div class="form-group">
+                    <label class="control-label">Сможете купить биткоинов:</label>
+                    <input class="form-control valute-course" id="btc_res" value="0 BTC" disabled="">
+
+                    <div class="help-block"></div>
+                </div>
+
+            </div>
+
 
             <div class="recommended-gm-content">
                 <?= $this->render('/other/google-recommended.php'); ?>

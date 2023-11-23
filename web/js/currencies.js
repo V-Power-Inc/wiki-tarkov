@@ -49,6 +49,21 @@ function bitkoinConventer(valNum) {
         alert('Введите целое число');
     }
 }
+
+/** Функция конвертирования рублей в другие виды валют */
+function allValutesConventer(valNum) {
+    if(!isNaN(valNum)) {
+        document.getElementById('#dollar_res').value = valNum / (valuteData[0].value / 100) + " $";
+    } else {
+        $('#roubles_input').val(null);
+        $('#dollar_res').val(null);
+        $('#euro_res').val(null);
+        $('#btc_res').val(null);
+        alert('Введите целое число');
+    }
+
+    // todo: Доделать это, валюты должны считаться
+}
     
     
 
