@@ -68,7 +68,7 @@ final class SiteController extends AdvancedController
                     'articles',
                     'articledetail',
                     'questions',
-                    //'currencies' // TODO: Вернуть кеш, когда закончу
+                    'currencies'
                 ],
                 'variations' => [
                     $_SERVER['SERVER_NAME'],
