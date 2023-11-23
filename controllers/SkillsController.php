@@ -9,6 +9,7 @@
 namespace app\controllers;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
+use app\common\services\redis\RedisVariationsConfig;
 use yii\web\HttpException;
 use app\models\Catskills;
 use app\models\Skills;
@@ -45,14 +46,7 @@ final class SkillsController extends AdvancedController
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) from skills limit 1',
                 ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }

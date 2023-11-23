@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\MarkersService;
+use app\common\services\redis\RedisVariationsConfig;
 use app\models\Forest;
 use app\models\Zavod;
 use app\models\Tamojnya;
@@ -62,17 +63,8 @@ final class MapsController extends AdvancedController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => 3600,
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->request->isAjax,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'duration' => Yii::$app->params['cacheTime']['one_hour'],
+                'variations' => RedisVariationsConfig::getMapsControllerVariations()
             ],
         ];
     }
