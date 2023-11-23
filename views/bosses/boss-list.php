@@ -54,7 +54,7 @@ $this->registerMetaTag([
         <?php foreach($maps as $map): ?>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-top-30 text-center">
                 <h2 class="text-center boss-map-heading">Боссы на локации <?= $map->map ?></h2>
-                <a href="/bosses/<?= $map->url ?>"><img class="boss-maps-img" src="<?= ImageService::mapImages($map->map) ?>"></a>
+                <a href="/bosses/<?= $map->url ?>"><img class="boss-maps-img" src="<?= ImageService::mapImages($map->map) ?>" alt="Боссы на локации <?= $map->map ?>" title="Боссы на локации <?= $map->map ?>"></a>
                 <br>
                 <br>
                 <a class="btn btn-default main-link" href="/bosses/<?= $map->url ?>">Перейти к боссам локации <?= $map->map ?></a>
