@@ -8,6 +8,7 @@
 
 namespace app\common\services;
 
+use app\common\constants\api\Api;
 use app\common\interfaces\ApiInterface;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\tasks\db\TaskModel;
@@ -177,17 +178,17 @@ final class ApiService implements ApiInterface
     private function saveData(array $data): bool
     {
         /** Проходим в цикле все полученные карты */
-        foreach ($data['data']['maps'] as $map) {
+        foreach ($data[Api::ATTR_DATA][Api::ATTR_MAPS] as $map) {
 
             /** Создаем новый AR объект Bosses */
             $model = new Bosses();
 
             /** Присваиваем атрибуты */
-            $model->map = $map['name'];
-            $model->bosses = Json::encode($map['bosses']);
+            $model->map = $map[Api::ATTR_MAP_NAME];
+            $model->bosses = Json::encode($map[Api::ATTR_BOSSES]);
 
             /** Передаем название карты в генератор Url */
-            $model->url = TranslateService::mapUrlCreator($map['name']);
+            $model->url = TranslateService::mapUrlCreator($map[Api::ATTR_MAP_NAME]);
 
             /** Сохраняем новый объект данных о боссе */
             $model->save();
@@ -365,7 +366,7 @@ final class ApiService implements ApiInterface
         $item = $this->getApiData();
 
         /** Пуляем запрос и проверяем - если ничего, надо делать SetFlash */
-        if (empty($item['data']['items'])) {
+        if (empty($item[Api::ATTR_DATA][Api::ATTR_ITEMS])) {
 
             /** Возвращаем уведомление, что не смогли найти искомый предмет */
             $messages = new MessagesComponent();
@@ -396,14 +397,14 @@ final class ApiService implements ApiInterface
         if ($ApiItems !== false) {
 
             /** В цикле проходим весь массив из API и сохраняем в БД новые данные */
-            foreach ($ApiItems['data']['items'] as $data) {
+            foreach ($ApiItems[Api::ATTR_DATA][Api::ATTR_ITEMS] as $data) {
 
                 /** Создаем новый объект AR класса ApiLoot */
                 $newItem = new ApiLoot();
 
                 /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
-                $newItem->name = trim($data['name']);
-                $newItem->url = $data['normalizedName'];
+                $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
+                $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
                 $newItem->json = Json::encode($data);
 
                 /** Сохраняем новые объекты */
@@ -535,7 +536,7 @@ final class ApiService implements ApiInterface
     private function createTasks(array $data): bool
     {
         /** В цикле проходим каждый квест из массив, полученного от API */
-        foreach ($data['data']['tasks'] as $task) {
+        foreach ($data[Api::ATTR_DATA][Api::ATTR_TASKS] as $task) {
 
             /** Задаем каждому объекту квеста атрибуты из массива */
             $model = new TaskModel($task);
@@ -605,13 +606,15 @@ final class ApiService implements ApiInterface
     }
 
     /**
+     * Метод для обновления данных о предмете из API справочника лута
+     *
      * @param ApiLoot $item - AR объект, лут из API справочника
      * @return bool
      */
     public function renewItemData(ApiLoot $item): bool
     {
         /** Декодируя JSON предмета - получаем его id */
-        $item_id = Json::decode($item->json)['id'];
+        $item_id = Json::decode($item->json)[Api::ATTR_ITEM_ID];
 
         /** Сетапим запрос API - для обновления данных о предмете */
         $this->query = $this->query->setSingleItemQuery($item_id);
