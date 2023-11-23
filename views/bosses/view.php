@@ -34,7 +34,7 @@ $this->registerMetaTag([
 
 /**
  * В этой вьюхе появилось довольно большое количество хардкода, в связи с несовершенством API tarkov.dev
- * по этому поводу был создан тикен у них в репозитории - стоит поглядывать периодически.
+ * по этому поводу был создан тикет у них в репозитории - стоит поглядывать периодически.
  *
  * @link https://github.com/the-hideout/tarkov-dev/issues/273
  */
@@ -83,7 +83,7 @@ $this->registerMetaTag([
 
                     <!-- Image -->
                     <div class="col-sm-2">
-                        <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>">
+                        <img class="boss-image" src="<?= ImageService::bossImages($boss['name']) ?>" alt="<?= $boss['name'] ?>" title="<?= $boss['name'] ?>">
                     </div>
 
                     <!-- Attributes -->

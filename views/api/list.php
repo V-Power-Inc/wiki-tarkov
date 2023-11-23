@@ -144,7 +144,7 @@ $this->registerMetaTag([
                         <!-- Image -->
                         <div class="col-sm-2">
                             <a href="/item/<?= $item->url ?>.html">
-                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>" alt="<?= $item->json['iconLink'] ?>">
+                                <img class="item-page-image" src="<?= $item->json['iconLink'] ?>" alt="<?= $item->json['name'] ?>" title="<?= $item->json['name'] ?>">
                             </a>
                         </div>
 
@@ -167,14 +167,13 @@ $this->registerMetaTag([
 
                                 <!-- Where we can sell -->
                                 <?php foreach ($item->json['sellFor'] as $trader) : ?>
-                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" title="<?= $trader['vendor']['name'] ?>" alt="<?= $trader['vendor']['name'] ?>">
+                                    <img class="item-page-trader" src="<?= ImageService::traderImages($trader['vendor']['name']) ?>" alt="<?= $trader['vendor']['name'] ?>" title="<?= $trader['vendor']['name'] ?>">
                                 <?php endforeach; ?>
                             </div>
 
                         </div>
 
                     </div>
-
                 <?php endforeach; ?>
 
                 <?php if(!empty($pagination)): ?>
@@ -187,36 +186,21 @@ $this->registerMetaTag([
                 <?php endif; ?>
 
             <?php else : ?>
-
                 <br>
-
                 <p class="alert alert-danger size-16">К сожалению в настоящий момент нет доступных предметов, попробуйте зайти позже</p>
-
             <?php endif; ?>
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>
-
         </div>
 
-
-        <!-- left block -->
+        <!-- right block -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php') ?>
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
             <br>
-
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
         </div>
 
     </div>

@@ -62,7 +62,7 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
             <div class="col-xs-3">
 
                 <a class="image-link" title="<?= $item->name ?>" href="<?= $item->json['inspectImageLink'] ?>">
-                    <img class="detail-item-image image-link" src="<?= $item->json['inspectImageLink'] ?>" alt="<?= $item->name ?>">
+                    <img class="detail-item-image image-link" src="<?= $item->json['inspectImageLink'] ?>" alt="<?= $item->name ?>" title="<?= $item->name ?>">
                 </a>
 
             </div>
@@ -233,8 +233,6 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                         </div>
                     </div>
                 </div>
-
-
 
             </div>
 
