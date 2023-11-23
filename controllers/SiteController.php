@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
+use app\common\services\redis\RedisVariationsConfig;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -70,15 +71,7 @@ final class SiteController extends AdvancedController
                     static::ACTION_QUESTIONS,
                     static::ACTION_CURRENCIES
                 ],
-                'variations' => [
-                    $_SERVER['SERVER_NAME'],
-                    Yii::$app->request->url,
-                    Yii::$app->response->statusCode,
-                    Yii::$app->request->get('page'),
-                    Yii::$app->request->cookies->get('overlay'),
-                    Yii::$app->request->cookies->get('sticky'),
-                    Yii::$app->request->cookies->get('dark_theme')
-                ]
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }
