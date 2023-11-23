@@ -59,16 +59,16 @@ final class SiteController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    'index',
-                    'table-patrons',
-                    'keys',
-                    'doorkeysdetail',
-                    'news',
-                    'newsdetail',
-                    'articles',
-                    'articledetail',
-                    'questions',
-                    'currencies'
+                    static::ACTION_INDEX,
+                    static::ACTION_TABLE_PATRONS,
+                    static::ACTION_KEYS,
+                    static::ACTION_DOORKEYSDETAIL,
+                    static::ACTION_NEWS,
+                    static::ACTION_NEWSDETAIL,
+                    static::ACTION_ARTICLES,
+                    static::ACTION_ARTICLESARTICLESDETAIL,
+                    static::ACTION_QUESTIONS,
+                    static::ACTION_CURRENCIES
                 ],
                 'variations' => [
                     $_SERVER['SERVER_NAME'],

@@ -37,7 +37,7 @@ final class ItemController extends AdvancedController
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
-                'only' => ['detailloot'],
+                'only' => [static::ACTION_DETAILLOOT],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',
