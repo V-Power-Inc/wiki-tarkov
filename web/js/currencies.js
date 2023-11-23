@@ -96,7 +96,7 @@ function allValutesConventer(valNum) {
         document.getElementById('euro_res').value = Math.round(valNum / (valuteData[1].value / 100) * 10) / 10 + " Евро";
 
         /** Считаем сколько сможем купить биткоинов на эту сумму */
-        document.getElementById('btc_res').value = Math.round(valNum / (valuteData[2].value / 100) * 10) / 10 + " BTC";
+        document.getElementById('btc_res').value = Math.trunc(valNum / (valuteData[2].value / 100)) + " BTC";
 
     } else { /** Если прилетело невалидное число */
 
