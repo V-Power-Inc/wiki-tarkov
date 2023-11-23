@@ -59,7 +59,7 @@ $this->registerMetaTag([
 
                 <!-- Submit form button -->
                 <?= Html::submitButton('Отправить форму', [
-                    'class' => 'btn btn-success mbl-margin-btn',
+                    'class' => 'btn btn-success mbl-margin-btn'
                 ]) ?>
             </div>
 
