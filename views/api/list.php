@@ -113,7 +113,7 @@ $this->registerMetaTag([
 
                 <?= $form->field($form_model, ApiForm::ATTR_RECAPTCHA)->widget(
                     ReCaptcha::class,
-                    ['siteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF']
+                    ['siteKey' => Yii::$app->params['recapchaSiteKey']]
                 ) ?>
 
                 <?= Html::submitButton('Осуществить поиск', ['class' => 'btn btn-success']) ?>

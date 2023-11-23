@@ -17,6 +17,7 @@ use app\modules\admin\controllers\DoorkeysController;
 use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\ArticlesController;
 use app\modules\admin\controllers\CurrenciesController;
+use app\modules\admin\controllers\FeedbackmessagesController;
 
 use yii\helpers\Url;
 
@@ -65,6 +66,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
         <li><a href="<?= Url::to(NewsController::getUrlRoute(NewsController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Новости</a></li>
         <li><a href="<?= Url::to(ArticlesController::getUrlRoute(ArticlesController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Полезные статьи</a></li>
         <li><a href="<?= Url::to(CurrenciesController::getUrlRoute(CurrenciesController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Курсы валют</a></li>
+        <li><a href="<?= Url::to(FeedbackmessagesController::getUrlRoute(FeedbackmessagesController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Обратная связь с сайта</a></li>
 
         <!-- disabled -->
         <li><a href="#" class="admin-tabs w-100-important unactive">Контент в описаниях маркеров</a></li>

@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\FeedbackMessagesQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -16,6 +17,9 @@ use yii\db\ActiveRecord;
  */
 class FeedbackMessages extends ActiveRecord
 {
+    /** @var string - Константа, название таблицы */
+    const TABLE_NAME = 'feedback_messages';
+
     /** Константы атрибутов Active Record модели */
     const ATTR_ID = 'id';
     const ATTR_CONTENT = 'content';
@@ -58,5 +62,16 @@ class FeedbackMessages extends ActiveRecord
             static::ATTR_CONTENT => 'Сообщение из формы',
             static::ATTR_DATE_CREATE => 'Дата создания',
         ];
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return FeedbackMessagesQuery
+     */
+    public static function find(): FeedbackMessagesQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new FeedbackMessagesQuery(get_called_class());
     }
 }

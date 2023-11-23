@@ -54,7 +54,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?= $form->field($model, 'reCaptcha')->widget(
                         \himiklab\yii2\recaptcha\ReCaptcha::class,
-                        ['siteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF']
+                        ['siteKey' => Yii::$app->params['recapchaSiteKey']]
                     ) ?>
 
                     <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())])->label('') ?>

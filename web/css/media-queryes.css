@@ -364,6 +364,16 @@
         z-index: 9999;
     }
 
+    /** Стили для иконки обратной связи */
+    .js-feedback-form.fa {
+        position: absolute;
+        top: 11px;
+        right: 125px;
+        color: orange;
+        cursor: pointer;
+        z-index: 9999;
+    }
+
     /** Указываем отображать блок меню с информацией */
     .navbar-nav > li.information-nav-block {
         display: block;

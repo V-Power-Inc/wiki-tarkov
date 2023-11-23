@@ -2330,6 +2330,16 @@ table.patrons-tbl >thead > tr > th {
     z-index: 9999;
 }
 
+/** Стили для формы обратной связи */
+.js-feedback-form.fa {
+    position: absolute;
+    top: 11px;
+    right: 70px;
+    color: orange;
+    cursor: pointer;
+    z-index: 9999;
+}
+
 /** Стили для заголовка с блоком предмета из списка актуального лута */
 h2.actual-items-block-title {
     margin-top: 0;
@@ -2344,4 +2354,9 @@ h2.actual-items-block-title {
 /** Отступ для горизонтального контейнера на интерактивных картах */
 .container.special-padding {
     padding: 0 15px 0px;
+}
+
+/** Регулируем ширину текстового блока, максимально возможная ширина */
+#feedbackform-content {
+    max-width: 1096px!important;
 }
