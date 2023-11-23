@@ -26,7 +26,7 @@ $this->registerMetaTag([
     'content' => 'Курс валют в Escape from Tarkov',
 ]);
 
-$this->registerJsFile('js/currencies.js?v=5.5.12', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">
