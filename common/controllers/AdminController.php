@@ -6,11 +6,11 @@
  * Time: 16:54
  *
  * Админский контроллер наследующийся от базового для удобных действий в админке
- *
  */
 
 namespace app\common\controllers;
 
+use app\models\Admins;
 use Yii;
 use yii\web\Response;
 
@@ -39,13 +39,17 @@ class AdminController extends \yii\web\Controller
      */
     public function beforeAction($action)
     {
-        /** Сразу разлогиниваем забаненных */
-        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === 1) {
+        /** Если пользователь авторизовался но является забаненым */
+        if(!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === Admins::ATTR_BANNED_TRUE) {
+
+            /** Сразу его разлогиниваем */
             return $this->redirect(AdminController::LOGOUT_URL);
         }
 
-        /** Сначала редиректим неавторизованного на страницу логина */
+        /** Если пользователь не авторизован и пытается лезть на страницы админки */
         if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
+
+            /** Редиректим его на страницу логина */
             return $this->redirect(AdminController::LOGIN_URL);
         }
 
