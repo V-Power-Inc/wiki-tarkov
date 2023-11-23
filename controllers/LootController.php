@@ -42,7 +42,10 @@ final class LootController extends AdvancedController
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
-                'only' => ['mainloot','category'],
+                'only' => [
+                    static::ACTION_MAINLOOT,
+                    static::ACTION_CATEGORY
+                ],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',

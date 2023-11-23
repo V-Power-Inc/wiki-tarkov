@@ -7,6 +7,7 @@
  */
 
 namespace app\controllers;
+
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
 use app\models\Clans;
