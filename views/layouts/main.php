@@ -85,7 +85,7 @@ AppAsset::register($this);
             </div>
 
             <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
-                <p class="copyright text-center">© 2017-<?php echo date("Y");?>&nbsp;<a>V-Power</a></p>
+                <p class="copyright text-center">© 2017-<?= date("Y") ?>&nbsp;<span class="organization_footer_title">V-Power</span></p>
 
                 <div class="icons-soc">
                     <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>

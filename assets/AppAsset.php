@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
         'css/owl-css/owl.theme.default.min.css',
         'css/font-awesome/font-awesome.min.css',
         'css/popup/magnific-popup.css',
-        ['css/custom.css?v=5.5.11', 'id' => 'custom_site_styles'],
+        ['css/custom.css?v=5.5.12', 'id' => 'custom_site_styles'],
     ];
     public $js = [
         'js/bootstrap-js/bootstrap.min.js',
