@@ -6,6 +6,9 @@
  * Time: 18:36
  */
 
+use app\common\services\CanonicalPagesService;
+use yii\helpers\Url;
+
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -16,6 +19,8 @@ $this->registerMetaTag([
     'content' => 'Интерактивная карта локации Маяк из игры Escape from Tarkov.',
 ]);
 
+/** Редирект для неканоничных страниц локаций (Убираем дубли из поисковых систем) */
+CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request->url);
 ?>
 
 
