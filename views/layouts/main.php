@@ -41,7 +41,7 @@ AppAsset::register($this);
 
     <!-- Check styles, which enabled by user -->
     <?php if (isset($cookies['dark_theme'])): ?>
-        <link id="dark_theme" href="/css/dark-theme.css?v=5.5.11" rel="stylesheet">
+        <link id="dark_theme" href="/css/dark-theme.css?v=5.5.12" rel="stylesheet">
     <?php endif; ?>
 
     <!-- Вынесено сюда из за возможностей менять цветовую тему -->
