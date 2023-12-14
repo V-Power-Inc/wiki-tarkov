@@ -141,17 +141,6 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
         <!-- right menu start -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-                <br>
-            </div>
-
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
-
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 

@@ -50,15 +50,11 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
+            <!-- Виджет Вконтакте - Был тут ранее -->
+            <div class="vk-widget-styling"></div>
 
-            <!-- Виджет Discord -->
-            <div class="margin-top-20">
-                <?= $this->render('/other/discord-widget.php'); ?>
-            </div>
+            <!-- Виджет Discord - Был тут ранее -->
+            <div class="margin-top-20"></div>
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>

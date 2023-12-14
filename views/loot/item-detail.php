@@ -56,16 +56,6 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет Discord -->
-            <div class="margin-top-20">
-                <?= $this->render('/other/discord-widget.php'); ?>
-            </div>
-
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
 

@@ -252,20 +252,8 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
         <!-- right block -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
-            <!--Yandex direct -->
+            <!-- Yandex direct -->
             <?= $this->render('/other/yandex-direct.php') ?>
-
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <br>
-
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
         </div>
 
     </div>

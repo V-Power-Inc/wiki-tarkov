@@ -143,16 +143,6 @@ $this->registerMetaTag([
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
-
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет дискорда -->
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
         </div>
     </div>
 </div>

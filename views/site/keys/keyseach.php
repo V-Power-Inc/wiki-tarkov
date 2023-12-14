@@ -76,15 +76,6 @@ $this->registerMetaTag([
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
-
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет дискорда -->
-            <?= $this->render('/other/discord-widget.php'); ?>
-
         </div>
     </div>
 </div>

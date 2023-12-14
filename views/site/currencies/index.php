@@ -214,18 +214,6 @@ $this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::c
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет Discord -->
-            <div>
-                <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                    <?= $this->render('/other/discord-widget.php'); ?>
-                <?php  $this->endCache(); } ?>
-            </div>
-
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
         </div>

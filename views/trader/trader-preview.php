@@ -62,11 +62,7 @@ $this->title = 'Предпросмотр: '.$trader->title;
 
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <!-- Виджет дискорда -->
-            <div class="margin-top-20"></div>
-            <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                <?= $this->render('/other/discord-widget.php'); ?>
-            <?php  $this->endCache(); } ?>
+
         </div>
 
     </div>
