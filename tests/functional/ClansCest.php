@@ -33,6 +33,12 @@ class ClansCest
         $I->amOnRoute(ClanController::routeId(ClanController::ACTION_INDEX));
     }
 
+    /** Мы проверяем - что код страницы 200 */
+    public function checkCodeIsOk(\FunctionalTester $I)
+    {
+        $I->canSeeResponseCodeIs(200);
+    }
+
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {

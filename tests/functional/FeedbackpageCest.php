@@ -2,26 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 28.08.2022
- * Time: 19:48
+ * Date: 14.12.2023
+ * Time: 14:15
  */
 
 namespace Tests\Functional;
 
-use app\controllers\MapsController;
+use app\controllers\FeedbackController;
 
 /**
- * Функциональные тесты интерактивной карты Лес
+ * Функциональные тесты страницы обратной связи
+ * Отправку формы не тестируем, т.к. у нас тут есть форма с рекапчей
  *
- * Class ForestCest
+ * Class FeedbackpageCest
  * @package Tests\Functional
  */
-class ForestCest
+class FeedbackpageCest
 {
     /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(MapsController::routeId(MapsController::ACTION_FOREST));
+        $I->amOnRoute(FeedbackController::routeId(FeedbackController::ACTION_INDEX));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -33,7 +34,7 @@ class ForestCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Интерактивная карта локации Лес из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.">');
+        $I->seeInSource('<meta name="description" content="Форма обратной связи">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -41,20 +42,20 @@ class ForestCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Карта локации Лес в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей">');
+        $I->seeInSource('<meta property="og:title" content="Форма обратной связи">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Карта локации Лес в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей');
+        $I->seeInTitle('Форма обратной связи');
     }
 
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Карта локации Лес', 'h1');
+        $I->see('Форма обратной связи', 'h1');
     }
 
     /** Мы видим все ссылки горизонтального меню */
