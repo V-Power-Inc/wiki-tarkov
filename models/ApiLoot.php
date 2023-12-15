@@ -53,6 +53,8 @@ class ApiLoot extends ActiveRecord
     public function rules()
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_NAME, RequiredValidator::class],
             [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 

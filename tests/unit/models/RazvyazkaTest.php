@@ -197,7 +197,7 @@ class RazvyazkaTest extends \Codeception\Test\Unit
         $this->assertIsInt($marker->update(), 'Ожидался int, вернулся false - объект не удалился.');
     }
 
-    /** Тестируем выборку маркера на обновление */
+    /** Тестируем выборку записи на обновление */
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */

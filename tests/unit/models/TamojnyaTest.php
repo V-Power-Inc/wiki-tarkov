@@ -179,7 +179,7 @@ class TamojnyaTest extends \Codeception\Test\Unit
         $this->assertTrue(count($list) == 4);
     }
 
-    /** Тестируем выборку маркера на обновление */
+    /** Тестируем выборку записи на обновление */
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
