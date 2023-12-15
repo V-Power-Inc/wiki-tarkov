@@ -6,6 +6,9 @@
  * Time: 15:00
  */
 
+use app\common\services\CanonicalPagesService;
+use yii\helpers\Url;
+
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -15,6 +18,9 @@ $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Интерактивная карта локации Развязка из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
 ]);
+
+/** Редирект для неканоничных страниц локаций (Убираем дубли из поисковых систем) */
+CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request->url);
 ?>
 
 
