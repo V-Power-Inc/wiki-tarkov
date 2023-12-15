@@ -171,6 +171,11 @@ class ZavodTest extends \Codeception\Test\Unit
         /** Валидируем атрибуты */
         $zavod->validate();
 
+        echo '<pre>';
+        echo print_r($zavod->getErrors());
+        exit;
+        echo '</pre>';
+
         /** Ожидаем что запись сохранилась */
         $this->assertTrue($zavod->save(), 'Ожидалось true - объект не сохранился.');
 
