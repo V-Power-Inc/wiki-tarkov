@@ -6,7 +6,7 @@
  * Time: 12:41
  */
 
-namespace models;
+namespace app\tests;
 
 use app\models\Items;
 use app\tests\fixtures\CategoryFixture;
@@ -134,21 +134,21 @@ class ItemsTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Items::ATTR_ID => 4,
-            Items::ATTR_TITLE => 'Тестовый предмет справочника лута',
-            Items::ATTR_PREVIEW => '/item/preview.png',
-            Items::ATTR_SHORTDESC => 'Короткое описание предмета справочника в списке категорий',
-            Items::ATTR_CONTENT => '<p>Детальное содержание объекта лута - тут выводится все содержимое</p>',
-            Items::ATTR_URL => 'testoviy-loot',
-            Items::ATTR_DESCRIPTION => 'Seo описание карточки лута',
-            Items::ATTR_KEYWORDS => 'Seo ключевые слова лута',
-            Items::ATTR_PARENTCAT_ID => 2, // Категория из фикстуры
-            Items::ATTR_ACTIVE => 1,
-            Items::ATTR_QUEST_ITEM => 0,
-            Items::ATTR_TRADER_GROUP => null,
-            Items::ATTR_SEARCH_WORDS => 'Тест, синоним, оригинал',
+            Items::ATTR_ID            => 4,
+            Items::ATTR_TITLE         => 'Тестовый предмет справочника лута',
+            Items::ATTR_PREVIEW       => '/item/preview.png',
+            Items::ATTR_SHORTDESC     => 'Короткое описание предмета справочника в списке категорий',
+            Items::ATTR_CONTENT       => '<p>Детальное содержание объекта лута - тут выводится все содержимое</p>',
+            Items::ATTR_URL           => 'testoviy-loot',
+            Items::ATTR_DESCRIPTION   => 'Seo описание карточки лута',
+            Items::ATTR_KEYWORDS      => 'Seo ключевые слова лута',
+            Items::ATTR_PARENTCAT_ID  => 2, // Категория из фикстуры
+            Items::ATTR_ACTIVE        => 1,
+            Items::ATTR_QUEST_ITEM    => 0,
+            Items::ATTR_TRADER_GROUP  => null,
+            Items::ATTR_SEARCH_WORDS  => 'Тест, синоним, оригинал',
             Items::ATTR_MODULE_WEAPON => null,
-            Items::ATTR_CREATOR => 'PC_Principal'
+            Items::ATTR_CREATOR       => 'PC_Principal'
         ];
 
         /** Сетапим атрибуты AR объекту */
