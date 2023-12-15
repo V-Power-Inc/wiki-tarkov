@@ -12,14 +12,6 @@ namespace app\tests\fixtures;
 
 class ZavodFixture extends \yii\test\ActiveFixture {
 
+    /** @var string - Класс фикстуры */
     public $modelClass = 'app\models\Zavod';
-
-    /** @var string Имя таблицы */
-    const TABLE_NAME = 'zavod';
-
-//    Действие для фикстур после отработки каждого теста
-//    public function afterLoad() {
-//        parent::afterLoad();
-//        $this->db->createCommand()->setSql('truncate table .'.static::TABLE_NAME)->execute();
-//    }
 }
