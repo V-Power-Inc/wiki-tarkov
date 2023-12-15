@@ -98,7 +98,7 @@ class ZavodTest extends \Codeception\Test\Unit
         $too_long_string = '';
 
         /** В цикле увеличиваем длину строки, пока не станет 56 символов */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_FIFTY + 1; $i++) {
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_FIFTY + 1; $i++) {
             $too_long_string .= 'a';
         }
 
@@ -110,7 +110,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет 101 символов */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
             $too_long_string .= 'a';
         }
 
@@ -122,7 +122,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет 256 символов */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
             $too_long_string .= 'a';
         }
 
@@ -131,11 +131,6 @@ class ZavodTest extends \Codeception\Test\Unit
 
             /** Валидируем каждый из них */
             $this->_validateAttribute($model, $item, $too_long_string);
-        }
-
-        /** В цикле увеличиваем длину строки, пока не станет огромной длины */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
-            $too_long_string .= 'a';
         }
     }
 
