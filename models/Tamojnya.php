@@ -68,6 +68,8 @@ class Tamojnya extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_NAME, RequiredValidator::class],
             [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => 100],
 

@@ -148,10 +148,10 @@ class ZavodTest extends \Codeception\Test\Unit
     public function testCreation()
     {
         /** Создаем новый объект класса маркеров */
-        $zavod = new Zavod();
+        $marker = new Zavod();
 
         /** Валидируем все атрибуты AR объекта*/
-        $this->_validateAttributes($zavod);
+        $this->_validateAttributes($marker);
 
         /** Значения на сохранение нового объекта */
         $values = [
@@ -168,13 +168,13 @@ class ZavodTest extends \Codeception\Test\Unit
         ];
 
         /** Сетапим атрибуты AR объекту */
-        $zavod->setAttributes($values, false);
+        $marker->setAttributes($values);
 
         /** Валидируем атрибуты */
-        $zavod->validate();
+        $marker->validate();
 
         /** Ожидаем что запись сохранилась */
-        $this->assertTrue($zavod->save(), 'Ожидалось true - объект не сохранился.');
+        $this->assertTrue($marker->save(), 'Ожидалось true - объект не сохранился.');
 
         /** Выбираем все записи */
         $list = Zavod::find()->all();
@@ -187,10 +187,10 @@ class ZavodTest extends \Codeception\Test\Unit
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $zavod = Zavod::findOne([Zavod::ATTR_ID => 3]);
+        $marker = Zavod::findOne([Zavod::ATTR_ID => 3]);
 
         /** Проводит валидацию атрибутов данных, полученных из фикстуры */
-        $this->_validateAttributes($zavod);
+        $this->_validateAttributes($marker);
     }
 
     /** Тестируем получение всех записей (select) */
@@ -207,10 +207,10 @@ class ZavodTest extends \Codeception\Test\Unit
     public function testDelete()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $zavod = Zavod::findOne([Zavod::ATTR_ID => 3]);
+        $marker = Zavod::findOne([Zavod::ATTR_ID => 3]);
 
         /** Удаляем запись */
-        $zavod->delete();
+        $marker->delete();
 
         /** Получаем список всех записей */
         $list = Zavod::find()->all();

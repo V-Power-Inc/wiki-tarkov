@@ -4,6 +4,7 @@ namespace models;
 
 use app\models\Tamojnya;
 use app\tests\fixtures\TamojnyaFixture;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * Unit тесты интерактивных маркеров Таможни
@@ -21,6 +22,13 @@ class TamojnyaTest extends \Codeception\Test\Unit
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
+        /** Грузим фикстуры перед каждым тестом */
+        $this->tester->haveFixtures([
+            'tamojnya' => [
+                'class' => TamojnyaFixture::class,
+                'dataFile' => codecept_data_dir() . 'tamojnya.php'
+            ]
+        ]);
     }
 
     /** Метод выполняется после каждого теста */
@@ -28,84 +36,182 @@ class TamojnyaTest extends \Codeception\Test\Unit
     {}
 
     /**
-     * Фикстуры для таблицы tamojnya
-     * @return array
+     * Метод вызывающий валидации атрибутов различных типов
      */
-    public function _fixtures() {
-        return [
-            'tamojnya' => [
-                'class' => TamojnyaFixture::class,
-                'dataFile' => codecept_data_dir() . 'tamojnya.php'
-            ]
-        ];
+    protected function _validateAttributes($model)
+    {
+        /** Валидация обязательных атрибутов */
+        $this->_validateRequiredAttributes($model);
+
+        /** Валидация строковых атрибутов */
+        $this->_validateStringAttributes($model);
+
+        /** Валидация числовых атрибутов */
+        $this->_validateNumberAttributes($model);
+    }
+
+    /** Метод для валидации обязательных атрибутов */
+    protected function _validateRequiredAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Tamojnya::ATTR_NAME];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем оставить их как null */
+            $this->_validateAttribute($model, $item, null);
+        }
+    }
+
+    /** Метод для валидации числовых атрибутов */
+    protected function _validateNumberAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Tamojnya::ATTR_ID, Tamojnya::ATTR_COORDS_X, Tamojnya::ATTR_COORDS_Y, Tamojnya::ATTR_ENABLED, Tamojnya::ATTR_EXIT_ANYWAY];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем засетапить в числовой атрибут - строку */
+            $this->_validateAttribute($model, $item, 'a');
+        }
+    }
+
+    /** Метод для валидации строковых атрибутов */
+    protected function _validateStringAttributes($model)
+    {
+        /** Список атрибутов на валидацию - длина 50 символов */
+        $list_fifty = [Tamojnya::ATTR_MARKER_GROUP];
+
+        /** Список атрибутов на валидацию - длина 100 символов */
+        $list_hundred = [Tamojnya::ATTR_NAME, Tamojnya::ATTR_EXITS_GROUP];
+
+        /** Список атрибутов на валидацию - длина 255 символов */
+        $list_main = [Tamojnya::ATTR_CUSTOMICON];
+
+        /** Переменная с пустой строкой */
+        $too_long_string = '';
+
+        /** В цикле увеличиваем длину строки, пока не станет 56 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_FIFTY + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 56 символов */
+        foreach ($list_fifty as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 101 символов */
+        foreach ($list_hundred as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 256 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 256 символов */
+        foreach ($list_main as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+    }
+
+    /** Метод валидации атрибута, что сюда передается */
+    protected function _validateAttribute($model, $attribute, $value)
+    {
+        /** Сетапим значение атрибута AR модели */
+        $model->setAttribute($attribute, $value);
+
+        /** Ожидаем что атрибут не пройдет валидацию */
+        $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
     /** Тестируем создание нового маркера */
-    public function testCreate()
+    public function testCreation()
     {
-        $tamojnya = new Tamojnya();
+        /** Создаем новый объект класса маркеров */
+        $marker = new Tamojnya();
 
-        $tamojnya->name = 'Ящик у выхода с локации';
-        $tamojnya->marker_group='Военные ящики';
-        $tamojnya->coords_x='10';
-        $tamojnya->coords_y='-135';
-        $tamojnya->content='<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $tamojnya->enabled='1';
-        $tamojnya->customicon='/img/admin/beregicons/vorota_3_d.png';
-        $tamojnya->exits_group='Спавн на зеленой лампе';
-        $tamojnya->exit_anyway='1';
+        /** Валидируем все атрибуты AR объекта*/
+        $this->_validateAttributes($marker);
 
-        $this->assertTrue($tamojnya->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
+        /** Значения на сохранение нового объекта */
+        $values = [
+            Tamojnya::ATTR_ID => 4,
+            Tamojnya::ATTR_NAME => 'Ящик у выхода с локации',
+            Tamojnya::ATTR_MARKER_GROUP => 'Военные ящики',
+            Tamojnya::ATTR_COORDS_X => 10,
+            Tamojnya::ATTR_COORDS_Y => -135,
+            Tamojnya::ATTR_CONTENT => '<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>',
+            Tamojnya::ATTR_ENABLED => 1,
+            Tamojnya::ATTR_CUSTOMICON => '/img/admin/beregicons/vorota_3_d.png',
+            Tamojnya::ATTR_EXITS_GROUP => 'Спавн на зеленой лампе',
+            Tamojnya::ATTR_EXIT_ANYWAY => 1
+        ];
+
+        /** Сетапим атрибуты AR объекту */
+        $marker->setAttributes($values);
+
+        /** Валидируем атрибуты */
+        $marker->validate();
+
+        /** Ожидаем что запись сохранилась */
+        $this->assertTrue($marker->save(), 'Ожидалось true - объект не сохранился.');
+
+        /** Выбираем все записи */
+        $list = Tamojnya::find()->all();
+
+        /** Ожидаем что всего будет 4 записи */
+        $this->assertTrue(count($list) == 4);
     }
 
-    /** Тестируем обновление маркера */
-    public function testUpdate()
+    /** Тестируем выборку маркера на обновление */
+    public function testEdit()
     {
-        $tamojnya = Tamojnya::find()->where(['is not','id',null])->one();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Tamojnya::findOne([Tamojnya::ATTR_ID => 3]);
 
-        $tamojnya->name = 'Ящик у выхода 234234с локации';
-        $tamojnya->marker_group='Военн234234ые ящики';
-        $tamojnya->coords_x='10';
-        $tamojnya->coords_y='-135';
-        $tamojnya->content='<p>Это основной выхо34234234д с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $tamojnya->enabled='0';
-        $tamojnya->customicon='/img/orota_3_d.png';
-        $tamojnya->exits_group='Другое значение';
-        $tamojnya->exit_anyway='0';
-
-        $this->assertIsInt($tamojnya->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        /** Проводит валидацию атрибутов данных, полученных из фикстуры */
+        $this->_validateAttributes($marker);
     }
 
-    /** Тестируем получение объекта (select) */
-    public function testSelect()
+    /** Тестируем получение всех записей (select) */
+    public function testList()
     {
-        $tamojnya = Tamojnya::find()->one();
+        /** Выбираем все записи */
+        $list = Tamojnya::find()->all();
 
-        $this->assertNotNull($tamojnya, 'Ожидался объект, вернулся null - объект не селектнулся.');
-    }
-
-    /** Тестируем получение всех объектов (select all) */
-    public function testSelectAll()
-    {
-        $tamojnya = Tamojnya::find()->all();
-
-        $this->assertTrue(count($tamojnya) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $tamojnya = Tamojnya::find()->one()->delete();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Tamojnya::findOne([Tamojnya::ATTR_ID => 3]);
 
-        $this->assertIsInt($tamojnya,'Удаление объекта не случилось, а должно было.');
+        /** Удаляем запись */
+        $marker->delete();
+
+        /** Получаем список всех записей */
+        $list = Tamojnya::find()->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
-
-    /** Тестируем удаление всех объектов */
-    public function testDeleteAll()
-    {
-        $tamojnya = Tamojnya::deleteAll();
-
-        $this->assertIsInt($tamojnya,'Удаление объекта не случилось, а должно было.');
-    }
-
 }
