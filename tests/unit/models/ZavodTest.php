@@ -8,6 +8,7 @@ use app\tests\fixtures\ZavodFixture;
 
 /**
  * Unit тесты интерактивных маркеров Завода
+ * Образцовый тест
  *
  * Class ZavodTest
  * @package models
@@ -136,7 +137,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет огромной длины */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
+        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * 100; $i++) {
             $too_long_string .= 'a';
         }
 
