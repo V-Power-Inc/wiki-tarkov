@@ -90,16 +90,6 @@ $this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
 
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>
-
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Discord place -->
-            <div class="margin-top-20"></div>
-
-
         </div>
 
     </div>

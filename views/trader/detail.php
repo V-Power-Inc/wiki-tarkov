@@ -140,14 +140,6 @@ $this->registerMetaTag([
         <!-- Боковая правая колонка -->
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
             <div class="margin-top-20"></div>
-
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет дискорда -->
-            <?= $this->render('/other/discord-widget.php'); ?>
             
             <!--Yandex direct -->
             <?= $this->render('/other/yandex-direct.php'); ?>

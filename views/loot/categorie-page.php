@@ -68,21 +68,10 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
 
-            <!-- Виджет Вконтакте -->
-            <div class="vk-widget-styling">
-                <?= $this->render('/other/wk-widget'); ?>
-            </div>
-
-            <!-- Виджет Discord -->
-            <div class="margin-top-20">
-                <?= $this->render('/other/discord-widget.php'); ?>
-            </div>
-
             <?php if(Yii::$app->request->url !== '/loot/modules/sight' && Yii::$app->request->url !== '/loot/telescopic-sight-hamr-deltapoint.html' && Yii::$app->request->url !== '/loot/weapons/rifles'): ?>
                 <!--Yandex direct -->
                 <?= $this->render('/other/yandex-direct.php'); ?>
             <?php endif; ?>
-
         </div>
 
         <!-- Основное содержимое страницы -->
@@ -92,7 +81,6 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
             <p class="alert alert-info size-16"><?= $cat->content ?></p>
 
                 <!-- ajax поиск предметов в справочнике лута -->
-
                 <?php
                 // Defines a custom template with a <code>Handlebars</code> compiler for rendering suggestions
                 echo '<label class="control-label">Поиск предметов в справочнике по названию</label>';
