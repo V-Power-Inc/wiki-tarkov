@@ -30,7 +30,4 @@ class StringValidator extends \yii\validators\StringValidator {
 
     /** @var int - Длина строки 50 символов */
 	const VARCHAR_LENGTH_FIFTY = 50;
-
-    /** @var int - Длина строки 250000 символов (Тесты полей типа TEXT) */
-	const VARCHAR_LENGTH_TEXT_TYPE =  250000;
 }

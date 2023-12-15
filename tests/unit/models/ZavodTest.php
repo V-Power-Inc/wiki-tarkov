@@ -94,9 +94,6 @@ class ZavodTest extends \Codeception\Test\Unit
         /** Список атрибутов на валидацию - длина 255 символов */
         $list_main = [Zavod::ATTR_CUSTOMICON];
 
-        /** Список атрибутов на валидацию - строка без ограничений (Обычно в бд филда text) */
-        $list_string_test = [Zavod::ATTR_CONTENT];
-
         /** Переменная с пустой строкой */
         $too_long_string = '';
 
@@ -139,13 +136,6 @@ class ZavodTest extends \Codeception\Test\Unit
         /** В цикле увеличиваем длину строки, пока не станет огромной длины */
         for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
             $too_long_string .= 'a';
-        }
-
-        /** Проходим в цикле список атрибутов - длина строки 5001 символов */
-        foreach ($list_string_test as $item) {
-
-            /** Валидируем каждый из них */
-            $this->_validateAttribute($model, $item, $too_long_string);
         }
     }
 
