@@ -13,6 +13,7 @@ use app\tests\fixtures\ZavodFixture;
  * @package models
  *
  * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class ZavodTest extends \Codeception\Test\Unit
 {
