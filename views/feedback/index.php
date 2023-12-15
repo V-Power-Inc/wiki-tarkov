@@ -65,5 +65,14 @@ $this->registerMetaTag([
 
             <?php ActiveForm::end(); ?>
         </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Relation -->
+            <div class="recommended-gm-content margin-top-30">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
+        </div>
+
     </div>
 </div>
