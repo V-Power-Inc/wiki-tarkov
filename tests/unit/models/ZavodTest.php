@@ -30,7 +30,7 @@ class ZavodTest extends \Codeception\Test\Unit
         return [
             'zavod' => [
                 'class' => ZavodFixture::class,
-                'dataFile' => codecept_data_dir() . 'Zavod.php'
+                'dataFile' => codecept_data_dir() . 'zavod.php'
             ]
         ];
     }
