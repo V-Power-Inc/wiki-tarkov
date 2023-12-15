@@ -155,7 +155,9 @@ class ZavodTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Zavod::ATTR_MARKER_GROUP => 'Ящик у выхода с локации',
+            Zavod::ATTR_ID => 4,
+            Zavod::ATTR_NAME => 'Ящик у выхода с локации',
+            Zavod::ATTR_MARKER_GROUP => 'Военные ящики',
             Zavod::ATTR_COORDS_X => 10,
             Zavod::ATTR_COORDS_Y => -135,
             Zavod::ATTR_CONTENT => '<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>',
@@ -170,13 +172,6 @@ class ZavodTest extends \Codeception\Test\Unit
 
         /** Валидируем атрибуты */
         $zavod->validate();
-
-        echo '<pre>';
-        echo print_r($zavod->attributes);
-        echo "<br><br>";
-        echo print_r($zavod->getErrors());
-        exit;
-        echo '</pre>';
 
         /** Ожидаем что запись сохранилась */
         $this->assertTrue($zavod->save(), 'Ожидалось true - объект не сохранился.');
