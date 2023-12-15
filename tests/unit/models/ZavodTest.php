@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace app\tests;
 
 use app\common\helpers\validators\StringValidator;
 use app\models\Zavod;
@@ -26,7 +26,7 @@ class ZavodTest extends \Codeception\Test\Unit
      * Фикстуры для таблицы zavod
      * @return array
      */
-    public function fixtures() {
+    public function _fixtures() {
         return [
             'zavod' => [
                 'class' => ZavodFixture::class,
