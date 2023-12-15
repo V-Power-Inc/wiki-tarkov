@@ -22,7 +22,7 @@ return [
         'title' => 'Some Kapibara',
         'description' => 'Description of capibaras',
         'preview' => 'https://vk.com/vector_power/image_555.png',
-        'link' => 'https://vk.com/test_url',
+        'link' => null,
         'date_create' => '2023-09-29 07:17:10',
         'moderated' => 1,
         'date_update' => '2024-01-23 10:27:00'
@@ -33,7 +33,7 @@ return [
         'preview' => 'https://vk.com/vector_power/invalid_image.png',
         'link' => 'https://vk.com/zbt',
         'date_create' => '2012-03-29 07:17:10',
-        'moderated' => 1,
+        'moderated' => 0,
         'date_update' => '2016-12-22 10:27:00'
     ]
 ];

@@ -18,8 +18,6 @@ use app\common\helpers\validators\StringValidator;
  * Class ClansTest
  * @package models
  *
- * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
- *
  * @see https://codeception.com/docs/UnitTests
  * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
@@ -189,6 +187,166 @@ class ClansTest extends \Codeception\Test\Unit
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных (select) */
+    public function testSelectModeratedRows()
+    {
+        /** Выбираем все записи - только промодерированные */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с описанием (select) */
+    public function testSelectModeratedRowsWithDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с линком (select) */
+    public function testSelectModeratedRowsWithLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью (select) */
+    public function testSelectModeratedRowsWithPreview()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью и урлом (select) */
+    public function testSelectModeratedRowsWithPreviewAndLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью, урлом и описанием (select) */
+    public function testSelectModeratedRowsWithPreviewAndLinkAndDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только отклоненных (select) */
+    public function testSelectNotModeratedRows()
+    {
+        /** Выбираем все записи - только промодерированные */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с описанием (select) */
+    public function testSelectNotModeratedRowsWithDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с линком (select) */
+    public function testSelectNotModeratedRowsWithLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью (select) */
+    public function testSelectNotModeratedRowsWithPreview()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью и урлом (select) */
+    public function testSelectNotModeratedRowsWithPreviewAndLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью, урлом и описанием (select) */
+    public function testSelectNotModeratedRowsWithPreviewAndLinkAndDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
     }
 
     /** Тестируем удаление объекта */
