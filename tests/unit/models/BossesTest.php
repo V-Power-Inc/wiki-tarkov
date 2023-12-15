@@ -186,8 +186,298 @@ class BossesTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Bosses::find()->all();
 
-        /** Ожидаем получить из фикстур - 3 записи */
+        /** Ожидаем получить из фикстур - 9 записи */
         $this->assertTrue(count($list) == 9);
+    }
+
+    /** Тестируем получение только активных записей - у который не проставлено old - их должно быть 9 */
+    public function testSelectActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Bosses::find()
+            ->where([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 9 записи */
+        $this->assertTrue(count($list) == 9);
+    }
+
+    /** Тестируем получение записей с боссами по локации Завод - подразумевается активная запись */
+    public function testSelectActiveZavodBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Завод'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации ночной Завод - подразумевается активная запись */
+    public function testSelectActiveNightZavodBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Ночной Завод'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Таможня - подразумевается активная запись */
+    public function testSelectActiveTamojnyaBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Таможня'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Лес - подразумевается активная запись */
+    public function testSelectActiveForestBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Лес'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Берег - подразумевается активная запись */
+    public function testSelectActiveBeregBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Берег'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Развязка - подразумевается активная запись */
+    public function testSelectActiveRazvyazkaBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Развязка'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Маяк - подразумевается активная запись */
+    public function testSelectActiveLighthouseBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Маяк'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Резерв - подразумевается активная запись */
+    public function testSelectActiveRezervBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Резерв'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Лаборатория - подразумевается активная запись */
+    public function testSelectActiveLaboratoryBossesByMapnameRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_MAP => 'Лаборатория'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Завод - подразумевается активная запись */
+    public function testSelectActiveZavodBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'zavod'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации ночной Завод - подразумевается активная запись */
+    public function testSelectActiveNightZavodBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'night-zavod'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Таможня - подразумевается активная запись */
+    public function testSelectActiveTamojnyaBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'tamojnya'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Лес - подразумевается активная запись */
+    public function testSelectActiveForestBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'forest'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Берег - подразумевается активная запись */
+    public function testSelectActiveBeregBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'bereg'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Развязка - подразумевается активная запись */
+    public function testSelectActiveRazvyazkaBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'razvyazka'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Маяк - подразумевается активная запись */
+    public function testSelectActiveLighthouseBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'lighthouse'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Резерв - подразумевается активная запись */
+    public function testSelectActiveRezervBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'rezerv'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение записей с боссами по локации Лаборатория - подразумевается активная запись */
+    public function testSelectActiveLaboratoryBossesByUrlRow()
+    {
+        /** Ищем запись в соответствии с условием */
+        $item = Bosses::find()
+            ->where([Bosses::ATTR_URL => 'terragroup-laboratory'])
+            ->andWhere([Bosses::ATTR_ACTIVE => 1])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->one();
+
+        /** Ожидаем получить из искомую запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение только устаревших записей, их должно быть 0 */
+    public function testSelectOldRows()
+    {
+        /** Выбираем все записи */
+        $list = Bosses::find()
+            ->andWhere([Bosses::ATTR_OLD => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записи */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение только неактивных записей, их должно быть 0 */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи */
+        $list = Bosses::find()
+            ->where([Bosses::ATTR_ACTIVE => 0])
+            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записи */
+        $this->assertTrue(count($list) == 0);
     }
 
     /** Тестируем удаление объекта */
