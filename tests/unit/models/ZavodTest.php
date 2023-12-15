@@ -166,6 +166,11 @@ class ZavodTest extends \Codeception\Test\Unit
     /** Тестируем создание нового маркера */
     public function testCreation()
     {
+        echo '<pre>';
+        echo print_r(codecept_data_dir() . 'zavod.php');
+        exit;
+        echo '</pre>';
+
         /** Создаем новый объект класса маркеров */
         $zavod = new Zavod();
 
