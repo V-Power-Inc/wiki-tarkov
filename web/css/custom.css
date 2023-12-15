@@ -120,7 +120,7 @@ footer .list-unstyled li a:hover {
     padding-top: 14px;
 }
 
-.copyright a {
+.copyright a, .copyright span.organization_footer_title {
     font-weight: bold;
     color: #7289da;
     font-style: italic;
