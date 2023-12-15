@@ -12,9 +12,11 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\ArrayService;
+use app\common\services\redis\RedisVariationsConfig;
 use app\models\Bosses;
 use yii\web\HttpException;
 use yii\db\StaleObjectException;
+use Yii;
 
 /**
  * Контроллер обеспечивает работоспособность API по получению информации о боссах со стороннего источника tarkov.dev
@@ -28,6 +30,33 @@ final class BossesController extends AdvancedController
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_INDEX = 'boss-list';
     const ACTION_VIEW  = 'view';
+
+    /**
+     * Массив поведения данного контроллера
+     * Подключаем REDIS кеширование для страниц этого контроллера
+     *
+     * Кеш на 7 дней (Если дата создания записей изменится - кеш сбросится досрочно
+     *
+     * @return array|array[]
+     */
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
+                'only' => [
+                    static::ACTION_INDEX,
+                    static::ACTION_VIEW
+                ],
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT MAX(date_create) FROM bosses',
+                ],
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
+            ],
+        ];
+    }
 
     /**
      * Метод выводит список карт и отображает все атрибуты о боссах, которые известны
