@@ -23,6 +23,15 @@ class ClansTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
+    /** Метод выполняется перед каждым тестом */
+    protected function _before()
+    {
+    }
+
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
     /** Тестируем создание нового объекта */
     public function testCreate()
     {

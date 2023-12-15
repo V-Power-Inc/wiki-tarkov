@@ -24,6 +24,15 @@ class ForestTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
+    /** Метод выполняется перед каждым тестом */
+    protected function _before()
+    {
+    }
+
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
     /**
      * Фикстуры для таблицы forest
      * @return array

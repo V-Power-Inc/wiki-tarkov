@@ -39,6 +39,10 @@ class ItemsTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
     /** Тестируем создание нового предмета в справочник лута */
     public function testCreate()
     {

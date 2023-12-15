@@ -137,7 +137,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет огромной длины */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * 2; $i++) {
+        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * 3; $i++) {
             $too_long_string .= 'a';
         }
 
@@ -170,7 +170,6 @@ class ZavodTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            // Zavod::ATTR_ID => 1,
             Zavod::ATTR_MARKER_GROUP => 'Ящик у выхода с локации',
             Zavod::ATTR_COORDS_X => 10,
             Zavod::ATTR_COORDS_Y => -135,
