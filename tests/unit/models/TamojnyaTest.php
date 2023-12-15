@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace app\tests;
 
 use app\models\Tamojnya;
 use app\tests\fixtures\TamojnyaFixture;

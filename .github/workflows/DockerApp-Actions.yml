@@ -111,9 +111,4 @@ jobs:
 
           echo "Functional и Unit тестирование"
 
-          docker-compose exec -T app vendor/bin/codecept run unit
-
-          docker-compose exec -T app vendor/bin/codecept run tests/functional/ItemsCest
-          docker-compose exec -T app vendor/bin/codecept run tests/functional/LootMainpageCest
-
           docker-compose exec -T app vendor/bin/codecept run

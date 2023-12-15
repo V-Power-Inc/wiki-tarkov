@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace app\tests;
 
 use app\models\Razvyazka;
 use app\tests\fixtures\RazvyazkaFixture;
