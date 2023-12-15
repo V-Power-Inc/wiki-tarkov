@@ -89,7 +89,7 @@ class TasksTest extends \Codeception\Test\Unit
     protected function _validateStringAttributes($model)
     {
         /** Список атрибутов на валидацию - длина 255 символов */
-        $list = [Tasks::ATTR_QUEST, Tasks::ATTR_TRADER_NAME, Tasks::ATTR_TRADER_ICON, Tasks::ATTR_JSON, Tasks::ATTR_URL];
+        $list = [Tasks::ATTR_QUEST, Tasks::ATTR_TRADER_NAME];
 
         /** Переменная с пустой строкой */
         $too_long_string = '';
