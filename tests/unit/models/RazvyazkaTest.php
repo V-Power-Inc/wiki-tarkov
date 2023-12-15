@@ -220,6 +220,199 @@ class RazvyazkaTest extends \Codeception\Test\Unit
         $this->assertTrue(count($list) == 3);
     }
 
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectActiveRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов ЧВК (select) */
+    public function testSelectActiveChvkExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_EXITS_GROUP => 'ЧВК зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов Диких (select) */
+    public function testSelectActiveDikieExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_EXITS_GROUP => 'Диких зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с кастомной иконкой (select) */
+    public function testSelectActiveWithCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere(['is not', Razvyazka::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без кастомной иконки (select) */
+    public function testSelectActiveWithoutCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere(['is', Razvyazka::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с возможностью выходить любой из сторон (select) */
+    public function testSelectActiveWithExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_EXIT_ANYWAY => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без возможности выходить любой из сторон (select) */
+    public function testSelectActiveWithoutExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_EXIT_ANYWAY => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой маркеры выходов (select) */
+    public function testSelectActiveWithExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Маркеры выходов'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой военных ящиков (select) */
+    public function testSelectActiveWithArmyLootRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Военные ящики'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой интересных мест (select) */
+    public function testSelectActiveWithInterestingPlacesRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Интересные места'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithDikieSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Спавны диких'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithChvkSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Спавны игроков ЧВК'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой квестовые точки (select) */
+    public function testSelectActiveWithQuestsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Квестовые точки'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой точки с ключами (select) */
+    public function testSelectActiveWithKeysRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->andWhere([Razvyazka::ATTR_MARKER_GROUP => 'Маркеры ключей'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Razvyazka::find()
+            ->where([Razvyazka::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
     /** Тестируем удаление объекта */
     public function testDelete()
     {
