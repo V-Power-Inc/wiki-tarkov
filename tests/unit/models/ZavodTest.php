@@ -137,7 +137,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет огромной длины */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * 3; $i++) {
+        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
             $too_long_string .= 'a';
         }
 
