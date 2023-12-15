@@ -69,7 +69,7 @@ class Zavod extends ActiveRecord
     {
         return [
             [static::ATTR_NAME, RequiredValidator::class],
-            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => 100],
+            [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH_HUNDRED],
 
             [static::ATTR_COORDS_X, NumberValidator::class],
 
@@ -81,9 +81,9 @@ class Zavod extends ActiveRecord
 
             [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
 
-            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 100],
+            [static::ATTR_EXITS_GROUP, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH_HUNDRED],
 
-            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => 50],
+            [static::ATTR_MARKER_GROUP, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH_FIFTY],
 
             [static::ATTR_CUSTOMICON, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
