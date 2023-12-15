@@ -26,7 +26,7 @@ class ZavodTest extends \Codeception\Test\Unit
      * Фикстуры для таблицы zavod
      * @return array
      */
-    public function _fixtures() {
+    public function fixtures() {
         return [
             'zavod' => [
                 'class' => ZavodFixture::class,
@@ -38,12 +38,12 @@ class ZavodTest extends \Codeception\Test\Unit
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
-        $this->tester->haveFixtures([
-            'zavod' => [
-                'class' => ZavodFixture::class,
-                'dataFile' => codecept_data_dir() . 'zavod.php'
-            ]
-        ]);
+//        $this->tester->haveFixtures([
+//            'zavod' => [
+//                'class' => ZavodFixture::class,
+//                'dataFile' => codecept_data_dir() . 'zavod.php'
+//            ]
+//        ]);
     }
 
     /** Метод выполняется после каждого теста */
@@ -148,7 +148,7 @@ class ZavodTest extends \Codeception\Test\Unit
         }
 
         /** В цикле увеличиваем длину строки, пока не станет 5001 символов */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE + 1; $i++) {
+        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE + StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
             $too_long_string .= 'a';
         }
 
