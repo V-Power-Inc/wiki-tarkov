@@ -22,28 +22,16 @@ class ZavodTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    /**
-     * Фикстуры для таблицы zavod
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    protected function _before()
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $this->tester->haveFixtures([
             'zavod' => [
                 'class' => ZavodFixture::class,
                 'dataFile' => codecept_data_dir() . 'zavod.php'
             ]
-        ];
-    }
-
-    /** Метод выполняется перед каждым тестом */
-    protected function _before()
-    {
-//        $this->tester->haveFixtures([
-//            'zavod' => [
-//                'class' => ZavodFixture::class,
-//                'dataFile' => codecept_data_dir() . 'zavod.php'
-//            ]
-//        ]);
+        ]);
     }
 
     /** Метод выполняется после каждого теста */
@@ -147,8 +135,8 @@ class ZavodTest extends \Codeception\Test\Unit
             $this->_validateAttribute($model, $item, $too_long_string);
         }
 
-        /** В цикле увеличиваем длину строки, пока не станет 5001 символов */
-        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE + StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
+        /** В цикле увеличиваем длину строки, пока не станет огромной длины */
+        for($i = 0; $i < StringValidator::VARCHAR_LENGTH_TEXT_TYPE * StringValidator::VARCHAR_LENGTH_TEXT_TYPE; $i++) {
             $too_long_string .= 'a';
         }
 
