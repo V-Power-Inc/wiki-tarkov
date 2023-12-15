@@ -172,6 +172,8 @@ class ZavodTest extends \Codeception\Test\Unit
         $zavod->validate();
 
         echo '<pre>';
+        echo print_r($zavod->attributes);
+        echo "<br><br>";
         echo print_r($zavod->getErrors());
         exit;
         echo '</pre>';
