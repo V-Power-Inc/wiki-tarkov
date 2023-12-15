@@ -5,15 +5,12 @@ namespace models;
 use app\common\helpers\validators\StringValidator;
 use app\models\Zavod;
 use app\tests\fixtures\ZavodFixture;
-use yii\db\ActiveRecord;
 
 /**
  * Unit тесты интерактивных маркеров Завода
  *
  * Class ZavodTest
  * @package models
- *
- * @var ActiveRecord $model - Объект ActiveRecord модели
  *
  * @see https://codeception.com/docs/UnitTests
  */
@@ -156,7 +153,7 @@ class ZavodTest extends \Codeception\Test\Unit
     }
 
     /** Метод валидации атрибута, что сюда передается */
-    protected function _validateAttribute(ActiveRecord $model, $attribute, $value)
+    protected function _validateAttribute($model, $attribute, $value)
     {
         /** Сетапим значение атрибута AR модели */
         $model->setAttribute($attribute, $value);
