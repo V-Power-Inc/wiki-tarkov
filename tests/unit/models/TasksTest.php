@@ -20,6 +20,9 @@ use app\tests\fixtures\TasksFixture;
  *
  * Class TasksTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class TasksTest extends \Codeception\Test\Unit
 {

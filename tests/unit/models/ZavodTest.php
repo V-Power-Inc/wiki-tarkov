@@ -8,7 +8,6 @@ use app\tests\fixtures\ZavodFixture;
 
 /**
  * Unit тесты интерактивных маркеров Завода
- * Образцовый тест
  *
  * Class ZavodTest
  * @package models

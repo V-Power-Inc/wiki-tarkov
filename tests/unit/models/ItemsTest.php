@@ -16,8 +16,6 @@ use app\tests\fixtures\ItemsFixture;
 /**
  * UNIT тестирование модели справочника лута
  *
- * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
- *
  * Class ItemsTest
  * @package models
  */
@@ -185,6 +183,163 @@ class ItemsTest extends \Codeception\Test\Unit
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
+    }
+
+    /** Тестируем выборку записей по конкретному автору (все записи) */
+    public function testSelectRowsByAuthor()
+    {
+        /** Выбираем все записи с конкретным автором */
+        $list = Items::find()->where([Items::ATTR_CREATOR => 'Максим (KondorMax)'])->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем выборку записей по конкретному автору (все записи) */
+    public function testSelectRowsByCategoryId()
+    {
+        /** Выбираем все записи с конкретным ID категории */
+        $list = Items::find()
+            ->where([Items::ATTR_PARENTCAT_ID => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение только отключенных записей (select) */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи - только отключенные */
+        $list = Items::find()->where([Items::ATTR_ACTIVE => 0])->all();
+
+        /** Ожидаем получить из фикстур - 1 активную запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение только активных записей (select) */
+    public function testSelectActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Items::find()->where([Items::ATTR_ACTIVE => 1])->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем выборку записей по конкретному автору (все записи) */
+    public function testSelectActiveRowsByCategoryId()
+    {
+        /** Выбираем все записи с конкретным ID категории и только активные */
+        $list = Items::find()
+            ->where([Items::ATTR_PARENTCAT_ID => 1])
+            ->andWhere([Items::ATTR_ACTIVE => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение только активных записей с группой торговца (select) */
+    public function testSelectActiveRowsByTraderGroup()
+    {
+        /** Выбираем все записи */
+        $list = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_QUEST_ITEM => 1])
+            ->andWhere([Items::ATTR_TRADER_GROUP => 'Прапор'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей по ключевому слову */
+    public function testSelectActiveRowsByWordAlias()
+    {
+        /** Выбираем все активные записи - с алиасом */
+        $list = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_SEARCH_WORDS => 'Снайперка'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение только активных записей (select) */
+    public function testSelectActiveRowsWithQuestLoot()
+    {
+        /** Выбираем все записи - активные и связанные с выполнением квеста */
+        $list = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_QUEST_ITEM => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 активные записи связанные с выполнением квеста */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение записи по ключевому слову */
+    public function testSelectActiveSingleRowByWordAlias()
+    {
+        /** Выбираем активную запись - с алиасом */
+        $list = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_SEARCH_WORDS => 'Снайперка'])
+            ->one();
+
+        /** Ожидаем получить из фикстур - 1 активная запись */
+        $this->assertTrue(!empty($list));
+    }
+
+    /** Тестируем получение только 1-й активной записи (select) */
+    public function testSelectActiveSingleRow()
+    {
+        /** Выбираем 1 запись - только активную */
+        $item = Items::find()->where([Items::ATTR_ACTIVE => 1])->one();
+
+        /** Ожидаем получить из фикстур - 1 активные запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение только 1-й активной записи по ID (select) */
+    public function testSelectActiveSingleRowById()
+    {
+        /** Выбираем 1 запись - только активную */
+        $item = Items::find()
+            ->where([Items::ATTR_ID => 1])
+            ->andWhere([Items::ATTR_ACTIVE => 1])
+            ->one();
+
+        /** Ожидаем получить из фикстур - 1 активные запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение 1-й активной записи по URL адреса */
+    public function testSelectActiveSingleRowByUrl()
+    {
+        /** Выбираем одну активную запись по урлу */
+        $item = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_URL => 'sv-98'])
+            ->one();
+
+        /** Ожидаем получить из фикстур - 1 активная запись по урлу */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Тестируем получение 1-й активной записи по URL адреса */
+    public function testSelectActiveSingleRowByAuthor()
+    {
+        /** Выбираем одну активную запись по урлу */
+        $item = Items::find()
+            ->where([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_CREATOR => 'Максим (KondorMax)'])
+            ->one();
+
+        /** Ожидаем получить из фикстур - 1 активная запись по урлу */
+        $this->assertTrue(!empty($item));
     }
 
     /** Тестируем удаление объекта */

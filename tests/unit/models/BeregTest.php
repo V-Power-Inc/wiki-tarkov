@@ -17,6 +17,9 @@ use app\tests\fixtures\BeregFixture;
  *
  * Class BeregTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class BeregTest extends \Codeception\Test\Unit
 {

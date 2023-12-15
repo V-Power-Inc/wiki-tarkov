@@ -17,6 +17,9 @@ use app\common\helpers\validators\StringValidator;
  *
  * Class ApilootTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class ApilootTest extends \Codeception\Test\Unit
 {

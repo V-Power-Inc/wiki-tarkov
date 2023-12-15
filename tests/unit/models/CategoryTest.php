@@ -19,6 +19,9 @@ use app\common\helpers\validators\StringValidator;
  *
  * Class CategoryTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class CategoryTest extends \Codeception\Test\Unit
 {

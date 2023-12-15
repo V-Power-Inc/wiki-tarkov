@@ -17,6 +17,11 @@ use app\common\helpers\validators\StringValidator;
 /**
  * Class ClansTest
  * @package models
+ *
+ * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class ClansTest extends \Codeception\Test\Unit
 {
