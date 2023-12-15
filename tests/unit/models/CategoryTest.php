@@ -13,8 +13,9 @@ use app\tests\fixtures\CategoryFixture;
 use app\common\helpers\validators\StringValidator;
 
 /**
- * UNIT тестирование Active Record модели категорий
- * для справочника лута
+ * UNIT тестирование Active Record модели категорий для справочника лута
+ *
+ * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
  *
  * Class CategoryTest
  * @package models
