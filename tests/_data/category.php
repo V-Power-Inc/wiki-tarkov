@@ -32,12 +32,12 @@ return [
     ],
     [
         'title' => 'Основная категория - third',
-        'parent_category' => null,
+        'parent_category' => 2,
         'url' => 'main-category-thirdd',
         'content' => '<p>Описание новой основной категории - third</p>',
         'description' => 'Seo описание новой основной категории - third',
         'keywords' => 'Основная категория, лут, тесты - third',
-        'enabled' => 1,
+        'enabled' => 0,
         'sortir' => 3
     ]
 ];

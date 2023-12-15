@@ -10,12 +10,11 @@ namespace app\tests;
 
 use app\models\Category;
 use app\tests\fixtures\CategoryFixture;
+use app\tests\fixtures\ItemsFixture;
 use app\common\helpers\validators\StringValidator;
 
 /**
  * UNIT тестирование Active Record модели категорий для справочника лута
- *
- * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
  *
  * Class CategoryTest
  * @package models
@@ -39,6 +38,10 @@ class CategoryTest extends \Codeception\Test\Unit
                 'class' => CategoryFixture::class,
                 'dataFile' => codecept_data_dir() . 'category.php'
             ],
+            'items' => [
+                'class' => ItemsFixture::class,
+                'dataFile' => codecept_data_dir() . 'items.php'
+            ]
         ]);
     }
 
@@ -215,6 +218,56 @@ class CategoryTest extends \Codeception\Test\Unit
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
+    }
+
+    /** Тестируем получение всех записей - только активных(select) */
+    public function testSelectActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Category::find()
+            ->where([Category::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение одной активной категории по урлу */
+    public function testSelectSingleActiveRowByUrl()
+    {
+        /** Выбираем одну активную запись по урлу */
+        $list = Category::find()
+            ->where([Category::ATTR_URL => 'main-category-second'])
+            ->andWhere([Category::ATTR_ENABLED => 1])
+            ->one();
+
+        /** Ожидаем что у категории есть активная запись по урлу */
+        $this->assertTrue(!empty($list));
+    }
+
+    /** Тестируем получение всех записей - только неактивных (select) */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи - только не активные */
+        $list = Category::find()
+            ->where([Category::ATTR_ENABLED => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 записи */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение одной неактивной категории по урлу */
+    public function testSelectSingleDisabledRowByUrl()
+    {
+        /** Выбираем одну активную запись по урлу и неактивную */
+        $list = Category::find()
+            ->where([Category::ATTR_URL => 'main-category-thirdd'])
+            ->andWhere([Category::ATTR_ENABLED => 0])
+            ->one();
+
+        /** Ожидаем что у категории есть активная запись по урлу */
+        $this->assertTrue(!empty($list));
     }
 
     /** Тестируем удаление объекта */
