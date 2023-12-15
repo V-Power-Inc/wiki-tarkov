@@ -128,7 +128,6 @@ class TasksTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Tasks::ATTR_ID => 4,
             Tasks::ATTR_QUEST => 'Первый квест',
             Tasks::ATTR_TRADER_NAME => 'Барахольщик',
             Tasks::ATTR_TRADER_ICON => 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp',
@@ -137,7 +136,7 @@ class TasksTest extends \Codeception\Test\Unit
         ];
 
         /** Сетапим атрибуты AR объекту */
-        $task->setAttributes($values);
+        $task->setAttributes($values, false);
 
         /** Валидируем атрибуты */
         $task->validate();
