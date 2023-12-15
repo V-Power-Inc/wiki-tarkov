@@ -48,7 +48,7 @@ class ZavodTest extends \Codeception\Test\Unit
     /**
      * Метод вызывающий валидации атрибутов различных типов
      */
-    protected function _validateAttributes(ActiveRecord $model)
+    protected function _validateAttributes($model)
     {
         /** Валидация обязательных атрибутов */
         $this->_validateRequiredAttributes($model);
