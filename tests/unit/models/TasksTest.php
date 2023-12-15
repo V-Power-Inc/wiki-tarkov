@@ -128,6 +128,7 @@ class TasksTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
+            Tasks::ATTR_ID => 4,
             Tasks::ATTR_QUEST => 'Первый квест',
             Tasks::ATTR_TRADER_NAME => 'Барахольщик',
             Tasks::ATTR_TRADER_ICON => 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp',
@@ -149,20 +150,6 @@ class TasksTest extends \Codeception\Test\Unit
 
         /** Ожидаем что всего будет 4 записи */
         $this->assertTrue(count($list) == 4);
-    }
-
-    /** Тестируем создание */
-    public function testCreate()
-    {
-        $baraholshik = new Tasks();
-
-        $baraholshik->quest = 'Первый квест';
-        $baraholshik->trader_name = 'Барахольщик';
-        $baraholshik->trader_icon = 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp';
-        $baraholshik->json = '{"name":"Секрет успеха","factionName":"Any","minPlayerLevel":26,"objectives":[{"type":"findQuestItem","description":"Найти Книгу о технологии изготовления одежды - Часть 1 на Развязке","optional":false},{"type":"giveQuestItem","description":"Передать первую книгу","optional":false},{"type":"findQuestItem","description":"Найти Книгу о технологии изготовления одежды - Часть 2 на Развязке","optional":false},{"type":"giveQuestItem","description":"Передать вторую книгу","optional":false}],"neededKeys":[],"taskRequirements":[{"task":{"name":"Шить - не тужить - Часть 2"},"status":["complete"]}],"experience":15600,"map":{"name":"Развязка"},"trader":{"name":"Барахольщик","imageLink":"https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp"},"restartable":false,"startRewards":{"items":[]},"finishRewards":{"items":[{"item":{"name":"Рубли","description":"Несколько банкнот пока еще котирующихся российских рублей.","iconLink":"https://assets.tarkov.dev/5449016a4bdc2d6f028b456f-icon.webp","inspectImageLink":"https://assets.tarkov.dev/5449016a4bdc2d6f028b456f-image.webp"},"count":60000},{"item":{"name":"Балаклава Призрак","description":"Балаклава с рисунком черепа. Выглядит опасно.","iconLink":"https://assets.tarkov.dev/5ab8f4ff86f77431c60d91ba-icon.webp","inspectImageLink":"https://assets.tarkov.dev/5ab8f4ff86f77431c60d91ba-image.webp"},"count":2}]}}';
-        $baraholshik->url = 'baraholshik-quests';
-
-        $this->assertTrue($baraholshik->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
     }
 
     /** Тестируем выборку записи на обновление */

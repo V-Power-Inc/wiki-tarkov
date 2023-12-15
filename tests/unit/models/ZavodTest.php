@@ -155,6 +155,7 @@ class ZavodTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
+            Zavod::ATTR_ID => 4,
             Zavod::ATTR_MARKER_GROUP => 'Ящик у выхода с локации',
             Zavod::ATTR_COORDS_X => 10,
             Zavod::ATTR_COORDS_Y => -135,
