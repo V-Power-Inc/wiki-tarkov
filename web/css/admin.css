@@ -1,5 +1,4 @@
 /*** Убираем видимость всех ненужных по умолчанию иконок в админке сайта ***/
-
 .form-group.field-forest-exits_group, .form-group.field-forest-file, .form-group.field-tamojnya-exits_group, .form-group.field-tamojnya-file {
     display: none;
 }
@@ -59,4 +58,9 @@
 
 .gods-btn {
     font-size: 20px;
+}
+
+/** Указываем админке скролл по необходимости */
+body {
+    overflow-x: auto;
 }
