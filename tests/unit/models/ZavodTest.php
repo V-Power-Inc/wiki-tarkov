@@ -37,7 +37,14 @@ class ZavodTest extends \Codeception\Test\Unit
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
-    {}
+    {
+        $this->tester->haveFixtures([
+            'zavod' => [
+                'class' => ZavodFixture::class,
+                'dataFile' => codecept_data_dir() . 'zavod.php'
+            ]
+        ]);
+    }
 
     /** Метод выполняется после каждого теста */
     protected function _after()
@@ -166,11 +173,6 @@ class ZavodTest extends \Codeception\Test\Unit
     /** Тестируем создание нового маркера */
     public function testCreation()
     {
-        echo '<pre>';
-        echo print_r(codecept_data_dir() . 'zavod.php');
-        exit;
-        echo '</pre>';
-
         /** Создаем новый объект класса маркеров */
         $zavod = new Zavod();
 
