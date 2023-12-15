@@ -27,6 +27,16 @@ $this->registerMetaTag([
     'content' => 'Форма обратной связи',
 ]);
 ?>
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content special-border">
+            <h2 class="main-site-heading">Блок опросов и голосований</h2>
+
+            <p class="size-16">Форма для голосования о способах отключения рекламы на сайте: <a href="https://forms.gle/uUdHK53cs3TpQQPk8" target="_blank" onclick="ym(47100633,'reachGoal','open_googleform');"><b>Опрос - отключение рекламы</b></a>.</p>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="row">

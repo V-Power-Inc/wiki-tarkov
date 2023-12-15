@@ -10,7 +10,7 @@ body {
 }
 
 /** Стили для заголовков */
-body h1, .jumbotron h1, h1.main-site-heading, .item-loot-title a:hover, .item-loot-title a {
+body h1, .jumbotron h1, h1.main-site-heading, h2.main-site-heading, .item-loot-title a:hover, .item-loot-title a {
     color: #c4c4c4;
 }
 
