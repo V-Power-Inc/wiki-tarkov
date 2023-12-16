@@ -6,6 +6,9 @@
  * Time: 15:05
  */
 
+use app\common\services\CanonicalPagesService;
+use yii\helpers\Url;
+
 $this->title = 'Карты локаций Escape from Tarkov - интерактивные карты с просмотром ключей от помещений';
 
 $this->registerMetaTag([
@@ -17,6 +20,9 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Карта Леса Тарков, Карта таможни Тарков, Escape from tarkov интерактивные карты',
 ]);
+
+/** Редирект для неканоничных страниц локаций (Убираем дубли из поисковых систем) */
+CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request->url);
 ?>
 <!-- Gorizontal information -->
 <div class="container">

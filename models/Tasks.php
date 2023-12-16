@@ -57,6 +57,8 @@ class Tasks extends ActiveRecord
     public function rules()
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_QUEST, RequiredValidator::class],
             [static::ATTR_QUEST, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 

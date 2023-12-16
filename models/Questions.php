@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\common\helpers\validators\IntegerValidator;
+use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use app\models\queries\QuestionsQuery;
@@ -42,13 +43,16 @@ class Questions extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
+            [static::ATTR_TITLE, RequiredValidator::class],
+            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 500],
+
             [static::ATTR_CONTENT, StringValidator::class],
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
-
-            [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 500]
+            [static::ATTR_ENABLED, IntegerValidator::class]
         ];
     }
 

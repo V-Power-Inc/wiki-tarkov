@@ -68,6 +68,7 @@ class MainpageCest
         $I->seeLink('Частые вопросы', '/questions');
         $I->seeLink('Таблица патронов', '/table-patrons');
         $I->seeLink('Список кланов', '/clans');
+        $I->seeLink('Обратная связь', '/feedback-form');
         $I->seeLink('Завод', '/maps/zavod-location#3/68.97/-8.00');
         $I->seeLink('Таможня', '/maps/tamojnya-location#4/80.40/-75.98');
         $I->seeLink('Лес', '/maps/forest-location#3/72.50/-9.58');

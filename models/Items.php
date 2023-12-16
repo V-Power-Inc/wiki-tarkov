@@ -93,6 +93,8 @@ class Items extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_TITLE, RequiredValidator::class],
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
@@ -100,8 +102,10 @@ class Items extends ActiveRecord
             [static::ATTR_SHORTDESC, StringValidator::class],
 
             [static::ATTR_URL, RequiredValidator::class],
+            [static::ATTR_URL, StringValidator::class],
 
             [static::ATTR_DESCRIPTION, RequiredValidator::class],
+            [static::ATTR_DESCRIPTION, StringValidator::class],
 
             [static::ATTR_CREATOR, RequiredValidator::class],
             [static::ATTR_CREATOR, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],

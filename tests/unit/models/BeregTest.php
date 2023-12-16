@@ -6,8 +6,9 @@
  * Time: 20:49
  */
 
-namespace models;
+namespace app\tests;
 
+use app\common\helpers\validators\StringValidator;
 use app\models\Bereg;
 use app\tests\fixtures\BeregFixture;
 
@@ -16,6 +17,9 @@ use app\tests\fixtures\BeregFixture;
  *
  * Class BeregTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class BeregTest extends \Codeception\Test\Unit
 {
@@ -24,85 +28,392 @@ class BeregTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    /**
-     * Фикстуры для таблицы bereg
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    protected function _before()
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $this->tester->haveFixtures([
             'bereg' => [
                 'class' => BeregFixture::class,
                 'dataFile' => codecept_data_dir() . 'bereg.php'
             ]
-        ];
+        ]);
+    }
+
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
+    /**
+     * Метод вызывающий валидации атрибутов различных типов
+     */
+    protected function _validateAttributes($model)
+    {
+        /** Валидация обязательных атрибутов */
+        $this->_validateRequiredAttributes($model);
+
+        /** Валидация строковых атрибутов */
+        $this->_validateStringAttributes($model);
+
+        /** Валидация числовых атрибутов */
+        $this->_validateNumberAttributes($model);
+    }
+
+    /** Метод для валидации обязательных атрибутов */
+    protected function _validateRequiredAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Bereg::ATTR_NAME];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем оставить их как null */
+            $this->_validateAttribute($model, $item, null);
+        }
+    }
+
+    /** Метод для валидации числовых атрибутов */
+    protected function _validateNumberAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Bereg::ATTR_ID, Bereg::ATTR_COORDS_X, Bereg::ATTR_COORDS_Y, Bereg::ATTR_ENABLED, Bereg::ATTR_EXIT_ANYWAY];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем засетапить в числовой атрибут - строку */
+            $this->_validateAttribute($model, $item, 'a');
+        }
+    }
+
+    /** Метод для валидации строковых атрибутов */
+    protected function _validateStringAttributes($model)
+    {
+        /** Список атрибутов на валидацию - длина 50 символов */
+        $list_fifty = [Bereg::ATTR_MARKER_GROUP];
+
+        /** Список атрибутов на валидацию - длина 100 символов */
+        $list_hundred = [Bereg::ATTR_NAME, Bereg::ATTR_EXITS_GROUP];
+
+        /** Список атрибутов на валидацию - длина 255 символов */
+        $list_main = [Bereg::ATTR_CUSTOMICON];
+
+        /** Переменная с пустой строкой */
+        $too_long_string = '';
+
+        /** В цикле увеличиваем длину строки, пока не станет 56 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_FIFTY + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 56 символов */
+        foreach ($list_fifty as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 101 символов */
+        foreach ($list_hundred as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 256 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 256 символов */
+        foreach ($list_main as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+    }
+
+    /** Метод валидации атрибута, что сюда передается */
+    protected function _validateAttribute($model, $attribute, $value)
+    {
+        /** Сетапим значение атрибута AR модели */
+        $model->setAttribute($attribute, $value);
+
+        /** Ожидаем что атрибут не пройдет валидацию */
+        $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
     /** Тестируем создание нового маркера */
-    public function testCreate()
+    public function testCreation()
     {
-        $bereg = new Bereg();
+        /** Создаем новый объект класса маркеров */
+        $marker = new Bereg();
 
-        $bereg->name = 'Ящик у выхода с локации';
-        $bereg->marker_group='Военные ящики';
-        $bereg->coords_x='10';
-        $bereg->coords_y='-135';
-        $bereg->content='<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $bereg->enabled='1';
-        $bereg->customicon='/img/admin/beregicons/vorota_3_d.png';
-        $bereg->exits_group='Спавн на зеленой лампе';
-        $bereg->exit_anyway='1';
+        /** Валидируем все атрибуты AR объекта*/
+        $this->_validateAttributes($marker);
 
-        $this->assertTrue($bereg->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
+        /** Значения на сохранение нового объекта */
+        $values = [
+            Bereg::ATTR_ID => 4,
+            Bereg::ATTR_NAME => 'Ящик у выхода с локации',
+            Bereg::ATTR_MARKER_GROUP => 'Военные ящики',
+            Bereg::ATTR_COORDS_X => 10,
+            Bereg::ATTR_COORDS_Y => -135,
+            Bereg::ATTR_CONTENT => '<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>',
+            Bereg::ATTR_ENABLED => 1,
+            Bereg::ATTR_CUSTOMICON => '/img/admin/beregicons/vorota_3_d.png',
+            Bereg::ATTR_EXITS_GROUP => 'Спавн на зеленой лампе',
+            Bereg::ATTR_EXIT_ANYWAY => 1
+        ];
+
+        /** Сетапим атрибуты AR объекту */
+        $marker->setAttributes($values);
+
+        /** Валидируем атрибуты */
+        $marker->validate();
+
+        /** Ожидаем что запись сохранилась */
+        $this->assertTrue($marker->save(), 'Ожидалось true - объект не сохранился.');
+
+        /** Выбираем все записи */
+        $list = Bereg::find()->all();
+
+        /** Ожидаем что всего будет 4 записи */
+        $this->assertTrue(count($list) == 4);
     }
 
-    /** Тестируем обновление маркера */
-    public function testUpdate()
+    /** Тестируем выборку записи на обновление */
+    public function testEdit()
     {
-        $bereg = Bereg::find()->where(['is not','id',null])->one();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Bereg::findOne([Bereg::ATTR_ID => 3]);
 
-        $bereg->name = 'Ящик у выхода 234234с локации';
-        $bereg->marker_group='Военн234234ые ящики';
-        $bereg->coords_x='10';
-        $bereg->coords_y='-135';
-        $bereg->content='<p>Это основной выхо34234234д с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $bereg->enabled='0';
-        $bereg->customicon='/img/orota_3_d.png';
-        $bereg->exits_group='Другое значение';
-        $bereg->exit_anyway='0';
-
-        $this->assertIsInt($bereg->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        /** Проводит валидацию атрибутов данных, полученных из фикстуры */
+        $this->_validateAttributes($marker);
     }
 
-    /** Тестируем получение объекта (select) */
-    public function testSelect()
+    /** Тестируем получение всех записей (select) */
+    public function testList()
     {
-        $bereg = Bereg::find()->one();
+        /** Выбираем все записи */
+        $list = Bereg::find()->all();
 
-        $this->assertNotNull($bereg, 'Ожидался объект, вернулся null - объект не селектнулся.');
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
     }
 
-    /** Тестируем получение всех объектов (select all) */
-    public function testSelectAll()
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectActiveRows()
     {
-        $bereg = Bereg::find()->all();
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->all();
 
-        $this->assertTrue(count($bereg) > 0, 'Ожидалось что вернется несколько объектов, что то пошло не так');
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов ЧВК (select) */
+    public function testSelectActiveChvkExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_EXITS_GROUP => 'ЧВК зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов Диких (select) */
+    public function testSelectActiveDikieExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_EXITS_GROUP => 'Диких зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с кастомной иконкой (select) */
+    public function testSelectActiveWithCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere(['is not', Bereg::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без кастомной иконки (select) */
+    public function testSelectActiveWithoutCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere(['is', Bereg::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с возможностью выходить любой из сторон (select) */
+    public function testSelectActiveWithExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_EXIT_ANYWAY => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без возможности выходить любой из сторон (select) */
+    public function testSelectActiveWithoutExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_EXIT_ANYWAY => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой маркеры выходов (select) */
+    public function testSelectActiveWithExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Маркеры выходов'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой военных ящиков (select) */
+    public function testSelectActiveWithArmyLootRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Военные ящики'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой интересных мест (select) */
+    public function testSelectActiveWithInterestingPlacesRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Интересные места'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithDikieSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Спавны диких'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithChvkSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Спавны игроков ЧВК'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой квестовые точки (select) */
+    public function testSelectActiveWithQuestsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Квестовые точки'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой точки с ключами (select) */
+    public function testSelectActiveWithKeysRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->andWhere([Bereg::ATTR_MARKER_GROUP => 'Маркеры ключей'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Bereg::find()
+            ->where([Bereg::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $bereg = Bereg::find()->one()->delete();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Bereg::findOne([Bereg::ATTR_ID => 3]);
 
-        $this->assertIsInt($bereg,'Удаление объекта не случилось, а должно было.');
+        /** Удаляем запись */
+        $marker->delete();
+
+        /** Получаем список всех записей */
+        $list = Bereg::find()->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
-
-    /** Тестируем удаление всех объектов */
-    public function testDeleteAll()
-    {
-        $bereg = Bereg::deleteAll();
-
-        $this->assertIsInt($bereg,'Удаление объекта не случилось, а должно было.');
-    }
-
 }

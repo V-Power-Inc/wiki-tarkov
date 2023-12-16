@@ -8,13 +8,18 @@
  * Unit тесты для таблицы Clans (Сделано через промежуточную модель из за рекапчи)
  */
 
-namespace models;
+namespace app\tests;
 
 use app\models\ClansForUnit;
+use app\tests\fixtures\ClansFixture;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * Class ClansTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class ClansTest extends \Codeception\Test\Unit
 {
@@ -23,64 +28,340 @@ class ClansTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    /** Тестируем создание нового объекта */
-    public function testCreate()
+    /** Метод выполняется перед каждым тестом */
+    public function _before()
     {
-        $clan = new ClansForUnit();
+        /** Грузим фикстуры перед каждым тестом */
+        $this->tester->haveFixtures([
+            'clans' => [
+                'class' => ClansFixture::class,
+                'dataFile' => codecept_data_dir() . 'clans.php'
+            ],
+        ]);
+    }
 
-        $clan->title = 'Second clan';
-        $clan->description = 'Secondary desc of clan';
-        $clan->preview = 'https://sometest.ru/image_prev.png';
-        $clan->link = 'https://sometest.ru';
-        $clan->moderated = 1;
-        $clan->date_create = '2019-03-29 07:17:10';
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
+    /**
+     * Метод вызывающий валидации атрибутов различных типов
+     */
+    protected function _validateAttributes($model)
+    {
+        /** Валидация обязательных атрибутов */
+        $this->_validateRequiredAttributes($model);
+
+        /** Валидация строковых атрибутов */
+        $this->_validateStringAttributes($model);
+
+        /** Валидация числовых атрибутов */
+        $this->_validateNumberAttributes($model);
+    }
+
+    /** Метод для валидации обязательных атрибутов */
+    protected function _validateRequiredAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [ClansForUnit::ATTR_TITLE, ClansForUnit::ATTR_DESCRIPTION];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем оставить их как null */
+            $this->_validateAttribute($model, $item, null);
+        }
+    }
+
+    /** Метод для валидации числовых атрибутов */
+    protected function _validateNumberAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [ClansForUnit::ATTR_ID, ClansForUnit::ATTR_MODERATED];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем засетапить в числовой атрибут - строку */
+            $this->_validateAttribute($model, $item, 'a');
+        }
+    }
+
+    /** Метод для валидации строковых атрибутов */
+    protected function _validateStringAttributes($model)
+    {
+        /** Список атрибутов на валидацию - длина 100 символов */
+        $list_hundred = [ClansForUnit::ATTR_TITLE];
         
-        $this->assertTrue($clan->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
-    }
-
-    /** Тестируем обновление маркера */
-    public function testUpdate()
-    {
-        $clan = ClansForUnit::find()->where(['is not','id',null])->one();
-
-        $clan->title = 'Changed title';
-        $clan->description = 'Changed Secondary desc of clan';
-        $clan->preview = 'https://sometest.ru/image_prev_2.png';
-        $clan->link = 'https://sometester.ru';
-        $clan->moderated = 0;
+        /** Список атрибутов на валидацию - длина 255 символов */
+        $list_main = [ClansForUnit::ATTR_DESCRIPTION];
         
-        $this->assertIsInt($clan->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        /** Переменная с пустой строкой */
+        $too_long_string = '';
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        foreach ($list_hundred as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+        
+        /** В цикле увеличиваем длину строки, пока не станет 256 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 256 символов */
+        foreach ($list_main as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
     }
 
-    /** Тестируем получение объекта (select) */
-    public function testSelect()
+    /** Метод валидации атрибута, что сюда передается */
+    protected function _validateAttribute($model, $attribute, $value)
     {
-        $clan = ClansForUnit::find()->one();
+        /** Сетапим значение атрибута AR модели */
+        $model->setAttribute($attribute, $value);
 
-        $this->assertNotNull($clan, 'Ожидался объект, вернулся null - объект не селектнулся.');
+        /** Ожидаем что атрибут не пройдет валидацию */
+        $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
-    /** Тестируем получение всех объектов (select all) */
-    public function testSelectAll()
+    /** Тестируем создание нового маркера */
+    public function testCreation()
     {
-        $clan = ClansForUnit::find()->all();
+        /** Создаем новый объект AR */
+        $item = new ClansForUnit();
 
-        $this->assertTrue(count($clan) == 1, 'Ожидалось что вернется 1 объект, что то пошло не так');
+        /** Валидируем все атрибуты AR объекта*/
+        $this->_validateAttributes($item);
+
+        /** Значения на сохранение нового объекта */
+        $values = [
+            ClansForUnit::ATTR_ID            => 4,
+            ClansForUnit::ATTR_DESCRIPTION   => 'Secondary desc of clan',
+            ClansForUnit::ATTR_TITLE         => 'Second clan',
+            ClansForUnit::ATTR_PREVIEW       => 'https://sometest.ru/image_prev.png',
+            ClansForUnit::ATTR_LINK          => 'https://sometest.ru',
+            ClansForUnit::ATTR_MODERATED     => 0
+        ];
+
+        /** Сетапим атрибуты AR объекту */
+        $item->setAttributes($values);
+
+        /** Валидируем атрибуты */
+        $item->validate();
+
+        /** Ожидаем что запись сохранилась */
+        $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился.');
+
+        /** Выбираем все записи */
+        $list = ClansForUnit::find()->all();
+
+        /** Ожидаем что всего будет 4 записи */
+        $this->assertTrue(count($list) == 4);
+    }
+
+    /** Тестируем выборку записи на обновление */
+    public function testEdit()
+    {
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $item = ClansForUnit::findOne([ClansForUnit::ATTR_ID => 3]);
+
+        /** Проводит валидацию атрибутов данных, полученных из фикстуры */
+        $this->_validateAttributes($item);
+    }
+
+    /** Тестируем получение всех записей (select) */
+    public function testList()
+    {
+        /** Выбираем все записи */
+        $list = ClansForUnit::find()->all();
+
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных (select) */
+    public function testSelectModeratedRows()
+    {
+        /** Выбираем все записи - только промодерированные */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с описанием (select) */
+    public function testSelectModeratedRowsWithDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с линком (select) */
+    public function testSelectModeratedRowsWithLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью (select) */
+    public function testSelectModeratedRowsWithPreview()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью и урлом (select) */
+    public function testSelectModeratedRowsWithPreviewAndLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью, урлом и описанием (select) */
+    public function testSelectModeratedRowsWithPreviewAndLinkAndDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 1])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только отклоненных (select) */
+    public function testSelectNotModeratedRows()
+    {
+        /** Выбираем все записи - только промодерированные */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с описанием (select) */
+    public function testSelectNotModeratedRowsWithDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с линком (select) */
+    public function testSelectNotModeratedRowsWithLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью (select) */
+    public function testSelectNotModeratedRowsWithPreview()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью и урлом (select) */
+    public function testSelectNotModeratedRowsWithPreviewAndLink()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только промодерированных и с превью, урлом и описанием (select) */
+    public function testSelectNotModeratedRowsWithPreviewAndLinkAndDescription()
+    {
+        /** Выбираем все записи - только промодерированные и с урлом */
+        $list = ClansForUnit::find()
+            ->where([ClansForUnit::ATTR_MODERATED => 0])
+            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $clan = ClansForUnit::find()->one()->delete();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $item = ClansForUnit::findOne([ClansForUnit::ATTR_ID => 3]);
 
-        $this->assertIsInt($clan,'Удаление объекта не случилось, а должно было.');
-    }
+        /** Удаляем запись */
+        $item->delete();
 
-    /** Тестируем удаление всех объектов */
-    public function testDeleteAll()
-    {
-        $clan = ClansForUnit::deleteAll();
+        /** Получаем список всех записей */
+        $list = ClansForUnit::find()->all();
 
-        $this->assertIsInt($clan,'Удаление объектов не случилось, а должно было.');
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
 }

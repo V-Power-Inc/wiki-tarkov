@@ -39,7 +39,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clans-content">
 
-            <?php  if(Yii::$app->getSession()->getFlash('message')):?>
+            <?php if(Yii::$app->getSession()->getFlash('message')):?>
                 <?=Yii::$app->getSession()->getFlash('message')?>
             <?php endif;?>
             
@@ -114,8 +114,9 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
         <!-- Блок комментариев -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-            <!-- Расстояние - заглушка -->
-            <div class="height-25"></div>
+            <div class="recommended-gm-content">
+                <?= $this->render('/other/google-recommended.php'); ?>
+            </div>
 
             <!-- Комментарии -->
             <?= $this->render('/other/comments');?>

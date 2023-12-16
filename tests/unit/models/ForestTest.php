@@ -6,16 +6,20 @@
  * Time: 21:12
  */
 
-namespace models;
+namespace app\tests;
 
 use app\models\Forest;
 use app\tests\fixtures\ForestFixture;
+use app\common\helpers\validators\StringValidator;
 
 /**
  * Unit тесты интерактивных маркеров Леса
  *
  * Class ForestTest
  * @package models
+ *
+ * @see https://codeception.com/docs/UnitTests
+ * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
 class ForestTest extends \Codeception\Test\Unit
 {
@@ -24,85 +28,392 @@ class ForestTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
-    /**
-     * Фикстуры для таблицы forest
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    protected function _before()
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $this->tester->haveFixtures([
             'forest' => [
                 'class' => ForestFixture::class,
                 'dataFile' => codecept_data_dir() . 'forest.php'
             ]
-        ];
+        ]);
+    }
+
+    /** Метод выполняется после каждого теста */
+    protected function _after()
+    {}
+
+    /**
+     * Метод вызывающий валидации атрибутов различных типов
+     */
+    protected function _validateAttributes($model)
+    {
+        /** Валидация обязательных атрибутов */
+        $this->_validateRequiredAttributes($model);
+
+        /** Валидация строковых атрибутов */
+        $this->_validateStringAttributes($model);
+
+        /** Валидация числовых атрибутов */
+        $this->_validateNumberAttributes($model);
+    }
+
+    /** Метод для валидации обязательных атрибутов */
+    protected function _validateRequiredAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Forest::ATTR_NAME];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем оставить их как null */
+            $this->_validateAttribute($model, $item, null);
+        }
+    }
+
+    /** Метод для валидации числовых атрибутов */
+    protected function _validateNumberAttributes($model)
+    {
+        /** Список атрибутов на валидацию */
+        $list = [Forest::ATTR_ID, Forest::ATTR_COORDS_X, Forest::ATTR_COORDS_Y, Forest::ATTR_ENABLED, Forest::ATTR_EXIT_ANYWAY];
+
+        /** Проходим в цикле список атрибутов */
+        foreach ($list as $item) {
+
+            /** Пробуем засетапить в числовой атрибут - строку */
+            $this->_validateAttribute($model, $item, 'a');
+        }
+    }
+
+    /** Метод для валидации строковых атрибутов */
+    protected function _validateStringAttributes($model)
+    {
+        /** Список атрибутов на валидацию - длина 50 символов */
+        $list_fifty = [Forest::ATTR_MARKER_GROUP];
+
+        /** Список атрибутов на валидацию - длина 100 символов */
+        $list_hundred = [Forest::ATTR_NAME, Forest::ATTR_EXITS_GROUP];
+
+        /** Список атрибутов на валидацию - длина 255 символов */
+        $list_main = [Forest::ATTR_CUSTOMICON];
+
+        /** Переменная с пустой строкой */
+        $too_long_string = '';
+
+        /** В цикле увеличиваем длину строки, пока не станет 56 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_FIFTY + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 56 символов */
+        foreach ($list_fifty as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 101 символов */
+        foreach ($list_hundred as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+
+        /** В цикле увеличиваем длину строки, пока не станет 256 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 256 символов */
+        foreach ($list_main as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
+    }
+
+    /** Метод валидации атрибута, что сюда передается */
+    protected function _validateAttribute($model, $attribute, $value)
+    {
+        /** Сетапим значение атрибута AR модели */
+        $model->setAttribute($attribute, $value);
+
+        /** Ожидаем что атрибут не пройдет валидацию */
+        $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
     /** Тестируем создание нового маркера */
-    public function testCreate()
+    public function testCreation()
     {
-        $forest = new Forest();
+        /** Создаем новый объект класса маркеров */
+        $marker = new Forest();
 
-        $forest->name = 'Ящик у выхода с локации';
-        $forest->marker_group='Военные ящики';
-        $forest->coords_x='10';
-        $forest->coords_y='-135';
-        $forest->content='<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $forest->enabled='1';
-        $forest->customicon='/img/admin/beregicons/vorota_3_d.png';
-        $forest->exits_group='Спавн на зеленой лампе';
-        $forest->exit_anyway='1';
+        /** Валидируем все атрибуты AR объекта*/
+        $this->_validateAttributes($marker);
 
-        $this->assertTrue($forest->save(), 'Ожидалось true, вернулось false - объект не сохранился.');
+        /** Значения на сохранение нового объекта */
+        $values = [
+            Forest::ATTR_ID => 4,
+            Forest::ATTR_NAME => 'Ящик у выхода с локации',
+            Forest::ATTR_MARKER_GROUP => 'Военные ящики',
+            Forest::ATTR_COORDS_X => 10,
+            Forest::ATTR_COORDS_Y => -135,
+            Forest::ATTR_CONTENT => '<p>Это основной выход с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>',
+            Forest::ATTR_ENABLED => 1,
+            Forest::ATTR_CUSTOMICON => '/img/admin/beregicons/vorota_3_d.png',
+            Forest::ATTR_EXITS_GROUP => 'Спавн на зеленой лампе',
+            Forest::ATTR_EXIT_ANYWAY => 1
+        ];
+
+        /** Сетапим атрибуты AR объекту */
+        $marker->setAttributes($values);
+
+        /** Валидируем атрибуты */
+        $marker->validate();
+
+        /** Ожидаем что запись сохранилась */
+        $this->assertTrue($marker->save(), 'Ожидалось true - объект не сохранился.');
+
+        /** Выбираем все записи */
+        $list = Forest::find()->all();
+
+        /** Ожидаем что всего будет 4 записи */
+        $this->assertTrue(count($list) == 4);
     }
 
-    /** Тестируем обновление маркера */
-    public function testUpdate()
+    /** Тестируем выборку записи на обновление */
+    public function testEdit()
     {
-        $forest = Forest::find()->where(['is not','id',null])->one();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Forest::findOne([Forest::ATTR_ID => 3]);
 
-        $forest->name = 'Ящик у выхода 234234с локации';
-        $forest->marker_group='Военн234234ые ящики';
-        $forest->coords_x='10';
-        $forest->coords_y='-135';
-        $forest->content='<p>Это основной выхо34234234д с локации Завод, если у вас нет ключа от выхода с завода - это ваш единственный способ выйти с карты.</p><p><img alt="Основной выход с локации Завод. Через него выходит основная часть игроков." src="/img/upload/bereg_images/vihod-s-karty.png" style="width:100%" /></p>';
-        $forest->enabled='0';
-        $forest->customicon='/img/orota_3_d.png';
-        $forest->exits_group='Другое значение';
-        $forest->exit_anyway='0';
-
-        $this->assertIsInt($forest->update(), 'Ожидался int, вернулся false - объект не удалился.');
+        /** Проводит валидацию атрибутов данных, полученных из фикстуры */
+        $this->_validateAttributes($marker);
     }
 
-    /** Тестируем получение объекта (select) */
-    public function testSelect()
+    /** Тестируем получение всех записей (select) */
+    public function testList()
     {
-        $forest = Forest::find()->one();
+        /** Выбираем все записи */
+        $list = Forest::find()->all();
 
-        $this->assertNotNull($forest, 'Ожидался объект, вернулся null - объект не селектнулся.');
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
     }
 
-    /** Тестируем получение всех объектов (select all) */
-    public function testSelectAll()
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectActiveRows()
     {
-        $forest = Forest::find()->all();
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->all();
 
-        $this->assertTrue(count($forest) == 1, 'Ожидалось что вернется 3 объекта, что то пошло не так');
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов ЧВК (select) */
+    public function testSelectActiveChvkExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_EXITS_GROUP => 'ЧВК зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и спавнов Диких (select) */
+    public function testSelectActiveDikieExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_EXITS_GROUP => 'Диких зона'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с кастомной иконкой (select) */
+    public function testSelectActiveWithCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere(['is not', Forest::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без кастомной иконки (select) */
+    public function testSelectActiveWithoutCustomIconRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere(['is', Forest::ATTR_CUSTOMICON, null])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с возможностью выходить любой из сторон (select) */
+    public function testSelectActiveWithExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_EXIT_ANYWAY => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и без возможности выходить любой из сторон (select) */
+    public function testSelectActiveWithoutExitsAnywayRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_EXIT_ANYWAY => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой маркеры выходов (select) */
+    public function testSelectActiveWithExitsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Маркеры выходов'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой военных ящиков (select) */
+    public function testSelectActiveWithArmyLootRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Военные ящики'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой интересных мест (select) */
+    public function testSelectActiveWithInterestingPlacesRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Интересные места'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithDikieSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Спавны диких'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой спавны за диких (select) */
+    public function testSelectActiveWithChvkSpawnsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Спавны игроков ЧВК'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой квестовые точки (select) */
+    public function testSelectActiveWithQuestsRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Квестовые точки'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных и с группой точки с ключами (select) */
+    public function testSelectActiveWithKeysRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->andWhere([Forest::ATTR_MARKER_GROUP => 'Маркеры ключей'])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 0 записей */
+        $this->assertTrue(count($list) == 0);
+    }
+
+    /** Тестируем получение всех записей - только активных (select) */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи - только активные */
+        $list = Forest::find()
+            ->where([Forest::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
-        $forest = Forest::find()->one()->delete();
+        /** Выбираем одну из записей, представленных в фикстурах */
+        $marker = Forest::findOne([Forest::ATTR_ID => 3]);
 
-        $this->assertIsInt($forest,'Удаление объекта не случилось, а должно было.');
+        /** Удаляем запись */
+        $marker->delete();
+
+        /** Получаем список всех записей */
+        $list = Forest::find()->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
-
-    /** Тестируем удаление всех объектов */
-    public function testDeleteAll()
-    {
-        $forest = Forest::deleteAll();
-
-        $this->assertIsInt($forest,'Удаление объекта не случилось, а должно было.');
-    }
-
 }

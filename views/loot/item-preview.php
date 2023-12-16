@@ -40,13 +40,6 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
             <br>
 
             <p><a class="btn btn-default main-link" href="/loot/quest-loot" style="width: 100%;">Квестовые предметы</a></p>
-
-            <!-- Виджет Discord -->
-            <div class="margin-top-20">
-                <?php if ($this->beginCache(Yii::$app->params['discordCache'], ['duration' => 604800])) { ?>
-                    <?= $this->render('/other/discord-widget.php'); ?>
-                <?php  $this->endCache(); } ?>
-            </div>
         </div>
 
         <!-- Основное содержимое страницы -->

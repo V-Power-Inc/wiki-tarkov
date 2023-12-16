@@ -6,6 +6,8 @@
  * Time: 18:23
  */
 
+use app\common\services\CanonicalPagesService;
+use yii\helpers\Url;
 use yii\web\JqueryAsset;
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
@@ -18,6 +20,9 @@ $this->registerMetaTag([
     'name' => 'description',
     'content' => 'Интерактивная карта локации Берег из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.',
 ]);
+
+/** Редирект для неканоничных страниц локаций (Убираем дубли из поисковых систем) */
+CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request->url);
 ?>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">

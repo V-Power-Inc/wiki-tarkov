@@ -63,7 +63,7 @@ final class MapsController extends AdvancedController
         return [
             [
                 'class' => 'yii\filters\PageCache',
-                'duration' => Yii::$app->params['cacheTime']['one_hour'],
+                'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'variations' => RedisVariationsConfig::getMapsControllerVariations()
             ],
         ];

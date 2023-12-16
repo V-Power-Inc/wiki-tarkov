@@ -52,6 +52,8 @@ class Bosses extends ActiveRecord
     public function rules()
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_BOSSES, StringValidator::class],
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
