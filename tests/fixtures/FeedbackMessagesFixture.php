@@ -11,7 +11,7 @@ namespace app\tests\fixtures;
 /**
  * Фикстура раздела обратной связи
  *
- * Class FeedbackMessages
+ * Class FeedbackMessagesFixture
  * @package app\tests\fixtures
  */
 class FeedbackMessagesFixture extends \yii\test\ActiveFixture
