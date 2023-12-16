@@ -41,7 +41,30 @@ class TasksCest
     /** Мы проверяем - что код страницы 200 */
     public function checkCodeIsOk(\FunctionalTester $I)
     {
+        /** Ожидание */
+        $I->wantTo('Получить страницу с кодом 200');
+
+        /** Вижу что код ответа не 404 */
+        $I->cantSeeResponseCodeIs(404);
+
+        /** Вижу что код ответа не 500 */
+        $I->cantSeeResponseCodeIs(500);
+
+        /** Вижу корректный код - 200 */
         $I->canSeeResponseCodeIs(200);
+    }
+
+    /** Мы видим что в мета тегах присутствуют коды яндекс верификации */
+    public function checkYandexVerification(\FunctionalTester $I)
+    {
+        $I->seeInSource('<meta name="yandex-verification" content="114a7ff38e4fe597" />');
+    }
+
+    /** Мы видим что на странице определен код РТБ блоков яндекса */
+    public function checkYandexRtbScripts(\FunctionalTester $I)
+    {
+        $I->seeInSource('<script>window.yaContextCb = window.yaContextCb || []</script>');
+        $I->seeInSource('<script src="https://yandex.ru/ads/system/context.js" async></script>');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */

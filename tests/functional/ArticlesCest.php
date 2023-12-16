@@ -2,26 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 28.08.2022
- * Time: 19:53
+ * Date: 17.12.2023
+ * Time: 1:37
  */
 
 namespace Tests\Functional;
 
-use app\controllers\MapsController;
+use app\controllers\SiteController;
 
 /**
- * Функциональные тесты интерактивной карты Таможня
+ * Функциональные тесты страницы списка статей
  *
- * Class BeregCest
+ * Class ArticlesCest
  * @package Tests\Functional
  */
-class BeregCest
+class ArticlesCest
 {
-    /** Мы на главной странице */
+    /** Мы на странице списка новостей */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(MapsController::routeId(MapsController::ACTION_BEREG));
+        $I->amOnRoute(SiteController::routeId(SiteController::ACTION_ARTICLES));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -40,6 +40,12 @@ class BeregCest
         $I->canSeeResponseCodeIs(200);
     }
 
+    /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
+    public function checkMetaTagsData(\FunctionalTester $I)
+    {
+        $I->seeInSource('<meta name="description" content="Полезные статьи по онлайн шутеру Escape from Tarkov.">');
+    }
+
     /** Мы видим что в мета тегах присутствуют коды яндекс верификации */
     public function checkYandexVerification(\FunctionalTester $I)
     {
@@ -53,31 +59,25 @@ class BeregCest
         $I->seeInSource('<script src="https://yandex.ru/ads/system/context.js" async></script>');
     }
 
-    /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
-    public function checkMetaTagsData(\FunctionalTester $I)
-    {
-        $I->seeInSource('<meta name="description" content="Интерактивная карта локации Берег из игры Escape from Tarkov с маркерами расположения военных ящиков, спавнов диких и ЧВК, дверей открываемых ключами.">');
-    }
-
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
     public function checkOpengraphTagsData(\FunctionalTester $I)
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Карта локации Берег в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей">');
+        $I->seeInSource('<meta property="og:title" content="Полезные статьи по Escape from Tarkov">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Карта локации Берег в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей');
+        $I->seeInTitle('Полезные статьи по Escape from Tarkov');
     }
 
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Карта локации Берег', 'h1');
+        $I->see('Полезные статьи по Escape from Tarkov', 'h1');
     }
 
     /** Мы видим все ссылки горизонтального меню */
