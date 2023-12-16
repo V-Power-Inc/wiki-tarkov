@@ -43,8 +43,12 @@ class Currencies extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_VALUE, IntegerValidator::class],
+
             [static::ATTR_ENABLED, IntegerValidator::class],
+
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];
     }
