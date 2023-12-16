@@ -14,9 +14,6 @@ use app\tests\fixtures\TasksFixture;
 
 /**
  * Unit тесты квестов из API
- * Раньше это было Unit тестирование таблицы Барахольщика, поэтому квесты тестируем по его примеру
- *
- * // TODO: Доделать методы (Можно выбирать активные записи, старые записи и так далее - тут есть что пилить)
  *
  * Class TasksTest
  * @package models
@@ -133,7 +130,7 @@ class TasksTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Tasks::ATTR_ID => 4,
+            Tasks::ATTR_ID => 11,
             Tasks::ATTR_QUEST => 'Первый квест',
             Tasks::ATTR_TRADER_NAME => 'Барахольщик',
             Tasks::ATTR_TRADER_ICON => 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp',
@@ -156,7 +153,7 @@ class TasksTest extends \Codeception\Test\Unit
         $list = Tasks::find()->all();
 
         /** Ожидаем что всего будет 4 записи */
-        $this->assertTrue(count($list) == 4);
+        $this->assertTrue(count($list) == 11);
     }
 
     /** Тестируем выборку записи на обновление */
@@ -175,8 +172,258 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()->all();
 
-        /** Ожидаем получить из фикстур - 3 записи */
-        $this->assertTrue(count($list) == 3);
+        /** Ожидаем получить из фикстур - 10 записи */
+        $this->assertTrue(count($list) == 10);
+    }
+
+    /** Тестируем выборку активных записей */
+    public function testSelectActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 9 записи */
+        $this->assertTrue(count($list) == 9);
+    }
+
+    /** Тестируем выборку активных записей - квесты Прапора */
+    public function testSelectPraporTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Прапор'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Терапевта */
+    public function testSelectTerapevtTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Терапевт'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Егеря */
+    public function testSelectEgerTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Егерь'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Механика */
+    public function testSelectMehanicTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Механик'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Лыжника */
+    public function testSelectLyjnicTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Лыжник'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Миротворца */
+    public function testSelectMirotvorecTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Миротворец'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Скупщика */
+    public function testSelectAnonymousTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Скупщик'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - квесты Смотрителя */
+    public function testSelectSeekerTraderActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_TRADER_NAME => 'Прапор'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей с помощью URL адреса - квесты Прапора */
+    public function testSelectPraporTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'prapor-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей с помощью URL адреса - квесты Терапевта */
+    public function testSelectTerapevtTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'terapevt-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей с помощью URL адреса - квесты Егеря */
+    public function testSelectEgerTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'eger-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей с помощью URL адреса - квесты Механика */
+    public function testSelectMehanicTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'mehanic-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей с помощью URL адреса - квесты Лыжника */
+    public function testSelectLyjnicTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'lyjnic-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - с помощью URL адреса квесты Миротворца */
+    public function testSelectMirotvorecTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'mirotvorec-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - с помощью URL адреса квесты Скупщика */
+    public function testSelectAnonymousTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'skypshik-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку активных записей - с помощью URL адреса квесты Смотрителя */
+    public function testSelectSeekerTraderByUrlActiveRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_URL => 'seeker-quests'])
+            ->andWhere([Tasks::ATTR_ACTIVE => 1])
+            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку деактивированных записей */
+    public function testSelectDisabledRows()
+    {
+        /** Выбираем все записи */
+        $list = Tasks::find()
+            ->where([Tasks::ATTR_ACTIVE => 0])
+            ->andWhere([Tasks::ATTR_OLD => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 записи */
+        $this->assertTrue(count($list) == 1);
     }
 
     /** Тестируем удаление объекта */
@@ -191,7 +438,7 @@ class TasksTest extends \Codeception\Test\Unit
         /** Получаем список всех записей */
         $list = Tasks::find()->all();
 
-        /** Ожидаем получить из фикстур - 2 записи */
-        $this->assertTrue(count($list) == 2);
+        /** Ожидаем получить из фикстур - 9 записи */
+        $this->assertTrue(count($list) == 9);
     }
 }
