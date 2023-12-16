@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
@@ -43,6 +44,8 @@ class FeedbackMessages extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_CONTENT, RequiredValidator::class],
             [static::ATTR_CONTENT, StringValidator::class],
 
