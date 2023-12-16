@@ -18,23 +18,18 @@ use app\tests\fixtures\TradersFixture;
  */
 class TraderCest
 {
-    /**
-     * Грузим фикстуры торговца и инфовиджета, т.к. без них тесты не отработают (ActiveRecord)
-     *
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'traders' => [
                 'class' => TradersFixture::class,
                 'dataFile' => codecept_data_dir() . 'traders.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на странице Прапора */
-    public function _before(\FunctionalTester $I)
-    {
+        /** Мы на главной странице */
         $I->amOnRoute('traders/prapor');
     }
 

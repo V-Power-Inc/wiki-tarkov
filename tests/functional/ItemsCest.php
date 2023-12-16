@@ -18,22 +18,17 @@ use app\tests\fixtures\ItemsFixture;
  */
 class ItemsCest
 {
-    /**
-     * Фикстуры для таблицы items
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'items' => [
                 'class' => ItemsFixture::class,
                 'dataFile' => codecept_data_dir() . 'items.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на главной странице */
-    public function _before(\FunctionalTester $I)
-    {
         /** URL адрес до детальной страницы с лутом */
         $I->amOnRoute('/loot/sv-98.html');
     }

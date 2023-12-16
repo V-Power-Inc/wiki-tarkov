@@ -10,6 +10,8 @@ namespace Tests\Functional;
 
 use app\controllers\LootController;
 use app\tests\fixtures\CategoryFixture;
+use app\tests\fixtures\ItemsFixture;
+use yii\helpers\Url;
 
 /**
  * Функциональные тестирование главной страницы справочника лута
@@ -19,23 +21,22 @@ use app\tests\fixtures\CategoryFixture;
  */
 class LootMainpageCest
 {
-    /**
-     * Грузим фикстуры предметов и категорий справочника лута
-     *
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'category' => [
                 'class' => CategoryFixture::class,
                 'dataFile' => codecept_data_dir() . 'category.php'
+            ],
+            'items' => [
+                'class' => ItemsFixture::class,
+                'dataFile' => codecept_data_dir() . 'items.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на главной странице */
-    public function _before(\FunctionalTester $I)
-    {
+        /** Мы на главной странице справочника лута */
         $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));
     }
 
