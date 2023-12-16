@@ -28,6 +28,9 @@ class StringValidator extends \yii\validators\StringValidator {
 	/** @var int - Длина строки 255 символов */
 	const VARCHAR_LENGTH = 255;
 
+    /** @var int - Длина строки 200 символов */
+    const VARCHAR_LENGTH_TWO_HUNDRED = 200;
+
     /** @var int - Длина строки 100 символов */
 	const VARCHAR_LENGTH_HUNDRED = 100;
 

@@ -65,6 +65,8 @@ class Articles extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_TITLE, RequiredValidator::class],
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
@@ -81,9 +83,9 @@ class Articles extends ActiveRecord
 
             [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => 100],
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH_HUNDRED],
 
-            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => 200]
+            [static::ATTR_PREVIEW, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH_TWO_HUNDRED]
         ];
     }
 
