@@ -1,28 +1,27 @@
 <?php
 /**
- * Created by PhpStorm
+ * Created by PhpStorm.
  * User: PC_Principal
- * Date: 30.08.2022
- * Time: 12:25
+ * Date: 16.12.2023
+ * Time: 14:24
  */
 
 namespace app\tests;
 
-use app\models\Category;
-use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\ItemsFixture;
+use app\models\Doorkeys;
 use app\common\helpers\validators\StringValidator;
+use app\tests\fixtures\DoorkeysFixture;
 
 /**
- * UNIT тестирование Active Record модели категорий для справочника лута
+ * Unit тесты ключей от дверей
  *
- * Class CategoryTest
+ * Class DoorkeysTest
  * @package models
  *
  * @see https://codeception.com/docs/UnitTests
  * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
-class CategoryTest extends \Codeception\Test\Unit
+class DoorkeysTest extends \Codeception\Test\Unit
 {
     /**
      * @var \UnitTester
@@ -30,17 +29,13 @@ class CategoryTest extends \Codeception\Test\Unit
     protected $tester;
 
     /** Метод выполняется перед каждым тестом */
-    public function _before()
+    protected function _before()
     {
-        /** Грузим фикстуры перед каждым тестом (Фикстура категории) */
+        /** Грузим фикстуры перед каждым тестом */
         $this->tester->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
+            'doorkeys' => [
+                'class' => DoorkeysFixture::class,
+                'dataFile' => codecept_data_dir() . 'doorkeys.php'
             ]
         ]);
     }
@@ -68,7 +63,7 @@ class CategoryTest extends \Codeception\Test\Unit
     protected function _validateRequiredAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [Category::ATTR_TITLE, Category::ATTR_DESCRIPTION, Category::ATTR_SORTIR, Category::ATTR_URL];
+        $list = [Doorkeys::ATTR_NAME,Doorkeys::ATTR_DESCRIPTION,Doorkeys::ATTR_KEYWORDS];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -82,7 +77,7 @@ class CategoryTest extends \Codeception\Test\Unit
     protected function _validateNumberAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [Category::ATTR_ID, Category::ATTR_SORTIR, Category::ATTR_ENABLED, Category::ATTR_PARENT_CATEGORY];
+        $list = [Doorkeys::ATTR_ID,Doorkeys::ATTR_ACTIVE];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -95,11 +90,26 @@ class CategoryTest extends \Codeception\Test\Unit
     /** Метод для валидации строковых атрибутов */
     protected function _validateStringAttributes($model)
     {
+        /** Список атрибутов на валидацию - длина 100 символов */
+        $list_hundred = [Doorkeys::ATTR_PREVIEW];
+        
         /** Список атрибутов на валидацию - длина 255 символов */
-        $list_main = [Category::ATTR_TITLE, Category::ATTR_DESCRIPTION, Category::ATTR_URL, Category::ATTR_KEYWORDS];
+        $list = [Doorkeys::ATTR_NAME];
 
         /** Переменная с пустой строкой */
         $too_long_string = '';
+
+        /** В цикле увеличиваем длину строки, пока не станет 101 символов */
+        for ($i = 0; $i < StringValidator::VARCHAR_LENGTH_HUNDRED + 1; $i++) {
+            $too_long_string .= 'a';
+        }
+
+        /** Проходим в цикле список атрибутов - длина строки 101 символов */
+        foreach ($list_hundred as $item) {
+
+            /** Валидируем каждый из них */
+            $this->_validateAttribute($model, $item, $too_long_string);
+        }
 
         /** В цикле увеличиваем длину строки, пока не станет 256 символов */
         for ($i = 0; $i < StringValidator::VARCHAR_LENGTH + 1; $i++) {
@@ -107,7 +117,7 @@ class CategoryTest extends \Codeception\Test\Unit
         }
 
         /** Проходим в цикле список атрибутов - длина строки 256 символов */
-        foreach ($list_main as $item) {
+        foreach ($list as $item) {
 
             /** Валидируем каждый из них */
             $this->_validateAttribute($model, $item, $too_long_string);
@@ -124,163 +134,125 @@ class CategoryTest extends \Codeception\Test\Unit
         $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
-    /** Тестируем создание основной категории */
-    public function testCreationParentCategory()
+    /** Тестируем создание нового объекта */
+    public function testCreation()
     {
-        /** Создаем новый объект AR */
-        $item = new Category();
+        /** Создаем новый AR объект  */
+        $task = new Doorkeys();
 
         /** Валидируем все атрибуты AR объекта*/
-        $this->_validateAttributes($item);
+        $this->_validateAttributes($task);
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Category::ATTR_ID => 4,
-            Category::ATTR_TITLE => 'Основная категория',
-            Category::ATTR_PARENT_CATEGORY => null,
-            Category::ATTR_URL => 'main-category3', // Констраинт на Unique в БД
-            Category::ATTR_CONTENT => '<p>Описание новой основной категории</p>',
-            Category::ATTR_DESCRIPTION => 'Seo описание новой основной категории',
-            Category::ATTR_KEYWORDS => 'Основная категория, лут, тесты',
-            Category::ATTR_SORTIR => 1,
-            Category::ATTR_ENABLED => 1
+            Doorkeys::ATTR_ID => 4,
+            Doorkeys::ATTR_NAME => 'Новый ключ',
+            Doorkeys::ATTR_URL => 'test_key_url',
+            Doorkeys::ATTR_PREVIEW => '/img/item/test.png',
+            Doorkeys::ATTR_CONTENT => '<p>New content about key</p>',
+            Doorkeys::ATTR_SHORTCONTENT => '<p>New Desc about content on page</p>',
+            Doorkeys::ATTR_ACTIVE => 1,
+            Doorkeys::ATTR_DESCRIPTION => 'Seo Description',
+            Doorkeys::ATTR_KEYWORDS => 'Seo keywords, Test Keywords',
+            Doorkeys::ATTR_MAPGROUP => ['Лес', 'Ключи от сейфов/помещений с сейфами']
         ];
 
         /** Сетапим атрибуты AR объекту */
-        $item->setAttributes($values);
+        $task->setAttributes($values);
 
         /** Валидируем атрибуты */
-        $item->validate();
+        $task->validate();
 
         /** Ожидаем что запись сохранилась */
-        $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился.');
+        $this->assertTrue($task->save(), 'Ожидалось true - объект не сохранился.');
 
         /** Выбираем все записи */
-        $list = Category::find()->all();
+        $list = Doorkeys::find()->all();
 
         /** Ожидаем что всего будет 4 записи */
         $this->assertTrue(count($list) == 4);
     }
 
-    /** Тестируем создание дочерней категории с привязкой к родительской */
-    public function testCreateChildCategory()
-    {
-        /** Создаем новый объект AR */
-        $item = new Category();
-
-        /** Валидируем все атрибуты AR объекта*/
-        $this->_validateAttributes($item);
-
-        /** Значения на сохранение нового объекта */
-        $values = [
-            Category::ATTR_ID => 5,
-            Category::ATTR_TITLE => 'Дочерняя категория',
-            Category::ATTR_PARENT_CATEGORY => 1,
-            Category::ATTR_URL => 'child-category', // Констраинт на Unique в БД
-            Category::ATTR_CONTENT => '<p>Описание дочерней категории</p>',
-            Category::ATTR_DESCRIPTION => 'Seo описание дочерней категории',
-            Category::ATTR_KEYWORDS => 'Дочерняя категория, лут, тесты',
-            Category::ATTR_SORTIR => 2,
-            Category::ATTR_ENABLED => 1
-        ];
-
-        /** Сетапим атрибуты AR объекту */
-        $item->setAttributes($values);
-
-        /** Валидируем атрибуты */
-        $item->validate();
-
-        /** Ожидаем что запись сохранилась */
-        $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился.');
-
-        /** Выбираем все записи */
-        $list = Category::find()->all();
-
-        /** Ожидаем что всего будет 4 записи */
-        $this->assertTrue(count($list) == 4);
-    }
-    
     /** Тестируем выборку записи на обновление */
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = Category::findOne([Category::ATTR_ID => 3]);
+        $task = Doorkeys::findOne([Doorkeys::ATTR_ID => 3]);
 
         /** Проводит валидацию атрибутов данных, полученных из фикстуры */
-        $this->_validateAttributes($item);
+        $this->_validateAttributes($task);
     }
 
     /** Тестируем получение всех записей (select) */
     public function testList()
     {
         /** Выбираем все записи */
-        $list = Category::find()->all();
+        $list = Doorkeys::find()->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
     }
 
-    /** Тестируем получение всех записей - только активных(select) */
+    /** Тестируем выборку записей - только активные ключи */
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Category::find()
-            ->where([Category::ATTR_ENABLED => 1])
-            ->all();
+        $list = Doorkeys::find()->where([Doorkeys::ATTR_ACTIVE => 1])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
     }
 
-    /** Тестируем получение одной активной категории по урлу */
-    public function testSelectSingleActiveRowByUrl()
+    /** Тестируем выборку записей - только активные ключи из определенной группы */
+    public function testSelectActiveRowsByGroup()
+    {
+        /** Выбираем все записи */
+        $list = Doorkeys::find()
+            ->andWhere(['like', Doorkeys::ATTR_MAPGROUP, 'Лес'])
+            ->andWhere([Doorkeys::ATTR_ACTIVE => 1])
+            ->orderby([Doorkeys::ATTR_NAME => SORT_STRING])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 1);
+    }
+
+    /** Тестируем выборку записей - только активные ключи из определенной группы */
+    public function testSelectActiveSingleRowByUrl()
     {
         /** Выбираем одну активную запись по урлу */
-        $list = Category::find()
-            ->where([Category::ATTR_URL => 'main-category-second'])
-            ->andWhere([Category::ATTR_ENABLED => 1])
+        $list = Doorkeys::find()
+            ->andWhere([Doorkeys::ATTR_URL => 'zb-014'])
+            ->andWhere([Doorkeys::ATTR_ACTIVE => 1])
             ->one();
 
-        /** Ожидаем что у категории есть активная запись по урлу */
+        /** Ожидаем получить из фикстур - 1 запись */
         $this->assertTrue(!empty($list));
     }
 
-    /** Тестируем получение всех записей - только неактивных (select) */
+    /** Тестируем выборку записей - только деактивированные записи */
     public function testSelectDisabledRows()
     {
-        /** Выбираем все записи - только не активные */
-        $list = Category::find()
-            ->where([Category::ATTR_ENABLED => 0])
+        /** Выбираем все записи */
+        $list = Doorkeys::find()
+            ->andWhere([Doorkeys::ATTR_ACTIVE => 0])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
         $this->assertTrue(count($list) == 1);
     }
 
-    /** Тестируем получение одной неактивной категории по урлу */
-    public function testSelectSingleDisabledRowByUrl()
-    {
-        /** Выбираем одну активную запись по урлу и неактивную */
-        $list = Category::find()
-            ->where([Category::ATTR_URL => 'main-category-thirdd'])
-            ->andWhere([Category::ATTR_ENABLED => 0])
-            ->one();
-
-        /** Ожидаем что у категории есть активная запись по урлу */
-        $this->assertTrue(!empty($list));
-    }
-
     /** Тестируем удаление объекта */
     public function testDelete()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = Category::findOne([Category::ATTR_ID => 3]);
+        $item = Doorkeys::findOne([Doorkeys::ATTR_ID => 3]);
 
         /** Удаляем запись */
         $item->delete();
 
         /** Получаем список всех записей */
-        $list = Category::find()->all();
+        $list = Doorkeys::find()->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);

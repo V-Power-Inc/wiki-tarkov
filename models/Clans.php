@@ -67,6 +67,8 @@ class Clans extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_TITLE, RequiredValidator::class],
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => 100],
 

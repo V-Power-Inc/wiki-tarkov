@@ -63,6 +63,8 @@ class Category extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_TITLE, RequiredValidator::class],
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
@@ -73,15 +75,14 @@ class Category extends ActiveRecord
             [static::ATTR_SORTIR, IntegerValidator::class],
 
             [static::ATTR_URL, RequiredValidator::class],
+            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
+            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [static::ATTR_ENABLED, IntegerValidator::class],
 
             [static::ATTR_PARENT_CATEGORY, IntegerValidator::class],
 
             [static::ATTR_CONTENT, StringValidator::class],
-
-            [static::ATTR_URL, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Значение url не является уникальным'],
-            [static::ATTR_URL, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
             [static::ATTR_KEYWORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH]
         ];

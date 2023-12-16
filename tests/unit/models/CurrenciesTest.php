@@ -2,26 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 28.10.2023
- * Time: 23:59
+ * Date: 16.12.2023
+ * Time: 13:40
  */
 
 namespace app\tests;
 
-use app\models\ApiLoot;
-use app\tests\fixtures\ApilootFixture;
+use app\models\Currencies;
+use app\tests\fixtures\CurrenciesFixture;
 use app\common\helpers\validators\StringValidator;
 
 /**
- * Unit тесты для API страниц актуального лута
+ * Unit тесты валют EFT
  *
- * Class ApilootTest
+ * Class CurrenciesTest
  * @package models
  *
  * @see https://codeception.com/docs/UnitTests
  * @see https://www.yiiframework.com/doc/guide/2.0/ru/test-fixtures
  */
-class ApilootTest extends \Codeception\Test\Unit
+class CurrenciesTest extends \Codeception\Test\Unit
 {
     /**
      * @var \UnitTester
@@ -29,13 +29,13 @@ class ApilootTest extends \Codeception\Test\Unit
     protected $tester;
 
     /** Метод выполняется перед каждым тестом */
-    public function _before()
+    protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
         $this->tester->haveFixtures([
-            'api_loot' => [
-                'class' => ApilootFixture::class,
-                'dataFile' => codecept_data_dir() . 'api-loot.php'
+            'currencies' => [
+                'class' => CurrenciesFixture::class,
+                'dataFile' => codecept_data_dir() . 'currencies.php'
             ]
         ]);
     }
@@ -63,7 +63,7 @@ class ApilootTest extends \Codeception\Test\Unit
     protected function _validateRequiredAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [ApiLoot::ATTR_URL, ApiLoot::ATTR_JSON, ApiLoot::ATTR_NAME];
+        $list = [];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -77,7 +77,7 @@ class ApilootTest extends \Codeception\Test\Unit
     protected function _validateNumberAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [ApiLoot::ATTR_ID, ApiLoot::ATTR_ACTIVE];
+        $list = [Currencies::ATTR_ID, Currencies::ATTR_VALUE, Currencies::ATTR_ENABLED];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -91,7 +91,7 @@ class ApilootTest extends \Codeception\Test\Unit
     protected function _validateStringAttributes($model)
     {
         /** Список атрибутов на валидацию - длина 255 символов */
-        $list_main = [ApiLoot::ATTR_NAME, ApiLoot::ATTR_URL];
+        $list = [Currencies::ATTR_TITLE];
 
         /** Переменная с пустой строкой */
         $too_long_string = '';
@@ -102,7 +102,7 @@ class ApilootTest extends \Codeception\Test\Unit
         }
 
         /** Проходим в цикле список атрибутов - длина строки 256 символов */
-        foreach ($list_main as $item) {
+        foreach ($list as $item) {
 
             /** Валидируем каждый из них */
             $this->_validateAttribute($model, $item, $too_long_string);
@@ -119,113 +119,121 @@ class ApilootTest extends \Codeception\Test\Unit
         $this->assertFalse($model->validate($attribute), $attribute . ': ' . $value);
     }
 
-    /** Тестируем создание нового маркера */
+    /** Тестируем создание нового объекта */
     public function testCreation()
     {
-        /** Создаем новый объект AR */
-        $item = new ApiLoot();
+        /** Создаем новый AR объект  */
+        $task = new Currencies();
 
         /** Валидируем все атрибуты AR объекта*/
-        $this->_validateAttributes($item);
+        $this->_validateAttributes($task);
 
         /** Значения на сохранение нового объекта */
         $values = [
-            ApiLoot::ATTR_ID     => 22,
-            ApiLoot::ATTR_NAME   => 'M4A1-Автомат',
-            ApiLoot::ATTR_JSON   => '{"id":"5ae30e795acfc408fb139a0b","name":"Мушка-газблок для M4A1","normalizedName":"m4a1-front-sight-with-gas-block","width":1,"height":1,"weight":0.15,"description":"Штатная мушка для M4A1, производство Colt.","category":{"name":"Газовый блок"},"iconLink":"https://assets.tarkov.dev/5ae30e795acfc408fb139a0b-icon.webp","inspectImageLink":"https://assets.tarkov.dev/5ae30e795acfc408fb139a0b-image.webp","sellFor":[{"vendor":{"name":"Прапор"},"price":1285,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":1285},{"vendor":{"name":"Скупщик"},"price":1028,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":1028},{"vendor":{"name":"Лыжник"},"price":1259,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":1259},{"vendor":{"name":"Миротворец"},"price":9,"currency":"USD","currencyItem":{"name":"Доллары"},"priceRUB":1156},{"vendor":{"name":"Механик"},"price":1439,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":1439},{"vendor":{"name":"Барахолка"},"price":20000,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":20000}],"buyFor":[{"vendor":{"name":"Миротворец"},"price":21,"currency":"USD","currencyItem":{"name":"Доллары"},"priceRUB":3125},{"vendor":{"name":"Барахолка"},"price":26255,"currency":"RUB","currencyItem":{"name":"Рубли"},"priceRUB":26255}],"bartersFor":[],"receivedFromTasks":[{"name":"Друг с Запада - Часть 1","trader":{"name":"Лыжник"}}]}',
-            ApiLoot::ATTR_URL    => 'm4a1',
-            ApiLoot::ATTR_ACTIVE => 1
+            Currencies::ATTR_ID => 4,
+            Currencies::ATTR_TITLE => 'Новый объект валюты',
+            Currencies::ATTR_VALUE => 10000,
+            Currencies::ATTR_ENABLED => 1
         ];
 
         /** Сетапим атрибуты AR объекту */
-        $item->setAttributes($values);
+        $task->setAttributes($values);
 
         /** Валидируем атрибуты */
-        $item->validate();
+        $task->validate();
 
         /** Ожидаем что запись сохранилась */
-        $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился.');
+        $this->assertTrue($task->save(), 'Ожидалось true - объект не сохранился.');
 
         /** Выбираем все записи */
-        $list = ApiLoot::find()->all();
+        $list = Currencies::find()->all();
 
-        /** Ожидаем что всего будет 22 записи */
-        $this->assertTrue(count($list) == 22);
+        /** Ожидаем что всего будет 4 записи */
+        $this->assertTrue(count($list) == 4);
     }
 
     /** Тестируем выборку записи на обновление */
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = ApiLoot::findOne([ApiLoot::ATTR_ID => 3]);
+        $task = Currencies::findOne([Currencies::ATTR_ID => 3]);
 
         /** Проводит валидацию атрибутов данных, полученных из фикстуры */
-        $this->_validateAttributes($item);
+        $this->_validateAttributes($task);
     }
 
     /** Тестируем получение всех записей (select) */
     public function testList()
     {
         /** Выбираем все записи */
-        $list = ApiLoot::find()->all();
+        $list = Currencies::find()->all();
 
-        /** Ожидаем получить из фикстур - 21 записи */
-        $this->assertTrue(count($list) == 21);
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
     }
 
-    /** Метод для получения только активных записей */
+    /** Тестируем выборку только среди активных записей */
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = ApiLoot::find()
-            ->where([ApiLoot::ATTR_ACTIVE => 1])
-            ->all();
+        $list = Currencies::find()->where([Currencies::ATTR_ENABLED => 1])->all();
 
-        /** Ожидаем получить из фикстур - 21 записи */
-        $this->assertTrue(count($list) == 20);
+        /** Ожидаем получить из фикстур - 3 записи */
+        $this->assertTrue(count($list) == 3);
     }
 
-    /** Метод для получения только активных записей с определенными филдами и сортировкой (как в контроллере) */
-    public function testSelectActiveRowsWithSortAndOrder()
+    /** Выбираем только 1 активную запись - курс доллара */
+    public function testSelectDollarRow()
     {
-        /** Выбираем все записи используя селект и сортировку (как в контроллере) */
-        $list = ApiLoot::find()
-            ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])
-            ->where([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
-            ->orderBy([ApiLoot::ATTR_DATE_CREATE => SORT_DESC])
+        /** Выбираем 1 запись по критерию */
+        $item = Currencies::find()
+            ->where([Currencies::ATTR_TITLE => 'Доллар'])
+            ->andWhere([Currencies::ATTR_ENABLED => 1])
             ->all();
-
-        /** Ожидаем получить из фикстур - 20 записи */
-        $this->assertTrue(count($list) == 20);
-    }
-
-    /** Метод для получения только одной активной записи по урлу */
-    public function testSelectActiveByUrlSingleRow()
-    {
-        /** Выбираем все записи */
-        $item = ApiLoot::find()
-            ->where([ApiLoot::ATTR_URL => 'm4a1-front-sight-with-gas-block-one'])
-            ->andWhere([ApiLoot::ATTR_ACTIVE => 1])
-            ->one();
 
         /** Ожидаем получить из фикстур - 1 запись */
         $this->assertTrue(!empty($item));
     }
 
+    /** Выбираем только 1 активную запись - курс евро */
+    public function testSelectEuroRow()
+    {
+        /** Выбираем 1 запись по критерию */
+        $item = Currencies::find()
+            ->where([Currencies::ATTR_TITLE => 'Евро'])
+            ->andWhere([Currencies::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(!empty($item));
+    }
+
+    /** Выбираем только 1 активную запись - курс биткоина */
+    public function testSelectBitkoinRow()
+    {
+        /** Выбираем 1 запись по критерию */
+        $item = Currencies::find()
+            ->where([Currencies::ATTR_TITLE => 'Биткоин'])
+            ->andWhere([Currencies::ATTR_ENABLED => 1])
+            ->all();
+
+        /** Ожидаем получить из фикстур - 1 запись */
+        $this->assertTrue(!empty($item));
+    }
 
     /** Тестируем удаление объекта */
     public function testDelete()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = ApiLoot::findOne([ApiLoot::ATTR_ID => 3]);
+        $item = Currencies::findOne([Currencies::ATTR_ID => 3]);
 
         /** Удаляем запись */
         $item->delete();
 
         /** Получаем список всех записей */
-        $list = ApiLoot::find()->all();
+        $list = Currencies::find()->all();
 
-        /** Ожидаем получить из фикстур - 20 записи */
-        $this->assertTrue(count($list) == 20);
+        /** Ожидаем получить из фикстур - 2 записи */
+        $this->assertTrue(count($list) == 2);
     }
 }
