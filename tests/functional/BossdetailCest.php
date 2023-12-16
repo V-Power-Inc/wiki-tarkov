@@ -12,23 +12,18 @@ use app\tests\fixtures\BossesFixture;
 
 class BossdetailCest
 {
-    /**
-     * Фикстуры для таблицы bosses
-     * @return array
-     */
-    public function _fixtures()
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
     {
-        return [
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'boss' => [
                 'class' => BossesFixture::class,
                 'dataFile' => codecept_data_dir() . 'bosses.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на главной странице боссов */
-    public function _before(\FunctionalTester $I)
-    {
+        /** Мы на главной странице боссов */
         $I->amOnRoute('/bosses/rezerv');
     }
 

@@ -19,12 +19,11 @@ use app\tests\fixtures\TasksFixture;
  */
 class TasksCest
 {
-    /**
-     * Фикстуры для таблицы tasks
-     * @return array
-     */
-    public function _fixtures() {
-        return [
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
+    {
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'traders' => [
                 'class' => TradersFixture::class,
                 'dataFile' => codecept_data_dir() . 'traders.php'
@@ -33,12 +32,8 @@ class TasksCest
                 'class' => TasksFixture::class,
                 'dataFile' => codecept_data_dir() . 'tasks.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на странице квестов Барахольщика (Другие квесты торговцев работают аналогично) */
-    public function _before(\FunctionalTester $I)
-    {
         /** Путь до страницы с квестами Барахольщика */
         $I->amOnRoute('quests-of-traders/baraholshik-quests');
     }

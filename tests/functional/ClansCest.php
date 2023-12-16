@@ -13,23 +13,18 @@ use app\tests\fixtures\ClansFixture;
  */
 class ClansCest
 {
-    /**
-     * Фикстуры для таблицы eger
-     * @return array
-     */
-    public function _fixtures()
+    /** Метод выполняется перед каждым тестом */
+    public function _before(\FunctionalTester $I)
     {
-        return [
+        /** Грузим фикстуры перед каждым тестом */
+        $I->haveFixtures([
             'clans' => [
                 'class' => ClansFixture::class,
                 'dataFile' => codecept_data_dir() . 'clans.php'
             ]
-        ];
-    }
+        ]);
 
-    /** Мы на главной странице */
-    public function _before(\FunctionalTester $I)
-    {
+        /** Путь до страницы с квестами Барахольщика */
         $I->amOnRoute(ClanController::routeId(ClanController::ACTION_INDEX));
     }
 
