@@ -22,6 +22,9 @@ class StringValidator extends \yii\validators\StringValidator {
 	const ATTR_TOO_SHORT = 'tooShort';
 	const ATTR_TOO_LONG  = 'tooLong';
 
+	/** @var int - Длина строки 500 символов */
+	const VARCHAR_LENGTH_FIVE_HINDRED = 500;
+
 	/** @var int - Длина строки 255 символов */
 	const VARCHAR_LENGTH = 255;
 
