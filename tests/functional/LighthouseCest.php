@@ -110,4 +110,22 @@ class LighthouseCest
     {
         $I->SeeElement('.overlay-block');
     }
+
+    /** У нас нет куки - темная тема сайта */
+    public function checkDarkThemeCoockie(\FunctionalTester $I)
+    {
+        $I->DontSeeCookie('dark_theme');
+    }
+
+    /** Проверяем что видим на странице переключатель темной темы */
+    public function checkThemeToggler(\FunctionalTester $I)
+    {
+        $I->SeeElement('.js-change-site-style');
+    }
+
+    /** Проверяем что видим на странице ссылку на страницу обратной связи */
+    public function checkFeedbackFormLinkIcon(\FunctionalTester $I)
+    {
+        $I->SeeElement('.js-feedback-form');
+    }
 }
