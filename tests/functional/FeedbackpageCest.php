@@ -19,7 +19,7 @@ use app\controllers\FeedbackController;
  */
 class FeedbackpageCest
 {
-    /** Мы на главной странице */
+    /** Мы на странице формы обратной связи */
     public function _before(\FunctionalTester $I)
     {
         $I->amOnRoute(FeedbackController::routeId(FeedbackController::ACTION_INDEX));

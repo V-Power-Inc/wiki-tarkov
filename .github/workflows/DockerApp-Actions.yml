@@ -111,7 +111,7 @@ jobs:
 
           echo "Сбрасываем кеши - на всякий случай"
 
-          docker-compose exec -T app redis-cli flushall
+          docker-compose exec -T redis redis-cli flushall
 
           echo "Functional и Unit тестирование"
 
