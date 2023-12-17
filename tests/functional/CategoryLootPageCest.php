@@ -217,6 +217,7 @@ class CategoryLootPageCest
         $I->click('.cls-btn');
     }
 
+    /** Проверяем наличие связанных записей на странице */
     public function checkItemsOnPage(\FunctionalTester $I)
     {
         /** Пожелания */
