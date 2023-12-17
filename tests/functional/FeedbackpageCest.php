@@ -173,4 +173,14 @@ class FeedbackpageCest
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
     }
+
+    /** Проверка что форма обратной связи есть на странице и поле с данными можно заполнить */
+    public function checkSendFeedbackFormOnPage(\FunctionalTester $I)
+    {
+        /** Вижу поле для ввода сообщения */
+        $I->see('Сообщение', 'label.control-label');
+
+        /** Заполняю инпут в форме */
+        $I->fillField('#feedbackform-content', 'Тестовая отправка формы обратной связи.');
+    }
 }
