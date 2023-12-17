@@ -2,41 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 03.09.2022
- * Time: 18:52
+ * Date: 17.12.2023
+ * Time: 12:31
  */
 
 namespace Tests\Functional;
 
-use app\controllers\LootController;
-use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\ItemsFixture;
+use app\controllers\SiteController;
+use app\tests\fixtures\CurrenciesFixture;
 
 /**
- * Функциональные тестирование главной страницы справочника лута
+ * Функциональные тесты для страницы списка валют
  *
- * Class LootMainpageCest
+ * Class CurrenciesCest
  * @package Tests\Functional
  */
-class LootMainpageCest
+class CurrenciesCest
 {
     /** Метод выполняется перед каждым тестом */
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
         $I->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
+            'currencies' => [
+                'class' => CurrenciesFixture::class,
+                'dataFile' => codecept_data_dir() . 'currencies.php'
             ]
         ]);
 
-        /** Мы на главной странице справочника лута */
-        $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));
+        /** Путь до страницы с валютами */
+        $I->amOnRoute(SiteController::routeId(SiteController::ACTION_CURRENCIES));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -71,8 +66,8 @@ class LootMainpageCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Полная база лута по Escape from Tarkov - контент постоянно актуализируется">');
-        $I->seeInSource('<meta name="keywords" content="Escape from Tarkov: Полная база данных лута">');
+        $I->seeInSource('<meta name="description" content="В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс.">');
+        $I->seeInSource('<meta name="keywords" content="Курс валют в Escape from Tarkov">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -80,47 +75,21 @@ class LootMainpageCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Справочник лута Escape from Tarkov. База внутриигровых предметов.">');
+        $I->seeInSource('<meta property="og:title" content="Курс валют в Escape from Tarkov">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Справочник лута Escape from Tarkov. База внутриигровых предметов.');
+        $I->seeInTitle('Курс валют в Escape from Tarkov');
     }
 
-    /** Мы видим левое меню, с категориями справочника лута */
-    public function checkLeftMenuExists(\FunctionalTester $I)
-    {
-        $I->seeElement('#categories-menu');
-    }
-
-    /** Проверяем существование активных категорий на странице */
-    public function checkCategoriesExists(\FunctionalTester $I)
-    {
-        $I->seeLink('Основная категория', '/loot/main-category');
-        $I->seeLink('Основная категория - second', '/loot/main-category-second');
-    }
-
-    /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
+    /** Мы видим H1 заголовок и текст описания страницы а также объект клана */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Справочник лута Escape from Tarkov. База внутриигровых предметов.', 'h1');
-        $I->seeLink('Квестовые предметы', '/loot/quest-loot');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->see('Поиск предметов в справочнике по названию', '.control-label');
-        $I->seeElement('.top-content');
-    }
-
-    /** Мы видим что основное описание страницы присутствует на ней */
-    public function checkPageContentDescription(\FunctionalTester $I)
-    {
-        $I->seeElement('.alert.alert-info.size-16.margin-top-20');
+        $I->see('Курс валют в Escape from Tarkov', 'h1');
+        $I->see('В Escape from Tarkov как и в реальном мире - есть свои денежные валюты, у которых также есть активный курс.');
     }
 
     /** Мы видим все ссылки горизонтального меню */
@@ -215,5 +184,84 @@ class LootMainpageCest
 
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
+    }
+
+    /** Метод проверяет сущестование блока с конвертацией доллара */
+    public function checkDollarBlockIsExist(\FunctionalTester $I)
+    {
+        /** Мы видим заголовок блока */
+        $I->see('Курс Доллара', 'h2.curencies-title');
+
+        /** Мы видим описание блока */
+        $I->see('Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.');
+
+        /** Мы видим блок с исходным курсом */
+        $I->seeElement('//html/body/div[1]/div[3]/div/div[1]/div[1]/div[1]/input');
+
+        /** Мы видим селектор до введения данных */
+        $I->seeElement('#dollar-refference');
+
+        /** Мы видим селектор до данных после конвертации */
+        $I->seeElement('#outputdollar');
+    }
+
+    /** Метод проверяет сущестование блока с конвертацией Евро */
+    public function checkEuroBlockIsExist(\FunctionalTester $I)
+    {
+        /** Мы видим заголовок блока */
+        $I->see('Курс Евро', 'h2.curencies-title');
+
+        /** Мы видим описание блока */
+        $I->see('Евро валюта является ходовой у торговца Механика, за нее он продает различные дополнения для вашего оружия в виде модулей, однако не только он продает товары за евро, у Лыжника также можно найти несколько товаров продаваемых за евро.');
+
+        /** Мы видим блок с исходным курсом */
+        $I->seeElement('//html/body/div[1]/div[3]/div/div[1]/div[2]/div[1]/input');
+
+        /** Мы видим селектор до введения данных */
+        $I->seeElement('#euro-refference');
+
+        /** Мы видим селектор до данных после конвертации */
+        $I->seeElement('#outputeuro');
+    }
+
+    /** Метод проверяет сущестование блока с конвертацией BTC */
+    public function checkBtcBlockIsExist(\FunctionalTester $I)
+    {
+        /** Мы видим заголовок блока */
+        $I->see('Курс Биткоина', 'h2.curencies-title');
+
+        /** Мы видим описание блока */
+        $I->see('Это самая дорогостоющая валюта, стоимость 1 биткоина в Таркове составляет десятки тысяч рублей. Валюта в ходу у Механика, за нее у него можно купить оружие с отличными боевыми характеристиками. Зачастую ЧВК используют биткоины также для того, чтобы поправить свое финансовое положение - следовательно продавать биткоин тоже очень выгодно.');
+
+        /** Мы видим блок с исходным курсом */
+        $I->seeElement('//html/body/div[1]/div[3]/div/div[1]/div[3]/div[1]/input');
+
+        /** Мы видим селектор до введения данных */
+        $I->seeElement('#bitkoin-refference');
+
+        /** Мы видим селектор до данных после конвертации */
+        $I->seeElement('#outputbitkoin');
+    }
+
+    /** Метод проверяет сущестование блока с конвертацией в рубли */
+    public function checkOnRoublesBlockIsExist(\FunctionalTester $I)
+    {
+        /** Мы видим заголовок блока */
+        $I->see('С рублей на другие валюты', 'h2.curencies-title');
+
+        /** Мы видим описание блока */
+        $I->see('В этом блоке вы можете ввести количество рублей, чтобы узнать сколько других валют сможете купить по текущим курсам.');
+
+        /** Мы видим блок с инпутом для конвертации в другие валюты */
+        $I->seeElement('#roubles_input');
+
+        /** Мы видим блок результатов Доллара */
+        $I->seeElement('#dollar_res');
+
+        /** Мы видим блок результатов Euro */
+        $I->seeElement('#euro_res');
+
+        /** Мы видим блок результатов BTC */
+        $I->seeElement('#btc_res');
     }
 }

@@ -66,6 +66,8 @@ class Catskills extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_CONTENT, StringValidator::class],
 
             [static::ATTR_BG_STYLE, StringValidator::class],

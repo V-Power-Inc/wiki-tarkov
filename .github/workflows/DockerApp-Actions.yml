@@ -109,6 +109,10 @@ jobs:
 
           docker-compose exec -T app php yii migrate --db db_test --interactive=0;
 
+          echo "Сбрасываем кеши - на всякий случай"
+
+          docker-compose exec -T redis redis-cli flushall
+
           echo "Functional и Unit тестирование"
 
           docker-compose exec -T app vendor/bin/codecept run

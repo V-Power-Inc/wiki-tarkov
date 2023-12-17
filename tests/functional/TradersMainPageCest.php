@@ -2,41 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 03.09.2022
- * Time: 18:52
+ * Date: 17.12.2023
+ * Time: 22:56
  */
 
 namespace Tests\Functional;
 
-use app\controllers\LootController;
-use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\ItemsFixture;
+use app\controllers\TraderController;
+use app\tests\fixtures\TradersFixture;
 
 /**
- * Функциональные тестирование главной страницы справочника лута
+ * Функциональные тесты страницы списка торговцев
  *
- * Class LootMainpageCest
+ * Class TradersMainPageCest
  * @package Tests\Functional
  */
-class LootMainpageCest
+class TradersMainPageCest
 {
     /** Метод выполняется перед каждым тестом */
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
         $I->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
+            'traders' => [
+                'class' => TradersFixture::class,
+                'dataFile' => codecept_data_dir() . 'traders.php'
             ]
         ]);
 
-        /** Мы на главной странице справочника лута */
-        $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));
+        /** Мы на странице списка торговцев */
+        $I->amOnRoute(TraderController::routeId(TraderController::ACTION_QUESTS));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -71,8 +66,8 @@ class LootMainpageCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Полная база лута по Escape from Tarkov - контент постоянно актуализируется">');
-        $I->seeInSource('<meta name="keywords" content="Escape from Tarkov: Полная база данных лута">');
+        $I->seeInSource('<meta name="description" content="Торговцы в Escape from Tarkov - описания торговцев и разбор квестов - прохождения заданий Escape from Tarkov.">');
+        $I->seeInSource('<meta name="keywords" content="Квесты Escape from Tarkov, Задачи торговцев, квесты в Таркоеве">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -80,47 +75,14 @@ class LootMainpageCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Справочник лута Escape from Tarkov. База внутриигровых предметов.">');
+        $I->seeInSource('<meta property="og:title" content="Торговцы в Escape from Tarkov - описания торговцев и разбор квестов">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Справочник лута Escape from Tarkov. База внутриигровых предметов.');
-    }
-
-    /** Мы видим левое меню, с категориями справочника лута */
-    public function checkLeftMenuExists(\FunctionalTester $I)
-    {
-        $I->seeElement('#categories-menu');
-    }
-
-    /** Проверяем существование активных категорий на странице */
-    public function checkCategoriesExists(\FunctionalTester $I)
-    {
-        $I->seeLink('Основная категория', '/loot/main-category');
-        $I->seeLink('Основная категория - second', '/loot/main-category-second');
-    }
-
-    /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
-    public function checkPageMainData(\FunctionalTester $I)
-    {
-        $I->see('Справочник лута Escape from Tarkov. База внутриигровых предметов.', 'h1');
-        $I->seeLink('Квестовые предметы', '/loot/quest-loot');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->see('Поиск предметов в справочнике по названию', '.control-label');
-        $I->seeElement('.top-content');
-    }
-
-    /** Мы видим что основное описание страницы присутствует на ней */
-    public function checkPageContentDescription(\FunctionalTester $I)
-    {
-        $I->seeElement('.alert.alert-info.size-16.margin-top-20');
+        $I->seeInTitle('Торговцы в Escape from Tarkov - описания торговцев и разбор квестов');
     }
 
     /** Мы видим все ссылки горизонтального меню */
@@ -163,6 +125,22 @@ class LootMainpageCest
         $I->seeLink('Справочник ключей', '/keys');
         $I->seeLink('Боссы на локациях', '/bosses');
         $I->seeLink('Актуальный лут', '/items');
+    }
+
+    /** Проверяем активность пункта навигации, для текущей страницы */
+    public function checkCurrentPageLinkActive(\FunctionalTester $I)
+    {
+        $I->seeElement('.dropdown-toggle.active');
+    }
+
+    /**
+     * Мы видим H1 заголовок и основные элементы данной страницы такие как
+     * Заголовок, детальное содержмое страницы, наличие табов, наличие ключевых ссылок на
+     * релевантные разделы
+     */
+    public function checkPageMainData(\FunctionalTester $I)
+    {
+        $I->see('Торговцы в Escape from Tarkov - описания торговцев и разбор квестов', 'h1');
     }
 
     /** У нас нет куки - скрывающей оверлей с рекламой */
@@ -215,5 +193,24 @@ class LootMainpageCest
 
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
+    }
+
+    /** Проверяем что хотя-бы один торговец есть на странице (остальные по аналогии работают) */
+    public function checkTradersExists(\FunctionalTester $I)
+    {
+        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
+        $I->expect('Я ожидаю что хотя-бы 1 торговец есть на странице');
+
+        /** Видим линк торговца */
+        $I->seeLink('Прапор', '/traders/prapor');
+
+        /** Видим изображение торговца */
+        $I->SeeElement('img.image-trader');
+
+        /** Видим линк на детальный раздел торговца */
+        $I->seeLink('Перейти в раздел Прапора', '/traders/prapor');
+
+        /** Видим линк на раздел квестов торговца */
+        $I->seeLink('Перейти в раздел квестов Прапора', '/quests-of-traders/prapor-quests');
     }
 }
