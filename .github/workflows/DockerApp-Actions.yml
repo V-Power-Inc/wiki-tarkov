@@ -18,39 +18,12 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-  # Собираем проект
-  Build:
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build (Docker-compose up & composer-update)
-      shell: bash
-      env:
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      run: |
-          echo "Экспоритруем переменные зашитые в битбакет для развертки"
-          echo DB_NAME="$DB_NAME" > .env
-          echo DB_USER="$DB_USER" >> .env
-          echo DB_PASSWORD="$DB_PASSWORD" >> .env
-
-          echo "Билдим контейнеры через docker-compose"
-
-          docker-compose build
-
-          echo "Поднимаем все контейнеры через docker-compose"
-          docker-compose up -d
-
-          echo "Обновляем зависимости composer"
-
-          docker-compose exec -T app composer install --no-interaction
-  # Прогоняем проект тестами
+  # Собираем проект и прогоняем тестами
   Tests:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: Tests (Applying migrations & Unit/Functional tests)
+    - name: Tests (Build & Applying migrations & Unit/Functional tests)
       shell: bash
       env:
         DB_NAME: ${{ secrets.DB_NAME }}
