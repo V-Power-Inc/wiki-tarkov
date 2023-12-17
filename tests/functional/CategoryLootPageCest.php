@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 03.09.2022
- * Time: 18:52
+ * Date: 17.12.2023
+ * Time: 21:22
  */
 
 namespace Tests\Functional;
@@ -14,12 +14,12 @@ use app\tests\fixtures\ItemsFixture;
 use yii\helpers\Url;
 
 /**
- * Функциональные тестирование главной страницы справочника лута
+ * Функциональные тесты страницы категории справочника луту
  *
- * Class LootMainpageCest
+ * Class CategoryLootPageCest
  * @package Tests\Functional
  */
-class LootMainpageCest
+class CategoryLootPageCest
 {
     /** Метод выполняется перед каждым тестом */
     public function _before(\FunctionalTester $I)
@@ -36,8 +36,8 @@ class LootMainpageCest
             ]
         ]);
 
-        /** Мы на главной странице справочника лута */
-        $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));
+        /** Мы на категории справочника лута */
+        $I->amOnRoute(LootController::routeId(LootController::ACTION_CATEGORY) . '/main-category');
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -72,8 +72,8 @@ class LootMainpageCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Полная база лута по Escape from Tarkov - контент постоянно актуализируется">');
-        $I->seeInSource('<meta name="keywords" content="Escape from Tarkov: Полная база данных лута">');
+        $I->seeInSource('<meta name="description" content="Seo описание новой основной категории">');
+        $I->seeInSource('<meta name="keywords" content="Основная категория, лут, тесты">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -81,14 +81,14 @@ class LootMainpageCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Справочник лута Escape from Tarkov. База внутриигровых предметов.">');
+        $I->seeInSource('<meta property="og:title" content="Escape from Tarkov: Основная категория">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Справочник лута Escape from Tarkov. База внутриигровых предметов.');
+        $I->seeInTitle('Escape from Tarkov: Основная категория');
     }
 
     /** Мы видим левое меню, с категориями справочника лута */
@@ -106,7 +106,7 @@ class LootMainpageCest
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Справочник лута Escape from Tarkov. База внутриигровых предметов.', 'h1');
+        $I->see('Escape from Tarkov: Основная категория', 'h1');
         $I->seeLink('Квестовые предметы', '/loot/quest-loot');
     }
 
@@ -120,7 +120,7 @@ class LootMainpageCest
     /** Мы видим что основное описание страницы присутствует на ней */
     public function checkPageContentDescription(\FunctionalTester $I)
     {
-        $I->seeElement('.alert.alert-info.size-16.margin-top-20');
+        $I->seeElement('.alert.alert-info.size-16');
     }
 
     /** Мы видим все ссылки горизонтального меню */
@@ -215,5 +215,14 @@ class LootMainpageCest
 
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
+    }
+
+    public function checkItemsOnPage(\FunctionalTester $I)
+    {
+        /** Пожелания */
+        $I->wantTo('Увидеть предмет из справочника лута, привязанный к этой категории');
+
+        /** Видим предмет из справочника лута, привязанный к этой категории */
+        $I->seeLink('Снайперская винтовка СВ-98', '/loot/sv-98.html');
     }
 }
