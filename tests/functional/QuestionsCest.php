@@ -2,41 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 03.09.2022
- * Time: 18:52
+ * Date: 17.12.2023
+ * Time: 1:39
  */
 
 namespace Tests\Functional;
 
-use app\controllers\LootController;
-use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\ItemsFixture;
+use app\controllers\SiteController;
+use app\tests\fixtures\QuestionsFixture;
 
 /**
- * Функциональные тестирование главной страницы справочника лута
+ * Функциональные тесты страницы списка вопросов ответов
  *
- * Class LootMainpageCest
+ * Class QuestionsCest
  * @package Tests\Functional
  */
-class LootMainpageCest
+class QuestionsCest
 {
     /** Метод выполняется перед каждым тестом */
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
         $I->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
+            'questions' => [
+                'class' => QuestionsFixture::class,
+                'dataFile' => codecept_data_dir() . 'questions.php'
             ]
         ]);
 
-        /** Мы на главной странице справочника лута */
-        $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));
+        /** Мы на странице списка новостей */
+        $I->amOnRoute(SiteController::routeId(SiteController::ACTION_QUESTIONS));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -71,8 +66,7 @@ class LootMainpageCest
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
     public function checkMetaTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta name="description" content="Полная база лута по Escape from Tarkov - контент постоянно актуализируется">');
-        $I->seeInSource('<meta name="keywords" content="Escape from Tarkov: Полная база данных лута">');
+        $I->seeInSource('<meta name="description" content="Наиболее часто задаваемые вопросы по игровому процессу в онлайн-шутере Escape from Tarkov.">');
     }
 
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
@@ -80,47 +74,20 @@ class LootMainpageCest
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Справочник лута Escape from Tarkov. База внутриигровых предметов.">');
+        $I->seeInSource('<meta property="og:title" content="Escape from Tarkov: Часто задаваемые вопросы">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Справочник лута Escape from Tarkov. База внутриигровых предметов.');
-    }
-
-    /** Мы видим левое меню, с категориями справочника лута */
-    public function checkLeftMenuExists(\FunctionalTester $I)
-    {
-        $I->seeElement('#categories-menu');
-    }
-
-    /** Проверяем существование активных категорий на странице */
-    public function checkCategoriesExists(\FunctionalTester $I)
-    {
-        $I->seeLink('Основная категория', '/loot/main-category');
-        $I->seeLink('Основная категория - second', '/loot/main-category-second');
+        $I->seeInTitle('Escape from Tarkov: Часто задаваемые вопросы');
     }
 
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Справочник лута Escape from Tarkov. База внутриигровых предметов.', 'h1');
-        $I->seeLink('Квестовые предметы', '/loot/quest-loot');
-    }
-
-    /** Мы видим, что поисковое поле поиска лута есть на странице */
-    public function checkSearchLootInput(\FunctionalTester $I)
-    {
-        $I->see('Поиск предметов в справочнике по названию', '.control-label');
-        $I->seeElement('.top-content');
-    }
-
-    /** Мы видим что основное описание страницы присутствует на ней */
-    public function checkPageContentDescription(\FunctionalTester $I)
-    {
-        $I->seeElement('.alert.alert-info.size-16.margin-top-20');
+        $I->see('Escape from Tarkov: Часто задаваемые вопросы', 'h1');
     }
 
     /** Мы видим все ссылки горизонтального меню */
@@ -215,5 +182,36 @@ class LootMainpageCest
 
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
+    }
+
+    /** Проверяем что на странице есть информация, представленная в фикстурах */
+    public function checkThatQuestionsExistingOnPage(\FunctionalTester $I)
+    {
+        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
+        $I->expect('Я ожидаю что на странице есть 2 вопроса и ответа на них и я смогу их посмотреть');
+
+        /** Видим первый вопрос */
+        $I->see('Что такое мурка?', 'h2.question-title');
+
+        /** Видим второй вопрос */
+        $I->see('Где найти ключницу Keybar?', 'h2.question-title');
+
+        /** Видим кнопки читать ответ */
+        $I->canSee('Читать ответ');
+
+        /** Видим ответ на первый вопрос */
+        $I->canSee('Мурка это жаргонное название');
+
+        /** Видим ответ на второй вопрос */
+        $I->canSee('Более подробно о ключнице Keybar');
+    }
+
+    public function checkThatDisabledRowsAreNotOnPage(\FunctionalTester $I)
+    {
+        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
+        $I->expect('Я ожидаю что отключенная запись на странице не отображается');
+
+        /** Мы не видим такого вопроса */
+        $I->cantSee('Какое управление и горячие клавиши в Таркове?');
     }
 }

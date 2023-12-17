@@ -71,6 +71,8 @@ class Skills extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_CATEGORY, IntegerValidator::class],
 
             [static::ATTR_ENABLED, IntegerValidator::class],
