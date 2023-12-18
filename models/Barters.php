@@ -9,6 +9,7 @@ use app\common\helpers\validators\StringValidator;
 use app\models\queries\BartersQuery;
 use Yii;
 use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "barters".
  *
@@ -51,6 +52,8 @@ class Barters extends ActiveRecord
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_TITLE, RequiredValidator::class],
             [static::ATTR_TITLE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
