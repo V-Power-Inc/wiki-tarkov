@@ -140,7 +140,7 @@ class Skills extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory0()
+    public function getCategory()
     {
         return $this->hasOne(Catskills::class, ['id' => 'category']);
     }
