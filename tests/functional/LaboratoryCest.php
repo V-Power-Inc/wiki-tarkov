@@ -174,4 +174,33 @@ class LaboratoryCest
         /** Кликаем кнопку скрытия рекламы */
         $I->click('.cls-btn');
     }
+
+    /** Проверяем что кнопка скролла вверх на странице присутствует */
+    public function checkScrollToTopExists(\FunctionalTester $I)
+    {
+        /** Видим что футер присутствует */
+        $I->SeeElement('.scup');
+    }
+
+    /** Проверяем правильную работу footer */
+    public function checkFooterLinks(\FunctionalTester $I)
+    {
+        /** Видим что футер присутствует */
+        $I->SeeElement('footer');
+
+        /** Видим что копирайт есть в футере */
+        $I->SeeElement('footer p.copyright.text-center');
+
+        /** Видим что присутствует название организации */
+        $I->SeeElement('footer p.copyright.text-center span.organization_footer_title');
+
+        /** Видим что присутствуют иконки-ссылки на соц-сети */
+        $I->SeeElement('div.icons-soc');
+
+        /** Видим что присутствует email обратной связи */
+        $I->see('Контактный Email: ', 'footer p.contact-info');
+
+        /** Видим что в футере указано, кому принадлежат права */
+        $I->see( 'Все права на Escape from Tarkov принадлежат Battlestate Games Limited','footer p.marks');
+    }
 }
