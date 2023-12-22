@@ -13,7 +13,7 @@ class m220815_174508_trg_clans_trigger extends Migration
      */
     public function safeUp()
     {
-        $sql = 'CREATE DEFINER=`'. $_ENV['DB_USER'] .'`@`localhost` TRIGGER `trg-clans` BEFORE UPDATE ON `bereg` FOR EACH ROW BEGIN
+        $sql = 'CREATE DEFINER=`'. $_ENV['DB_USER'] .'`@`localhost` TRIGGER `trg-clans` BEFORE UPDATE ON `clans` FOR EACH ROW BEGIN
       SET NEW.date_update = CURRENT_TIMESTAMP;
      END';
         $this->execute($sql);
