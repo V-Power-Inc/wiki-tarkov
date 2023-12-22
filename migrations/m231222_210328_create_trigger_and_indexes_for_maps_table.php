@@ -53,7 +53,7 @@ class m231222_210328_create_trigger_and_indexes_for_maps_table extends Migration
 
         /** Дропаем индекс на имя таблицы */
         $this->dropIndex(
-            'idx_name',
+            'idx_map',
             static::TABLE_NAME
         );
 
