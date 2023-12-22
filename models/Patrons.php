@@ -22,7 +22,6 @@ use yii\db\ActiveRecord;
  * @property string $tochn
  * @property string $otdacha
  * @property string $fragmentation
- * @property string $iznos
  * @property string $blood_1
  * @property string $blood_2
  * @property string $rikochet
@@ -42,7 +41,6 @@ class Patrons extends ActiveRecord
     const ATTR_TOCHN              = 'tochn';
     const ATTR_OTDACHA            = 'otdacha';
     const ATTR_FRAGMENTATION      = 'fragmentation';
-    const ATTR_IZNOS              = 'iznos';
     const ATTR_BLOOD_1            = 'blood_1';
     const ATTR_BLOOD_2            = 'blood_2';
     const ATTR_RIKOCHET           = 'rikochet';
@@ -79,7 +77,6 @@ class Patrons extends ActiveRecord
             [static::ATTR_TOCHN, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_OTDACHA, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_FRAGMENTATION, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
-            [static::ATTR_IZNOS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_BLOOD_1, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_BLOOD_2, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_RIKOCHET, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
@@ -107,7 +104,6 @@ class Patrons extends ActiveRecord
             static::ATTR_TOCHN => 'Точность %',
             static::ATTR_OTDACHA => 'Отдача %',
             static::ATTR_FRAGMENTATION => 'Шанс фрагментации %',
-            static::ATTR_IZNOS => 'Доп. износ оружия',
             static::ATTR_BLOOD_1 => 'Тяжелое кровотечение %',
             static::ATTR_BLOOD_2 => 'Легкое кровотечение %',
             static::ATTR_RIKOCHET => 'Шанс рикошета',

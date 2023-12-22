@@ -30,9 +30,7 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
             <?= $this->render('/other/google-gor.php'); ?>
         </div>
 
-
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clans-content">
-
 
             <div class="size-16 alert alert-info">
                 На этой странице представлена таблица патронов Escape from Tarkov с характеристиками каждого вида патрона в удобном виде. С помощью таблицы вы сможете узнать основные характеристики каждого патрона и узнать его эффективные атрибуты для применения в различного рода боевых ситуациях.
@@ -82,7 +80,6 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
                             <th>Точность %</th>
                             <th>Отдача %</th>
                             <th>Шанс фрагментации %</th>
-                            <th>Доп. износ оружия</th>
                             <th>Тяжелое кровотечение %</th>
                             <th>Легкое кровотечение %</th>
                             <th>Шанс рикошета</th>
@@ -105,7 +102,6 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
                             <td><span style="font-size:14px"><strong><?=$patron['tochn']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['otdacha']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['fragmentation']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['iznos']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['blood_1']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['blood_2']?></strong></span></td>
                             <td><span style="font-size:14px"><strong><?=$patron['rikochet']?></strong></span></td>
