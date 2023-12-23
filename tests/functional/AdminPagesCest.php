@@ -32,6 +32,7 @@ use app\modules\admin\controllers\TradersController;
  */
 class AdminPagesCest
 {
+    /** Метод проверяет что на страницы админки мы не можем зайти без авторизации */
     public function checkAdminPagesWithoutLogin(\FunctionalTester $I)
     {
         /** В цикле проходим каждый URL из админки (Каждый в отдельном контроллере) */
