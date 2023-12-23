@@ -1,7 +1,7 @@
 /**
  * Created by PC_Principal on 07.01.2023.
  *
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.dev/ - Obfuscate JS
  */
 
 /** Вызов карты и указание центра координат **/

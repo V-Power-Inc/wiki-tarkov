@@ -8,11 +8,7 @@
 
 namespace app\common\services;
 
-use app\models\Razvyazka;
-use app\models\Zavod;
-use app\models\Forest;
-use app\models\Tamojnya;
-use app\models\Bereg;
+use app\models\Maps;
 use yii\helpers\Json;
 
 /**
@@ -24,9 +20,11 @@ use yii\helpers\Json;
 final class MarkersService
 {
     /**
-     * Метод вытаскивает маркеры, по переданному значению
+     * Метод вытаскивает маркеры, по переданному значению названия карты
+     * Возвращает Json
      *
-     * @param string $map_title - название карты (Совпадает с названием таблицы)
+     * @param string $map_title - название карты
+     *
      * @return string
      */
     public static function takeMarkers(string $map_title): string
@@ -37,19 +35,19 @@ final class MarkersService
         /** В свиче в зависимости от названия карты вернем нужный набор маркеров */
         switch ($map_title) {
             case 'zavod':
-                $markers = Zavod::takeMarkers();
+                $markers = Maps::takeZavodMarkers();
                 break;
             case 'tamojnya':
-                $markers = Tamojnya::takeMarkers();
+                $markers = Maps::takeTamojnyaMarkers();
                 break;
             case 'forest':
-                $markers = Forest::takeMarkers();
+                $markers = Maps::takeForestMarkers();
                 break;
             case 'bereg':
-                $markers = Bereg::takeMarkers();
+                $markers = Maps::takeBeregMarkers();
                 break;
             case 'razvyazka':
-                $markers = Razvyazka::takeMarkers();
+                $markers = Maps::takeRazvyazkaMarkers();
                 break;
         }
 

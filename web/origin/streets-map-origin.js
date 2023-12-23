@@ -7,7 +7,7 @@
  * - Сетап чекбокса слоев (Константа LayerControls)
  *
  * @link https://mourner.github.io/Leaflet/reference.html - Documentation LeafletJS
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.dev/ - Obfuscate JS
  */
 
 /** Константа с селекторами, для работы с DOM */

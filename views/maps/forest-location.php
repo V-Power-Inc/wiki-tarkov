@@ -12,7 +12,7 @@ use yii\helpers\Url;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/forest-location.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/forest-location.js?v=6.1.12', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Карта локации Лес в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
 $this->registerMetaTag([
     'name' => 'description',
