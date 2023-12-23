@@ -2,11 +2,6 @@
 
 use app\modules\admin\controllers\CategoryController;
 use app\modules\admin\controllers\ItemsController;
-use app\modules\admin\controllers\ZavodController;
-use app\modules\admin\controllers\ForestController;
-use app\modules\admin\controllers\TamojnyaController;
-use app\modules\admin\controllers\BeregController;
-use app\modules\admin\controllers\RazvyazkaController;
 use app\modules\admin\controllers\ClansController;
 use app\modules\admin\controllers\BartersController;
 use app\modules\admin\controllers\QuestionsController;
@@ -18,6 +13,7 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\ArticlesController;
 use app\modules\admin\controllers\CurrenciesController;
 use app\modules\admin\controllers\FeedbackmessagesController;
+use app\modules\admin\controllers\MapsController;
 
 use yii\helpers\Url;
 
@@ -44,11 +40,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Маркеры на картах</h2>
-        <li><a href="<?= Url::to(ZavodController::getUrlRoute(ZavodController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локации Завод</a></li>
-        <li><a href="<?= Url::to(ForestController::getUrlRoute(ForestController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локации Лес</a></li>
-        <li><a href="<?= Url::to(TamojnyaController::getUrlRoute(TamojnyaController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локации Таможня</a></li>
-        <li><a href="<?= Url::to(BeregController::getUrlRoute(BeregController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локации Берег</a></li>
-        <li><a href="<?= Url::to(RazvyazkaController::getUrlRoute(RazvyazkaController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локации Развязка</a></li>
+        <li><a href="<?= Url::to(MapsController::getUrlRoute(MapsController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Маркеры на локациях</a></li>
     </ul>
 </div>
 

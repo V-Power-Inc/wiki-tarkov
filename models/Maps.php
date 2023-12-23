@@ -127,6 +127,7 @@ class Maps extends ActiveRecord
             static::ATTR_EXITS_GROUP => 'Спавн был в зоне',
             static::ATTR_ENABLED => 'Включен',
             static::ATTR_EXIT_ANYWAY => 'Общий выход',
+            static::ATTR_DATE_UPDATE => 'Дата обновления',
             static::FILE => 'Иконка маркера'
         ];
     }
