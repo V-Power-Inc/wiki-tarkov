@@ -11,8 +11,6 @@ use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
-use app\common\helpers\validators\ReCaptchaValidator;
-use Yii;
 use yii\db\ActiveRecord;
 
 /**

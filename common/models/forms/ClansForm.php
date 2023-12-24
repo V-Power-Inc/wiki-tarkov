@@ -11,7 +11,6 @@ namespace app\common\models\forms;
 use app\common\helpers\validators\UrlValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\FileValidator;
-use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\ReCaptchaValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
