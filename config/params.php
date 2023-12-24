@@ -5,8 +5,6 @@
  *
  * adminEmail - Email администратора
  *
- * discordCache - флаг для кеширования виджета дискорда
- *
  * yandexCache - флаг для кеширования яндекса
  *
  * keysBlocks - флаг для генерации рекламного места, в циклах материалов
@@ -25,7 +23,6 @@
 
 return [
     'adminEmail' => '#',
-    'discordCache' => 1,
     'yandexCache' => 1,
     'keysBlocks' => [],
 

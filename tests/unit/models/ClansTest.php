@@ -10,7 +10,7 @@
 
 namespace app\tests;
 
-use app\models\ClansForUnit;
+use app\models\Clans;
 use app\tests\fixtures\ClansFixture;
 use app\common\helpers\validators\StringValidator;
 
@@ -63,7 +63,7 @@ class ClansTest extends \Codeception\Test\Unit
     protected function _validateRequiredAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [ClansForUnit::ATTR_TITLE, ClansForUnit::ATTR_DESCRIPTION];
+        $list = [Clans::ATTR_TITLE, Clans::ATTR_DESCRIPTION];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -77,7 +77,7 @@ class ClansTest extends \Codeception\Test\Unit
     protected function _validateNumberAttributes($model)
     {
         /** Список атрибутов на валидацию */
-        $list = [ClansForUnit::ATTR_ID, ClansForUnit::ATTR_MODERATED];
+        $list = [Clans::ATTR_ID, Clans::ATTR_MODERATED];
 
         /** Проходим в цикле список атрибутов */
         foreach ($list as $item) {
@@ -91,10 +91,10 @@ class ClansTest extends \Codeception\Test\Unit
     protected function _validateStringAttributes($model)
     {
         /** Список атрибутов на валидацию - длина 100 символов */
-        $list_hundred = [ClansForUnit::ATTR_TITLE];
+        $list_hundred = [Clans::ATTR_TITLE];
         
         /** Список атрибутов на валидацию - длина 255 символов */
-        $list_main = [ClansForUnit::ATTR_DESCRIPTION];
+        $list_main = [Clans::ATTR_DESCRIPTION];
         
         /** Переменная с пустой строкой */
         $too_long_string = '';
@@ -138,19 +138,19 @@ class ClansTest extends \Codeception\Test\Unit
     public function testCreation()
     {
         /** Создаем новый объект AR */
-        $item = new ClansForUnit();
+        $item = new Clans();
 
         /** Валидируем все атрибуты AR объекта*/
         $this->_validateAttributes($item);
 
         /** Значения на сохранение нового объекта */
         $values = [
-            ClansForUnit::ATTR_ID            => 4,
-            ClansForUnit::ATTR_DESCRIPTION   => 'Secondary desc of clan',
-            ClansForUnit::ATTR_TITLE         => 'Second clan',
-            ClansForUnit::ATTR_PREVIEW       => 'https://sometest.ru/image_prev.png',
-            ClansForUnit::ATTR_LINK          => 'https://sometest.ru',
-            ClansForUnit::ATTR_MODERATED     => 0
+            Clans::ATTR_ID            => 4,
+            Clans::ATTR_DESCRIPTION   => 'Secondary desc of clan',
+            Clans::ATTR_TITLE         => 'Second clan',
+            Clans::ATTR_PREVIEW       => 'https://sometest.ru/image_prev.png',
+            Clans::ATTR_LINK          => 'https://sometest.ru',
+            Clans::ATTR_MODERATED     => 0
         ];
 
         /** Сетапим атрибуты AR объекту */
@@ -163,7 +163,7 @@ class ClansTest extends \Codeception\Test\Unit
         $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился.');
 
         /** Выбираем все записи */
-        $list = ClansForUnit::find()->all();
+        $list = Clans::find()->all();
 
         /** Ожидаем что всего будет 4 записи */
         $this->assertTrue(count($list) == 4);
@@ -173,7 +173,7 @@ class ClansTest extends \Codeception\Test\Unit
     public function testEdit()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = ClansForUnit::findOne([ClansForUnit::ATTR_ID => 3]);
+        $item = Clans::findOne([Clans::ATTR_ID => 3]);
 
         /** Проводит валидацию атрибутов данных, полученных из фикстуры */
         $this->_validateAttributes($item);
@@ -183,7 +183,7 @@ class ClansTest extends \Codeception\Test\Unit
     public function testList()
     {
         /** Выбираем все записи */
-        $list = ClansForUnit::find()->all();
+        $list = Clans::find()->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
@@ -193,8 +193,8 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRows()
     {
         /** Выбираем все записи - только промодерированные */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -205,9 +205,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRowsWithDescription()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
-            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
+            ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -218,9 +218,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRowsWithLink()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -231,9 +231,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRowsWithPreview()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -244,10 +244,10 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRowsWithPreviewAndLink()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -258,11 +258,11 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectModeratedRowsWithPreviewAndLinkAndDescription()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 1])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 1])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
+            ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -273,8 +273,8 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRows()
     {
         /** Выбираем все записи - только промодерированные */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -285,9 +285,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRowsWithDescription()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
-            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
+            ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -298,9 +298,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRowsWithLink()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -311,9 +311,9 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRowsWithPreview()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -324,10 +324,10 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRowsWithPreviewAndLink()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -338,11 +338,11 @@ class ClansTest extends \Codeception\Test\Unit
     public function testSelectNotModeratedRowsWithPreviewAndLinkAndDescription()
     {
         /** Выбираем все записи - только промодерированные и с урлом */
-        $list = ClansForUnit::find()
-            ->where([ClansForUnit::ATTR_MODERATED => 0])
-            ->andWhere(['is not', ClansForUnit::ATTR_LINK, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_PREVIEW, null])
-            ->andWhere(['is not', ClansForUnit::ATTR_DESCRIPTION, null])
+        $list = Clans::find()
+            ->where([Clans::ATTR_MODERATED => 0])
+            ->andWhere(['is not', Clans::ATTR_LINK, null])
+            ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
+            ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -353,13 +353,13 @@ class ClansTest extends \Codeception\Test\Unit
     public function testDelete()
     {
         /** Выбираем одну из записей, представленных в фикстурах */
-        $item = ClansForUnit::findOne([ClansForUnit::ATTR_ID => 3]);
+        $item = Clans::findOne([Clans::ATTR_ID => 3]);
 
         /** Удаляем запись */
         $item->delete();
 
         /** Получаем список всех записей */
-        $list = ClansForUnit::find()->all();
+        $list = Clans::find()->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);

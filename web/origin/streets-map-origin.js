@@ -83,6 +83,7 @@ const mainData = L.map('map', {
     /** Дефолтный зум карты */
     zoom: 1,
 
+    /** Лефолтный слой */
     layers: [baseTileLayer],
 });
 
@@ -475,9 +476,6 @@ $(Selectors.body).on('click', Selectors.buttonHideAllMenu, function() {
 
 /** События по Document Ready */
 $(document).ready(function() {
-
-    /** Делаем бэкграунд черным **/
-    $(Selectors.body).css({'background':'black'});
 
     /** Отключаем на минимальном зуме кнопку минуса **/
     $('a.leaflet-control-zoom-out').addClass('leaflet-disabled');

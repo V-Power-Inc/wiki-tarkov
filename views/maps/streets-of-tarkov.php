@@ -45,7 +45,7 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
 
 <!-- Инициализация карты -->
 <div class="w-100">
-    <div id="map" class="map map-alternative relative">
+    <div id="map" class="map">
 
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>

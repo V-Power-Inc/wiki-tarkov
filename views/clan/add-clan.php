@@ -6,6 +6,7 @@
  * Time: 12:24
  */
 
+use app\common\models\forms\ClansForm;
 use yii\widgets\ActiveForm;
 
 $this->title = "Escape from Tarkov: Зарегистрировать новый клан";
@@ -40,24 +41,24 @@ $this->registerMetaTag([
             </p>
             
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <?= $form->field($model, 'title')->textInput(['placeholder' => 'Введите название вашего клана']) ?>
+                    <?= $form->field($model, ClansForm::ATTR_TITLE)->textInput(['placeholder' => 'Введите название вашего клана']) ?>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <?= $form->field($model, 'description')->textInput(['placeholder' => 'Введите краткое описание вашего клана']) ?>
+                    <?= $form->field($model, ClansForm::ATTR_DESCRIPTION)->textInput(['placeholder' => 'Введите краткое описание вашего клана']) ?>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <?= $form->field($model, 'link')->textInput(['placeholder' => 'https://someclan.ru']) ?>
+                    <?= $form->field($model, ClansForm::ATTR_LINK)->textInput(['placeholder' => 'https://someclan.ru']) ?>
                 </div>
             
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?= $form->field($model, 'reCaptcha')->widget(
+                    <?= $form->field($model, ClansForm::RECAPTCHA)->widget(
                         \himiklab\yii2\recaptcha\ReCaptcha::class,
                         ['siteKey' => Yii::$app->params['recapchaSiteKey']]
                     ) ?>
 
-                    <?= $form->field($model, 'date_update')->hiddenInput(['value'=>date("Y-m-d H:i:s",time())])->label('') ?>
+                    <?= $form->field($model, ClansForm::ATTR_DATE_UPDATE)->hiddenInput(['value'=>date("Y-m-d H:i:s",time())])->label('') ?>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
