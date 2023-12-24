@@ -5,8 +5,6 @@
  *
  * adminEmail - Email администратора
  *
- * discordCache - флаг для кеширования виджета дискорда
- *
  * yandexCache - флаг для кеширования яндекса
  *
  * keysBlocks - флаг для генерации рекламного места, в циклах материалов
@@ -25,14 +23,10 @@
 
 return [
     'adminEmail' => '#',
-    'discordCache' => 1,
     'yandexCache' => 1,
     'keysBlocks' => [],
-
     'recapchaKey' => '6LcNnTggAAAAAKiDSyRe0BisZPZqFqtPdRu1LCum',
     'recapchaSiteKey' => '6LcNnTggAAAAAEK6rB1IcEZSdhVQyl_X5gEDNnxF',
-
-
     'restrictedAlertsUrls' => [
         '/',
         '/maps/zavod-location',
