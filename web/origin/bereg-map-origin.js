@@ -2,7 +2,7 @@
  * Created by DIR300NRU-ADMIN on 13.11.2017.
  * Refactoring by PC_Principal on 09.01.2023
  *
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.dev/ - Obfuscate JS
  */
 
 /** Вызываем заглушку для страницы в самом начале **/
@@ -351,9 +351,9 @@ map.on('mousemove', onMouseMove);
 /** По прогрузке документа получаем данные по ajax с координатами и описаниями маркеров всех слоев **/
 $(document).ready(function() {
     $.ajax({
-        url: '/maps/beregmarkers',
+        url: '/maps/get-markers',
         dataType: 'json',
-        data: {param: param, token : token},
+        data: {param: param, token : token, map: 'bereg'},
         async: false,
         success: function(markersData) {
 

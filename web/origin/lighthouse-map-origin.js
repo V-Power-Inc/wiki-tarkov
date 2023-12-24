@@ -1,5 +1,5 @@
 /**
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.dev/ - Obfuscate JS
  */
 
 /** Вызов карты и указание центра координат **/

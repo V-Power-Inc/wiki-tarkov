@@ -1,5 +1,5 @@
 /**
- * @link https://www.obfuscator.io/ - Obfuscate JS
+ * @link https://javascriptobfuscator.dev/ - Obfuscate JS
  */
 
 /*** После релиза нормальной карты этот файл необходимо перезалить по аналогии с другими картами ***/
