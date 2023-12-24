@@ -56,7 +56,7 @@ $(document).ready(function() {
 
     /*** Кнопка загрузки аватарки кланового сообщества ***/
     $('#upl-clan-logo').click(function() {
-        $('#clans-file').click();
+        $('#clansform-file').click();
     });
 
     /*** Убираем уведомление о заявки регистрации клана на завтрашний день ***/

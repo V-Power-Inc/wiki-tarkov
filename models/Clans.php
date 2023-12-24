@@ -47,10 +47,6 @@ class Clans extends ActiveRecord
     public $file;
     const FILE = 'file';
 
-    /** @var string $reCaptcha - Переменная для рекапчи false */
-    public $reCaptcha = false;
-    const RECAPTCHA = 'reCaptcha';
-
     /**
      * {@inheritdoc}
      */
@@ -86,14 +82,7 @@ class Clans extends ActiveRecord
 
             [static::ATTR_MODERATED, IntegerValidator::class],
 
-            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']],
-
-            [
-                [static::RECAPTCHA],
-                ReCaptchaValidator::class,
-                ReCaptchaValidator::ATTR_SECRET => Yii::$app->params['recapchaKey'],
-                ReCaptchaValidator::ATTR_UNCHECKED_MESSAGE => 'Подтвердите что вы не бот.'
-            ]
+            [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => ['png','jpg']]
         ];
     }
 
@@ -113,8 +102,7 @@ class Clans extends ActiveRecord
             static::ATTR_LINK => 'Ссылка на сообщество клана',
             static::ATTR_DATE_CREATE => 'Дата регистрации',
             static::ATTR_MODERATED => 'Модерация пройдена',
-            static::RECAPTCHA => 'Защита от спама',
-            static::SEARCHCLAN => 'Поиска клана по названию',
+            static::SEARCHCLAN => 'Поиск клана по названию',
             static::ATTR_DATE_UPDATE => 'Дата обновления'
         ];
     }

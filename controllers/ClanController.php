@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
+use app\common\models\forms\ClansForm;
 use app\models\Clans;
 use yii\web\HttpException;
 use app\components\MessagesComponent;
@@ -83,8 +84,8 @@ final class ClanController extends AdvancedController
 
         } else { /** Если еще можно подать заявку на регистрацию клана */
 
-            /** Создаем объект кланов */
-            $model = new Clans();
+            /** Создаем объект промежуточной формы кланов */
+            $model = new ClansForm();
 
             /** Рендерим страницу с полями для регистрации клана */
             return $this->render(static::ACTION_ADDCLAN, ['model' => $model]);
@@ -94,13 +95,18 @@ final class ClanController extends AdvancedController
     /**
      * Обработчик сохранения данных в БД
      *
+     * 24_12_2023г. - Не самый лучший метод от старой логики остался
+     *
      * @return array|Response
      * @throws HttpException
      */
     public function actionSave()
     {
-        /** Создаем новый AR объект кланов */
-        $model = new Clans();
+        /** Создаем новый AR объект формы сохранения кланов */
+        $model = new ClansForm();
+
+        /** Создаем объект компонента для flash сообщений */
+        $messages = new MessagesComponent();
 
         /** Ajax валидация - если запрос прилетел AJAX и были загружен POST данные в модель */
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -125,7 +131,6 @@ final class ClanController extends AdvancedController
             if($avialableTickets <= 0) {
 
                 /** Сетапим флэш сообщение об этом (SetFlash) */
-                $messages = new MessagesComponent();
                 $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>";
                 $messages->setMessages($message);
 
@@ -138,7 +143,6 @@ final class ClanController extends AdvancedController
                 if($model->uploadPreview() === false) {
 
                     /** Сетапим флэш сообщение об этом (SetFlash) */
-                    $messages = new MessagesComponent();
                     $message = "<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>";
                     $messages->setMessages($message);
 
@@ -150,11 +154,19 @@ final class ClanController extends AdvancedController
                     /** Грузим в модель остальные данные из POST */
                     $model->load(Yii::$app->request->post());
 
+                    $model->validate();
+
+                    echo '<pre>';
+                    echo print_r($model->attributes);
+                    echo '<br><br><br><br>';
+                    echo print_r($model->getErrors());
+                    exit;
+                    echo '</pre>';
+
                     /** Если модель смогла сохраниться (Без валидации) */
-                    if ($model->save(false)) {
+                    if ($model->save()) {
 
                         /** Сетапим флэш сообщение об этом (SetFlash) */
-                        $messages = new MessagesComponent();
                         $message = "<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>";
                         $messages->setMessages($message);
 
@@ -164,7 +176,6 @@ final class ClanController extends AdvancedController
                     } else { /** Если данные по каким то причинам не смогли сохраниться */
 
                         /** Сетапим флэш сообщение об этом (SetFlash) - указываем, что о баге можно сообщить на электронную почту */
-                        $messages = new MessagesComponent();
                         $message = "<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>";
                         $messages->setMessages($message);
 
