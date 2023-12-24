@@ -63,5 +63,3 @@ docker/nginx/log/prod-access.log
 
 # Mac DS_Store Files
 .DS_Store
-
-/config/params.php
