@@ -1,25 +1,25 @@
 name: Deploy on Prod
 
 # Автодеплой на PROD - Только ветка Master, только при удачных мержах
-on:
-  pull_request:
-    branches:
-      - "master"
-    types:
-      - closed
-
-jobs:
-  Deploy:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-    - name: Deploy on Prod
-      shell: bash
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-        SSH_USER: ${{secrets.SSH_USER}}
-      run: |
-        install -m 600 -D /dev/null /home/runner/.ssh/id_ed25519
-        echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_ed25519
-        ssh-keyscan wiki-tarkov.ru >> /home/runner/.ssh/known_hosts
-        ssh -i /home/runner/.ssh/id_ed25519 "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
+#on:
+#  pull_request:
+#    branches:
+#      - "master"
+#    types:
+#      - closed
+#
+#jobs:
+#  Deploy:
+#    if: github.event.pull_request.merged == true
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Deploy on Prod
+#      shell: bash
+#      env:
+#        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+#        SSH_USER: ${{secrets.SSH_USER}}
+#      run: |
+#        install -m 600 -D /dev/null /home/runner/.ssh/id_ed25519
+#        echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_ed25519
+#        ssh-keyscan wiki-tarkov.ru >> /home/runner/.ssh/known_hosts
+#        ssh -i /home/runner/.ssh/id_ed25519 "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
