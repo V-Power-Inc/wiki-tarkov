@@ -52,11 +52,6 @@ sql_dump.sql
 # ignore environment variables
 /.env
 
-# ignore main-local.php config
-/config/web-local.php
-
-/config/params.php
-
 # Ignore Sitemaps files in the future
 /sitemaps
 
