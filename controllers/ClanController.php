@@ -154,15 +154,6 @@ final class ClanController extends AdvancedController
                     /** Грузим в модель остальные данные из POST */
                     $model->load(Yii::$app->request->post());
 
-                    $model->validate();
-
-                    echo '<pre>';
-                    echo print_r($model->attributes);
-                    echo '<br><br><br><br>';
-                    echo print_r($model->getErrors());
-                    exit;
-                    echo '</pre>';
-
                     /** Если модель смогла сохраниться (Без валидации) */
                     if ($model->save()) {
 
