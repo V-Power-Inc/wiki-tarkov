@@ -10,6 +10,7 @@ namespace app\common\services;
 
 /**
  * Сервис для получения транслитов для всякого рода потребностей
+ * Содержит приличное количество хардкода
  *
  * Class TranslateService
  * @package app\common\services

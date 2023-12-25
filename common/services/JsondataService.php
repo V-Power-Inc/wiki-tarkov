@@ -8,11 +8,14 @@
 
 namespace app\common\services;
 
-use app\models\Tasks;
+use app\models\ApiSearchLogs;
+use app\models\Doorkeys;
+use app\models\Items;
 use yii\db\Query;
 use yii\helpers\Json;
 use app\models\Category;
 use app\models\Bosses;
+use Yii;
 
 /**
  * Сервис предназначенный для получения и передачи в контроллер необходимых
@@ -23,6 +26,12 @@ use app\models\Bosses;
  */
 final class JsondataService
 {
+    /** @var string - Ключ массива результирующих значений для массива данных */
+    const ATTR_VALUE = 'value';
+
+    /** @var string - Ключ массива title для результирующих данных массивов */
+    const ATTR_TITLE = 'title';
+
     /**
      * Метод вытаскивает необходимые названия ключей по параметру
      * который приходит в виде строки
@@ -33,24 +42,41 @@ final class JsondataService
      */
     public static function getKeysJson(string $q = null): string
     {
+        /** Объект запроса к БД */
         $query = new Query;
 
-        $query->select('name, mapgroup, preview, url')
-            ->from('doorkeys')
-            ->where('name LIKE "%' . $q . '%"')
-            ->orWhere('keywords LIKE "%' . $q . '%"')
-            ->andWhere(['active' => 1])
-            ->orderBy('name')
-            ->cache(3600);
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select([Doorkeys::ATTR_NAME, Doorkeys::ATTR_MAPGROUP, Doorkeys::ATTR_PREVIEW, Doorkeys::ATTR_URL])
+            ->from(Doorkeys::tableName())
+            ->where(Doorkeys::ATTR_NAME . ' LIKE "%' . $q . '%"')
+            ->orWhere(Doorkeys::ATTR_KEYWORDS . ' LIKE "%' . $q . '%"')
+            ->andWhere([Doorkeys::ATTR_ACTIVE => 1])
+            ->orderBy(Doorkeys::ATTR_NAME)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+
+        /** Создаем SQL команду */
         $command = $query->createCommand();
+
+        /** Выбираем всех подходящие под запрос данные */
         $data = $command->queryAll();
 
+        /** Массив для результатов */
         $out = [];
 
         /** Цикл составления готовых данных по запросу пользователя в поиске **/
         foreach ($data as $d) {
-            $out[] = ['value' => $d['name'], 'name' => $d['name'], 'preview' => $d['preview'], 'url' => $d['url'], 'mapgroup' => $d['mapgroup']];
+
+            /** Добавляем в итоговый массив нужные данные */
+            $out[] = [
+                static::ATTR_VALUE      => $d[Doorkeys::ATTR_NAME],
+                Doorkeys::ATTR_NAME     => $d[Doorkeys::ATTR_NAME],
+                Doorkeys::ATTR_PREVIEW  => $d[Doorkeys::ATTR_PREVIEW],
+                Doorkeys::ATTR_URL      => $d[Doorkeys::ATTR_URL],
+                Doorkeys::ATTR_MAPGROUP => $d[Doorkeys::ATTR_MAPGROUP]
+            ];
         }
+
+        /** Возвращаем массив закодированный в Json */
         return Json::encode($out);
     }
 
@@ -64,25 +90,48 @@ final class JsondataService
      */
     public static function getLootJson(string $q = null): string
     {
+        /** Объект запроса к БД */
         $query = new Query;
 
-        $query->select('title, shortdesc, preview, url, parentcat_id, search_words')
-            ->from('items')
-            ->where('title LIKE "%' . $q . '%"')
-            ->orWhere('search_words LIKE "%' . $q . '%"')
-            ->andWhere(['active' => 1])
-            ->orderBy('title')
-            ->cache(3600);
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select([Items::ATTR_TITLE, Items::ATTR_SHORTDESC, Items::ATTR_PREVIEW, Items::ATTR_URL, Items::ATTR_PARENTCAT_ID, Items::ATTR_SEARCH_WORDS])
+            ->from(Items::tableName())
+            ->where(Items::ATTR_TITLE . ' LIKE "%' . $q . '%"')
+            ->orWhere(Items::ATTR_SEARCH_WORDS . ' LIKE "%' . $q . '%"')
+            ->andWhere([Items::ATTR_ACTIVE => Items::TRUE])
+            ->orderBy(Items::ATTR_TITLE)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+
+        /** Выбираем нужные данные с кешируемым запросом */
         $command = $query->createCommand();
+
+        /** Выбираем всех подходящие под запрос данные */
         $data = $command->queryAll();
 
+        /** Массив для результатов */
         $out = [];
 
         /** Цикл составления готовых данных по запросу пользователя в поиске **/
         foreach ($data as $d) {
-            $parencat = Category::find()->where(['id' => $d['parentcat_id']])->cache(3600)->one();
-            $out[] = ['value' => $d['title'], 'title' => $d['title'], 'parentcat_id' => $parencat->title, 'shortdesc' => $d['shortdesc'], 'preview' => $d['preview'], 'url' => $d['url']];
+
+            /** Получаем объект родительской категории предмета */
+            $parencat = Category::find()
+                ->where([Category::ATTR_ID => $d[Items::ATTR_PARENTCAT_ID]])
+                ->cache(Yii::$app->params['cacheTime']['one_hour'])
+                ->one();
+
+            /** Добавляем в итоговый массив нужные данные */
+            $out[] = [
+                static::ATTR_VALUE       => $d[Items::ATTR_TITLE],
+                static::ATTR_TITLE       => $d[Items::ATTR_TITLE],
+                Items::ATTR_PARENTCAT_ID => $parencat->title,
+                Items::ATTR_SHORTDESC    => $d[Items::ATTR_SHORTDESC],
+                Items::ATTR_PREVIEW      => $d[Items::ATTR_PREVIEW],
+                Items::ATTR_URL          => $d[Items::ATTR_URL]
+            ];
         }
+
+        /** Возвращаем массив закодированный в Json */
         return Json::encode($out);
     }
 
@@ -96,23 +145,35 @@ final class JsondataService
      */
     public static function getSearchItem(string $q = null): string
     {
+        /** Объект запроса к БД */
         $query = new Query;
 
-        $query->select('words')
-            ->from('api_search_logs')
-            ->where('words LIKE "%' . $q . '%"')
-            ->andWhere(['flag' => 1])
-            ->groupBy('words')
-            ->orderBy('date_create')
-            ->cache(3600);
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select(ApiSearchLogs::ATTR_WORDS)
+            ->from(ApiSearchLogs::tableName())
+            ->where(ApiSearchLogs::ATTR_WORDS .' LIKE "%' . $q . '%"')
+            ->andWhere([ApiSearchLogs::ATTR_FLAG => ApiSearchLogs::TRUE])
+            ->groupBy(ApiSearchLogs::ATTR_WORDS)
+            ->orderBy(ApiSearchLogs::ATTR_DATE_CREATE)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+
+        /** Выбираем нужные данные с кешируемым запросом */
         $command = $query->createCommand();
+
+        /** Выбираем всех подходящие под запрос данные */
         $data = $command->queryAll();
 
+        /** Массив для результатов */
         $out = [];
 
         /** Цикл составления готовых данных по запросу пользователя в поиске **/
         foreach ($data as $d) {
-            $out[] = ['value' => $d['words'], 'title' => $d['words']];
+
+            /** Добавляем в итоговый массив нужные данные */
+            $out[] = [
+                static::ATTR_VALUE => $d[ApiSearchLogs::ATTR_WORDS],
+                static::ATTR_TITLE => $d[ApiSearchLogs::ATTR_WORDS]
+            ];
         }
 
         /** Возвращаем конечный массив закодированным в JSON */
@@ -121,8 +182,9 @@ final class JsondataService
 
     /**
      * Метод по параметру URL адрес возвращает набор данных нужной карты из таблицы Bosses
+     * Декодирует данные из Json
      *
-     * @param string $url
+     * @param string $url - URL локации
      * @return mixed
      */
     public static function getBossData(string $url)

@@ -130,7 +130,7 @@ class Catskills extends ActiveRecord
      */
     public function getSkills()
     {
-        return $this->hasMany(Skills::class, ['category' => 'id']);
+        return $this->hasMany(Skills::class, [Skills::ATTR_CATEGORY => static::ATTR_ID]);
     }
 
     /**

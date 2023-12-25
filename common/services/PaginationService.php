@@ -22,6 +22,9 @@ use Yii;
  */
 final class PaginationService
 {
+    /** @var string - Константа, название атрибута даты создания записи у большинства AR моделей */
+    const ATTR_DATE_CREATE = 'date_create';
+
     /** @var int defaultPageSize - кол-во элементов на странице по умолчанию  */
     const defaultPageSize = 20;
 
@@ -51,13 +54,13 @@ final class PaginationService
         /** Если кеш установлен как true - будет запрос с кешированием на 1 час */
         if ($cache) {
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby(['date_create'=>SORT_DESC])
+                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->cache(Yii::$app->params['cacheTime']['one_hour'])
                 ->all();
         } else { /** Если флаг кеша как false - показываем данные без кеша */
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby(['date_create'=>SORT_DESC])
+                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->all();
         }

@@ -66,12 +66,12 @@ class CurrenciesSearch extends Currencies
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'value' => $this->value,
-            'enabled' => $this->enabled,
+            static::ATTR_ID => $this->id,
+            static::ATTR_VALUE => $this->value,
+            static::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title]);
 
         return $dataProvider;
     }
