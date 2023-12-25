@@ -72,27 +72,40 @@ final class NewsController extends AdminController implements CrudInterface
      * При сохранении нового объекта новости, должен происходить
      * Push в Discord канал waki-tarkov через веб-хук дискорда
      *
+     * UDP 25_12_2023г. - Функционал пуша в дискорд отключен (Смотреть историю коммитов)
+     *
      * @return mixed
      * @throws
      */
     public function actionCreate()
     {
+        /** Создаем AR Объект новости */
         $model = new News();
+
+        /** Грузим превью */
         $model->uploadPreview();
 
+        /** Если данные в модель из POST'a прогрузились и сохранились */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            /** Отправка уведомления в дискорд канал */
-            if($_SERVER['SERVER_NAME'] !== 'dev.kfc-it.ru') {
-                $webhook = new ClientdiscordComponent(Yii::$app->params['discordHookNewsUrl']);
-                $embed = new Embeddiscord();
-                $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
-                $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
-                $embed->url('https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
-                $webhook->username('Новости Таркова')->message($model->title)->embed($embed)->send();
-            }
+            /** Отправка уведомления в дискорд канал (Если боевой сервак) - Сейчас отключено за ненадобностью
+             * Подробнее об интеграции в этом файле: /components/ClientdiscordComponent.php
+             */
+//            if($_SERVER['SERVER_NAME'] !== 'dev' . $_ENV['DOMAIN']) {
+//                $webhook = new ClientdiscordComponent(Yii::$app->params['discordHookNewsUrl']);
+//                $embed = new Embeddiscord();
+//                $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
+//                $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
+//                $embed->url('https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
+//                $webhook->username('Новости Таркова')->message($model->title)->embed($embed)->send();
+//            }
+
+            /** Редирект на страницу детального просмотра новости */
             return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
-        } else {
+
+        } else { /** В ином случае */
+
+            /** Рендер вьюхи создания новости */
             return $this->render(static::ACTION_CREATE, [
                 'model' => $model,
             ]);
