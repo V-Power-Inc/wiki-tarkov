@@ -70,6 +70,8 @@ class Admins extends ActiveRecord implements IdentityInterface
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_USER, RequiredValidator::class],
             [static::ATTR_USER, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Логин пользователя должен быть уникальным.'],
             [static::ATTR_USER, StringValidator::class, StringValidator::ATTR_MAX => 45],
