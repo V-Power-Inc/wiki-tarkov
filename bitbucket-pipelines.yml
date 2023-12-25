@@ -62,6 +62,8 @@ definitions:
           - echo DB_TEST_NAME=$DB_TEST_NAME >> .env
           - echo DB_TEST_USER=$DB_TEST_USER >> .env
           - echo DB_TEST_PASSWORD=$DB_TEST_PASSWORD >> .env
+          - echo ENVIRONMENT=dev >> .env
+          - echo DEBUG_STATUS=true >> .env
 
           # Build docker containers (Пока убрали чтобы сборки быстрее проходили)
           - echo "Билдим контейнеры через docker-compose"
