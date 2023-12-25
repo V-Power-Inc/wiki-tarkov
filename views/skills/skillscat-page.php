@@ -7,26 +7,27 @@
  */
 
 use yii\web\JqueryAsset;
-use \app\models\CatSkills;
+use app\models\CatSkills;
+use app\models\Skills;
 
 /* @var CatSkills $cat - объект категории справочника умений */
 
-$this->title = "Escape from Tarkov: " . $cat['title'];
+$this->title = "Escape from Tarkov: " . $cat[CatSkills::ATTR_TITLE];
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $cat['description'],
+    'content' => $cat[CatSkills::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $cat['keywords'],
+    'content' => $cat[CatSkills::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $cat['title'],
+    'content' => $cat[CatSkills::ATTR_TITLE],
 ]);
 
 $this->registerMetaTag([
@@ -36,7 +37,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:description',
-    'content' => $cat['description'],
+    'content' => $cat[CatSkills::ATTR_DESCRIPTION],
 ]);
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
@@ -80,20 +81,20 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::
                     <?php endif; ?>
 
 
-                    <?php if($v['enabled'] == 1) : ?>
+                    <?php if($v[Skills::ATTR_ENABLED] == Skills::TRUE): ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
-                                <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $v['url'] ?>.html"><img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>"></a>
-                                <p class="loot-description"><?= $v['short_desc'] ?></p>
+                                <h2 class="item-loot-title"><a href="/skills/<?= $cat->url ?>/<?= $v[Skills::ATTR_URL] ?>.html"><?= $v[Skills::ATTR_TITLE] ?></a></h2>
+                                <a class="loot-link" href="/skills/<?= $cat->url ?>/<?= $v[Skills::ATTR_URL] ?>.html"><img class="loot-image" alt="<?= $v[Skills::ATTR_TITLE] ?>" src="<?= $v[Skills::ATTR_PREVIEW] ?>"></a>
+                                <p class="loot-description"><?= $v[Skills::ATTR_SHORT_DESC] ?></p>
                             </div>
                         </div>
-                    <?php elseif($v['enabled'] == 0) : ?>
+                    <?php elseif($v[Skills::ATTR_ENABLED] == Skills::FALSE) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a><?= $v['title'] ?></a></h2>
-                                <a class="loot-link"><img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>"></a>
-                                <p class="loot-description"><?= $v['short_desc'] ?></p>
+                                <h2 class="item-loot-title"><a><?= $v[Skills::ATTR_TITLE] ?></a></h2>
+                                <a class="loot-link"><img class="loot-image" alt="<?= $v[Skills::ATTR_TITLE] ?>" src="<?= $v[Skills::ATTR_PREVIEW] ?>"></a>
+                                <p class="loot-description"><?= $v[Skills::ATTR_SHORT_DESC] ?></p>
                                 <p class="alert alert-danger size-16 unactive-skill">В настоящий момент это умение не реализовано в игре.</p>
                             </div>
                         </div>

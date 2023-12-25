@@ -13,25 +13,26 @@ use kartik\typeahead\Typeahead;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 use app\models\Category;
+use app\models\Items;
 
 /* @var Category $cat - AR объект категории справочника лута */
 
-$this->title = "Escape from Tarkov: " . $cat['title'];
+$this->title = "Escape from Tarkov: " . $cat[Category::ATTR_TITLE];
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $cat['description'],
+    'content' => $cat[Category::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $cat['keywords'],
+    'content' => $cat[Category::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $cat['title'],
+    'content' => $cat[Category::ATTR_TITLE],
 ]);
 
 $this->registerMetaTag([
@@ -41,7 +42,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:description',
-    'content' => $cat['description'],
+    'content' => $cat[Category::ATTR_DESCRIPTION],
 ]);
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
@@ -152,14 +153,14 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
 
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/loot/<?= $v['url'] ?>.html"><?= $v['title'] ?></a></h2>
-                                <a class="loot-link" href="/loot/<?= $v['url'] ?>.html">
+                                <h2 class="item-loot-title"><a href="/loot/<?= $v[Items::ATTR_URL] ?>.html"><?= $v[Items::ATTR_TITLE] ?></a></h2>
+                                <a class="loot-link" href="/loot/<?= $v[Items::ATTR_URL] ?>.html">
                                     <div class="fixies-float-image">
-                                        <img class="loot-image" alt="<?= $v['title'] ?>" src="<?= $v['preview'] ?>">
+                                        <img class="loot-image" alt="<?= $v[Items::ATTR_TITLE] ?>" src="<?= $v[Items::ATTR_PREVIEW] ?>">
                                     </div>
                                 </a>
-                                <p class="loot-description"><?= $v['shortdesc'] ?></p>
-                                <?php if($v['quest_item'] == 1) : ?>
+                                <p class="loot-description"><?= $v[Items::ATTR_SHORTDESC] ?></p>
+                                <?php if($v[Items::ATTR_QUEST_ITEM] == Items::TRUE) : ?>
                                 <p class="alert alert-danger size-16 custom-margin-top"><b>Этот предмет необходим для выполнения квеста.</b></p>
                                 <?php endif; ?>
                             </div>
@@ -188,8 +189,6 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
 
                 <!-- Расстояние - заглушка -->
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 height-25"></div>
-
-
 
                 <!-- Комментарии -->
                 <?php if(empty($_GET)) : ?>

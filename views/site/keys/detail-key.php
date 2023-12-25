@@ -6,28 +6,29 @@
  * Time: 21:41
  */
 
+use app\models\Doorkeys;
 use yii\web\JqueryAsset;
 
-$this->title = 'Escape from Tarkov: ' .$model['name'];
+$this->title = 'Escape from Tarkov: ' .$model[Doorkeys::ATTR_NAME];
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $model['description'],
+    'content' => $model[Doorkeys::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $model['keywords'],
+    'content' => $model[Doorkeys::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $model['name'],
+    'content' => $model[Doorkeys::ATTR_NAME],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model['url'],
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model[Doorkeys::ATTR_URL],
 ]);
 
 $this->registerMetaTag([
@@ -59,10 +60,10 @@ $this->registerJsFile('js/keys-scripts.js', ['depends' => [JqueryAsset::class]])
             <div class="col-lg-12">
                 
                     <div class="col-lg-12 item-key detail">
-                        <img class="w-100 margin-5 f-left fixible" alt="<?=$model['name']?>" src="<?=$model['preview']?>">
+                        <img class="w-100 margin-5 f-left fixible" alt="<?=$model[Doorkeys::ATTR_NAME]?>" src="<?=$model[Doorkeys::ATTR_PREVIEW]?>">
                         <div class="item-content d-block w-100">
-                            <p class="size-16">Ключ используется на локациях: <b><?=$model['mapgroup']?></b></p>
-                            <?=$model['content']?>
+                            <p class="size-16">Ключ используется на локациях: <b><?= $model[Doorkeys::ATTR_MAPGROUP] ?></b></p>
+                            <?= $model[Doorkeys::ATTR_CONTENT] ?>
                         </div>
                     </div>
 

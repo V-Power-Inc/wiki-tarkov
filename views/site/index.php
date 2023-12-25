@@ -131,8 +131,7 @@ $this->registerMetaTag([
                 </div>
 
             </div>
-            
-            
+
             <div class="margin-top-20">
                     
                 <div class="row margin-top-20">
@@ -144,7 +143,6 @@ $this->registerMetaTag([
 
                 </div>
             </div>
-
             
         </div>
     </div>
