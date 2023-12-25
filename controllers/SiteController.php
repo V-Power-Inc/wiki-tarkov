@@ -11,13 +11,13 @@ use app\models\Articles;
 use app\models\Questions;
 use app\models\Currencies;
 use app\models\Patrons;
-use Yii;
 use yii\helpers\Json;
 use yii\web\Cookie;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\common\services\KeysService;
 use app\common\services\JsondataService;
+use Yii;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -84,7 +84,7 @@ final class SiteController extends AdvancedController
     public function actionIndex(): string
     {
         /** Рендерим индексную страницу сайта (Главная страница) */
-        return $this->render('index');
+        return $this->render(static::ACTION_INDEX);
     }
 
     /**
