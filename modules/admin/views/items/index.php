@@ -64,26 +64,26 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
-            'preview' => [
-                'attribute' => 'preview',
+            Items::ATTR_TITLE,
+            Items::ATTR_PREVIEW => [
+                'attribute' => Items::ATTR_PREVIEW,
                 'format' => 'image',
                 'value' => function($data) {
                     return $data->preview;
                 },
             ],
 
-            'url' => [
-                'attribute' => 'url',
+            Items::ATTR_URL => [
+                'attribute' => Items::ATTR_URL,
                 'format' => 'raw',
                 'value' => function($url) {
                     return $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/loot/<b>'.$url->url.'</b>.html';
                 },
             ],
-            'date_create',
-            'date_update',
-            'creator' => [
-                'attribute' => 'creator',
+            Items::ATTR_DATE_CREATE,
+            Items::ATTR_DATE_UPDATE,
+            Items::ATTR_CREATOR => [
+                'attribute' => Items::ATTR_CREATOR,
                 'format' => 'html',
                 'value' => function($user) {
                     if(!is_null($user->creator)) {
@@ -92,20 +92,20 @@ if(isset($_GET['per-page']) && is_numeric($_GET['per-page'])) {
                         return '<span class="not-set">Не определен</span>';
                     }
                 },
-                'filter' => Html::activeDropDownList($searchModel,'creator',ArrayHelper::map(Items::find()->where(['is not','creator',null])->groupBy(['creator'])->asArray()->all(), 'creator', 'creator'), ['class'=>'form-control','prompt'=>'Выберите создателя']),
+                'filter' => Html::activeDropDownList($searchModel,Items::ATTR_CREATOR,ArrayHelper::map(Items::find()->where(['is not',Items::ATTR_CREATOR,null])->groupBy([Items::ATTR_CREATOR])->asArray()->all(), Items::ATTR_CREATOR, Items::ATTR_CREATOR), ['class'=>'form-control','prompt'=>'Выберите создателя']),
             ],
             
             /** Ниже узнаем по связи название родительской категории из связанной таблицы */
             [
-                'attribute' => 'parentcat_id',
-                'value' => 'parentcat.title',
-                'filter' => Html::activeDropDownList($searchModel,'parentcat_id',ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию предмета']),
+                'attribute' => Items::ATTR_PARENTCAT_ID,
+                'value' =>  Items::RELATION_PARENTCAT . '.' . Items::ATTR_TITLE,
+                'filter' => Html::activeDropDownList($searchModel,Items::ATTR_PARENTCAT_ID,ArrayHelper::map(Category::find()->asArray()->all(), Items::ATTR_ID, Items::ATTR_TITLE), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию предмета']),
             ],
             [
                 'attribute' => 'active',
                 'format' => 'raw',
                 'value' => function($active) {
-                    if($active->active === 1) {
+                    if($active->active === Items::TRUE) {
                         return '<label class="label label-success customed-labels-adm">Активен</label>';
                     } else {
                         return '<label class="label label-danger customed-labels-adm">Отключен</label>';

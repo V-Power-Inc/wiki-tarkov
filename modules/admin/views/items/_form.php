@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Items;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -19,17 +20,17 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Items::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parentcat_id')->dropDownList(ArrayHelper::map(Category::find()->all(), 'id', 'title')) ?>
+    <?= $form->field($model, Items::ATTR_PARENTCAT_ID)->dropDownList(ArrayHelper::map(Category::find()->all(), Items::ATTR_ID, Items::ATTR_TITLE)) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Items::ATTR_URL)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Items::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Items::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, Items::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -40,18 +41,18 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
     <br>
     <br>
 
-    <?= $form->field($model, 'shortdesc')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, Items::ATTR_SHORTDESC)->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Items::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'quest_item')->checkbox([
+    <?= $form->field($model, Items::ATTR_QUEST_ITEM)->checkbox([
         'label' => 'Квестовый предмет',
     ]); ?>
 
-    <?= $form->field($model, 'trader_group')
+    <?= $form->field($model, Items::ATTR_TRADER_GROUP)
         ->listBox([
             'Прапор' => 'Прапор',
             'Терапевт' => 'Терапевт',
@@ -66,15 +67,15 @@ $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::clas
                 'style' => 'height: 115px',
             ]); ?>
 
-    <?= $form->field($model, 'search_words')->textInput(['maxlength' => true])->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, Items::ATTR_SEARCH_WORDS)->textInput(['maxlength' => true])->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['disabled' => true]) ?>
+    <?= $form->field($model, Items::ATTR_DATE_CREATE)->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'active')->checkbox([
+    <?= $form->field($model, Items::ATTR_ACTIVE)->checkbox([
         'label' => 'Предмет активен',
     ]); ?>
 
-    <?= $form->field($model, 'creator')->hiddenInput(['value' => ($model->creator !== Null)?$model->creator:Yii::$app->user->identity->name])->label('') ?>
+    <?= $form->field($model, Items::ATTR_CREATOR)->hiddenInput(['value' => ($model->creator !== Null)?$model->creator:Yii::$app->user->identity->name])->label('') ?>
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать новый предмет' : 'Обновить существующий предмет', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

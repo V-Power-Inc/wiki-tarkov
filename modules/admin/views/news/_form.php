@@ -1,5 +1,6 @@
 <?php
 
+use app\models\News;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -14,15 +15,15 @@ use mihaildev\elfinder\ElFinder;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, News::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, News::ATTR_URL)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, News::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, News::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, News::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -33,19 +34,19 @@ use mihaildev\elfinder\ElFinder;
     <br>
     <br>
     
-    <?= $form->field($model, 'shortdesc')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, News::ATTR_SHORTDESC)->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, News::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->widget(\yii\jui\DatePicker::class, [
+    <?= $form->field($model, News::ATTR_DATE_CREATE)->widget(\yii\jui\DatePicker::class, [
         'language' => 'ru',
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, News::ATTR_ENABLED)->checkbox([
         'label' => 'Новость активна',
     ]); ?>
     

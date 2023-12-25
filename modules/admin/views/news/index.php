@@ -1,5 +1,6 @@
 <?php
 
+use app\models\News;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -23,15 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
-            'preview' => [
+            News::ATTR_TITLE,
+            News::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
                     return  $data->preview;
                 },
             ],
-             'date_create',
-             'enabled',
+            News::ATTR_DATE_CREATE,
+            News::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

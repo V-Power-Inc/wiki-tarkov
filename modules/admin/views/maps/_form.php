@@ -18,9 +18,9 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Maps::ATTR_NAME)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'map')
+    <?= $form->field($model, Maps::ATTR_MAP)
         ->dropDownList(
             ArrayHelper::map(
                 Maps::find()
@@ -34,7 +34,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
         )
     ?>
 
-    <?= $form->field($model, 'marker_group')
+    <?= $form->field($model, Maps::ATTR_MARKER_GROUP)
         ->dropDownList([
             'Военные ящики' => 'Военные ящики',
             'Спавны диких' => 'Спавны диких',
@@ -49,7 +49,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
         )
     ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->customicon]) ?>
+    <?= $form->field($model, Maps::FILE)->fileInput(['value' => $model->customicon]) ?>
 
     <?php if($model->customicon) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -60,7 +60,7 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
     <br>
     <br>
 
-    <?= $form->field($model, 'exits_group')
+    <?= $form->field($model, Maps::ATTR_EXITS_GROUP)
         ->dropDownList(
                 ArrayHelper::map(
                 Maps::find()
@@ -75,20 +75,20 @@ $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::
         )
     ?>
 
-    <?= $form->field($model, 'coords_x')->textInput() ?>
+    <?= $form->field($model, Maps::ATTR_COORDS_X)->textInput() ?>
 
-    <?= $form->field($model, 'coords_y')->textInput() ?>
+    <?= $form->field($model, Maps::ATTR_COORDS_Y)->textInput() ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Maps::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'exit_anyway')->checkbox([
+    <?= $form->field($model, Maps::ATTR_EXIT_ANYWAY)->checkbox([
         'label' => 'Доступен для любого спавна ЧВК',
     ]); ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Maps::ATTR_ENABLED)->checkbox([
         'label' => 'Включен',
     ]); ?>
 

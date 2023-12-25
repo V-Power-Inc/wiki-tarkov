@@ -27,27 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
+            Maps::ATTR_NAME,
             [
-                'attribute' => 'map',
-                'value' => 'map',
-                'filter' => Html::activeDropDownList($searchModel,'map',ArrayHelper::map(Maps::find()->asArray()->all(), 'map', 'map'), ['class'=>'form-control','prompt'=>'Выберите локацию']),
+                'attribute' => Maps::ATTR_MAP,
+                'value' => Maps::ATTR_MAP,
+                'filter' => Html::activeDropDownList($searchModel,Maps::ATTR_MAP,ArrayHelper::map(Maps::find()->asArray()->all(), Maps::ATTR_MAP, Maps::ATTR_MAP), ['class'=>'form-control','prompt'=>'Выберите локацию']),
             ],
             [
-                'attribute' => 'marker_group',
-                'value' => 'marker_group',
-                'filter' => Html::activeDropDownList($searchModel,'marker_group',ArrayHelper::map(Maps::find()->asArray()->all(), 'marker_group', 'marker_group'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
+                'attribute' => Maps::ATTR_MARKER_GROUP,
+                'value' => Maps::ATTR_MARKER_GROUP,
+                'filter' => Html::activeDropDownList($searchModel,Maps::ATTR_MARKER_GROUP, ArrayHelper::map(Maps::find()->asArray()->all(), Maps::ATTR_MARKER_GROUP, Maps::ATTR_MARKER_GROUP), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
             ],
-            'coords_x',
-            'coords_y',
-            'customicon' => [
+            Maps::ATTR_COORDS_X,
+            Maps::ATTR_COORDS_Y,
+            Maps::ATTR_CUSTOMICON => [
                 'format' => 'image',
                 'value' => function($data) {
                     return  $data->customicon;
                 },
             ],
-            'exits_group',
-            'exit_anyway',
+            Maps::ATTR_EXITS_GROUP,
+            Maps::ATTR_EXIT_ANYWAY,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

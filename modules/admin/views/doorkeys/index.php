@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Doorkeys;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -24,24 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'mapgroup',
-            'shortcontent:ntext',
-            'preview' => [
+            Doorkeys::ATTR_ID,
+            Doorkeys::ATTR_NAME,
+            Doorkeys::ATTR_MAPGROUP,
+            Doorkeys::ATTR_SHORTCONTENT . ':ntext',
+            Doorkeys::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
                     return $data->preview;
                 },
             ],
-            'url',
+            Doorkeys::ATTR_URL,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
         
-            'tableOptions' => [
-                'class' => 'table table-striped table-bordered customed'
-            ],
-       
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered customed'
+        ]
     ]); ?>
 </div>
