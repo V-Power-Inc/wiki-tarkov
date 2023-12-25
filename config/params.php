@@ -42,6 +42,7 @@ return [
         '/maps/streets-of-tarkov-location'
     ],
     'cacheTime' => [
+        'one_minute' => 60,
         'one_hour' => 3600,
         'seven_days' => 604800,
         'one_day' => 86400

@@ -199,7 +199,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveKeys()
     {
         return static::find()
-            ->where([static::ATTR_ACTIVE => 1])
+            ->where([static::ATTR_ACTIVE => static::TRUE])
             ->orderby([static::ATTR_NAME => SORT_STRING])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->all();
@@ -213,7 +213,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveZavodKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Завод']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])
@@ -229,7 +229,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveForestKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Лес']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])
@@ -245,7 +245,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveBeregKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Берег']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])
@@ -261,7 +261,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveTamojnyaKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Таможня']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])
@@ -277,7 +277,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveRazvyazkaKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Развязка']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])
@@ -293,7 +293,7 @@ class Doorkeys extends ActiveRecord
     public static function takeActiveLaboratoryKeys()
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->andWhere(['like', static::ATTR_MAPGROUP, ['Лаборатория Terra Group']])
             ->asArray()->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->orderby([static::ATTR_NAME => SORT_STRING])

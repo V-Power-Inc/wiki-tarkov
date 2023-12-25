@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\models\ApiSearchLogs;
+use app\models\Clans;
 use app\models\Doorkeys;
 use app\models\Items;
 use yii\db\Query;
@@ -177,6 +178,54 @@ final class JsondataService
         }
 
         /** Возвращаем конечный массив закодированным в JSON */
+        return Json::encode($out);
+    }
+
+    /**
+     * Метод осуществляет поиск кланов по таблице clans и возвращает результаты в виде Json
+     *
+     * @param string|null $q - поисковый запрос
+     * @return string
+     * @throws \yii\db\Exception
+     */
+    public static function getClansList(string $q = null): string
+    {
+        /** Преподгатавливаем переменную для запроса к БД */
+        $query = new Query;
+
+        /** Определяем запрос и ищем клан по названию */
+        $query->select([Clans::ATTR_TITLE, Clans::ATTR_DESCRIPTION, Clans::ATTR_PREVIEW, Clans::ATTR_LINK, Clans::ATTR_DATE_CREATE])
+            ->from(Clans::tableName())
+            ->where(Clans::ATTR_TITLE . ' LIKE "%' . $q . '%"')
+            ->andWhere([Clans::ATTR_MODERATED => Clans::TRUE])
+            ->orderBy( Clans::ATTR_DATE_CREATE .' DESC')
+            ->limit(30)
+            ->cache(Yii::$app->params['cacheTime']['one_minute']);
+
+        /** Определяем команду и выполняем запрос */
+        $command = $query->createCommand();
+
+        /** Указываем выбрать все нужные записи */
+        $data = $command->queryAll();
+
+        /** Массив для резултирующих данных */
+        $out = [];
+
+        /** В цикле наполняем массив с результирующими данными - в нужном формате **/
+        foreach ($data as $d) {
+
+            /** Добавляем в итоговый массив нужные данные */
+            $out[] = [
+                static::ATTR_VALUE      => $d[Clans::ATTR_TITLE],
+                static::ATTR_TITLE      => $d[Clans::ATTR_TITLE],
+                Clans::ATTR_DESCRIPTION => $d[Clans::ATTR_DESCRIPTION],
+                Clans::ATTR_PREVIEW     => $d[Clans::ATTR_PREVIEW],
+                Clans::ATTR_LINK        => $d[Clans::ATTR_LINK],
+                Clans::ATTR_DATE_CREATE => $d[Clans::ATTR_DATE_CREATE]
+            ];
+        }
+
+        /** Возвращаем результирующий массив в формате Json */
         return Json::encode($out);
     }
 

@@ -4,6 +4,8 @@
  * User: comp
  * Date: 02.06.2018
  * Time: 10:51
+ *
+ * todo: Глянуть что тут творится
  */
 
 namespace app\components;
