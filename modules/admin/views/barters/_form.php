@@ -67,5 +67,4 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
         <input type="hidden" id="trader-content" name="Barters[content]">
     </form>
 
-
 </div>
