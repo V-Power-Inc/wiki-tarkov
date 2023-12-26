@@ -151,7 +151,7 @@ final class SiteController extends AdvancedController
     public function actionNews(): string
     {
         /** Ищем активные новости */
-        $query =  News::find()->andWhere(['enabled' => 1]);
+        $query =  News::find()->andWhere([News::ATTR_ENABLED => News::TRUE]);
 
         /** Задаем параметры пагинации */
         $data = new PaginationService($query,10);
@@ -193,7 +193,7 @@ final class SiteController extends AdvancedController
     public function actionArticles(): string
     {
         /** Ищем активные статьи */
-        $query = Articles::find()->andWhere(['enabled' => 1]);
+        $query = Articles::find()->andWhere([Articles::ATTR_ENABLED => Articles::TRUE]);
 
         /** Задаем объект с пагинацией */
         $data = new PaginationService($query);
