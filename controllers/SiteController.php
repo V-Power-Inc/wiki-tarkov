@@ -11,13 +11,13 @@ use app\models\Articles;
 use app\models\Questions;
 use app\models\Currencies;
 use app\models\Patrons;
-use Yii;
 use yii\helpers\Json;
 use yii\web\Cookie;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\common\services\KeysService;
 use app\common\services\JsondataService;
+use Yii;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -84,7 +84,7 @@ final class SiteController extends AdvancedController
     public function actionIndex(): string
     {
         /** Рендерим индексную страницу сайта (Главная страница) */
-        return $this->render('index');
+        return $this->render(static::ACTION_INDEX);
     }
 
     /**
@@ -133,7 +133,7 @@ final class SiteController extends AdvancedController
     public function actionDoorkeysdetail($id): string
     {
         /** Если нашли по URL Детальную страницу ключа */
-        if(Doorkeys::findActiveKeyByUrl($id)) {
+        if (Doorkeys::findActiveKeyByUrl($id)) {
 
             /** Рендерим страницу с детальной информацией о ключе */
             return $this->render('keys/detail-key.php',['model' => Doorkeys::findActiveKeyByUrl($id)]);
@@ -151,7 +151,7 @@ final class SiteController extends AdvancedController
     public function actionNews(): string
     {
         /** Ищем активные новости */
-        $query =  News::find()->andWhere(['enabled' => 1]);
+        $query =  News::find()->andWhere([News::ATTR_ENABLED => News::TRUE]);
 
         /** Задаем параметры пагинации */
         $data = new PaginationService($query,10);
@@ -175,7 +175,7 @@ final class SiteController extends AdvancedController
     public function actionNewsdetail($id): string
     {
         /** Если по урлу нашли детальную новость  */
-        if(News::findActiveNewsByUrl($id)) {
+        if (News::findActiveNewsByUrl($id)) {
 
             /** Рендерим вьюху */
             return $this->render('news/detail.php',['model' => News::findActiveNewsByUrl($id)]);
@@ -193,7 +193,7 @@ final class SiteController extends AdvancedController
     public function actionArticles(): string
     {
         /** Ищем активные статьи */
-        $query = Articles::find()->andWhere(['enabled' => 1]);
+        $query = Articles::find()->andWhere([Articles::ATTR_ENABLED => Articles::TRUE]);
 
         /** Задаем объект с пагинацией */
         $data = new PaginationService($query);
@@ -217,7 +217,7 @@ final class SiteController extends AdvancedController
     public function actionArticledetail($url): string
     {
         /** Если нашли статью по урлу */
-        if(Articles::takeActiveArticleByUrl($url)) {
+        if (Articles::takeActiveArticleByUrl($url)) {
 
             /** Рендерим вьюху с детальной информацией */
             return $this->render('articles/detail.php',['model' => Articles::takeActiveArticleByUrl($url)]);
@@ -235,7 +235,7 @@ final class SiteController extends AdvancedController
     public function actionQuestions(): string
     {
         /** Ищем активные вопросы */
-        $model = Questions::find()->where(['enabled' => 1]);
+        $model = Questions::find()->where([Questions::ATTR_ENABLED => Questions::TRUE]);
 
         /** Задаем объект с пагинацией */
         $data = new PaginationService($model);
@@ -390,11 +390,7 @@ final class SiteController extends AdvancedController
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
+            ]
         ];
     }
 }

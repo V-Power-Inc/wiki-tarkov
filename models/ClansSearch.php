@@ -77,10 +77,10 @@ class ClansSearch extends Clans
             'moderated' => $this->moderated,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'link', $this->link]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description])
+            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', static::ATTR_LINK, $this->link]);
 
         return $dataProvider;
     }

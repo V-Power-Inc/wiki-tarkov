@@ -77,7 +77,12 @@ class LeftmenuWidget extends Widget {
     public function run(): string
     {
         /** Сетапи атрибуту класса - запрос на получение данных, активные категории */
-        $this->data = Category::find()->where(['enabled' => '1'])->indexBy('id')->orderby(['sortir' => SORT_ASC])->asArray()->all();
+        $this->data = Category::find()
+            ->where([Category::ATTR_ENABLED => Category::TRUE])
+            ->indexBy(Category::ATTR_ID)
+            ->orderby([Category::ATTR_SORTIR => SORT_ASC])
+            ->asArray()
+            ->all();
 
         /** Сетапим атрибуту класса - построить дерево категорий */
         $this->tree = $this->getTree();
@@ -101,10 +106,10 @@ class LeftmenuWidget extends Widget {
 
         /** В цикле проходим массив категорий, что сформировать массив категорий - родители и их дочерние категории */
         foreach ($this->data as $id=>&$node) {
-            if (!$node['parent_category']) {
+            if (!$node[Category::ATTR_PARENT_CATEGORY]) {
                 $categoryTree[$id] = &$node;
             } else {
-                $this->data[$node['parent_category']]['childs'][$node['id']] = &$node;
+                $this->data[$node[Category::ATTR_PARENT_CATEGORY]]['childs'][$node[Category::ATTR_ID]] = &$node;
             }
         }
 

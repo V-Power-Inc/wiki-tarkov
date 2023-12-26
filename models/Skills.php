@@ -176,7 +176,7 @@ class Skills extends ActiveRecord
     public static function takeSkillByCategoryId(int $id)
     {
         return static::find()
-            ->andWhere(['category' => $id])
+            ->andWhere([static::ATTR_CATEGORY => $id])
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->asArray()
             ->all();

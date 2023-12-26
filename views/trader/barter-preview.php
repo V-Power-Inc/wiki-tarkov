@@ -52,8 +52,8 @@ $this->title = 'Предпросмотр: '.$barter->title;
                         <!-- Контент табов -->
                         <div class="tab-content">
                             <div id="<?=$id?>" class="tab-pane fade in">
-                                <h3><?=$barter['title']?></h3>
-                                <p><?=$barter['content']?></p>
+                                <h3><?=$barter[Barters::ATTR_TITLE]?></h3>
+                                <p><?=$barter[Barters::ATTR_CONTENT]?></p>
                             </div>
                         </div>
 
@@ -67,7 +67,6 @@ $this->title = 'Предпросмотр: '.$barter->title;
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
         </div>
-
 
     </div>
 </div>

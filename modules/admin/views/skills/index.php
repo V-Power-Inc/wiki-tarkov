@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Skills;
 use app\models\Catskills;
 use yii\helpers\ArrayHelper;
 
@@ -33,21 +34,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            'title',
+            Skills::ATTR_ID,
+            Skills::ATTR_TITLE,
             [
-                'attribute' => 'category',
-                'value' => 'category0.title',
-                'filter' => Html::activeDropDownList($searchModel,'category',ArrayHelper::map(Catskills::find()->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
+                'attribute' => Skills::ATTR_CATEGORY,
+                'value' => Skills::ATTR_CATEGORY . '.' . Skills::ATTR_TITLE,
+                'filter' => Html::activeDropDownList($searchModel,Skills::ATTR_CATEGORY,ArrayHelper::map(Catskills::find()->asArray()->all(), Skills::ATTR_ID, Skills::ATTR_TITLE), ['class'=>'form-control','prompt'=>'Выберите группу маркера']),
             ],
-            'url:url',
-            'preview' => [
+            Skills::ATTR_URL . ':' . Skills::ATTR_URL,
+            Skills::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
                     return  $data->preview;
                 },
             ],
-            'enabled',
+            Skills::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn']
         ],

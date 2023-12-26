@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Questions;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -14,16 +15,16 @@ use mihaildev\elfinder\ElFinder;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Questions::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Questions::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
+    <?= $form->field($model, Questions::ATTR_DATE_CREATE)->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Questions::ATTR_ENABLED)->checkbox([
         'label' => 'Включен',
     ]); ?>
 

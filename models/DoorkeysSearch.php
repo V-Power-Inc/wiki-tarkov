@@ -70,14 +70,14 @@ class DoorkeysSearch extends Doorkeys
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'active' => $this->active,
-            'date_create' => $this->date_create,
+            static::ATTR_ID => $this->id,
+            static::ATTR_ACTIVE => $this->active,
+            static::ATTR_DATE_CREATE => $this->date_create,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'mapgroup', $this->mapgroup])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', static::ATTR_NAME, $this->name])
+            ->andFilterWhere(['like', static::ATTR_MAPGROUP, $this->mapgroup])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content]);
 
         return $dataProvider;
     }

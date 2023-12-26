@@ -6,6 +6,7 @@
  * Time: 13:45
  */
 
+use app\models\Questions;
 use yii\web\JqueryAsset;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
@@ -48,11 +49,11 @@ $this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
                     <?php endif; ?>
 
                     <div class="question-block bg-white">
-                        <h2 class="question-title"><?=$item['title'] ?></h2>
+                        <h2 class="question-title"><?=$item[Questions::ATTR_TITLE] ?></h2>
 
                         <div class="toggle-block slide">
                             <div class="js-slide-hidden slide" style="display: none;">
-                                <?=$item['content'] ?>
+                                <?=$item[Questions::ATTR_CONTENT] ?>
                             </div>
                             <a class="btn btn-default main-link float-right mobile-btn-margin opener" href="javascript:void(0)"><span>Читать ответ</span><em>Скрыть ответ</em></a>
                         </div>

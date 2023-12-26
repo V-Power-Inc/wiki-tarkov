@@ -96,7 +96,7 @@ final class SkillsController extends AdvancedController
     public function actionSkillsdetail(string $url): string
     {
         /** Если нашли активное умение по URL адресу */
-        if(Skills::takeSkillByUrl($url)) {
+        if (Skills::takeSkillByUrl($url)) {
 
             /** Рендерим вьюху умения */
             return $this->render('/skills/skill-detail.php', ['item' => Skills::takeSkillByUrl($url)]);

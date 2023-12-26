@@ -6,24 +6,25 @@
  * Time: 14:19
  */
 
+use app\models\Articles;
 use yii\web\JqueryAsset;
 
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model['title'];
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $model['description'],
+    'content' => $model[Articles::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $model['keywords'],
+    'content' => $model[Articles::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $model['title'],
+    'content' => $model[Articles::ATTR_TITLE],
 ]);
 
 $this->registerMetaTag([
@@ -33,12 +34,12 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:description',
-    'content' => $model['description'],
+    'content' => $model[Articles::ATTR_DESCRIPTION],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:image',
-    'content' => $model['preview'],
+    'content' => $model[Articles::ATTR_PREVIEW],
 ]);
 /******** Окончание OpenGraph тегов ************/
 ?>
@@ -59,10 +60,10 @@ $this->registerMetaTag([
 
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="news-shortitem bg-white">
-                <span class="news-date d-block"><?=date('d-m-Y',strtotime($model['date_create']))?></span>
+                <span class="news-date d-block"><?=date('d-m-Y',strtotime($model[Articles::ATTR_DATE_CREATE]))?></span>
                 <br>
-                <img class="news-titleimage" alt="<?=$model['title']?>" src="<?=$model['preview']?>">
-                <div class="text-left"><?=$model['content'] ?></div>
+                <img class="news-titleimage" alt="<?=$model[Articles::ATTR_TITLE]?>" src="<?=$model[Articles::ATTR_PREVIEW]?>">
+                <div class="text-left"><?=$model[Articles::ATTR_CONTENT] ?></div>
 
                 <br>
 

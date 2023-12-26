@@ -1,9 +1,9 @@
 <?php
 
+use app\models\Category;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Category */
@@ -14,22 +14,22 @@ use app\models\Category;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Category::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
     <!-- В arrayMap проверяем - сделать более 3-х уровневое дерево категорий невозможно -->
-    <?= $form->field($model, 'parent_category')->dropDownList(ArrayHelper::map(Category::find()->where(['parent_category' => null])->all(), 'id', 'title'), $params = ['prompt' => 'Не задано']) ?>
+    <?= $form->field($model, Category::ATTR_PARENT_CATEGORY)->dropDownList(ArrayHelper::map(Category::find()->where([Category::ATTR_PARENT_CATEGORY => null])->all(), Category::ATTR_ID, Category::ATTR_TITLE), $params = ['prompt' => 'Не задано']) ?>
 
-    <?= $form->field($model, 'sortir')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Category::ATTR_SORTIR)->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'url', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Category::ATTR_URL, ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, Category::ATTR_CONTENT)->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Category::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Category::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Category::ATTR_ENABLED)->checkbox([
         'label' => 'Включен',
     ]); ?>
 

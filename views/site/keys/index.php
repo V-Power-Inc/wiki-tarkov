@@ -67,9 +67,9 @@ $this->registerMetaTag([
                     <?php endif; ?>
 
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_terralab['url']?>"><?=$k_terralab['name']?></a></p>
-                        <a href="/keys/<?=$k_terralab['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_terralab['preview']?>"></a>
-                        <div class="item-content"><?=$k_terralab['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_terralab[Doorkeys::ATTR_URL]?>"><?=$k_terralab[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_terralab[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_terralab[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_terralab[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -81,9 +81,9 @@ $this->registerMetaTag([
                 <!-- Контентная часть ключей -->
                 <?php foreach ($tamojnya as $ztamojnya => $k_tamojnya): ?>
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_tamojnya['url']?>"><?=$k_tamojnya['name']?></a></p>
-                        <a href="/keys/<?=$k_tamojnya['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_tamojnya['preview']?>"></a>
-                        <div class="item-content"><?=$k_tamojnya['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_tamojnya[Doorkeys::ATTR_URL]?>"><?=$k_tamojnya[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_tamojnya[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_tamojnya[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_tamojnya[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -95,9 +95,9 @@ $this->registerMetaTag([
                 <!-- Контентная часть ключей -->
                 <?php foreach ($zavod as $kzavod => $k_zavod): ?>
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_zavod['url']?>"><?=$k_zavod['name']?></a></p>
-                        <a href="/keys/<?=$k_zavod['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_zavod['preview']?>"></a>
-                        <div class="item-content"><?=$k_zavod['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_zavod[Doorkeys::ATTR_URL]?>"><?=$k_zavod[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_zavod[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_zavod[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_zavod[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -109,9 +109,9 @@ $this->registerMetaTag([
                 <!-- Контентная часть ключей -->
                 <?php foreach ($forest as $zforest => $k_forest): ?>
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_forest['url']?>"><?=$k_forest['name']?></a></p>
-                        <a href="/keys/<?=$k_forest['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_forest['preview']?>"></a>
-                        <div class="item-content"><?=$k_forest['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_forest[Doorkeys::ATTR_URL]?>"><?=$k_forest[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_forest[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_forest[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_forest[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -123,9 +123,9 @@ $this->registerMetaTag([
                 <!-- Контентная часть ключей -->
                 <?php foreach ($bereg as $zbereg => $k_bereg): ?>
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_bereg['url']?>"><?=$k_bereg['name']?></a></p>
-                        <a href="/keys/<?=$k_bereg['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_bereg['preview']?>"></a>
-                        <div class="item-content"><?=$k_bereg['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_bereg[Doorkeys::ATTR_URL]?>"><?=$k_bereg[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_bereg[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_bereg[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_bereg[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -138,9 +138,9 @@ $this->registerMetaTag([
                 <!-- Контентная часть ключей -->
                 <?php foreach ($razvyazka as $zrazvyazka => $k_razvyazka): ?>
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$k_razvyazka['url']?>"><?=$k_razvyazka['name']?></a></p>
-                        <a href="/keys/<?=$k_razvyazka['url']?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka['preview']?>"></a>
-                        <div class="item-content"><?=$k_razvyazka['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$k_razvyazka[Doorkeys::ATTR_URL]?>"><?=$k_razvyazka[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$k_razvyazka[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" src="<?=$k_razvyazka[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$k_razvyazka[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->
@@ -159,4 +159,3 @@ $this->registerMetaTag([
 
     </div>
 </div>
-

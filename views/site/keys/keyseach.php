@@ -63,9 +63,9 @@ $this->registerMetaTag([
                     <?php endif; ?>
 
                     <div class="col-lg-12 item-key">
-                        <p class="item-name"><a href="/keys/<?=$keys['url']?>"><?=$keys['name']?></a></p>
-                        <a href="/keys/<?=$keys['url']?>"><img class="w-100 f-left fixible custom-key-margin" alt="<?=$keys['name']?>" src="<?=$keys['preview']?>"></a>
-                        <div class="item-content"><?=$keys['shortcontent']?></div>
+                        <p class="item-name"><a href="/keys/<?=$keys[Doorkeys::ATTR_URL]?>"><?=$keys[Doorkeys::ATTR_NAME]?></a></p>
+                        <a href="/keys/<?=$keys[Doorkeys::ATTR_URL]?>"><img class="w-100 f-left fixible custom-key-margin" alt="<?=$keys[Doorkeys::ATTR_NAME]?>" src="<?=$keys[Doorkeys::ATTR_PREVIEW]?>"></a>
+                        <div class="item-content"><?=$keys[Doorkeys::ATTR_SHORTCONTENT]?></div>
                     </div>
                 <?php endforeach; ?>
                 <!-- Оконачание контентной части ключей -->

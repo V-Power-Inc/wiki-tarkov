@@ -74,16 +74,16 @@ class SkillsSearch extends Skills
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'category' => $this->category,
-            'enabled' => $this->enabled,
+            static::ATTR_ID => $this->id,
+            static::ATTR_CATEGORY => $this->category,
+            static::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'preview', $this->preview]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_URL, $this->url])
+            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description])
+            ->andFilterWhere(['like', static::ATTR_KEYWORDS, $this->keywords])
+            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview]);
 
         return $dataProvider;
     }

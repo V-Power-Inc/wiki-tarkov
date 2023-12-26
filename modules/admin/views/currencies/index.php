@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Currencies;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'title',
-            'value',
-            'enabled',
+            Currencies::ATTR_ID,
+            Currencies::ATTR_TITLE,
+            Currencies::ATTR_VALUE,
+            Currencies::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

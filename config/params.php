@@ -42,9 +42,10 @@ return [
         '/maps/streets-of-tarkov-location'
     ],
     'cacheTime' => [
+        'one_minute' => 60,
         'one_hour' => 3600,
         'seven_days' => 604800,
         'one_day' => 86400
     ],
-    'discordHookNewsUrl' => 'https://discord.com/api/webhooks/452407880566571008/XUNKYU2VjqAyjx3TW5eCw8vOrzYaohxo4Ym6T025R0hFZ2vwcmr2n0Np9vo88mE_8xSO'
+    'discordHookNewsUrl' => 'your_discord_hook'
 ];

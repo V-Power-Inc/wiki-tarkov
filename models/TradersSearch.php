@@ -74,16 +74,16 @@ class TradersSearch extends Traders
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'enabled' => $this->enabled,
+            static::ATTR_ID => $this->id,
+            static::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'urltoquets', $this->urltoquets])
-            ->andFilterWhere(['like', 'button_quests', $this->button_quests])
-            ->andFilterWhere(['like', 'button_detail', $this->button_detail])
-            ->andFilterWhere(['like', 'bg_style', $this->bg_style]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', static::ATTR_URLTOQUETS, $this->urltoquets])
+            ->andFilterWhere(['like', static::ATTR_BUTTON_QUESTS, $this->button_quests])
+            ->andFilterWhere(['like', static::ATTR_BUTTON_DETAIL, $this->button_detail])
+            ->andFilterWhere(['like', static::ATTR_BG_STYLE, $this->bg_style]);
 
         return $dataProvider;
     }

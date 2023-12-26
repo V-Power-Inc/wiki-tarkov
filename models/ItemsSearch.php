@@ -76,17 +76,17 @@ class ItemsSearch extends Items
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'date_create' => $this->date_create,
-            'active' => $this->active,
-            'parentcat_id' => $this->parentcat_id,
+            static::ATTR_ID => $this->id,
+            static::ATTR_DATE_CREATE => $this->date_create,
+            static::ATTR_ACTIVE => $this->active,
+            static::ATTR_PARENTCAT_ID => $this->parentcat_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'preview', $this->preview])
-            ->andFilterWhere(['like', 'shortdesc', $this->shortdesc])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['creator' => $this->creator]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', static::ATTR_SHORTDESC, $this->shortdesc])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content])
+            ->andFilterWhere([static::ATTR_CREATOR => $this->creator]);
         return $dataProvider;
     }
 }

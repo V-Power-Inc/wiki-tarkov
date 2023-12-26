@@ -43,22 +43,22 @@ $this->registerMetaTag([
 
     <!-- Список активных категорий умений -->
 <?php foreach($catskills as $cat) : ?>
-    <div class="<?= $cat['bg_style'] ?>">
+    <div class="<?= $cat[Catskills::ATTR_BG_STYLE] ?>">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: inline-block; z-index: 100">
                     <h2 class="mobile-text-center">
-                        <a href="/skills/<?= $cat['url'] ?>"><?= $cat['title'] ?></a>
+                        <a href="/skills/<?= $cat[Catskills::ATTR_URL] ?>"><?= $cat[Catskills::ATTR_TITLE] ?></a>
                     </h2>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 mobile-text-center">
-                    <a href="/skills/<?= $cat['url'] ?>"><img class="image-trader" src="<?= $cat['preview'] ?>" style="max-width: 100%;" alt="<?= $cat['title'] ?>"></a>
+                    <a href="/skills/<?= $cat[Catskills::ATTR_URL] ?>"><img class="image-trader" src="<?= $cat[Catskills::ATTR_PREVIEW] ?>" style="max-width: 100%;" alt="<?= $cat[Catskills::ATTR_TITLE] ?>"></a>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-10">
-                    <?= $cat['content'] ?>
+                    <?= $cat[Catskills::ATTR_CONTENT] ?>
                     <br>
                     <p class="mobile-text-center">
-                        <a class="btn btn-default main-link float-right" href="/skills/<?= $cat['url'] ?>">Перейти в подробный раздел</a>
+                        <a class="btn btn-default main-link float-right" href="/skills/<?= $cat[Catskills::ATTR_URL] ?>">Перейти в подробный раздел</a>
                     </p>
                 </div>
             </div>

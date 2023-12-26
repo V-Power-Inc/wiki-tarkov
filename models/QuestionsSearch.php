@@ -73,8 +73,8 @@ class QuestionsSearch extends Questions
             'enabled' => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', Questions::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', Questions::ATTR_CONTENT, $this->content]);
 
         return $dataProvider;
     }

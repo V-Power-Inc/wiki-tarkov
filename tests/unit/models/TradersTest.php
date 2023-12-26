@@ -150,7 +150,7 @@ class TradersTest extends \Codeception\Test\Unit
             Traders::ATTR_URLTOQUETS    => 'https://sometest.ru',
             Traders::ATTR_SORTIR        => 8,
             Traders::ATTR_FULLCONTENT   => '<p><span style="font-size:16px">С самого зарождения конфликта Скупщик&nbsp;уже начинал действовать, организуя анонимные точки приёма и сбыта товара. Оставаясь инкогнито, смог организовать отлаженную сеть контрабандистов по всей Норвинской области.</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><span style="font-size:16px">Пара скриншотов того, что можно найти у Скупщика.</span></p><p><span style="font-size:16px"><img alt="" class="image-link" src="/img/upload/traders/skupshik/skupshik.png" style="float:left; margin:5px 15px; width:20%" /><img alt="" class="image-link" src="/img/upload/traders/skupshik/skupshik_2.png" style="float:left; margin:5px 15px; width:20%" /></span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2><span style="font-size:18px"><strong>Что покупает Скупщик.</strong></span></h2><p><span style="font-size:16px">Скупщик <strong>покупает всё</strong>. Нюанс заключается в том, что <strong>цена</strong>, за которую вы можете продать что-то Скупщику, будет <strong>в 2-3 раза ниже</strong>, чем у других торговцев.​</span></p><h2><span style="font-size:18px"><strong>Что стоит продавать Скупщику.</strong></span></h2><p><span style="font-size:16px">В основном&nbsp;это будут те предметы, которые у вас не купят другие торговцы из-за низкого технического состояния предмета.</span></p><h2><span style="font-size:18px"><strong>Что продаёт Скупщик.</strong></span></h2><p><span style="font-size:16px">В продаже у Скупщика может появиться всё, что угодно. Это может быть ключница, граната Ф-1, шоколад, R11 RSASS, броня 6б43 и т.д. Эти предметы могут появиться в любом техническом состоянии и от этого будет зависеть цена на предмет. <strong>Цена</strong> покупки на все предметы может быть <strong>выше на 15-30%</strong>.</span></p>',
-            Traders::ATTR_ENABLED       => 1
+            Traders::ATTR_ENABLED       => Traders::TRUE
         ];
 
         /** Сетапим атрибуты AR объекту */
@@ -193,7 +193,7 @@ class TradersTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Traders::find()->where([Traders::ATTR_ENABLED => 1])->all();
+        $list = Traders::find()->where([Traders::ATTR_ENABLED => Traders::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 6 записи */
         $this->assertTrue(count($list) == 6);
@@ -205,7 +205,7 @@ class TradersTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $item = Traders::find()
             ->where([Traders::ATTR_URL => 'skupshik'])
-            ->andWhere([Traders::ATTR_ENABLED => 1])
+            ->andWhere([Traders::ATTR_ENABLED => Traders::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
