@@ -14,7 +14,7 @@ use yii\helpers\Url;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/streets-of-tarkov-location.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/streets-of-tarkov-location.js?v=6.5.24', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->title = 'Карта локации Улицы Таркова';
 $this->registerMetaTag([
     'name' => 'description',

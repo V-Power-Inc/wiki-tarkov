@@ -13,7 +13,7 @@ use yii\web\JqueryAsset;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [JqueryAsset::class]]);
-$this->registerJsFile('js/bereg-location.js?v=6.1.12', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/bereg-location.js?v=6.5.24', ['depends' => [JqueryAsset::class]]);
 
 $this->title = 'Карта локации Берег в Escape from Tarkov - интерактивная карта со спавнами Диких, точками военных ящиков и ключей';
 $this->registerMetaTag([
