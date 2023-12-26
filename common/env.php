@@ -17,12 +17,20 @@ $dotenv->load();
  * Ключи рекапчи не включал сюда, при желании можно капчу снести полнстью - смотреть пример в .env.example
  */
 $dotenv->required([
+    'DEBUG_STATUS',
+    'ENVIRONMENT',
     'DB_DSN',
     'DB_NAME',
     'DB_USER',
     'DB_PASSWORD',
     'DB_CHARSET',
+    'DB_TEST_DSN',
+    'DB_TEST_NAME',
+    'DB_TEST_USER',
+    'DB_TEST_PASSWORD',
+    'DB_TEST_CHARSET',
     'DOMAIN_PROTOCOL',
-    'DOMAIN'
+    'DOMAIN',
+    'REDIS_HOST'
 ]);
 ?>
