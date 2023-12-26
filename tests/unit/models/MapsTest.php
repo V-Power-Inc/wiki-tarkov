@@ -215,7 +215,7 @@ class MapsTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только активные */
         $list = Maps::find()
-            ->where([Maps::ATTR_ENABLED => 1])
+            ->where([Maps::ATTR_ENABLED => Maps::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 5 записи */

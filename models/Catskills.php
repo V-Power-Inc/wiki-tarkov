@@ -49,6 +49,10 @@ class Catskills extends ActiveRecord
     /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
     const FILE = 'file';
+
+    /** Константы bool значений */
+    const TRUE = 1;
+    const FALSE = 0;
     
     /**
      * @inheritdoc

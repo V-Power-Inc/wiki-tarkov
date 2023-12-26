@@ -178,7 +178,7 @@ class ApilootTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = ApiLoot::find()
-            ->where([ApiLoot::ATTR_ACTIVE => 1])
+            ->where([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 21 записи */
@@ -205,7 +205,7 @@ class ApilootTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $item = ApiLoot::find()
             ->where([ApiLoot::ATTR_URL => 'm4a1-front-sight-with-gas-block-one'])
-            ->andWhere([ApiLoot::ATTR_ACTIVE => 1])
+            ->andWhere([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 запись */

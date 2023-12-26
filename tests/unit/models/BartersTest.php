@@ -178,7 +178,7 @@ class BartersTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи только активные */
-        $list = Barters::find()->where([Barters::ATTR_ENABLED => 1])->all();
+        $list = Barters::find()->where([Barters::ATTR_ENABLED => Barters::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -190,7 +190,7 @@ class BartersTest extends \Codeception\Test\Unit
         /** Выбираем все записи только активные */
         $list = Barters::find()
             ->where([Barters::ATTR_TRADER_GROUP => 'Прапор'])
-            ->where([Barters::ATTR_ENABLED => 1])
+            ->where([Barters::ATTR_ENABLED => Barters::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */

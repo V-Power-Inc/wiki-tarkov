@@ -211,7 +211,7 @@ class NewsTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = News::find()->where([News::ATTR_ENABLED => 1])->all();
+        $list = News::find()->where([News::ATTR_ENABLED => News::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -223,7 +223,7 @@ class NewsTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $item = News::find()
             ->where([News::ATTR_URL => 'sanatoriy-korpusa'])
-            ->andWhere([News::ATTR_ENABLED => 1])
+            ->andWhere([News::ATTR_ENABLED => News::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -234,7 +234,7 @@ class NewsTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи */
-        $list = News::find()->where([News::ATTR_ENABLED => 0])->all();
+        $list = News::find()->where([News::ATTR_ENABLED => News::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 1);

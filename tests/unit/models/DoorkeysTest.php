@@ -197,7 +197,7 @@ class DoorkeysTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Doorkeys::find()->where([Doorkeys::ATTR_ACTIVE => 1])->all();
+        $list = Doorkeys::find()->where([Doorkeys::ATTR_ACTIVE => Doorkeys::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -209,7 +209,7 @@ class DoorkeysTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Doorkeys::find()
             ->andWhere(['like', Doorkeys::ATTR_MAPGROUP, 'Лес'])
-            ->andWhere([Doorkeys::ATTR_ACTIVE => 1])
+            ->andWhere([Doorkeys::ATTR_ACTIVE => Doorkeys::TRUE])
             ->orderby([Doorkeys::ATTR_NAME => SORT_STRING])
             ->all();
 
@@ -223,7 +223,7 @@ class DoorkeysTest extends \Codeception\Test\Unit
         /** Выбираем одну активную запись по урлу */
         $list = Doorkeys::find()
             ->andWhere([Doorkeys::ATTR_URL => 'zb-014'])
-            ->andWhere([Doorkeys::ATTR_ACTIVE => 1])
+            ->andWhere([Doorkeys::ATTR_ACTIVE => Doorkeys::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -235,7 +235,7 @@ class DoorkeysTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Doorkeys::find()
-            ->andWhere([Doorkeys::ATTR_ACTIVE => 0])
+            ->andWhere([Doorkeys::ATTR_ACTIVE => Doorkeys::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */

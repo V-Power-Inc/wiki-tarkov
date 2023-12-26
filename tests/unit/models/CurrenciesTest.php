@@ -176,7 +176,7 @@ class CurrenciesTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Currencies::find()->where([Currencies::ATTR_ENABLED => 1])->all();
+        $list = Currencies::find()->where([Currencies::ATTR_ENABLED => Currencies::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 3);
@@ -188,7 +188,7 @@ class CurrenciesTest extends \Codeception\Test\Unit
         /** Выбираем 1 запись по критерию */
         $item = Currencies::find()
             ->where([Currencies::ATTR_TITLE => 'Доллар'])
-            ->andWhere([Currencies::ATTR_ENABLED => 1])
+            ->andWhere([Currencies::ATTR_ENABLED => Currencies::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -201,7 +201,7 @@ class CurrenciesTest extends \Codeception\Test\Unit
         /** Выбираем 1 запись по критерию */
         $item = Currencies::find()
             ->where([Currencies::ATTR_TITLE => 'Евро'])
-            ->andWhere([Currencies::ATTR_ENABLED => 1])
+            ->andWhere([Currencies::ATTR_ENABLED => Currencies::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -214,7 +214,7 @@ class CurrenciesTest extends \Codeception\Test\Unit
         /** Выбираем 1 запись по критерию */
         $item = Currencies::find()
             ->where([Currencies::ATTR_TITLE => 'Биткоин'])
-            ->andWhere([Currencies::ATTR_ENABLED => 1])
+            ->andWhere([Currencies::ATTR_ENABLED => Currencies::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */

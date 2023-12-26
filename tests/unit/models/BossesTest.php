@@ -195,8 +195,8 @@ class BossesTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Bosses::find()
-            ->where([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->where([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 9 записи */
@@ -209,8 +209,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Завод'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -223,8 +223,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Ночной Завод'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -237,8 +237,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Таможня'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -251,8 +251,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Лес'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -265,8 +265,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Берег'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -279,8 +279,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Развязка'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -293,8 +293,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Маяк'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -307,8 +307,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Резерв'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -321,8 +321,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_MAP => 'Лаборатория'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -335,8 +335,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'zavod'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -349,8 +349,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'night-zavod'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -363,8 +363,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'tamojnya'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -377,8 +377,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'forest'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -391,8 +391,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'bereg'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -405,8 +405,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'razvyazka'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -419,8 +419,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'lighthouse'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -433,8 +433,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'rezerv'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -447,8 +447,8 @@ class BossesTest extends \Codeception\Test\Unit
         /** Ищем запись в соответствии с условием */
         $item = Bosses::find()
             ->where([Bosses::ATTR_URL => 'terragroup-laboratory'])
-            ->andWhere([Bosses::ATTR_ACTIVE => 1])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->andWhere([Bosses::ATTR_ACTIVE => Bosses::TRUE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->one();
 
         /** Ожидаем получить из искомую запись */
@@ -460,7 +460,7 @@ class BossesTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Bosses::find()
-            ->andWhere([Bosses::ATTR_OLD => 1])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 0 записи */
@@ -472,8 +472,8 @@ class BossesTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Bosses::find()
-            ->where([Bosses::ATTR_ACTIVE => 0])
-            ->andWhere([Bosses::ATTR_OLD => 0])
+            ->where([Bosses::ATTR_ACTIVE => Bosses::FALSE])
+            ->andWhere([Bosses::ATTR_OLD => Bosses::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 0 записи */
