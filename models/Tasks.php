@@ -89,15 +89,15 @@ class Tasks extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'quest' => 'Название квеста',
-            'trader_name' => 'Имя торговца',
-            'trader_icon' => 'Иконка торговца',
-            'json' => 'Json с данными о квести',
-            'date_create' => 'Дата создания',
-            'active' => 'Активен',
-            'old' => 'Запись устарела',
-            'url' => 'Url до квестов торговца'
+            static::ATTR_ID => 'ID',
+            static::ATTR_QUEST => 'Название квеста',
+            static::ATTR_TRADER_NAME => 'Имя торговца',
+            static::ATTR_TRADER_ICON => 'Иконка торговца',
+            static::ATTR_JSON => 'Json с данными о квести',
+            static::ATTR_DATE_CREATE => 'Дата создания',
+            static::ATTR_ACTIVE => 'Активен',
+            static::ATTR_OLD => 'Запись устарела',
+            static::ATTR_URL => 'Url до квестов торговца'
         ];
     }
 

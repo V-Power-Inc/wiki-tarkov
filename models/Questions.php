@@ -27,6 +27,10 @@ class Questions extends ActiveRecord
     const ATTR_DATE_CREATE = 'date_create';
     const ATTR_ENABLED     = 'enabled';
 
+    /** Константы True/False для различных поисков */
+    const TRUE  = 1;
+    const FALSE = 0;
+
     /**
      * @inheritdoc
      */

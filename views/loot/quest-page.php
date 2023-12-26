@@ -68,7 +68,7 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['loot/questloot']],'id' => 'questloot','method' => 'post',]) ?>
                     <?= $form->field($form_model, 'questitem')->dropDownList(Traders::traderGroups(),
                         [
-                            'value' => $formValue??'Все предметы'
+                            'value' => $formValue ?? 'Все предметы'
                         ]);
                     ?>
                     <button type="submit" id="submitform" class="btn btn-primary h-37">Осуществить поиск...</button>
@@ -89,13 +89,13 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
                     <?php foreach ($questsearch as $item) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html">
+                                <h2 class="item-loot-title"><a href="/loot/<?= $item[Items::ATTR_URL] ?>.html"><?= $item[Items::ATTR_TITLE] ?></a></h2>
+                                <a class="loot-link" href="/loot/<?= $item[Items::ATTR_URL] ?>.html">
                                     <div class="fixies-float-image">
-                                        <img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>">
+                                        <img class="loot-image" alt="<?= $item[Items::ATTR_TITLE] ?>" src="<?= $item[Items::ATTR_PREVIEW] ?>">
                                     </div>
                                 </a>
-                                <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                                <p class="loot-description"><?= $item[Items::ATTR_SHORTDESC] ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -103,9 +103,9 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
                     <?php foreach ($allquestitems as $item) : ?>
                         <div class="col-lg-12">
                             <div class="item-loot">
-                                <h2 class="item-loot-title"><a href="/loot/<?= $item['url'] ?>.html"><?= $item['title'] ?></a></h2>
-                                <a class="loot-link" href="/loot/<?= $item['url'] ?>.html"><img class="loot-image" alt="<?= $item['title'] ?>" src="<?= $item['preview'] ?>"></a>
-                                <p class="loot-description"><?= $item['shortdesc'] ?></p>
+                                <h2 class="item-loot-title"><a href="/loot/<?= $item[Items::ATTR_URL] ?>.html"><?= $item[Items::ATTR_TITLE] ?></a></h2>
+                                <a class="loot-link" href="/loot/<?= $item[Items::ATTR_URL] ?>.html"><img class="loot-image" alt="<?= $item[Items::ATTR_TITLE] ?>" src="<?= $item[Items::ATTR_PREVIEW] ?>"></a>
+                                <p class="loot-description"><?= $item[Items::ATTR_SHORTDESC] ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>

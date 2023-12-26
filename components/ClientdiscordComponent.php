@@ -7,16 +7,23 @@
  */
 
 namespace app\components;
+
 use Yii;
+
 /**
  * Client generates the payload and sends the webhook payload to Discord
+ *
+ * Если нужно пушить новости в свой дискорд канал, нужно создать в дискорде веб-хук и засетапить его в params приложения
+ * В этом классе находится в атрибуте $url, $username сетапить по своему усмотрению
+ *
+ * 25_12_2023 - Старый URL веб-хука снесен (Т.к. в дискорд канале сейчас новости по Таркову летят с официального канала)
  *
  * @see https://github.com/nopjmp/discord-webhooks
  */
 class ClientdiscordComponent
 {
     protected $url = (string)Yii::$app->params['discordHookNewsUrl'];
-    protected $username = 'wiki-tarkov.ru';
+    protected $username = 'discord_username';
     protected $avatar;
     protected $message;
     protected $embeds;

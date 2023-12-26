@@ -3,10 +3,10 @@
 namespace app\models;
 
 use app\models\queries\AdminsQuery;
-use Yii;
-use \yii\db\ActiveRecord;
+use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
-use \yii\web\IdentityInterface;
+use yii\web\IdentityInterface;
+use Yii;
 
 use app\common\helpers\validators\UniqueValidator;
 use app\common\helpers\validators\RequiredValidator;
@@ -14,6 +14,9 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
 /**
+ * Таблица пользователей, в нашем случае - админов сайта
+ * Есть значительное количество рудиментарных полей в таблице
+ *
  * This is the model class for table "admins".
  *
  * @property int $id             - id Primary Key
@@ -70,6 +73,8 @@ class Admins extends ActiveRecord implements IdentityInterface
     public function rules(): array
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_USER, RequiredValidator::class],
             [static::ATTR_USER, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Логин пользователя должен быть уникальным.'],
             [static::ATTR_USER, StringValidator::class, StringValidator::ATTR_MAX => 45],

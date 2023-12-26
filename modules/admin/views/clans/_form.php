@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Clans;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,11 +13,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Название клана']) ?>
+    <?= $form->field($model, Clans::ATTR_TITLE)->textInput(['maxlength' => true, 'placeholder' => 'Название клана']) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true, 'placeholder' => 'Описание клана']) ?>
+    <?= $form->field($model, Clans::ATTR_DESCRIPTION)->textInput(['maxlength' => true, 'placeholder' => 'Описание клана']) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, Clans::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -24,11 +25,11 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?= $form->field($model, 'link')->textInput(['maxlength' => true, 'placeholder' => 'Ссылка на сообщество или сайт']) ?>
+    <?= $form->field($model, Clans::ATTR_LINK)->textInput(['maxlength' => true, 'placeholder' => 'Ссылка на сообщество или сайт']) ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'placeholder' => 'Дата создания', 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
+    <?= $form->field($model, Clans::ATTR_DATE_CREATE)->textInput(['maxlength' => true, 'placeholder' => 'Дата создания', 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
     
-    <?= $form->field($model, 'moderated')->checkbox([
+    <?= $form->field($model, Clans::ATTR_MODERATED)->checkbox([
         'label' => 'Заявка одобрена',
     ]); ?>
 

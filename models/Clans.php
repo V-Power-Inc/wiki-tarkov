@@ -45,6 +45,10 @@ class Clans extends ActiveRecord
     public $file;
     const FILE = 'file';
 
+    /** Константы bool значений */
+    const TRUE = 1;
+    const FALSE = 0;
+
     /**
      * {@inheritdoc}
      */

@@ -23,6 +23,7 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\QuestionsController;
 use app\modules\admin\controllers\SkillsController;
 use app\modules\admin\controllers\TradersController;
+use app\tests\fixtures\AdminsFixture;
 
 /**
  * Функциональные тесты для проверки страниц админки
@@ -32,6 +33,20 @@ use app\modules\admin\controllers\TradersController;
  */
 class AdminPagesCest
 {
+    /**
+     * Фикстуры с пользователями сайта
+     * @return array
+     */
+    public function _fixtures()
+    {
+        return [
+            'admins' => [
+                'class' => AdminsFixture::class,
+                'dataFile' => codecept_data_dir() . 'admins.php'
+            ]
+        ];
+    }
+
     /** Метод проверяет что на страницы админки мы не можем зайти без авторизации */
     public function checkAdminPagesWithoutLogin(\FunctionalTester $I)
     {
@@ -43,6 +58,23 @@ class AdminPagesCest
 
             /** Проверка что мы на странице логина и не видим штуки из интерфейса залогинненого пользователя */
             $this->expectCantSeeAdminPages($I);
+        }
+    }
+
+    /** Метод проверяет что на страницы админки мы не можем зайти без авторизации */
+    public function checkAdminPagesWithLogin(\FunctionalTester $I)
+    {
+        /** Мы залогинены в данный момент как админ */
+        $I->amLoggedInAs(1);
+
+        /** В цикле проходим каждый URL из админки (Каждый в отдельном контроллере) */
+        foreach ($this->getUrlList() as $url) {
+
+            /** Заходим на страницу URL'a */
+            $I->amOnRoute($url);
+
+            /** Проверка что мы на странице внутри админки и можем видеть то содержимое, которое видит только админ */
+            $this->canSeeAdminMenuInLogginedInterface($I);
         }
     }
 
@@ -90,6 +122,42 @@ class AdminPagesCest
 
         /** Мы видим кнопку войти для авторизации */
         $I->canSee('Войти', 'button');
+    }
+
+    /** Метод проверяет что мы ВИДИМ МЕНЮ, которое может видеть залогиненный пользователь */
+    private function canSeeAdminMenuInLogginedInterface(\FunctionalTester $I)
+    {
+        /** Проверяем что видим линки из навигации для админа на сайте */
+        $I->canSee('Открыть сайт');
+        $I->canSee('Справочник квестов');
+        $I->canSee('База ключей');
+        $I->canSee('Список новостей');
+        $I->canSee('Выход');
+
+        /** Проверка что НЕ ВИДИМ атрибуты страницы авторизации */
+        $this->cantSeeLoginPageAttributes($I);
+    }
+
+    /** Метод проверяет что мы видим все необходимые атрибуты страницы авторизации в админку */
+    private function cantSeeLoginPageAttributes(\FunctionalTester $I)
+    {
+        /** Проверяем что видим надпись - админка сайта */
+        $I->canSee('Админка сайта');
+
+        /** Проверяем, что нет заголовока формы авторизации */
+        $I->cantSee('Авторизация', 'h1');
+
+        /** Проверяем, что нет инпута для ввода логина */
+        $I->cantSeeElement('#login-email');
+
+        /** Проверяем, что нет инпута для ввода пароля */
+        $I->cantSeeElement('#login-password');
+
+        /** Проверяем, что нет инпута для ввода рекапчи от Google */
+        $I->cantSeeElement('#login-recaptcha');
+
+        /** Мы не видим кнопку войти для авторизации */
+        $I->cantSee('Войти', 'button');
     }
 
     /**

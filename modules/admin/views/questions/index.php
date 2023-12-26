@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Questions;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,11 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'title',
-            'content:ntext',
-            'date_create',
-            'enabled',
+            Questions::ATTR_ID,
+            Questions::ATTR_TITLE,
+            Questions::ATTR_CONTENT . ':ntext',
+            Questions::ATTR_DATE_CREATE,
+            Questions::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

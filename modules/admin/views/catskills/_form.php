@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Catskills;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -14,9 +15,9 @@ use mihaildev\elfinder\ElFinder;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Catskills::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'bg_style')
+    <?= $form->field($model, Catskills::ATTR_BG_STYLE)
         ->dropDownList([
             'interback-white' => 'Белый фон',
             'interback-grey' => 'Серый фон',
@@ -24,11 +25,11 @@ use mihaildev\elfinder\ElFinder;
     ?>
 
 
-    <?= $form->field($model, 'sortir')->textInput() ?>
+    <?= $form->field($model, Catskills::ATTR_SORTIR)->textInput() ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Catskills::ATTR_URL)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, Catskills::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -39,16 +40,16 @@ use mihaildev\elfinder\ElFinder;
     <br>
     <br>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Catskills::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Catskills::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Catskills::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Catskills::ATTR_ENABLED)->checkbox([
         'label' => 'Категория активна',
     ]); ?>
 

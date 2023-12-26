@@ -55,11 +55,11 @@ $this->registerMetaTag([
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="news-shortitem">
-                        <p class="news-short-title"><a class="news-link" href="/articles/<?=$item['url']?>"><?=$item['title']?></a></p>
-                        <span class="news-date"><?=date('d-m-Y',strtotime($item['date_create']))?></span>
-                        <a class="news-link" href="/articles/<?=$item['url']?>"><img class="news-titleimage" alt="<?=$item['title']?>" src="<?=$item['preview']?>"></a>
-                        <div class="text-left news-short-text"><?= $item['shortdesc'] ?></div>
-                        <p class="text-right"><a class="btn btn-default main-link" href="/articles/<?=$item['url']?>">Читать детально</a></p>
+                        <p class="news-short-title"><a class="news-link" href="/articles/<?=$item[Articles::ATTR_URL]?>"><?=$item[Articles::ATTR_TITLE]?></a></p>
+                        <span class="news-date"><?=date('d-m-Y',strtotime($item[Articles::ATTR_DATE_CREATE]))?></span>
+                        <a class="news-link" href="/articles/<?=$item[Articles::ATTR_URL]?>"><img class="news-titleimage" alt="<?=$item[Articles::ATTR_TITLE]?>" src="<?=$item[Articles::ATTR_PREVIEW]?>"></a>
+                        <div class="text-left news-short-text"><?= $item[Articles::ATTR_SHORTDESC] ?></div>
+                        <p class="text-right"><a class="btn btn-default main-link" href="/articles/<?=$item[Articles::ATTR_URL]?>">Читать детально</a></p>
                     </div>
 
 

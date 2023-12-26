@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Currencies;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,11 +13,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Currencies::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textInput() ?>
+    <?= $form->field($model, Currencies::ATTR_VALUE)->textInput() ?>
 
-    <?= $form->field($model, 'enabled')->checkbox() ?>
+    <?= $form->field($model, Currencies::ATTR_ENABLED)->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить валюту', ['class' => 'btn btn-success']) ?>

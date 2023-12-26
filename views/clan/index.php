@@ -82,7 +82,7 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
             <?php foreach($clans as $clan): ?>
                 <div class="clan-block">
                     <h3 class="clan-title">
-                            <?= $clan['title'] ?>
+                            <?= $clan[Clans::ATTR_TITLE] ?>
                         <i class="fa fa-check-circle checked-by-admins" title="Клан проверен администрацией <?=$_ENV['DOMAIN']?>"></i>
                     </h3>
 
@@ -91,20 +91,20 @@ $this->registerJsFile('js/search-clan.js', ['depends' => [JqueryAsset::class]]);
                        <img class="clan-img" src="/img/qsch.png" alt="Логотип клана отсутствует">
                    <?php else: ?>
                         <!-- 100x100 -->
-                        <img class="clan-img" src="<?=$clan['preview']?>" alt="<?= $clan['title'] ?>">
+                        <img class="clan-img" src="<?=$clan[Clans::ATTR_PREVIEW]?>" alt="<?= $clan[Clans::ATTR_TITLE] ?>">
                    <?php endif; ?>
                         
-                    <p class="size-16"><?=$clan['description']?></p>
+                    <p class="size-16"><?=$clan[Clans::ATTR_DESCRIPTION]?></p>
 
-                    <?php if($clan['link'] == null || $clan['link']==''): ?>
+                    <?php if($clan[Clans::ATTR_LINK] == null || $clan[Clans::ATTR_LINK]==''): ?>
                         <label class="label label-danger">Клан не опубликовал ссылку на сообщество</label>
                         <br>
                         <br>
                     <?php else: ?>
-                        <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="<?=$clan['link']?>" rel="nofollow" target="_blank">Перейти в сообщество</a></p>
+                        <p class="clan-community-link">Ссылка на сообщество клана: <a class="clan-community-link" href="<?=$clan[Clans::ATTR_LINK]?>" rel="nofollow" target="_blank">Перейти в сообщество</a></p>
                     <?php endif; ?>
 
-                    <label class="label label-info date-clan-label">Клан зарегистрирован: <?= date("Y-m-d H:i:s", strtotime($clan['date_create'])) ?></label>
+                    <label class="label label-info date-clan-label">Клан зарегистрирован: <?= date("Y-m-d H:i:s", strtotime($clan[Clans::ATTR_DATE_CREATE])) ?></label>
                 </div>
             <?php endforeach; ?>
             <?php endif; ?>

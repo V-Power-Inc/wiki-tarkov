@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Catskills;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -31,16 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'title',
-            'content:ntext',
-            'sortir',
-            'preview' => [
+            Catskills::ATTR_TITLE,
+            Catskills::ATTR_CONTENT . ':ntext',
+            Catskills::ATTR_SORTIR,
+            Catskills::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
-                    return  $data->preview;
+                    return $data->preview;
                 },
             ],
-            'url:url',
+            Catskills::ATTR_URL . ':' . Catskills::ATTR_URL,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

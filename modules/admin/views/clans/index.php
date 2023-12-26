@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Clans;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,26 +26,26 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'title',
+                'attribute' => Clans::ATTR_TITLE,
                 'format' => 'raw',
                 'value' => function($active) {
                     return '<b>'.$active->title.'</b>';
                 }
             ],
-            'description',
+            Clans::ATTR_DESCRIPTION,
             'preview' => [
-                'attribute' => 'preview',
+                'attribute' => Clans::ATTR_PREVIEW,
                 'format' => 'image',
                 'value' => function($data) {
                     return $data->preview;
                 },
             ],
-            'link:ntext',
+            Clans::ATTR_LINK . ':ntext',
             [
-                'attribute' => 'moderated',
+                'attribute' => Clans::ATTR_MODERATED,
                 'format' => 'raw',
                 'value' => function($active) {
-                    if($active->moderated === 1) {
+                    if($active->moderated === Clans::TRUE) {
                         return '<label class="label label-success customed-labels-adm">Проверено</label>';
                     } else {
                         return '<label class="label label-danger customed-labels-adm">Не проверено</label>';

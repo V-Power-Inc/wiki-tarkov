@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Traders;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -28,18 +29,18 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Traders::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'bg_style')
+    <?= $form->field($model, Traders::ATTR_BG_STYLE)
         ->dropDownList([
             'interback-white' => 'Белый фон',
             'interback-grey' => 'Серый фон',
         ])
     ?>
 
-    <?= $form->field($model, 'sortir')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Traders::ATTR_SORTIR)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, Traders::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -50,38 +51,38 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
     <br>
     <br>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Traders::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '200']),
     ]);
     ?>
 
-    <?php  echo $form->field($model, 'fullcontent')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Traders::ATTR_FULLCONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
     
     <h3 style="color: green;">Раздел квестов торговца:</h3>
     <div class="custom-admin-div">
-        <?= $form->field($model, 'urltoquets')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, Traders::ATTR_URLTOQUETS)->textInput(['maxlength' => true]) ?>
     
-        <?= $form->field($model, 'button_quests')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, Traders::ATTR_BUTTON_QUESTS)->textInput(['maxlength' => true]) ?>
     </div>
 
     <h3 style="color: green;">Детальный раздел торговца:</h3>
     
     <div class="custom-admin-div">
-        <?= $form->field($model, 'button_detail')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, Traders::ATTR_BUTTON_DETAIL)->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, Traders::ATTR_URL)->textInput(['maxlength' => true]) ?>
     </div>
         
     <br>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Traders::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Traders::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
         
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Traders::ATTR_ENABLED)->checkbox([
         'label' => 'Торговец активен',
     ]); ?>
 

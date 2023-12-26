@@ -6,40 +6,41 @@
  * Time: 17:02
  */
 
+use app\models\News;
 use yii\web\JqueryAsset;
 
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/spoiler-script.js', ['depends' => [JqueryAsset::class]]);
-$this->title = 'Escape from Tarkov: ' .$model['title'];
+$this->title = 'Escape from Tarkov: ' .$model[News::ATTR_TITLE];
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $model['description'],
+    'content' => $model[News::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $model['keywords'],
+    'content' => $model[News::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $model['title'],
+    'content' => $model[News::ATTR_TITLE],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:url',
-    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model['url'],
+    'content' => $_ENV['DOMAIN_PROTOCOL'].$_ENV['DOMAIN'].'/'.$model[News::ATTR_URL],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:description',
-    'content' => $model['description'],
+    'content' => $model[News::ATTR_DESCRIPTION],
 ]);
 
 $this->registerMetaTag([
     'property' => 'og:image',
-    'content' => $model['preview'],
+    'content' => $model[News::ATTR_PREVIEW],
 ]);
 /******** Окончание OpenGraph тегов ************/
 ?>
@@ -60,10 +61,10 @@ $this->registerMetaTag([
 
         <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
             <div class="news-shortitem bg-white">
-                <span class="news-date d-block"><?=date('d-m-Y',strtotime($model['date_create']))?></span>
+                <span class="news-date d-block"><?=date('d-m-Y',strtotime($model[News::ATTR_DATE_CREATE]))?></span>
                 <br>
-                <img class="news-titleimage" alt="<?=$model['title']?>" src="<?=$model['preview']?>">
-                <div class="text-left"><?=$model['content'] ?></div>
+                <img class="news-titleimage" alt="<?=$model[News::ATTR_TITLE]?>" src="<?=$model[News::ATTR_PREVIEW]?>">
+                <div class="text-left"><?=$model[News::ATTR_CONTENT] ?></div>
                 
                 <br>
                 

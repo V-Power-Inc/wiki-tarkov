@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Doorkeys;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -14,15 +15,15 @@ use mihaildev\elfinder\ElFinder;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Doorkeys::ATTR_NAME)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Doorkeys::ATTR_URL)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Doorkeys::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Doorkeys::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-   <?= $form->field($model, 'mapgroup')
+   <?= $form->field($model, Doorkeys::ATTR_MAPGROUP)
     ->listBox([
         'Лаборатория Terra Group' => 'Лаборатория Terra Group',
         'Таможня' => 'Таможня',
@@ -44,8 +45,7 @@ use mihaildev\elfinder\ElFinder;
 
    ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
-    
+    <?= $form->field($model, Doorkeys::FILE)->fileInput(['value' => $model->preview]) ?>
 
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -54,9 +54,8 @@ use mihaildev\elfinder\ElFinder;
         echo '<br>';
     };
     ?>
-    
 
-    <?php  echo $form->field($model, 'shortcontent')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Doorkeys::ATTR_SHORTCONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '100']),
     ]);
     ?>
@@ -64,18 +63,18 @@ use mihaildev\elfinder\ElFinder;
     <br>
     <br>
     
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Doorkeys::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
     <br>
     
-    <?= $form->field($model, 'active')->checkbox([
+    <?= $form->field($model, Doorkeys::ATTR_ACTIVE)->checkbox([
         'label' => 'Включен',
     ]); ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
+    <?= $form->field($model, Doorkeys::ATTR_DATE_CREATE)->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать новый ключ' : 'Обновить ключ', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

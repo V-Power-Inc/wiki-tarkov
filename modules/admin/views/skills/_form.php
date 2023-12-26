@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Skills;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
@@ -16,13 +17,13 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Skills::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(Catskills::find()->all(), 'id', 'title')) ?>
+    <?= $form->field($model, Skills::ATTR_CATEGORY)->dropDownList(ArrayHelper::map(Catskills::find()->all(), Skills::ATTR_ID, Skills::ATTR_TITLE)) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Skills::ATTR_URL)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(['value' => $model->preview]) ?>
+    <?= $form->field($model, Skills::FILE)->fileInput(['value' => $model->preview]) ?>
     
     <?php if($model->preview) {
         echo '<span style="font-weight: bold;">Текущее изображение:</span><br>';
@@ -33,18 +34,18 @@ use yii\helpers\ArrayHelper;
     <br>
     <br>
 
-    <?= $form->field($model, 'short_desc')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, Skills::ATTR_SHORT_DESC)->textarea(['rows' => 3]) ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Skills::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Skills::ATTR_DESCRIPTION)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Skills::ATTR_KEYWORDS)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Skills::ATTR_ENABLED)->checkbox([
         'label' => 'Умение активно',
     ]); ?>
     

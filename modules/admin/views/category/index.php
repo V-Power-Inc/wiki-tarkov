@@ -33,14 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
+            Category::ATTR_TITLE,
             [
-                'attribute' => 'parent_category',
-                'value' => 'parentcat.title',
-                'filter' => Html::activeDropDownList($searchModel,'parent_category',ArrayHelper::map(Category::find()->where(['parent_category' => null])->asArray()->all(), 'id', 'title'), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию']),
+                'attribute' => Category::ATTR_PARENT_CATEGORY,
+                'value' => Category::RELATION_PARENTCAT . '.' . Category::ATTR_TITLE,
+                'filter' => Html::activeDropDownList($searchModel,Category::ATTR_PARENT_CATEGORY,ArrayHelper::map(Category::find()->where([Category::ATTR_PARENT_CATEGORY => null])->asArray()->all(), Category::ATTR_ID, Category::ATTR_TITLE), ['class'=>'form-control','prompt'=>'Выберите родительскую категорию']),
             ],
-            'url:url',
-            'sortir',
+            Category::ATTR_URL . ':' . Category::ATTR_URL,
+            Category::ATTR_SORTIR,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

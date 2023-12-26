@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Barters;
 use yii\web\JqueryAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -18,14 +19,14 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Barters::ATTR_TITLE)->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'site_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, Barters::ATTR_SITE_TITLE)->textInput(['maxlength' => true]) ?>
 
     <label class="label label-info margin-bottom-20 adm">Название на сайте должно быть например следующим - LVL 1, или например LVL 2.</label>
 
     <!-- todo: Хардкод списки -->
-    <?= $form->field($model, 'trader_group')->dropDownList([
+    <?= $form->field($model, Barters::ATTR_TRADER_GROUP)->dropDownList([
             'Прапор' => 'Прапор',
             'Терапевт' => 'Терапевт',
             'Скупщик' => 'Скупщик',
@@ -37,14 +38,14 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
         ])
     ?>
 
-    <?php  echo $form->field($model, 'content')->widget(CKEditor::class,[
+    <?php  echo $form->field($model, Barters::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, 'date_create')->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
+    <?= $form->field($model, Barters::ATTR_DATE_CREATE)->textInput(['maxlength' => true, 'value'=>($model->date_create == Null)?date("Y-m-d H:i:s",time()):$model->date_create, 'disabled' => true]) ?>
 
-    <?= $form->field($model, 'enabled')->checkbox([
+    <?= $form->field($model, Barters::ATTR_ENABLED)->checkbox([
         'label' => 'Включен',
     ]); ?>
 
@@ -66,6 +67,5 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
         <input type="hidden" id="trader" name="Barters[trader_group]">
         <input type="hidden" id="trader-content" name="Barters[content]">
     </form>
-
 
 </div>

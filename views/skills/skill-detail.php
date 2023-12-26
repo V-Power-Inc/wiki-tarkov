@@ -6,10 +6,10 @@
  * Time: 19:19
  */
 
+use app\models\Skills;
 use yii\web\JqueryAsset;
-use app\models\Items;
 
-/* @var Items $item - объект справочника лута */
+/* @var Skills $item - объект справочника лута */
 
 /** Преобразуем title в нижний регистр **/
 $lowertitle = mb_strtolower($item->title);

@@ -77,10 +77,10 @@ class CategorySearch extends Category
             'enabled' => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_URL, $this->url])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content])
+            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description]);
 
         return $dataProvider;
     }

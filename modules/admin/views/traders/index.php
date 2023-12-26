@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Traders;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -38,16 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
-            'sortir',
-            'preview' => [
+            Traders::ATTR_TITLE,
+            Traders::ATTR_SORTIR,
+            Traders::ATTR_PREVIEW => [
                 'format' => 'image',
                 'value' => function($data) {
                     return  $data->preview;
                 },
             ],
-            'content',
-            'enabled',
+            Traders::ATTR_CONTENT,
+            Traders::ATTR_ENABLED,
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

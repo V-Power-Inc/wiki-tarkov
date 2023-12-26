@@ -8,6 +8,8 @@
 
 /*** Вьюха с таблицей патронов Escape from Tarkov ***/
 
+use app\models\Patrons;
+
 $this->title = "Таблица патронов Escape from Tarkov";
 
 $this->registerMetaTag([
@@ -91,21 +93,21 @@ $this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\J
 
                     <?php foreach ($patrons as $patron): ?>
                         <tr>
-                            <td class="apt-pos-sticky-left"><span style="font-size:14px"><strong><?=$patron['caliber']?></strong></span></td>
-                            <td class="apt-pos-sticky-left-2"><span style="font-size:14px"><strong><?=$patron['type']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['damage']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['probitie']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['damage_per_defence']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['yb']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['speed']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['count']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['tochn']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['otdacha']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['fragmentation']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['blood_1']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['blood_2']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['rikochet']?></strong></span></td>
-                            <td><span style="font-size:14px"><strong><?=$patron['traccer']?></strong></span></td>
+                            <td class="apt-pos-sticky-left"><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_CALIBER]?></strong></span></td>
+                            <td class="apt-pos-sticky-left-2"><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_TYPE]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_DAMAGE]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_PROBITIE]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_DAMAGE_PER_DEFENCE]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_YB]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_SPEED]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_COUNT]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_TOCHN]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_OTDACHA]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_FRAGMENTATION]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_BLOOD_1]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_BLOOD_2]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_RIKOCHET]?></strong></span></td>
+                            <td><span style="font-size:14px"><strong><?=$patron[Patrons::ATTR_TRACCER]?></strong></span></td>
                         </tr>
                     <?php endforeach; ?>
 

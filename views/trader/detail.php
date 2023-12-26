@@ -8,13 +8,14 @@
 
 use yii\web\JqueryAsset;
 use app\models\Traders;
+use app\models\Barters;
 
 /* @var Traders $trader - AR объект торговца */
 
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/barter-tabs.js', ['depends' => [JqueryAsset::class]]);
-$this->title = 'Торговцы Escape from Tarkov: ' .$trader->title;
+$this->title = 'Торговцы Escape from Tarkov: ' . $trader->title;
 $this->registerMetaTag([
     'name' => 'description',
     'content' => $trader->description,
@@ -91,9 +92,9 @@ $this->registerMetaTag([
                         <ul class="nav nav-tabs barters">
                             <?php foreach($barters as $key => $value): ?>
                                 <?php if($key == 0): ?>
-                                    <li><a class="first-lvl <?=$trader->url.$value['id']?>" data-toggle="tab" href="#<?=$trader->url.$value['id']?>"><?=$value['site_title']?></a></li>
+                                    <li><a class="first-lvl <?=$trader->url.$value[Barters::ATTR_ID]?>" data-toggle="tab" href="#<?=$trader->url.$value[Barters::ATTR_ID]?>"><?=$value[Barters::ATTR_SITE_TITLE]?></a></li>
                                 <?php else: ?>
-                                    <li><a data-toggle="tab" class="<?=$trader->url.$value['id']?>" href="#<?=$trader->url.$value['id']?>"><?=$value['site_title']?></a></li>
+                                    <li><a data-toggle="tab" class="<?=$trader->url.$value[Barters::ATTR_ID]?>" href="#<?=$trader->url.$value[Barters::ATTR_ID]?>"><?=$value[Barters::ATTR_SITE_TITLE]?></a></li>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
@@ -102,14 +103,14 @@ $this->registerMetaTag([
                         <div class="tab-content">
                             <?php foreach($barters as $key => $value): ?>
                                 <?php if($key == 0): ?>
-                                    <div id="<?=$trader->url.$value['id']?>" class="tab-pane fade in active">
-                                        <h3><?=$value['title']?></h3>
-                                        <p><?=$value['content']?></p>
+                                    <div id="<?=$trader->url.$value[Barters::ATTR_ID]?>" class="tab-pane fade in active">
+                                        <h3><?=$value[Barters::ATTR_TITLE]?></h3>
+                                        <p><?=$value[Barters::ATTR_CONTENT]?></p>
                                     </div>
                                 <?php else: ?>
-                                    <div id="<?=$trader->url.$value['id']?>" class="tab-pane fade in">
-                                        <h3><?=$value['title']?></h3>
-                                        <p><?=$value['content']?></p>
+                                    <div id="<?=$trader->url.$value[Barters::ATTR_ID]?>" class="tab-pane fade in">
+                                        <h3><?=$value[Barters::ATTR_TITLE]?></h3>
+                                        <p><?=$value[Barters::ATTR_CONTENT]?></p>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>

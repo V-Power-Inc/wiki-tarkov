@@ -81,12 +81,12 @@ class CatskillsSearch extends Catskills
             'enabled' => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'preview', $this->preview]);
+        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content])
+            ->andFilterWhere(['like', static::ATTR_URL, $this->url])
+            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description])
+            ->andFilterWhere(['like', static::ATTR_KEYWORDS, $this->keywords])
+            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview]);
 
         return $dataProvider;
     }
