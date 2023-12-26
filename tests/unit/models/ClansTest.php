@@ -194,7 +194,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -206,7 +206,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
@@ -219,7 +219,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->all();
 
@@ -232,7 +232,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
@@ -245,7 +245,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
@@ -259,7 +259,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 1])
+            ->where([Clans::ATTR_MODERATED => Clans::TRUE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
@@ -274,7 +274,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -286,7 +286,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])
             ->all();
 
@@ -299,7 +299,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->all();
 
@@ -312,7 +312,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
 
@@ -325,7 +325,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->all();
@@ -339,7 +339,7 @@ class ClansTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только промодерированные и с урлом */
         $list = Clans::find()
-            ->where([Clans::ATTR_MODERATED => 0])
+            ->where([Clans::ATTR_MODERATED => Clans::FALSE])
             ->andWhere(['is not', Clans::ATTR_LINK, null])
             ->andWhere(['is not', Clans::ATTR_PREVIEW, null])
             ->andWhere(['is not', Clans::ATTR_DESCRIPTION, null])

@@ -209,8 +209,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Терапевт'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -223,8 +223,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Егерь'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -237,8 +237,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Механик'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -251,8 +251,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Лыжник'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -265,8 +265,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Миротворец'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -279,8 +279,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Скупщик'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -293,8 +293,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_TRADER_NAME => 'Прапор'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -307,8 +307,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'prapor-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -321,8 +321,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'terapevt-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -335,8 +335,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'eger-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -349,8 +349,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'mehanic-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -363,8 +363,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'lyjnic-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -377,8 +377,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'mirotvorec-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -391,8 +391,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'skypshik-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -405,8 +405,8 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_URL => 'seeker-quests'])
-            ->andWhere([Tasks::ATTR_ACTIVE => 1])
-            ->andWhere([Tasks::ATTR_OLD => 0])
+            ->andWhere([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -418,8 +418,8 @@ class TasksTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Tasks::find()
-            ->where([Tasks::ATTR_ACTIVE => 0])
-            ->andWhere([Tasks::ATTR_OLD => 1])
+            ->where([Tasks::ATTR_ACTIVE => Tasks::TRUE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */

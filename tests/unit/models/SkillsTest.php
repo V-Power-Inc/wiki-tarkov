@@ -186,7 +186,7 @@ class SkillsTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи - только среди активных */
-        $list = Skills::find()->where([Skills::ATTR_ENABLED => 1])->all();
+        $list = Skills::find()->where([Skills::ATTR_ENABLED => Skills::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -196,7 +196,7 @@ class SkillsTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи - только среди активных */
-        $list = Skills::find()->where([Skills::ATTR_ENABLED => 0])->all();
+        $list = Skills::find()->where([Skills::ATTR_ENABLED => Skills::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
         $this->assertTrue(count($list) == 1);

@@ -211,7 +211,7 @@ class ItemsTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи - только отключенные */
-        $list = Items::find()->where([Items::ATTR_ACTIVE => 0])->all();
+        $list = Items::find()->where([Items::ATTR_ACTIVE => Items::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 1 активную запись */
         $this->assertTrue(count($list) == 1);
@@ -221,7 +221,7 @@ class ItemsTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Items::find()->where([Items::ATTR_ACTIVE => 1])->all();
+        $list = Items::find()->where([Items::ATTR_ACTIVE => Items::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 активные записи */
         $this->assertTrue(count($list) == 2);
@@ -233,7 +233,7 @@ class ItemsTest extends \Codeception\Test\Unit
         /** Выбираем все записи с конкретным ID категории и только активные */
         $list = Items::find()
             ->where([Items::ATTR_PARENTCAT_ID => 1])
-            ->andWhere([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_ACTIVE => Items::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 активные записи */
@@ -245,8 +245,8 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
-            ->andWhere([Items::ATTR_QUEST_ITEM => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
+            ->andWhere([Items::ATTR_QUEST_ITEM => Items::TRUE])
             ->andWhere([Items::ATTR_TRADER_GROUP => 'Прапор'])
             ->all();
 
@@ -259,7 +259,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем все активные записи - с алиасом */
         $list = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
             ->andWhere([Items::ATTR_SEARCH_WORDS => 'Снайперка'])
             ->all();
 
@@ -272,8 +272,8 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - активные и связанные с выполнением квеста */
         $list = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
-            ->andWhere([Items::ATTR_QUEST_ITEM => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
+            ->andWhere([Items::ATTR_QUEST_ITEM => Items::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 активные записи связанные с выполнением квеста */
@@ -285,7 +285,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем активную запись - с алиасом */
         $list = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
             ->andWhere([Items::ATTR_SEARCH_WORDS => 'Снайперка'])
             ->one();
 
@@ -297,7 +297,7 @@ class ItemsTest extends \Codeception\Test\Unit
     public function testSelectActiveSingleRow()
     {
         /** Выбираем 1 запись - только активную */
-        $item = Items::find()->where([Items::ATTR_ACTIVE => 1])->one();
+        $item = Items::find()->where([Items::ATTR_ACTIVE => Items::TRUE])->one();
 
         /** Ожидаем получить из фикстур - 1 активные запись */
         $this->assertTrue(!empty($item));
@@ -309,7 +309,7 @@ class ItemsTest extends \Codeception\Test\Unit
         /** Выбираем 1 запись - только активную */
         $item = Items::find()
             ->where([Items::ATTR_ID => 1])
-            ->andWhere([Items::ATTR_ACTIVE => 1])
+            ->andWhere([Items::ATTR_ACTIVE => Items::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 активные запись */
@@ -321,7 +321,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем одну активную запись по урлу */
         $item = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
             ->andWhere([Items::ATTR_URL => 'sv-98'])
             ->one();
 
@@ -334,7 +334,7 @@ class ItemsTest extends \Codeception\Test\Unit
     {
         /** Выбираем одну активную запись по урлу */
         $item = Items::find()
-            ->where([Items::ATTR_ACTIVE => 1])
+            ->where([Items::ATTR_ACTIVE => Items::TRUE])
             ->andWhere([Items::ATTR_CREATOR => 'Максим (KondorMax)'])
             ->one();
 

@@ -211,7 +211,7 @@ class ArticlesTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Articles::find()->where([Articles::ATTR_ENABLED => 1])->all();
+        $list = Articles::find()->where([Articles::ATTR_ENABLED => Articles::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -223,7 +223,7 @@ class ArticlesTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $item = Articles::find()
             ->where([Articles::ATTR_URL => 'sanatoriy-korpusa'])
-            ->andWhere([Articles::ATTR_ENABLED => 1])
+            ->andWhere([Articles::ATTR_ENABLED => Articles::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 запись */
@@ -234,7 +234,7 @@ class ArticlesTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи */
-        $list = Articles::find()->where([Articles::ATTR_ENABLED => 0])->all();
+        $list = Articles::find()->where([Articles::ATTR_ENABLED => Articles::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 1);

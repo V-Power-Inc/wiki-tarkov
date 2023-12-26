@@ -225,7 +225,7 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи */
         $list = Category::find()
-            ->where([Category::ATTR_ENABLED => 1])
+            ->where([Category::ATTR_ENABLED => Category::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
@@ -238,7 +238,7 @@ class CategoryTest extends \Codeception\Test\Unit
         /** Выбираем одну активную запись по урлу */
         $list = Category::find()
             ->where([Category::ATTR_URL => 'main-category-second'])
-            ->andWhere([Category::ATTR_ENABLED => 1])
+            ->andWhere([Category::ATTR_ENABLED => Category::TRUE])
             ->one();
 
         /** Ожидаем что у категории есть активная запись по урлу */
@@ -250,7 +250,7 @@ class CategoryTest extends \Codeception\Test\Unit
     {
         /** Выбираем все записи - только не активные */
         $list = Category::find()
-            ->where([Category::ATTR_ENABLED => 0])
+            ->where([Category::ATTR_ENABLED => Category::FALSE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
@@ -263,7 +263,7 @@ class CategoryTest extends \Codeception\Test\Unit
         /** Выбираем одну активную запись по урлу и неактивную */
         $list = Category::find()
             ->where([Category::ATTR_URL => 'main-category-thirdd'])
-            ->andWhere([Category::ATTR_ENABLED => 0])
+            ->andWhere([Category::ATTR_ENABLED => Category::FALSE])
             ->one();
 
         /** Ожидаем что у категории есть активная запись по урлу */

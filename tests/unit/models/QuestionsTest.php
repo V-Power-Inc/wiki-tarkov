@@ -176,7 +176,7 @@ class QuestionsTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи */
-        $list = Questions::find()->where([Questions::ATTR_ENABLED => 1])->all();
+        $list = Questions::find()->where([Questions::ATTR_ENABLED => Questions::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -186,7 +186,7 @@ class QuestionsTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи */
-        $list = Questions::find()->where([Questions::ATTR_ENABLED => 0])->all();
+        $list = Questions::find()->where([Questions::ATTR_ENABLED => Questions::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 3 записи */
         $this->assertTrue(count($list) == 1);

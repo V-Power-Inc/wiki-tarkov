@@ -185,7 +185,7 @@ class CatskillsTest extends \Codeception\Test\Unit
     public function testSelectActiveRows()
     {
         /** Выбираем все записи - только среди активных */
-        $list = Catskills::find()->where([Catskills::ATTR_ENABLED => 1])->all();
+        $list = Catskills::find()->where([Catskills::ATTR_ENABLED => Catskills::TRUE])->all();
 
         /** Ожидаем получить из фикстур - 2 записи */
         $this->assertTrue(count($list) == 2);
@@ -197,7 +197,7 @@ class CatskillsTest extends \Codeception\Test\Unit
         /** Ищем одну активную запись по урлу */
         $item = Catskills::find()
             ->where([Catskills::ATTR_URL => 'mental'])
-            ->andWhere([Catskills::ATTR_ENABLED => 1])
+            ->andWhere([Catskills::ATTR_ENABLED => Catskills::TRUE])
             ->one();
 
         /** Ожидаем получить из фикстур - 1 записи */
@@ -208,7 +208,7 @@ class CatskillsTest extends \Codeception\Test\Unit
     public function testSelectDisabledRows()
     {
         /** Выбираем все записи - только среди активных */
-        $list = Catskills::find()->where([Catskills::ATTR_ENABLED => 0])->all();
+        $list = Catskills::find()->where([Catskills::ATTR_ENABLED => Catskills::FALSE])->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
         $this->assertTrue(count($list) == 1);
