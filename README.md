@@ -229,6 +229,23 @@ Snyk в настоящий момент применяет 2 теста для �
 
 Конечно в проекте не все идеально, но т.к. это pet-project - здесь для любой ситуации возможны исключения, так или иначе проект регулярно дорабатывается по мере необходимости.
 
+## Стратегия Pull Requests
+Если вы хотите добавить в репозиторий новые коммиты, создайте новую ветку наследуясь от ветки **dev**, укажите в названии ветки префикс **contribute_название вашей ветки**, после проделанных работ отправьте свою ветку в этот репозиторий.
+
+После модерации изменения будут внесены в master ветку, либо будут даны комментарии по поводу проделанных работ.
+
+## Стек
+<div>
+  <img src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original.svg" title="Docker" alt="Docker" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/php/php-original.svg" title="Php" alt="Php" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/yii/yii-original.svg" title="Yii 2"  alt="Yii 2" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original-wordmark.svg" title="MySQL"  alt="MySQL" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JavaScript" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/nginx/nginx-original.svg" title="Nginx" alt="Nginx" width="40" height="40"/>&nbsp;
+</div>
+
 ## Ссылка на API используемый в проекте 📚
 
 - https://tarkov.dev/api/ (Tarkov DEV Api)
@@ -237,3 +254,9 @@ Snyk в настоящий момент применяет 2 теста для �
 
 - https://github.com/PC-Principal/wiki-tarkov (Основная разработка)
 - https://bitbucket.org/PC_Principal/eft-locations-map (Закрытая резервная репа)
+
+# Авторы 🧑‍🤝‍🧑
+
+Thank you to all of our awesome contributors! ❤️
+
+ContribRocks is Needed
