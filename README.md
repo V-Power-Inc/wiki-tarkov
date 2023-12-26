@@ -255,7 +255,7 @@ Snyk в настоящий момент применяет 2 теста для �
 - https://github.com/PC-Principal/wiki-tarkov (Основная разработка)
 - https://bitbucket.org/PC_Principal/eft-locations-map (Закрытая резервная репа)
 
-# Авторы 🧑‍🤝‍🧑
+## Авторы 🧑‍🤝‍🧑
 
 Thank you to all of our awesome contributors! ❤️
 
