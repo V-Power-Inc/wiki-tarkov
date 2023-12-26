@@ -419,7 +419,7 @@ class TasksTest extends \Codeception\Test\Unit
         /** Выбираем все записи */
         $list = Tasks::find()
             ->where([Tasks::ATTR_ACTIVE => Tasks::FALSE])
-            ->andWhere([Tasks::ATTR_OLD => Tasks::FALSE])
+            ->andWhere([Tasks::ATTR_OLD => Tasks::TRUE])
             ->all();
 
         /** Ожидаем получить из фикстур - 1 записи */
