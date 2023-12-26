@@ -286,4 +286,8 @@ Snyk в настоящий момент применяет 2 теста для �
 
 Thank you to all of our awesome contributors! ❤️
 
-ContribRocks is Needed
+<a href="https://github.com/V-Power-Inc/wiki-tarkov/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=V-Power-Inc/wiki-tarkov" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
