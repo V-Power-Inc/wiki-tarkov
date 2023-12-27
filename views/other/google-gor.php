@@ -8,7 +8,7 @@
  * Горизонтальная реклама в верхней части сайта
  */
 ?>
-<div class="margins-vertical-20">
+<div class="margins-vertical-20 mobile-display-none">
     <!--AdFox START-->
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Блок верхняя горизонтальная строка-->
     <!--Категория: Основная категория-->

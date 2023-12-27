@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="margins-vertical-20">
+<div class="margins-vertical-20 mobile-display-none">
     <!--AdFox START-->
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Боковой верхний баннер-->
     <!--Категория: Основная категория-->
@@ -29,7 +29,7 @@
 
 </div>
 
-<div class="margins-vertical-20">
+<div class="margins-vertical-20 mobile-display-none">
     <!--AdFox START-->
     <!--Площадка: wiki-tarkov.ru / Все страницы / ADF [Place] - Боковой нижний баннер-->
     <!--Категория: Основная категория-->
