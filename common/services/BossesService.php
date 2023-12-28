@@ -88,7 +88,7 @@ final class BossesService
         if (($boss_name == 'gifter' || $boss_name == 'Santa Claus')) {
 
             /** Переводим на русский */
-            $boss_name = 'Санта Улаус';
+            $boss_name = 'Санта Клаус';
         }
 
         /** Если у босса имя bossKolontay */
