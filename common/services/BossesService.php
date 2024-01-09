@@ -91,8 +91,8 @@ final class BossesService
             $boss_name = 'Санта Клаус';
         }
 
-        /** Если у босса имя bossKolontay */
-        if ($boss_name == 'bossKolontay') {
+        /** Если у босса имя bossKolontay или Kollontay */
+        if ($boss_name == 'bossKolontay' || $boss_name == 'Kollontay') {
 
             /** Переводим на русский */
             $boss_name = 'Колонтай';
