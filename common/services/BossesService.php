@@ -46,7 +46,8 @@ final class BossesService
             'Погоня' => 755,
             'Кабан' => 1300,
             'Кабан (снайпер)' => 710,
-            'Santa Claus' => 1040
+            'Santa Claus' => 1040,
+            'Kollontay' => 1055
         ];
     }
 
