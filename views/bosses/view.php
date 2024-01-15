@@ -86,7 +86,7 @@ $this->registerMetaTag([
 
                     <!-- Image -->
                     <div class="col-sm-2">
-                        <img class="boss-image" src="<?= ImageService::bossImages($boss[BossAttributes::ATTR_NAME]) ?>" alt="<?= $boss[BossAttributes::ATTR_NAME] ?>" title="<?= $boss[BossAttributes::ATTR_NAME] ?>">
+                        <img class="boss-image" src="<?= ImageService::bossImages($boss[BossAttributes::ATTR_NAME]) ?>" alt="<?= BossesService::checkBossName($boss[BossAttributes::ATTR_NAME]) ?>" title="<?= BossesService::checkBossName($boss[BossAttributes::ATTR_NAME]) ?>">
                     </div>
 
                     <!-- Attributes -->
