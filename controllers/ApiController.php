@@ -102,10 +102,10 @@ final class ApiController extends AdvancedController
      * Экшен для рендеринга страницы с детальной информацией о предмете
      *
      * @param string $url - строка с Url адресом
-     * @return string
+     * @return mixed
      * @throws HttpException
      */
-    public function actionItem(string $url): string
+    public function actionItem(string $url)
     {
         /** Создаем переменную с объектом ApiLoot по параметру url адреса */
         $item = ApiLoot::findItemByUrl($url);

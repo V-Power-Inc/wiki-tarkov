@@ -82,7 +82,7 @@ $this->registerMetaTag([
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boss-page-bg">
 
                     <!-- Name -->
-                    <h2 class="text-left"><?= ($boss[BossAttributes::ATTR_NAME] == 'gifter') ? 'Санта Клаус' : $boss[BossAttributes::ATTR_NAME] ?></h2>
+                    <h2 class="text-left"><?= BossesService::checkBossName($boss[BossAttributes::ATTR_NAME]) ?></h2>
 
                     <!-- Image -->
                     <div class="col-sm-2">
