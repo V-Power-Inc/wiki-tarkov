@@ -45,7 +45,9 @@ final class BossesService
             'Зрячий' => 1305,
             'Погоня' => 755,
             'Кабан' => 1300,
-            'Кабан (снайпер)' => 710
+            'Кабан (снайпер)' => 710,
+            'Santa Claus' => 1040,
+            'Kollontay' => 1055
         ];
     }
 
@@ -68,5 +70,36 @@ final class BossesService
 
         /** Возвращаем либо результат по ключу, либо null */
         return $array[$boss_name] ?? null;
+    }
+
+    /**
+     * Метод проверяет названия некоторых боссов и переводит их на русский
+     * Это связано с тем, что api tarkov.dev не всегда успевают в краткие сроки обработать данные
+     * Первые дни после вайпов - данные прилетают довольные сырые
+     *
+     * Всегда возвращает строку (Имя босса)
+     *
+     * @param string $boss_name - Имя босса
+     *
+     * @return string
+     */
+    public static function checkBossName(string $boss_name): string
+    {
+        /** Если у босса имя gifter или Santa Claus */
+        if (($boss_name == 'gifter' || $boss_name == 'Santa Claus')) {
+
+            /** Переводим на русский */
+            $boss_name = 'Санта Клаус';
+        }
+
+        /** Если у босса имя bossKolontay или Kollontay */
+        if ($boss_name == 'bossKolontay' || $boss_name == 'Kollontay') {
+
+            /** Переводим на русский */
+            $boss_name = 'Колонтай';
+        }
+
+        /** Возвращаем строку с именем босса */
+        return $boss_name;
     }
 }
