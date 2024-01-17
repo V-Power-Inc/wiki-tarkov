@@ -96,7 +96,7 @@ final class BossesService
         if ($boss_name == 'bossKolontay' || $boss_name == 'Kollontay') {
 
             /** Переводим на русский */
-            $boss_name = 'Колонтай';
+            $boss_name = 'Коллонтай';
         }
 
         /** Возвращаем строку с именем босса */
