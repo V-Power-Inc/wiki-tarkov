@@ -40,6 +40,9 @@ $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 
 /** Подключаем сюда файл, который AJAX запросом будет генерить правильный график */
 $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::class]]);
+
+/** Атрибут canonical (Т.к. из API могут прилетать полностью идентичные страницы, но урлы у них разные) */
+$this->registerLinkTag(['rel' => 'canonical', 'href' => $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . Yii::$app->request->url]);
 ?>
 <!-- Gorizontal information -->
 <div class="row">
@@ -85,7 +88,7 @@ $this->registerJsFile('js/highcharts/highchart.js', ['depends' => [JqueryAsset::
                     <div class="selling-block row">
 
                         <div class="col-sm-2">
-                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" title="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
+                            <img class="detail-item-trader" src="<?= ImageService::traderImages($trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME]) ?>" alt="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>" title="<?= $trader[ItemAttributes::ATTR_VENDOR][ItemAttributes::ATTR_VENDOR_NAME] ?>">
                         </div>
 
                         <div class="col-sm-10">
