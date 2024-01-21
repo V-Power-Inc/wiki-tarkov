@@ -47,6 +47,7 @@ body {
     top: 5px;
     left: -80px;
     width: 100px;
+    height: 100px;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -2303,7 +2304,7 @@ table.patrons-tbl >thead > tr > th {
 /** Отступы и ресайз для картинок на главной странице */
 .preview-mainpage-desc {
     margin: 15px 0;
-    max-width: 100%;
+    max-width: 360px;
 }
 
 /** Иконка торговца что выдает квест */
@@ -2328,6 +2329,8 @@ table.patrons-tbl >thead > tr > th {
     color: orange;
     cursor: pointer;
     z-index: 9999;
+    width: 24px;
+    height: 24px;
 }
 
 /** Стили для формы обратной связи */
