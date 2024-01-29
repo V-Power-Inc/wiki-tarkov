@@ -10,11 +10,12 @@
 
 use app\common\services\CanonicalPagesService;
 use yii\helpers\Url;
+use yii\web\JqueryAsset;
 
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
-$this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/map_hash.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-$this->registerJsFile('js/streets-of-tarkov-location.js?v=6.5.24', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/map_hash.js', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/streets-of-tarkov-location.js?v=6.8.11', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Карта локации Улицы Таркова';
 $this->registerMetaTag([
     'name' => 'description',

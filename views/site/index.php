@@ -16,28 +16,28 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Интерактивные карты локаций Escape from Tarkov, квесты Escape from Tarkov, Ключи Escape from Tarkov.',
 ]);
-
 ?>
+
 <div class="owl-carousel owl-theme">
 
     <div class="owl-item">
-        <img src="/img/slider/eft-2.jpg" alt="Escape from Tarkov: Игровые скриншоты">
+        <img src="/img/slider/eft-2.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-1.jpg" alt="Escape from Tarkov: Игровые скриншоты">
+        <img src="/img/slider/eft-1.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
     </div>
     
     <div class="owl-item">
-        <img src="/img/slider/eft-3.jpg" alt="Escape from Tarkov: Игровые скриншоты">
+        <img src="/img/slider/eft-3.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-4.jpg" alt="Escape from Tarkov: Игровые скриншоты">
+        <img src="/img/slider/eft-4.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
     </div>
 
     <div class="owl-item">
-        <img src="/img/slider/eft-5.jpg" alt="Escape from Tarkov: Игровые скриншоты">
+        <img src="/img/slider/eft-5.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
     </div>
     
 </div>
@@ -60,7 +60,7 @@ $this->registerMetaTag([
         <div class="body-content">
     
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Задачи у торговцев</h2>
 
                     <a href="/quests-of-traders">
@@ -71,7 +71,7 @@ $this->registerMetaTag([
     
                     <p><a class="btn btn-default main-link" href="/quests-of-traders">Перейти в раздел квестов EFT</a></p>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Ключи от дверей</h2>
 
                     <a href="/keys">
@@ -82,7 +82,7 @@ $this->registerMetaTag([
 
                     <p><a class="btn btn-default main-link" href="/keys">Перейти в раздел ключей EFT</a></p>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Карты локаций</h2>
 
                     <a href="/maps">
@@ -94,7 +94,7 @@ $this->registerMetaTag([
                     <p><a class="btn btn-default main-link" href="/maps">Перейти к интерактивным картам EFT</a></p>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Справочник лута</h2>
 
                     <a href="/loot">
@@ -106,7 +106,7 @@ $this->registerMetaTag([
                     <p><a class="btn btn-default main-link" href="/loot">Перейти в справочник лута EFT</a></p>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Справочник умений</h2>
 
                     <a href="/skills">
@@ -118,7 +118,7 @@ $this->registerMetaTag([
                     <p><a class="btn btn-default main-link" href="/skills">Перейти в справочник умений EFT</a></p>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <h2>Квестовый лут</h2>
 
                     <a href="/loot/quest-loot">
