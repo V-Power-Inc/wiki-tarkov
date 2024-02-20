@@ -92,11 +92,11 @@ final class BossesService
             $boss_name = 'Санта Клаус';
         }
 
-        /** Если у босса имя bossKolontay или Kollontay */
+        /** Если у босса имя bossKolontay или Kollontay (Api переодически возвращает разные названия) */
         if ($boss_name == 'bossKolontay' || $boss_name == 'Kollontay') {
 
             /** Переводим на русский */
-            $boss_name = 'Коллонтай';
+            $boss_name = 'Колонтай';
         }
 
         /** Возвращаем строку с именем босса */
