@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: basil
+ * User: PC_Principal
  * Date: 21.02.2024
  * Time: 0:26
  */
@@ -28,6 +28,9 @@ class CookieComponent
     /** @var string - Константа, название кукиса, который скрывает рекламный блок - оверлей */
     const NAME_OVERLAY = 'overlay';
 
+    /** @var bool - Переменная для возвратов, в методах, что сетапят кукисы */
+    const RESULT = true;
+
     /**
      * Метод сетапит кукис, который скрывает пользователю рекламный блок оверлей на 6 часов
      * time() + (60 * 60 * 24) - 1 день
@@ -37,9 +40,6 @@ class CookieComponent
      */
     public static function setOverlay(): bool
     {
-        /** Переменная для return'a */
-        $result = true;
-
         /** Создаем кукис оверлея и задаем срок истечения 6 часов, в течении этого времени блок overlay будет скрыт у посетителя */
         Yii::$app->response->cookies->add(new Cookie([
             'name' => 'overlay',
@@ -47,8 +47,8 @@ class CookieComponent
             'expire' => time() + (60 * 60 * 6),
         ]));
 
-        /** Возвращаем bool результат */
-        return $result;
+        /** Возвращаем bool результат - true */
+        return static::RESULT;
     }
 
     /**
@@ -59,9 +59,6 @@ class CookieComponent
      */
     public static function setDarkTheme(): bool
     {
-        /** Переменная для return'a */
-        $result = true;
-
         /** Сетапим кукис на 1 год */
         Yii::$app->response->cookies->add(new Cookie([
             'name' => 'dark_theme',
@@ -69,7 +66,7 @@ class CookieComponent
             'expire' => time() + 3600 * 24 * 365
         ]));
 
-        /** Возвращаем bool результат */
-        return $result;
+        /** Возвращаем bool результат - true */
+        return static::RESULT;
     }
 }
