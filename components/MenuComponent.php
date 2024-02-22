@@ -300,4 +300,3 @@ class MenuComponent
         return '<a href="' . Url::to(FeedbackController::getUrlRoute(FeedbackController::ACTION_INDEX)) . '"><i class="fa fa-2x fa-envelope js-feedback-form" title="Форма обратной связи"></i></a>';
     }
 }
-?>

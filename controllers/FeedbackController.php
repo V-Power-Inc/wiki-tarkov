@@ -32,9 +32,6 @@ final class FeedbackController extends AdvancedController
      */
     public function actionIndex()
     {
-        /** Компонент сообщений */
-        $messages = new MessagesComponent();
-
         /** Данные из POST */
         $post = Yii::$app->request->post();
 
@@ -47,11 +44,8 @@ final class FeedbackController extends AdvancedController
             /** Если данные прогрузились в модель и сохранились */
             if ($model->load($post) && $model->save()) {
 
-                /** Сетапим во flash - успешную отправку сообщения */
-                $message = "<p class='alert alert-success size-16 margin-top-20'><b>Сообщение успешно отправлено, спасибо!</b></p>";
-
-                /** Отправляем сообщение во вьюху */
-                $messages->setMessages($message);
+                /** Сетапим flash сообщение */
+                MessagesComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Сообщение успешно отправлено, спасибо!</b></p>");
             }
         }
 

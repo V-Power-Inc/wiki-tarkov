@@ -20,7 +20,7 @@ use yii\base\InvalidConfigException;
 
 /**
  * Url компонент для маршрутизации на детальные страницы некоторых коллекций объектов
- * (Новости, Ключи, Полезные материалы, Детальные страницы торговцеы)
+ * (Новости, Ключи, Полезные материалы, Детальные страницы торговцев)
  *
  * Class UrlComponent
  * @package app\components
@@ -48,13 +48,13 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
         $exploded_url = explode('/',$pathInfo);
 
         /** Если первый элемента массива - keys, значит мы в разделе ключей */
-        if($exploded_url[static::FIRST_ELEMENT] == 'keys'){
+        if ($exploded_url[static::FIRST_ELEMENT] == 'keys'){
 
             /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
 
                 /** Отправляем в контроллер с нужным параметром для Action */
-                return ['site/doorkeysdetail',['id'=>$matches[3]]];
+                return ['site/doorkeysdetail', ['id'=>$matches[3]]];
             }
         } elseif ($exploded_url[static::FIRST_ELEMENT] == 'news') { /** Если первый элемента массива - news, значит мы в разделе новостей */
 
@@ -62,7 +62,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
 
                 /** Отправляем в контроллер с нужным параметром для Action */
-                return ['site/newsdetail',['id'=>$matches[3]]];
+                return ['site/newsdetail', ['id'=>$matches[3]]];
             }
         } elseif ($exploded_url[static::FIRST_ELEMENT] == 'articles') { /** Если первый элемента массива - articles, значит мы в разделе статей */
 
@@ -87,10 +87,12 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
 
                 /** Отправляем в контроллер с нужным параметром для Action - дательная страница умения */
                 return ['skills/skillsdetail', ['url' => $matches[5]]];
+
             } elseif (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) {
 
                 /** Отправляем в контроллер с нужным параметром для Action - категория */
                 return ['skills/skillscategory',['name'=>$matches[3]]];
+
             }
         } elseif ($exploded_url[static::FIRST_ELEMENT] == 'loot') { /** Если первый элемента массива - loot, значит мы в разделе лута */
 
@@ -99,10 +101,12 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
 
                 /** Отправляем в контроллер с нужным параметром для Action - подкатегория */
                 return ['loot/category',['name'=>$matches[5]]];
+
             } elseif (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для категории */
 
                 /** Отправляем в контроллер с нужным параметром для Action - категория */
                 return ['loot/category',['name'=>$matches[3]]];
+
             } elseif (preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для детальной страницы лута */
 
                 /** Отправляем в контроллер с нужным параметром для Action - детальная страница лута */
@@ -129,12 +133,12 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
         if (Doorkeys::find()->where([Doorkeys::ATTR_URL => $route])->One()) {
 
             /** Возвращаем путь до детальной страницы */
-            return 'keys/'.$route;
+            return 'keys/' . $route;
 
         } elseif (News::find()->where([News::ATTR_URL => $route])->One()){ /** Если смогли найти по урлу - Новость */
 
             /** Возвращаем путь до детальной страницы */
-            return 'news/'.$route;
+            return 'news/' . $route;
 
         } elseif(Articles::find()->where([Articles::ATTR_URL => $route])->One()) { /** Если смогли найти по урлу - Статья */
 

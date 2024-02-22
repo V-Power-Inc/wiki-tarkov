@@ -26,7 +26,7 @@ class MessagesComponent
      * @param string $messageText - сообщение, которое будет отображено во вьюхе (Может быть html кодом)
      * @return void
      */
-    public function setMessages(string $messageText): void
+    public static function setMessages(string $messageText): void
     {
         /** Удаляем кукис messages */
         Yii::$app->response->cookies->remove('message');

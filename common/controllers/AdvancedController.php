@@ -4,13 +4,19 @@
  * User: basil
  * Date: 03.08.2022
  * Time: 20:50
- *
- * Кастомный контроллер для удобных маршрутизаций для публичной части сайта
  */
 
 namespace app\common\controllers;
 
-class AdvancedController extends \yii\web\Controller
+use yii\web\Controller;
+
+/**
+ * Контроллер для наследования контроллеров, отвечающих за отображение основного контента сайта
+ *
+ * Class AdvancedController
+ * @package app\common\controllers
+ */
+class AdvancedController extends Controller
 {
     /** Используем трейт для множественного наследования */
     use ControllerRoutesTrait;
@@ -28,10 +34,6 @@ class AdvancedController extends \yii\web\Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }

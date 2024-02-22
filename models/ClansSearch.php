@@ -84,4 +84,14 @@ class ClansSearch extends Clans
 
         return $dataProvider;
     }
+
+    /**
+     * Получаем число - количество заявок на регистрацию кланов, поданных сегодня
+     *
+     * @return bool|int|string|null
+     */
+    public static function getTodayTicketsCount()
+    {
+        return Clans::find()->where(['like', Clans::ATTR_DATE_CREATE, date('Y-m-d')])->count('*');
+    }
 }

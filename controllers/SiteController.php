@@ -114,8 +114,8 @@ final class SiteController extends AdvancedController
             /** Рендерим вьюху с учетом полученных данных из POST */
             return $this->render('keys/keyseach.php', [
                     'form_model' => $form_model,
-                    'keysearch' => KeysService::takeResult($form_model),
-                    'formValue' => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
+                    'keysearch'  => KeysService::takeResult($form_model),
+                    'formValue'  => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
             ]);
         }
 
@@ -158,10 +158,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим вьюху с пагинацией */
         return $this->render('news/list.php', [
-            'news'=>$data->items,
+            'news'        => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -200,10 +200,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим вьюху с информацией */
         return $this->render('articles/list.php', [
-            'news'=> $data->items,
+            'news'        => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -242,10 +242,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим страницу со списком вопросов */
         return $this->render('questions/list.php', [
-            'questions' => $data->items,
+            'questions'   => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -253,6 +253,7 @@ final class SiteController extends AdvancedController
      * Данные о доступных ключах от дверей в формате Json - выборка только по включенным
      *
      * @param null $q - ключевое слово запроса
+     *
      * @return string
      * @throws HttpException
      * @throws \yii\db\Exception
@@ -260,7 +261,7 @@ final class SiteController extends AdvancedController
     public function actionKeysjson($q = null): string
     {
         /** Если запрос пришел через Ajax */
-        if(Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {
 
             /** Возвращаем информацию в JSON формате о ключе по запросу */
             return JsondataService::getKeysJson($q);
@@ -294,7 +295,7 @@ final class SiteController extends AdvancedController
     public function actionJsonvalute(): string
     {
         /** Если запрос пришел как AJAX */
-        if(Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {
 
             /** Возвращаем JSON информацию о курсах валют */
             return Json::encode(Currencies::takeActiveValutes());
@@ -320,7 +321,7 @@ final class SiteController extends AdvancedController
             $cookies = Yii::$app->request->cookies;
 
             /** Если у поступающего сюда запроса не определена кука Overlay */
-            if($cookies->get(CookieComponent::NAME_OVERLAY) == null) {
+            if ($cookies->get(CookieComponent::NAME_OVERLAY) == null) {
 
                 /** Создаем ее и задаем срок истечения 6 часов, в течении этого времени блок overlay будет скрыт у посетителя */
                 return CookieComponent::setOverlay();
