@@ -8,6 +8,7 @@
 
 namespace app\components;
 
+use app\components\menu\MenuUrlsComponent;
 use app\controllers\FeedbackController;
 use Yii;
 use yii\helpers\Url;
@@ -222,90 +223,6 @@ class MenuComponent
     }
 
     /**
-     * Массив урлов карт локаций
-     *
-     * @return string[]
-     */
-    private static function getMapsUrlArray(): array
-    {
-        return [
-            "/maps",
-            "/maps/zavod-location",
-            "/maps/bereg-location",
-            "/maps/forest-location",
-            "/maps/tamojnya-location",
-            "/maps/terragroup-laboratory-location",
-            "/maps/rezerv-location",
-            "/maps/lighthouse-location",
-            "/maps/streets-of-tarkov-location"
-        ];
-    }
-
-    /**
-     * Массив урлов торговцев и их квестов
-     *
-     * @return string[]
-     */
-    private static function getTradersUrlArray(): array
-    {
-        return [
-            "/quests-of-traders",
-            "/quests-of-traders/prapor-quests",
-            "/quests-of-traders/terapevt-quests",
-            "/quests-of-traders/skypchik-quests",
-            "/quests-of-traders/lyjnic-quests",
-            "/quests-of-traders/mirotvorec-quests",
-            "/quests-of-traders/eger-quests",
-            "/quests-of-traders/mehanic-quests",
-            "/quests-of-traders/seeker-quests",
-            "/traders/prapor",
-            "/traders/terapevt",
-            "/traders/lyjnic",
-            "/traders/mirotvorec",
-            "/traders/mehanic",
-            "/traders/skupshik",
-            "/traders/baraholshik",
-            "/traders/eger"
-        ];
-    }
-
-    /**
-     * Массив урлов страниц с умениями
-     *
-     * @return string[]
-     */
-    private static function getSkillsUrlArray(): array
-    {
-        return [
-            "/skills",
-            "/skills/physical",
-            "/skills/mental",
-            "/skills/practical",
-            "/skills/combat",
-            "/skills/special"
-        ];
-    }
-
-    /**
-     * Массив урлов страницы, что находятся в разделе
-     *
-     * @return string[]
-     */
-    private static function getOtherUlrArray(): array
-    {
-        return [
-            '/currencies',
-            '/questions',
-            '/news',
-            '/articles',
-            '/clans',
-            '/add-clan',
-            '/table-patrons',
-            '/feedback-form'
-        ];
-    }
-
-    /**
      * Если текущий урл совпадает с одним из тех, что прилетают в массиве в виде параметра
      * Тогда вернет строку active, иначе - null
      *
@@ -338,15 +255,15 @@ class MenuComponent
     private static function getActiveNavByUrlArray()
     {
         /** Получаем активность меню для раздела - интерактивные карты локаций */
-        static::$intermaps = static::checkActiveTabByUrlArray(static::getMapsUrlArray());
+        static::$intermaps = static::checkActiveTabByUrlArray(MenuUrlsComponent::getMapsUrlArray());
 
         /** Получаем активность меню для раздела - умения персонажа */
-        static::$skills = static::checkActiveTabByUrlArray(static::getSkillsUrlArray());
+        static::$skills = static::checkActiveTabByUrlArray(MenuUrlsComponent::getSkillsUrlArray());
 
         /** Получаем активность меню для раздела - торговцы и квесты */
-        static::$pagequests = static::checkActiveTabByUrlArray(static::getTradersUrlArray());
+        static::$pagequests = static::checkActiveTabByUrlArray(MenuUrlsComponent::getTradersUrlArray());
 
         /** Получаем активность меню для раздела - прочее */
-        static::$other = static::checkActiveTabByUrlArray(static::getOtherUlrArray());
+        static::$other = static::checkActiveTabByUrlArray(MenuUrlsComponent::getOtherUlrArray());
     }
 }
