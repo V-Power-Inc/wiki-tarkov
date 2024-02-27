@@ -32,7 +32,8 @@ class MenuUrlsComponent
             "/maps/terragroup-laboratory-location",
             "/maps/rezerv-location",
             "/maps/lighthouse-location",
-            "/maps/streets-of-tarkov-location"
+            "/maps/streets-of-tarkov-location",
+            "/maps/razvyazka-location",
         ];
     }
 
