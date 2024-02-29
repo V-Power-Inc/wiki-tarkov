@@ -369,9 +369,7 @@ final class ApiService implements ApiInterface
         if (empty($item[Api::ATTR_DATA][Api::ATTR_ITEMS])) {
 
             /** Возвращаем уведомление, что не смогли найти искомый предмет */
-            $messages = new MessagesComponent();
-            $message = "<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению мы не смогли ничего найти по вашему запросу, попробуйте другой запрос.</b></p>";
-            $messages->setMessages($message);
+            MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению мы не смогли ничего найти по вашему запросу, попробуйте другой запрос.</b></p>");
 
             /** Возвращаем false - если не смогли найти результат даже по APIшке */
             return false;

@@ -45,6 +45,8 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_INFO, StringValidator::class],
 
             [static::ATTR_DATE_CREATE, SafeValidator::class],
