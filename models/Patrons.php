@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\common\helpers\validators\IntegerValidator;
 use app\models\queries\PatronsQuery;
 use Yii;
 
@@ -67,6 +68,8 @@ class Patrons extends ActiveRecord
         return [
             /** Оставил комментарий для сравнения */
             // [['caliber', 'type', 'damage', 'probitie', 'damage_per_defence', 'speed', 'count', 'tochn', 'otdacha', 'fragmentation', 'iznos', 'blood_1', 'blood_2', 'rikochet', 'traccer'], 'string', 'max' => 255],
+            [static::ATTR_ID, IntegerValidator::class],
+
             [static::ATTR_CALIBER, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_TYPE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_DAMAGE, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],

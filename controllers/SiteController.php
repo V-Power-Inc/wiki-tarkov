@@ -368,18 +368,4 @@ final class SiteController extends AdvancedController
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
         throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
-
-    /**
-     * Обработчик ошибок - отображает статусы ответа сервера
-     *
-     * @return array
-     */
-    public function actions(): array
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ]
-        ];
-    }
 }
