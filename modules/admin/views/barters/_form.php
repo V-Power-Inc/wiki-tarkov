@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Barters;
+use app\models\Traders;
 use yii\web\JqueryAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -25,18 +26,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
 
     <label class="label label-info margin-bottom-20 adm">Название на сайте должно быть например следующим - LVL 1, или например LVL 2.</label>
 
-    <!-- todo: Хардкод списки -->
-    <?= $form->field($model, Barters::ATTR_TRADER_GROUP)->dropDownList([
-            'Прапор' => 'Прапор',
-            'Терапевт' => 'Терапевт',
-            'Скупщик' => 'Скупщик',
-            'Лыжник' => 'Лыжник',
-            'Миротворец' => 'Миротворец',
-            'Механик' => 'Механик',
-            'Барахольщик' => 'Барахольщик',
-            'Егерь' => 'Егерь'
-        ])
-    ?>
+    <?= $form->field($model, Barters::ATTR_TRADER_GROUP)->dropDownList(Traders::getTradersList()) ?>
 
     <?php  echo $form->field($model, Barters::ATTR_CONTENT)->widget(CKEditor::class,[
         'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),

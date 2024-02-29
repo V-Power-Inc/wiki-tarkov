@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\common\services\redis\RedisVariationsConfig;
+use app\components\CookieComponent;
 use app\models\Doorkeys;
 use app\models\News;
 use app\models\Articles;
@@ -12,7 +13,6 @@ use app\models\Questions;
 use app\models\Currencies;
 use app\models\Patrons;
 use yii\helpers\Json;
-use yii\web\Cookie;
 use app\common\controllers\AdvancedController;
 use yii\web\HttpException;
 use app\common\services\KeysService;
@@ -114,8 +114,8 @@ final class SiteController extends AdvancedController
             /** Рендерим вьюху с учетом полученных данных из POST */
             return $this->render('keys/keyseach.php', [
                     'form_model' => $form_model,
-                    'keysearch' => KeysService::takeResult($form_model),
-                    'formValue' => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
+                    'keysearch'  => KeysService::takeResult($form_model),
+                    'formValue'  => (string)Doorkeys::KeysCategories()[$form_model->doorkey]
             ]);
         }
 
@@ -158,10 +158,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим вьюху с пагинацией */
         return $this->render('news/list.php', [
-            'news'=>$data->items,
+            'news'        => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -200,10 +200,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим вьюху с информацией */
         return $this->render('articles/list.php', [
-            'news'=> $data->items,
+            'news'        => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -242,10 +242,10 @@ final class SiteController extends AdvancedController
 
         /** Рендерим страницу со списком вопросов */
         return $this->render('questions/list.php', [
-            'questions' => $data->items,
+            'questions'   => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),
-            'pagination' => $data->paginator
+            'pagination'  => $data->paginator
         ]);
     }
 
@@ -253,6 +253,7 @@ final class SiteController extends AdvancedController
      * Данные о доступных ключах от дверей в формате Json - выборка только по включенным
      *
      * @param null $q - ключевое слово запроса
+     *
      * @return string
      * @throws HttpException
      * @throws \yii\db\Exception
@@ -260,7 +261,7 @@ final class SiteController extends AdvancedController
     public function actionKeysjson($q = null): string
     {
         /** Если запрос пришел через Ajax */
-        if(Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {
 
             /** Возвращаем информацию в JSON формате о ключе по запросу */
             return JsondataService::getKeysJson($q);
@@ -279,8 +280,8 @@ final class SiteController extends AdvancedController
     {
         /** Рендерим страницу с информацией о курсах валют */
         return $this->render('currencies/index.php', [
-            'dollar' => Currencies::takeDollar(),
-            'euro' => Currencies::takeEuro(),
+            'dollar'  => Currencies::takeDollar(),
+            'euro'    => Currencies::takeEuro(),
             'bitkoin' => Currencies::takeBitkoin()
         ]);
     }
@@ -294,7 +295,7 @@ final class SiteController extends AdvancedController
     public function actionJsonvalute(): string
     {
         /** Если запрос пришел как AJAX */
-        if(Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {
 
             /** Возвращаем JSON информацию о курсах валют */
             return Json::encode(Currencies::takeActiveValutes());
@@ -308,13 +309,10 @@ final class SiteController extends AdvancedController
      * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
      * сайта на 6 часов (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
-     * time() + (60 * 60 * 24) - 1 день
-     * time() + (60 * 60 * 6) - 6 часов
-     *
      * @return mixed
      * @throws HttpException - Если без AJAX пытаются сюда лезть прямым запросом
      */
-    public function actionCloseOverlay()
+    public function actionCloseOverlay(): bool
     {
         /** Если запрос отправлен через AJAX */
         if (Yii::$app->request->isAjax) {
@@ -323,14 +321,10 @@ final class SiteController extends AdvancedController
             $cookies = Yii::$app->request->cookies;
 
             /** Если у поступающего сюда запроса не определена кука Overlay */
-            if($cookies->get('overlay') == null) {
+            if ($cookies->get(CookieComponent::NAME_OVERLAY) == null) {
 
                 /** Создаем ее и задаем срок истечения 6 часов, в течении этого времени блок overlay будет скрыт у посетителя */
-                return Yii::$app->response->cookies->add(new Cookie([
-                    'name' => 'overlay',
-                    'value' => 1,
-                    'expire' => time() + (60 * 60 * 6),
-                ]));
+                return CookieComponent::setOverlay();
             }
         }
 
@@ -341,8 +335,7 @@ final class SiteController extends AdvancedController
     /**
      * Метод определяет, какую тему необходимо отобразить пользователю, в зависимости
      * от наличия определенного кукиса - либо удаляет существующую куку, либо сетапит ее
-     *
-     * time() + 3600 * 24 * 365 - 1 год, срок жизни куки
+     * Всегда возвращает строку
      *
      * @return string
      * @throws HttpException - Если запрос сюда без Ajax
@@ -356,41 +349,23 @@ final class SiteController extends AdvancedController
             $cookies = Yii::$app->request->cookies;
 
             /** Если у пользователя нет куки - dark_theme, т.е. темной темы */
-            if ($cookies->get('dark_theme') == null) {
+            if ($cookies->get(CookieComponent::NAME_DARK_THEME) == null) {
 
-                /** Сетапим кукис на 1 год */
-                Yii::$app->response->cookies->add(new Cookie([
-                    'name' => 'dark_theme',
-                    'value' => 1,
-                    'expire' => time() + 3600 * 24 * 365
-                ]));
+                /** Сетапим кукис с темной темой сайта на 1 год */
+                CookieComponent::setDarkTheme();
 
                 /** Указываем во вьюхе сделать темную тему */
-                return 'dark-theme';
+                return CookieComponent::NAME_DARK_THEME;
             }
 
             /** Удаляем кукис темной темы, если он был при запросе сюда */
-            Yii::$app->response->cookies->remove('dark_theme');
+            Yii::$app->response->cookies->remove(CookieComponent::NAME_DARK_THEME);
 
             /** Указываем во вьюхе сделать светлую тему */
-            return 'light-theme';
+            return CookieComponent::NAME_LIGHT_THEME;
         }
 
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
         throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
-    }
-
-    /**
-     * Обработчик ошибок - отображает статусы ответа сервера
-     *
-     * @return array
-     */
-    public function actions(): array
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ]
-        ];
     }
 }

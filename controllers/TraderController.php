@@ -101,7 +101,7 @@ final class TraderController extends AdvancedController
 
             /** Рендерим вьюху с данными о нем */
             return $this->render('detail',[
-                'trader' => Traders::takeTraderByUrl($id),
+                'trader'  => Traders::takeTraderByUrl($id),
                 'barters' => Barters::takeBartersByTitle(Traders::takeTraderByUrl($id)->title)
             ]);
         }
@@ -156,7 +156,10 @@ final class TraderController extends AdvancedController
             $id = Barters::find()->select(Barters::ATTR_ID)->where([Barters::ATTR_TITLE => $barter->title])->scalar();
 
             /** Рендерим вьюху по торговцу с предпросмотром бартеров */
-            return $this->render('barter-preview', ['barter' => $barter, 'id' => $id]);
+            return $this->render('barter-preview', [
+                'barter' => $barter,
+                'id'     => $id
+            ]);
         }
 
         /** Выкидываем 404 ошибку, если пользователь не авторизован */
