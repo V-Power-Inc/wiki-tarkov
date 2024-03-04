@@ -32,6 +32,6 @@ final class TraderService
         $form_model->questitem = $_POST[Items::formName][Items::QUESTITEM];
 
         return $result = $form_model->questitem == "Все предметы" ? Items::takeActiveQuestItems() :
-            Items::takeQuestItemsByTraderCat(Traders::traderGroups()[$form_model->questitem]);
+            Items::takeQuestItemsByTraderCat(Traders::getTradersList()[$form_model->questitem]);
     }
 }

@@ -132,7 +132,7 @@ final class LootController extends AdvancedController
             return $this->render('quest-page', [
                 'form_model' => $form_model,
                 'questsearch' => TraderService::takeResult($form_model),
-                'formValue' => (string)Traders::traderGroups()[$form_model->questitem]
+                'formValue' => Traders::getTradersList()[$form_model->questitem]
             ]);
         }
 
