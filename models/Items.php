@@ -250,7 +250,7 @@ class Items extends ActiveRecord
     {
         return static::find()
             ->where([static::ATTR_ACTIVE => static::TRUE])
-            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->andWhere([static::ATTR_QUEST_ITEM => static::TRUE])
             ->orderby([static::ATTR_TITLE => SORT_STRING])
             ->all();
     }
@@ -264,8 +264,8 @@ class Items extends ActiveRecord
     public static function takeQuestItemsByTraderCat(string $category)
     {
         return static::find()
-            ->andWhere([static::ATTR_ACTIVE => 1])
-            ->andWhere([static::ATTR_QUEST_ITEM => 1])
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->andWhere([static::ATTR_QUEST_ITEM => static::TRUE])
             ->andWhere(['like', static::ATTR_TRADER_GROUP, [$category]])
             ->orderby([static::ATTR_TITLE => SORT_STRING])
             ->all();

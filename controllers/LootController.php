@@ -12,6 +12,7 @@ use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\JsondataService;
 use app\common\services\redis\RedisVariationsConfig;
+use app\common\services\TradersService;
 use yii;
 use app\models\Category;
 use app\models\Items;
@@ -131,8 +132,8 @@ final class LootController extends AdvancedController
             /** Рендерим страницу с квестовым лутом по определенному торговцу */
             return $this->render('quest-page', [
                 'form_model' => $form_model,
-                'questsearch' => TraderService::takeResult($form_model),
-                'formValue' => (string)Traders::traderGroups()[$form_model->questitem]
+                'questsearch' => TradersService::takeResult($form_model),
+                'formValue' => Traders::traderGroups()[$form_model->questitem]
             ]);
         }
 

@@ -156,6 +156,8 @@ class Traders extends ActiveRecord
      * Возвращаем список всех торговцев в виде массива с одинаковыми ключом и значением
      * Может использовать в различного рода селектах
      *
+     * TODO: Этот и вышеупомянутый метод слить в 1 с добавлением параметра
+     *
      * @return string[]
      */
     public static function getTradersList(): array

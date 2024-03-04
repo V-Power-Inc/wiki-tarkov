@@ -99,7 +99,7 @@ final class TranslateService
         }
 
         /** Возвращаем пустую строку, если не попали в switch */
-        return '';
+        return self::EMPTY_STRING;
     }
 
     /**
