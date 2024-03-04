@@ -17,6 +17,9 @@ namespace app\common\services;
  */
 final class TranslateService
 {
+    /** @var string - Константа пустой строки */
+    const EMPTY_STRING = '';
+
     /**
      * Метод по полученному параметру создает название карты - возвращает строку
      * Если вхождения не было - вернет null
@@ -51,7 +54,7 @@ final class TranslateService
         }
 
         /** Возвращаем null только если не попали не в 1 из кейсов */
-        return null;
+        return self::EMPTY_STRING;
     }
 
     /**
