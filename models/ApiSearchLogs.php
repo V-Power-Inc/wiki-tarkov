@@ -6,6 +6,9 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\models\queries\ApiSearchLogsQuery;
+use yii\db\ActiveRecord;
+use yii\db\Query;
+use Yii;
 
 /**
  * Поисковая модель, которая хранит в БД логи поисковых запросов пользователей к API и иную полезную информацию
@@ -16,7 +19,7 @@ use app\models\queries\ApiSearchLogsQuery;
  * @property string $date_create Дата создания записи лога
  * @property int $flag Флаг для проверки вернулись ли данные по запросу или нет
  */
-class ApiSearchLogs extends \yii\db\ActiveRecord
+class ApiSearchLogs extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';
@@ -82,7 +85,31 @@ class ApiSearchLogs extends \yii\db\ActiveRecord
      */
     public static function findCaptchaCode(string $captcha)
     {
-        return ApiSearchLogs::findOne([ApiSearchLogs::ATTR_INFO => $captcha]);
+        return static::findOne([static::ATTR_INFO => $captcha]);
+    }
+
+    /**
+     * Метод возвращает объект запроса для последующего использования в JsondataService
+     *
+     * @param string $title - Поисковый запрос
+     * @return Query
+     */
+    public static function getSearchWordsForSelectSearch(string $title): Query
+    {
+        /** Объект запроса к БД */
+        $query = new Query;
+
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select(static::ATTR_WORDS)
+            ->from(static::tableName())
+            ->where(static::ATTR_WORDS .' LIKE "%' . $title . '%"')
+            ->andWhere([static::ATTR_FLAG => static::TRUE])
+            ->groupBy(static::ATTR_WORDS)
+            ->orderBy(static::ATTR_DATE_CREATE)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+
+        /** Возвращаем объект запроса к БД */
+        return $query;
     }
 
     /**

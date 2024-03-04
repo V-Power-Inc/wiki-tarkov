@@ -66,7 +66,7 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
 
                 <span class="key-selector">Искать квестовые предметы по торговцу:</span>
                 <?php $form = ActiveForm::begin(['options' => ['action' => ['loot/questloot']],'id' => 'questloot','method' => 'post',]) ?>
-                    <?= $form->field($form_model, 'questitem')->dropDownList(Traders::traderGroups(),
+                    <?= $form->field($form_model, 'questitem')->dropDownList(Traders::getTradersList(),
                         [
                             'value' => $formValue ?? 'Все предметы'
                         ]);

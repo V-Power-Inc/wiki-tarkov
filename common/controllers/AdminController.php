@@ -12,6 +12,7 @@ use app\models\Admins;
 use Yii;
 use yii\web\Response;
 use yii\web\Controller;
+use yii\base\Action;
 
 /**
  * Контроллер, для наследования контроллерами, созданными для администрирования сайта
@@ -40,9 +41,9 @@ class AdminController extends Controller
      * Проверяем пользователя на авторизацию, если не авторизован редирект на страницу логина
      * Предотвращаем доступ в админку и соблюдаем DRY паттерн таким образом
      *
-     * @param string $action - ID экшена
+     * @param Action $action - объект Action
      *
-     * @return Response|$this
+     * @return Response|bool
      */
     public function beforeAction($action)
     {
@@ -54,13 +55,13 @@ class AdminController extends Controller
         }
 
         /** Если пользователь не авторизован и пытается лезть на страницы админки */
-        if (Yii::$app->user->isGuest && Yii::$app->request->url !== '/admin/login') {
+        if (Yii::$app->user->isGuest && Yii::$app->request->url !== AdminController::LOGIN_URL) {
 
             /** Редиректим его на страницу логина */
             return $this->redirect(AdminController::LOGIN_URL);
         }
 
-        /** Возвращаем экземпляр текущего класса */
-        return $this;
+        /** Возвращаем родительский beforeAction */
+        return parent::beforeAction($action);
     }
 }

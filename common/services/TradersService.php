@@ -8,6 +8,10 @@
 
 namespace app\common\services;
 
+use app\models\Items;
+use app\models\Traders;
+use yii\db\ActiveRecord;
+
 /**
  * Класс для работы с сущностями торговцев, включая квесты
  *
@@ -50,5 +54,22 @@ final class TradersService
 
         /** Если в switch не попали - пишем error, так мы узнаем что есть новый торговец и при этом не вылетит ошибка */
         return 'error';
+    }
+
+    /**
+     * Получаем отсортированный лут и в зависимости от полученного значения
+     * возвращаем нужный результат в контроллер
+     *
+     * @param Items $form_model
+     * @return ActiveRecord[]
+     */
+    public static function takeResult(Items $form_model): array
+    {
+        /** Сетапим атрибуту модели - данные из POST */
+        $form_model->questitem = $_POST[Items::formName][Items::QUESTITEM];
+
+        /** Возвращаем данные в зависимости от фильтров */
+        return $form_model->questitem == "Все предметы" ? Items::takeActiveQuestItems() :
+            Items::takeQuestItemsByTraderCat(Traders::traderGroups()[$form_model->questitem]);
     }
 }

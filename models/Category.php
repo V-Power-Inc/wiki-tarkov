@@ -8,6 +8,7 @@ use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\UniqueValidator;
 use app\models\queries\CategoryQuery;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "category".
@@ -120,6 +121,21 @@ class Category extends ActiveRecord
 
         /** Возвращаем AR объекты в виде массивов со всеми категориями */
         return $categories;
+    }
+
+    /**
+     * Получаем родительскую категорию по ID в виде параметра
+     *
+     * @param int $id - ID категории
+     *
+     * @return array|ActiveRecord|null
+     */
+    public static function getCategoryById(int $id)
+    {
+        return Category::find()
+            ->where([Category::ATTR_ID => $id])
+            ->cache(Yii::$app->params['cacheTime']['one_hour'])
+            ->one();
     }
 
     /**
