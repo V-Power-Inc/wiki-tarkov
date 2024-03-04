@@ -5,6 +5,7 @@
  * Date: 25.01.2018
  * Time: 19:17
  */
+
 /** Этот контроллер отвечает за вывод категорий и лута предметов из Escape from Tarkov  **/
 namespace app\controllers;
 
@@ -19,7 +20,6 @@ use app\models\Items;
 use app\models\Traders;
 use yii\web\HttpException;
 use app\common\services\PaginationService;
-use app\common\services\TraderService;
 
 /**
  * Class LootController
@@ -133,7 +133,7 @@ final class LootController extends AdvancedController
             return $this->render('quest-page', [
                 'form_model' => $form_model,
                 'questsearch' => TradersService::takeResult($form_model),
-                'formValue' => Traders::traderGroups()[$form_model->questitem]
+                'formValue' => Traders::getTradersList()[$form_model->questitem]
             ]);
         }
 
