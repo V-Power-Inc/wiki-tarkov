@@ -7,8 +7,6 @@ use app\models\News;
 use app\models\NewsSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\components\ClientdiscordComponent;
-use app\components\Embeddiscord;
 use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
