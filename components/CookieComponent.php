@@ -23,7 +23,7 @@ class CookieComponent
     const NAME_LIGHT_THEME = 'light-theme';
 
     /** @var string - Константа, название кукиса, который активирует темную тему на сайте */
-    const NAME_DARK_THEME = 'dark_theme';
+    const NAME_DARK_THEME = 'dark-theme';
 
     /** @var string - Константа, название кукиса, который скрывает рекламный блок - оверлей */
     const NAME_OVERLAY = 'overlay';

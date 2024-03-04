@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\queries\DoorkeysQuery;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
@@ -311,12 +312,12 @@ class Doorkeys extends ActiveRecord
     public static function KeysDefaultRenderingArray(Doorkeys $formModel): array
     {
         return [
-            'terralab'=> Doorkeys::takeActiveLaboratoryKeys(),
-            'zavod'=> Doorkeys::takeActiveZavodKeys(),
-            'forest'=> Doorkeys::takeActiveForestKeys(),
-            'bereg'=> Doorkeys::takeActiveBeregKeys(),
-            'tamojnya'=> Doorkeys::takeActiveTamojnyaKeys(),
-            'razvyazka' => Doorkeys::takeActiveRazvyazkaKeys(),
+            'terralab'=> static::takeActiveLaboratoryKeys(),
+            'zavod'=> static::takeActiveZavodKeys(),
+            'forest'=> static::takeActiveForestKeys(),
+            'bereg'=> static::takeActiveBeregKeys(),
+            'tamojnya'=> static::takeActiveTamojnyaKeys(),
+            'razvyazka' => static::takeActiveRazvyazkaKeys(),
             'form_model' => $formModel
         ];
     }
@@ -335,6 +336,31 @@ class Doorkeys extends ActiveRecord
             ->cache(Yii::$app->params['cacheTime']['one_hour'])
             ->One();
     }
+
+    /**
+     * Метод возвращает объект запроса для последующего использования в JsondataService
+     *
+     * @param string $title - Поисковый запрос
+     * @return Query
+     */
+    public static function getKeysForSelectSearch(string $title): Query
+    {
+        /** Объект запроса к БД */
+        $query = new Query;
+
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select([static::ATTR_NAME, static::ATTR_MAPGROUP, static::ATTR_PREVIEW, static::ATTR_URL])
+            ->from(static::tableName())
+            ->where(static::ATTR_NAME . ' LIKE "%' . $title . '%"')
+            ->orWhere(static::ATTR_KEYWORDS . ' LIKE "%' . $title . '%"')
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->orderBy(static::ATTR_NAME)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+        
+        /** Возвращаем объект запроса к БД */
+        return $query;
+    }
+    
 
     /**
      * Уникальный ActiveQuery для каждой AR модели

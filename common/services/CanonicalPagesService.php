@@ -8,6 +8,9 @@
 
 namespace app\common\services;
 
+use app\common\interfaces\ResponseStatusInterface;
+use yii\console\Response as ConsoleResponse;
+use yii\web\Response as Response;
 use Yii;
 
 /**
@@ -27,7 +30,7 @@ final class CanonicalPagesService
      * @param string $canonical_url - Канонический адрес страницы
      * @param string $requested_url - Url что запрашивал пользователь
      *
-     * @return \yii\console\Response|\yii\web\Response|bool
+     * @return ConsoleResponse|Response|bool
      */
     public static function redirectToCanonical(string $canonical_url, string $requested_url)
     {
@@ -41,7 +44,7 @@ final class CanonicalPagesService
         if ($canonical_url !== $requested_url) {
 
             /** Возвращаем редиректом на канонический Url адрес */
-            return Yii::$app->response->redirect($canonical_url, 301);
+            return Yii::$app->response->redirect($canonical_url, ResponseStatusInterface::REDIRECT_CODE);
         }
 
         /** Возвращаем false - если редиректа не было */

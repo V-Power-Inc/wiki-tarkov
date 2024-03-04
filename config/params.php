@@ -17,8 +17,6 @@
  * В таких урлах это реализовано отдельно)
  *
  * cacheTime - массив со временем кеширования (Ключ название - значение количество в секундах)
- *
- * discordHookNewsUrl - URL веб хука для дискорда
  */
 
 return [
@@ -47,5 +45,4 @@ return [
         'seven_days' => 604800,
         'one_day' => 86400
     ],
-    'discordHookNewsUrl' => 'your_discord_hook'
 ];
