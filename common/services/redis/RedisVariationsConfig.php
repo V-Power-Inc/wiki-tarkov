@@ -26,7 +26,7 @@ class RedisVariationsConfig
     const COOCKIE_OVERLAY = 'overlay';
 
     /** @var string - Константа, кукис темной темы (Если есть - значит у пользователя темная тема сайта) */
-    const COOCKIE_DARK_THEME = 'dark_theme';
+    const COOCKIE_DARK_THEME = 'dark-theme';
 
     /**
      * Конфиг вариаций кеширования для контроллеров (Используется большинством контроллеров)
