@@ -70,6 +70,6 @@ final class TradersService
 
         /** Возвращаем данные в зависимости от фильтров */
         return $form_model->questitem == "Все предметы" ? Items::takeActiveQuestItems() :
-            Items::takeQuestItemsByTraderCat(Traders::traderGroups()[$form_model->questitem]);
+            Items::takeQuestItemsByTraderCat(Traders::getTradersList()[$form_model->questitem]);
     }
 }
