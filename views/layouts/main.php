@@ -7,6 +7,7 @@ use yii\web\View;
 use yii\helpers\Html;
 use app\components\MenuComponent;
 use app\assets\AppAsset;
+use app\components\CookieComponent;
 use app\common\interfaces\ResponseStatusInterface;
 
 $cookies = Yii::$app->request->cookies;
@@ -40,7 +41,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
     <!-- Check styles, which enabled by user -->
-    <?php if (isset($cookies['dark_theme'])): ?>
+    <?php if (isset($cookies[CookieComponent::NAME_DARK_THEME])): ?>
         <link id="dark_theme" href="/css/dark-theme.css?v=6.8.11" rel="stylesheet">
     <?php endif; ?>
 

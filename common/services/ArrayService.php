@@ -56,7 +56,8 @@ final class ArrayService
             'rezerv',
             'bereg',
             'terragroup-laboratory',
-            'forest'
+            'forest',
+            'streets-of-tarkov'
         ];
     }
 }

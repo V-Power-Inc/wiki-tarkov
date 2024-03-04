@@ -7,8 +7,6 @@ use app\models\News;
 use app\models\NewsSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\components\ClientdiscordComponent;
-use app\components\Embeddiscord;
 use app\common\interfaces\CrudInterface;
 use app\common\controllers\AdminController;
 
@@ -69,10 +67,10 @@ final class NewsController extends AdminController implements CrudInterface
     }
 
     /**
-     * При сохранении нового объекта новости, должен происходить
-     * Push в Discord канал waki-tarkov через веб-хук дискорда
+     * Метод для сохранения нового AR объекта новости
      *
      * UDP 25_12_2023г. - Функционал пуша в дискорд отключен (Смотреть историю коммитов)
+     * UPD 04_03_2024г. - Функционал полностью убран из проекта (Смотреть историю коммитов)
      *
      * @return mixed
      * @throws
@@ -87,18 +85,6 @@ final class NewsController extends AdminController implements CrudInterface
 
         /** Если данные в модель из POST'a прогрузились и сохранились */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            /** Отправка уведомления в дискорд канал (Если боевой сервак) - Сейчас отключено за ненадобностью
-             * Подробнее об интеграции в этом файле: /components/ClientdiscordComponent.php
-             */
-//            if($_SERVER['SERVER_NAME'] !== 'dev' . $_ENV['DOMAIN']) {
-//                $webhook = new ClientdiscordComponent(Yii::$app->params['discordHookNewsUrl']);
-//                $embed = new Embeddiscord();
-//                $embed->image('https://'.$_SERVER['SERVER_NAME'].$model->preview);
-//                $embed->description($model->shortdesc."\r\n".'Подробнее: https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
-//                $embed->url('https://'.$_SERVER['SERVER_NAME'].'/news/'.$model->url);
-//                $webhook->username('Новости Таркова')->message($model->title)->embed($embed)->send();
-//            }
 
             /** Редирект на страницу детального просмотра новости */
             return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);

@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\common\helpers\validators\UrlValidator;
 use app\models\queries\ClansQuery;
+use yii\db\Query;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use app\common\helpers\validators\SafeValidator;
@@ -12,6 +13,7 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "clans".
@@ -129,6 +131,30 @@ class Clans extends ActiveRecord
         }
     }
 
+    /**
+     * Метод возвращает объект запроса для последующего использования в JsondataService
+     *
+     * @param string $title - Поисковый запрос
+     * @return Query
+     */
+    public static function getClansForSelectSearch(string $title)
+    {
+        /** Преподгатавливаем переменную для запроса к БД */
+        $query = new Query;
+
+        /** Определяем запрос и ищем клан по названию */
+        $query->select([static::ATTR_TITLE, static::ATTR_DESCRIPTION, static::ATTR_PREVIEW, static::ATTR_LINK, static::ATTR_DATE_CREATE])
+            ->from(static::tableName())
+            ->where(static::ATTR_TITLE . ' LIKE "%' . $title . '%"')
+            ->andWhere([static::ATTR_MODERATED => static::TRUE])
+            ->orderBy( static::ATTR_DATE_CREATE .' DESC')
+            ->limit(30)
+            ->cache(Yii::$app->params['cacheTime']['one_minute']);
+
+        /** Возвращаем объект запроса к БД */
+        return $query;
+    }
+    
     /**
      * Уникальный ActiveQuery для каждой AR модели
      *
