@@ -3,6 +3,7 @@
 namespace app\models;
 
 use app\models\queries\ItemsQuery;
+use yii\db\Query;
 use yii\imagine\Image;
 use yii\web\UploadedFile;
 use app\common\helpers\validators\RequiredValidator;
@@ -12,6 +13,7 @@ use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\ExistValidator;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "items".
@@ -199,13 +201,13 @@ class Items extends ActiveRecord
 
     /** Получаем список всех предметов из таблицы справочника лута **/
     public function getAllItems() {
-        $Items = Items::find()->asArray()->all();
+        $Items = static::find()->asArray()->all();
         return $Items;
     }
 
     /** Получаем все активные предметы из справочника лута в виде массива **/
     public function getActiveItems() {
-        $activeLoot = Items::find()->where(['active' => 1])->asArray()->all();
+        $activeLoot = static::find()->where(['active' => 1])->asArray()->all();
         return $activeLoot;
     }
 
@@ -282,6 +284,30 @@ class Items extends ActiveRecord
             ->where(['like binary', static::ATTR_URL, $item])
             ->andWhere([static::ATTR_ACTIVE => static::TRUE])
             ->one();
+    }
+
+    /**
+     * Метод возвращает объект запроса для последующего использования в JsondataService
+     *
+     * @param string $title - Поисковый запрос
+     * @return Query
+     */
+    public static function getItemsForSelectSearch(string $title): Query
+    {
+        /** Объект запроса к БД */
+        $query = new Query;
+
+        /** Выбираем нужные данные с кешируемым запросом */
+        $query->select([static::ATTR_TITLE, static::ATTR_SHORTDESC, static::ATTR_PREVIEW, static::ATTR_URL, static::ATTR_PARENTCAT_ID, static::ATTR_SEARCH_WORDS])
+            ->from(static::tableName())
+            ->where(static::ATTR_TITLE . ' LIKE "%' . $title . '%"')
+            ->orWhere(static::ATTR_SEARCH_WORDS . ' LIKE "%' . $title . '%"')
+            ->andWhere([static::ATTR_ACTIVE => static::TRUE])
+            ->orderBy(static::ATTR_TITLE)
+            ->cache(Yii::$app->params['cacheTime']['one_hour']);
+
+        /** Возвращаем объект запроса к БД */
+        return $query;
     }
 
     /**
