@@ -167,7 +167,7 @@ class ImageService extends FilesService
         $fileImg->saveAs($catalog);
 
         /** Сохраняем корректное имя изображения для атрибута AR модели */
-        $class->customicon = '/' . $catalog;
+        $class->customicon = self::FILE_PATH_SEPARATOR . $catalog;
 
         /** Преобразуем качество изображения и его размеры уже на сервере */
         Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
