@@ -7,10 +7,9 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\NumberValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\common\services\files\ImageService;
 use app\models\queries\MapsQuery;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
+use yii\base\Model;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -132,15 +131,14 @@ class Maps extends ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек маркера ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/foresticons/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->customicon = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение иконки интерактивных карт локаций
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

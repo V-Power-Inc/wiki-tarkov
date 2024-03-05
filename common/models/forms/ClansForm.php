@@ -14,9 +14,8 @@ use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\ReCaptchaValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\common\services\files\ImageService;
 use app\models\Clans;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
 use yii\base\Model;
 use Yii;
 
@@ -105,24 +104,14 @@ class ClansForm extends Model
         ];
     }
 
-    /*** Загрузка и сохранение логотипов кланов ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-
-            $catalog = 'img/admin/resized/clans/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->save($catalog , ['quality' => 70]);
-
-            $imginfo = getimagesize($_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . $this->preview);
-
-            // Проверяем размеры изображения, если они некорректны - то удаляем его.
-            if($imginfo[0] !== 100 && $imginfo[1] !== 100) {
-                unlink('./'.$this->preview);
-                return false;
-            }
-        }
+    /**
+     * Загрузка и сохранение превьюшки клана
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

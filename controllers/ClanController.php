@@ -127,8 +127,8 @@ final class ClanController extends AdvancedController
 
             } else { /** Если клан еще можно зарегистрировать сегодня (Есть свободные тикеты) */
 
-                /** Если модель пыталась загрузить изображение и результат равен false */
-                if ($model->uploadPreview() === false) {
+                /** Если модель пыталась загрузить изображение и атрибут изображения задан */
+                if ($model->uploadPreview() && empty($model->preview)) {
 
                     /** Сетапим флэш сообщение об этом (SetFlash) */
                     MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>");
