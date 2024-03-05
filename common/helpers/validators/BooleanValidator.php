@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class BooleanValidator
  * @package app\common\helpers\validators
  */
-class BooleanValidator extends \yii\validators\BooleanValidator
+final class BooleanValidator extends \yii\validators\BooleanValidator
 {
     const ATTR_STRICT = 'strict';
 }

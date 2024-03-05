@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class ExistValidator
  * @package app\common\helpers\validators
  */
-class ExistValidator extends \yii\validators\ExistValidator {
+final class ExistValidator extends \yii\validators\ExistValidator {
 	const ATTR_TARGET_CLASS              = 'targetClass';
 	const ATTR_TARGET_ATTRIBUTE          = 'targetAttribute';
 	const ATTR_TARGET_RELATION           = 'targetRelation';

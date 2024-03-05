@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class EmailValidator
  * @package common\yii\validators
  */
-class EmailValidator extends \yii\validators\EmailValidator
+final class EmailValidator extends \yii\validators\EmailValidator
 {
     const ATTR_PATTERN              = 'pattern';
     const ATTR_FULL_PATTERN         = 'fullPattern';
