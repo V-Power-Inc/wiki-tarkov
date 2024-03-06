@@ -24,13 +24,16 @@ use yii\imagine\Image;
 use yii\web\UploadedFile;
 
 /**
- * Сервис для загрузки изображений на сервер с помощью моделей
+ * Сервис для загрузки изображений на сервер с помощью обычных моделей и AR моделей
  *
  * Class ImageService
  * @package app\common\services\files
  */
-class ImageService extends FilesService
+final class ImageService extends FilesService
 {
+    /** @var string - Разделитель в построении маршрута до изображений */
+    const FILE_PATH_SEPARATOR = '/';
+
     /**
      * Метод реализует загрузку файла на сервер
      *
@@ -47,35 +50,35 @@ class ImageService extends FilesService
         /** Если смогли достать изображение */
         if ($fileImg !== null) {
 
-            /** В свиче смотрим, какой класс сюда прилетел и в зависимости от кейсов отправляем в свой метод */
+            /** В свиче смотрим, какой класс сюда прилетел и в зависимости от кейса отправляем в свой метод сохранения */
             switch (get_class($class)) {
 
                 case Articles::class:
-                    return static::uploadArticlesPreview($class, $fileImg);
+                    return self::uploadArticlesPreview($class, $fileImg);
 
                 case ClansForm::class:
-                    return static::uploadClansPreview($class, $fileImg);
+                    return self::uploadClansPreview($class, $fileImg);
 
                 case Maps::class:
-                    return static::uploadMapsIcons($class, $fileImg);
+                    return self::uploadMapsIcons($class, $fileImg);
 
                 case Doorkeys::class:
-                    return static::uploadDoorkeysPreview($class, $fileImg);
+                    return self::uploadDoorkeysPreview($class, $fileImg);
 
                 case Catskills::class:
-                    return static::uploadCatskillsPreview($class, $fileImg);
+                    return self::uploadCatskillsPreview($class, $fileImg);
 
                 case Items::class:
-                    return static::uploadItemsPreview($class, $fileImg);
+                    return self::uploadItemsPreview($class, $fileImg);
 
                 case News::class:
-                    return static::uploadNewsPreview($class, $fileImg);
+                    return self::uploadNewsPreview($class, $fileImg);
 
                 case Skills::class:
-                    return static::uploadSkillsPreview($class, $fileImg);
+                    return self::uploadSkillsPreview($class, $fileImg);
 
                 case Traders::class:
-                    return static::uploadTradersPreview($class, $fileImg);
+                    return self::uploadTradersPreview($class, $fileImg);
             }
         }
 
