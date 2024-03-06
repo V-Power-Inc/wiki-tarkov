@@ -2,10 +2,9 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\SkillsQuery;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
+use yii\base\Model;
 use app\common\helpers\validators\UniqueValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
@@ -95,9 +94,9 @@ class Skills extends ActiveRecord
             [static::ATTR_CATEGORY,
                 ExistValidator::class,
                 ExistValidator::ATTR_SKIP_ON_ERROR => true,
-                ExistValidator::ATTR_TARGET_CLASS => CatSkills::class,
+                ExistValidator::ATTR_TARGET_CLASS => Catskills::class,
                 ExistValidator::ATTR_TARGET_ATTRIBUTE =>
-                    [static::ATTR_CATEGORY => CatSkills::ATTR_ID]
+                    [static::ATTR_CATEGORY => Catskills::ATTR_ID]
             ],
 
             [static::FILE, FileValidator::class, FileValidator::ATTR_EXTENSIONS => "jpg,png,jpeg"]
@@ -126,15 +125,14 @@ class Skills extends ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек умений ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(68, 69))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение превьюшки умения
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

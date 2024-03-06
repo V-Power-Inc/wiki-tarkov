@@ -2,13 +2,12 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\DoorkeysQuery;
 use Yii;
+use yii\base\Model;
 use yii\db\ActiveRecord;
 use yii\db\Query;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
@@ -139,15 +138,14 @@ class Doorkeys extends ActiveRecord
         return false;
     }
 
-    /*** Загрузка и сохранение превьюшек квеста ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/doorkeys/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(64, 64))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение превьюшки ключа
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**
@@ -178,7 +176,8 @@ class Doorkeys extends ActiveRecord
     /**
      * Возвращаем массив объектов ключей по переданному значению
      *
-     * @param string $category
+     * @param string $category - Категория ключа
+     *
      * @return ActiveRecord[]
      */
     public static function takeKeysByCategory(string $category)
@@ -194,7 +193,6 @@ class Doorkeys extends ActiveRecord
     /**
      * Возвращаем массив объектов активных ключей
      *
-     * @param string $category
      * @return ActiveRecord[]
      */
     public static function takeActiveKeys()
@@ -207,7 +205,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Завода
+     * Получаем 20 активных ключей от Завода
      *
      * @return array|ActiveRecord[]
      */
@@ -223,7 +221,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Леса
+     * Получаем 20 активных ключей от Леса
      *
      * @return array|ActiveRecord[]
      */
@@ -239,7 +237,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Берега
+     * Получаем 20 активных ключей от Берега
      *
      * @return array|ActiveRecord[]
      */
@@ -255,7 +253,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Таможни
+     * Получаем 20 активных ключей от Таможни
      *
      * @return array|ActiveRecord[]
      */
@@ -271,7 +269,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Развязки
+     * Получаем 20 активных ключей от Развязки
      *
      * @return array|ActiveRecord[]
      */
@@ -287,7 +285,7 @@ class Doorkeys extends ActiveRecord
     }
 
     /**
-     * Получаем 20 активных маркеров Лаборатории
+     * Получаем 20 активных ключей от Лаборатории
      *
      * @return array|ActiveRecord[]
      */
@@ -306,7 +304,8 @@ class Doorkeys extends ActiveRecord
      * Массив дефолтных загрузок на странице ключей, если категория искогомого ключа
      * не оказалась явно указанной (Не сабмитнули форму)
      *
-     * @param Doorkeys $formModel
+     * @param Doorkeys $formModel - AR объект ключей
+     *
      * @return array
      */
     public static function KeysDefaultRenderingArray(Doorkeys $formModel): array
