@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class FileValidator
  * @package app\common\helpers\validators
  */
-class FileValidator extends \yii\validators\FileValidator
+final class FileValidator extends \yii\validators\FileValidator
 {
 	const  ATTR_EXTENSIONS                   = 'extensions';
 	const  ATTR_MIME_TYPES                   = 'mimeTypes';

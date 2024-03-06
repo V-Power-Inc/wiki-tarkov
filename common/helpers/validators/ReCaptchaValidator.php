@@ -16,7 +16,7 @@ use himiklab\yii2\recaptcha\ReCaptchaValidator2;
  * Class ReCaptchaValidator
  * @package app\common\helpers\validators
  */
-class ReCaptchaValidator extends ReCaptchaValidator2
+final class ReCaptchaValidator extends ReCaptchaValidator2
 {
     /** @var string - Доступ к атрибуту секрета */
     const ATTR_SECRET = 'secret';

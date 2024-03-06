@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class UrlValidator
  * @package app\common\helpers\validators
  */
-class UrlValidator extends \yii\validators\UrlValidator
+final class UrlValidator extends \yii\validators\UrlValidator
 {
     const ATTR_VALID_SCHEMES = 'validSchemes';
 }

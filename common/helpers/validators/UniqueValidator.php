@@ -12,7 +12,7 @@ namespace app\common\helpers\validators;
  * Class UniqueValidator
  * @package common\yii\validators
  */
-class UniqueValidator extends \yii\validators\UniqueValidator {
+final class UniqueValidator extends \yii\validators\UniqueValidator {
 	const ATTR_TARGET_CLASS     = 'targetClass';
 	const ATTR_TARGET_ATTRIBUTE = 'targetAttribute';
 	const ATTR_FILTER           = 'filter';
