@@ -8,6 +8,7 @@
 
 namespace app\common\services\redis;
 
+use app\components\CookieComponent;
 use Yii;
 
 /**
@@ -22,12 +23,6 @@ class RedisVariationsConfig
     /** @var string - Константа, GET параметр пагинации */
     const GET_PARAM_PAGE = 'page';
 
-    /** @var string - Константа, рекламный кукис оверлея */
-    const COOCKIE_OVERLAY = 'overlay';
-
-    /** @var string - Константа, кукис темной темы (Если есть - значит у пользователя темная тема сайта) */
-    const COOCKIE_DARK_THEME = 'dark-theme';
-
     /**
      * Конфиг вариаций кеширования для контроллеров (Используется большинством контроллеров)
      * Если будут исключения, они будут представлены в виде отдельных методов в текущем классе
@@ -41,8 +36,8 @@ class RedisVariationsConfig
             Yii::$app->request->url,
             Yii::$app->response->statusCode,
             Yii::$app->request->get(static::GET_PARAM_PAGE),
-            Yii::$app->request->cookies->get(static::COOCKIE_OVERLAY),
-            Yii::$app->request->cookies->get(static::COOCKIE_DARK_THEME)
+            Yii::$app->request->cookies->get(CookieComponent::NAME_OVERLAY),
+            Yii::$app->request->cookies->get(CookieComponent::NAME_DARK_THEME)
         ];
     }
 
@@ -59,8 +54,8 @@ class RedisVariationsConfig
             Yii::$app->request->isAjax,
             Yii::$app->response->statusCode,
             Yii::$app->request->get(static::GET_PARAM_PAGE),
-            Yii::$app->request->cookies->get(static::COOCKIE_OVERLAY),
-            Yii::$app->request->cookies->get(static::COOCKIE_DARK_THEME)
+            Yii::$app->request->cookies->get(CookieComponent::NAME_OVERLAY),
+            Yii::$app->request->cookies->get(CookieComponent::NAME_DARK_THEME)
         ];
     }
 }

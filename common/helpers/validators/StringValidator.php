@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class StringValidator
  * @package app\common\helpers\validators
  */
-class StringValidator extends \yii\validators\StringValidator {
+final class StringValidator extends \yii\validators\StringValidator {
 	const ATTR_MIN       = 'min';
 	const ATTR_MAX       = 'max';
 	const ATTR_LENGTH    = 'length';
