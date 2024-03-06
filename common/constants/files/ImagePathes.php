@@ -27,4 +27,7 @@ final class ImagePathes extends FilePathes
 
     /** @var string - Константа, путь до иконок интерактивных карт локаций */
     const PATH_FOR_LOCATIONS_FILES = 'img/admin/maps/';
+
+    /** @var string - Константа, путь до иконок превьюшек новостей */
+    const PATH_FOR_NEWS_FILES = 'img/admin/news/';
 }

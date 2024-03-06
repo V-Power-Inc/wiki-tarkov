@@ -6,11 +6,10 @@ use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
+use app\common\services\files\ImageService;
 use app\models\queries\TradersQuery;
+use yii\base\Model;
 use yii\db\ActiveRecord;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
 use Yii;
 
 /**
@@ -167,15 +166,14 @@ class Traders extends ActiveRecord
         return $array;
     }
 
-    /*** Загрузка и сохранение превьюшек торговца ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(130, 130))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение превьюшки торговца
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

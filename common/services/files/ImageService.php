@@ -50,34 +50,32 @@ class ImageService extends FilesService
             /** В свиче смотрим, какой класс сюда прилетел и в зависимости от кейсов отправляем в свой метод */
             switch (get_class($class)) {
 
-                case "app\models\Articles":
+                case Articles::class:
                     return static::uploadArticlesPreview($class, $fileImg);
 
-                case 'app\common\models\forms\ClansForm':
+                case ClansForm::class:
                     return static::uploadClansPreview($class, $fileImg);
 
-                case "app\models\Maps":
+                case Maps::class:
                     return static::uploadMapsIcons($class, $fileImg);
 
-                // TODO: Все что ниже нужно доделать
-                case "app\models\Doorkeys":
+                case Doorkeys::class:
                     return static::uploadDoorkeysPreview($class, $fileImg);
 
-                case "app\models\Catskills":
+                case Catskills::class:
                     return static::uploadCatskillsPreview($class, $fileImg);
 
-                case "app\models\Items":
+                case Items::class:
                     return static::uploadItemsPreview($class, $fileImg);
 
-                case "app\models\News":
+                case News::class:
                     return static::uploadNewsPreview($class, $fileImg);
 
-                case "app\models\Skills":
+                case Skills::class:
                     return static::uploadSkillsPreview($class, $fileImg);
 
-                case "app\models\Traders":
+                case Traders::class:
                     return static::uploadTradersPreview($class, $fileImg);
-
             }
         }
 
@@ -151,9 +149,9 @@ class ImageService extends FilesService
     }
 
     /**
-     * Метод сохраняет файл иконки интерактивной карты на сервер, если она не подойдет по размерам, также удалит ее
+     * Метод сохраняет файл иконки интерактивной карты на сервер
      *
-     * @param Maps $class - Объект AR класса полезный статей
+     * @param Maps $class - Объект AR класса маркеров интерактивных карт
      * @param UploadedFile $fileImg - Инстанс загруженного файла
      *
      * @return Model
@@ -176,42 +174,159 @@ class ImageService extends FilesService
         return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл иконки ключа на сервер
+     *
+     * @param Doorkeys $class - Объект AR класса ключей от дверей
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadDoorkeysPreview(Doorkeys $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_FOR_DOORKEYS_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** Преобразуем качество изображения и его размеры уже на сервере */
+        Image::getImagine()->open($catalog)->thumbnail(new Box(64, 64))->save($catalog , ['quality' => 90]);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл категории умения на сервер
+     *
+     * @param Catskills $class - Объект AR класса категории умения
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadCatskillsPreview(Catskills $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_MAIN_ADMIN_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** Преобразуем качество изображения и его размеры уже на сервере */
+        Image::getImagine()->open($catalog)->thumbnail(new Box(130, 130))->save($catalog , ['quality' => 90]);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл иконки справочника лута на сервер
+     *
+     * @param Items $class - Объект AR класса предмета из справочника лута
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadItemsPreview(Items $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_MAIN_ADMIN_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** На случай преобразований */
+        // Image::getImagine()->open($catalog)->save($catalog);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл превьюшки новости на сервер
+     *
+     * @param News $class - Объект AR класса новости
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadNewsPreview(News $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_FOR_NEWS_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** Преобразуем качество изображения и его размеры уже на сервере */
+        Image::getImagine()->open($catalog)->thumbnail(new Box(200, 113))->save($catalog , ['quality' => 90]);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл превьюшки скила на сервер
+     *
+     * @param Skills $class - Объект AR класса скила
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadSkillsPreview(Skills $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_MAIN_ADMIN_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** Преобразуем качество изображения и его размеры уже на сервере */
+        Image::getImagine()->open($catalog)->thumbnail(new Box(68, 69))->save($catalog , ['quality' => 90]);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
 
-    // TODO: На очереди в реализации
+    /**
+     * Метод сохраняет файл превьюшки скила на сервер
+     *
+     * @param Traders $class - Объект AR класса торговца
+     * @param UploadedFile $fileImg - Инстанс загруженного файла
+     *
+     * @return Model
+     */
     private static function uploadTradersPreview(Traders $class, UploadedFile $fileImg): Model
     {
+        /** Сетапим путь до сохранения изображения */
+        $catalog = ImagePathes::PATH_MAIN_ADMIN_FILES . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
 
+        /** Сохраняем файл на сервере по заданному пути */
+        $fileImg->saveAs($catalog);
+
+        /** Сохраняем корректное имя изображения для атрибута AR модели */
+        $class->preview = self::FILE_PATH_SEPARATOR . $catalog;
+
+        /** Преобразуем качество изображения и его размеры уже на сервере */
+        Image::getImagine()->open($catalog)->thumbnail(new Box(130, 130))->save($catalog , ['quality' => 90]);
+
+        /** Возвращаем объект класса, что прилетел сюда из параметра */
+        return $class;
     }
-
-
-
 }
