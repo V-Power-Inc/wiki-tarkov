@@ -2,10 +2,9 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\NewsQuery;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
+use yii\base\Model;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
@@ -112,15 +111,14 @@ class News extends ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек квеста ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/news/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(200, 113))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение превьюшки новости
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

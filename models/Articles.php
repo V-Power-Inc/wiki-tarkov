@@ -2,10 +2,9 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\ArticlesQuery;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
+use yii\base\Model;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\StringValidator;
@@ -112,18 +111,13 @@ class Articles extends ActiveRecord
     }
 
     /**
-     * Загрузка и сохранение превьюшек квеста
+     * Загрузка и сохранение превьюшки статьи
      *
-     * @return void
+     * @return Model
      */
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(300, 200))->save($catalog , ['quality' => 90]);
-        }
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, self::FILE);
     }
 
     /**

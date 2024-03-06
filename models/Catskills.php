@@ -2,10 +2,9 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\CatskillsQuery;
-use yii\web\UploadedFile;
-use yii\imagine\Image;
-use Imagine\Image\Box;
+use yii\base\Model;
 use app\common\helpers\validators\UniqueValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
@@ -118,15 +117,14 @@ class Catskills extends ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек умений ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->thumbnail(new Box(130, 130))->save($catalog , ['quality' => 90]);
-        }
+    /**
+     * Загрузка и сохранение превьюшки категории умений
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace app\models;
 
+use app\common\services\files\ImageService;
 use app\models\queries\ItemsQuery;
+use yii\base\Model;
 use yii\db\Query;
-use yii\imagine\Image;
-use yii\web\UploadedFile;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
 use app\common\helpers\validators\IntegerValidator;
@@ -188,15 +188,14 @@ class Items extends ActiveRecord
         ];
     }
 
-    /*** Загрузка и сохранение превьюшек предмета - здесь не происходит ресайз картинки ***/
-    public function uploadPreview() {
-        $fileImg = UploadedFile::getInstance($this, 'file');
-        if($fileImg !== null) {
-            $catalog = 'img/admin/resized/' . $fileImg->baseName . date("dmyhis", strtotime("now")) . '.' . $fileImg->extension;
-            $fileImg->saveAs($catalog);
-            $this->preview = '/' . $catalog;
-            Image::getImagine()->open($catalog)->save($catalog);
-        }
+    /**
+     * Загрузка и сохранение превьюшки предмета из справочника
+     *
+     * @return Model
+     */
+    public function uploadPreview(): Model
+    {
+        return ImageService::uploadFile($this, static::FILE);
     }
 
     /** Получаем список всех предметов из таблицы справочника лута **/
