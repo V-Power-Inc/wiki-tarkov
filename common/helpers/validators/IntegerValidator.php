@@ -14,7 +14,7 @@ namespace app\common\helpers\validators;
  * Class IntegerValidator
  * @package app\common\helpers\validators
  */
-class IntegerValidator extends NumberValidator {
+final class IntegerValidator extends \yii\validators\NumberValidator {
     const ATTR_MIN            = 'min';
     const ATTR_MAX            = 'max';
     const ATTR_NUMBER_PATTERN = 'numberPattern';
