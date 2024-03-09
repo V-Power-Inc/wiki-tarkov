@@ -1,5 +1,5 @@
 
-<img alt="Repo logo" src="https://wiki-tarkov.ru/img/upload/icon-128-128.png" style="float: right">
+<img alt="Repo logo" src="https://wiki-tarkov.ru/img/upload/icon-128-128.png" align="right">
 
 # Wiki Tarkov Project 💻
 
