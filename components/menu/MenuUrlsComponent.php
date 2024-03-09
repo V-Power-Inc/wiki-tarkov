@@ -34,6 +34,7 @@ class MenuUrlsComponent
             "/maps/lighthouse-location",
             "/maps/streets-of-tarkov-location",
             "/maps/razvyazka-location",
+            "/maps/epicenter"
         ];
     }
 
