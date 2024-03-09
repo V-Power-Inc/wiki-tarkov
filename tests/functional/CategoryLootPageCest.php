@@ -12,6 +12,7 @@ use app\controllers\LootController;
 use app\tests\fixtures\CategoryFixture;
 use app\tests\fixtures\ItemsFixture;
 use tests\_support\CheckLinks;
+use tests\_support\CheckPageCodes;
 
 /**
  * Функциональные тесты страницы категории справочника луту
@@ -43,17 +44,8 @@ class CategoryLootPageCest
     /** Мы проверяем - что код страницы 200 */
     public function checkCodeIsOk(\FunctionalTester $I)
     {
-        /** Ожидание */
-        $I->wantTo('Получить страницу с кодом 200');
-
-        /** Вижу что код ответа не 404 */
-        $I->cantSeeResponseCodeIs(404);
-
-        /** Вижу что код ответа не 500 */
-        $I->cantSeeResponseCodeIs(500);
-
-        /** Вижу корректный код - 200 */
-        $I->canSeeResponseCodeIs(200);
+        /** Вызываем класс по проверке кодов страниц */
+        CheckPageCodes::start($I);
     }
 
     /** Мы видим что в мета тегах присутствуют коды яндекс верификации */
