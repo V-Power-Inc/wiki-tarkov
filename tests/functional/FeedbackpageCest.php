@@ -90,6 +90,7 @@ class FeedbackpageCest
         $I->seeLink('Частые вопросы', '/questions');
         $I->seeLink('Таблица патронов', '/table-patrons');
         $I->seeLink('Список кланов', '/clans');
+        $I->seeLink('Обратная связь', '/feedback-form');
         $I->seeLink('Завод', '/maps/zavod-location#3/68.97/-8.00');
         $I->seeLink('Таможня', '/maps/tamojnya-location#4/80.40/-75.98');
         $I->seeLink('Лес', '/maps/forest-location#3/72.50/-9.58');
@@ -99,6 +100,7 @@ class FeedbackpageCest
         $I->seeLink('Резерв', '/maps/rezerv-location#2/64.6/41.0');
         $I->seeLink('Маяк', '/maps/lighthouse-location#2/74.0/65.2');
         $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/59.2/34.3');
+        $I->seeLink('Эпицентр', '/maps/epicenter#2/48.7/-24.8');
         $I->seeLink('Смотреть список доступных карт', '/maps');
         $I->seeLink('Прапор', '/traders/prapor');
         $I->seeLink('Терапевт', '/traders/terapevt');

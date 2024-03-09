@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: basil
- * Date: 08.06.2022
- * Time: 18:08
+ * User: PC_Principal
+ * Date: 09.03.2024
+ * Time: 16:04
  */
 
 use app\common\services\CanonicalPagesService;
@@ -13,11 +13,11 @@ use yii\web\JqueryAsset;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [JqueryAsset::class]]);
-$this->registerJsFile('js/rezerv-location.js?v=6.8.27', ['depends' => [JqueryAsset::class]]);
-$this->title = 'Карта локации Резерв в Escape from Tarkov';
+$this->registerJsFile('js/epicenter-location.js?v=6.8.27', ['depends' => [JqueryAsset::class]]);
+$this->title = 'Карта локации Эпицентр в Escape from Tarkov.';
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Интерактивная карта локации Резерв из игры Escape from Tarkov',
+    'content' => 'Интерактивная карта локации Эпицентр из игры Escape from Tarkov.',
 ]);
 
 /** Редирект для неканоничных страниц локаций (Убираем дубли из поисковых систем) */
@@ -28,7 +28,7 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <div class="heading-class mappage">
     <div class="container">
-        <h1 class="main-site-heading">Карта локации Резерв</h1>
+        <h1 class="main-site-heading">Карта локации Эпицентр</h1>
     </div>
 </div>
 
@@ -49,6 +49,7 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
 
         <!-- Координаты мышки -->
         <div id="mapCoords" data-original-title="" title=""></div>
+
         <!-- Кнопка вернуться к центру -->
         <p class="mapcenter"><a class="btn btn-default main-link">Вернуться к центру карты</a></p>
     </div>

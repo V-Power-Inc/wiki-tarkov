@@ -113,7 +113,6 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
                 <br>
                 <br>
                 <a class="btn btn-default main-link" href="/maps/rezerv-location">Перейти к карте Резерв</a>
-
             </div>
 
             <!-- Карта Маяка -->
@@ -135,6 +134,20 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
                 <a class="btn btn-default main-link" href="/maps/streets-of-tarkov-location">Перейти к карте Улицы Таркова</a>
             </div>
         </div>
+
+        <div class="row maps-margin-top-30">
+
+            <!-- Карта Эпицентра -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+                <h2 class="text-center map-heading">Карта Эпицентра</h2>
+                <a href="/maps/epicenter#2/61.9/-58.2"><img class="maps__small" src="/img/maps/epicenter.png" title="Карта Эпицентр" alt="Карта Эпицентр"></a>
+                <br>
+                <br>
+                <a class="btn btn-default main-link" href="/maps/epicenter#2/61.9/-58.2">Перейти к карте Эпицентр</a>
+            </div>
+
+        </div>
+
     </div>
 </div>
 

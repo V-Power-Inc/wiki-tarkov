@@ -99,6 +99,7 @@ class LaboratoryCest
         $I->seeLink('Резерв', '/maps/rezerv-location#2/64.6/41.0');
         $I->seeLink('Маяк', '/maps/lighthouse-location#2/74.0/65.2');
         $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/59.2/34.3');
+        $I->seeLink('Эпицентр', '/maps/epicenter#2/48.7/-24.8');
         $I->seeLink('Смотреть список доступных карт', '/maps');
         $I->seeLink('Прапор', '/traders/prapor');
         $I->seeLink('Терапевт', '/traders/terapevt');

@@ -94,6 +94,7 @@ class MapsCest
         $I->seeLink('Резерв', '/maps/rezerv-location#2/64.6/41.0');
         $I->seeLink('Маяк', '/maps/lighthouse-location#2/74.0/65.2');
         $I->seeLink('Улицы Таркова', '/maps/streets-of-tarkov-location#2/59.2/34.3');
+        $I->seeLink('Эпицентр', '/maps/epicenter#2/48.7/-24.8');
         $I->seeLink('Смотреть список доступных карт', '/maps');
         $I->seeLink('Прапор', '/traders/prapor');
         $I->seeLink('Терапевт', '/traders/terapevt');
@@ -129,13 +130,14 @@ class MapsCest
         $I->see('Карта Резерва', 'H2');
         $I->see('Карта Маяка', 'H2');
         $I->see('Карта Улицы Таркова', 'H2');
+        $I->see('Карта Эпицентра', 'H2');
     }
 
     /** Проверяем что видим правильное количество превьюшек интерактивных карт */
     public function checkMapsMiniatures(\FunctionalTester $I)
     {
         $I->seeElement('.maps__small');
-        $I->seeNumberOfElements('.maps__small', 9);
+        $I->seeNumberOfElements('.maps__small', 10);
     }
 
     /** Проверяем корректность ссылок на детальные страницы интерактивных карт */
@@ -150,6 +152,7 @@ class MapsCest
         $I->seeLink('Перейти к карте Резерв','/maps/rezerv-location');
         $I->seeLink('Перейти к карте Маяк','/maps/lighthouse-location');
         $I->seeLink('Перейти к карте Улицы Таркова','/maps/streets-of-tarkov-location');
+        $I->seeLink('Перейти к карте Эпицентр','/maps/streets-of-tarkov-location');
     }
 
     /** У нас нет куки - скрывающей оверлей с рекламой */

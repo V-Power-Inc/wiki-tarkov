@@ -40,6 +40,7 @@ final class MapsController extends AdvancedController
     const ACTION_REZERV            = 'rezerv';
     const ACTION_LIGHTHOUSE        = 'lighthouse';
     const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
+    const ACTION_EPICENTER = 'epicenter';
 
     /** @var string - GET параметр локации */
     const PARAM_MAP = 'map';
@@ -198,5 +199,16 @@ final class MapsController extends AdvancedController
     {
         /** Рендерим вьюху с картой */
         return $this->render('streets-of-tarkov');
+    }
+
+    /**
+     * Рендер страницы с картой Эпицентр
+     *
+     * @return string
+     */
+    public function actionEpicenter(): string
+    {
+        /** Рендерим вьюху с картой */
+        return $this->render('epicenter');
     }
 }

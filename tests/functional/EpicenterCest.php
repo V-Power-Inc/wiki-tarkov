@@ -2,26 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: PC_Principal
- * Date: 17.12.2023
- * Time: 1:37
+ * Date: 09.03.2024
+ * Time: 16:50
  */
 
 namespace Tests\Functional;
 
-use app\controllers\SiteController;
+use app\controllers\MapsController;
 
 /**
- * Функциональные тесты страницы списка статей
+ * Функциональные тесты интерактивной карты Резерв
  *
- * Class ArticlesCest
+ * Class EpicenterCest
  * @package Tests\Functional
  */
-class ArticlesCest
+class EpicenterCest
 {
-    /** Мы на странице списка новостей */
+    /** Мы на главной странице */
     public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute(SiteController::routeId(SiteController::ACTION_ARTICLES));
+        $I->amOnRoute(MapsController::routeId(MapsController::ACTION_EPICENTER));
     }
 
     /** Мы проверяем - что код страницы 200 */
@@ -40,12 +40,6 @@ class ArticlesCest
         $I->canSeeResponseCodeIs(200);
     }
 
-    /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
-    public function checkMetaTagsData(\FunctionalTester $I)
-    {
-        $I->seeInSource('<meta name="description" content="Полезные статьи по онлайн шутеру Escape from Tarkov.">');
-    }
-
     /** Мы видим что в мета тегах присутствуют коды яндекс верификации */
     public function checkYandexVerification(\FunctionalTester $I)
     {
@@ -59,25 +53,31 @@ class ArticlesCest
         $I->seeInSource('<script src="https://yandex.ru/ads/system/context.js" async></script>');
     }
 
+    /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
+    public function checkMetaTagsData(\FunctionalTester $I)
+    {
+        $I->seeInSource('<meta name="description" content="Интерактивная карта локации Эпицентр из игры Escape from Tarkov.">');
+    }
+
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
     public function checkOpengraphTagsData(\FunctionalTester $I)
     {
         $I->seeInSource('<meta property="og:type" content="website">');
         $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Полезные статьи по Escape from Tarkov">');
+        $I->seeInSource('<meta property="og:title" content="Карта локации Эпицентр в Escape from Tarkov.">');
         $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
     }
 
     /** Мы видим корректный Title */
     public function checkTitle(\FunctionalTester $I)
     {
-        $I->seeInTitle('Полезные статьи по Escape from Tarkov');
+        $I->seeInTitle('Карта локации Эпицентр в Escape from Tarkov.');
     }
 
     /** Мы видим H1 заголовок и кнопку перейти к интерактивным картам */
     public function checkPageMainData(\FunctionalTester $I)
     {
-        $I->see('Полезные статьи по Escape from Tarkov', 'h1');
+        $I->see('Карта локации Эпицентр', 'h1');
     }
 
     /** Мы видим все ссылки горизонтального меню */
