@@ -13,6 +13,7 @@ use app\tests\fixtures\CategoryFixture;
 use app\tests\fixtures\ItemsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
 /**
@@ -72,10 +73,8 @@ class CategoryLootPageCest
     /** Мы видим что все OpenGraph теги соответствуют нашим стандартам */
     public function checkOpengraphTagsData(\FunctionalTester $I)
     {
-        $I->seeInSource('<meta property="og:type" content="website">');
-        $I->seeInSource('<meta property="og:site_name" content="База знаний Escape from Tarkov">');
-        $I->seeInSource('<meta property="og:title" content="Escape from Tarkov: Основная категория">');
-        $I->seeInSource('<meta property="og:image" content="/img/logo-full.png">');
+        /** Чекаем корректность OpenGraph тегов */
+        OpengraphChecker::checkTags($I, 'Escape from Tarkov: Основная категория');
     }
 
     /** Мы видим корректный Title */
