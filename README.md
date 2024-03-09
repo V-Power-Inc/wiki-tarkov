@@ -1,15 +1,14 @@
 
-<img alt="Repo logo" src="https://wiki-tarkov.ru/img/upload/icon-128-128.png" align="right">
+<img alt="Repo logo" src="https://wiki-tarkov.ru/img/upload/icon-128-128.png" style="float: right">
 
-Wiki Tarkov Project 💻
-=================
+# Wiki Tarkov Project 💻
 
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
 ![Stable Version](https://img.shields.io/badge/version-v6.8.28-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
-![Tests Count](https://img.shields.io/badge/tests%20count-554-informational)
+![Tests Count](https://img.shields.io/badge/tests%20count-738-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-97%25-success)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
@@ -39,6 +38,7 @@ Wiki Tarkov Project 💻
 - API с сервиса tarkov.dev, которое позволяет получать актуальную информацию о боссах, которые могут спавниться на локациях а также всю информацию по покупке и бартеру лута у торговцев и на барахолке.
 - API для получения дополнительной информации о луте (Стоимость, трейды, кто выдает и тому подобное)
 - Логирование поисковых запросов пользователей к Api (Включая записи о рекапче)
+
 ## Yii2 basic reworked  ⭐
 В процессе разработки использовалась Yii2 basic, однако под нужды проекта она была доработана, в связи с чем в проекте появились некоторые нюансы.
 
@@ -75,7 +75,6 @@ Wiki Tarkov Project 💻
 Суть этого подхода в том, чтобы для бекенда и фронтенда использовались разные контроллеры, со своей логикой, но при этом чтобы у каждого из них была возможность использовать некий функционал, который сделал бы Url менеджер более прозрачным.
 
 В трейте ControllerRoutesTrait содержатся 2 метода:
-
 
     public static function getUrlRoute(string $action, array $params = []): array
     public static function routeId(string $action): string
@@ -118,6 +117,7 @@ Wiki Tarkov Project 💻
     'testing-page' => ExampleController::routeId(ExampleController::ACTION_TEST)
 
 Преимущество этого константного подхода в том, что если какой-либо url адрес поменяется нам не придется лазать по всему проекту, в бесконечных попытках произвести все замены (Кейс, когда отсутствует IDE).
+
 ## Миграции ✅
 Для проекта были написаны все необходимые миграции, с комментариями на каждую таблицу и поля, добавлением индексов и внешних ключей, также были созданы триггеры для автообновления полей на некоторые таблицы.
 
@@ -143,6 +143,7 @@ Unit тестирование было написано исключительн
  - Категории справочника лута
  - Детальные страницы справочника лута
  - API по получению информации о боссах и актуальном луте
+ - Таблица с информацией о патронах и их характеристики
  - Страница со списком кланов
  - Страница конвентера валют
  - Страница обратной связи
@@ -286,7 +287,7 @@ Snyk в настоящий момент применяет 2 теста для �
 Thank you to all of our awesome contributors! ❤️
 
 <a href="https://github.com/V-Power-Inc/wiki-tarkov/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=V-Power-Inc/wiki-tarkov" />
+  <img alt="Contributors" src="https://contrib.rocks/image?repo=V-Power-Inc/wiki-tarkov" />
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
