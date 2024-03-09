@@ -12,6 +12,7 @@ use app\controllers\SiteController;
 use app\tests\fixtures\CurrenciesFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\OverlayChecker;
 
 /**
  * Функциональные тесты для страницы списка валют
@@ -131,17 +132,8 @@ class CurrenciesCest
     /** Проверяем что блок оверлея с рекламой скроется и установится кукис, который отключит его на 6 часов */
     public function checkThatOverlayIsCloseIsClickable(\FunctionalTester $I)
     {
-        /** Пожелания */
-        $I->wantTo('Отключить блок с рекламой оверлея, в нижней части экрана при нажатии на кнопку закрытия');
-
-        /** Видим кнопку закрытия оверлея */
-        $I->SeeElement('.cls-btn');
-
-        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
-        $I->expect('Я ожидаю что по нажатию на кнопку, оверлей скроется');
-
-        /** Кликаем кнопку скрытия рекламы */
-        $I->click('.cls-btn');
+        /** Проверяем кликабельность кнопки скрытия оверлея */
+        OverlayChecker::overlayIsCloseIsClickable($I);
     }
 
     /** Метод проверяет сущестование блока с конвертацией доллара */

@@ -17,7 +17,7 @@ namespace tests\_support;
  * Class CheckPageCodes
  * @package tests\_support
  */
-class CheckPageCodes
+final class CheckPageCodes
 {
     /**
      * Проверяем что код страницы именно 200 (Все в порядке)

@@ -12,6 +12,7 @@ use app\controllers\ApiController;
 use app\tests\fixtures\ApilootFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\OverlayChecker;
 
 /**
  * Функциональные тесты страниц лута из Api
@@ -120,7 +121,6 @@ class ApilootCest
         $I->SeeElement('.js-feedback-form');
     }
 
-
     /** Проверяем что видим на странице кнопку для закрытия оверлейного блока с рекламой */
     public function checkExistingOfCloseOverlayButton(\FunctionalTester $I)
     {
@@ -130,17 +130,8 @@ class ApilootCest
     /** Проверяем что блок оверлея с рекламой скроется и установится кукис, который отключит его на 6 часов */
     public function checkThatOverlayIsCloseIsClickable(\FunctionalTester $I)
     {
-        /** Пожелания */
-        $I->wantTo('Отключить блок с рекламой оверлея, в нижней части экрана при нажатии на кнопку закрытия');
-
-        /** Видим кнопку закрытия оверлея */
-        $I->SeeElement('.cls-btn');
-
-        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
-        $I->expect('Я ожидаю что по нажатию на кнопку, оверлей скроется');
-
-        /** Кликаем кнопку скрытия рекламы */
-        $I->click('.cls-btn');
+        /** Проверяем кликабельность кнопки скрытия оверлея */
+        OverlayChecker::overlayIsCloseIsClickable($I);
     }
 
     /** Проверяем что кнопка скролла вверх на странице присутствует */

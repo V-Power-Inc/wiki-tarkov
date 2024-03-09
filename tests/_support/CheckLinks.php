@@ -17,7 +17,7 @@ namespace tests\_support;
  * Class CheckFooterLinksCest
  * @package Tests\Functional
  */
-class CheckLinks
+final class CheckLinks
 {
     /**
      * Метод проверяет - все ли ссылки горизонтального меню присутствуют на страницах

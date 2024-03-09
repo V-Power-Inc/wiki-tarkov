@@ -12,6 +12,7 @@ use app\controllers\TraderController;
 use app\tests\fixtures\TradersFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\OverlayChecker;
 
 /**
  * Функциональные тесты страницы списка торговцев
@@ -140,17 +141,8 @@ class TradersMainPageCest
     /** Проверяем что блок оверлея с рекламой скроется и установится кукис, который отключит его на 6 часов */
     public function checkThatOverlayIsCloseIsClickable(\FunctionalTester $I)
     {
-        /** Пожелания */
-        $I->wantTo('Отключить блок с рекламой оверлея, в нижней части экрана при нажатии на кнопку закрытия');
-
-        /** Видим кнопку закрытия оверлея */
-        $I->SeeElement('.cls-btn');
-
-        /** Ожидания - что при нажатии на кнопку, оверелей скроется */
-        $I->expect('Я ожидаю что по нажатию на кнопку, оверлей скроется');
-
-        /** Кликаем кнопку скрытия рекламы */
-        $I->click('.cls-btn');
+        /** Проверяем кликабельность кнопки скрытия оверлея */
+        OverlayChecker::overlayIsCloseIsClickable($I);
     }
 
     /** Проверяем что хотя-бы один торговец есть на странице (остальные по аналогии работают) */
