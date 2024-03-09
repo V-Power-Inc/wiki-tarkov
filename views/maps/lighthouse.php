@@ -13,7 +13,7 @@ use yii\web\JqueryAsset;
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [JqueryAsset::class]]);
-$this->registerJsFile('js/lighthouse-location.js?v=6.8.11', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('js/lighthouse-location.js?v=6.8.27', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Карта локации Маяк в Escape from Tarkov.';
 $this->registerMetaTag([
     'name' => 'description',

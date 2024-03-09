@@ -93,7 +93,7 @@ final class BossesController extends AdvancedController
         $api = new ApiService();
 
         /** Проверяем есть ли в БД страница с таким URL адресом */
-        if ($url && Bosses::isExists($url) == true) {
+        if ($url && Bosses::isExists($url)) {
 
             /** Дергаем метод, который вернет нам детальную страницу Боссов */
             $bosses = $api->getBosses($url);

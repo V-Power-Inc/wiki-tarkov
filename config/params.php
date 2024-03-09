@@ -37,7 +37,8 @@ return [
         '/maps/terragroup-laboratory-location',
         '/maps/rezerv-location',
         '/maps/lighthouse-location',
-        '/maps/streets-of-tarkov-location'
+        '/maps/streets-of-tarkov-location',
+        '/maps/epicenter'
     ],
     'cacheTime' => [
         'one_minute' => 60,
