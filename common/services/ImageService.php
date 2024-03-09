@@ -35,11 +35,12 @@ final class ImageService
             'Лаборатория' => '/img/maps/terra-group.png',
             'Резерв' => '/img/maps/rezerv.jpg',
             'Лес' => '/img/maps/forest_prev.jpg',
-            'Улицы Таркова' => '/img/maps/streets-of-tarkov.jpg'
+            'Улицы Таркова' => '/img/maps/streets-of-tarkov.jpg',
+            'Эпицентр' => '/img/maps/epicenter.png'
         ];
 
-        /** Возвращаем значение массива по полученному в виде параметра ключу */
-        return $array[$map_name];
+        /** Возвращаем значение массива по полученному в виде параметра ключу - если такого нет, возвращаем заглушку */
+        return $array[$map_name] ?? '/img/qsch.png';
     }
 
     /**

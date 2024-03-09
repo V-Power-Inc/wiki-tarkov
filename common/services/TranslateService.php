@@ -51,6 +51,8 @@ final class TranslateService
                 return 'forest';
             case 'Улицы Таркова':
                 return 'streets-of-tarkov';
+            case 'Эпицентр':
+                return 'epicenter';
         }
 
         /** Возвращаем null только если не попали не в 1 из кейсов */
