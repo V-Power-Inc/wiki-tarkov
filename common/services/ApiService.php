@@ -153,6 +153,7 @@ final class ApiService implements ApiInterface
      *
      * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
      * @return mixed
+     * @throws HttpException
      */
     private function getApiData(bool $encoded = true)
     {
@@ -164,6 +165,15 @@ final class ApiService implements ApiInterface
                 'content' => Json::encode(['query' => $this->query]),
             ]
         ]));
+
+
+        /** TODO: Пора логирующую таблицу начать использовать */
+        /** Если не получили данных из API - выкидываем Exception */
+        if ($data === false) {
+
+            /** Выкидываем 404 с указанием что API не вернул данных */
+            throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'API не вернул данные, попробуйте зайти позже');
+        }
 
         /** Возвращаем результат, либо раскодированный из JSON либо нет, в зависимости от переданного сюда флага */
         return $encoded ? Json::decode($data, true) : $data;
