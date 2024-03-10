@@ -24,6 +24,9 @@ class m240310_203412_create_log_table extends Migration
             'error_code' => $this->integer()->notNull()->defaultValue(500)->comment('Код ошибки'),
             'date_create' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')->comment('Дата создания записи')
         ]);
+
+        /** Коммент на таблицу */
+        $this->addCommentOnTable(static::TABLE_NAME, 'Логирующая ошибки приложения таблица');
     }
 
     /**
