@@ -6,7 +6,7 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
-![Stable Version](https://img.shields.io/badge/version-v6.8.28-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v6.9.11-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-738-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-97%25-success)
@@ -38,6 +38,7 @@
 - API с сервиса tarkov.dev, которое позволяет получать актуальную информацию о боссах, которые могут спавниться на локациях а также всю информацию по покупке и бартеру лута у торговцев и на барахолке.
 - API для получения дополнительной информации о луте (Стоимость, трейды, кто выдает и тому подобное)
 - Логирование поисковых запросов пользователей к Api (Включая записи о рекапче)
+- Сервис логирования ошибок в БД
 
 ## Yii2 basic reworked  ⭐
 В процессе разработки использовалась Yii2 basic, однако под нужды проекта она была доработана, в связи с чем в проекте появились некоторые нюансы.
