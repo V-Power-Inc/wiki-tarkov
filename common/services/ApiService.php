@@ -166,7 +166,6 @@ final class ApiService implements ApiInterface
             ]
         ]));
 
-
         /** TODO: Пора логирующую таблицу начать использовать */
         /** Если не получили данных из API - выкидываем Exception */
         if ($data === false) {
