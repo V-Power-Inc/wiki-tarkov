@@ -425,7 +425,7 @@ class TasksTest extends \Codeception\Test\Unit
         /** Получаем список всех записей */
         $list = Tasks::find()->all();
 
-        /** Ожидаем получить из фикстур - 9 записи */
-        $this->assertTrue(count($list) == 9);
+        /** Ожидаем получить из фикстур - 10 записи */
+        $this->assertTrue(count($list) == 10);
     }
 }

@@ -22,7 +22,7 @@ return [
         'trader_name' => 'Барахольщик',
         'trader_icon' => 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp',
         'json' => '{"name":"Борода не нужна","factionName":"Any","minPlayerLevel":26,"objectives":[{"type":"traderLevel","description":"Достичь 3-го уровня лояльности с Терапевтом","optional":false}],"neededKeys":[],"taskRequirements":[{"task":{"name":"Секрет успеха"},"status":["complete"]}],"experience":15800,"map":null,"trader":{"name":"Барахольщик","imageLink":"https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp"},"restartable":false,"startRewards":{"items":[]},"finishRewards":{"items":[{"item":{"name":"Рубли","description":"Несколько банкнот пока еще котирующихся российских рублей.","iconLink":"https://assets.tarkov.dev/5449016a4bdc2d6f028b456f-icon.webp","inspectImageLink":"https://assets.tarkov.dev/5449016a4bdc2d6f028b456f-image.webp"},"count":32000},{"item":{"name":"Бронешлем \"Алтын\"","description":"Шлемы \"Алтын\" прошли боевые испытания в Афганистане и Чечне и до сих пор находится на вооружении Министерства внутренних дел Российской Федерации и войсках специального назначения. Возможна установка бронированного забрала.","iconLink":"https://assets.tarkov.dev/5aa7e276e5b5b000171d0647-icon.webp","inspectImageLink":"https://assets.tarkov.dev/5aa7e276e5b5b000171d0647-image.webp"},"count":1}]}}',
-        'url' => 'eger-quests',
+        'url' => 'baraholshik-quests',
         'active' => 1,
         'old' => 0
     ],
