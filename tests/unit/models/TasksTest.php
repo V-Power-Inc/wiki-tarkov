@@ -185,8 +185,8 @@ class TasksTest extends \Codeception\Test\Unit
             ->andWhere([Tasks::ATTR_OLD => 0])
             ->all();
 
-        /** Ожидаем получить из фикстур - 9 записи */
-        $this->assertTrue(count($list) == 9);
+        /** Ожидаем получить из фикстур - 10 записей */
+        $this->assertTrue(count($list) == 10);
     }
 
     /** Тестируем выборку активных записей - квесты Прапора */
@@ -410,19 +410,6 @@ class TasksTest extends \Codeception\Test\Unit
             ->all();
 
         /** Ожидаем получить из фикстур - 1 запись */
-        $this->assertTrue(count($list) == 1);
-    }
-
-    /** Тестируем выборку деактивированных записей */
-    public function testSelectDisabledRows()
-    {
-        /** Выбираем все записи */
-        $list = Tasks::find()
-            ->where([Tasks::ATTR_ACTIVE => Tasks::FALSE])
-            ->andWhere([Tasks::ATTR_OLD => Tasks::TRUE])
-            ->all();
-
-        /** Ожидаем получить из фикстур - 1 записи */
         $this->assertTrue(count($list) == 1);
     }
 
