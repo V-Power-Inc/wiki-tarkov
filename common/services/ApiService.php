@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\constants\api\Api;
+use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\ApiInterface;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\tasks\db\TaskModel;
@@ -22,6 +23,7 @@ use app\models\Tasks;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
+use Yii;
 
 /**
  * Сервис предназначенный для работы с API tarkov.dev и получения необходимой информации с помощью
@@ -123,7 +125,7 @@ final class ApiService implements ApiInterface
      */
     private function isEmptyBosses(): bool
     {
-        return empty(Bosses::find()->all()) ? true : false;
+        return empty(Bosses::find()->all());
     }
 
     /**
@@ -166,9 +168,11 @@ final class ApiService implements ApiInterface
             ]
         ]));
 
-        /** TODO: Пора логирующую таблицу начать использовать */
         /** Если не получили данных из API - выкидываем Exception */
         if ($data === false) {
+
+            /** Логируем в БД ошибку получения данных на этом этапе */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
 
             /** Выкидываем 404 с указанием что API не вернул данных */
             throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'API не вернул данные, попробуйте зайти позже');
@@ -317,6 +321,7 @@ final class ApiService implements ApiInterface
      * - Есть предмет в базе
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
+     *
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
@@ -354,6 +359,9 @@ final class ApiService implements ApiInterface
             /** Возвращаем False в контроллер, если в API нет данных */
             return false;
         }
+
+        /** Логируем в БД ошибку */
+        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
 
         /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
         throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');

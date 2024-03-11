@@ -119,8 +119,6 @@ $this->registerMetaTag([
                                 <?php endif; ?>
 
                             <?php endif; ?>
-
-                        </p>
                     </div>
                 </div>
             <?php endforeach;?>

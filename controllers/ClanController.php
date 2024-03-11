@@ -8,10 +8,12 @@
 
 namespace app\controllers;
 
+use app\common\constants\log\ErrorDesc;
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\forms\ClansForm;
 use app\common\services\JsondataService;
+use app\common\services\LogService;
 use app\models\Clans;
 use app\models\ClansSearch;
 use yii\web\HttpException;
@@ -151,6 +153,9 @@ final class ClanController extends AdvancedController
                         return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
                     } else { /** Если данные по каким то причинам не смогли сохраниться */
+
+                        /** Логируем этот кейс в БД, т.к. необычная ошибка */
+                        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_CLAN_SAVE_ERROR, ErrorDesc::DESC_CLAN_SAVE_ERROR, ResponseStatusInterface::OK_CODE);
 
                         /** Сетапим флэш сообщение об этом (SetFlash) - указываем, что о баге можно сообщить на электронную почту */
                         MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>");

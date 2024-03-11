@@ -27,11 +27,6 @@ final class SkillsController extends AdvancedController
     const ACTION_SKILLSCATEGORY = 'skillscategory';
     const ACTION_SKILLSDETAIL   = 'skillsdetail';
 
-    /** Кеширование по секундам с различными сроками **/
-    const WEEK_CACHE = 604800;
-    const TWO_DAYS = 172800;
-    const ONE_DAY = 86400;
-
     /**
      * Массив поведения контроллера
      *
@@ -73,7 +68,7 @@ final class SkillsController extends AdvancedController
     public function actionSkillscategory(string $name): string
     {
         /** Если нашли по урлу активную категорию умений */
-        if(Catskills::takeActiveCategoryByUrl($name)) {
+        if (Catskills::takeActiveCategoryByUrl($name)) {
 
             /** Рендерим вьюху с категорией */
             return $this->render('/skills/skillscat-page.php', [

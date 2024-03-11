@@ -22,10 +22,10 @@ final class TranslateService
 
     /**
      * Метод по полученному параметру создает название карты - возвращает строку
-     * Если вхождения не было - вернет null
+     * Если вхождения не было - вернет пустую строку
      *
      * @param string $map - название карты
-     * @return string|null
+     * @return string
      */
     public static function mapUrlCreator(string $map): string
     {
