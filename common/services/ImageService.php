@@ -122,8 +122,18 @@ final class ImageService
             'Барахолка' => '/img/baraholka.jpg'
         ];
 
-        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
-        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
+        /** Если не нашли нужное изображение торговца по ключу */
+        if (!empty($array[$trader])) {
+
+            /** Логируем что есть необработанный торговец */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+
+            /** Выводим изображение заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение по ключу */
+        return $array[$trader];
     }
 
     /**
@@ -146,7 +156,17 @@ final class ImageService
             'Смотритель' => '/img/torgovcy/seeker_full.jpg',
         ];
 
-        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
-        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
+        /** Если не нашли нужное изображение торговца по ключу */
+        if (!empty($array[$trader])) {
+
+            /** Логируем что есть необработанный торговец */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+
+            /** Выводим изображение заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение по ключу */
+        return $array[$trader];
     }
 }
