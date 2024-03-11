@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
+use app\models\queries\ErrorLogQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -67,5 +68,16 @@ class ErrorLog extends ActiveRecord
             static::ATTR_ERROR_CODE => 'Error Code',
             static::ATTR_DATE_CREATE => 'Date Create',
         ];
+    }
+
+    /**
+     * Уникальный ActiveQuery для каждой AR модели
+     *
+     * @return ErrorLogQuery
+     */
+    public static function find(): ErrorLogQuery
+    {
+        /** Каждой AR модели свой класс ActiveQuery */
+        return new ErrorLogQuery(get_called_class());
     }
 }
