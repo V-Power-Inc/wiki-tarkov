@@ -14,7 +14,7 @@ namespace app\common\constants\log;
  * Class ErrorDesc
  * @package app\common\constants\log
  */
-class ErrorDesc
+final class ErrorDesc
 {
     /** @var string - Константа, тип ошибки по получению данных из API */
     const TYPE_ERROR_API = 'API не вернул данные';

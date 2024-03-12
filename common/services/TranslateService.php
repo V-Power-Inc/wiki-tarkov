@@ -59,6 +59,9 @@ final class TranslateService
                 return 'epicenter';
         }
 
+        /** Логируем что пришла новая карта */
+        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map, ResponseStatusInterface::OK_CODE);
+
         /** Возвращаем null только если не попали не в 1 из кейсов */
         return self::EMPTY_STRING;
     }
