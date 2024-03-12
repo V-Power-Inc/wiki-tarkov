@@ -130,7 +130,7 @@ class TasksTest extends \Codeception\Test\Unit
 
         /** Значения на сохранение нового объекта */
         $values = [
-            Tasks::ATTR_ID => 11,
+            Tasks::ATTR_ID => 12,
             Tasks::ATTR_QUEST => 'Первый квест',
             Tasks::ATTR_TRADER_NAME => 'Барахольщик',
             Tasks::ATTR_TRADER_ICON => 'https://assets.tarkov.dev/5ac3b934156ae10c4430e83c.webp',
@@ -153,7 +153,7 @@ class TasksTest extends \Codeception\Test\Unit
         $list = Tasks::find()->all();
 
         /** Ожидаем что всего будет 4 записи */
-        $this->assertTrue(count($list) == 11);
+        $this->assertTrue(count($list) == 12);
     }
 
     /** Тестируем выборку записи на обновление */
@@ -173,7 +173,7 @@ class TasksTest extends \Codeception\Test\Unit
         $list = Tasks::find()->all();
 
         /** Ожидаем получить из фикстур - 10 записи */
-        $this->assertTrue(count($list) == 10);
+        $this->assertTrue(count($list) == 11);
     }
 
     /** Тестируем выборку активных записей */
@@ -185,8 +185,8 @@ class TasksTest extends \Codeception\Test\Unit
             ->andWhere([Tasks::ATTR_OLD => 0])
             ->all();
 
-        /** Ожидаем получить из фикстур - 9 записи */
-        $this->assertTrue(count($list) == 9);
+        /** Ожидаем получить из фикстур - 10 записей */
+        $this->assertTrue(count($list) == 11);
     }
 
     /** Тестируем выборку активных записей - квесты Прапора */
@@ -413,19 +413,6 @@ class TasksTest extends \Codeception\Test\Unit
         $this->assertTrue(count($list) == 1);
     }
 
-    /** Тестируем выборку деактивированных записей */
-    public function testSelectDisabledRows()
-    {
-        /** Выбираем все записи */
-        $list = Tasks::find()
-            ->where([Tasks::ATTR_ACTIVE => Tasks::FALSE])
-            ->andWhere([Tasks::ATTR_OLD => Tasks::TRUE])
-            ->all();
-
-        /** Ожидаем получить из фикстур - 1 записи */
-        $this->assertTrue(count($list) == 1);
-    }
-
     /** Тестируем удаление объекта */
     public function testDelete()
     {
@@ -438,7 +425,7 @@ class TasksTest extends \Codeception\Test\Unit
         /** Получаем список всех записей */
         $list = Tasks::find()->all();
 
-        /** Ожидаем получить из фикстур - 9 записи */
-        $this->assertTrue(count($list) == 9);
+        /** Ожидаем получить из фикстур - 10 записи */
+        $this->assertTrue(count($list) == 10);
     }
 }

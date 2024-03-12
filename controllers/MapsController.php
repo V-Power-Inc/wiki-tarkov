@@ -25,12 +25,6 @@ final class MapsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     const ACTION_LOCATIONS         = 'locations';
-    const ACTION_ZAVODMARKERS      = 'zavodmarkers';
-    const ACTION_FORESTMARKERS     = 'forestmarkers';
-    const ACTION_TAMOJNYAMARKERS   = 'tamojnyamarkers';
-    const ACTION_BEREGMARKERS      = 'beregmarkers';
-    const ACTION_RAZVYAZKAMARKERS  = 'razvyazkamarkers';
-    const ACTION_LABORATORYMARKERS = 'laboratorymarkers';
     const ACTION_ZAVOD             = 'zavod';
     const ACTION_FOREST            = 'forest';
     const ACTION_TAMOJNYA          = 'tamojnya';
@@ -40,7 +34,8 @@ final class MapsController extends AdvancedController
     const ACTION_REZERV            = 'rezerv';
     const ACTION_LIGHTHOUSE        = 'lighthouse';
     const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
-    const ACTION_EPICENTER = 'epicenter';
+    const ACTION_EPICENTER         = 'epicenter';
+    const ACTION_GET_MARKERS       = 'get-markers';
 
     /** @var string - GET параметр локации */
     const PARAM_MAP = 'map';
