@@ -8,6 +8,10 @@
 
 namespace app\common\services;
 
+use app\common\constants\log\ErrorDesc;
+use app\common\interfaces\ResponseStatusInterface;
+use Yii;
+
 /**
  * Сервис для всякого рода работы с изображениями и получения путей к ним
  *
@@ -39,8 +43,18 @@ final class ImageService
             'Эпицентр' => '/img/maps/epicenter.png'
         ];
 
-        /** Возвращаем значение массива по полученному в виде параметра ключу - если такого нет, возвращаем заглушку */
-        return $array[$map_name] ?? '/img/qsch.png';
+        /** Если такой локации у нас нет */
+        if (empty($array[$map_name])) {
+
+            /** Логируем что пришла новая карта */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
+
+            /** Возвращаем заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение массива по полученному в виде параметра ключу */
+        return $array[$map_name];
     }
 
     /**
@@ -72,8 +86,18 @@ final class ImageService
             'Колонтай' => '/img/bosses/collontay.jpg'
         ];
 
-        /** Возвращаем значение массива по полученному в виде параметра ключу или изображение вопроса, если босс не найден */
-        return $array[$boss] ?? '/img/qsch.png';
+        /** Если не нашли изображение подходящего босса */
+        if (empty($array[$boss])) {
+
+            /** Логируем что есть необработанный босс */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
+
+            /** Возвращаем изображение заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение массива по полученному в виде параметра ключу */
+        return $array[$boss];
     }
 
     /**
@@ -98,8 +122,18 @@ final class ImageService
             'Барахолка' => '/img/baraholka.jpg'
         ];
 
-        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
-        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
+        /** Если не нашли нужное изображение торговца по ключу */
+        if (!empty($array[$trader])) {
+
+            /** Логируем что есть необработанный торговец */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+
+            /** Выводим изображение заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение по ключу */
+        return $array[$trader];
     }
 
     /**
@@ -122,7 +156,17 @@ final class ImageService
             'Смотритель' => '/img/torgovcy/seeker_full.jpg',
         ];
 
-        /** Возвращаем значение по ключу или если его не нашли дефолтную картинку с вопросом */
-        return !empty($array[$trader]) ? $array[$trader] : '/img/qsch.png' ;
+        /** Если не нашли нужное изображение торговца по ключу */
+        if (!empty($array[$trader])) {
+
+            /** Логируем что есть необработанный торговец */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+
+            /** Выводим изображение заглушку */
+            return '/img/qsch.png';
+        }
+
+        /** Возвращаем значение по ключу */
+        return $array[$trader];
     }
 }

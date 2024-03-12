@@ -25,6 +25,8 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Боссы на локациях Escape from Tarkov, Escape from tarkov, Виды боссов'
 ]);
+
+/** Вьюха страницы со списком локаций, где есть различные боссы */
 ?>
 <!-- Gorizontal information -->
 <div class="container">

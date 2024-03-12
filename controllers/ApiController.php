@@ -155,7 +155,6 @@ final class ApiController extends AdvancedController
      */
     public function actionGetGraphs(string $id): string
     {
-
         /** Если запрос сюда прилетел AJAXом */
         if (Yii::$app->request->isAjax) {
 
