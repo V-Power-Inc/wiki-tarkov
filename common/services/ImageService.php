@@ -123,7 +123,7 @@ final class ImageService
         ];
 
         /** Если не нашли нужное изображение торговца по ключу */
-        if (!empty($array[$trader])) {
+        if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
             LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
