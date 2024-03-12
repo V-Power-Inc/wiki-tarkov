@@ -8,6 +8,10 @@
 
 namespace app\common\services;
 
+use app\common\constants\log\ErrorDesc;
+use app\common\interfaces\ResponseStatusInterface;
+use Yii;
+
 /**
  * Сервис для получения транслитов для всякого рода потребностей
  * Содержит приличное количество хардкода
@@ -137,7 +141,6 @@ final class TranslateService
      */
     public static function getQuestFaction(string $faction): string
     {
-
         /** @var $array - массив с переводами доступных фракций */
         $array = [
             'Any' => 'Bear или Usec',
@@ -145,8 +148,18 @@ final class TranslateService
             'USEC' => 'Usec'
         ];
 
-        /** Возвращаем значение массива по ключу, если ключа нет - вернем любую фракцию */
-        return $array[$faction] ?? 'Любая';
+        /** Если не смогли по ключу найти значение фракции */
+        if (empty($array[$faction])) {
+
+            /** Логируем что прилетела новая фракция */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_FACTION, ErrorDesc::DESC_NEW_API_QUEST_FACTION . $faction, ResponseStatusInterface::OK_CODE);
+
+            /** Возвращаем необработанный результат */
+            return $faction;
+        }
+
+        /** Возвращаем значение массива по ключу */
+        return $array[$faction];
     }
 
     /**
@@ -163,6 +176,17 @@ final class TranslateService
             'failed' => 'провален'
         ];
 
+        /** Если в массиве по ключу не можем найти элемент */
+        if (empty($array[$status])) {
+
+            /** Логируем что прилетело новое состояние квеста */
+            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_QUEST_STATE, ErrorDesc::DESC_NEW_API_QUEST_STATE . $status, ResponseStatusInterface::OK_CODE);
+
+            /** Возвращаем значение в необработанном виде */
+            return $status;
+        }
+
+        /** Возвращаем нужное состояние по ключу */
         return $array[$status];
     }
 }

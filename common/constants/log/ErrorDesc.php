@@ -51,4 +51,16 @@ class ErrorDesc
 
     /** @var string - Константа, описание ошибки - из API прилетел новый торговец */
     const DESC_NEW_API_TRADER = 'Из API прилетел новый торговец - ';
+
+    /** @var string - Константа, описание типа ошибки - Новое состояние квеста из API */
+    const TYPE_NEW_API_QUEST_STATE = 'Новое состояние квеста из API';
+
+    /** @var string - Константа, описание ошибки - Новое состояние квеста из API */
+    const DESC_NEW_API_QUEST_STATE = 'Из API прилетело новое состояние квеста - ';
+
+    /** @var string - Константа, описание типа ошибки - Новая фракция из API */
+    const TYPE_NEW_API_FACTION = 'Новая фракция из API';
+
+    /** @var string - Константа, описание ошибки - Новая фракция из API */
+    const DESC_NEW_API_QUEST_FACTION = 'Из API прилетела новая фракция - ';
 }
