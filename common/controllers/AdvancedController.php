@@ -23,4 +23,18 @@ class AdvancedController extends Controller
 
     /** @var string - Параметр ID */
     public const PARAM_ID = 'id';
+
+    /**
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
 }

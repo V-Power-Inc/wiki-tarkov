@@ -64,4 +64,18 @@ class AdminController extends Controller
         /** Возвращаем родительский beforeAction */
         return parent::beforeAction($action);
     }
+
+    /**
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
 }
