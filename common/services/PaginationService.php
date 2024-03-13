@@ -23,16 +23,16 @@ use Yii;
 final class PaginationService
 {
     /** @var string - Константа, название атрибута даты создания записи у большинства AR моделей */
-    const ATTR_DATE_CREATE = 'date_create';
+    private const ATTR_DATE_CREATE = 'date_create';
 
     /** @var int defaultPageSize - кол-во элементов на странице по умолчанию  */
-    const defaultPageSize = 20;
+    private const defaultPageSize = 20;
 
-    /** @var Pagination $paginator */
-    public $paginator;
+    /** @var Pagination $paginator - Объект класса пагинации */
+    public Pagination $paginator;
 
-    /** @var array|ActiveRecord $items - переменная для хранения набора объектов */
-    public $items;
+    /** @var array|ActiveRecord[] $items - переменная для хранения набора объектов */
+    public array $items;
 
     /**
      * Метод construct объект пагинатора и возвращает полноценный запрос

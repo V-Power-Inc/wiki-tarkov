@@ -20,17 +20,17 @@ namespace app\common\constants\api;
 final class BossAttributes
 {
     /** @var string - Константа, имя босса */
-    const ATTR_NAME = 'name';
+    public const ATTR_NAME = 'name';
 
     /** @var string - Константа, шанс спавна */
-    const ATTR_SPAWN_CHANCE = 'spawnChance';
+    public const ATTR_SPAWN_CHANCE = 'spawnChance';
 
     /** @var string - Константа, локации спавна */
-    const ATTR_SPAWN_LOCATIONS = 'spawnLocations';
+    public const ATTR_SPAWN_LOCATIONS = 'spawnLocations';
 
     /** @var string - Константа, есть ли у босса сопровождение */
-    const ATTR_ESCORTS = 'escorts';
+    public const ATTR_ESCORTS = 'escorts';
 
     /** @var string - Константа, триггер спавна */
-    const ATTR_SPAWN_TRIGGER = 'spawnTrigger';
+    public const ATTR_SPAWN_TRIGGER = 'spawnTrigger';
 }

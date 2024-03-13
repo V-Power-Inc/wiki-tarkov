@@ -14,6 +14,7 @@ namespace app\common\helpers\validators;
  * Class SafeValidator
  * @package app\common\helpers\validators
  */
-final class SafeValidator extends \yii\validators\SafeValidator {
-	const ATTR_ON = 'on';
+final class SafeValidator extends \yii\validators\SafeValidator
+{
+    public const ATTR_ON = 'on';
 }

@@ -28,8 +28,8 @@ use Yii;
 final class BossesController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_INDEX = 'boss-list';
-    const ACTION_VIEW  = 'view';
+    public const ACTION_INDEX = 'boss-list';
+    public const ACTION_VIEW  = 'view';
 
     /**
      * Массив поведения данного контроллера

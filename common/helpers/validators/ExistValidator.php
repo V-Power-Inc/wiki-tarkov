@@ -14,15 +14,16 @@ namespace app\common\helpers\validators;
  * Class ExistValidator
  * @package app\common\helpers\validators
  */
-final class ExistValidator extends \yii\validators\ExistValidator {
-	const ATTR_TARGET_CLASS              = 'targetClass';
-	const ATTR_TARGET_ATTRIBUTE          = 'targetAttribute';
-	const ATTR_TARGET_RELATION           = 'targetRelation';
-	const ATTR_FILTER                    = 'filter';
-	const ATTR_ALLOW_ARRAY               = 'allowArray';
-	const ATTR_TARGET_ATTRIBUTE_JUNCTION = 'targetAttributeJunction';
-	const ATTR_FORCE_MASTER_DB           = 'forceMasterDb';
-	const ATTR_ON                        = 'on';
-	const ATTR_MESSAGE                   = 'message';
-	const ATTR_SKIP_ON_ERROR			 = 'skipOnError';
+final class ExistValidator extends \yii\validators\ExistValidator
+{
+    public const ATTR_TARGET_CLASS              = 'targetClass';
+    public const ATTR_TARGET_ATTRIBUTE          = 'targetAttribute';
+    public const ATTR_TARGET_RELATION           = 'targetRelation';
+    public const ATTR_FILTER                    = 'filter';
+    public const ATTR_ALLOW_ARRAY               = 'allowArray';
+    public const ATTR_TARGET_ATTRIBUTE_JUNCTION = 'targetAttributeJunction';
+    public const ATTR_FORCE_MASTER_DB           = 'forceMasterDb';
+    public const ATTR_ON                        = 'on';
+    public const ATTR_MESSAGE                   = 'message';
+    public const ATTR_SKIP_ON_ERROR			 = 'skipOnError';
 }

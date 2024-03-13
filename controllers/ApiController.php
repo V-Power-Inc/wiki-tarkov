@@ -33,10 +33,10 @@ use Yii;
 final class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_LIST       = 'list';
-    const ACTION_ITEM       = 'item';
-    const ACTION_SEARCH     = 'search';
-    const ACTION_GET_GRAPHS = 'get-graphs';
+    public const ACTION_LIST       = 'list';
+    public const ACTION_ITEM       = 'item';
+    public const ACTION_SEARCH     = 'search';
+    public const ACTION_GET_GRAPHS = 'get-graphs';
 
     /**
      * Метод рендерит главную страницу API справочника
@@ -184,7 +184,7 @@ final class ApiController extends AdvancedController
         $form_model = new ApiForm();
 
         /** Сетапим пагинацию для дефолтной страницы с лутом */
-        $data = new PaginationService($items, PaginationService::defaultPageSize);
+        $data = new PaginationService($items);
 
         /** Рендерим вьюху */
         return $this->render(static::ACTION_LIST, [

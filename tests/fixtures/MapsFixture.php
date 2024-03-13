@@ -20,5 +20,5 @@ class MapsFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Maps';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'maps';
+    public const TABLE_NAME = 'maps';
 }

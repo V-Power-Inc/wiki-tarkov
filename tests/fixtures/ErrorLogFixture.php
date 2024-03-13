@@ -20,5 +20,5 @@ class ErrorLogFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\ErrorLog';
 
     /** @var string - Имя таблицы */
-    const TABLE_NAME = 'error_log';
+    public const TABLE_NAME = 'error_log';
 }

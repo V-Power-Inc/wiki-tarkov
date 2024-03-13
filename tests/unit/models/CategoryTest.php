@@ -12,6 +12,7 @@ use app\models\Category;
 use app\tests\fixtures\CategoryFixture;
 use app\tests\fixtures\ItemsFixture;
 use app\common\helpers\validators\StringValidator;
+use UnitTester;
 
 /**
  * UNIT тестирование Active Record модели категорий для справочника лута
@@ -24,10 +25,8 @@ use app\common\helpers\validators\StringValidator;
  */
 class CategoryTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

@@ -22,19 +22,5 @@ class AdvancedController extends Controller
     use ControllerRoutesTrait;
 
     /** @var string - Параметр ID */
-    const PARAM_ID = 'id';
-
-    /**
-     * Обработчик ошибок - отображает статусы ответа сервера
-     *
-     * @return array
-     */
-    public function actions(): array
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
+    public const PARAM_ID = 'id';
 }

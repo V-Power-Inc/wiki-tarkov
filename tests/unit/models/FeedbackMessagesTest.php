@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\FeedbackMessages;
 use app\common\helpers\validators\StringValidator;
 use app\tests\fixtures\FeedbackMessagesFixture;
+use UnitTester;
 
 /**
  * Unit тесты раздела обратной связи
@@ -23,10 +24,8 @@ use app\tests\fixtures\FeedbackMessagesFixture;
  */
 class FeedbackMessagesTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()

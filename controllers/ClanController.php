@@ -29,13 +29,13 @@ use Yii;
 final class ClanController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_INDEX      = 'index';
-    const ACTION_ADDCLAN    = 'add-clan';
-    const ACTION_SAVE       = 'save';
-    const ACTION_CLANSEARCH = 'clansearch';
+    public const ACTION_INDEX      = 'index';
+    public const ACTION_ADDCLAN    = 'add-clan';
+    public const ACTION_SAVE       = 'save';
+    public const ACTION_CLANSEARCH = 'clansearch';
 
     /*** Константа, количество заявок для обработки в день ***/
-    const PARAM_TICKETS_DAY_LIMIT = 10;
+    public const PARAM_TICKETS_DAY_LIMIT = 10;
 
     /**
      * Рендерим страницу списка кланов

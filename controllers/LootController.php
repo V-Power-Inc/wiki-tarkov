@@ -28,10 +28,10 @@ use app\common\services\PaginationService;
 final class LootController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_MAINLOOT  = 'mainloot';
-    const ACTION_CATEGORY  = 'category';
-    const ACTION_QUESTLOOT = 'questloot';
-    const ACTION_LOOTJSON  = 'lootjson';
+    public const ACTION_MAINLOOT  = 'mainloot';
+    public const ACTION_CATEGORY  = 'category';
+    public const ACTION_QUESTLOOT = 'questloot';
+    public const ACTION_LOOTJSON  = 'lootjson';
 
     /**
      * Массив поведения контроллера

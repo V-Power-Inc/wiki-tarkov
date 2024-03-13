@@ -20,29 +20,29 @@ namespace app\common\constants\api;
 final class Api
 {
     /** @var string - Константа, ключ до массива с данными от API (Общий для всех данных, что возвращает API) */
-    const ATTR_DATA = 'data';
+    public const ATTR_DATA = 'data';
 
     /** @var string - Константа, ключ до массив с данными о луте от API (Обработка данных о луте) */
-    const ATTR_ITEMS = 'items';
+    public const ATTR_ITEMS = 'items';
 
     /** @var string - Константа, ключ до массива с данными о квестах от API (Обработка данных о квестах) */
-    const ATTR_TASKS = 'tasks';
+    public const ATTR_TASKS = 'tasks';
 
     /** @var string - Константа, ключ до массива карт на которых обитают боссы (Обработка данных о боссах) */
-    const ATTR_MAPS = 'maps';
+    public const ATTR_MAPS = 'maps';
 
     /** @var string - Константа, ключ до названия локации из API (Обработка данных о боссах) */
-    const ATTR_MAP_NAME = 'name';
+    public const ATTR_MAP_NAME = 'name';
 
     /** @var string - Константа, ключ до массива боссов из API (Обработка данных о боссах) */
-    const ATTR_BOSSES = 'bosses';
+    public const ATTR_BOSSES = 'bosses';
 
     /** @var string - Константа, ключ до название предмета из API (Обработка данных о луте) */
-    const ATTR_ITEM_NAME = 'name';
+    public const ATTR_ITEM_NAME = 'name';
 
     /** @var string - Константа, ключ до нормализованного названия предмета из API (Обработка данных о луте) */
-    const ATTR_NORMALIZED_ITEM_NAME = 'normalizedName';
+    public const ATTR_NORMALIZED_ITEM_NAME = 'normalizedName';
 
     /** @var string - Констнта, ID предмета для его обновления в БД с помощью API (Обработка данных о луте) */
-    const ATTR_ITEM_ID = 'id';
+    public const ATTR_ITEM_ID = 'id';
 }

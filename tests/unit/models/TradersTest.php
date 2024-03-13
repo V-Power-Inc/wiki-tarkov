@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\Traders;
 use app\tests\fixtures\TradersFixture;
 use app\common\helpers\validators\StringValidator;
+use UnitTester;
 
 /**
  * Class TradersTest
@@ -21,10 +22,8 @@ use app\common\helpers\validators\StringValidator;
  */
 class TradersTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

@@ -12,6 +12,7 @@ use app\models\Catskills;
 use app\tests\fixtures\CatskillsFixture;
 use app\tests\fixtures\SkillsFixture;
 use app\common\helpers\validators\StringValidator;
+use UnitTester;
 
 /**
  * UNIT тестирование Active Record модели категорий для справочника умений
@@ -24,10 +25,8 @@ use app\common\helpers\validators\StringValidator;
  */
 class CatskillsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

@@ -26,10 +26,10 @@ use yii\db\Exception;
 final class JsondataService
 {
     /** @var string - Ключ массива результирующих значений для массива данных */
-    const ATTR_VALUE = 'value';
+    private const ATTR_VALUE = 'value';
 
     /** @var string - Ключ массива title для результирующих данных массивов */
-    const ATTR_TITLE = 'title';
+    private const ATTR_TITLE = 'title';
 
     /**
      * Метод вытаскивает необходимые названия ключей по параметру

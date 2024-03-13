@@ -16,14 +16,14 @@ namespace app\common\models\tasks;
  */
 final class StartRewardsResult
 {
-    /** @var RewardsItem[] - Массив с предметами для вы */
+    /** @var RewardsItem[] - Массив с предметами для выдачи награды */
     public $_items;
 
     /** @var string - Ключ массива до данных с предметов */
-    const ITEM = 'item';
+    private const ITEM = 'item';
 
     /** @var string - Ключ массива до данных с количество предметов */
-    const COUNT = 'count';
+    private const COUNT = 'count';
 
     /**
      * В конструкторе сетапим данные о предметах, необходимых для выполнения задания, если массив прилетел
@@ -44,19 +44,19 @@ final class StartRewardsResult
                 $model = new RewardsItem();
 
                 /** Сетапим название предмета */
-                $model->name = $item[static::ITEM]['name'];
+                $model->name = $item[self::ITEM]['name'];
 
                 /** Сетапим описание предмета */
-                $model->description = $item[static::ITEM]['description'];
+                $model->description = $item[self::ITEM]['description'];
 
                 /** Сетапим иконку предмета */
-                $model->iconLink = $item[static::ITEM]['iconLink'];
+                $model->iconLink = $item[self::ITEM]['iconLink'];
 
                 /** Сетапим инспектирующее изображение предмета */
-                $model->inspectImageLink = $item[static::ITEM]['inspectImageLink'];
+                $model->inspectImageLink = $item[self::ITEM]['inspectImageLink'];
 
                 /** Сетапим необходимое количество предметов */
-                $model->count = $item[static::COUNT];
+                $model->count = $item[self::COUNT];
 
                 /** Добавляем новый объект с данными в массив объектов для результирующей выборки */
                 $this->_items[] = $model;

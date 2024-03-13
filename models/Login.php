@@ -17,30 +17,26 @@ use Yii;
 class Login extends Model
 {
     /** @var string - Название текущего класса */
-    const CLASS_NAME = 'Login';
+    public const CLASS_NAME = 'Login';
 
     /** @var string - Атрибут модели email */
     public $email;
-    const ATTR_EMAIL = 'email';
+    public const ATTR_EMAIL = 'email';
 
     /** @var string - Атрибут модели пароль */
     public $password;
-    const ATTR_PASSWORD = 'password';
+    public const ATTR_PASSWORD = 'password';
 
     /** @var string - Атрибут модели - запомнить пользователя или нет */
     public $rememberMe;
-    const ATTR_REMEMBER_ME = 'rememberMe';
+    public const ATTR_REMEMBER_ME = 'rememberMe';
 
     /** @var Admins - Объект пользователя */
     private $_user = false;
 
     /** @var string - Атрибут модели - капча */
     public $reCaptcha = false;
-    const ATTR_RECAPTCHA = 'reCaptcha';
-
-    /** @var string - Константы для рекапчи, прописал их здесь, чтобы не городить класс - прослойку ради этого */
-    const ATTR_RECAPTCHA_SECRET = 'secret';
-    const ATTR_RECAPTCHA_UNCHECKED_MESSAGE = 'uncheckedMessage';
+    public const ATTR_RECAPTCHA = 'reCaptcha';
 
     /**
      * Массив валидаций текущей модели
@@ -105,8 +101,8 @@ class Login extends Model
      * @param $attribute
      * @param $params
      */
-    public function validatePassword($attribute, $params){
-
+    public function validatePassword($attribute, $params)
+    {
         /** Если при валидации модели нет ошибок */
         if (!$this->hasErrors()){
 
@@ -117,14 +113,14 @@ class Login extends Model
             if (!$user || ($user->password !== sha1($this->password))){
 
                /** Возвращаем во вьюху сообщение с ошибкой */
-               return $this->addError($attribute, 'Логин или пароль, введены не верно');
+               $this->addError($attribute, 'Логин или пароль, введены не верно');
             }
 
             /** Если посетитель был забанен */
             if ($user->banned === Admins::ATTR_BANNED_TRUE) {
 
                 /** Выводим сообщение об этом */
-                return $this->addError($attribute, 'Пользователь деактивирован');
+                $this->addError($attribute, 'Пользователь деактивирован');
             }
         }
     }

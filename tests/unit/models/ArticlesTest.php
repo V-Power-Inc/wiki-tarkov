@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\Articles;
 use app\common\helpers\validators\StringValidator;
 use app\tests\fixtures\ArticlesFixture;
+use UnitTester;
 
 /**
  * Unit тесты полезных статей
@@ -23,10 +24,8 @@ use app\tests\fixtures\ArticlesFixture;
  */
 class ArticlesTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()

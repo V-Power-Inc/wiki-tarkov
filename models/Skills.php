@@ -32,27 +32,24 @@ use yii\db\ActiveRecord;
 class Skills extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID            = 'id';
-    const ATTR_TITLE         = 'title';
-    const ATTR_CATEGORY      = 'category';
-    const ATTR_URL           = 'url';
-    const ATTR_ENABLED       = 'enabled';
-    const ATTR_DESCRIPTION   = 'description';
-    const ATTR_KEYWORDS      = 'keywords';
-    const ATTR_PREVIEW       = 'preview';
-    const ATTR_CONTENT       = 'content';
-    const ATTR_SHORT_DESC    = 'short_desc';
-
-    /** Константы связей таблицы */
-    const RELATION_CATEGORY0 = 'category0';
+    public const ATTR_ID            = 'id';
+    public const ATTR_TITLE         = 'title';
+    public const ATTR_CATEGORY      = 'category';
+    public const ATTR_URL           = 'url';
+    public const ATTR_ENABLED       = 'enabled';
+    public const ATTR_DESCRIPTION   = 'description';
+    public const ATTR_KEYWORDS      = 'keywords';
+    public const ATTR_PREVIEW       = 'preview';
+    public const ATTR_CONTENT       = 'content';
+    public const ATTR_SHORT_DESC    = 'short_desc';
 
     /** @var string $file - Переменная файла превьюшки null */
     public $file;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
     
     /**
      * @inheritdoc

@@ -25,19 +25,19 @@ use yii\db\ActiveRecord;
 class Tasks extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID           = 'id';
-    const ATTR_QUEST        = 'quest';
-    const ATTR_TRADER_NAME  = 'trader_name';
-    const ATTR_TRADER_ICON  = 'trader_icon';
-    const ATTR_JSON         = 'json';
-    const ATTR_DATE_CREATE  = 'date_create';
-    const ATTR_ACTIVE       = 'active';
-    const ATTR_OLD          = 'old';
-    const ATTR_URL          = 'url';
+    public const ATTR_ID           = 'id';
+    public const ATTR_QUEST        = 'quest';
+    public const ATTR_TRADER_NAME  = 'trader_name';
+    public const ATTR_TRADER_ICON  = 'trader_icon';
+    public const ATTR_JSON         = 'json';
+    public const ATTR_DATE_CREATE  = 'date_create';
+    public const ATTR_ACTIVE       = 'active';
+    public const ATTR_OLD          = 'old';
+    public const ATTR_URL          = 'url';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /**
      * Метод возвращающий имя таблицы

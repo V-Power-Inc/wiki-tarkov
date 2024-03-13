@@ -21,10 +21,10 @@ use yii\helpers\Json;
 final class TasksResult
 {
     /** @var TaskItem[] - Массив объектов квестов TaskItem */
-    public $_items = [];
+    public array $_items = [];
 
     /** @var string - Ключ поля до Json объекта */
-    const JSON = 'json';
+    private const JSON = 'json';
 
     /**
      * Конструктор для возвращения структурированного массива объектов о квестах

@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\ApiSearchLogs;
 use app\common\helpers\validators\StringValidator;
 use app\tests\fixtures\ApiSearchLogsFixture;
+use UnitTester;
 
 /**
  * Unit тесты логов API
@@ -23,10 +24,8 @@ use app\tests\fixtures\ApiSearchLogsFixture;
  */
 class ApiSearchLogsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()

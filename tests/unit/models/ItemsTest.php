@@ -12,6 +12,7 @@ use app\models\Items;
 use app\tests\fixtures\CategoryFixture;
 use app\common\helpers\validators\StringValidator;
 use app\tests\fixtures\ItemsFixture;
+use UnitTester;
 
 /**
  * UNIT тестирование модели справочника лута
@@ -21,10 +22,8 @@ use app\tests\fixtures\ItemsFixture;
  */
 class ItemsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

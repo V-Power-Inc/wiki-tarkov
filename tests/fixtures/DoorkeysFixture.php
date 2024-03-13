@@ -16,5 +16,5 @@ class DoorkeysFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Doorkeys';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'doorkeys';
+    public const TABLE_NAME = 'doorkeys';
 }

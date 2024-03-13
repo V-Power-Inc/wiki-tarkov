@@ -28,25 +28,25 @@ use Yii;
 class Category extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID              = 'id';
-    const ATTR_TITLE           = 'title';
-    const ATTR_PARENT_CATEGORY = 'parent_category';
-    const ATTR_URL             = 'url';
-    const ATTR_CONTENT         = 'content';
-    const ATTR_DESCRIPTION     = 'description';
-    const ATTR_KEYWORDS        = 'keywords';
-    const ATTR_ENABLED         = 'enabled';
-    const ATTR_SORTIR          = 'sortir';
+    public const ATTR_ID              = 'id';
+    public const ATTR_TITLE           = 'title';
+    public const ATTR_PARENT_CATEGORY = 'parent_category';
+    public const ATTR_URL             = 'url';
+    public const ATTR_CONTENT         = 'content';
+    public const ATTR_DESCRIPTION     = 'description';
+    public const ATTR_KEYWORDS        = 'keywords';
+    public const ATTR_ENABLED         = 'enabled';
+    public const ATTR_SORTIR          = 'sortir';
 
     /** Константы связей таблицы */
-    const RELATION_ITEMS       = 'items';
+    public const RELATION_ITEMS       = 'items';
 
     /** @var string - Константа, связь до родительской категории */
-    const RELATION_PARENTCAT   = 'parentcat';
+    public const RELATION_PARENTCAT   = 'parentcat';
 
     /** Константы bool значений */
-    const TRUE = 1;
-    const FALSE = 0;
+    public const TRUE = 1;
+    public const FALSE = 0;
 
     /**
      * @inheritdoc

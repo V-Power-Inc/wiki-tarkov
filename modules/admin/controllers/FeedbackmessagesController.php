@@ -20,13 +20,6 @@ use Yii;
  */
 final class FeedbackmessagesController extends AdminController implements CrudInterface
 {
-    /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_VIEW   = 'view';
-    const ACTION_CREATE = 'create';
-    const ACTION_UPDATE = 'update';
-    const ACTION_DELETE = 'delete';
-
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array
@@ -74,24 +67,15 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
 
     /** Создание через CRUD в этом кейсе не нужно */
     public function actionCreate()
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /** Апдейт через CRUD в этом кейсе не нужно */
     public function actionUpdate(int $id)
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /** Удаление через CRUD в этом кейсе не нужно */
     public function actionDelete(int $id)
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /**
      * Finds the FeedbackMessages model based on its primary key value.

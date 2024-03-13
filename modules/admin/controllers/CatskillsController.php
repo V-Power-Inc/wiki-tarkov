@@ -17,13 +17,6 @@ use app\common\controllers\AdminController;
  */
 final class CatskillsController extends AdminController implements CrudInterface
 {
-    /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_VIEW   = 'view';
-    const ACTION_CREATE = 'create';
-    const ACTION_UPDATE = 'update';
-    const ACTION_DELETE = 'delete';
-
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array

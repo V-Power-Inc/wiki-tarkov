@@ -21,8 +21,8 @@ use Yii;
 final class ItemController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_DETAILLOOT = 'detailloot';
-    const ACTION_PREVIEWLOOT = 'previewloot';
+    public const ACTION_DETAILLOOT = 'detailloot';
+    public const ACTION_PREVIEWLOOT = 'previewloot';
 
     /** CSRF валидация POST запросов методов этого контроллера включена */
     public $enableCsrfValidation;

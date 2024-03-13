@@ -24,17 +24,17 @@ use yii\db\ActiveRecord;
 class Barters extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID           = 'id';
-    const ATTR_TITLE        = 'title';
-    const ATTR_SITE_TITLE   = 'site_title';
-    const ATTR_TRADER_GROUP = 'trader_group';
-    const ATTR_CONTENT      = 'content';
-    const ATTR_DATE_CREATE  = 'date_create';
-    const ATTR_ENABLED      = 'enabled';
+    public const ATTR_ID           = 'id';
+    public const ATTR_TITLE        = 'title';
+    public const ATTR_SITE_TITLE   = 'site_title';
+    public const ATTR_TRADER_GROUP = 'trader_group';
+    public const ATTR_CONTENT      = 'content';
+    public const ATTR_DATE_CREATE  = 'date_create';
+    public const ATTR_ENABLED      = 'enabled';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /**
      * {@inheritdoc}

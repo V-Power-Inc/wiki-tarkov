@@ -20,5 +20,5 @@ class FeedbackMessagesFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\FeedbackMessages';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'feedback_messages';
+    public const TABLE_NAME = 'feedback_messages';
 }

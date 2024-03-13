@@ -8,6 +8,7 @@
 
 namespace app\common\services;
 
+use app\common\interfaces\ResponseStatusInterface;
 use app\models\ErrorLog;
 
 /**
@@ -28,7 +29,7 @@ class LogService
      *
      * @return bool
      */
-    public static function saveErrorData(string $url, string $type, string $description, int $error_code = 500): bool
+    public static function saveErrorData(string $url, string $type, string $description, int $error_code = ResponseStatusInterface::SERVER_ERROR_CODE): bool
     {
         /** Создаем новый объект модели ошибок и логов */
         $model = new ErrorLog();

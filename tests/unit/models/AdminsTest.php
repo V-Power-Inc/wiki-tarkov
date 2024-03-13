@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\Admins;
 use app\tests\fixtures\AdminsFixture;
 use app\common\helpers\validators\StringValidator;
+use UnitTester;
 
 /**
  * Unit тесты для таблицы с пользователями сайта (Админами)
@@ -23,10 +24,8 @@ use app\common\helpers\validators\StringValidator;
  */
 class AdminsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

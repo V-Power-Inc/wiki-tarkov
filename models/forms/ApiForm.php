@@ -24,11 +24,11 @@ class ApiForm extends Model
 {
     /** @var string - имя предмета */
     public $item_name;
-    const ATTR_ITEM_NAME = 'item_name';
+    public const ATTR_ITEM_NAME = 'item_name';
 
     /** @var string - Переменная для рекапчи false */
     public $recaptcha = false;
-    const ATTR_RECAPTCHA = 'recaptcha';
+    public const ATTR_RECAPTCHA = 'recaptcha';
 
     /**
      * Правила валидации модели

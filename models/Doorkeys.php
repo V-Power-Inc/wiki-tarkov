@@ -32,32 +32,32 @@ use app\common\helpers\validators\StringValidator;
 class Doorkeys extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID           = 'id';
-    const ATTR_NAME         = 'name';
-    const ATTR_MAPGROUP     = 'mapgroup';
-    const ATTR_CONTENT      = 'content';
-    const ATTR_ACTIVE       = 'active';
-    const ATTR_DATE_CREATE  = 'date_create';
-    const ATTR_PREVIEW      = 'preview';
-    const ATTR_SHORTCONTENT = 'shortcontent';
-    const ATTR_URL          = 'url';
-    const ATTR_DESCRIPTION  = 'description';
-    const ATTR_KEYWORDS     = 'keywords';
+    public const ATTR_ID           = 'id';
+    public const ATTR_NAME         = 'name';
+    public const ATTR_MAPGROUP     = 'mapgroup';
+    public const ATTR_CONTENT      = 'content';
+    public const ATTR_ACTIVE       = 'active';
+    public const ATTR_DATE_CREATE  = 'date_create';
+    public const ATTR_PREVIEW      = 'preview';
+    public const ATTR_SHORTCONTENT = 'shortcontent';
+    public const ATTR_URL          = 'url';
+    public const ATTR_DESCRIPTION  = 'description';
+    public const ATTR_KEYWORDS     = 'keywords';
 
     /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** @var string $doorkey - Переменная doorkey */
     public $doorkey;
-    const DOORKEY = 'doorkey';
+    public const DOORKEY = 'doorkey';
 
     /** Константы True/False для различных поисков */
     const TRUE  = 1;
     const FALSE = 0;
 
     /** @var string Заглушка имени форм */
-    const formName = 'Doorkeys';
+    public const formName = 'Doorkeys';
     
     /**
      * @inheritdoc

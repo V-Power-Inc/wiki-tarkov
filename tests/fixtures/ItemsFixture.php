@@ -10,4 +10,7 @@ namespace app\tests\fixtures;
 class ItemsFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Items';
     public $depends = ['app\tests\fixtures\CategoryFixture'];
+
+    /** @var string Имя таблицы */
+    public const TABLE_NAME = 'items';
 }

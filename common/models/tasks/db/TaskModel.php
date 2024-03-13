@@ -27,34 +27,34 @@ final class TaskModel extends Model
 {
     /** @var string - Название квеста */
     public $quest;
-    const ATTR_QUEST = 'quest';
+    private const ATTR_QUEST = 'quest';
 
     /** @var string - Имя торговца */
     public $trader_name;
-    const ATTR_TRADER_NAME = 'trader_name';
+    private const ATTR_TRADER_NAME = 'trader_name';
 
     /** @var string - Иконка торговца */
     public $trader_icon;
-    const ATTR_TRADER_ICON = 'trader_icon';
+    private const ATTR_TRADER_ICON = 'trader_icon';
 
     /** @var string - Строка с JSON данными о квесте (Содержит в себе полный набор данных) */
     public $json;
-    const ATTR_JSON = 'json';
+    private const ATTR_JSON = 'json';
 
     /** @var int - Флаг активности записи (0 - не активна / 1 - активна), по-умолчанию активна */
     public $active = 1;
-    const ATTR_ACTIVE = 'active';
+    private const ATTR_ACTIVE = 'active';
 
     /** @var int - Флаг устаревания записи (0 - актуальна / 1 - не актуальна), по-умолчанию актуальна */
     public $old = 0;
-    const ATTR_OLD = 'old';
+    private const ATTR_OLD = 'old';
 
     /** @var string - Url до квестов торговца */
     public $url;
-    const ATTR_URL = 'url';
+    private const ATTR_URL = 'url';
 
     /** @var string - Ключ массива с информацией о торговце */
-    const TRADER = 'trader';
+    private const TRADER = 'trader';
 
     /**
      * В конструкторе сетапим атрибутам текущей модели данные о квесте, если прилетел массив
@@ -73,16 +73,16 @@ final class TaskModel extends Model
             $this->quest = $task['name'];
 
             /** Сетапим имя торговца атрибуту текущей модели */
-            $this->trader_name = $task[static::TRADER]['name'];
+            $this->trader_name = $task[self::TRADER]['name'];
 
             /** Сетапим иконку торговца атрибуту текущей модели */
-            $this->trader_icon = $task[static::TRADER]['imageLink'];
+            $this->trader_icon = $task[self::TRADER]['imageLink'];
 
             /** Сетапим полный JSON с данными атрибуту текущей модели */
             $this->json = Json::encode($task);
 
             /** Сетапим URL до квестов конкретного торговца */
-            $this->url = TradersService::takeApiTasks($task[static::TRADER]['name']);
+            $this->url = TradersService::takeApiTasks($task[self::TRADER]['name']);
         }
 
         parent::__construct($config);
@@ -106,23 +106,23 @@ final class TaskModel extends Model
     public function rules(): array
     {
         return [
-            [static::ATTR_QUEST, RequiredValidator::class],
-            [static::ATTR_QUEST, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_QUEST, RequiredValidator::class],
+            [self::ATTR_QUEST, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_TRADER_NAME, RequiredValidator::class],
-            [static::ATTR_TRADER_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_TRADER_NAME, RequiredValidator::class],
+            [self::ATTR_TRADER_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_TRADER_ICON, RequiredValidator::class],
-            [static::ATTR_TRADER_ICON, StringValidator::class],
+            [self::ATTR_TRADER_ICON, RequiredValidator::class],
+            [self::ATTR_TRADER_ICON, StringValidator::class],
 
-            [static::ATTR_JSON, RequiredValidator::class],
-            [static::ATTR_JSON, StringValidator::class],
+            [self::ATTR_JSON, RequiredValidator::class],
+            [self::ATTR_JSON, StringValidator::class],
 
-            [static::ATTR_ACTIVE, IntegerValidator::class],
+            [self::ATTR_ACTIVE, IntegerValidator::class],
 
-            [static::ATTR_OLD, IntegerValidator::class],
+            [self::ATTR_OLD, IntegerValidator::class],
 
-            [static::ATTR_URL, StringValidator::class]
+            [self::ATTR_URL, StringValidator::class]
         ];
     }
 

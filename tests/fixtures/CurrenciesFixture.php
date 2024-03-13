@@ -16,5 +16,5 @@ class CurrenciesFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Currencies';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'currencies';
+    public const TABLE_NAME = 'currencies';
 }

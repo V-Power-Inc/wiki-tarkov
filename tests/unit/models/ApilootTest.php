@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\ApiLoot;
 use app\tests\fixtures\ApilootFixture;
 use app\common\helpers\validators\StringValidator;
+use UnitTester;
 
 /**
  * Unit тесты для API страниц актуального лута
@@ -23,10 +24,8 @@ use app\common\helpers\validators\StringValidator;
  */
 class ApilootTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()

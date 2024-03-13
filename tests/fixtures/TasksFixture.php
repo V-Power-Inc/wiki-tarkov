@@ -8,5 +8,5 @@ class TasksFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Tasks';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'tasks';
+    public const TABLE_NAME = 'tasks';
 }

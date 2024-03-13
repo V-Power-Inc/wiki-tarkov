@@ -37,27 +37,30 @@ use Yii;
 final class ApiService implements ApiInterface
 {
     /** @var array - Атрибут с заголовками запроса */
-    private $headers = ['Content-Type: application/json'];
+    private array $headers = ['Content-Type: application/json'];
+
+    /** @var ApiQueries - Объект класса, что будет формировать нам строку запросу в атрибут текущего класса */
+    private ApiQueries $query_service;
 
     /** @var string - Атрибут с телом запроса */
-    private $query = '';
+    private string $query = '';
 
     /** @var string - Атрибут с основным адресом для получения API */
-    private $api_url = 'https://api.tarkov.dev/graphql';
+    private string $api_url = 'https://api.tarkov.dev/graphql';
 
     /** @var string - Атрибут с видом запроса (GET,POST и т.д.) */
-    private $method = 'POST';
+    private string $method = 'POST';
 
     /**
      * Конструктор при инициализации класса задает атрибуту класса объет APIQueries для применения
-     * различных запросов к API
+     * последующих сетапов различных запросов к API
      *
      * ApiService constructor.
      */
     public function __construct()
     {
         /** Сетапим атрибуту класса - объект APIQueries для сетапа запросов к API */
-        $this->query = new ApiQueries();
+        $this->query_service = new ApiQueries();
     }
 
     /**
@@ -78,7 +81,7 @@ final class ApiService implements ApiInterface
             $this->removeOldBosses();
 
             /** Задаем тело запроса для получения информации о боссах */
-            $this->query = $this->query->setBossesQuery();
+            $this->query = $this->query_service->setBossesQuery();
 
             /** Присваиваем результат запроса переменной */
             $content = $this->getApiData();
@@ -251,7 +254,7 @@ final class ApiService implements ApiInterface
     public function setItemQuery(string $itemName): void
     {
         /** Задаем тело запроса для получения информации о предметах */
-        $this->query = $this->query->setItemQuery($itemName);
+        $this->query = $this->query_service->setItemQuery($itemName);
     }
 
     /**
@@ -261,7 +264,7 @@ final class ApiService implements ApiInterface
     private function setTasksQuery(): void
     {
         /** Задаем тело запроса для получения информации о квестах */
-        $this->query = $this->query->setTasksQuery();
+        $this->query = $this->query_service->setTasksQuery();
     }
 
     /**
@@ -578,7 +581,7 @@ final class ApiService implements ApiInterface
     private function setGraphsItemQuery(string $id): bool
     {
         /** Запрос для получения информацию по графику конкретного предмета (Последние сделки) */
-        $this->query = $this->query->setGraphsItemQuery($id);
+        $this->query = $this->query_service->setGraphsItemQuery($id);
 
         /** Возвращаем bool результат */
         return true;
@@ -632,7 +635,7 @@ final class ApiService implements ApiInterface
         $item_id = Json::decode($item->json)[Api::ATTR_ITEM_ID];
 
         /** Сетапим запрос API - для обновления данных о предмете */
-        $this->query = $this->query->setSingleItemQuery($item_id);
+        $this->query = $this->query_service->setSingleItemQuery($item_id);
 
         /** Сетапим данные из API - переменной */
         $content = $this->getApiData();

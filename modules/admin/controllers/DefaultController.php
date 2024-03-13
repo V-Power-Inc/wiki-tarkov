@@ -12,9 +12,9 @@ use app\models\Login;
 final class DefaultController extends AdminController
 {
     /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_LOGIN  = 'login';
-    const ACTION_LOGOUT = 'logout';
+    public const ACTION_INDEX  = 'index';
+    public const ACTION_LOGIN  = 'login';
+    public const ACTION_LOGOUT = 'logout';
 
     /**
      * Рендер главной страницы админки

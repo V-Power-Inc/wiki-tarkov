@@ -30,26 +30,26 @@ use Yii;
 class Clans extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID          = 'id';
-    const ATTR_TITLE       = 'title';
-    const ATTR_DESCRIPTION = 'description';
-    const ATTR_PREVIEW     = 'preview';
-    const ATTR_LINK        = 'link';
-    const ATTR_DATE_CREATE = 'date_create';
-    const ATTR_DATE_UPDATE = 'date_update';
-    const ATTR_MODERATED   = 'moderated';
+    public const ATTR_ID          = 'id';
+    public const ATTR_TITLE       = 'title';
+    public const ATTR_DESCRIPTION = 'description';
+    public const ATTR_PREVIEW     = 'preview';
+    public const ATTR_LINK        = 'link';
+    public const ATTR_DATE_CREATE = 'date_create';
+    public const ATTR_DATE_UPDATE = 'date_update';
+    public const ATTR_MODERATED   = 'moderated';
 
     /** @var string $searchclan - Переменная для поиска клана */
     public $searchclan;
-    const SEARCHCLAN = 'searchclan';
+    public const SEARCHCLAN = 'searchclan';
 
     /** @var string $file - Переменная файла превьюшки */
     public $file;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** Константы bool значений */
-    const TRUE = 1;
-    const FALSE = 0;
+    public const TRUE = 1;
+    public const FALSE = 0;
 
     /**
      * {@inheritdoc}

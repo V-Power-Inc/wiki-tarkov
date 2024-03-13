@@ -24,18 +24,18 @@ use yii\web\HttpException;
 final class MapsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_LOCATIONS         = 'locations';
-    const ACTION_ZAVOD             = 'zavod';
-    const ACTION_FOREST            = 'forest';
-    const ACTION_TAMOJNYA          = 'tamojnya';
-    const ACTION_BEREG             = 'bereg';
-    const ACTION_RAZVYAZKA         = 'razvyazka';
-    const ACTION_LABORATORYTERRA   = 'laboratoryterra';
-    const ACTION_REZERV            = 'rezerv';
-    const ACTION_LIGHTHOUSE        = 'lighthouse';
-    const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
-    const ACTION_EPICENTER         = 'epicenter';
-    const ACTION_GET_MARKERS       = 'get-markers';
+    public const ACTION_LOCATIONS         = 'locations';
+    public const ACTION_ZAVOD             = 'zavod';
+    public const ACTION_FOREST            = 'forest';
+    public const ACTION_TAMOJNYA          = 'tamojnya';
+    public const ACTION_BEREG             = 'bereg';
+    public const ACTION_RAZVYAZKA         = 'razvyazka';
+    public const ACTION_LABORATORYTERRA   = 'laboratoryterra';
+    public const ACTION_REZERV            = 'rezerv';
+    public const ACTION_LIGHTHOUSE        = 'lighthouse';
+    public const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
+    public const ACTION_EPICENTER         = 'epicenter';
+    public const ACTION_GET_MARKERS       = 'get-markers';
 
     /** @var string - GET параметр локации */
     const PARAM_MAP = 'map';

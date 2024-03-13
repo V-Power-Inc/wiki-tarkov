@@ -56,28 +56,28 @@ final class TaskItem
     public $finishRewards;
 
     /** @var string - Ключ массива с информацией о торговце */
-    const TRADER = 'trader';
+    private const TRADER = 'trader';
 
     /** @var string - Ключ массива с информацией о карте */
-    const MAP = 'map';
+    private const MAP = 'map';
 
     /** @var string - Ключ массива с информацией о целях задачи */
-    const OBJECTIVES = 'objectives';
+    private const OBJECTIVES = 'objectives';
 
     /** @var string - Ключ массива с информацией о ключах */
-    const KEYS = 'neededKeys';
+    private const KEYS = 'neededKeys';
 
     /** @var string - Ключ массива с информацией о необходимых выполненных заданиях */
-    const TASK_REQUIREMENTS = 'taskRequirements';
+    private const TASK_REQUIREMENTS = 'taskRequirements';
 
     /** @var string - Ключ массива с информацией о стартовых вещах, необходимых для выполнения квеста */
-    const START_REWARDS = 'startRewards';
+    private const START_REWARDS = 'startRewards';
 
     /** @var string - Ключ массива с информацией о вещах, которые дадут в награду, за выполнение квеста */
-    const FINISH_REWARDS = 'finishRewards';
+    private const FINISH_REWARDS = 'finishRewards';
 
     /** @var string - Ключ массива до предметов, выдаваемых за выполнение квеста или необходимых для его завершения */
-    const ITEMS = 'items';
+    private const ITEMS = 'items';
 
     /**
      * Сетапим данные о квесте атрибутам текущей модели через конструктор

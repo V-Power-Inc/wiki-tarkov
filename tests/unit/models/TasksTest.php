@@ -11,6 +11,7 @@ namespace app\tests;
 use app\models\Tasks;
 use app\common\helpers\validators\StringValidator;
 use app\tests\fixtures\TasksFixture;
+use UnitTester;
 
 /**
  * Unit тесты квестов из API
@@ -23,10 +24,8 @@ use app\tests\fixtures\TasksFixture;
  */
 class TasksTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()

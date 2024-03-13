@@ -7,8 +7,8 @@
 
 use yii\helpers\Html;
 
+/** Сетапим title в соответствии с именем ошибки */
 $this->title = $name;
-
 ?>
 
 <div class="container">

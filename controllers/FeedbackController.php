@@ -22,7 +22,7 @@ use Yii;
 final class FeedbackController extends AdvancedController
 {
     /** @var string - Константы экшенов */
-    const ACTION_INDEX = 'index';
+    public const ACTION_INDEX = 'index';
 
     /**
      * Рендер страницы с формой обратной связи

@@ -14,6 +14,7 @@ namespace app\common\helpers\validators;
  * Class DefaultValueValidator
  * @package app\common\helpers\validators
  */
-final class DefaultValueValidator extends \yii\validators\DefaultValueValidator {
-    const ATTR_VALUE = 'value';
+final class DefaultValueValidator extends \yii\validators\DefaultValueValidator
+{
+    public const ATTR_VALUE = 'value';
 }
