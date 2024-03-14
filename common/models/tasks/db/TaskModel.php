@@ -86,7 +86,7 @@ final class TaskModel extends Model
                 $this->trader_icon = $task[self::TRADER]['imageLink'];
 
                 /** Сетапим полный JSON с данными атрибуту текущей модели */
-                $this->json = Json::encode($task . 'awerwerwerwre' . '//sd' . [2323] . '232323');
+                $this->json = Json::encode($task);
 
                 /** Сетапим URL до квестов конкретного торговца */
                 $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);

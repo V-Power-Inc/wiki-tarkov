@@ -28,10 +28,10 @@ use app\tests\fixtures\AdminsFixture;
 /**
  * Функциональные тесты для проверки страниц админки
  *
- * Class AdminPagesCest
+ * Class AdminPagesCheckAccessCest
  * @package Tests\Functional
  */
-class AdminPagesCest
+class AdminPagesCheckAccessCest
 {
     /**
      * Фикстуры с пользователями сайта
