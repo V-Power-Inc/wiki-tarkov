@@ -24,7 +24,7 @@ final class DefaultController extends AdminController
     public function actionIndex(): string
     {
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_INDEX);
+        return $this->render(self::ACTION_INDEX);
     }
 
     /** Рендер страницы авторизации **/
@@ -58,7 +58,7 @@ final class DefaultController extends AdminController
         }
 
         /** Рендерим страницу логина */
-        return $this->render(static::ACTION_LOGIN, ['model' => $model]);
+        return $this->render(self::ACTION_LOGIN, ['model' => $model]);
     }
 
     /**

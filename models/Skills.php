@@ -26,6 +26,7 @@ use yii\db\ActiveRecord;
  * @property string $preview
  * @property string $content
  * @property string $short_desc
+ * @property string $date_update
  *
  * @property CatSkills $category0
  */
@@ -42,6 +43,7 @@ class Skills extends ActiveRecord
     public const ATTR_PREVIEW       = 'preview';
     public const ATTR_CONTENT       = 'content';
     public const ATTR_SHORT_DESC    = 'short_desc';
+    public const ATTR_DATE_UPDATE = 'date_update';
 
     /** @var string $file - Переменная файла превьюшки null */
     public $file;

@@ -40,7 +40,7 @@ final class ItemsController extends AdminController implements CrudInterface
         $searchModel = new ItemsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -54,7 +54,7 @@ final class ItemsController extends AdminController implements CrudInterface
      */
     public function actionView($id): string
     {
-        return $this->render(static::ACTION_VIEW, [
+        return $this->render(self::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -69,9 +69,9 @@ final class ItemsController extends AdminController implements CrudInterface
         $model = new Items();
         $model->uploadPreview();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
+            return $this->redirect([self::ACTION_VIEW, self::PARAM_ID => $model->id]);
         } else {
-            return $this->render(static::ACTION_CREATE, [
+            return $this->render(self::ACTION_CREATE, [
                 'model' => $model,
             ]);
         }
@@ -98,9 +98,9 @@ final class ItemsController extends AdminController implements CrudInterface
         $model->trader_group=$tradergroup;
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
+            return $this->redirect([self::ACTION_VIEW, self::PARAM_ID => $model->id]);
         } else {
-            return $this->render(static::ACTION_UPDATE, [
+            return $this->render(self::ACTION_UPDATE, [
                 'model' => $model,
             ]);
         }
@@ -115,7 +115,7 @@ final class ItemsController extends AdminController implements CrudInterface
      */
     public function actionDelete(int $id)
     {
-        return $this->redirect([static::ACTION_INDEX]);
+        return $this->redirect([self::ACTION_INDEX]);
     }
 
     /**

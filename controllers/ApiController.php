@@ -92,7 +92,7 @@ final class ApiController extends AdvancedController
         $form_model = new ApiForm();
 
         /** Рендер страницы со списком предметов - стандартный, без пагинации */
-        return $this->render(static::ACTION_LIST, [
+        return $this->render(self::ACTION_LIST, [
             'form_model' => $form_model,
             'items' => $items
         ]);
@@ -120,7 +120,7 @@ final class ApiController extends AdvancedController
             $api->renewItemData($item);
 
             /** Ренденирг данных */
-            return $this->render(static::ACTION_ITEM, ['item' => $item]);
+            return $this->render(self::ACTION_ITEM, ['item' => $item]);
         }
 
         /** Если в базе нет предмета - редиректим с временным кодом на страницу со списком актуального лута */
@@ -187,7 +187,7 @@ final class ApiController extends AdvancedController
         $data = new PaginationService($items);
 
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_LIST, [
+        return $this->render(self::ACTION_LIST, [
             'items' => $data->items,
             'active_page' => Yii::$app->request->get('page',1),
             'count_pages' => $data->paginator->getPageCount(),

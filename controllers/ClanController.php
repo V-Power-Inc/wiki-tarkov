@@ -54,7 +54,7 @@ final class ClanController extends AdvancedController
         $avialableTickets = self::PARAM_TICKETS_DAY_LIMIT - ClansSearch::getTodayTicketsCount();
 
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'clans' => $clans,
             'avialableTickets' => $avialableTickets,
             'srcclan'          => $srcclan,
@@ -79,7 +79,7 @@ final class ClanController extends AdvancedController
             CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
 
             /** Редиректим на страницу со списком кланов */
-            return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+            return $this->redirect(self::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
         } else { /** Если еще можно подать заявку на регистрацию клана */
 
@@ -87,7 +87,7 @@ final class ClanController extends AdvancedController
             $model = new ClansForm();
 
             /** Рендерим страницу с полями для регистрации клана */
-            return $this->render(static::ACTION_ADDCLAN, ['model' => $model]);
+            return $this->render(self::ACTION_ADDCLAN, ['model' => $model]);
         }
     }
 
@@ -125,7 +125,7 @@ final class ClanController extends AdvancedController
                 CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
 
                 /** Редиректим на страницу со списком кланов */
-                return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                return $this->redirect(self::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
             } else { /** Если клан еще можно зарегистрировать сегодня (Есть свободные тикеты) */
 
@@ -136,7 +136,7 @@ final class ClanController extends AdvancedController
                     CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>");
 
                     /** Редиректим на страницу добавления кланов */
-                    return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                    return $this->redirect(self::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
                 } else { /** Если изображение удалось загрузить */
 
@@ -150,7 +150,7 @@ final class ClanController extends AdvancedController
                         CookieComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>");
 
                         /** Редиректим на страницу со списком кланов */
-                        return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                        return $this->redirect(self::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
 
                     } else { /** Если данные по каким то причинам не смогли сохраниться */
 
@@ -161,7 +161,7 @@ final class ClanController extends AdvancedController
                         CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>");
 
                         /** Редиректим на страницу добавления кланов */
-                        return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+                        return $this->redirect(self::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
                     }
                 }
             }

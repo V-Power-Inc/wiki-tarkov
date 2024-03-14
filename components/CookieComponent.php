@@ -42,7 +42,7 @@ final class CookieComponent
     {
         /** Создаем кукис оверлея и задаем срок истечения 6 часов, в течении этого времени блок overlay будет скрыт у посетителя */
         Yii::$app->response->cookies->add(new Cookie([
-            'name' => static::NAME_OVERLAY,
+            'name' => self::NAME_OVERLAY,
             'value' => 1,
             'expire' => time() + (60 * 60 * 6),
         ]));
@@ -61,7 +61,7 @@ final class CookieComponent
     {
         /** Сетапим кукис на 1 год */
         Yii::$app->response->cookies->add(new Cookie([
-            'name' => static::NAME_DARK_THEME,
+            'name' => self::NAME_DARK_THEME,
             'value' => 1,
             'expire' => time() + 3600 * 24 * 365
         ]));

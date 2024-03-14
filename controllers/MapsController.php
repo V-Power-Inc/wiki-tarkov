@@ -86,10 +86,10 @@ final class MapsController extends AdvancedController
             $params = Yii::$app->request->get();
 
             /** Если не пуст параметр с названием локации */
-            if (!empty($params[static::PARAM_MAP])) {
+            if (!empty($params[self::PARAM_MAP])) {
 
                 /** Возвращаем маркеры по названия таблицы в виде JSON */
-                return MarkersService::takeMarkers($params[static::PARAM_MAP]);
+                return MarkersService::takeMarkers($params[self::PARAM_MAP]);
             }
         }
 

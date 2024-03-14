@@ -53,7 +53,7 @@ final class FeedbackController extends AdvancedController
         $model->reCaptcha = false;
 
         /** Рендерим страницу с формой обратной связи */
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'model' => $model
         ]);
     }

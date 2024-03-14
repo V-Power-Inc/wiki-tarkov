@@ -20,15 +20,15 @@ final class QuestionsSearch extends Questions
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class],
+            [self::ATTR_TITLE, SafeValidator::class],
 
-            [static::ATTR_CONTENT, SafeValidator::class],
+            [self::ATTR_CONTENT, SafeValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class]
+            [self::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 

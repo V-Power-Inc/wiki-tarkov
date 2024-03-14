@@ -20,21 +20,21 @@ final class TradersSearch extends Traders
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class],
+            [self::ATTR_TITLE, SafeValidator::class],
 
-            [static::ATTR_PREVIEW, SafeValidator::class],
+            [self::ATTR_PREVIEW, SafeValidator::class],
 
-            [static::ATTR_URLTOQUETS, SafeValidator::class],
+            [self::ATTR_URLTOQUETS, SafeValidator::class],
 
-            [static::ATTR_BUTTON_QUESTS, SafeValidator::class],
+            [self::ATTR_BUTTON_QUESTS, SafeValidator::class],
 
-            [static::ATTR_BUTTON_DETAIL, SafeValidator::class],
+            [self::ATTR_BUTTON_DETAIL, SafeValidator::class],
 
-            [static::ATTR_BG_STYLE, SafeValidator::class]
+            [self::ATTR_BG_STYLE, SafeValidator::class]
         ];
     }
 
@@ -74,16 +74,16 @@ final class TradersSearch extends Traders
 
         // grid filtering conditions
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_ENABLED => $this->enabled,
+            self::ATTR_ID => $this->id,
+            self::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
-            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
-            ->andFilterWhere(['like', static::ATTR_URLTOQUETS, $this->urltoquets])
-            ->andFilterWhere(['like', static::ATTR_BUTTON_QUESTS, $this->button_quests])
-            ->andFilterWhere(['like', static::ATTR_BUTTON_DETAIL, $this->button_detail])
-            ->andFilterWhere(['like', static::ATTR_BG_STYLE, $this->bg_style]);
+        $query->andFilterWhere(['like', self::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', self::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', self::ATTR_URLTOQUETS, $this->urltoquets])
+            ->andFilterWhere(['like', self::ATTR_BUTTON_QUESTS, $this->button_quests])
+            ->andFilterWhere(['like', self::ATTR_BUTTON_DETAIL, $this->button_detail])
+            ->andFilterWhere(['like', self::ATTR_BG_STYLE, $this->bg_style]);
 
         return $dataProvider;
     }

@@ -54,13 +54,13 @@ final class PaginationService
         /** Если кеш установлен как true - будет запрос с кешированием на 1 час */
         if ($cache) {
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
+                ->orderby([self::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->cache(Yii::$app->params['cacheTime']['one_hour'])
                 ->all();
         } else { /** Если флаг кеша как false - показываем данные без кеша */
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
+                ->orderby([self::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->all();
         }

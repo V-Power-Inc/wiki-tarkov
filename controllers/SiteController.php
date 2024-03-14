@@ -60,16 +60,16 @@ final class SiteController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    static::ACTION_INDEX,
-                    static::ACTION_TABLE_PATRONS,
-                    static::ACTION_KEYS,
-                    static::ACTION_DOORKEYSDETAIL,
-                    static::ACTION_NEWS,
-                    static::ACTION_NEWSDETAIL,
-                    static::ACTION_ARTICLES,
-                    static::ACTION_ARTICLESARTICLESDETAIL,
-                    static::ACTION_QUESTIONS,
-                    static::ACTION_CURRENCIES
+                    self::ACTION_INDEX,
+                    self::ACTION_TABLE_PATRONS,
+                    self::ACTION_KEYS,
+                    self::ACTION_DOORKEYSDETAIL,
+                    self::ACTION_NEWS,
+                    self::ACTION_NEWSDETAIL,
+                    self::ACTION_ARTICLES,
+                    self::ACTION_ARTICLESARTICLESDETAIL,
+                    self::ACTION_QUESTIONS,
+                    self::ACTION_CURRENCIES
                 ],
                 'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
@@ -84,7 +84,7 @@ final class SiteController extends AdvancedController
     public function actionIndex(): string
     {
         /** Рендерим индексную страницу сайта (Главная страница) */
-        return $this->render(static::ACTION_INDEX);
+        return $this->render(self::ACTION_INDEX);
     }
 
     /**

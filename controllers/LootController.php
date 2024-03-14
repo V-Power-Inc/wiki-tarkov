@@ -45,8 +45,8 @@ final class LootController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    static::ACTION_MAINLOOT,
-                    static::ACTION_CATEGORY
+                    self::ACTION_MAINLOOT,
+                    self::ACTION_CATEGORY
                 ],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',

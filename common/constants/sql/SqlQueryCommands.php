@@ -9,6 +9,7 @@
 namespace app\common\constants\sql;
 
 use app\models\Bosses;
+use app\models\Skills;
 
 /**
  * Класс для определения в константах различных SQL запросов
@@ -24,4 +25,7 @@ final class SqlQueryCommands
 
     /** @var string - Выбираем максимальную дату создания из таблицы Боссов */
     public const MAX_BOSSES_DATE_CREATE = 'SELECT MAX('.Bosses::ATTR_DATE_CREATE.') FROM bosses';
+
+    /** @var string - Выбираем максимальную дату обновления из таблицы умений */
+    public const MAX_SKILLS_DATE_UPDATE = 'SELECT MAX('.Skills::ATTR_DATE_UPDATE.') from skills limit 1';
 }

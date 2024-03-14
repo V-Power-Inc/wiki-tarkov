@@ -46,7 +46,7 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
         $searchModel = new FeedbackMessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -60,7 +60,7 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
      */
     public function actionView($id): string
     {
-        return $this->render(static::ACTION_VIEW, [
+        return $this->render(self::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }

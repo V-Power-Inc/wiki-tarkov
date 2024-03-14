@@ -20,21 +20,21 @@ final class SkillsSearch extends Skills
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_CATEGORY, IntegerValidator::class],
+            [self::ATTR_CATEGORY, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class],
+            [self::ATTR_TITLE, SafeValidator::class],
 
-            [static::ATTR_URL, SafeValidator::class],
+            [self::ATTR_URL, SafeValidator::class],
 
-            [static::ATTR_DESCRIPTION, SafeValidator::class],
+            [self::ATTR_DESCRIPTION, SafeValidator::class],
 
-            [static::ATTR_KEYWORDS, SafeValidator::class],
+            [self::ATTR_KEYWORDS, SafeValidator::class],
 
-            [static::ATTR_PREVIEW, SafeValidator::class]
+            [self::ATTR_PREVIEW, SafeValidator::class]
         ];
     }
 
@@ -74,16 +74,16 @@ final class SkillsSearch extends Skills
 
         // grid filtering conditions
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_CATEGORY => $this->category,
-            static::ATTR_ENABLED => $this->enabled,
+            self::ATTR_ID => $this->id,
+            self::ATTR_CATEGORY => $this->category,
+            self::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
-            ->andFilterWhere(['like', static::ATTR_URL, $this->url])
-            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description])
-            ->andFilterWhere(['like', static::ATTR_KEYWORDS, $this->keywords])
-            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview]);
+        $query->andFilterWhere(['like', self::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', self::ATTR_URL, $this->url])
+            ->andFilterWhere(['like', self::ATTR_DESCRIPTION, $this->description])
+            ->andFilterWhere(['like', self::ATTR_KEYWORDS, $this->keywords])
+            ->andFilterWhere(['like', self::ATTR_PREVIEW, $this->preview]);
 
         return $dataProvider;
     }

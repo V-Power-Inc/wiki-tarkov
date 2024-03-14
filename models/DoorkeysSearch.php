@@ -20,17 +20,17 @@ final class DoorkeysSearch extends Doorkeys
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_ACTIVE, IntegerValidator::class],
+            [self::ATTR_ACTIVE, IntegerValidator::class],
 
-            [static::ATTR_NAME, SafeValidator::class],
+            [self::ATTR_NAME, SafeValidator::class],
 
-            [static::ATTR_CONTENT, SafeValidator::class],
+            [self::ATTR_CONTENT, SafeValidator::class],
 
-            [static::ATTR_MAPGROUP, SafeValidator::class],
+            [self::ATTR_MAPGROUP, SafeValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class]
+            [self::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 
@@ -70,14 +70,14 @@ final class DoorkeysSearch extends Doorkeys
 
         // grid filtering conditions
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_ACTIVE => $this->active,
-            static::ATTR_DATE_CREATE => $this->date_create,
+            self::ATTR_ID => $this->id,
+            self::ATTR_ACTIVE => $this->active,
+            self::ATTR_DATE_CREATE => $this->date_create,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_NAME, $this->name])
-            ->andFilterWhere(['like', static::ATTR_MAPGROUP, $this->mapgroup])
-            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content]);
+        $query->andFilterWhere(['like', self::ATTR_NAME, $this->name])
+            ->andFilterWhere(['like', self::ATTR_MAPGROUP, $this->mapgroup])
+            ->andFilterWhere(['like', self::ATTR_CONTENT, $this->content]);
 
         return $dataProvider;
     }
