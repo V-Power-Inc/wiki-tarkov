@@ -38,7 +38,7 @@ final class TasksResult
         foreach ($data as $task) {
 
             /** Создаем новый объект квеста и закидываем в него данные (Предварительно декодировав из Json) а также id квеста из БД */
-            $model = new TaskItem(Json::decode($task[static::JSON]), $task->id);
+            $model = new TaskItem(Json::decode($task[self::JSON]), $task->id);
 
             /** Сетапим данные о квесте в результирующий массив квестов */
             $this->_items[] = $model;

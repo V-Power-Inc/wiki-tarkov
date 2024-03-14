@@ -8,13 +8,17 @@
 
 namespace app\common\models\tasks\db;
 
+use app\common\constants\log\ErrorDesc;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
+use app\common\services\LogService;
 use app\common\services\TradersService;
 use app\models\Tasks;
+use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use yii\helpers\Json;
+use Yii;
 
 /**
  * Модель с атрибутами данных квестов, в которую данные предварительно сетапятся, перед загрузкой в AR
@@ -69,20 +73,31 @@ final class TaskModel extends Model
         /** Если массив с данными о квесте прилетел */
         if (!empty($task)) {
 
-            /** Сетапим название квеста атрибуту текущей модели */
-            $this->quest = $task['name'];
+            /** Через try пробуем в атрибут закодировать JSON */
+            try {
+                /** Сетапим название квеста атрибуту текущей модели */
+                $this->quest = $task['name'];
 
-            /** Сетапим имя торговца атрибуту текущей модели */
-            $this->trader_name = $task[self::TRADER]['name'];
+                /** Сетапим имя торговца атрибуту текущей модели */
+                $this->trader_name = $task[self::TRADER]['name'];
 
-            /** Сетапим иконку торговца атрибуту текущей модели */
-            $this->trader_icon = $task[self::TRADER]['imageLink'];
+                /** Сетапим иконку торговца атрибуту текущей модели */
+                $this->trader_icon = $task[self::TRADER]['imageLink'];
 
-            /** Сетапим полный JSON с данными атрибуту текущей модели */
-            $this->json = Json::encode($task);
+                /** Сетапим полный JSON с данными атрибуту текущей модели */
+                $this->json = Json::encode([$task]);
+
+            } catch (InvalidArgumentException $e) {
+
+                /** Сетапим null для Json - чтобы не прошел валидацию на сохранение */
+                $this->json = null;
+
+                /** Логируем что API вернул кривые данные */
+                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+            }
 
             /** Сетапим URL до квестов конкретного торговца */
-            $this->url = TradersService::takeApiTasks($task[self::TRADER]['name']);
+            $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);
         }
 
         parent::__construct($config);
