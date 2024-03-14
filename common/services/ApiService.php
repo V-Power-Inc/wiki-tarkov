@@ -20,6 +20,7 @@ use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
 use app\models\Tasks;
+use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
@@ -208,7 +209,7 @@ final class ApiService implements ApiInterface
                 /** Пробуем закодировать строку в JSON  */
                 $model->bosses = Json::encode($map[Api::ATTR_BOSSES]);
 
-            } catch (InvalidArgumentException $e) {
+            } catch (InvalidArgumentException|ErrorException $e) {
 
                 /** Логируем что API вернул кривые данные */
                 LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
@@ -443,7 +444,7 @@ final class ApiService implements ApiInterface
                     /** Пробуем закодировать строку в JSON  */
                     $newItem->json = Json::encode($data);
 
-                } catch (InvalidArgumentException $e) {
+                } catch (InvalidArgumentException|ErrorException $e) {
 
                     /** Логируем что API вернул кривые данные */
                     LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);

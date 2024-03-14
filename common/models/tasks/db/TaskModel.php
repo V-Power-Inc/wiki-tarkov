@@ -15,6 +15,7 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\services\LogService;
 use app\common\services\TradersService;
 use app\models\Tasks;
+use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use yii\helpers\Json;
@@ -85,9 +86,12 @@ final class TaskModel extends Model
                 $this->trader_icon = $task[self::TRADER]['imageLink'];
 
                 /** Сетапим полный JSON с данными атрибуту текущей модели */
-                $this->json = Json::encode([$task]);
+                $this->json = Json::encode($task . 'awerwerwerwre' . '//sd' . [2323] . '232323');
 
-            } catch (InvalidArgumentException $e) {
+                /** Сетапим URL до квестов конкретного торговца */
+                $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);
+
+            } catch (InvalidArgumentException|ErrorException $e) {
 
                 /** Сетапим null для Json - чтобы не прошел валидацию на сохранение */
                 $this->json = null;
@@ -95,9 +99,6 @@ final class TaskModel extends Model
                 /** Логируем что API вернул кривые данные */
                 LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
             }
-
-            /** Сетапим URL до квестов конкретного торговца */
-            $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);
         }
 
         parent::__construct($config);
