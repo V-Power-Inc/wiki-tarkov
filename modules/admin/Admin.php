@@ -13,6 +13,9 @@ use Yii;
  */
 class Admin extends \yii\base\Module
 {
+    /** @var string - Константа, название обработчика ошибок */
+    private const ID_ERROR_HANDLER = 'errorHandler';
+
     /**
      * @inheritdoc
      */
@@ -39,10 +42,10 @@ class Admin extends \yii\base\Module
         ]);
 
         /** Получаем созданный обработчик ошибок */
-        $handler = $this->get('errorHandler');
+        $handler = $this->get(self::ID_ERROR_HANDLER);
 
         /** Перезаписываем обработчик событий тем, что создали только что */
-        Yii::$app->set('errorHandler', $handler);
+        Yii::$app->set(self::ID_ERROR_HANDLER, $handler);
 
         /** Регистрируем его */
         $handler->register();
