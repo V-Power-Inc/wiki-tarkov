@@ -20,6 +20,7 @@ use app\models\ApiSearchLogs;
 use app\models\Bosses;
 use app\models\forms\ApiForm;
 use app\models\Tasks;
+use yii\base\InvalidArgumentException;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -201,7 +202,20 @@ final class ApiService implements ApiInterface
 
             /** Присваиваем атрибуты */
             $model->map = $map[Api::ATTR_MAP_NAME];
-            $model->bosses = Json::encode($map[Api::ATTR_BOSSES]);
+
+            /** Через try пробуем в атрибут закодировать JSON */
+            try {
+                /** Пробуем закодировать строку в JSON  */
+                $model->bosses = Json::encode($map[Api::ATTR_BOSSES]);
+
+            } catch (InvalidArgumentException $e) {
+
+                /** Логируем что API вернул кривые данные */
+                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+
+                /** Возвращаем false - Не удалось сохранить новые данные */
+                return false;
+            }
 
             /** Передаем название карты в генератор Url */
             $model->url = TranslateService::mapUrlCreator($map[Api::ATTR_MAP_NAME]);
@@ -423,7 +437,20 @@ final class ApiService implements ApiInterface
                 /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
-                $newItem->json = Json::encode($data);
+
+                /** Через try пробуем в атрибут закодировать JSON */
+                try {
+                    /** Пробуем закодировать строку в JSON  */
+                    $newItem->json = Json::encode($data);
+
+                } catch (InvalidArgumentException $e) {
+
+                    /** Логируем что API вернул кривые данные */
+                    LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+
+                    /** Возвращаем false - Не удалось сохранить новые данные */
+                    return false;
+                }
 
                 /** Сохраняем новые объекты */
                 $newItem->save();

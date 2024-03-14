@@ -63,4 +63,10 @@ final class ErrorDesc
 
     /** @var string - Константа, описание ошибки - Новая фракция из API */
     public const DESC_NEW_API_QUEST_FACTION = 'Из API прилетела новая фракция - ';
+
+    /** @var string - Константа, описание ошибки - Невалидный JSON из API */
+    public const TYPE_ERROR_JSON_ENCODE_API = 'Не смогли закодировать в JSON данные из API';
+
+    /** @var string - Константа, описание ошибки - Невалидный JSON из API */
+    public const DESC_ERROR_JSON_ENCODE_API = 'При получении новых предметов, не удалось их форматнуть в JSON для сохранения в БД';
 }
