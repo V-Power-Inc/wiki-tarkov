@@ -7,6 +7,7 @@
  */
 
 namespace app\components;
+use app\common\constants\sql\SqlQueryCommands;
 use yii\base\Widget;
 use app\models\Category;
 use Yii;
@@ -63,7 +64,7 @@ final class LeftmenuWidget extends Widget {
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT COUNT(*) FROM category',
+                    'sql' => SqlQueryCommands::COUNT_FROM_CATEGORY,
                 ],
             ],
         ];

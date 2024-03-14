@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\constants\sql\SqlQueryCommands;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
@@ -46,12 +47,12 @@ final class BossesController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    static::ACTION_INDEX,
-                    static::ACTION_VIEW
+                    self::ACTION_INDEX,
+                    self::ACTION_VIEW
                 ],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
-                    'sql' => 'SELECT MAX(date_create) FROM bosses',
+                    'sql' => SqlQueryCommands::MAX_BOSSES_DATE_CREATE,
                 ],
                 'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
@@ -75,7 +76,7 @@ final class BossesController extends AdvancedController
         $maps = $api->getBosses();
 
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_INDEX, ['maps' => $maps]);
+        return $this->render(self::ACTION_INDEX, ['maps' => $maps]);
     }
 
     /**
@@ -99,7 +100,7 @@ final class BossesController extends AdvancedController
             $bosses = $api->getBosses($url);
 
             /** Рендерим вьюху */
-            return $this->render(static::ACTION_VIEW, [
+            return $this->render(self::ACTION_VIEW, [
                 'bosses' => $bosses,
                 'map_title' => Bosses::findMapTitleByUrl($url)
             ]);
