@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * ItemsSearch represents the model behind the search form about `app\models\Items`.
  */
-class ItemsSearch extends Items
+final class ItemsSearch extends Items
 {
     /**
      * Массив валидаций этой модели

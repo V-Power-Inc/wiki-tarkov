@@ -19,7 +19,7 @@ use Yii;
  * @property string $date_create Дата создания записи лога
  * @property int $flag Флаг для проверки вернулись ли данные по запросу или нет
  */
-class ApiSearchLogs extends ActiveRecord
+final class ApiSearchLogs extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
     const ATTR_ID           = 'id';

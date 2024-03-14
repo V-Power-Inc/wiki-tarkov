@@ -16,7 +16,7 @@ use Yii;
  * Class FeedbackMessagesSearch
  * @package app\models
  */
-class FeedbackMessagesSearch extends FeedbackMessages
+final class FeedbackMessagesSearch extends FeedbackMessages
 {
     /**
      * Массив валидаций атрибутов текущей модели

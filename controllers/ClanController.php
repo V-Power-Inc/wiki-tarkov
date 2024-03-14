@@ -14,10 +14,10 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\forms\ClansForm;
 use app\common\services\JsondataService;
 use app\common\services\LogService;
+use app\components\CookieComponent;
 use app\models\Clans;
 use app\models\ClansSearch;
 use yii\web\HttpException;
-use app\components\MessagesComponent;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
 use Yii;
@@ -76,7 +76,7 @@ final class ClanController extends AdvancedController
         if ($avialableTickets <= 0) {
 
             /** Сетапим флэш сообщение об этом (SetFlash) */
-            MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
+            CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
 
             /** Редиректим на страницу со списком кланов */
             return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
@@ -122,7 +122,7 @@ final class ClanController extends AdvancedController
             if ($avialableTickets <= 0) {
 
                 /** Сетапим флэш сообщение об этом (SetFlash) */
-                MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
+                CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Оформить заявку на регистрацию клана будет возможно только завтра.</b></p>");
 
                 /** Редиректим на страницу со списком кланов */
                 return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
@@ -133,7 +133,7 @@ final class ClanController extends AdvancedController
                 if ($model->uploadPreview() && empty($model->preview)) {
 
                     /** Сетапим флэш сообщение об этом (SetFlash) */
-                    MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>");
+                    CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Изображение должно быть размера 100x100 пикселей</b></p>");
 
                     /** Редиректим на страницу добавления кланов */
                     return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
@@ -147,7 +147,7 @@ final class ClanController extends AdvancedController
                     if ($model->save()) {
 
                         /** Сетапим флэш сообщение об этом (SetFlash) */
-                        MessagesComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>");
+                        CookieComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Заяка о регистрации клана успешно отправлена на рассмотрение!</b></p>");
 
                         /** Редиректим на страницу со списком кланов */
                         return $this->redirect(static::ACTION_INDEX, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
@@ -158,7 +158,7 @@ final class ClanController extends AdvancedController
                         LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_CLAN_SAVE_ERROR, ErrorDesc::DESC_CLAN_SAVE_ERROR, ResponseStatusInterface::OK_CODE);
 
                         /** Сетапим флэш сообщение об этом (SetFlash) - указываем, что о баге можно сообщить на электронную почту */
-                        MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>");
+                        CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>");
 
                         /** Редиректим на страницу добавления кланов */
                         return $this->redirect(static::ACTION_ADDCLAN, ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);

@@ -15,7 +15,7 @@ use yii\data\ActiveDataProvider;
  * Class MapsSearch
  * @package app\models
  */
-class MapsSearch extends Maps
+final class MapsSearch extends Maps
 {
     /**
      * Массив валидаций этой модели

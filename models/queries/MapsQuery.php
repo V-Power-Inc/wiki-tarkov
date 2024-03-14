@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class MapsQuery
  * @package app\models\queries
  */
-class MapsQuery extends ActiveQuery
+final class MapsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

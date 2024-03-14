@@ -20,7 +20,7 @@ use Yii;
  * Class ApiForm
  * @package app\models\forms
  */
-class ApiForm extends Model
+final class ApiForm extends Model
 {
     /** @var string - имя предмета */
     public $item_name;

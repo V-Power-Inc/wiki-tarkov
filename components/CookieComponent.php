@@ -17,19 +17,19 @@ use yii\web\Cookie;
  * Class CookieComponent
  * @package app\components
  */
-class CookieComponent
+final class CookieComponent
 {
     /** @var string - Название светлой темы сайта */
-    const NAME_LIGHT_THEME = 'light-theme';
+    public const NAME_LIGHT_THEME = 'light-theme';
 
     /** @var string - Константа, название кукиса, который активирует темную тему на сайте */
-    const NAME_DARK_THEME = 'dark-theme';
+    public const NAME_DARK_THEME = 'dark-theme';
 
     /** @var string - Константа, название кукиса, который скрывает рекламный блок - оверлей */
-    const NAME_OVERLAY = 'overlay';
+    public const NAME_OVERLAY = 'overlay';
 
     /** @var bool - Переменная для возвратов, в методах, что сетапят кукисы */
-    const RESULT = true;
+    private const RESULT = true;
 
     /**
      * Метод сетапит кукис, который скрывает пользователю рекламный блок оверлей на 6 часов
@@ -48,7 +48,7 @@ class CookieComponent
         ]));
 
         /** Возвращаем bool результат - true */
-        return static::RESULT;
+        return self::RESULT;
     }
 
     /**
@@ -67,6 +67,24 @@ class CookieComponent
         ]));
 
         /** Возвращаем bool результат - true */
-        return static::RESULT;
+        return self::RESULT;
+    }
+
+    /**
+     * Метод устанавливает пользовательские сообщения SetFlash по параметру строки
+     *
+     * @param string $messageText - сообщение, которое будет отображено во вьюхе (Может быть html кодом)
+     * @return void
+     */
+    public static function setMessages(string $messageText): bool
+    {
+        /** Удаляем кукис messages */
+        Yii::$app->response->cookies->remove('message');
+
+        /** Устанавливаем в текущую сессию flash сообщение с текстом */
+        Yii::$app->getSession()->setFlash('message',$messageText);
+
+        /** Возвращаем bool результат - true */
+        return self::RESULT;
     }
 }

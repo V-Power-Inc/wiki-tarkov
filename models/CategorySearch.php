@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * CategorySearch represents the model behind the search form about `app\models\Category`.
  */
-class CategorySearch extends Category
+final class CategorySearch extends Category
 {
     /**
      * Массив валидаций этой модели

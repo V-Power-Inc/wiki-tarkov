@@ -19,7 +19,7 @@ use yii\helpers\Url;
  * Class MenuComponent
  * @package app\components
  */
-class MenuComponent
+final class MenuComponent
 {
     /** Атрибуты класса для сетапа активности вкладки при выбранном элементе меню */
     private static $keys = null;

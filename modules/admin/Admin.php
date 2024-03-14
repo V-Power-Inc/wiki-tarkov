@@ -2,16 +2,17 @@
 
 namespace app\modules\admin;
 
+use yii\base\Module;
 use yii\web\ErrorHandler;
 use Yii;
 
 /**
- * admin module definition class
+ * Модуль - админка приложения
  *
  * Class Admin
  * @package app\modules\admin
  */
-class Admin extends \yii\base\Module
+final class Admin extends Module
 {
     /** @var string - Константа, название обработчика ошибок */
     private const ID_ERROR_HANDLER = 'errorHandler';
@@ -34,7 +35,7 @@ class Admin extends \yii\base\Module
         /** На лету переопределяем обработчик ошибок, у админки он свой, со своей страницей ошибок */
         Yii::configure($this, [
             'components' => [
-                'errorHandler' => [
+                self::ID_ERROR_HANDLER => [
                     'class' => ErrorHandler::class,
                     'errorAction' => 'admin/default/error'
                 ]

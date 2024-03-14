@@ -25,7 +25,7 @@ use Yii;
  * Class ClansForm
  * @package app\common\models\forms
  */
-class ClansForm extends Model
+final class ClansForm extends Model
 {
     /** @var string - Название клана */
     public $title;

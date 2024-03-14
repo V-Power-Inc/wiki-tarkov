@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * DoorkeysSearch represents the model behind the search form about `app\models\Doorkeys`.
  */
-class DoorkeysSearch extends Doorkeys
+final class DoorkeysSearch extends Doorkeys
 {
     /**
      * Массив валидаций этой модели

@@ -19,7 +19,7 @@ use Yii;
  *
  * @author Mikhail Dimitrenko
  */
-class LeftmenuWidget extends Widget {
+final class LeftmenuWidget extends Widget {
 
     /** @var string - Название файла, который содержит HTML шаблон меню */
     public $tpl;

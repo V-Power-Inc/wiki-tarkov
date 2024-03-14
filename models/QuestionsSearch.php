@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * QuestionsSearch represents the model behind the search form of `app\models\Questions`.
  */
-class QuestionsSearch extends Questions
+final class QuestionsSearch extends Questions
 {
     /**
      * Массив валидаций этой модели

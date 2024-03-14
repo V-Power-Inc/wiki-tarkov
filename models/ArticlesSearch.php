@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * ArticlesSearch represents the model behind the search form about `app\models\Articles`.
  */
-class ArticlesSearch extends Articles
+final class ArticlesSearch extends Articles
 {
     /**
      * Массив валидаций этой модели

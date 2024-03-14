@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * NewsSearch represents the model behind the search form about `app\models\News`.
  */
-class NewsSearch extends News
+final class NewsSearch extends News
 {
     /**
      * Массив валидаций этой модели

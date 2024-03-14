@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * TradersSearch represents the model behind the search form about `app\models\Traders`.
  */
-class TradersSearch extends Traders
+final class TradersSearch extends Traders
 {
     /**
      * Массив валидаций этой модели

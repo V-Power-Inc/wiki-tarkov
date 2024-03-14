@@ -25,10 +25,10 @@ use yii\base\InvalidConfigException;
  * Class UrlComponent
  * @package app\components
  */
-class UrlComponent extends BaseObject implements UrlRuleInterface
+final class UrlComponent extends BaseObject implements UrlRuleInterface
 {
     /** @var int - Константа, первый элемент массива */
-    const FIRST_ELEMENT = 0;
+    private const FIRST_ELEMENT = 0;
 
     /**
      * Метод парсит запрос и возвращает маршрут в зависимости от заданной логики или вернет false

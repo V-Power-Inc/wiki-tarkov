@@ -21,7 +21,7 @@ use Yii;
  * Class FeedbackForm
  * @package app\common\models\forms
  */
-class FeedbackForm extends Model
+final class FeedbackForm extends Model
 {
     /** @var string - Сообщения от посетителя */
     public $content;

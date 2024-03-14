@@ -18,7 +18,7 @@ use yii\db\ActiveRecord;
  * Class AdminsQuery
  * @package app\models\queries
  */
-class AdminsQuery extends ActiveQuery
+final class AdminsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

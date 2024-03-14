@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * CurrenciesSearch represents the model behind the search form of `app\models\Currencies`.
  */
-class CurrenciesSearch extends Currencies
+final class CurrenciesSearch extends Currencies
 {
     /**
      * Массив валидаций этой модели

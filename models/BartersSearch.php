@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * BartersSearch represents the model behind the search form of `app\models\Barters`.
  */
-class BartersSearch extends Barters
+final class BartersSearch extends Barters
 {
     /**
      * Массив валидаций этой модели

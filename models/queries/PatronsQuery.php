@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class PatronsQuery
  * @package app\models\queries
  */
-class PatronsQuery extends ActiveQuery
+final class PatronsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

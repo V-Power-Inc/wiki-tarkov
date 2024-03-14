@@ -14,7 +14,7 @@ use app\common\interfaces\ApiInterface;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\tasks\db\TaskModel;
 use app\common\models\tasks\TasksResult;
-use app\components\MessagesComponent;
+use app\components\CookieComponent;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\Bosses;
@@ -389,7 +389,7 @@ final class ApiService implements ApiInterface
         if (empty($item[Api::ATTR_DATA][Api::ATTR_ITEMS])) {
 
             /** Возвращаем уведомление, что не смогли найти искомый предмет */
-            MessagesComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению мы не смогли ничего найти по вашему запросу, попробуйте другой запрос.</b></p>");
+            CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>К сожалению мы не смогли ничего найти по вашему запросу, попробуйте другой запрос.</b></p>");
 
             /** Возвращаем false - если не смогли найти результат даже по APIшке */
             return false;

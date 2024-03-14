@@ -10,7 +10,7 @@ namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
 use app\common\models\forms\FeedbackForm;
-use app\components\MessagesComponent;
+use app\components\CookieComponent;
 use Yii;
 
 /**
@@ -45,7 +45,7 @@ final class FeedbackController extends AdvancedController
             if ($model->load($post) && $model->save()) {
 
                 /** Сетапим flash сообщение */
-                MessagesComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Сообщение успешно отправлено, спасибо!</b></p>");
+                CookieComponent::setMessages("<p class='alert alert-success size-16 margin-top-20'><b>Сообщение успешно отправлено, спасибо!</b></p>");
             }
         }
 

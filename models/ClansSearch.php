@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * ClansSearch represents the model behind the search form of `app\models\Clans`.
  */
-class ClansSearch extends Clans
+final class ClansSearch extends Clans
 {
     /**
      * Массив валидаций этой модели

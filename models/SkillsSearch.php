@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * SkillsSearch represents the model behind the search form about `app\models\Skills`.
  */
-class SkillsSearch extends Skills
+final class SkillsSearch extends Skills
 {
     /**
      * Массив валидаций этой модели

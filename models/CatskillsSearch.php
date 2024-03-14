@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * CatskillsSearch represents the model behind the search form about `app\models\Catskills`.
  */
-class CatskillsSearch extends Catskills
+final class CatskillsSearch extends Catskills
 {
     /**
      * Массив валидаций этой модели
