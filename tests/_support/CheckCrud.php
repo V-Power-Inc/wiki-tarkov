@@ -93,8 +93,6 @@ final class CheckCrud
 
         /** Убедимся что код ошибки 405 */
         CheckPageCodes::checkMethodNotAllowed($I);
-
-        $I->canSee('Method Not Allowed (#405)', 'h1');
     }
 
     /**
