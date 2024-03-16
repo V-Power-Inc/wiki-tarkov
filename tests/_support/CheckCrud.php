@@ -32,10 +32,10 @@ final class CheckCrud
         $I->canSeeElement('form');
 
         /** Видим кнопку создания новой записи */
-        $I->canSeeElement('.btn.btn-success');
+        $I->canSeeElement('.btn-success');
 
         /** Видим кнопку возврата в список всех записей */
-        $I->canSeeElement('.btn.btn-primary');
+        $I->canSeeElement('.btn-primary');
     }
 
     /**
@@ -54,10 +54,10 @@ final class CheckCrud
         $I->canSeeElement('table');
 
         /** Видим кнопки возврата в список всех записей и обновления */
-        $I->canSeeElement('.btn.btn-primary');
+        $I->canSeeElement('.btn-primary');
 
         /** Видим кнопку удаления записи */
-        $I->canSeeElement('.btn.btn-danger');
+        $I->canSeeElement('.btn-danger');
     }
 
     /**
@@ -76,7 +76,7 @@ final class CheckCrud
         $I->canSeeElement('form');
 
         /** Видим кнопку возврата в список всех записей */
-        $I->canSeeElement('.btn.btn-primary');
+        $I->canSeeElement('.btn-primary');
     }
 
     /**
