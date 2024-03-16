@@ -12,7 +12,7 @@ return [
       'user' => 'test_admin',
       'password' => '4ac1b63dca561d274c6055ebf3ed97db', // test_pass
       'captcha' => 'test',
-      'remember_me' => 0,
+      'remember_me' => 1,
       'role' => 'admin',
       'date_end' => null,
       'name' => 'Username',

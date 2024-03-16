@@ -11,7 +11,6 @@
  */
 return [
     [
-        'id' => 1,
         'title' => 'Основная категория',
         'parent_category' => null,
         'url' => 'main-category',
@@ -22,7 +21,6 @@ return [
         'sortir' => 1
     ],
     [
-        'id' => 2,
         'title' => 'Основная категория - second',
         'parent_category' => null,
         'url' => 'main-category-second',
@@ -33,7 +31,6 @@ return [
         'sortir' => 2
     ],
     [
-        'id' => 3,
         'title' => 'Основная категория - third',
         'parent_category' => 2,
         'url' => 'main-category-thirdd',
