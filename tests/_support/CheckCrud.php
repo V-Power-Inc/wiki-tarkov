@@ -25,8 +25,11 @@ final class CheckCrud
      */
     public static function onCreate(\FunctionalTester $I, string $url)
     {
+        /** Заходим на страницу URL'a */
+        $I->amOnRoute($url);
+
         /** Проверяем что страница с кодом 200 и есть h1 заголовок */
-        self::baseChecking($I, $url);
+        self::baseChecking($I);
 
         /** Видим форму создания новой записи */
         $I->canSeeElement('form');
@@ -47,8 +50,11 @@ final class CheckCrud
      */
     public static function onView(\FunctionalTester $I, string $url)
     {
+        /** Заходим на страницу URL'a */
+        $I->amOnRoute($url);
+
         /** Проверяем что страница с кодом 200 и есть h1 заголовок */
-        self::baseChecking($I, $url);
+        self::baseChecking($I);
 
         /** Можем видеть таблицу с данными */
         $I->canSeeElement('table');
@@ -69,8 +75,11 @@ final class CheckCrud
      */
     public static function onEdit(\FunctionalTester $I, string $url)
     {
+        /** Заходим на страницу URL'a */
+        $I->amOnRoute($url);
+
         /** Проверяем что страница с кодом 200 и есть h1 заголовок */
-        self::baseChecking($I, $url);
+        self::baseChecking($I);
 
         /** Видим форму создания новой записи */
         $I->canSeeElement('form');
@@ -99,14 +108,10 @@ final class CheckCrud
      * Метод с повторяющимися проверками, для остальных методов текущего класса
      *
      * @param \FunctionalTester $I
-     * @param string $url - URL адрес, что проверяем
      * @return void
      */
-    private static function baseChecking(\FunctionalTester $I, string $url)
+    private static function baseChecking(\FunctionalTester $I)
     {
-        /** Заходим на страницу URL'a */
-        $I->amOnRoute($url);
-
         /** Проверяем что ответ сервера - 200 */
         CheckPageCodes::start($I);
 
