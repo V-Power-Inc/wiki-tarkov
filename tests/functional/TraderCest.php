@@ -8,9 +8,9 @@
 
 namespace Tests\Functional;
 
-use app\tests\fixtures\TradersFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -26,12 +26,7 @@ class TraderCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'traders' => [
-                'class' => TradersFixture::class,
-                'dataFile' => codecept_data_dir() . 'traders.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getTraders());
 
         /** Мы на главной странице */
         $I->amOnRoute('traders/prapor');

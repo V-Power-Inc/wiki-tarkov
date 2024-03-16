@@ -10,7 +10,7 @@ namespace app\tests;
 
 use app\common\helpers\validators\StringValidator;
 use app\models\ErrorLog;
-use app\tests\fixtures\ErrorLogFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class ErrorLogTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'tasks' => [
-                'class' => ErrorLogFixture::class,
-                'dataFile' => codecept_data_dir() . 'errors.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getErrors());
     }
 
     /** Метод выполняется после каждого теста */

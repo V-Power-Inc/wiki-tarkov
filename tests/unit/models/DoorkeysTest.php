@@ -10,7 +10,7 @@ namespace app\tests;
 
 use app\models\Doorkeys;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\DoorkeysFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class DoorkeysTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'doorkeys' => [
-                'class' => DoorkeysFixture::class,
-                'dataFile' => codecept_data_dir() . 'doorkeys.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getDoorkeys());
     }
 
     /** Метод выполняется после каждого теста */

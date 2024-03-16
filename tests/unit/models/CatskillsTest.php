@@ -9,9 +9,8 @@
 namespace app\tests;
 
 use app\models\Catskills;
-use app\tests\fixtures\CatskillsFixture;
-use app\tests\fixtures\SkillsFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -32,16 +31,7 @@ class CatskillsTest extends \Codeception\Test\Unit
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'catskills' => [
-                'class' => CatskillsFixture::class,
-                'dataFile' => codecept_data_dir() . 'catskills.php'
-            ],
-            'skills' => [
-                'class' => SkillsFixture::class,
-                'dataFile' => codecept_data_dir() . 'skills.php'
-            ],
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getSkillsWithCats());
     }
 
     /** Метод выполняется после каждого теста */

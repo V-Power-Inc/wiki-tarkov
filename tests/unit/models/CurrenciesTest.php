@@ -9,8 +9,8 @@
 namespace app\tests;
 
 use app\models\Currencies;
-use app\tests\fixtures\CurrenciesFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class CurrenciesTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'currencies' => [
-                'class' => CurrenciesFixture::class,
-                'dataFile' => codecept_data_dir() . 'currencies.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getCurrencies());
     }
 
     /** Метод выполняется после каждого теста */

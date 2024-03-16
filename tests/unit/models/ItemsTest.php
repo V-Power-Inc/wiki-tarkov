@@ -9,9 +9,8 @@
 namespace app\tests;
 
 use app\models\Items;
-use app\tests\fixtures\CategoryFixture;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\ItemsFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -29,16 +28,7 @@ class ItemsTest extends \Codeception\Test\Unit
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом (Фикстура категории и лута) */
-        $this->tester->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getItemsWithCats());
     }
 
     /** Метод выполняется после каждого теста */

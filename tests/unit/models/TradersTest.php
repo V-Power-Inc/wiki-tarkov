@@ -9,8 +9,8 @@
 namespace app\tests;
 
 use app\models\Traders;
-use app\tests\fixtures\TradersFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -29,12 +29,7 @@ class TradersTest extends \Codeception\Test\Unit
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'traders' => [
-                'class' => TradersFixture::class,
-                'dataFile' => codecept_data_dir() . 'traders.php'
-            ],
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getTraders());
     }
 
     /** Метод выполняется после каждого теста */

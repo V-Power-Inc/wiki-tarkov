@@ -9,8 +9,8 @@
 namespace app\tests;
 
 use app\models\Barters;
-use app\tests\fixtures\BartersFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class BartersTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'barters' => [
-                'class' => BartersFixture::class,
-                'dataFile' => codecept_data_dir() . 'barters.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getBarters());
     }
 
     /** Метод выполняется после каждого теста */

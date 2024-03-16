@@ -9,10 +9,9 @@
 namespace Tests\Functional;
 
 use app\controllers\LootController;
-use app\tests\fixtures\CategoryFixture;
-use app\tests\fixtures\ItemsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -28,16 +27,7 @@ class LootMainpageCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'category' => [
-                'class' => CategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'category.php'
-            ],
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getItemsWithCats());
 
         /** Мы на главной странице справочника лута */
         $I->amOnRoute(LootController::routeId(LootController::ACTION_MAINLOOT));

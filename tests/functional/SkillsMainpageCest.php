@@ -9,9 +9,9 @@
 namespace Tests\Functional;
 
 use app\controllers\SkillsController;
-use app\tests\fixtures\CatskillsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -27,12 +27,7 @@ class SkillsMainpageCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'catskills' => [
-                'class' => CatskillsFixture::class,
-                'dataFile' => codecept_data_dir() . 'catskills.php'
-            ],
-        ]);
+        $I->haveFixtures(FixturesCollection::getCatskills());
 
         /** Мы на главной странице справочника умений */
         $I->amOnRoute(SkillsController::routeId(SkillsController::ACTION_MAINSKILLS));

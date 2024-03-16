@@ -10,7 +10,7 @@ namespace app\tests;
 
 use app\models\ApiSearchLogs;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\ApiSearchLogsFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class ApiSearchLogsTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'api_search_logs' => [
-                'class' => ApiSearchLogsFixture::class,
-                'dataFile' => codecept_data_dir() . 'api_search_logs.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getApiSearchLogs());
     }
 
     /** Метод выполняется после каждого теста */

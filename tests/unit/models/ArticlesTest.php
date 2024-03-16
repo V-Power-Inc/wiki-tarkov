@@ -10,7 +10,7 @@ namespace app\tests;
 
 use app\models\Articles;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\ArticlesFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class ArticlesTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'articles' => [
-                'class' => ArticlesFixture::class,
-                'dataFile' => codecept_data_dir() . 'articles.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getArticles());
     }
 
     /** Метод выполняется после каждого теста */

@@ -10,7 +10,7 @@ namespace app\tests;
 
 use app\models\Tasks;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\TasksFixture;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class TasksTest extends \Codeception\Test\Unit
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'tasks' => [
-                'class' => TasksFixture::class,
-                'dataFile' => codecept_data_dir() . 'tasks.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getTasks());
     }
 
     /** Метод выполняется после каждого теста */

@@ -9,8 +9,8 @@
 namespace app\tests;
 
 use app\models\ApiLoot;
-use app\tests\fixtures\ApilootFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class ApilootTest extends \Codeception\Test\Unit
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'api_loot' => [
-                'class' => ApilootFixture::class,
-                'dataFile' => codecept_data_dir() . 'api-loot.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getApiloot());
     }
 
     /** Метод выполняется после каждого теста */

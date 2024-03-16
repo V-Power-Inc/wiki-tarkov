@@ -9,8 +9,8 @@
 namespace app\tests;
 
 use app\models\Admins;
-use app\tests\fixtures\AdminsFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
 use UnitTester;
 
 /**
@@ -31,12 +31,7 @@ class AdminsTest extends \Codeception\Test\Unit
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'admins' => [
-                'class' => AdminsFixture::class,
-                'dataFile' => codecept_data_dir() . 'admins.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getAdmins());
     }
 
     /** Метод выполняется после каждого теста */

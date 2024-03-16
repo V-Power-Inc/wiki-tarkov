@@ -24,7 +24,7 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\QuestionsController;
 use app\modules\admin\controllers\SkillsController;
 use app\modules\admin\controllers\TradersController;
-use app\tests\fixtures\AdminsFixture;
+use tests\_support\FixturesCollection;
 
 /**
  * Функциональные тесты для проверки страниц админки
@@ -40,12 +40,7 @@ class AdminPagesCheckAccessCest
      */
     public function _fixtures()
     {
-        return [
-            'admins' => [
-                'class' => AdminsFixture::class,
-                'dataFile' => codecept_data_dir() . 'admins.php'
-            ]
-        ];
+        return FixturesCollection::getAdmins();
     }
 
     /** Метод проверяет что на страницы админки мы не можем зайти без авторизации */
