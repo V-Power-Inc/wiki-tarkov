@@ -214,7 +214,7 @@ class AdminPagesCrudCest
         CheckCrud::onCreate($I, $url_create);
 
         /** Проверяем страницу просмотра записей */
-//        CheckCrud::onView($I, $url_view);
+        CheckCrud::onView($I, $url_view);
 //
 //        /** Проверяем страницу редактирования записей */
 //        CheckCrud::onEdit($I, $url_edit);
