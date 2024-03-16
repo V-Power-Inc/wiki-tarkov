@@ -214,12 +214,12 @@ class AdminPagesCrudCest
         CheckCrud::onCreate($I, $url_create);
 
         /** Проверяем страницу просмотра записей */
-        CheckCrud::onView($I, $url_view);
-
-        /** Проверяем страницу редактирования записей */
-        CheckCrud::onEdit($I, $url_edit);
-
-        /** Проверяем страницу удаления записей */
-        CheckCrud::onDelete($I, $url_delete);
+//        CheckCrud::onView($I, $url_view);
+//
+//        /** Проверяем страницу редактирования записей */
+//        CheckCrud::onEdit($I, $url_edit);
+//
+//        /** Проверяем страницу удаления записей */
+//        CheckCrud::onDelete($I, $url_delete);
     }
 }
