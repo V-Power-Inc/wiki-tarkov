@@ -46,7 +46,7 @@ final class FixturesCollection
      */
     public static function getCrudOnly(): array
     {
-        return [
+        return array_merge(
             self::getAdmins(),
             self::getApiloot(),
             self::getArticles(),
@@ -66,7 +66,7 @@ final class FixturesCollection
             self::getQuestions(),
             self::getTraders(),
             self::getTasks()
-        ];
+        );
     }
 
     /**
