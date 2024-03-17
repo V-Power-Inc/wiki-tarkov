@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class DoorkeysQuery
  * @package app\models\queries
  */
-class DoorkeysQuery extends ActiveQuery
+final class DoorkeysQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

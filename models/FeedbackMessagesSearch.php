@@ -16,7 +16,7 @@ use Yii;
  * Class FeedbackMessagesSearch
  * @package app\models
  */
-class FeedbackMessagesSearch extends FeedbackMessages
+final class FeedbackMessagesSearch extends FeedbackMessages
 {
     /**
      * Массив валидаций атрибутов текущей модели
@@ -26,9 +26,9 @@ class FeedbackMessagesSearch extends FeedbackMessages
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class]
+            [self::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 
@@ -71,7 +71,7 @@ class FeedbackMessagesSearch extends FeedbackMessages
 
         /** Ищем данные в соответствии с ID */
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
+            self::ATTR_ID => $this->id,
         ]);
 
         /** Если в атрибуте есть дата создания */
@@ -81,11 +81,11 @@ class FeedbackMessagesSearch extends FeedbackMessages
             $date = Yii::$app->formatter->asDate($this->date_create, 'php: Y-m-d');
 
             /** Ищем данные в связке с датой */
-            $query->andWhere(new Expression("date(" . static::TABLE_NAME .".". static::ATTR_DATE_CREATE . ") = '$date'"));
+            $query->andWhere(new Expression("date(" . self::TABLE_NAME .".". self::ATTR_DATE_CREATE . ") = '$date'"));
         }
 
         /** Контент ищем через like */
-        $query->andFilterWhere(['ilike', static::ATTR_CONTENT, $this->content]);
+        $query->andFilterWhere(['ilike', self::ATTR_CONTENT, $this->content]);
 
         /** Возвращаем объект дата-провайдера */
         return $dataProvider;

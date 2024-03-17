@@ -9,8 +9,9 @@
 namespace app\tests;
 
 use app\models\Currencies;
-use app\tests\fixtures\CurrenciesFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты валют EFT
@@ -23,21 +24,14 @@ use app\common\helpers\validators\StringValidator;
  */
 class CurrenciesTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'currencies' => [
-                'class' => CurrenciesFixture::class,
-                'dataFile' => codecept_data_dir() . 'currencies.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getCurrencies());
     }
 
     /** Метод выполняется после каждого теста */

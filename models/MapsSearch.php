@@ -15,7 +15,7 @@ use yii\data\ActiveDataProvider;
  * Class MapsSearch
  * @package app\models
  */
-class MapsSearch extends Maps
+final class MapsSearch extends Maps
 {
     /**
      * Массив валидаций этой модели
@@ -25,27 +25,27 @@ class MapsSearch extends Maps
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_EXIT_ANYWAY, IntegerValidator::class],
+            [self::ATTR_EXIT_ANYWAY, IntegerValidator::class],
 
-            [static::ATTR_NAME, SafeValidator::class],
+            [self::ATTR_NAME, SafeValidator::class],
 
-            [static::ATTR_MAP, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_MAP, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_MARKER_GROUP, SafeValidator::class],
+            [self::ATTR_MARKER_GROUP, SafeValidator::class],
 
-            [static::ATTR_CONTENT, SafeValidator::class],
+            [self::ATTR_CONTENT, SafeValidator::class],
 
-            [static::ATTR_CUSTOMICON, SafeValidator::class],
+            [self::ATTR_CUSTOMICON, SafeValidator::class],
 
-            [static::ATTR_EXITS_GROUP, SafeValidator::class],
+            [self::ATTR_EXITS_GROUP, SafeValidator::class],
 
-            [static::ATTR_COORDS_X, NumberValidator::class],
+            [self::ATTR_COORDS_X, NumberValidator::class],
 
-            [static::ATTR_COORDS_Y, NumberValidator::class]
+            [self::ATTR_COORDS_Y, NumberValidator::class]
         ];
     }
 
@@ -89,21 +89,21 @@ class MapsSearch extends Maps
 
         /** Фильрациия для Grid */
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_COORDS_X => $this->coords_x,
-            static::ATTR_COORDS_Y => $this->coords_y,
-            static::ATTR_ENABLED => $this->enabled,
-            static::ATTR_EXIT_ANYWAY => $this->exit_anyway,
-            static::ATTR_DATE_UPDATE => $this->date_update,
+            self::ATTR_ID => $this->id,
+            self::ATTR_COORDS_X => $this->coords_x,
+            self::ATTR_COORDS_Y => $this->coords_y,
+            self::ATTR_ENABLED => $this->enabled,
+            self::ATTR_EXIT_ANYWAY => $this->exit_anyway,
+            self::ATTR_DATE_UPDATE => $this->date_update,
         ]);
 
         /** Фильрациия для Grid */
-        $query->andFilterWhere(['like', static::ATTR_NAME, $this->name])
-            ->andFilterWhere(['like', static::ATTR_MAP, $this->map])
-            ->andFilterWhere(['like', static::ATTR_MARKER_GROUP, $this->marker_group])
-            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content])
-            ->andFilterWhere(['like', static::ATTR_CUSTOMICON, $this->customicon])
-            ->andFilterWhere(['like', static::ATTR_EXITS_GROUP, $this->exits_group]);
+        $query->andFilterWhere(['like', self::ATTR_NAME, $this->name])
+            ->andFilterWhere(['like', self::ATTR_MAP, $this->map])
+            ->andFilterWhere(['like', self::ATTR_MARKER_GROUP, $this->marker_group])
+            ->andFilterWhere(['like', self::ATTR_CONTENT, $this->content])
+            ->andFilterWhere(['like', self::ATTR_CUSTOMICON, $this->customicon])
+            ->andFilterWhere(['like', self::ATTR_EXITS_GROUP, $this->exits_group]);
 
         /** Возвращаем $dataProvider */
         return $dataProvider;

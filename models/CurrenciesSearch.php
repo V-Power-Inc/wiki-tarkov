@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * CurrenciesSearch represents the model behind the search form of `app\models\Currencies`.
  */
-class CurrenciesSearch extends Currencies
+final class CurrenciesSearch extends Currencies
 {
     /**
      * Массив валидаций этой модели
@@ -20,13 +20,13 @@ class CurrenciesSearch extends Currencies
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_VALUE, IntegerValidator::class],
+            [self::ATTR_VALUE, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class]
+            [self::ATTR_TITLE, SafeValidator::class]
         ];
     }
 
@@ -66,12 +66,12 @@ class CurrenciesSearch extends Currencies
 
         // grid filtering conditions
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_VALUE => $this->value,
-            static::ATTR_ENABLED => $this->enabled,
+            self::ATTR_ID => $this->id,
+            self::ATTR_VALUE => $this->value,
+            self::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title]);
+        $query->andFilterWhere(['like', self::ATTR_TITLE, $this->title]);
 
         return $dataProvider;
     }

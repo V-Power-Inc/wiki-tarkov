@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class TradersQuery
  * @package app\models\queries
  */
-class TradersQuery extends ActiveQuery
+final class TradersQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

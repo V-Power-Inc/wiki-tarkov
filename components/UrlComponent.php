@@ -25,10 +25,10 @@ use yii\base\InvalidConfigException;
  * Class UrlComponent
  * @package app\components
  */
-class UrlComponent extends BaseObject implements UrlRuleInterface
+final class UrlComponent extends BaseObject implements UrlRuleInterface
 {
     /** @var int - Константа, первый элемент массива */
-    const FIRST_ELEMENT = 0;
+    private const FIRST_ELEMENT = 0;
 
     /**
      * Метод парсит запрос и возвращает маршрут в зависимости от заданной логики или вернет false
@@ -48,7 +48,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
         $exploded_url = explode('/',$pathInfo);
 
         /** Если первый элемента массива - keys, значит мы в разделе ключей */
-        if ($exploded_url[static::FIRST_ELEMENT] == 'keys'){
+        if ($exploded_url[self::FIRST_ELEMENT] == 'keys'){
 
             /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
@@ -56,7 +56,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
                 /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/doorkeysdetail', ['id'=>$matches[3]]];
             }
-        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'news') { /** Если первый элемента массива - news, значит мы в разделе новостей */
+        } elseif ($exploded_url[self::FIRST_ELEMENT] == 'news') { /** Если первый элемента массива - news, значит мы в разделе новостей */
 
             /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
@@ -64,7 +64,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
                 /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/newsdetail', ['id'=>$matches[3]]];
             }
-        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'articles') { /** Если первый элемента массива - articles, значит мы в разделе статей */
+        } elseif ($exploded_url[self::FIRST_ELEMENT] == 'articles') { /** Если первый элемента массива - articles, значит мы в разделе статей */
 
             /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
@@ -72,7 +72,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
                 /** Отправляем в контроллер с нужным параметром для Action */
                 return ['site/articledetail',['url'=>$matches[3]]];
             }
-        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'traders') { /** Если первый элемента массива - traders, значит мы в разделе торговцев */
+        } elseif ($exploded_url[self::FIRST_ELEMENT] == 'traders') { /** Если первый элемента массива - traders, значит мы в разделе торговцев */
 
             /** Регулярка на совпадение - отправит на детальную страницу, в случае если удастся извлечь нужный параметр */
             if (preg_match('%([\w\-]+)([\/])([\w\-]+)$%', $pathInfo, $matches)) {
@@ -80,7 +80,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
                 /** Отправляем в контроллер с нужным параметром для Action */
                 return ['trader/tradersdetail',['id'=>$matches[3]]];
             }
-        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'skills') { /** Если первый элемента массива - skills, значит мы в разделе умений */
+        } elseif ($exploded_url[self::FIRST_ELEMENT] == 'skills') { /** Если первый элемента массива - skills, значит мы в разделе умений */
 
             /** Регулярка на совпадение - отправит на детальную страницу или категорию, в случае если удастся извлечь нужный параметр */
             if (preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) {
@@ -94,7 +94,7 @@ class UrlComponent extends BaseObject implements UrlRuleInterface
                 return ['skills/skillscategory',['name'=>$matches[3]]];
 
             }
-        } elseif ($exploded_url[static::FIRST_ELEMENT] == 'loot') { /** Если первый элемента массива - loot, значит мы в разделе лута */
+        } elseif ($exploded_url[self::FIRST_ELEMENT] == 'loot') { /** Если первый элемента массива - loot, значит мы в разделе лута */
 
             /** Регулярка на совпадение - отправит на детальную страницу, категорию или подкатегорию в случае если удастся извлечь нужный параметр */
             if (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для подкатегории */

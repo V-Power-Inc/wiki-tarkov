@@ -21,10 +21,10 @@ use yii\helpers\Json;
 final class TasksResult
 {
     /** @var TaskItem[] - Массив объектов квестов TaskItem */
-    public $_items = [];
+    public array $_items = [];
 
     /** @var string - Ключ поля до Json объекта */
-    const JSON = 'json';
+    private const JSON = 'json';
 
     /**
      * Конструктор для возвращения структурированного массива объектов о квестах
@@ -38,7 +38,7 @@ final class TasksResult
         foreach ($data as $task) {
 
             /** Создаем новый объект квеста и закидываем в него данные (Предварительно декодировав из Json) а также id квеста из БД */
-            $model = new TaskItem(Json::decode($task[static::JSON]), $task->id);
+            $model = new TaskItem(Json::decode($task[self::JSON]), $task->id);
 
             /** Сетапим данные о квесте в результирующий массив квестов */
             $this->_items[] = $model;

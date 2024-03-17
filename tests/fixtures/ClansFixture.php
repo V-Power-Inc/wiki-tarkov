@@ -13,5 +13,5 @@ class ClansFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Clans';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'clans';
+    public const TABLE_NAME = 'clans';
 }

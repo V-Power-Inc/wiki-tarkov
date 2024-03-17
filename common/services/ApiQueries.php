@@ -17,13 +17,7 @@ namespace app\common\services;
 final class ApiQueries
 {
     /** @var string - запрос, который будет отправляться в API */
-    public $query;
-
-    /** @var bool - Константа для возвратов положительных результатов по работе методов */
-    const TRUE = true;
-
-    /** @var bool - Константа для возвратов отрицательных результатов по работе методов */
-    const FALSE = false;
+    public string $query;
 
     /**
      * Метод сетапит атрибуту класса запрос в API для получения информации о боссах,

@@ -9,8 +9,9 @@
 namespace app\tests;
 
 use app\models\Bosses;
-use app\tests\fixtures\BossesFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты для API страниц боссов
@@ -23,21 +24,14 @@ use app\common\helpers\validators\StringValidator;
  */
 class BossesTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'bosses' => [
-                'class' => BossesFixture::class,
-                'dataFile' => codecept_data_dir() . 'bosses.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getBosses());
     }
 
     /** Метод выполняется после каждого теста */

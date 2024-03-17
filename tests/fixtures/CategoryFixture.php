@@ -9,4 +9,7 @@ namespace app\tests\fixtures;
 
 class CategoryFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Category';
+
+    /** @var string Имя таблицы */
+    public const TABLE_NAME = 'category';
 }

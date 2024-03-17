@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class CurrenciesQuery
  * @package app\models\queries
  */
-class CurrenciesQuery extends ActiveQuery
+final class CurrenciesQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

@@ -6,9 +6,12 @@
  * Time: 20:46
  */
 
+namespace app\tests;
+
 use app\models\Patrons;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\PatronsFixture;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты таблицы патронов и их атрибутов
@@ -21,21 +24,14 @@ use app\tests\fixtures\PatronsFixture;
  */
 class PatronsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'patrons' => [
-                'class' => PatronsFixture::class,
-                'dataFile' => codecept_data_dir() . 'patrons.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getPatrons());
     }
 
     /** Метод выполняется после каждого теста */

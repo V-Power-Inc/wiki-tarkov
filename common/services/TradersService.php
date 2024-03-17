@@ -28,7 +28,7 @@ final class TradersService
      * @param string $trader - имя торговца
      * @return string
      */
-    public static function takeApiTasks(string $trader): string
+    public static function takeApiTasksUrl(string $trader): string
     {
         /** В свиче - по имени торговца, подставляем нужный урл до квестов */
         switch ($trader) {

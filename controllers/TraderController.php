@@ -26,11 +26,11 @@ use Yii;
 final class TraderController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_QUESTS                 = 'quests';
-    const ACTION_QUESTS_DETAIL          = 'quests-detail';
-    const ACTION_TRADERSDETAIL          = 'tradersdetail';
-    const ACTION_BARTERS_PREVIEW        = 'barterspreview';
-    const ACTION_PREVIEWTRADER          = 'previewtrader';
+    public const ACTION_QUESTS                 = 'quests';
+    public const ACTION_QUESTS_DETAIL          = 'quests-detail';
+    public const ACTION_TRADERSDETAIL          = 'tradersdetail';
+    public const ACTION_BARTERS_PREVIEW        = 'barterspreview';
+    public const ACTION_PREVIEWTRADER          = 'previewtrader';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;

@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class ApiLootQuery
  * @package app\models\queries
  */
-class ApiLootQuery extends ActiveQuery
+final class ApiLootQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

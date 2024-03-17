@@ -21,15 +21,15 @@ use Yii;
  * Class FeedbackForm
  * @package app\common\models\forms
  */
-class FeedbackForm extends Model
+final class FeedbackForm extends Model
 {
     /** @var string - Сообщения от посетителя */
     public $content;
-    const ATTR_CONTENT = 'content';
+    public const ATTR_CONTENT = 'content';
 
     /** @var string $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
-    const RECAPTCHA = 'reCaptcha';
+    public const RECAPTCHA = 'reCaptcha';
 
     /**
      * Массив валидаций этой модели

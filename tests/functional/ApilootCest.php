@@ -9,9 +9,9 @@
 namespace Tests\Functional;
 
 use app\controllers\ApiController;
-use app\tests\fixtures\ApilootFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -29,12 +29,7 @@ class ApilootCest
      */
     public function _fixtures()
     {
-        return [
-            'api_loot' => [
-                'class' => ApilootFixture::class,
-                'dataFile' => codecept_data_dir() . 'api-loot.php'
-            ]
-        ];
+        return FixturesCollection::getApiloot();
     }
 
     /** Мы на главной странице */

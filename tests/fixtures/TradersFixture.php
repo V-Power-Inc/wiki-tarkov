@@ -20,5 +20,5 @@ class TradersFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Traders';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'traders';
+    public const TABLE_NAME = 'traders';
 }

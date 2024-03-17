@@ -33,28 +33,28 @@ use Yii;
 class Traders extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID            = 'id';
-    const ATTR_TITLE         = 'title';
-    const ATTR_PREVIEW       = 'preview';
-    const ATTR_CONTENT       = 'content';
-    const ATTR_URLTOQUETS    = 'urltoquets';
-    const ATTR_BUTTON_QUESTS = 'button_quests';
-    const ATTR_BUTTON_DETAIL = 'button_detail';
-    const ATTR_BG_STYLE      = 'bg_style';
-    const ATTR_FULLCONTENT   = 'fullcontent';
-    const ATTR_DESCRIPTION   = 'description';
-    const ATTR_KEYWORDS      = 'keywords';
-    const ATTR_URL           = 'url';
-    const ATTR_SORTIR        = 'sortir';
-    const ATTR_ENABLED       = 'enabled';
+    public const ATTR_ID            = 'id';
+    public const ATTR_TITLE         = 'title';
+    public const ATTR_PREVIEW       = 'preview';
+    public const ATTR_CONTENT       = 'content';
+    public const ATTR_URLTOQUETS    = 'urltoquets';
+    public const ATTR_BUTTON_QUESTS = 'button_quests';
+    public const ATTR_BUTTON_DETAIL = 'button_detail';
+    public const ATTR_BG_STYLE      = 'bg_style';
+    public const ATTR_FULLCONTENT   = 'fullcontent';
+    public const ATTR_DESCRIPTION   = 'description';
+    public const ATTR_KEYWORDS      = 'keywords';
+    public const ATTR_URL           = 'url';
+    public const ATTR_SORTIR        = 'sortir';
+    public const ATTR_ENABLED       = 'enabled';
 
     /** @var string $file - Переменная файла превьюшки */
     public $file;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
     
     /**
      * @inheritdoc

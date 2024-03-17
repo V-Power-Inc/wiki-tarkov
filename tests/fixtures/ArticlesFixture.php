@@ -20,5 +20,5 @@ class ArticlesFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Articles';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'articles';
+    public const TABLE_NAME = 'articles';
 }

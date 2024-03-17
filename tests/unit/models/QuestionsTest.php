@@ -10,7 +10,8 @@ namespace app\tests;
 
 use app\models\Questions;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\QuestionsFixture;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты раздела Faq
@@ -23,21 +24,14 @@ use app\tests\fixtures\QuestionsFixture;
  */
 class QuestionsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'questions' => [
-                'class' => QuestionsFixture::class,
-                'dataFile' => codecept_data_dir() . 'questions.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getQuestions());
     }
 
     /** Метод выполняется после каждого теста */

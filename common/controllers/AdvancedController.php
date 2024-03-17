@@ -22,7 +22,7 @@ class AdvancedController extends Controller
     use ControllerRoutesTrait;
 
     /** @var string - Параметр ID */
-    const PARAM_ID = 'id';
+    public const PARAM_ID = 'id';
 
     /**
      * Обработчик ошибок - отображает статусы ответа сервера

@@ -10,7 +10,8 @@ namespace app\tests;
 
 use app\common\helpers\validators\StringValidator;
 use app\models\Maps;
-use app\tests\fixtures\MapsFixture;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты маркеров локаций
@@ -23,21 +24,14 @@ use app\tests\fixtures\MapsFixture;
  */
 class MapsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'maps' => [
-                'class' => MapsFixture::class,
-                'dataFile' => codecept_data_dir() . 'maps.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getMaps());
     }
 
     /** Метод выполняется после каждого теста */

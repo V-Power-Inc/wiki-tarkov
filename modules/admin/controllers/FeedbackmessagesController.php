@@ -9,7 +9,6 @@ use app\models\FeedbackMessagesSearch;
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 use Yii;
 
 /**
@@ -20,13 +19,6 @@ use Yii;
  */
 final class FeedbackmessagesController extends AdminController implements CrudInterface
 {
-    /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_VIEW   = 'view';
-    const ACTION_CREATE = 'create';
-    const ACTION_UPDATE = 'update';
-    const ACTION_DELETE = 'delete';
-
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array
@@ -53,7 +45,7 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
         $searchModel = new FeedbackMessagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -67,31 +59,22 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
      */
     public function actionView($id): string
     {
-        return $this->render(static::ACTION_VIEW, [
+        return $this->render(self::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }
 
     /** Создание через CRUD в этом кейсе не нужно */
     public function actionCreate()
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /** Апдейт через CRUD в этом кейсе не нужно */
     public function actionUpdate(int $id)
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /** Удаление через CRUD в этом кейсе не нужно */
     public function actionDelete(int $id)
-    {
-        /** Редирект на индексную страничку обратной связи */
-        return $this->redirect(static::ACTION_INDEX);
-    }
+    {}
 
     /**
      * Finds the FeedbackMessages model based on its primary key value.

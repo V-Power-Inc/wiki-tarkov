@@ -7,8 +7,10 @@
 
 use yii\helpers\Html;
 
+/** Сетапим title в соответствии с именем ошибки */
 $this->title = $name;
 
+/** Вьюха для отображения ошибок для посетителей сайта */
 ?>
 
 <div class="container">

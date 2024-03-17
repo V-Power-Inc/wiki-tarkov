@@ -26,7 +26,7 @@ final class KeysItem
     public $_items;
 
     /** @var string - Ключ массива с информацией о ключе */
-    const KEYS = 'keys';
+    private const KEYS = 'keys';
 
     /**
      * В конструкторе собираем массив объектов с информацией о ключах если сюда прилетел массив
@@ -44,7 +44,7 @@ final class KeysItem
             foreach ($keys as $obj) {
 
                 /** В цикле получаем информацию по ключу */
-                foreach ($obj[static::KEYS] as $item_key) {
+                foreach ($obj[self::KEYS] as $item_key) {
 
                     /** Создаем новый объект с информацией о ключе */
                     $model = new KeysItem();

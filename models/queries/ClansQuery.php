@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class ClansQuery
  * @package app\models\queries
  */
-class ClansQuery extends ActiveQuery
+final class ClansQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

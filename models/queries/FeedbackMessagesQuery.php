@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class FeedbackMessagesQuery
  * @package app\models\queries
  */
-class FeedbackMessagesQuery extends ActiveQuery
+final class FeedbackMessagesQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

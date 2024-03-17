@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class ApiSearchLogsQuery
  * @package app\models\queries
  */
-class ApiSearchLogsQuery extends ActiveQuery
+final class ApiSearchLogsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

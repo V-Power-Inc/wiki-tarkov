@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * NewsSearch represents the model behind the search form about `app\models\News`.
  */
-class NewsSearch extends News
+final class NewsSearch extends News
 {
     /**
      * Массив валидаций этой модели
@@ -20,19 +20,19 @@ class NewsSearch extends News
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_ENABLED, IntegerValidator::class],
+            [self::ATTR_ENABLED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class],
+            [self::ATTR_TITLE, SafeValidator::class],
 
-            [static::ATTR_URL, SafeValidator::class],
+            [self::ATTR_URL, SafeValidator::class],
 
-            [static::ATTR_PREVIEW, SafeValidator::class],
+            [self::ATTR_PREVIEW, SafeValidator::class],
 
-            [static::ATTR_CONTENT, SafeValidator::class],
+            [self::ATTR_CONTENT, SafeValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class]
+            [self::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 
@@ -72,15 +72,15 @@ class NewsSearch extends News
 
         // grid filtering conditions
         $query->andFilterWhere([
-            static::ATTR_ID => $this->id,
-            static::ATTR_DATE_CREATE => $this->date_create,
-            static::ATTR_ENABLED => $this->enabled,
+            self::ATTR_ID => $this->id,
+            self::ATTR_DATE_CREATE => $this->date_create,
+            self::ATTR_ENABLED => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
-            ->andFilterWhere(['like', static::ATTR_URL, $this->url])
-            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
-            ->andFilterWhere(['like', static::ATTR_CONTENT, $this->content]);
+        $query->andFilterWhere(['like', self::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', self::ATTR_URL, $this->url])
+            ->andFilterWhere(['like', self::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', self::ATTR_CONTENT, $this->content]);
 
         return $dataProvider;
     }

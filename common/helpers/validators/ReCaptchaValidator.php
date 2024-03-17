@@ -19,8 +19,8 @@ use himiklab\yii2\recaptcha\ReCaptchaValidator2;
 final class ReCaptchaValidator extends ReCaptchaValidator2
 {
     /** @var string - Доступ к атрибуту секрета */
-    const ATTR_SECRET = 'secret';
+    public const ATTR_SECRET = 'secret';
 
     /** @var string - Доступ к атрибуту, сообщение, если капчка не проверена */
-    const ATTR_UNCHECKED_MESSAGE = 'uncheckedMessage';
+    public const ATTR_UNCHECKED_MESSAGE = 'uncheckedMessage';
 }

@@ -28,21 +28,21 @@ use Yii;
 final class SiteController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_INDEX                  = 'index';
-    const ACTION_TABLE_PATRONS          = 'table-patrons';
-    const ACTION_KEYS                   = 'keys';
-    const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
-    const ACTION_NEWS                   = 'news';
-    const ACTION_NEWSDETAIL             = 'newsdetail';
-    const ACTION_ARTICLES               = 'articles';
-    const ACTION_ARTICLESARTICLESDETAIL = 'articlesdetail';
-    const ACTION_QUESTIONS              = 'questions';
-    const ACTION_KEYSJSON               = 'keysjson';
-    const ACTION_CURRENCIES             = 'currencies';
-    const ACTION_JSDISABLED             = 'jsdisabled';
-    const ACTION_JSONVALUTE             = 'jsonvalute';
-    const ACTION_CLOSE_OVERLAY          = 'close-overlay';
-    const ACTION_CHANGE_LAYOUT          = 'change-layout';
+    public const ACTION_INDEX                  = 'index';
+    public const ACTION_TABLE_PATRONS          = 'table-patrons';
+    public const ACTION_KEYS                   = 'keys';
+    public const ACTION_DOORKEYSDETAIL         = 'doorkeysdetail';
+    public const ACTION_NEWS                   = 'news';
+    public const ACTION_NEWSDETAIL             = 'newsdetail';
+    public const ACTION_ARTICLES               = 'articles';
+    public const ACTION_ARTICLESARTICLESDETAIL = 'articlesdetail';
+    public const ACTION_QUESTIONS              = 'questions';
+    public const ACTION_KEYSJSON               = 'keysjson';
+    public const ACTION_CURRENCIES             = 'currencies';
+    public const ACTION_JSDISABLED             = 'jsdisabled';
+    public const ACTION_JSONVALUTE             = 'jsonvalute';
+    public const ACTION_CLOSE_OVERLAY          = 'close-overlay';
+    public const ACTION_CHANGE_LAYOUT          = 'change-layout';
 
     /** CSRF валидация POST запросов методов этого контроллера включена по умолачнию */
     public $enableCsrfValidation;
@@ -60,16 +60,16 @@ final class SiteController extends AdvancedController
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
                 'only' => [
-                    static::ACTION_INDEX,
-                    static::ACTION_TABLE_PATRONS,
-                    static::ACTION_KEYS,
-                    static::ACTION_DOORKEYSDETAIL,
-                    static::ACTION_NEWS,
-                    static::ACTION_NEWSDETAIL,
-                    static::ACTION_ARTICLES,
-                    static::ACTION_ARTICLESARTICLESDETAIL,
-                    static::ACTION_QUESTIONS,
-                    static::ACTION_CURRENCIES
+                    self::ACTION_INDEX,
+                    self::ACTION_TABLE_PATRONS,
+                    self::ACTION_KEYS,
+                    self::ACTION_DOORKEYSDETAIL,
+                    self::ACTION_NEWS,
+                    self::ACTION_NEWSDETAIL,
+                    self::ACTION_ARTICLES,
+                    self::ACTION_ARTICLESARTICLESDETAIL,
+                    self::ACTION_QUESTIONS,
+                    self::ACTION_CURRENCIES
                 ],
                 'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
@@ -84,7 +84,7 @@ final class SiteController extends AdvancedController
     public function actionIndex(): string
     {
         /** Рендерим индексную страницу сайта (Главная страница) */
-        return $this->render(static::ACTION_INDEX);
+        return $this->render(self::ACTION_INDEX);
     }
 
     /**

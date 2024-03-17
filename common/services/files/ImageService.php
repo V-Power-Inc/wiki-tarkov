@@ -32,7 +32,7 @@ use yii\web\UploadedFile;
 final class ImageService extends FilesService
 {
     /** @var string - Разделитель в построении маршрута до изображений */
-    const FILE_PATH_SEPARATOR = '/';
+    private const FILE_PATH_SEPARATOR = '/';
 
     /**
      * Метод реализует загрузку файла на сервер

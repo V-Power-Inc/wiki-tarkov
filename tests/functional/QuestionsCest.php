@@ -9,9 +9,9 @@
 namespace Tests\Functional;
 
 use app\controllers\SiteController;
-use app\tests\fixtures\QuestionsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -27,12 +27,7 @@ class QuestionsCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'questions' => [
-                'class' => QuestionsFixture::class,
-                'dataFile' => codecept_data_dir() . 'questions.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getQuestions());
 
         /** Мы на странице списка новостей */
         $I->amOnRoute(SiteController::routeId(SiteController::ACTION_QUESTIONS));

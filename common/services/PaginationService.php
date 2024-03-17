@@ -23,16 +23,16 @@ use Yii;
 final class PaginationService
 {
     /** @var string - Константа, название атрибута даты создания записи у большинства AR моделей */
-    const ATTR_DATE_CREATE = 'date_create';
+    private const ATTR_DATE_CREATE = 'date_create';
 
     /** @var int defaultPageSize - кол-во элементов на странице по умолчанию  */
-    const defaultPageSize = 20;
+    private const defaultPageSize = 20;
 
-    /** @var Pagination $paginator */
-    public $paginator;
+    /** @var Pagination $paginator - Объект класса пагинации */
+    public Pagination $paginator;
 
-    /** @var array|ActiveRecord $items - переменная для хранения набора объектов */
-    public $items;
+    /** @var array|ActiveRecord[] $items - переменная для хранения набора объектов */
+    public array $items;
 
     /**
      * Метод construct объект пагинатора и возвращает полноценный запрос
@@ -54,13 +54,13 @@ final class PaginationService
         /** Если кеш установлен как true - будет запрос с кешированием на 1 час */
         if ($cache) {
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
+                ->orderby([self::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->cache(Yii::$app->params['cacheTime']['one_hour'])
                 ->all();
         } else { /** Если флаг кеша как false - показываем данные без кеша */
             $this->items = $query->offset($this->paginator->offset)
-                ->orderby([static::ATTR_DATE_CREATE => SORT_DESC])
+                ->orderby([self::ATTR_DATE_CREATE => SORT_DESC])
                 ->limit($this->paginator->limit)
                 ->all();
         }

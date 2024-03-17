@@ -10,7 +10,8 @@ namespace app\tests;
 
 use app\models\News;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\NewsFixture;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты новостей
@@ -23,21 +24,14 @@ use app\tests\fixtures\NewsFixture;
  */
 class NewsTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'news' => [
-                'class' => NewsFixture::class,
-                'dataFile' => codecept_data_dir() . 'news.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getNews());
     }
 
     /** Метод выполняется после каждого теста */

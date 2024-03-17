@@ -10,7 +10,7 @@ use app\common\helpers\validators\SafeValidator;
 /**
  * ClansSearch represents the model behind the search form of `app\models\Clans`.
  */
-class ClansSearch extends Clans
+final class ClansSearch extends Clans
 {
     /**
      * Массив валидаций этой модели
@@ -20,19 +20,19 @@ class ClansSearch extends Clans
     public function rules(): array
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_MODERATED, IntegerValidator::class],
+            [self::ATTR_MODERATED, IntegerValidator::class],
 
-            [static::ATTR_TITLE, SafeValidator::class],
+            [self::ATTR_TITLE, SafeValidator::class],
 
-            [static::ATTR_DESCRIPTION, SafeValidator::class],
+            [self::ATTR_DESCRIPTION, SafeValidator::class],
 
-            [static::ATTR_PREVIEW, SafeValidator::class],
+            [self::ATTR_PREVIEW, SafeValidator::class],
 
-            [static::ATTR_LINK, SafeValidator::class],
+            [self::ATTR_LINK, SafeValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class]
+            [self::ATTR_DATE_CREATE, SafeValidator::class]
         ];
     }
 
@@ -77,10 +77,10 @@ class ClansSearch extends Clans
             'moderated' => $this->moderated,
         ]);
 
-        $query->andFilterWhere(['like', static::ATTR_TITLE, $this->title])
-            ->andFilterWhere(['like', static::ATTR_DESCRIPTION, $this->description])
-            ->andFilterWhere(['like', static::ATTR_PREVIEW, $this->preview])
-            ->andFilterWhere(['like', static::ATTR_LINK, $this->link]);
+        $query->andFilterWhere(['like', self::ATTR_TITLE, $this->title])
+            ->andFilterWhere(['like', self::ATTR_DESCRIPTION, $this->description])
+            ->andFilterWhere(['like', self::ATTR_PREVIEW, $this->preview])
+            ->andFilterWhere(['like', self::ATTR_LINK, $this->link]);
 
         return $dataProvider;
     }

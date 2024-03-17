@@ -13,5 +13,5 @@ class PatronsFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Patrons';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'patrons';
+    public const TABLE_NAME = 'patrons';
 }

@@ -27,9 +27,6 @@ final class CheckPageCodes
      */
     public static function start(\FunctionalTester $I)
     {
-        /** Ожидание */
-        $I->wantTo('Получить страницу с кодом 200');
-
         /** Вижу что код ответа не 404 */
         $I->cantSeeResponseCodeIs(404);
 
@@ -38,5 +35,17 @@ final class CheckPageCodes
 
         /** Вижу корректный код - 200 */
         $I->canSeeResponseCodeIs(200);
+    }
+
+    /**
+     * Проверяем что код страницы 405 (Такой код на страницах удаления в CRUD если не через POST идем)
+     *
+     * @param \FunctionalTester $I
+     * @return void
+     */
+    public static function checkMethodNotAllowed(\FunctionalTester $I)
+    {
+        /** Видим что код ответа - 405 */
+        $I->canSeeResponseCodeIs(405);
     }
 }

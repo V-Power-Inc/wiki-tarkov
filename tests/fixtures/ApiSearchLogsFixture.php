@@ -13,5 +13,5 @@ class ApiSearchLogsFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\ApiSearchLogs';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'api_search_logs';
+    public const TABLE_NAME = 'api_search_logs';
 }

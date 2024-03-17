@@ -19,12 +19,12 @@ use yii\db\ActiveRecord;
 class FeedbackMessages extends ActiveRecord
 {
     /** @var string - Константа, название таблицы */
-    const TABLE_NAME = 'feedback_messages';
+    public const TABLE_NAME = 'feedback_messages';
 
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID = 'id';
-    const ATTR_CONTENT = 'content';
-    const ATTR_DATE_CREATE = 'date_create';
+    public const ATTR_ID = 'id';
+    public const ATTR_CONTENT = 'content';
+    public const ATTR_DATE_CREATE = 'date_create';
 
     /**
      * Название таблицы

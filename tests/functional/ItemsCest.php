@@ -8,9 +8,9 @@
 
 namespace Tests\Functional;
 
-use app\tests\fixtures\ItemsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -26,12 +26,7 @@ class ItemsCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'items' => [
-                'class' => ItemsFixture::class,
-                'dataFile' => codecept_data_dir() . 'items.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getItems());
 
         /** URL адрес до детальной страницы с лутом */
         $I->amOnRoute('/loot/sv-98.html');

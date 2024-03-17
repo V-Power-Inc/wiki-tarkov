@@ -9,6 +9,7 @@
 namespace Tests\Functional;
 
 use app\common\controllers\AdminController;
+use app\common\interfaces\CrudInterface;
 use app\modules\admin\controllers\CurrenciesController;
 use app\modules\admin\controllers\ArticlesController;
 use app\modules\admin\controllers\BartersController;
@@ -23,15 +24,15 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\QuestionsController;
 use app\modules\admin\controllers\SkillsController;
 use app\modules\admin\controllers\TradersController;
-use app\tests\fixtures\AdminsFixture;
+use tests\_support\FixturesCollection;
 
 /**
  * Функциональные тесты для проверки страниц админки
  *
- * Class AdminPagesCest
+ * Class AdminPagesCheckAccessCest
  * @package Tests\Functional
  */
-class AdminPagesCest
+class AdminPagesCheckAccessCest
 {
     /**
      * Фикстуры с пользователями сайта
@@ -39,12 +40,7 @@ class AdminPagesCest
      */
     public function _fixtures()
     {
-        return [
-            'admins' => [
-                'class' => AdminsFixture::class,
-                'dataFile' => codecept_data_dir() . 'admins.php'
-            ]
-        ];
+        return FixturesCollection::getAdmins();
     }
 
     /** Метод проверяет что на страницы админки мы не можем зайти без авторизации */
@@ -170,20 +166,20 @@ class AdminPagesCest
     {
         /** Возвращаем массив с урлами для проверки */
         return [
-            CurrenciesController::routeId(CurrenciesController::ACTION_INDEX),
-            BartersController::routeId(BartersController::ACTION_INDEX),
-            ArticlesController::routeId(ArticlesController::ACTION_INDEX),
-            CategoryController::routeId(CategoryController::ACTION_INDEX),
-            CatskillsController::routeId(CatskillsController::ACTION_INDEX),
-            ClansController::routeId(ClansController::ACTION_INDEX),
-            DefaultController::routeId(DefaultController::ACTION_INDEX),
-            DoorkeysController::routeId(DoorkeysController::ACTION_INDEX),
-            ItemsController::routeId(ItemsController::ACTION_INDEX),
-            NewsController::routeId(NewsController::ACTION_INDEX),
-            QuestionsController::routeId(QuestionsController::ACTION_INDEX),
-            SkillsController::routeId(SkillsController::ACTION_INDEX),
-            TradersController::routeId(TradersController::ACTION_INDEX),
-            FeedbackmessagesController::routeId(FeedbackmessagesController::ACTION_INDEX)
+            CurrenciesController::routeId(CrudInterface::ACTION_INDEX),
+            BartersController::routeId(CrudInterface::ACTION_INDEX),
+            ArticlesController::routeId(CrudInterface::ACTION_INDEX),
+            CategoryController::routeId(CrudInterface::ACTION_INDEX),
+            CatskillsController::routeId(CrudInterface::ACTION_INDEX),
+            ClansController::routeId(CrudInterface::ACTION_INDEX),
+            DefaultController::routeId(CrudInterface::ACTION_INDEX),
+            DoorkeysController::routeId(CrudInterface::ACTION_INDEX),
+            ItemsController::routeId(CrudInterface::ACTION_INDEX),
+            NewsController::routeId(CrudInterface::ACTION_INDEX),
+            QuestionsController::routeId(CrudInterface::ACTION_INDEX),
+            SkillsController::routeId(CrudInterface::ACTION_INDEX),
+            TradersController::routeId(CrudInterface::ACTION_INDEX),
+            FeedbackmessagesController::routeId(CrudInterface::ACTION_INDEX)
         ];
     }
 }
