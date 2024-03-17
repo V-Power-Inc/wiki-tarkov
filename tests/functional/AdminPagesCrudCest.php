@@ -214,14 +214,13 @@ class AdminPagesCrudCest
         CheckCrud::onCreate($I, $url_create);
 
         // TODO: Тут что-то не так, остальные тесты не проходят в контейнере, однако проходят на DEV'e
+        /** Проверяем страницу просмотра записей */
+        CheckCrud::onView($I, $url_view);
 
-//        /** Проверяем страницу просмотра записей */
-//        CheckCrud::onView($I, $url_view);
-//
-//        /** Проверяем страницу редактирования записей */
-//        CheckCrud::onEdit($I, $url_edit);
-//
-//        /** Проверяем страницу удаления записей */
-//        CheckCrud::onDelete($I, $url_delete);
+        /** Проверяем страницу редактирования записей */
+        CheckCrud::onEdit($I, $url_edit);
+
+        /** Проверяем страницу удаления записей */
+        CheckCrud::onDelete($I, $url_delete);
     }
 }
