@@ -70,7 +70,7 @@ jobs:
 
           echo "Даем больше прав юзеру MySQL для создания триггеров"
 
-          docker exec -t db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
+          docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
             CREATE DATABASE test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;

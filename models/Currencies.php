@@ -81,9 +81,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс доллара из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeDollar(): ActiveRecord
+    public static function takeDollar()
     {
         return static::find()->where([static::ATTR_TITLE => 'Доллар'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -91,9 +91,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс евро из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeEuro(): ActiveRecord
+    public static function takeEuro()
     {
         return static::find()->where([static::ATTR_TITLE => 'Евро'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -101,9 +101,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс биткоина из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeBitkoin(): ActiveRecord
+    public static function takeBitkoin()
     {
         return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
