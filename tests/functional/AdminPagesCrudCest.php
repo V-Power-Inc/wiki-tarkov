@@ -198,22 +198,21 @@ class AdminPagesCrudCest
      */
     private function executeCrudChecking(\FunctionalTester $I, string $class)
     {
-        /** Формируем урл создания записи с учетом прилетевшего класса */
+        /** Формируем урл создания записи с учетом прилетевшего класса контроллера */
         $url_create = Url::to($class::getUrlRoute(CrudInterface::ACTION_CREATE));
 
-        /** Формируем урл просмотра записи с учетом прилетевшего класса */
+        /** Формируем урл просмотра записи с учетом прилетевшего класса контроллера */
         $url_view = Url::to($class::getUrlRoute(CrudInterface::ACTION_VIEW, [self::PARAM_ID => self::ID_FIRST_ROW]));
 
-        /** Формируем урл редактирования записи с учетом прилетевшего класса */
+        /** Формируем урл редактирования записи с учетом прилетевшего класса контроллера */
         $url_edit = Url::to($class::getUrlRoute(CrudInterface::ACTION_UPDATE, [self::PARAM_ID => self::ID_FIRST_ROW]));
 
-        /** Формируем урл редактирования записи с учетом прилетевшего класса */
+        /** Формируем урл редактирования записи с учетом прилетевшего класса контроллера */
         $url_delete = Url::to($class::getUrlRoute(CrudInterface::ACTION_DELETE, [self::PARAM_ID => self::ID_FIRST_ROW]));
 
         /** Проверяем страницу создания новых записей */
         CheckCrud::onCreate($I, $url_create);
 
-        // TODO: Тут что-то не так, остальные тесты не проходят в контейнере, однако проходят на DEV'e
         /** Проверяем страницу просмотра записей */
         CheckCrud::onView($I, $url_view);
 
