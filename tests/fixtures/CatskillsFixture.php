@@ -19,5 +19,5 @@ class CatskillsFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Catskills';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'cat_skills';
+    public const TABLE_NAME = 'cat_skills';
 }

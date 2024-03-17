@@ -19,7 +19,7 @@ use yii\helpers\Url;
  * Class MenuComponent
  * @package app\components
  */
-class MenuComponent
+final class MenuComponent
 {
     /** Атрибуты класса для сетапа активности вкладки при выбранном элементе меню */
     private static $keys = null;
@@ -256,15 +256,15 @@ class MenuComponent
     private static function getActiveNavByUrlArray()
     {
         /** Получаем активность меню для раздела - интерактивные карты локаций */
-        static::$intermaps = static::checkActiveTabByUrlArray(MenuUrlsComponent::getMapsUrlArray());
+        self::$intermaps = self::checkActiveTabByUrlArray(MenuUrlsComponent::getMapsUrlArray());
 
         /** Получаем активность меню для раздела - умения персонажа */
-        static::$skills = static::checkActiveTabByUrlArray(MenuUrlsComponent::getSkillsUrlArray());
+        self::$skills = self::checkActiveTabByUrlArray(MenuUrlsComponent::getSkillsUrlArray());
 
         /** Получаем активность меню для раздела - торговцы и квесты */
-        static::$pagequests = static::checkActiveTabByUrlArray(MenuUrlsComponent::getTradersUrlArray());
+        self::$pagequests = self::checkActiveTabByUrlArray(MenuUrlsComponent::getTradersUrlArray());
 
         /** Получаем активность меню для раздела - прочее */
-        static::$other = static::checkActiveTabByUrlArray(MenuUrlsComponent::getOtherUlrArray());
+        self::$other = self::checkActiveTabByUrlArray(MenuUrlsComponent::getOtherUlrArray());
     }
 }

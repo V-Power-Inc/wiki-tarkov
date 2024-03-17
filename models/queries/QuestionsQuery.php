@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class QuestionsQuery
  * @package app\models\queries
  */
-class QuestionsQuery extends ActiveQuery
+final class QuestionsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

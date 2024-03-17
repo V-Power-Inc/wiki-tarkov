@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class CategoryQuery
  * @package app\models\queries
  */
-class CategoryQuery extends ActiveQuery
+final class CategoryQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

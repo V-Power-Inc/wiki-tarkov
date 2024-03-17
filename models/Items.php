@@ -42,42 +42,42 @@ use Yii;
 class Items extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID            = 'id';
-    const ATTR_TITLE         = 'title';
-    const ATTR_PREVIEW       = 'preview';
-    const ATTR_SHORTDESC     = 'shortdesc';
-    const ATTR_CONTENT       = 'content';
-    const ATTR_DATE_CREATE   = 'date_create';
-    const ATTR_DATE_UPDATE   = 'date_update';
-    const ATTR_ACTIVE        = 'active';
-    const ATTR_URL           = 'url';
-    const ATTR_DESCRIPTION   = 'description';
-    const ATTR_KEYWORDS      = 'keywords';
-    const ATTR_PARENTCAT_ID  = 'parentcat_id';
-    const ATTR_QUEST_ITEM    = 'quest_item';
-    const ATTR_TRADER_GROUP  = 'trader_group';
-    const ATTR_SEARCH_WORDS  = 'search_words';
-    const ATTR_MODULE_WEAPON = 'module_weapon';
-    const ATTR_CREATOR       = 'creator';
+    public const ATTR_ID            = 'id';
+    public const ATTR_TITLE         = 'title';
+    public const ATTR_PREVIEW       = 'preview';
+    public const ATTR_SHORTDESC     = 'shortdesc';
+    public const ATTR_CONTENT       = 'content';
+    public const ATTR_DATE_CREATE   = 'date_create';
+    public const ATTR_DATE_UPDATE   = 'date_update';
+    public const ATTR_ACTIVE        = 'active';
+    public const ATTR_URL           = 'url';
+    public const ATTR_DESCRIPTION   = 'description';
+    public const ATTR_KEYWORDS      = 'keywords';
+    public const ATTR_PARENTCAT_ID  = 'parentcat_id';
+    public const ATTR_QUEST_ITEM    = 'quest_item';
+    public const ATTR_TRADER_GROUP  = 'trader_group';
+    public const ATTR_SEARCH_WORDS  = 'search_words';
+    public const ATTR_MODULE_WEAPON = 'module_weapon';
+    public const ATTR_CREATOR       = 'creator';
 
     /** Константы связей таблицы */
-    const RELATION_PARENTCAT = 'parentcat';
-    const RELATION_MAINCAT   = 'maincat';
+    public const RELATION_PARENTCAT = 'parentcat';
+    public const RELATION_MAINCAT   = 'maincat';
 
     /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** @var string $questitem - Переменная квестового предмета */
     public $questitem;
-    const QUESTITEM = 'questitem';
+    public const QUESTITEM = 'questitem';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /** @var string Заглушка имени форм */
-    const formName = 'Items';
+    public const formName = 'Items';
 
     /**
      * @inheritdoc

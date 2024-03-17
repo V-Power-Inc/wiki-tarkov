@@ -8,10 +8,9 @@
 
 namespace Tests\Functional;
 
-use app\tests\fixtures\TasksFixture;
-use app\tests\fixtures\TradersFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -27,16 +26,7 @@ class TasksCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'traders' => [
-                'class' => TradersFixture::class,
-                'dataFile' => codecept_data_dir() . 'traders.php'
-            ],
-            'tasks' => [
-                'class' => TasksFixture::class,
-                'dataFile' => codecept_data_dir() . 'tasks.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getTradersWithTasks());
 
         /** Путь до страницы с квестами Барахольщика */
         $I->amOnRoute('quests-of-traders/baraholshik-quests');

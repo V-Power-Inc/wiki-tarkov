@@ -23,9 +23,9 @@ use yii;
 final class SkillsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_MAINSKILLS     = 'mainskills';
-    const ACTION_SKILLSCATEGORY = 'skillscategory';
-    const ACTION_SKILLSDETAIL   = 'skillsdetail';
+    public const ACTION_MAINSKILLS     = 'mainskills';
+    public const ACTION_SKILLSCATEGORY = 'skillscategory';
+    public const ACTION_SKILLSDETAIL   = 'skillsdetail';
 
     /**
      * Массив поведения контроллера

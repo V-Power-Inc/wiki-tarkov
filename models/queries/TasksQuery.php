@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class TasksQuery
  * @package app\models\queries
  */
-class TasksQuery extends ActiveQuery
+final class TasksQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

@@ -8,13 +8,18 @@
 
 namespace app\common\models\tasks\db;
 
+use app\common\constants\log\ErrorDesc;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
+use app\common\services\LogService;
 use app\common\services\TradersService;
 use app\models\Tasks;
+use yii\base\ErrorException;
+use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use yii\helpers\Json;
+use Yii;
 
 /**
  * Модель с атрибутами данных квестов, в которую данные предварительно сетапятся, перед загрузкой в AR
@@ -27,34 +32,34 @@ final class TaskModel extends Model
 {
     /** @var string - Название квеста */
     public $quest;
-    const ATTR_QUEST = 'quest';
+    private const ATTR_QUEST = 'quest';
 
     /** @var string - Имя торговца */
     public $trader_name;
-    const ATTR_TRADER_NAME = 'trader_name';
+    private const ATTR_TRADER_NAME = 'trader_name';
 
     /** @var string - Иконка торговца */
     public $trader_icon;
-    const ATTR_TRADER_ICON = 'trader_icon';
+    private const ATTR_TRADER_ICON = 'trader_icon';
 
     /** @var string - Строка с JSON данными о квесте (Содержит в себе полный набор данных) */
     public $json;
-    const ATTR_JSON = 'json';
+    private const ATTR_JSON = 'json';
 
     /** @var int - Флаг активности записи (0 - не активна / 1 - активна), по-умолчанию активна */
     public $active = 1;
-    const ATTR_ACTIVE = 'active';
+    private const ATTR_ACTIVE = 'active';
 
     /** @var int - Флаг устаревания записи (0 - актуальна / 1 - не актуальна), по-умолчанию актуальна */
     public $old = 0;
-    const ATTR_OLD = 'old';
+    private const ATTR_OLD = 'old';
 
     /** @var string - Url до квестов торговца */
     public $url;
-    const ATTR_URL = 'url';
+    private const ATTR_URL = 'url';
 
     /** @var string - Ключ массива с информацией о торговце */
-    const TRADER = 'trader';
+    private const TRADER = 'trader';
 
     /**
      * В конструкторе сетапим атрибутам текущей модели данные о квесте, если прилетел массив
@@ -69,20 +74,31 @@ final class TaskModel extends Model
         /** Если массив с данными о квесте прилетел */
         if (!empty($task)) {
 
-            /** Сетапим название квеста атрибуту текущей модели */
-            $this->quest = $task['name'];
+            /** Через try пробуем в атрибут закодировать JSON */
+            try {
+                /** Сетапим название квеста атрибуту текущей модели */
+                $this->quest = $task['name'];
 
-            /** Сетапим имя торговца атрибуту текущей модели */
-            $this->trader_name = $task[static::TRADER]['name'];
+                /** Сетапим имя торговца атрибуту текущей модели */
+                $this->trader_name = $task[self::TRADER]['name'];
 
-            /** Сетапим иконку торговца атрибуту текущей модели */
-            $this->trader_icon = $task[static::TRADER]['imageLink'];
+                /** Сетапим иконку торговца атрибуту текущей модели */
+                $this->trader_icon = $task[self::TRADER]['imageLink'];
 
-            /** Сетапим полный JSON с данными атрибуту текущей модели */
-            $this->json = Json::encode($task);
+                /** Сетапим полный JSON с данными атрибуту текущей модели */
+                $this->json = Json::encode($task);
 
-            /** Сетапим URL до квестов конкретного торговца */
-            $this->url = TradersService::takeApiTasks($task[static::TRADER]['name']);
+                /** Сетапим URL до квестов конкретного торговца */
+                $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);
+
+            } catch (InvalidArgumentException|ErrorException $e) {
+
+                /** Сетапим null для Json - чтобы не прошел валидацию на сохранение */
+                $this->json = null;
+
+                /** Логируем что API вернул кривые данные */
+                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+            }
         }
 
         parent::__construct($config);
@@ -106,23 +122,23 @@ final class TaskModel extends Model
     public function rules(): array
     {
         return [
-            [static::ATTR_QUEST, RequiredValidator::class],
-            [static::ATTR_QUEST, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_QUEST, RequiredValidator::class],
+            [self::ATTR_QUEST, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_TRADER_NAME, RequiredValidator::class],
-            [static::ATTR_TRADER_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_TRADER_NAME, RequiredValidator::class],
+            [self::ATTR_TRADER_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_TRADER_ICON, RequiredValidator::class],
-            [static::ATTR_TRADER_ICON, StringValidator::class],
+            [self::ATTR_TRADER_ICON, RequiredValidator::class],
+            [self::ATTR_TRADER_ICON, StringValidator::class],
 
-            [static::ATTR_JSON, RequiredValidator::class],
-            [static::ATTR_JSON, StringValidator::class],
+            [self::ATTR_JSON, RequiredValidator::class],
+            [self::ATTR_JSON, StringValidator::class],
 
-            [static::ATTR_ACTIVE, IntegerValidator::class],
+            [self::ATTR_ACTIVE, IntegerValidator::class],
 
-            [static::ATTR_OLD, IntegerValidator::class],
+            [self::ATTR_OLD, IntegerValidator::class],
 
-            [static::ATTR_URL, StringValidator::class]
+            [self::ATTR_URL, StringValidator::class]
         ];
     }
 

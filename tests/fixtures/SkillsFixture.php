@@ -19,5 +19,5 @@ class SkillsFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Skills';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'skills';
+    public const TABLE_NAME = 'skills';
 }

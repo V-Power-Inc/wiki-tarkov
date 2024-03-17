@@ -25,35 +25,35 @@ use Yii;
  * Class ClansForm
  * @package app\common\models\forms
  */
-class ClansForm extends Model
+final class ClansForm extends Model
 {
     /** @var string - Название клана */
     public $title;
-    const ATTR_TITLE = 'title';
+    public const ATTR_TITLE = 'title';
 
     /** @var string - Описание клана */
     public $description;
-    const ATTR_DESCRIPTION = 'description';
+    public const ATTR_DESCRIPTION = 'description';
 
     /** @var string - Превьюшка клана */
     public $preview;
-    const ATTR_PREVIEW = 'preview';
+    public const ATTR_PREVIEW = 'preview';
 
     /** @var string - Ссылка на страницу клана */
     public $link;
-    const ATTR_LINK = 'link';
+    public const ATTR_LINK = 'link';
 
     /** @var string - Дата обновления записи */
     public $date_update;
-    const ATTR_DATE_UPDATE = 'date_update';
+    public const ATTR_DATE_UPDATE = 'date_update';
 
     /** @var string $file - Переменная файла превьюшки */
     public $file;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /** @var string $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
-    const RECAPTCHA = 'reCaptcha';
+    public const RECAPTCHA = 'reCaptcha';
 
     /**
      * Массив валидаций этой модели

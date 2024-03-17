@@ -20,14 +20,14 @@ use yii\db\ActiveRecord;
 class Currencies extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID      = 'id';
-    const ATTR_TITLE   = 'title';
-    const ATTR_VALUE   = 'value';
-    const ATTR_ENABLED = 'enabled';
+    public const ATTR_ID      = 'id';
+    public const ATTR_TITLE   = 'title';
+    public const ATTR_VALUE   = 'value';
+    public const ATTR_ENABLED = 'enabled';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /**
      * @inheritdoc
@@ -81,9 +81,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс доллара из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeDollar(): ActiveRecord
+    public static function takeDollar()
     {
         return static::find()->where([static::ATTR_TITLE => 'Доллар'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -91,9 +91,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс евро из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeEuro(): ActiveRecord
+    public static function takeEuro()
     {
         return static::find()->where([static::ATTR_TITLE => 'Евро'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }
@@ -101,9 +101,9 @@ class Currencies extends ActiveRecord
     /**
      * Достаем курс биткоина из таблицы
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public static function takeBitkoin(): ActiveRecord
+    public static function takeBitkoin()
     {
         return static::find()->where([static::ATTR_TITLE => 'Биткоин'])->cache(Yii::$app->params['cacheTime']['one_hour'])->One();
     }

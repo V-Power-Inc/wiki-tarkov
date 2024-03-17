@@ -18,13 +18,6 @@ use yii\filters\VerbFilter;
  */
 final class MapsController extends AdminController implements CrudInterface
 {
-    /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_VIEW   = 'view';
-    const ACTION_CREATE = 'create';
-    const ACTION_UPDATE = 'update';
-    const ACTION_DELETE = 'delete';
-
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array
@@ -55,7 +48,7 @@ final class MapsController extends AdminController implements CrudInterface
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_INDEX, [
+        return $this->render(self::ACTION_INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -71,7 +64,7 @@ final class MapsController extends AdminController implements CrudInterface
     public function actionView($id): string
     {
         /** Рендерим вьюху с детальной информацией по маркеру */
-        return $this->render(static::ACTION_VIEW, [
+        return $this->render(self::ACTION_VIEW, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -93,12 +86,12 @@ final class MapsController extends AdminController implements CrudInterface
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             /** Редирект на страницу детального просмотра данных о маркере */
-            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
+            return $this->redirect([self::ACTION_VIEW, self::PARAM_ID => $model->id]);
 
         } else { /** В ином случае */
 
             /** Рендер вьюхи создания маркера */
-            return $this->render(static::ACTION_CREATE, [
+            return $this->render(self::ACTION_CREATE, [
                 'model' => $model,
             ]);
         }
@@ -123,12 +116,12 @@ final class MapsController extends AdminController implements CrudInterface
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             /** Редиректим пользователя на страницу детального просмотра данных по маркеру */
-            return $this->redirect([static::ACTION_VIEW, static::PARAM_ID => $model->id]);
+            return $this->redirect([self::ACTION_VIEW, self::PARAM_ID => $model->id]);
 
         } else { /** В ином случае */
 
             /** Рендерим вьюху редактирования */
-            return $this->render(static::ACTION_UPDATE, [
+            return $this->render(self::ACTION_UPDATE, [
                 'model' => $model,
             ]);
         }
@@ -146,7 +139,7 @@ final class MapsController extends AdminController implements CrudInterface
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
-        return $this->redirect([static::ACTION_INDEX]);
+        return $this->redirect([self::ACTION_INDEX]);
     }
 
     /**

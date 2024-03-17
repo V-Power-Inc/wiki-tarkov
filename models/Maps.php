@@ -32,34 +32,34 @@ use Yii;
 class Maps extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID           = 'id';
-    const ATTR_NAME         = 'name';
-    const ATTR_MAP          = 'map';
-    const ATTR_MARKER_GROUP = 'marker_group';
-    const ATTR_COORDS_X     = 'coords_x';
-    const ATTR_COORDS_Y     = 'coords_y';
-    const ATTR_CONTENT      = 'content';
-    const ATTR_ENABLED      = 'enabled';
-    const ATTR_CUSTOMICON   = 'customicon';
-    const ATTR_EXITS_GROUP  = 'exits_group';
-    const ATTR_EXIT_ANYWAY  = 'exit_anyway';
-    const ATTR_DATE_UPDATE  = 'date_update';
+    public const ATTR_ID           = 'id';
+    public const ATTR_NAME         = 'name';
+    public const ATTR_MAP          = 'map';
+    public const ATTR_MARKER_GROUP = 'marker_group';
+    public const ATTR_COORDS_X     = 'coords_x';
+    public const ATTR_COORDS_Y     = 'coords_y';
+    public const ATTR_CONTENT      = 'content';
+    public const ATTR_ENABLED      = 'enabled';
+    public const ATTR_CUSTOMICON   = 'customicon';
+    public const ATTR_EXITS_GROUP  = 'exits_group';
+    public const ATTR_EXIT_ANYWAY  = 'exit_anyway';
+    public const ATTR_DATE_UPDATE  = 'date_update';
 
     /** Константы существующих локаций */
-    const MAP_ZAVOD      = 'Завод';
-    const MAP_BEREG      = 'Берег';
-    const MAP_TAMOJNYA   = 'Таможня';
-    const MAP_LABORATORY = 'Лаборатория';
-    const MAP_FOREST     = 'Лес';
-    const MAP_RAZVYAZKA  = 'Развязка';
+    protected const MAP_ZAVOD      = 'Завод';
+    protected const MAP_BEREG      = 'Берег';
+    protected const MAP_TAMOJNYA   = 'Таможня';
+    protected const MAP_LABORATORY = 'Лаборатория';
+    protected const MAP_FOREST     = 'Лес';
+    protected const MAP_RAZVYAZKA  = 'Развязка';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /** @var string $file - Переменная файла превьюшки null */
     public $file = null;
-    const FILE = 'file';
+    public const FILE = 'file';
 
     /**
      * {@inheritdoc}

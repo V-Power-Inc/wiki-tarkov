@@ -20,5 +20,5 @@ class NewsFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\News';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'news';
+    public const TABLE_NAME = 'news';
 }

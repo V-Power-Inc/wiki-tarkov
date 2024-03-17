@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class NewsQuery
  * @package app\models\queries
  */
-class NewsQuery extends ActiveQuery
+final class NewsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

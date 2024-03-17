@@ -13,5 +13,5 @@ class AdminsFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Admins';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'admins';
+    public const TABLE_NAME = 'admins';
 }

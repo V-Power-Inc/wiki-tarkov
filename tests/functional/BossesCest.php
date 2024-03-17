@@ -9,9 +9,9 @@
 namespace Tests\Functional;
 
 use app\controllers\BossesController;
-use app\tests\fixtures\BossesFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -27,12 +27,7 @@ class BossesCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'bosses' => [
-                'class' => BossesFixture::class,
-                'dataFile' => codecept_data_dir() . 'bosses.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getBosses());
 
         /** Мы на главной странице боссов */
         $I->amOnRoute(BossesController::routeId(BossesController::ACTION_INDEX));

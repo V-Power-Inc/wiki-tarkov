@@ -11,8 +11,9 @@
 namespace app\tests;
 
 use app\models\Clans;
-use app\tests\fixtures\ClansFixture;
 use app\common\helpers\validators\StringValidator;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Class ClansTest
@@ -23,21 +24,14 @@ use app\common\helpers\validators\StringValidator;
  */
 class ClansTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     public function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'clans' => [
-                'class' => ClansFixture::class,
-                'dataFile' => codecept_data_dir() . 'clans.php'
-            ],
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getClans());
     }
 
     /** Метод выполняется после каждого теста */

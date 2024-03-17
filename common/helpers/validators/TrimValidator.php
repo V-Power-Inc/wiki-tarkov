@@ -16,7 +16,8 @@ use yii\validators\FilterValidator;
  * Class TrimValidator
  * @package app\common\helpers\validators
  */
-final class TrimValidator extends FilterValidator {
+final class TrimValidator extends FilterValidator
+{
     public $filter      = 'trim';
     public $skipOnEmpty = true;
 }

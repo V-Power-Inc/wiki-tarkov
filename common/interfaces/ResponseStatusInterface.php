@@ -16,23 +16,23 @@ namespace app\common\interfaces;
 interface ResponseStatusInterface
 {
     /** @var int - Константа, код ответа 200 - все ок */
-    const OK_CODE = 200;
+    public const OK_CODE = 200;
 
     /** @var int - Константа, код ответа сервера 301 - редирект, перемещено навсегда */
-    const REDIRECT_CODE = 301;
+    public const REDIRECT_CODE = 301;
 
     /** @var int - Константа, код ответа сервера 302 - редирект, перемещено временно */
-    const REDIRECT_TEMPORARILY_CODE = 302;
+    public const REDIRECT_TEMPORARILY_CODE = 302;
 
     /** @var int - Константа, код ответа сервера 400 - некорретный запрос */
-    const BAD_REQUEST_CODE = 400;
+    public const BAD_REQUEST_CODE = 400;
 
     /** @var int - Константа, код ответа сервера 403 - доступ запрещен */
-    const FORBIDDEN_CODE = 403;
+    public const FORBIDDEN_CODE = 403;
 
     /** @var int - Константа, код ответа 404 - страница не найдена */
-    const NOT_FOUND_CODE = 404;
+    public const NOT_FOUND_CODE = 404;
 
     /** @var int - Константа, код ответа 500 - ошибка на стороне сервера */
-    const SERVER_ERROR_CODE = 500;
+    public const SERVER_ERROR_CODE = 500;
 }

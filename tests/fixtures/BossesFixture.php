@@ -15,5 +15,5 @@ class BossesFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\Bosses';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'bosses';
+    public const TABLE_NAME = 'bosses';
 }

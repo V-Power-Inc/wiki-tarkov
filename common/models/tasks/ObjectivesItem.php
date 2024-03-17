@@ -26,7 +26,7 @@ final class ObjectivesItem
     public $optional;
 
     /** @var ObjectivesItem[] - Массив объектов необходимых для выполнения задачи */
-    public $_items = [];
+    public array $_items = [];
 
     /**
      * В конструкторе - сетапим атрибуты требований задачи, если массив сюда прилетел

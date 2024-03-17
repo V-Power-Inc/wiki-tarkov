@@ -53,7 +53,7 @@ $this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::c
 
             <!-- Начало рассчетной части -->
             
-            <?php if($dollar->enabled==1): ?>
+            <?php if(!empty($dollar) && $dollar->enabled==1): ?>
                 <!-- Строка курса доллара -->
                 <h2 class="curencies-title">Курс Доллара</h2>
                 <p class="size-16 alert alert-info">Как было сказано выше - доллар это ходовая валюта у торговца Миротворец - ниже вы сможете узнать актуальный курс доллара, а также воспользоваться калькулятором для рассчета цен.</p>
@@ -88,7 +88,7 @@ $this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::c
                 </div>
             <?php endif; ?>
 
-            <?php if($euro->enabled==1): ?>
+            <?php if(!empty($euro) && $euro->enabled==1): ?>
                 <!-- Строка курса евро -->
                 <h2 class="curencies-title">Курс Евро</h2>
                 <p class="size-16 alert alert-info">Евро валюта является ходовой у торговца Механика, за нее он продает различные дополнения для вашего оружия в виде модулей, однако не только он продает товары за евро, у Лыжника также можно найти несколько товаров продаваемых за евро.</p>
@@ -124,7 +124,7 @@ $this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::c
             <?php endif; ?>
 
 
-            <?php if($bitkoin->enabled==1): ?>
+            <?php if(!empty($bitkoin) && $bitkoin->enabled==1): ?>
                 <!-- Строка курса биткоина -->
                 <h2 class="curencies-title">Курс Биткоина</h2>
                 <p class="size-16 alert alert-info">Это самая дорогостоющая валюта, стоимость 1 биткоина в Таркове составляет десятки тысяч рублей. Валюта в ходу у Механика, за нее у него можно купить оружие с отличными боевыми характеристиками. Зачастую ЧВК используют биткоины также для того, чтобы поправить свое финансовое положение - следовательно продавать биткоин тоже очень выгодно.</p>
@@ -160,46 +160,48 @@ $this->registerJsFile('js/currencies.js?v=5.5.13', ['depends' => [JqueryAsset::c
             <?php endif; ?>
 
 
-            <!-- Блок пересчета с рублей на другие виды валют -->
-            <div style="padding: 10px;">
+            <?php if (!empty($dollar) && !empty($euro) && !empty($bitkoin)): ?>
+                <!-- Блок пересчета с рублей на другие виды валют -->
+                <div style="padding: 10px;">
 
-                <!-- Строка курса биткоина -->
-                <h2 class="curencies-title">С рублей на другие валюты</h2>
-                <p class="size-16 alert alert-info">В этом блоке вы можете ввести количество рублей, чтобы узнать сколько других валют сможете купить по текущим курсам.</p>
+                    <!-- Строка курса биткоина -->
+                    <h2 class="curencies-title">С рублей на другие валюты</h2>
+                    <p class="size-16 alert alert-info">В этом блоке вы можете ввести количество рублей, чтобы узнать сколько других валют сможете купить по текущим курсам.</p>
 
-                <!-- Инпут с пересчетом биткоина на рубли -->
-                <div class="form-group">
-                    <label class="control-label">Введите интересующее количество Рублей:</label>
-                    <input class="form-control valute-course" id="roubles_input" oninput="allValutesConventer(this.value)" onchange="allValutesConventer(this.value)" value="">
+                    <!-- Инпут с пересчетом биткоина на рубли -->
+                    <div class="form-group">
+                        <label class="control-label">Введите интересующее количество Рублей:</label>
+                        <input class="form-control valute-course" id="roubles_input" oninput="allValutesConventer(this.value)" onchange="allValutesConventer(this.value)" value="">
 
-                    <div class="help-block"></div>
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Сколько получите долларов -->
+                    <div class="form-group">
+                        <label class="control-label">Сможете купить долларов:</label>
+                        <input class="form-control valute-course" id="dollar_res" value="0 $" disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Сколько получите евро -->
+                    <div class="form-group">
+                        <label class="control-label">Сможете купить ЕВРО:</label>
+                        <input class="form-control valute-course" id="euro_res" value="0 Евро" disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
+                    <!-- Сколько получите биткоинов -->
+                    <div class="form-group">
+                        <label class="control-label">Сможете купить биткоинов:</label>
+                        <input class="form-control valute-course" id="btc_res" value="0 BTC" disabled="">
+
+                        <div class="help-block"></div>
+                    </div>
+
                 </div>
-
-                <!-- Сколько получите долларов -->
-                <div class="form-group">
-                    <label class="control-label">Сможете купить долларов:</label>
-                    <input class="form-control valute-course" id="dollar_res" value="0 $" disabled="">
-
-                    <div class="help-block"></div>
-                </div>
-
-                <!-- Сколько получите евро -->
-                <div class="form-group">
-                    <label class="control-label">Сможете купить ЕВРО:</label>
-                    <input class="form-control valute-course" id="euro_res" value="0 Евро" disabled="">
-
-                    <div class="help-block"></div>
-                </div>
-
-                <!-- Сколько получите биткоинов -->
-                <div class="form-group">
-                    <label class="control-label">Сможете купить биткоинов:</label>
-                    <input class="form-control valute-course" id="btc_res" value="0 BTC" disabled="">
-
-                    <div class="help-block"></div>
-                </div>
-
-            </div>
+            <?php endif; ?>
 
 
             <div class="recommended-gm-content">

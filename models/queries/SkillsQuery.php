@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class SkillsQuery
  * @package app\models\queries
  */
-class SkillsQuery extends ActiveQuery
+final class SkillsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

@@ -14,7 +14,7 @@ namespace app\components\menu;
  * Class MenuUrlsComponent
  * @package app\components\menu
  */
-class MenuUrlsComponent
+final class MenuUrlsComponent
 {
     /**
      * Массив урлов карт локаций

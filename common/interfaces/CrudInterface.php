@@ -18,6 +18,13 @@ use yii\web\NotFoundHttpException;
  */
 interface CrudInterface
 {
+    /** @var string - Константы для обращения к методам (CRUD Реализация) */
+    public const ACTION_INDEX  = 'index';
+    public const ACTION_VIEW   = 'view';
+    public const ACTION_CREATE = 'create';
+    public const ACTION_UPDATE = 'update';
+    public const ACTION_DELETE = 'delete';
+
     /**
      * Описание метода указывающего разрешения (Наследуется от Yii)
      * @return array

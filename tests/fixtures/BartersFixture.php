@@ -20,5 +20,5 @@ class BartersFixture extends \yii\test\ActiveFixture
     public $modelClass = 'app\models\Barters';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'barters';
+    public const TABLE_NAME = 'barters';
 }

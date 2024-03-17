@@ -8,9 +8,9 @@
 
 namespace Tests\Functional;
 
-use app\tests\fixtures\SkillsFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -26,12 +26,7 @@ class SkillsCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'skills' => [
-                'class' => SkillsFixture::class,
-                'dataFile' => codecept_data_dir() . 'skills.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getSkills());
 
         /** URL адрес до детальной страницы с умением */
         $I->amOnRoute('/skills/physical/endurance.html');

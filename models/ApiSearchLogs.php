@@ -19,14 +19,14 @@ use Yii;
  * @property string $date_create Дата создания записи лога
  * @property int $flag Флаг для проверки вернулись ли данные по запросу или нет
  */
-class ApiSearchLogs extends ActiveRecord
+final class ApiSearchLogs extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID           = 'id';
-    const ATTR_WORDS        = 'words';
-    const ATTR_INFO         = 'info';
-    const ATTR_DATE_CREATE  = 'date_create';
-    const ATTR_FLAG         = 'flag';
+    public const ATTR_ID           = 'id';
+    public const ATTR_WORDS        = 'words';
+    public const ATTR_INFO         = 'info';
+    public const ATTR_DATE_CREATE  = 'date_create';
+    public const ATTR_FLAG         = 'flag';
 
     /** Константы для проверки Bool значений */
     const TRUE = 1;
@@ -48,17 +48,17 @@ class ApiSearchLogs extends ActiveRecord
     public function rules()
     {
         return [
-            [static::ATTR_ID, IntegerValidator::class],
+            [self::ATTR_ID, IntegerValidator::class],
 
-            [static::ATTR_INFO, StringValidator::class],
+            [self::ATTR_INFO, StringValidator::class],
 
-            [static::ATTR_DATE_CREATE, SafeValidator::class],
+            [self::ATTR_DATE_CREATE, SafeValidator::class],
 
-            [static::ATTR_WORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
+            [self::ATTR_WORDS, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
 
-            [static::ATTR_INFO, StringValidator::class],
+            [self::ATTR_INFO, StringValidator::class],
 
-            [static::ATTR_FLAG, IntegerValidator::class]
+            [self::ATTR_FLAG, IntegerValidator::class]
         ];
     }
 
@@ -70,10 +70,10 @@ class ApiSearchLogs extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            static::ATTR_ID => 'ID',
-            static::ATTR_WORDS => 'Поисковый запрос',
-            static::ATTR_INFO => 'Капча пользователя',
-            static::ATTR_DATE_CREATE => 'Дата создания'
+            self::ATTR_ID => 'ID',
+            self::ATTR_WORDS => 'Поисковый запрос',
+            self::ATTR_INFO => 'Капча пользователя',
+            self::ATTR_DATE_CREATE => 'Дата создания'
         ];
     }
 
@@ -85,7 +85,7 @@ class ApiSearchLogs extends ActiveRecord
      */
     public static function findCaptchaCode(string $captcha)
     {
-        return static::findOne([static::ATTR_INFO => $captcha]);
+        return self::findOne([self::ATTR_INFO => $captcha]);
     }
 
     /**
@@ -100,12 +100,12 @@ class ApiSearchLogs extends ActiveRecord
         $query = new Query;
 
         /** Выбираем нужные данные с кешируемым запросом */
-        $query->select(static::ATTR_WORDS)
-            ->from(static::tableName())
-            ->where(static::ATTR_WORDS .' LIKE "%' . $title . '%"')
-            ->andWhere([static::ATTR_FLAG => static::TRUE])
-            ->groupBy(static::ATTR_WORDS)
-            ->orderBy(static::ATTR_DATE_CREATE)
+        $query->select(self::ATTR_WORDS)
+            ->from(self::tableName())
+            ->where(self::ATTR_WORDS .' LIKE "%' . $title . '%"')
+            ->andWhere([self::ATTR_FLAG => self::TRUE])
+            ->groupBy(self::ATTR_WORDS)
+            ->orderBy(self::ATTR_DATE_CREATE)
             ->cache(Yii::$app->params['cacheTime']['one_hour']);
 
         /** Возвращаем объект запроса к БД */

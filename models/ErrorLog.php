@@ -21,12 +21,12 @@ use yii\db\ActiveRecord;
 class ErrorLog extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID = 'id';
-    const ATTR_TYPE = 'type';
-    const ATTR_URL = 'url';
-    const ATTR_DESCRIPTION = 'description';
-    const ATTR_ERROR_CODE = 'error_code';
-    const ATTR_DATE_CREATE = 'date_create';
+    public const ATTR_ID = 'id';
+    public const ATTR_TYPE = 'type';
+    public const ATTR_URL = 'url';
+    public const ATTR_DESCRIPTION = 'description';
+    public const ATTR_ERROR_CODE = 'error_code';
+    public const ATTR_DATE_CREATE = 'date_create';
 
     /**
      * {@inheritdoc}

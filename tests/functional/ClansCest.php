@@ -3,9 +3,9 @@
 namespace Tests\Functional;
 
 use app\controllers\ClanController;
-use app\tests\fixtures\ClansFixture;
 use tests\_support\CheckLinks;
 use tests\_support\CheckPageCodes;
+use tests\_support\FixturesCollection;
 use tests\_support\OpengraphChecker;
 use tests\_support\OverlayChecker;
 
@@ -21,12 +21,7 @@ class ClansCest
     public function _before(\FunctionalTester $I)
     {
         /** Грузим фикстуры перед каждым тестом */
-        $I->haveFixtures([
-            'clans' => [
-                'class' => ClansFixture::class,
-                'dataFile' => codecept_data_dir() . 'clans.php'
-            ]
-        ]);
+        $I->haveFixtures(FixturesCollection::getClans());
 
         /** Путь до страницы с квестами Барахольщика */
         $I->amOnRoute(ClanController::routeId(ClanController::ACTION_INDEX));

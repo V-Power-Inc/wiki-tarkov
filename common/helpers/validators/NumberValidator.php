@@ -14,8 +14,9 @@ namespace app\common\helpers\validators;
  * Class NumberValidator
  * @package app\common\helpers\validators
  */
-final class NumberValidator extends \yii\validators\NumberValidator {
-	const ATTR_MIN            = 'min';
-	const ATTR_MAX            = 'max';
-	const ATTR_NUMBER_PATTERN = 'numberPattern';
+final class NumberValidator extends \yii\validators\NumberValidator
+{
+    public const ATTR_MIN            = 'min';
+    public const ATTR_MAX            = 'max';
+    public const ATTR_NUMBER_PATTERN = 'numberPattern';
 }

@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class CatskillsQuery
  * @package app\models\queries
  */
-class CatskillsQuery extends ActiveQuery
+final class CatskillsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

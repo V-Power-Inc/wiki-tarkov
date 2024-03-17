@@ -6,7 +6,10 @@
  * Time: 19:10
  */
 
-/*** Вьюха с таблицей патронов Escape from Tarkov ***/
+/** Вьюха с таблицей патронов Escape from Tarkov
+ *
+ * @var array $partons - Массив данных из AR Patrons в виде массива
+ */
 
 use app\models\Patrons;
 
@@ -21,8 +24,6 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Таблица патронов Escape from Tarkov',
 ]);
-
-$this->registerJsFile('js/jquery.fixedheadertable.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 <div class="container">
     <div class="row">

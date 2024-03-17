@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class BossesQuery
  * @package app\models\queries
  */
-class BossesQuery extends ActiveQuery
+final class BossesQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

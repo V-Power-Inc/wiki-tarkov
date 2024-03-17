@@ -21,8 +21,8 @@ use Yii;
 final class ItemController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
-    const ACTION_DETAILLOOT = 'detailloot';
-    const ACTION_PREVIEWLOOT = 'previewloot';
+    public const ACTION_DETAILLOOT = 'detailloot';
+    public const ACTION_PREVIEWLOOT = 'previewloot';
 
     /** CSRF валидация POST запросов методов этого контроллера включена */
     public $enableCsrfValidation;
@@ -38,7 +38,7 @@ final class ItemController extends AdvancedController
             [
                 'class' => 'yii\filters\PageCache',
                 'duration' => Yii::$app->params['cacheTime']['seven_days'],
-                'only' => [static::ACTION_DETAILLOOT],
+                'only' => [self::ACTION_DETAILLOOT],
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT MAX(date_update) FROM items',

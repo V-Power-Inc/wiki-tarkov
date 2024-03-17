@@ -3,6 +3,7 @@ version: '3.2'
 services:
 
   web:
+    container_name: tarkov_web
     image: nginx:1.18.0
     restart: always
     volumes:
@@ -16,6 +17,7 @@ services:
       - 443:443
 
   app:
+    container_name: tarkov_app
     build: docker/php
     restart: always
     volumes:
@@ -31,7 +33,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
   db:
-    container_name: db
+    container_name: tarkov_db
     image: mariadb:10.6
     restart: always
     ports:
@@ -47,6 +49,7 @@ services:
       - MARIADB_PASSWORD=${DB_PASSWORD}
 
   redis:
+    container_name: tarkov_redis
     image: redis:7.0-alpine
     restart: always
     ports:

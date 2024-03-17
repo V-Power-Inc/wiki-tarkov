@@ -26,10 +26,10 @@ use yii\db\Exception;
 final class JsondataService
 {
     /** @var string - Ключ массива результирующих значений для массива данных */
-    const ATTR_VALUE = 'value';
+    private const ATTR_VALUE = 'value';
 
     /** @var string - Ключ массива title для результирующих данных массивов */
-    const ATTR_TITLE = 'title';
+    private const ATTR_TITLE = 'title';
 
     /**
      * Метод вытаскивает необходимые названия ключей по параметру
@@ -53,7 +53,7 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                static::ATTR_VALUE      => $d[Doorkeys::ATTR_NAME],
+                self::ATTR_VALUE      => $d[Doorkeys::ATTR_NAME],
                 Doorkeys::ATTR_NAME     => $d[Doorkeys::ATTR_NAME],
                 Doorkeys::ATTR_PREVIEW  => $d[Doorkeys::ATTR_PREVIEW],
                 Doorkeys::ATTR_URL      => $d[Doorkeys::ATTR_URL],
@@ -90,8 +90,8 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                static::ATTR_VALUE       => $d[Items::ATTR_TITLE],
-                static::ATTR_TITLE       => $d[Items::ATTR_TITLE],
+                self::ATTR_VALUE       => $d[Items::ATTR_TITLE],
+                self::ATTR_TITLE       => $d[Items::ATTR_TITLE],
                 Items::ATTR_PARENTCAT_ID => $parentcat ? $parentcat->title : 'Категория не определена',
                 Items::ATTR_SHORTDESC    => $d[Items::ATTR_SHORTDESC],
                 Items::ATTR_PREVIEW      => $d[Items::ATTR_PREVIEW],
@@ -125,8 +125,8 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                static::ATTR_VALUE => $d[ApiSearchLogs::ATTR_WORDS],
-                static::ATTR_TITLE => $d[ApiSearchLogs::ATTR_WORDS]
+                self::ATTR_VALUE => $d[ApiSearchLogs::ATTR_WORDS],
+                self::ATTR_TITLE => $d[ApiSearchLogs::ATTR_WORDS]
             ];
         }
 
@@ -154,8 +154,8 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                static::ATTR_VALUE      => $d[Clans::ATTR_TITLE],
-                static::ATTR_TITLE      => $d[Clans::ATTR_TITLE],
+                self::ATTR_VALUE      => $d[Clans::ATTR_TITLE],
+                self::ATTR_TITLE      => $d[Clans::ATTR_TITLE],
                 Clans::ATTR_DESCRIPTION => $d[Clans::ATTR_DESCRIPTION],
                 Clans::ATTR_PREVIEW     => $d[Clans::ATTR_PREVIEW],
                 Clans::ATTR_LINK        => $d[Clans::ATTR_LINK],

@@ -12,9 +12,9 @@ use app\models\Login;
 final class DefaultController extends AdminController
 {
     /** @var string - Константы для обращения к методам */
-    const ACTION_INDEX  = 'index';
-    const ACTION_LOGIN  = 'login';
-    const ACTION_LOGOUT = 'logout';
+    public const ACTION_INDEX  = 'index';
+    public const ACTION_LOGIN  = 'login';
+    public const ACTION_LOGOUT = 'logout';
 
     /**
      * Рендер главной страницы админки
@@ -24,7 +24,7 @@ final class DefaultController extends AdminController
     public function actionIndex(): string
     {
         /** Рендерим вьюху */
-        return $this->render(static::ACTION_INDEX);
+        return $this->render(self::ACTION_INDEX);
     }
 
     /** Рендер страницы авторизации **/
@@ -58,7 +58,7 @@ final class DefaultController extends AdminController
         }
 
         /** Рендерим страницу логина */
-        return $this->render(static::ACTION_LOGIN, ['model' => $model]);
+        return $this->render(self::ACTION_LOGIN, ['model' => $model]);
     }
 
     /**

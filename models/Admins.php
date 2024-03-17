@@ -33,27 +33,27 @@ use app\common\helpers\validators\SafeValidator;
 class Admins extends ActiveRecord implements IdentityInterface
 {
     /** @var string - Константа, название таблицы */
-    const TABLE_NAME = 'admins';
+    public const TABLE_NAME = 'admins';
 
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID          = 'id';
-    const ATTR_BANNED      = 'banned';
-    const ATTR_USER        = 'user';
-    const ATTR_PASSWORD    = 'password';
-    const ATTR_CAPTCHA     = 'captcha';
-    const ATTR_REMEMBER_ME = 'remember_me';
-    const ATTR_ROLE        = 'role';
-    const ATTR_NAME        = 'name';
-    const ATTR_DATE_END    = 'date_end';
-    const ATTR_BANN_REASON = 'bann_reason';
+    public const ATTR_ID          = 'id';
+    public const ATTR_BANNED      = 'banned';
+    public const ATTR_USER        = 'user';
+    public const ATTR_PASSWORD    = 'password';
+    public const ATTR_CAPTCHA     = 'captcha';
+    public const ATTR_REMEMBER_ME = 'remember_me';
+    public const ATTR_ROLE        = 'role';
+    public const ATTR_NAME        = 'name';
+    public const ATTR_DATE_END    = 'date_end';
+    public const ATTR_BANN_REASON = 'bann_reason';
 
     /** Константы True/False для различных поисков */
-    const TRUE  = 1;
-    const FALSE = 0;
+    public const TRUE  = 1;
+    public const FALSE = 0;
 
     /** Константы True/False для проверки, забанен пользователь или нет */
-    const ATTR_BANNED_TRUE = 1;
-    const ATTR_BANNED_FALSE = 0;
+    public const ATTR_BANNED_TRUE = 1;
+    public const ATTR_BANNED_FALSE = 0;
 
     /**
      * Имя таблицы в БД

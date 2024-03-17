@@ -22,7 +22,7 @@ use Yii;
 final class TranslateService
 {
     /** @var string - Константа пустой строки */
-    const EMPTY_STRING = '';
+    private const EMPTY_STRING = '';
 
     /**
      * Метод по полученному параметру создает название карты - возвращает строку

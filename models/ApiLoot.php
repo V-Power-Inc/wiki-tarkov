@@ -24,16 +24,16 @@ use yii\helpers\Json;
 class ApiLoot extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID = 'id';
-    const ATTR_NAME = 'name';
-    const ATTR_JSON = 'json';
-    const ATTR_URL  = 'url';
-    const ATTR_DATE_CREATE = 'date_create';
-    const ATTR_ACTIVE = 'active';
+    public const ATTR_ID = 'id';
+    public const ATTR_NAME = 'name';
+    public const ATTR_JSON = 'json';
+    public const ATTR_URL  = 'url';
+    public const ATTR_DATE_CREATE = 'date_create';
+    public const ATTR_ACTIVE = 'active';
 
     /** Константы bool значений */
-    const TRUE = 1;
-    const FALSE = 0;
+    public const TRUE = 1;
+    public const FALSE = 0;
 
     /**
      * Метод возвращающий имя таблицы

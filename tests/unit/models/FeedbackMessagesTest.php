@@ -10,7 +10,8 @@ namespace app\tests;
 
 use app\models\FeedbackMessages;
 use app\common\helpers\validators\StringValidator;
-use app\tests\fixtures\FeedbackMessagesFixture;
+use tests\_support\FixturesCollection;
+use UnitTester;
 
 /**
  * Unit тесты раздела обратной связи
@@ -23,21 +24,14 @@ use app\tests\fixtures\FeedbackMessagesFixture;
  */
 class FeedbackMessagesTest extends \Codeception\Test\Unit
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
+    /** Объект класса для тестирования */
+    protected UnitTester $tester;
 
     /** Метод выполняется перед каждым тестом */
     protected function _before()
     {
         /** Грузим фикстуры перед каждым тестом */
-        $this->tester->haveFixtures([
-            'feedback_messages' => [
-                'class' => FeedbackMessagesFixture::class,
-                'dataFile' => codecept_data_dir() . 'feedback_messages.php'
-            ]
-        ]);
+        $this->tester->haveFixtures(FixturesCollection::getFeedbackMessages());
     }
 
     /** Метод выполняется после каждого теста */

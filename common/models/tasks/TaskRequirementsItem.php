@@ -16,20 +16,23 @@ namespace app\common\models\tasks;
  */
 final class TaskRequirementsItem
 {
-    /** @var array - название квеста (Далее name в массиве) */
+    /** @var string - название квеста (Далее name в массиве) */
     public $task;
 
     /** @var array - Статусы, которые могут быть у текущей задачи (В массиве список статусов) */
     public $status;
 
     /** @var TaskRequirementsItem[] - Массив объектов с выполненными заданиями */
-    public $_items = [];
+    public array $_items = [];
 
     /** @var string - Ключ массива с информацией о названии квеста */
-    const TASK = 'task';
+    private const TASK_NAME = 'name';
+
+    /** @var string - Ключ массива с информацией о квесте */
+    private const TASK = 'task';
 
     /** @var string - Ключ массива с информацией о необходимом статусе задания */
-    const STATUS = 'status';
+    private const STATUS = 'status';
 
     /**
      * В конструкторе наполняем массив данных о задачах необходимых для взятия квеста, если массив прилетел в этот класс
@@ -50,15 +53,16 @@ final class TaskRequirementsItem
                 $model = new TaskRequirementsItem();
 
                 /** Сетапим название задачи */
-                $model->task = $obj[static::TASK]['name'];
+                $model->task = $obj[self::TASK][self::TASK_NAME];
 
                 /** Сетапим массив статусов задачи */
-                $model->status = $obj[static::STATUS];
+                $model->status = $obj[self::STATUS];
 
                 /** Добавляем новый объект, в модель с результирующей выборкой */
                 $this->_items[] = $model;
             }
 
+            /** Возвращаем массив с результирующей выборкой или пустой массив */
             return $this->_items;
         }
     }

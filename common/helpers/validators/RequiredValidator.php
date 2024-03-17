@@ -14,8 +14,9 @@ namespace app\common\helpers\validators;
  * Class RequiredValidator
  * @package app\common\helpers\validators
  */
-final class RequiredValidator extends \yii\validators\RequiredValidator {
-	const ATTR_ON          = 'on';
-	const ATTR_MESSAGE     = 'message';
-	const ATTR_WHEN_CLIENT = 'whenClient';
+final class RequiredValidator extends \yii\validators\RequiredValidator
+{
+    public const ATTR_ON          = 'on';
+    public const ATTR_MESSAGE     = 'message';
+    public const ATTR_WHEN_CLIENT = 'whenClient';
 }

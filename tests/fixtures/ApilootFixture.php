@@ -13,5 +13,5 @@ class ApilootFixture extends \yii\test\ActiveFixture {
     public $modelClass = 'app\models\ApiLoot';
 
     /** @var string Имя таблицы */
-    const TABLE_NAME = 'ApiLoot';
+    public const TABLE_NAME = 'ApiLoot';
 }

@@ -16,12 +16,12 @@ namespace app\common\helpers\validators;
  */
 final class FileValidator extends \yii\validators\FileValidator
 {
-	const  ATTR_EXTENSIONS                   = 'extensions';
-	const  ATTR_MIME_TYPES                   = 'mimeTypes';
-	const  ATTR_MAX_SIZE                     = 'maxSize';
-	const  ATTR_MIN_SIZE                     = 'minSize';
-	const  ATTR_MAX_FILES                    = 'maxFiles';
-	const  ATTR_CHECK_EXTENSION_BY_MIME_TYPE = 'checkExtensionByMimeType';
-	const  ATTR_SKIP_ON_EMPTY                = 'skipOnEmpty';
-	const  ATTR_MESSAGE                      = 'message';
+    public const  ATTR_EXTENSIONS                   = 'extensions';
+    public const  ATTR_MIME_TYPES                   = 'mimeTypes';
+    public const  ATTR_MAX_SIZE                     = 'maxSize';
+    public const  ATTR_MIN_SIZE                     = 'minSize';
+    public const  ATTR_MAX_FILES                    = 'maxFiles';
+    public const  ATTR_CHECK_EXTENSION_BY_MIME_TYPE = 'checkExtensionByMimeType';
+    public const  ATTR_SKIP_ON_EMPTY                = 'skipOnEmpty';
+    public const  ATTR_MESSAGE                      = 'message';
 }

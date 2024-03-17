@@ -16,12 +16,12 @@ namespace app\common\helpers\validators;
  */
 final class EmailValidator extends \yii\validators\EmailValidator
 {
-    const ATTR_PATTERN              = 'pattern';
-    const ATTR_FULL_PATTERN         = 'fullPattern';
-    const ATTR_PATTERN_ASCII        = 'patternASCII';
-    const ATTR_FULL_PATTERN_ASCII   = 'fullPatternASCII';
-    const ATTR_ALLOW_NAME           = 'allowName';
-    const ATTR_CHECK_DNS            = 'checkDNS';
-    const ATTR_ENABLE_IDN           = 'enableIDN';
-    const ATTR_ENABLE_LOCAL_IDN     = 'enableLocalIDN';
+    public const ATTR_PATTERN              = 'pattern';
+    public const ATTR_FULL_PATTERN         = 'fullPattern';
+    public const ATTR_PATTERN_ASCII        = 'patternASCII';
+    public const ATTR_FULL_PATTERN_ASCII   = 'fullPatternASCII';
+    public const ATTR_ALLOW_NAME           = 'allowName';
+    public const ATTR_CHECK_DNS            = 'checkDNS';
+    public const ATTR_ENABLE_IDN           = 'enableIDN';
+    public const ATTR_ENABLE_LOCAL_IDN     = 'enableLocalIDN';
 }

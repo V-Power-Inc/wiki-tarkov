@@ -31,22 +31,22 @@ use yii\db\ActiveRecord;
 class Patrons extends ActiveRecord
 {
     /** Константы атрибутов Active Record модели */
-    const ATTR_ID                 = 'id';
-    const ATTR_CALIBER            = 'caliber';
-    const ATTR_TYPE               = 'type';
-    const ATTR_DAMAGE             = 'damage';
-    const ATTR_PROBITIE           = 'probitie';
-    const ATTR_DAMAGE_PER_DEFENCE = 'damage_per_defence';
-    const ATTR_SPEED              = 'speed';
-    const ATTR_COUNT              = 'count';
-    const ATTR_TOCHN              = 'tochn';
-    const ATTR_OTDACHA            = 'otdacha';
-    const ATTR_FRAGMENTATION      = 'fragmentation';
-    const ATTR_BLOOD_1            = 'blood_1';
-    const ATTR_BLOOD_2            = 'blood_2';
-    const ATTR_RIKOCHET           = 'rikochet';
-    const ATTR_TRACCER            = 'traccer';
-    const ATTR_YB                 = 'yb';
+    public const ATTR_ID                 = 'id';
+    public const ATTR_CALIBER            = 'caliber';
+    public const ATTR_TYPE               = 'type';
+    public const ATTR_DAMAGE             = 'damage';
+    public const ATTR_PROBITIE           = 'probitie';
+    public const ATTR_DAMAGE_PER_DEFENCE = 'damage_per_defence';
+    public const ATTR_SPEED              = 'speed';
+    public const ATTR_COUNT              = 'count';
+    public const ATTR_TOCHN              = 'tochn';
+    public const ATTR_OTDACHA            = 'otdacha';
+    public const ATTR_FRAGMENTATION      = 'fragmentation';
+    public const ATTR_BLOOD_1            = 'blood_1';
+    public const ATTR_BLOOD_2            = 'blood_2';
+    public const ATTR_RIKOCHET           = 'rikochet';
+    public const ATTR_TRACCER            = 'traccer';
+    public const ATTR_YB                 = 'yb';
 
     /**
      * Имя таблицы

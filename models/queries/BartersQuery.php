@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class BartersQuery
  * @package app\models\queries
  */
-class BartersQuery extends ActiveQuery
+final class BartersQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}

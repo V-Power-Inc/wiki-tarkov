@@ -16,5 +16,5 @@ namespace app\common\helpers\validators;
  */
 final class UrlValidator extends \yii\validators\UrlValidator
 {
-    const ATTR_VALID_SCHEMES = 'validSchemes';
+    public const ATTR_VALID_SCHEMES = 'validSchemes';
 }

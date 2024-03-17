@@ -25,17 +25,17 @@ class AdminController extends Controller
     /** Используем трейт для множественного наследования */
     use ControllerRoutesTrait;
 
-    /** @var string - Параметр ID */
-    const PARAM_ID = 'id';
-
-    /** @var string LOGIN_URL Константа урла для логина */
-    const LOGIN_URL = '/admin/login';
-
-    /** @var string LOGOUT_URL Константа урла для разлогинивания */
-    const LOGOUT_URL = '/admin/logout';
-
     /** @var string $layout - Подключаем отдельный layout для CRUD контроллеров */
     public $layout = 'admin';
+
+    /** @var string - Параметр ID */
+    public const PARAM_ID = 'id';
+
+    /** @var string LOGIN_URL Константа урла для логина */
+    public const LOGIN_URL = '/admin/login';
+
+    /** @var string LOGOUT_URL Константа урла для разлогинивания */
+    public const LOGOUT_URL = '/admin/logout';
 
     /**
      * Проверяем пользователя на авторизацию, если не авторизован редирект на страницу логина
@@ -63,5 +63,19 @@ class AdminController extends Controller
 
         /** Возвращаем родительский beforeAction */
         return parent::beforeAction($action);
+    }
+
+    /**
+     * Обработчик ошибок - отображает статусы ответа сервера
+     *
+     * @return array
+     */
+    public function actions(): array
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
     }
 }

@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * Class ErrorLogQuery
  * @package app\models\queries
  */
-class ErrorLogQuery extends ActiveQuery
+final class ErrorLogQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}
