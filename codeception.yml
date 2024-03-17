@@ -14,7 +14,7 @@ modules:
     config:
         Yii2:
             configFile: 'config/test.php'
-            cleanup: true
+            cleanup: true # Чистим БД после каждого теста
 
 # To enable code coverage:
 #coverage:

@@ -211,16 +211,16 @@ class AdminPagesCrudCest
         $url_delete = Url::to($class::getUrlRoute(CrudInterface::ACTION_DELETE, [self::PARAM_ID => self::ID_FIRST_ROW]));
 
         /** Проверяем страницу создания новых записей */
-//        CheckCrud::onCreate($I, $url_create);
+        CheckCrud::onCreate($I, $url_create);
 
         // TODO: Тут что-то не так, остальные тесты не проходят в контейнере, однако проходят на DEV'e
         /** Проверяем страницу просмотра записей */
         CheckCrud::onView($I, $url_view);
 
-//        /** Проверяем страницу редактирования записей */
-//        CheckCrud::onEdit($I, $url_edit);
-//
-//        /** Проверяем страницу удаления записей */
-//        CheckCrud::onDelete($I, $url_delete);
+        /** Проверяем страницу редактирования записей */
+        CheckCrud::onEdit($I, $url_edit);
+
+        /** Проверяем страницу удаления записей */
+        CheckCrud::onDelete($I, $url_delete);
     }
 }
