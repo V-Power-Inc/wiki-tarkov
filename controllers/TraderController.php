@@ -23,7 +23,7 @@ use Yii;
  * Class TraderController
  * @package app\controllers
  */
-final class TraderController extends AdvancedController
+class TraderController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_QUESTS                 = 'quests';

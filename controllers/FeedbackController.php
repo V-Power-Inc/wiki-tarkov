@@ -19,7 +19,7 @@ use Yii;
  * Class FeedbackController
  * @package app\controllers
  */
-final class FeedbackController extends AdvancedController
+class FeedbackController extends AdvancedController
 {
     /** @var string - Константы экшенов */
     public const ACTION_INDEX = 'index';

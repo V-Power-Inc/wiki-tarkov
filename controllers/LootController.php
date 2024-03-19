@@ -25,7 +25,7 @@ use app\common\services\PaginationService;
  * Class LootController
  * @package app\controllers
  */
-final class LootController extends AdvancedController
+class LootController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_MAINLOOT  = 'mainloot';

@@ -21,7 +21,7 @@ use yii\web\HttpException;
  * Class MapsController
  * @package app\controllers
  */
-final class MapsController extends AdvancedController
+class MapsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_LOCATIONS         = 'locations';

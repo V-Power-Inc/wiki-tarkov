@@ -20,7 +20,7 @@ use yii;
  * Class SkillsController
  * @package app\controllers
  */
-final class SkillsController extends AdvancedController
+class SkillsController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_MAINSKILLS     = 'mainskills';

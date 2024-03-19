@@ -30,7 +30,7 @@ use Yii;
  * Class ApiController
  * @package app\controllers
  */
-final class ApiController extends AdvancedController
+class ApiController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_LIST       = 'list';
