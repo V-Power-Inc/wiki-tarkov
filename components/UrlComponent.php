@@ -135,7 +135,7 @@ final class UrlComponent extends BaseObject implements UrlRuleInterface
             /** Возвращаем путь до детальной страницы */
             return 'keys/' . $route;
 
-        } elseif (News::find()->where([News::ATTR_URL => $route])->One()){ /** Если смогли найти по урлу - Новость */
+        } elseif (News::find()->where([News::ATTR_URL => $route])->One()) { /** Если смогли найти по урлу - Новость */
 
             /** Возвращаем путь до детальной страницы */
             return 'news/' . $route;
