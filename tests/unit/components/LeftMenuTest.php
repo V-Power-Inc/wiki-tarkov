@@ -32,9 +32,6 @@ class LeftMenuTest extends Unit
     /** @var UnitTester - Объект класса для тестирования */
     protected UnitTester $tester;
 
-    /** Мок с кукисами */
-    protected $cookies;
-
     /** Мок класса Request */
     protected $request;
 
@@ -56,7 +53,7 @@ class LeftMenuTest extends Unit
         /** Подставляем правильный URL */
         $this->request->expects($this->any())
             ->method('getUrl')
-            ->willReturn('/loot'); // Устанавливаем значение URL
+            ->willReturn('/loot');
 
         /** Создаем заглушку коллекций кукисов */
         $cookieCollection = new CookieCollection([
