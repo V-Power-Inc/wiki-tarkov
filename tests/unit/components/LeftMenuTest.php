@@ -14,11 +14,11 @@ use app\models\Category;
 use Codeception\Test\Unit;
 use tests\_support\FixturesCollection;
 use UnitTester;
-use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\CookieCollection;
 use yii\web\Request;
 use ReflectionMethod;
+use Yii;
 
 /**
  * Тестирование виджета для вывода левого меню сайта
