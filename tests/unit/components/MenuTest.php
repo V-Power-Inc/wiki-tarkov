@@ -44,9 +44,6 @@ class MenuTest extends Unit
      */
     protected function _before()
     {
-        /** Родительский конструктор */
-        parent::_before();
-
         /** Создаем заглушку для объекта $cookies */
         $this->cookies = $this->getMockBuilder(CookieCollection::class)
             ->disableOriginalConstructor()
