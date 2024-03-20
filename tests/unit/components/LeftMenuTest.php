@@ -17,6 +17,7 @@ use UnitTester;
 use yii\base\InvalidConfigException;
 use yii\web\CookieCollection;
 use yii\web\Request;
+use yii\web\Cookie;
 use ReflectionMethod;
 use Yii;
 
@@ -34,6 +35,9 @@ class LeftMenuTest extends Unit
     /** Мок с кукисами */
     protected $cookies;
 
+    /** Мок класса Request */
+    protected $request;
+
     /**
      * Действия выполняемые перед каждым тестом
      *
@@ -45,28 +49,30 @@ class LeftMenuTest extends Unit
         /** Грузим фикстуры перед каждым тестом */
         $this->tester->haveFixtures(FixturesCollection::getCategory());
 
-        /** Создаем заглушку для объекта $cookies */
-        $this->cookies = $this->getMockBuilder(CookieCollection::class)
-            ->disableOriginalConstructor()
+        /** Создаем заглушку для объекта $request */
+        $this->request = $this->getMockBuilder(Request::class)
             ->getMock();
 
-        /** Устанавливаем поведение заглушки */
-        $this->cookies->expects($this->any())
-            ->method('getValue')
-            ->with([CookieComponent::NAME_DARK_THEME])
-            ->willReturn(true);
+        /** Подставляем правильный URL */
+        $this->request->expects($this->any())
+            ->method('getUrl')
+            ->willReturn('/loot'); // Устанавливаем значение URL
 
-        // Создаем заглушку для объекта Request
-        $request = $this->getMockBuilder(Request::class)
-            ->getMock();
+        /** Создаем заглушку коллекций кукисов */
+        $cookieCollection = new CookieCollection([
+            new Cookie([
+                'name' => CookieComponent::NAME_OVERLAY,
+                'value' => 1
+            ])
+        ]);
 
-        /** Устанавливаем поведение заглушки */
-        $request->expects($this->any())
-            ->method('get')
-            ->willReturn(new CookieCollection());
+        /** Через магический метод указываем что должно вернуть свойство cookies */
+        $this->request->method('__get')->willReturnMap([
+            ['cookies', $cookieCollection]
+        ]);
 
-        // Устанавливаем объект Request в Yii::$app->request
-        Yii::$app->set('request', $request);
+        /** Создаем заглушку для объекта Request */
+        Yii::$app->set('request', $this->request);
     }
 
     /**
