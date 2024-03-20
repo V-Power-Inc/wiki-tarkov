@@ -8,6 +8,7 @@
 
 namespace app\tests\components;
 
+use app\components\CookieComponent;
 use app\components\LeftmenuWidget;
 use app\models\Category;
 use Codeception\Test\Unit;
@@ -15,6 +16,7 @@ use tests\_support\FixturesCollection;
 use UnitTester;
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\web\CookieCollection;
 use yii\web\Request;
 use ReflectionMethod;
 
@@ -29,8 +31,8 @@ class LeftMenuTest extends Unit
     /** @var UnitTester - Объект класса для тестирования */
     protected UnitTester $tester;
 
-    /** Мок класса Request */
-    protected $request;
+    /** Мок с кукисами */
+    protected $cookies;
 
     /**
      * Действия выполняемые перед каждым тестом
@@ -43,17 +45,28 @@ class LeftMenuTest extends Unit
         /** Грузим фикстуры перед каждым тестом */
         $this->tester->haveFixtures(FixturesCollection::getCategory());
 
-        /** Создаем заглушку для объекта $request */
-        $this->request = $this->getMockBuilder(Request::class)
+        /** Создаем заглушку для объекта $cookies */
+        $this->cookies = $this->getMockBuilder(CookieCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->request->expects($this->any())
-            ->method('getUrl')
-            ->willReturn('/loot'); // Устанавливаем значение URL
+        /** Устанавливаем поведение заглушки */
+        $this->cookies->expects($this->any())
+            ->method('getValue')
+            ->with([CookieComponent::NAME_DARK_THEME])
+            ->willReturn(true);
 
-        /** Создаем заглушку для объекта Request */
-        Yii::$app->set('request', $this->request);
+        // Создаем заглушку для объекта Request
+        $request = $this->getMockBuilder(Request::class)
+            ->getMock();
+
+        /** Устанавливаем поведение заглушки */
+        $request->expects($this->any())
+            ->method('get')
+            ->willReturn(new CookieCollection());
+
+        // Устанавливаем объект Request в Yii::$app->request
+        Yii::$app->set('request', $request);
     }
 
     /**
@@ -71,6 +84,7 @@ class LeftMenuTest extends Unit
         $this->assertArrayHasKey('class', $behaviors[0]);
         $this->assertArrayHasKey('duration', $behaviors[0]);
         $this->assertArrayHasKey('dependency', $behaviors[0]);
+        $this->assertArrayHasKey('variations', $behaviors[0]);
     }
 
     /**

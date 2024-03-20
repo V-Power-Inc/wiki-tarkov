@@ -9,6 +9,7 @@
 namespace app\components;
 
 use app\common\constants\sql\SqlQueryCommands;
+use app\common\services\redis\RedisVariationsConfig;
 use yii\base\Widget;
 use app\models\Category;
 use Yii;
@@ -41,12 +42,8 @@ final class LeftmenuWidget extends Widget {
         /** Инициализация родительского виджета (Widget) */
         parent::init();
 
-        /** Если не указан файл шаблона из которого брать меню */
-        if ($this->tpl === null) {
-
-            /** Указываем название файла */
-           $this->tpl = 'leftmenu.php';
-        }
+        /** Указываем название файла */
+        $this->tpl = 'leftmenu.php';
     }
 
     /**
@@ -64,6 +61,7 @@ final class LeftmenuWidget extends Widget {
                     'class' => 'yii\caching\DbDependency',
                     'sql' => SqlQueryCommands::COUNT_FROM_CATEGORY,
                 ],
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }
