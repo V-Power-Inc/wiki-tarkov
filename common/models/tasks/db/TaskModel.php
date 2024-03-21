@@ -97,7 +97,7 @@ final class TaskModel extends Model
                 $this->json = null;
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
             }
         }
 

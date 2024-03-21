@@ -47,7 +47,7 @@ final class ImageService
         if (empty($array[$map_name])) {
 
             /** Логируем что пришла новая карта */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем заглушку */
             return '/img/qsch.png';
@@ -90,7 +90,7 @@ final class ImageService
         if (empty($array[$boss])) {
 
             /** Логируем что есть необработанный босс */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем изображение заглушку */
             return '/img/qsch.png';
@@ -126,7 +126,7 @@ final class ImageService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';
@@ -160,7 +160,7 @@ final class ImageService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';

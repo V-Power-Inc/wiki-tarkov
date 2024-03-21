@@ -60,7 +60,7 @@ final class TranslateService
         }
 
         /** Логируем что пришла новая карта */
-        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map, ResponseStatusInterface::OK_CODE);
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map, ResponseStatusInterface::OK_CODE);
 
         /** Возвращаем null только если не попали не в 1 из кейсов */
         return self::EMPTY_STRING;
@@ -155,7 +155,7 @@ final class TranslateService
         if (empty($array[$faction])) {
 
             /** Логируем что прилетела новая фракция */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_FACTION, ErrorDesc::DESC_NEW_API_QUEST_FACTION . $faction, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_FACTION, ErrorDesc::DESC_NEW_API_QUEST_FACTION . $faction, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем необработанный результат */
             return $faction;
@@ -183,7 +183,7 @@ final class TranslateService
         if (empty($array[$status])) {
 
             /** Логируем что прилетело новое состояние квеста */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_QUEST_STATE, ErrorDesc::DESC_NEW_API_QUEST_STATE . $status, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_QUEST_STATE, ErrorDesc::DESC_NEW_API_QUEST_STATE . $status, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем значение в необработанном виде */
             return $status;

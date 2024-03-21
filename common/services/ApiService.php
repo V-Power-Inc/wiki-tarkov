@@ -177,7 +177,7 @@ final class ApiService implements ApiInterface
         if ($data === false) {
 
             /** Логируем в БД ошибку получения данных на этом этапе */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
 
             /** Выкидываем 404 с указанием что API не вернул данных */
             throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'API не вернул данные, попробуйте зайти позже');
@@ -212,7 +212,7 @@ final class ApiService implements ApiInterface
             } catch (InvalidArgumentException|ErrorException $e) {
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
 
                 /** Возвращаем false - Не удалось сохранить новые данные */
                 return false;
@@ -379,7 +379,7 @@ final class ApiService implements ApiInterface
         }
 
         /** Логируем в БД ошибку */
-        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
 
         /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
         throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
@@ -447,7 +447,7 @@ final class ApiService implements ApiInterface
                 } catch (InvalidArgumentException|ErrorException $e) {
 
                     /** Логируем что API вернул кривые данные */
-                    LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                    LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
 
                     /** Возвращаем false - Не удалось сохранить новые данные */
                     return false;
