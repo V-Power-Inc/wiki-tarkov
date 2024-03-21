@@ -27,7 +27,7 @@ use Yii;
  * Class ClanController
  * @package app\controllers
  */
-class ClanController extends AdvancedController
+final class ClanController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_INDEX      = 'index';

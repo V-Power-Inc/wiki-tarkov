@@ -26,7 +26,7 @@ use Yii;
  * Class BossesController
  * @package app\controllers
  */
-class BossesController extends AdvancedController
+final class BossesController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_INDEX = 'boss-list';

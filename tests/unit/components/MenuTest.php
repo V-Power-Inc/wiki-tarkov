@@ -16,6 +16,7 @@ use ReflectionException;
 use ReflectionClass;
 use yii\base\InvalidConfigException;
 use Yii;
+use yii\web\Controller;
 use yii\web\CookieCollection;
 use yii\web\Request;
 
@@ -73,7 +74,7 @@ class MenuTest extends Unit
         Yii::$app->set('request', $this->request);
 
         /** Создаем заглушку контроллера */
-        $controllerMock = $this->getMockBuilder(MapsController::class)
+        $controllerMock = $this->getMockBuilder(Controller::class)
             ->disableOriginalConstructor()
             ->getMock();
 

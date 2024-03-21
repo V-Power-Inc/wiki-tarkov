@@ -25,7 +25,7 @@ use Yii;
  * Class SiteController
  * @package app\controllers
  */
-class SiteController extends AdvancedController
+final class SiteController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_INDEX                  = 'index';

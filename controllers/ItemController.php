@@ -18,7 +18,7 @@ use Yii;
  * Class ItemController
  * @package app\controllers
  */
-class ItemController extends AdvancedController
+final class ItemController extends AdvancedController
 {
     /** Константы для передачи в маршрутизатор /config/routes.php */
     public const ACTION_DETAILLOOT = 'detailloot';
