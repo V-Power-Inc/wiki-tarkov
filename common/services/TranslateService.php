@@ -11,6 +11,7 @@ namespace app\common\services;
 use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\ResponseStatusInterface;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * Сервис для получения транслитов для всякого рода потребностей
@@ -30,6 +31,7 @@ final class TranslateService
      *
      * @param string $map - название карты
      * @return string
+     * @throws InvalidConfigException
      */
     public static function mapUrlCreator(string $map): string
     {
@@ -141,6 +143,7 @@ final class TranslateService
      *
      * @param string $faction - Название фракции
      * @return string
+     * @throws InvalidConfigException
      */
     public static function getQuestFaction(string $faction): string
     {
@@ -170,6 +173,7 @@ final class TranslateService
      *
      * @param string $status - статус квеста
      * @return string
+     * @throws InvalidConfigException
      */
     public static function getTaskStatus(string $status): string
     {

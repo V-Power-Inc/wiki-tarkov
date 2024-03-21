@@ -17,6 +17,7 @@ use app\common\services\TradersService;
 use app\models\Tasks;
 use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\Json;
 use Yii;
@@ -68,6 +69,7 @@ final class TaskModel extends Model
      * TaskModel constructor.
      * @param array $config
      * @param array|null $task - данные с информацией о квесте (task массив)
+     * @throws InvalidConfigException
      */
     public function __construct(array $task = null, array $config = [])
     {

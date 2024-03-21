@@ -22,6 +22,7 @@ use app\models\forms\ApiForm;
 use app\models\Tasks;
 use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -161,6 +162,7 @@ final class ApiService implements ApiInterface
      * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
      * @return mixed
      * @throws HttpException
+     * @throws InvalidConfigException
      */
     private function getApiData(bool $encoded = true)
     {
@@ -192,6 +194,7 @@ final class ApiService implements ApiInterface
      *
      * @param array $data - массив с данными о боссах
      * @return bool
+     * @throws InvalidConfigException
      */
     private function saveData(array $data): bool
     {
@@ -340,10 +343,11 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
+     * @return mixed
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
-     * @return mixed
+     * @throws InvalidConfigException
      */
     public function proccessSearchItem(ApiForm $model)
     {
@@ -391,6 +395,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - единичный объект ApiForm
      * @return mixed
+     * @throws InvalidConfigException
      */
     private function getNewItems(ApiForm $model)
     {
@@ -420,6 +425,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - объект ApiForm
      * @return bool
+     * @throws InvalidConfigException
      */
     private function createNewItems(ApiForm $model): bool
     {

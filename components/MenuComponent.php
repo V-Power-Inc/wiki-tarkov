@@ -245,7 +245,7 @@ final class MenuComponent
             $result = 'active';
         }
 
-        /** Возвращаем результат в виде строки */
+        /** Возвращаем результат в виде строки или null */
         return $result;
     }
 

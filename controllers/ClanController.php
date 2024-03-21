@@ -17,6 +17,7 @@ use app\common\services\LogService;
 use app\components\CookieComponent;
 use app\models\Clans;
 use app\models\ClansSearch;
+use yii\base\InvalidConfigException;
 use yii\web\HttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
@@ -96,6 +97,7 @@ class ClanController extends AdvancedController
      *
      * @return array|Response
      * @throws HttpException
+     * @throws InvalidConfigException
      */
     public function actionSave()
     {
