@@ -8,6 +8,7 @@
 
 namespace app\tests;
 
+use app\common\services\MarkersService;
 use Codeception\Test\Unit;
 use tests\_support\FixturesCollection;
 use UnitTester;

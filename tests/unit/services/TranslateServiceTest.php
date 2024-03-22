@@ -8,6 +8,7 @@
 
 namespace app\tests;
 
+use app\common\services\TranslateService;
 use Codeception\Test\Unit;
 use yii\base\InvalidConfigException;
 use yii\web\Request;

@@ -8,6 +8,7 @@
 
 namespace app\tests;
 
+use app\common\services\DbCommandService;
 use yii\db\Query;
 use yii\db\Command;
 use Codeception\Test\Unit;
