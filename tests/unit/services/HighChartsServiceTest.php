@@ -6,7 +6,7 @@
  * Time: 9:31
  */
 
-namespace app\tests\services;
+namespace app\tests;
 
 use app\components\CookieComponent;
 use app\common\services\HighChartsService;

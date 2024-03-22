@@ -6,7 +6,7 @@
  * Time: 13:03
  */
 
-namespace app\tests\components;
+namespace app\tests;
 
 use app\components\CookieComponent;
 use app\components\LeftmenuWidget;

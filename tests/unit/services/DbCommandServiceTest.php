@@ -6,7 +6,7 @@
  * Time: 15:21
  */
 
-namespace app\tests\services;
+namespace app\tests;
 
 use yii\db\Query;
 use yii\db\Command;

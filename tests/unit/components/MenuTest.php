@@ -6,7 +6,7 @@
  * Time: 10:30
  */
 
-namespace app\tests\components;
+namespace app\tests;
 
 use app\components\CookieComponent;
 use app\components\MenuComponent;

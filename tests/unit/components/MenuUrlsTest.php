@@ -6,7 +6,7 @@
  * Time: 15:08
  */
 
-namespace app\tests\components;
+namespace app\tests;
 
 use app\components\menu\MenuUrlsComponent;
 use Codeception\Test\Unit;

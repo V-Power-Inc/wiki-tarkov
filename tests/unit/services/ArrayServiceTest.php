@@ -6,7 +6,7 @@
  * Time: 14:14
  */
 
-namespace app\tests\services;
+namespace app\tests;
 
 use app\common\services\ArrayService;
 use Codeception\Test\Unit;

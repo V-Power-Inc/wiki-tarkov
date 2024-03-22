@@ -6,7 +6,7 @@
  * Time: 14:12
  */
 
-namespace app\tests\components;
+namespace app\tests;
 
 use app\components\CookieComponent;
 use Codeception\Test\Unit;

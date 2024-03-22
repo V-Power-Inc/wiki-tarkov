@@ -6,7 +6,7 @@
  * Time: 14:48
  */
 
-namespace app\tests\components;
+namespace app\tests;
 
 use app\components\UrlComponent;
 use Codeception\Test\Unit;

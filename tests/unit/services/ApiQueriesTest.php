@@ -6,7 +6,7 @@
  * Time: 14:39
  */
 
-namespace app\tests\services;
+namespace app\tests;
 
 use app\common\services\ApiQueries;
 use Codeception\Test\Unit;
