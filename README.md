@@ -9,7 +9,7 @@
 ![Stable Version](https://img.shields.io/badge/version-v7.3.12-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-753-informational)
-![Tests Code Coverage](https://img.shields.io/badge/coverage-92%25-success)
+![Tests Code Coverage](https://img.shields.io/badge/coverage-68%25-success)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 
