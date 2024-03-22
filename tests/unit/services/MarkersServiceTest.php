@@ -6,7 +6,7 @@
  * Time: 8:55
  */
 
-namespace app\common\services;
+namespace app\tests\services;
 
 use Codeception\Test\Unit;
 use tests\_support\FixturesCollection;

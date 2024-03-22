@@ -6,7 +6,7 @@
  * Time: 21:29
  */
 
-namespace app\common\services;
+namespace app\tests\services;
 
 use Codeception\Test\Unit;
 use yii\base\InvalidConfigException;
