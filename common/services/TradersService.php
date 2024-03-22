@@ -11,6 +11,7 @@ namespace app\common\services;
 use app\models\Items;
 use app\models\Traders;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * Класс для работы с сущностями торговцев, включая квесты
@@ -65,8 +66,11 @@ final class TradersService
      */
     public static function takeResult(Items $form_model): array
     {
+        /** Post данные */
+        $post = Yii::$app->request->post();
+
         /** Сетапим атрибуту модели - данные из POST */
-        $form_model->questitem = $_POST[Items::formName][Items::QUESTITEM];
+        $form_model->questitem = $post[Items::formName][Items::QUESTITEM];
 
         /** Возвращаем данные в зависимости от фильтров */
         return $form_model->questitem == "Все предметы" ? Items::takeActiveQuestItems() :
