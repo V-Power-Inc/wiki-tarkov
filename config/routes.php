@@ -54,8 +54,8 @@ return [
     'loot/lootjson' => LootController::routeId(LootController::ACTION_LOOTJSON),
     'loot/quest-loot' => LootController::routeId(LootController::ACTION_QUESTLOOT),
     'loot' => LootController::routeId(LootController::ACTION_MAINLOOT),
-    'loot/<action:[\w_\/-]+>/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
-    'loot/<name:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
+    'loot/<action:[\w_\/-]+>/<url:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
+    'loot/<url:[\w_\/-]+>' => LootController::routeId(LootController::ACTION_CATEGORY),
 
     /** URL до страницы со списком боссов */
     'bosses' => BossesController::routeId(BossesController::ACTION_INDEX),

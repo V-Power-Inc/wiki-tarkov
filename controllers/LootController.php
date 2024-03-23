@@ -87,20 +87,20 @@ final class LootController extends AdvancedController
     /**
      * Рендер детальной страницы категории - тут рендерятся как родительские так и дочерние категории
      *
-     * @param string $name - url адрес
+     * @param string $url - url адрес
      * @return string
      * @throws HttpException
      */
-    public function actionCategory(string $name): string
+    public function actionCategory(string $url): string
     {
         /** Ищем в БД категорию по URL, только среди активных */
-        $cat = Category::find()->where([Category::ATTR_URL => $name])->andWhere([Category::ATTR_ENABLED => Category::TRUE])->One();
+        $cat = Category::find()->where([Category::ATTR_URL => $url])->andWhere([Category::ATTR_ENABLED => Category::TRUE])->One();
 
         /** Если категория нашлась */
         if ($cat) {
 
             /** Создаем объект пагинации, в который передаем данные предметов по связке с родительской категорией */
-            $data = new PaginationService(Items::takeItemsWithParentCat($name, $cat->id));
+            $data = new PaginationService(Items::takeItemsWithParentCat($url, $cat->id));
 
             /** Рендерим вьюху */
             return $this->render('categorie-page.php', [

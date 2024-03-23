@@ -100,12 +100,12 @@ final class UrlComponent extends BaseObject implements UrlRuleInterface
             if (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для подкатегории */
 
                 /** Отправляем в контроллер с нужным параметром для Action - подкатегория */
-                return ['loot/category',['name'=>$matches[5]]];
+                return ['loot/category',['url'=>$matches[5]]];
 
             } elseif (preg_match('%^([\w\-]+)([\/]{1})([\-\w\d]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для категории */
 
                 /** Отправляем в контроллер с нужным параметром для Action - категория */
-                return ['loot/category',['name'=>$matches[3]]];
+                return ['loot/category',['url'=>$matches[3]]];
 
             } elseif (preg_match('%^([\-\w\d]+)([\/]{1})([\-\w\d]+)([.html]+)$%',$request->pathInfo, $matches)) { /** Вытащили параметр для детальной страницы лута */
 

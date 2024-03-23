@@ -87,7 +87,7 @@ class UrlTest extends Unit
 
         /** Тестируем что попали в кейс обработки категорий справочника лута */
         $parsedRequestLootCategory = $this->urlComponent->parseRequest($this->urlManager, new Request(['pathInfo' => 'loot/some-category']));
-        $this->assertEquals(['loot/category', ['name' => 'some-category']], $parsedRequestLootCategory);
+        $this->assertEquals(['loot/category', ['url' => 'some-category']], $parsedRequestLootCategory);
 
         /** Тестируем что не попали не в один из кейсов */
         $parsedRequestLootCategory = $this->urlComponent->parseRequest($this->urlManager, new Request(['pathInfo' => 'somecontroller/unexists']));
