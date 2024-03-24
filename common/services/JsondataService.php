@@ -53,7 +53,7 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                self::ATTR_VALUE      => $d[Doorkeys::ATTR_NAME],
+                self::ATTR_VALUE        => $d[Doorkeys::ATTR_NAME],
                 Doorkeys::ATTR_NAME     => $d[Doorkeys::ATTR_NAME],
                 Doorkeys::ATTR_PREVIEW  => $d[Doorkeys::ATTR_PREVIEW],
                 Doorkeys::ATTR_URL      => $d[Doorkeys::ATTR_URL],
@@ -90,8 +90,8 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                self::ATTR_VALUE       => $d[Items::ATTR_TITLE],
-                self::ATTR_TITLE       => $d[Items::ATTR_TITLE],
+                self::ATTR_VALUE         => $d[Items::ATTR_TITLE],
+                self::ATTR_TITLE         => $d[Items::ATTR_TITLE],
                 Items::ATTR_PARENTCAT_ID => $parentcat ? $parentcat->title : 'Категория не определена',
                 Items::ATTR_SHORTDESC    => $d[Items::ATTR_SHORTDESC],
                 Items::ATTR_PREVIEW      => $d[Items::ATTR_PREVIEW],
@@ -112,7 +112,7 @@ final class JsondataService
      *
      * @throws Exception
      */
-    public static function getSearchItem(string $q = null): string
+    public static function getSearchApiLogItem(string $q = null): string
     {
         /** Выбираем всех подходящие под запрос данные */
         $data = DbCommandService::createCommandQueryAll(ApiSearchLogs::getSearchWordsForSelectSearch($q));
@@ -154,8 +154,8 @@ final class JsondataService
 
             /** Добавляем в итоговый массив нужные данные */
             $out[] = [
-                self::ATTR_VALUE      => $d[Clans::ATTR_TITLE],
-                self::ATTR_TITLE      => $d[Clans::ATTR_TITLE],
+                self::ATTR_VALUE        => $d[Clans::ATTR_TITLE],
+                self::ATTR_TITLE        => $d[Clans::ATTR_TITLE],
                 Clans::ATTR_DESCRIPTION => $d[Clans::ATTR_DESCRIPTION],
                 Clans::ATTR_PREVIEW     => $d[Clans::ATTR_PREVIEW],
                 Clans::ATTR_LINK        => $d[Clans::ATTR_LINK],
