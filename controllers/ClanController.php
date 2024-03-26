@@ -17,6 +17,7 @@ use app\common\services\LogService;
 use app\components\CookieComponent;
 use app\models\Clans;
 use app\models\ClansSearch;
+use yii\base\InvalidConfigException;
 use yii\web\HttpException;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
@@ -96,6 +97,7 @@ final class ClanController extends AdvancedController
      *
      * @return array|Response
      * @throws HttpException
+     * @throws InvalidConfigException
      */
     public function actionSave()
     {
@@ -155,7 +157,7 @@ final class ClanController extends AdvancedController
                     } else { /** Если данные по каким то причинам не смогли сохраниться */
 
                         /** Логируем этот кейс в БД, т.к. необычная ошибка */
-                        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_CLAN_SAVE_ERROR, ErrorDesc::DESC_CLAN_SAVE_ERROR, ResponseStatusInterface::OK_CODE);
+                        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_CLAN_SAVE_ERROR, ErrorDesc::DESC_CLAN_SAVE_ERROR, ResponseStatusInterface::OK_CODE);
 
                         /** Сетапим флэш сообщение об этом (SetFlash) - указываем, что о баге можно сообщить на электронную почту */
                         CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20'><b>Заявка не была отправлена, напишите об этом на <b>tarkov-wiki@ya.ru</b></b></p>");

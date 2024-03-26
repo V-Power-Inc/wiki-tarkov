@@ -38,7 +38,7 @@ final class CanonicalPagesService
         $result = false;
 
         /** Выдергиваем из канонического урла хост и все лишнее */
-        $canonical_url = str_replace(Yii::$app->request->hostInfo, "",$canonical_url);
+        $canonical_url = str_replace(Yii::$app->request->getHostInfo(), "", $canonical_url);
 
         /** Если url, который запросили не является частью канонического урла */
         if ($canonical_url !== $requested_url) {

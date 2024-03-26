@@ -151,7 +151,7 @@ final class SiteController extends AdvancedController
     public function actionNews(): string
     {
         /** Ищем активные новости */
-        $query =  News::find()->andWhere([News::ATTR_ENABLED => News::TRUE]);
+        $query = News::find()->andWhere([News::ATTR_ENABLED => News::TRUE]);
 
         /** Задаем параметры пагинации */
         $data = new PaginationService($query,10);

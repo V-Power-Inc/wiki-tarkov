@@ -10,6 +10,7 @@ namespace app\common\services;
 
 use app\models\Doorkeys;
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * Этот класс занимается пробросом данных на страницу ключей
@@ -28,8 +29,11 @@ final class KeysService
      */
     public static function takeResult(Doorkeys $form_model): array
     {
+        /** Post данные */
+        $post = Yii::$app->request->post();
+
         /** Сетапим атрибуту модели - данные из POST */
-        $form_model->doorkey = $_POST[Doorkeys::formName][Doorkeys::DOORKEY];
+        $form_model->doorkey = $post[Doorkeys::formName][Doorkeys::DOORKEY];
 
         /** Возвращаем данные в зависимости от фильтров */
         return $form_model->doorkey == "Все ключи" ? Doorkeys::takeActiveKeys() :

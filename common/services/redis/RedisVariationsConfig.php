@@ -10,6 +10,7 @@ namespace app\common\services\redis;
 
 use app\components\CookieComponent;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * Класс в котором прописаны конфиги вариаций для сброса кеша
@@ -28,12 +29,13 @@ class RedisVariationsConfig
      * Если будут исключения, они будут представлены в виде отдельных методов в текущем классе
      *
      * @return array
+     * @throws InvalidConfigException
      */
     public static function getMainControllerVariations(): array
     {
         return [
             $_SERVER['SERVER_NAME'],
-            Yii::$app->request->url,
+            Yii::$app->request->getUrl(),
             Yii::$app->response->statusCode,
             Yii::$app->request->get(static::GET_PARAM_PAGE),
             Yii::$app->request->cookies->get(CookieComponent::NAME_OVERLAY),
@@ -45,12 +47,13 @@ class RedisVariationsConfig
      * Конфиг вариаций кеширования для контроллера карт (Дополнен вариацией с ajax параметрами)
      *
      * @return array
+     * @throws InvalidConfigException
      */
     public static function getMapsControllerVariations(): array
     {
         return [
             $_SERVER['SERVER_NAME'],
-            Yii::$app->request->url,
+            Yii::$app->request->getUrl(),
             Yii::$app->request->isAjax,
             Yii::$app->response->statusCode,
             Yii::$app->request->get(static::GET_PARAM_PAGE),

@@ -140,7 +140,7 @@ final class ApiController extends AdvancedController
         if (Yii::$app->request->isAjax) {
 
             /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
-            return JsondataService::getSearchItem($q);
+            return JsondataService::getSearchApiLogItem($q);
         }
 
         /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */

@@ -1,5 +1,5 @@
 <?php
-$params = require __DIR__ . '/params.php';
+$params = require __DIR__ . '/params-test.php';
 $db = require __DIR__ . '/test_db.php';
 
 /**

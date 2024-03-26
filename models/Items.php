@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\services\files\ImageService;
 use app\models\queries\ItemsQuery;
 use yii\base\Model;
+use yii\db\ActiveQuery;
 use yii\db\Query;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
@@ -222,18 +223,19 @@ class Items extends ActiveRecord
 
     /**
      * Получаем активный лут, связанный с текущей категорией, а также получаем родительскую категорию
+     * TODO: Подлежит рефакторингу
      *
-     * @param string $name - url алрес категории
+     * @param string $url - url алрес категории
      * @param int $id - id родительской категории
      * @return \yii\db\ActiveQuery
      */
-    public static function takeItemsWithParentCat(string $name, int $id)
+    public static function takeItemsWithParentCat(string $url, int $id): ActiveQuery
     {
         return static::find()
             ->alias( 'i')
             ->select('i.*')
             ->leftJoin('category as c1', '`i`.`parentcat_id` = `c1`.`id`')
-            ->andWhere(['c1.url' => $name])
+            ->andWhere(['c1.url' => $url])
             ->andWhere(['active' => 1])
             ->orWhere(['c1.parent_category' => $id])
             ->andWhere(['active' => 1])

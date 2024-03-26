@@ -17,6 +17,7 @@ use app\common\services\TradersService;
 use app\models\Tasks;
 use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\Json;
 use Yii;
@@ -68,6 +69,7 @@ final class TaskModel extends Model
      * TaskModel constructor.
      * @param array $config
      * @param array|null $task - данные с информацией о квесте (task массив)
+     * @throws InvalidConfigException
      */
     public function __construct(array $task = null, array $config = [])
     {
@@ -97,7 +99,7 @@ final class TaskModel extends Model
                 $this->json = null;
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
             }
         }
 

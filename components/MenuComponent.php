@@ -11,6 +11,7 @@ namespace app\components;
 use app\components\menu\MenuUrlsComponent;
 use app\controllers\FeedbackController;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\helpers\Url;
 
 /**
@@ -171,7 +172,7 @@ final class MenuComponent
     private static function getActiveNav()
     {
         /** Получаем id (название) экшена, где сейчас находимся */
-        $activeAction = Yii::$app->controller->action->id;
+        $activeAction = Yii::$app->controller->action;
 
         /** В свиче смотрим - какой экшен, чтобы засетапить active класс активному элементу меню */
         switch ($activeAction) {
@@ -196,7 +197,7 @@ final class MenuComponent
      *
      * @return string
      */
-    public static function themeToggler(): string
+    private static function themeToggler(): string
     {
         /** Переменная с доступом до кукисов */
         $cookies = Yii::$app->request->cookies;
@@ -230,6 +231,7 @@ final class MenuComponent
      * @param array $url_array - массив URL адресов для проверки
      *
      * @return string|null
+     * @throws InvalidConfigException
      */
     private static function checkActiveTabByUrlArray(array $url_array)
     {
@@ -237,13 +239,13 @@ final class MenuComponent
         $result = null;
 
         /** Проверяем текущий урл на вхождение в список урлов, что пришли в виде параметра */
-        if (in_array(Yii::$app->request->url, $url_array)) {
+        if (in_array(Yii::$app->request->getUrl(), $url_array)) {
 
             /** Сетапим результирующую строку - active */
             $result = 'active';
         }
 
-        /** Возвращаем результат в виде строки */
+        /** Возвращаем результат в виде строки или null */
         return $result;
     }
 
@@ -252,6 +254,7 @@ final class MenuComponent
      * Такие формируются с помощью массивов урлов
      *
      * @return void
+     * @throws InvalidConfigException
      */
     private static function getActiveNavByUrlArray()
     {
