@@ -42,11 +42,11 @@ AppAsset::register($this);
 
     <!-- Check styles, which enabled by user -->
     <?php if (isset($cookies[CookieComponent::NAME_DARK_THEME])): ?>
-        <link id="dark_theme" href="/css/dark-theme.css?v=6.8.11" rel="stylesheet">
+        <link id="dark_theme" href="/css/dark-theme.css?v=6.8.12" rel="stylesheet">
     <?php endif; ?>
 
     <!-- Вынесено сюда из за возможностей менять цветовую тему -->
-    <link href="/css/media-queryes.css?v=6.8.11" rel="stylesheet">
+    <link href="/css/media-queryes.css?v=6.8.12" rel="stylesheet">
 
 </head>
 
