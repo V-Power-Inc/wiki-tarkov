@@ -318,4 +318,15 @@ class Items extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new ItemsQuery(get_called_class());
     }
+
+    /**
+     * Получаем запрос для формирования SQL на получение всех активных предметов справочника лута
+     * Для последующей передачи в конструктор пагинации
+     *
+     * @return ItemsQuery
+     */
+    public static function getActiveItemsQuery(): ItemsQuery
+    {
+        return static::find()->where([static::ATTR_ACTIVE => static::TRUE]);
+    }
 }

@@ -7,6 +7,7 @@
  */
 
 namespace app\controllers;
+
 use app\common\controllers\AdvancedController;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\redis\RedisVariationsConfig;
@@ -80,7 +81,7 @@ final class ItemController extends AdvancedController
         $this->enableCsrfValidation = false;
 
         /** Если пользователь авторизован */
-        if(Yii::$app->user->isGuest !== true) {
+        if (Yii::$app->user->isGuest !== true) {
 
             /** Создаем AR объект Items */
             $item = new Items();
