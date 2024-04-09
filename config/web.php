@@ -64,12 +64,17 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
-        'log' => [
+        'log' => [ // Если нет акка в Sentry, можно дефолтный Yii2 лог оставить
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => 'notamedia\sentry\SentryTarget',
+                    'dsn' => $_ENV['SENTRY_DSN'],
                     'levels' => ['error', 'warning'],
+                    // Write the context information (the default is true):
+                    'context' => true,
+                    // Additional options for `Sentry\init`:
+                    // 'clientOptions' => ['release' => 'my-project-name@2.3.12']
                 ],
             ],
         ],
