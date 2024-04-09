@@ -165,4 +165,20 @@ class Clans extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new ClansQuery(get_called_class());
     }
+
+    /**
+     * Получаем список промодерированных кланов
+     *
+     * @return array
+     */
+    public static function getModeratedClans(): array
+    {
+        return static::find()
+            ->where([static::ATTR_MODERATED => static::TRUE])
+            ->orderBy([static::ATTR_DATE_CREATE => SORT_DESC])
+            ->cache(Yii::$app->params['cacheTime']['one_minute'])
+            ->asArray()
+            ->limit(20)
+            ->all();
+    }
 }

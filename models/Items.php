@@ -225,19 +225,18 @@ class Items extends ActiveRecord
      *
      * @param string $name - url алрес категории
      * @param int $id - id родительской категории
-     * @return \yii\db\ActiveQuery
+     * @return Query
      */
-    public static function takeItemsWithParentCat(string $name, int $id)
+    public static function takeItemsWithParentCat(string $name, int $id): Query
     {
         return static::find()
             ->alias( 'i')
             ->select('i.*')
             ->leftJoin('category as c1', '`i`.`parentcat_id` = `c1`.`id`')
             ->andWhere(['c1.url' => $name])
-            ->andWhere(['active' => 1])
+            ->andWhere(['i.active' => 1])
             ->orWhere(['c1.parent_category' => $id])
-            ->andWhere(['active' => 1])
-            ->with('parentcat');
+            ->andWhere(['c1.enabled' => 1]);
     }
 
     /**
@@ -318,5 +317,16 @@ class Items extends ActiveRecord
     {
         /** Каждой AR модели свой класс ActiveQuery */
         return new ItemsQuery(get_called_class());
+    }
+
+    /**
+     * Получаем запрос для формирования SQL на получение всех активных предметов справочника лута
+     * Для последующей передачи в конструктор пагинации
+     *
+     * @return ItemsQuery
+     */
+    public static function getActiveItemsQuery(): ItemsQuery
+    {
+        return static::find()->where([static::ATTR_ACTIVE => static::TRUE]);
     }
 }

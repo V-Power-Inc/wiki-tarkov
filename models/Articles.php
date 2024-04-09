@@ -145,4 +145,16 @@ class Articles extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new ArticlesQuery(get_called_class());
     }
+
+    /**
+     * Получаем запрос для получения всех активных полезных материалов
+     * Потом закинем его в конструктор пагинации
+     *
+     * @return ArticlesQuery
+     */
+    public static function getActiveArticlesQuery(): ArticlesQuery
+    {
+        return static::find()->andWhere([static::ATTR_ENABLED => static::TRUE]);
+    }
+
 }
