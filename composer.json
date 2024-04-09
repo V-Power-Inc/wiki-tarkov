@@ -26,7 +26,8 @@
         "yiisoft/yii2-redis": "~2.0.0",
         "martyn911/yii2-adblock-detector":"*",
         "vlucas/phpdotenv": "*",
-        "miloschuman/yii2-highcharts-widget": "^8.0"
+        "miloschuman/yii2-highcharts-widget": "^8.0",
+        "notamedia/yii2-sentry": "^1.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -46,7 +47,8 @@
             }
         },
         "allow-plugins": {
-            "yiisoft/yii2-composer": true
+            "yiisoft/yii2-composer": true,
+            "php-http/discovery": true
         }
     },
     "scripts": {
