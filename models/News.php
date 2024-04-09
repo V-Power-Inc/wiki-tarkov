@@ -146,4 +146,15 @@ class News extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new NewsQuery(get_called_class());
     }
+
+    /**
+     * Запрос на получение всех активных новостей
+     * Для последующей передачи в конструктор пагинации
+     *
+     * @return NewsQuery
+     */
+    public static function getActiveNewsQuery(): NewsQuery
+    {
+        return static::find()->andWhere([static::ATTR_ENABLED => static::TRUE]);
+    }
 }
