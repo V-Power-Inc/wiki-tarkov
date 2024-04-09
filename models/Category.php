@@ -182,4 +182,18 @@ class Category extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new CategoryQuery(get_called_class());
     }
+
+    /**
+     * Получаем одну активную категорию по параметру - URL
+     *
+     * @param string $url
+     * @return array|ActiveRecord|null
+     */
+    public static function getActiveCategoryByUrl(string $url)
+    {
+        return static::find()
+            ->where([static::ATTR_URL => $url])
+            ->andWhere([static::ATTR_ENABLED => static::TRUE])
+            ->one();
+    }
 }

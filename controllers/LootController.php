@@ -67,11 +67,8 @@ final class LootController extends AdvancedController
         /** Создаем объект лута */
         $model = new Items();
 
-        /** Ищем только активный лут */
-        $fullitems = Items::find()->where([Items::ATTR_ACTIVE => Items::TRUE]);
-
         /** Передаем запрос с лутом в сервис пагинации */
-        $data = new PaginationService($fullitems,50);
+        $data = new PaginationService(Items::getActiveItemsQuery(),50);
 
         /** Рендерим вьюху */
         return $this->render('mainpage.php', [
@@ -94,7 +91,7 @@ final class LootController extends AdvancedController
     public function actionCategory(string $name): string
     {
         /** Ищем в БД категорию по URL, только среди активных */
-        $cat = Category::find()->where([Category::ATTR_URL => $name])->andWhere([Category::ATTR_ENABLED => Category::TRUE])->One();
+        $cat = Category::getActiveCategoryByUrl($name);
 
         /** Если категория нашлась */
         if ($cat) {
