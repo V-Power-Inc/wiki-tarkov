@@ -150,11 +150,8 @@ final class SiteController extends AdvancedController
      */
     public function actionNews(): string
     {
-        /** Ищем активные новости */
-        $query = News::find()->andWhere([News::ATTR_ENABLED => News::TRUE]);
-
         /** Задаем параметры пагинации */
-        $data = new PaginationService($query,10);
+        $data = new PaginationService(News::getActiveNewsQuery(),10);
 
         /** Рендерим вьюху с пагинацией */
         return $this->render('news/list.php', [
@@ -192,11 +189,8 @@ final class SiteController extends AdvancedController
      */
     public function actionArticles(): string
     {
-        /** Ищем активные статьи */
-        $query = Articles::find()->andWhere([Articles::ATTR_ENABLED => Articles::TRUE]);
-
         /** Задаем объект с пагинацией */
-        $data = new PaginationService($query);
+        $data = new PaginationService(Articles::getActiveArticlesQuery());
 
         /** Рендерим вьюху с информацией */
         return $this->render('articles/list.php', [
@@ -234,11 +228,8 @@ final class SiteController extends AdvancedController
      */
     public function actionQuestions(): string
     {
-        /** Ищем активные вопросы */
-        $model = Questions::find()->where([Questions::ATTR_ENABLED => Questions::TRUE]);
-
         /** Задаем объект с пагинацией */
-        $data = new PaginationService($model);
+        $data = new PaginationService(Questions::getActiveQuestionsQuery());
 
         /** Рендерим страницу со списком вопросов */
         return $this->render('questions/list.php', [

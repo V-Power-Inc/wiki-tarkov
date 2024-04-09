@@ -116,4 +116,18 @@ class Barters extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new BartersQuery(get_called_class());
     }
+
+    /**
+     * Получаем ID записи превью бартера по названию модели
+     *
+     * @param string $title
+     * @return false|int|string|null
+     */
+    public static function getBarterIdByTitle(string $title)
+    {
+        return static::find()
+            ->select(static::ATTR_ID)
+            ->where([static::ATTR_TITLE => $title])
+            ->scalar();
+    }
 }

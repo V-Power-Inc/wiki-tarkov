@@ -86,4 +86,15 @@ class Questions extends ActiveRecord
         /** Каждой AR модели свой класс ActiveQuery */
         return new QuestionsQuery(get_called_class());
     }
+
+    /**
+     * Получаем запрос для получения всех активных вопросов
+     * Потом закинем его в конструктор пагинации
+     *
+     * @return QuestionsQuery
+     */
+    public static function getActiveQuestionsQuery(): QuestionsQuery
+    {
+        return static::find()->where([static::ATTR_ENABLED => static::TRUE]);
+    }
 }

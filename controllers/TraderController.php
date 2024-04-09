@@ -153,7 +153,7 @@ final class TraderController extends AdvancedController
             $barter->load(Yii::$app->request->post());
 
             /** Находим нужного торговца по ID в БД */
-            $id = Barters::find()->select(Barters::ATTR_ID)->where([Barters::ATTR_TITLE => $barter->title])->scalar();
+            $id = Barters::getBarterIdByTitle($barter->title);
 
             /** Рендерим вьюху по торговцу с предпросмотром бартеров */
             return $this->render('barter-preview', [

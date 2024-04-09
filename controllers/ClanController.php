@@ -48,15 +48,12 @@ final class ClanController extends AdvancedController
         /** Создаем объект класса - Кланы */
         $srcclan = new Clans();
 
-        /** Получаем список отмодерированных кланов */
-        $clans = Clans::find()->where([Clans::ATTR_MODERATED => Clans::TRUE])->orderBy([Clans::ATTR_DATE_CREATE => SORT_DESC])->cache(60)->asArray()->limit(20)->all();
-
         /** Вычисляем количество заявок на регистрацию клана, доступных на сегодня */
         $avialableTickets = self::PARAM_TICKETS_DAY_LIMIT - ClansSearch::getTodayTicketsCount();
 
         /** Рендерим вьюху */
         return $this->render(self::ACTION_INDEX, [
-            'clans' => $clans,
+            'clans'            => Clans::getModeratedClans(),
             'avialableTickets' => $avialableTickets,
             'srcclan'          => $srcclan,
             'countdaylimit'    => self::PARAM_TICKETS_DAY_LIMIT
