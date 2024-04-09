@@ -59,6 +59,8 @@ final class TranslateService
                 return 'streets-of-tarkov';
             case 'Эпицентр':
                 return 'epicenter';
+            case 'Эпицентр 21+':
+                return 'epicenter-21';
         }
 
         /** Логируем что пришла новая карта */

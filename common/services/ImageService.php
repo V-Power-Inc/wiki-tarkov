@@ -42,7 +42,8 @@ final class ImageService
             'Резерв' => '/img/maps/rezerv.jpg',
             'Лес' => '/img/maps/forest_prev.jpg',
             'Улицы Таркова' => '/img/maps/streets-of-tarkov.jpg',
-            'Эпицентр' => '/img/maps/epicenter.png'
+            'Эпицентр' => '/img/maps/epicenter.png',
+            'Эпицентр 21+' => '/img/maps/epicenter.png'
         ];
 
         /** Если такой локации у нас нет */
