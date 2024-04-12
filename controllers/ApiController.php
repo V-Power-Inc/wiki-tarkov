@@ -8,7 +8,7 @@
 
 namespace app\controllers;
 
-use app\common\exceptions\controllers\app\ApiControllerHttpException;
+use app\common\exceptions\http\controllers\app\ApiControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;

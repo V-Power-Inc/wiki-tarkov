@@ -7,13 +7,13 @@
  * Time: 18:40
  */
 
-namespace app\common\exceptions\controllers\app;
+namespace app\common\exceptions\http\controllers\app;
 
 use yii\web\HttpException;
 
 /**
  * Class BossesControllerHttpException
- * @package app\common\exceptions\controllers\app
+ * @package app\common\exceptions\http\controllers\app
  */
 class BossesControllerHttpException extends HttpException
 {}

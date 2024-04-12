@@ -9,7 +9,7 @@
 namespace app\controllers;
 
 use app\common\constants\sql\SqlQueryCommands;
-use app\common\exceptions\controllers\app\BossesControllerHttpException;
+use app\common\exceptions\http\controllers\app\BossesControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;

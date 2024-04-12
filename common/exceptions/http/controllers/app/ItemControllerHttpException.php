@@ -6,13 +6,13 @@
  * Time: 19:17
  */
 
-namespace app\common\exceptions\controllers\app;
+namespace app\common\exceptions\http\controllers\app;
 
 use yii\web\HttpException;
 
 /**
  * Class ItemControllerHttpException
- * @package app\common\exceptions\controllers\app
+ * @package app\common\exceptions\http\controllers\app
  */
 class ItemControllerHttpException extends HttpException
 {}

@@ -10,7 +10,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
-use app\common\exceptions\controllers\app\LootControllerHttpException;
+use app\common\exceptions\http\controllers\app\LootControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\JsondataService;
 use app\common\services\redis\RedisVariationsConfig;

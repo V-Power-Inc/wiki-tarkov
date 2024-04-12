@@ -9,7 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
-use app\common\exceptions\controllers\app\TraderControllerHttpException;
+use app\common\exceptions\http\controllers\app\TraderControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\ApiService;
 use app\common\services\redis\RedisVariationsConfig;

@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\common\exceptions\controllers\app\SiteControllerHttpException;
+use app\common\exceptions\http\controllers\app\SiteControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\common\services\redis\RedisVariationsConfig;
@@ -18,6 +18,7 @@ use app\common\controllers\AdvancedController;
 use app\common\services\KeysService;
 use app\common\services\JsondataService;
 use Yii;
+use yii\web\HttpException;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -128,7 +129,7 @@ final class SiteController extends AdvancedController
      *
      * @param $id - параметр url ключа
      * @return string
-     * @throws SiteControllerHttpException
+     * @throws \
      */
     public function actionDoorkeysdetail($id): string
     {

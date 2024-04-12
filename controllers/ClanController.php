@@ -10,7 +10,7 @@ namespace app\controllers;
 
 use app\common\constants\log\ErrorDesc;
 use app\common\controllers\AdvancedController;
-use app\common\exceptions\controllers\app\ClanControllerHttpException;
+use app\common\exceptions\http\controllers\app\ClanControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\forms\ClansForm;
 use app\common\services\JsondataService;

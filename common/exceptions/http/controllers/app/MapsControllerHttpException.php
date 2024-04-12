@@ -6,13 +6,13 @@
  * Time: 19:18
  */
 
-namespace app\common\exceptions\controllers\app;
+namespace app\common\exceptions\http\controllers\app;
 
 use yii\web\HttpException;
 
 /**
  * Class MapsControllerHttpException
- * @package app\common\exceptions\controllers\app
+ * @package app\common\exceptions\http\controllers\app
  */
 class MapsControllerHttpException extends HttpException
 {}
