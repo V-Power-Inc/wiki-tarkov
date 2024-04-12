@@ -17,7 +17,7 @@ use app\common\services\PaginationService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
-use yii\web\HttpException;
+use yii\base\InvalidConfigException;
 use yii\web\ServerErrorHttpException;
 use yii\db\Exception;
 use Yii;
@@ -104,7 +104,8 @@ final class ApiController extends AdvancedController
      *
      * @param string $url - строка с Url адресом
      * @return mixed
-     * @throws HttpException
+     * @throws ApiControllerHttpException
+     * @throws InvalidConfigException
      */
     public function actionItem(string $url)
     {
@@ -117,8 +118,12 @@ final class ApiController extends AdvancedController
             /** Инициализируем API */
             $api = new ApiService();
 
-            /** Обновляем данные о предмете через API */
-            $api->renewItemData($item);
+            /** Обновляем данные о предмете через API, если не получится */
+            if ($api->renewItemData($item) === false) {
+
+                /** Эксепшн, на случай если не смогли из API обновить данные */
+                throw new ApiControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+            }
 
             /** Ренденирг данных */
             return $this->render(self::ACTION_ITEM, ['item' => $item]);

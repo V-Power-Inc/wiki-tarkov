@@ -662,6 +662,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiLoot $item - AR объект, лут из API справочника
      * @return bool
+     * @throws InvalidConfigException
      */
     public function renewItemData(ApiLoot $item): bool
     {
@@ -673,6 +674,11 @@ final class ApiService implements ApiInterface
 
         /** Сетапим данные из API - переменной */
         $content = $this->getApiData();
+
+        /** Если не смогли получить данные из API, возвращаем false */
+        if (empty($content)) {
+            return false;
+        }
 
         /** Возвращаем bool результат обновления лута */
         return $item->updateData($content);
