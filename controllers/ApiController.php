@@ -104,7 +104,6 @@ final class ApiController extends AdvancedController
      *
      * @param string $url - строка с Url адресом
      * @return mixed
-     * @throws ApiControllerHttpException
      * @throws InvalidConfigException
      */
     public function actionItem(string $url)
@@ -121,8 +120,8 @@ final class ApiController extends AdvancedController
             /** Обновляем данные о предмете через API, если не получится */
             if ($api->renewItemData($item) === false) {
 
-                /** Эксепшн, на случай если не смогли из API обновить данные */
-                throw new ApiControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
+                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
             }
 
             /** Ренденирг данных */
