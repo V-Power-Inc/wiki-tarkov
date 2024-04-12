@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\exceptions\http\controllers\app\LootControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\JsondataService;
 use app\common\services\redis\RedisVariationsConfig;
@@ -18,7 +19,6 @@ use yii;
 use app\models\Category;
 use app\models\Items;
 use app\models\Traders;
-use yii\web\HttpException;
 use app\common\services\PaginationService;
 
 /**
@@ -86,7 +86,7 @@ final class LootController extends AdvancedController
      *
      * @param string $url - url адрес
      * @return string
-     * @throws HttpException
+     * @throws LootControllerHttpException
      */
     public function actionCategory(string $url): string
     {
@@ -110,7 +110,7 @@ final class LootController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если активная категория не нашлась */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new LootControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -148,7 +148,7 @@ final class LootController extends AdvancedController
      *
      * @param string|null $q - поисковый запрос
      * @return string
-     * @throws HttpException
+     * @throws LootControllerHttpException
      * @throws yii\db\Exception
      */
     public function actionLootjson(string $q = null): string
@@ -161,6 +161,6 @@ final class LootController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если запрос прилетел не через AJAX */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new LootControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }

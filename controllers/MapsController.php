@@ -8,12 +8,12 @@
 
 namespace app\controllers;
 
+use app\common\exceptions\http\controllers\app\MapsControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\MarkersService;
 use app\common\services\redis\RedisVariationsConfig;
 use Yii;
-use yii\web\HttpException;
 
 /**
  * Это контроллер интерактивных карт
@@ -76,6 +76,7 @@ final class MapsController extends AdvancedController
      * Метод возвращает маркеры локаций по GET параметру название карты
      *
      * @return string
+     * @throws MapsControllerHttpException
      */
     public function actionGetMarkers(): string
     {
@@ -94,7 +95,7 @@ final class MapsController extends AdvancedController
         }
 
         /** Если запрос к странице был не по Ajax - всегда выкидываем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
+        throw new MapsControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не найдена');
     }
 
     /**

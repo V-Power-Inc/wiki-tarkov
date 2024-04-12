@@ -9,9 +9,9 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\exceptions\http\controllers\app\ItemControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\redis\RedisVariationsConfig;
-use yii\web\HttpException;
 use app\models\Items;
 use Yii;
 
@@ -54,7 +54,7 @@ final class ItemController extends AdvancedController
      *
      * @param $item - url адрес
      * @return string
-     * @throws HttpException
+     * @throws ItemControllerHttpException
      */
     public function actionDetailloot($item): string
     {
@@ -66,14 +66,14 @@ final class ItemController extends AdvancedController
         }
 
         /** Выкидываем 404 - если не нашли такой лут в базе */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new ItemControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
      * Рендер страницы предпросмотра детальной страницы лута
      *
      * @return string
-     * @throws HttpException
+     * @throws ItemControllerHttpException
      */
     public function actionPreviewloot(): string
     {
@@ -94,6 +94,6 @@ final class ItemController extends AdvancedController
         }
 
         /** Если на эту страницу пытается попасть неавторизованный пользователь - выкидываем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new ItemControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }

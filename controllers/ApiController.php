@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\common\exceptions\http\controllers\app\ApiControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
@@ -132,6 +133,7 @@ final class ApiController extends AdvancedController
      *
      * @param string $q - поисковый запрос
      * @return string
+     * @throws ApiControllerHttpException
      * @throws Exception
      */
     public function actionSearch(string $q): string
@@ -144,7 +146,7 @@ final class ApiController extends AdvancedController
         }
 
         /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+        throw new ApiControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 
     /**
@@ -152,6 +154,7 @@ final class ApiController extends AdvancedController
      *
      * @param string $id - id предмета из API tarkov.dev
      * @return string
+     * @throws ApiControllerHttpException
      */
     public function actionGetGraphs(string $id): string
     {
@@ -166,7 +169,7 @@ final class ApiController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если кто-то сюда ломится помимо Ajax */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.');
+        throw new ApiControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует.');
     }
 
     /**

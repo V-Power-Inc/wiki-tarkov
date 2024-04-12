@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\services\files\ImageService;
 use app\models\queries\ItemsQuery;
 use yii\base\Model;
+use yii\db\ActiveQuery;
 use yii\db\Query;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\FileValidator;
@@ -225,9 +226,9 @@ class Items extends ActiveRecord
      *
      * @param string $url - url алрес категории
      * @param int $id - id родительской категории
-     * @return Query
+     * @return ActiveQuery
      */
-    public static function takeItemsWithParentCat(string $url, int $id): Query
+    public static function takeItemsWithParentCat(string $url, int $id): ActiveQuery
     {
         return static::find()
             ->alias( 'i')
