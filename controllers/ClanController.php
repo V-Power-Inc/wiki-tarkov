@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\common\constants\log\ErrorDesc;
 use app\common\controllers\AdvancedController;
+use app\common\exceptions\controllers\app\ClanControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\models\forms\ClansForm;
 use app\common\services\JsondataService;
@@ -17,7 +18,7 @@ use app\common\services\LogService;
 use app\components\CookieComponent;
 use app\models\Clans;
 use app\models\ClansSearch;
-use yii\web\HttpException;
+use yii\db\Exception;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
 use Yii;
@@ -92,7 +93,7 @@ final class ClanController extends AdvancedController
      * Обработчик сохранения данных нового клана в БД
      *
      * @return array|Response
-     * @throws HttpException
+     * @throws ClanControllerHttpException
      */
     public function actionSave()
     {
@@ -165,7 +166,7 @@ final class ClanController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку - если пришел запрос не подходящий не под один из критериев */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new ClanControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -173,8 +174,8 @@ final class ClanController extends AdvancedController
      *
      * @param string|null $q - поисковый запрос
      * @return string
-     * @throws HttpException
-     * @throws \yii\db\Exception
+     * @throws ClanControllerHttpException
+     * @throws Exception
      */
     public function actionClansearch(string $q = null): string
     {
@@ -187,7 +188,7 @@ final class ClanController extends AdvancedController
         } else { /** Если запрос сюда прилетел иным образом */
 
             /** Выкидываем 404 ошибку */
-            throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+            throw new ClanControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
         }
     }
 }

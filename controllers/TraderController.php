@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\common\controllers\AdvancedController;
+use app\common\exceptions\controllers\app\TraderControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\ApiService;
 use app\common\services\redis\RedisVariationsConfig;
@@ -92,7 +93,7 @@ final class TraderController extends AdvancedController
      *
      * @param $id - url адрес торговца
      * @return string
-     * @throws HttpException
+     * @throws TraderControllerHttpException
      */
     public function actionTradersdetail($id): string
     {
@@ -107,14 +108,14 @@ final class TraderController extends AdvancedController
         }
 
         /** Если не нашли информацию о торговце, выкидываем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new TraderControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
      * Рендер страницы предпросмотра детальной страницы торговца
      *
      * @return string
-     * @throws HttpException
+     * @throws TraderControllerHttpException
      */
     public function actionPreviewtrader(): string
     {
@@ -132,14 +133,14 @@ final class TraderController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если сюда пытались зайти неавторизованные пользователи */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует.');
+        throw new TraderControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует.');
     }
 
     /**
      * Рендер страницы предпросмотра бартера торговцев
      *
      * @return string
-     * @throws HttpException
+     * @throws TraderControllerHttpException
      */
     public function actionBarterspreview(): string
     {
@@ -163,6 +164,6 @@ final class TraderController extends AdvancedController
         }
 
         /** Выкидываем 404 ошибку, если пользователь не авторизован */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new TraderControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }
