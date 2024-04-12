@@ -9,13 +9,13 @@
 namespace app\controllers;
 
 use app\common\constants\sql\SqlQueryCommands;
+use app\common\exceptions\http\controllers\app\BossesControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\ApiService;
 use app\common\services\ArrayService;
 use app\common\services\redis\RedisVariationsConfig;
 use app\models\Bosses;
-use yii\web\HttpException;
 use yii\db\StaleObjectException;
 use Yii;
 
@@ -86,6 +86,7 @@ final class BossesController extends AdvancedController
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
+     * @throws BossesControllerHttpException
      * @return mixed
      */
     public function actionView(string $url)
@@ -117,6 +118,6 @@ final class BossesController extends AdvancedController
         }
 
         /** Exception на всякий случай */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
+        throw new BossesControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'Такая страница не существует');
     }
 }

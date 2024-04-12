@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\common\exceptions\http\controllers\app\SiteControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\common\services\redis\RedisVariationsConfig;
@@ -14,10 +15,10 @@ use app\models\Currencies;
 use app\models\Patrons;
 use yii\helpers\Json;
 use app\common\controllers\AdvancedController;
-use yii\web\HttpException;
 use app\common\services\KeysService;
 use app\common\services\JsondataService;
 use Yii;
+use yii\web\HttpException;
 
 /**
  * Основной контроллер сайта (Изначально существующий)
@@ -128,7 +129,7 @@ final class SiteController extends AdvancedController
      *
      * @param $id - параметр url ключа
      * @return string
-     * @throws HttpException
+     * @throws \
      */
     public function actionDoorkeysdetail($id): string
     {
@@ -140,7 +141,7 @@ final class SiteController extends AdvancedController
         }
 
         /** В ином случае выкидываем Exception */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -167,7 +168,7 @@ final class SiteController extends AdvancedController
      *
      * @param $id - параметр url новости
      * @return string
-     * @throws HttpException
+     * @throws SiteControllerHttpException(
      */
     public function actionNewsdetail($id): string
     {
@@ -179,7 +180,7 @@ final class SiteController extends AdvancedController
         }
 
         /** В ином случае выкидываем 404 ошибку */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -206,7 +207,7 @@ final class SiteController extends AdvancedController
      *
      * @param $url - параметр url статьи
      * @return string
-     * @throws HttpException
+     * @throws SiteControllerHttpException
      */
     public function actionArticledetail($url): string
     {
@@ -218,7 +219,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 ошибка - если не нашли такой статьи по урлу */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -246,7 +247,7 @@ final class SiteController extends AdvancedController
      * @param null $q - ключевое слово запроса
      *
      * @return string
-     * @throws HttpException
+     * @throws SiteControllerHttpException
      * @throws \yii\db\Exception
      */
     public function actionKeysjson($q = null): string
@@ -259,7 +260,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 - если сюда не AJAX запрос прилетел */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -281,7 +282,7 @@ final class SiteController extends AdvancedController
      * Отдаем валюты из базы в JSON формате
      *
      * @return string
-     * @throws HttpException
+     * @throws SiteControllerHttpException
      */
     public function actionJsonvalute(): string
     {
@@ -293,7 +294,7 @@ final class SiteController extends AdvancedController
         }
 
         /** 404 - Если запрос прилетел не по AJAX */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -301,7 +302,7 @@ final class SiteController extends AdvancedController
      * сайта на 6 часов (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
      * @return mixed
-     * @throws HttpException - Если без AJAX пытаются сюда лезть прямым запросом
+     * @throws SiteControllerHttpException - Если без AJAX пытаются сюда лезть прямым запросом
      */
     public function actionCloseOverlay(): bool
     {
@@ -320,7 +321,7 @@ final class SiteController extends AdvancedController
         }
 
         /** Исключение - в случае если сюда пытались залезть прямым запросом */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -329,7 +330,7 @@ final class SiteController extends AdvancedController
      * Всегда возвращает строку
      *
      * @return string
-     * @throws HttpException - Если запрос сюда без Ajax
+     * @throws SiteControllerHttpException - Если запрос сюда без Ajax
      */
     public function actionChangeLayout(): string
     {
@@ -357,6 +358,6 @@ final class SiteController extends AdvancedController
         }
 
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }
