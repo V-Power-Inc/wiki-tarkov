@@ -49,6 +49,8 @@ final class MarkersService
             case 'razvyazka':
                 $markers = Maps::takeRazvyazkaMarkers();
                 break;
+            default:
+                $markers = [];
         }
 
         /** Возвращает маркеры, приведенные к JSON виду */

@@ -8,13 +8,15 @@
 
 namespace app\common\services;
 
+use app\common\interfaces\ApiQueryInterface;
+
 /**
  * Сервис, который задает запрос к API ресурса tarkov.dev
  *
  * Class ApiQueries
  * @package app\common\services
  */
-final class ApiQueries
+final class ApiQueries implements ApiQueryInterface
 {
     /** @var string - запрос, который будет отправляться в API */
     public string $query;

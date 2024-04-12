@@ -22,6 +22,7 @@ use app\models\forms\ApiForm;
 use app\models\Tasks;
 use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -161,6 +162,7 @@ final class ApiService implements ApiInterface
      * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
      * @return mixed
      * @throws HttpException
+     * @throws InvalidConfigException
      */
     private function getApiData(bool $encoded = true)
     {
@@ -177,7 +179,7 @@ final class ApiService implements ApiInterface
         if ($data === false) {
 
             /** Логируем в БД ошибку получения данных на этом этапе */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
 
             /** Выкидываем 404 с указанием что API не вернул данных */
             throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'API не вернул данные, попробуйте зайти позже');
@@ -192,6 +194,7 @@ final class ApiService implements ApiInterface
      *
      * @param array $data - массив с данными о боссах
      * @return bool
+     * @throws InvalidConfigException
      */
     private function saveData(array $data): bool
     {
@@ -212,7 +215,7 @@ final class ApiService implements ApiInterface
             } catch (InvalidArgumentException|ErrorException $e) {
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
 
                 /** Возвращаем false - Не удалось сохранить новые данные */
                 return false;
@@ -340,10 +343,11 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
+     * @return mixed
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
-     * @return mixed
+     * @throws InvalidConfigException
      */
     public function proccessSearchItem(ApiForm $model)
     {
@@ -379,7 +383,7 @@ final class ApiService implements ApiInterface
         }
 
         /** Логируем в БД ошибку */
-        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
 
         /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
         throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
@@ -391,6 +395,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - единичный объект ApiForm
      * @return mixed
+     * @throws InvalidConfigException
      */
     private function getNewItems(ApiForm $model)
     {
@@ -420,6 +425,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - объект ApiForm
      * @return bool
+     * @throws InvalidConfigException
      */
     private function createNewItems(ApiForm $model): bool
     {
@@ -447,7 +453,7 @@ final class ApiService implements ApiInterface
                 } catch (InvalidArgumentException|ErrorException $e) {
 
                     /** Логируем что API вернул кривые данные */
-                    LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                    LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
 
                     /** Возвращаем false - Не удалось сохранить новые данные */
                     return false;
@@ -656,6 +662,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiLoot $item - AR объект, лут из API справочника
      * @return bool
+     * @throws InvalidConfigException
      */
     public function renewItemData(ApiLoot $item): bool
     {
@@ -667,6 +674,11 @@ final class ApiService implements ApiInterface
 
         /** Сетапим данные из API - переменной */
         $content = $this->getApiData();
+
+        /** Если не смогли получить данные из API, возвращаем false */
+        if (empty($content)) {
+            return false;
+        }
 
         /** Возвращаем bool результат обновления лута */
         return $item->updateData($content);

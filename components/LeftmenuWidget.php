@@ -7,7 +7,9 @@
  */
 
 namespace app\components;
+
 use app\common\constants\sql\SqlQueryCommands;
+use app\common\services\redis\RedisVariationsConfig;
 use yii\base\Widget;
 use app\models\Category;
 use Yii;
@@ -40,15 +42,8 @@ final class LeftmenuWidget extends Widget {
         /** Инициализация родительского виджета (Widget) */
         parent::init();
 
-        /** Если не указан файл шаблона из которого брать меню */
-        if ($this->tpl === null) {
-
-            /** Указываем название файла */
-           $this->tpl = 'leftmenu';
-        }
-
-        /** Указываем расширения файла */
-        $this->tpl .='.php';
+        /** Указываем название файла */
+        $this->tpl = 'leftmenu.php';
     }
 
     /**
@@ -66,6 +61,7 @@ final class LeftmenuWidget extends Widget {
                     'class' => 'yii\caching\DbDependency',
                     'sql' => SqlQueryCommands::COUNT_FROM_CATEGORY,
                 ],
+                'variations' => RedisVariationsConfig::getMainControllerVariations()
             ],
         ];
     }
@@ -77,7 +73,7 @@ final class LeftmenuWidget extends Widget {
      */
     public function run(): string
     {
-        /** Сетапи атрибуту класса - запрос на получение данных, активные категории */
+        /** Сетапим атрибуту класса - запрос на получение данных, активные категории */
         $this->data = Category::find()
             ->where([Category::ATTR_ENABLED => Category::TRUE])
             ->indexBy(Category::ATTR_ID)
@@ -100,7 +96,7 @@ final class LeftmenuWidget extends Widget {
      *
      * @return array
      */
-    protected function getTree(): array
+    private function getTree(): array
     {
         /** Массив для возвращение результата */
         $categoryTree = [];
@@ -124,13 +120,13 @@ final class LeftmenuWidget extends Widget {
      * @param array $categoryTree - массив дерева категорий с родительскими и дочерними элементами
      * @return string
      */
-    protected function getMenuHtml(array $categoryTree): string
+    private function getMenuHtml(array $categoryTree): string
     {
         /** Строка для выдачи результата */
         $resultHTML = '';
 
         /** В цикле проходим массив категорий (Родительских и дочерних )*/
-        foreach($categoryTree as $category) {
+        foreach ($categoryTree as $category) {
 
             /** Нарезаем элементы в html */
             $resultHTML .= $this->catToTemplate($category);
@@ -146,15 +142,15 @@ final class LeftmenuWidget extends Widget {
      * @param $category
      * @return false|string
      */
-    protected function catToTemplate($category)
+    private function catToTemplate($category)
     {
         /** Используем буферизацию вывода */
         ob_start();
 
         /** Подключаем и исполняем этот файл (Шаблон левого меню сайта) */
-        include __DIR__ . '/render_views/' .$this->tpl;
+        include __DIR__ . '/render_views/' . $this->tpl;
 
-        /** Получем содержимое текущего буфера, после чего - удаляем его */
+        /** Получим содержимое текущего буфера, после чего - удаляем его */
         return ob_get_clean();
     }
 }

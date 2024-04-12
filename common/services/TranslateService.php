@@ -11,6 +11,7 @@ namespace app\common\services;
 use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\ResponseStatusInterface;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * Сервис для получения транслитов для всякого рода потребностей
@@ -30,6 +31,7 @@ final class TranslateService
      *
      * @param string $map - название карты
      * @return string
+     * @throws InvalidConfigException
      */
     public static function mapUrlCreator(string $map): string
     {
@@ -62,7 +64,7 @@ final class TranslateService
         }
 
         /** Логируем что пришла новая карта */
-        LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map, ResponseStatusInterface::OK_CODE);
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map, ResponseStatusInterface::OK_CODE);
 
         /** Возвращаем null только если не попали не в 1 из кейсов */
         return self::EMPTY_STRING;
@@ -143,6 +145,7 @@ final class TranslateService
      *
      * @param string $faction - Название фракции
      * @return string
+     * @throws InvalidConfigException
      */
     public static function getQuestFaction(string $faction): string
     {
@@ -157,7 +160,7 @@ final class TranslateService
         if (empty($array[$faction])) {
 
             /** Логируем что прилетела новая фракция */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_FACTION, ErrorDesc::DESC_NEW_API_QUEST_FACTION . $faction, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_FACTION, ErrorDesc::DESC_NEW_API_QUEST_FACTION . $faction, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем необработанный результат */
             return $faction;
@@ -172,6 +175,7 @@ final class TranslateService
      *
      * @param string $status - статус квеста
      * @return string
+     * @throws InvalidConfigException
      */
     public static function getTaskStatus(string $status): string
     {
@@ -185,7 +189,7 @@ final class TranslateService
         if (empty($array[$status])) {
 
             /** Логируем что прилетело новое состояние квеста */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_QUEST_STATE, ErrorDesc::DESC_NEW_API_QUEST_STATE . $status, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_QUEST_STATE, ErrorDesc::DESC_NEW_API_QUEST_STATE . $status, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем значение в необработанном виде */
             return $status;
