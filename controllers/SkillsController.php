@@ -8,10 +8,10 @@
 
 namespace app\controllers;
 
+use app\common\exceptions\http\controllers\app\SkillsControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\redis\RedisVariationsConfig;
-use yii\web\HttpException;
 use app\models\Catskills;
 use app\models\Skills;
 use yii;
@@ -63,7 +63,7 @@ final class SkillsController extends AdvancedController
      *
      * @param string $name - url адрес
      * @return string
-     * @throws HttpException
+     * @throws SkillsControllerHttpException
      */
     public function actionSkillscategory(string $name): string
     {
@@ -78,7 +78,7 @@ final class SkillsController extends AdvancedController
         }
 
         /** 404 - Если не нашли страницу с активной категорией */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SkillsControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 
     /**
@@ -86,7 +86,7 @@ final class SkillsController extends AdvancedController
      *
      * @param string $url - url адрес
      * @return string
-     * @throws HttpException
+     * @throws SkillsControllerHttpException
      */
     public function actionSkillsdetail(string $url): string
     {
@@ -98,6 +98,6 @@ final class SkillsController extends AdvancedController
         }
 
         /** 404 - Если не нашли страницу с умением */
-        throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
+        throw new SkillsControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
 }

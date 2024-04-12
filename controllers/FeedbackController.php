@@ -30,7 +30,7 @@ final class FeedbackController extends AdvancedController
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         /** Данные из POST */
         $post = Yii::$app->request->post();
