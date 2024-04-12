@@ -11,6 +11,7 @@ namespace app\common\services;
 use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\ResponseStatusInterface;
 use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * Сервис для всякого рода работы с изображениями и получения путей к ним
@@ -25,6 +26,7 @@ final class ImageService
      *
      * @param string $map_name - Название карты
      * @return string
+     * @throws InvalidConfigException
      */
     public static function mapImages(string $map_name): string
     {
@@ -48,7 +50,7 @@ final class ImageService
         if (empty($array[$map_name])) {
 
             /** Логируем что пришла новая карта */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем заглушку */
             return '/img/qsch.png';
@@ -63,6 +65,7 @@ final class ImageService
      *
      * @param string $boss - Название босса
      * @return string
+     * @throws InvalidConfigException
      */
     public static function bossImages(string $boss): string
     {
@@ -91,7 +94,7 @@ final class ImageService
         if (empty($array[$boss])) {
 
             /** Логируем что есть необработанный босс */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
 
             /** Возвращаем изображение заглушку */
             return '/img/qsch.png';
@@ -106,6 +109,7 @@ final class ImageService
      *
      * @param string $trader - имя торговца
      * @return string
+     * @throws InvalidConfigException
      */
     public static function traderImages(string $trader): string
     {
@@ -127,7 +131,7 @@ final class ImageService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';
@@ -142,6 +146,7 @@ final class ImageService
      *
      * @param string $trader - имя торговца
      * @return string
+     * @throws InvalidConfigException
      */
     public static function questsTraderImages(string $trader): string
     {
@@ -161,7 +166,7 @@ final class ImageService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->url, ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';

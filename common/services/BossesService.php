@@ -55,9 +55,9 @@ final class BossesService
      * Метод возвращает по ключу, возможные значения свиты у боссов
      *
      * @param string $boss_name - Строка, имя босса
-     * @return mixed
+     * @return string
      */
-    public static function minionsNamesPrefix(string $boss_name)
+    public static function minionsNamesPrefix(string $boss_name): string
     {
         /** Массив с вариациями имен или префиксов свиты */
         $array = [
@@ -68,8 +68,8 @@ final class BossesService
             'Штурман' => 'Светлоозерский'
         ];
 
-        /** Возвращаем либо результат по ключу, либо null */
-        return $array[$boss_name] ?? null;
+        /** Возвращаем либо результат по ключу, либо пустую строку */
+        return $array[$boss_name] ?? '';
     }
 
     /**

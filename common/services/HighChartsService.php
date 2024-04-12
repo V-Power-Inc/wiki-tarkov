@@ -8,6 +8,7 @@
 
 namespace app\common\services;
 
+use app\components\CookieComponent;
 use Yii;
 
 /**
@@ -26,11 +27,8 @@ final class HighChartsService
      */
     public static function getBackgroundByTheme(): string
     {
-        /** Коллекция кукисов */
-        $cookies = Yii::$app->request->cookies;
-
         /** В зависимости от выбранно темы сайта - вернет правильный цвет для бэкграунда HighCharts при рендере */
-        return isset($cookies['dark_theme']) ? '#363535' : '#fff';
+        return Yii::$app->request->cookies->has(CookieComponent::NAME_DARK_THEME) ? '#363535' : '#fff';
     }
 
     /**
@@ -41,10 +39,7 @@ final class HighChartsService
      */
     public static function getTextByTheme(): string
     {
-        /** Коллекция кукисов */
-        $cookies = Yii::$app->request->cookies;
-
         /** В зависимости от выбранно темы сайта - вернет правильный цвет для текста HighCharts при рендере */
-        return isset($cookies['dark_theme']) ? '#c4c4c4' : '#333333';
+        return Yii::$app->request->cookies->has(CookieComponent::NAME_DARK_THEME) ? '#c4c4c4' : '#333333';
     }
 }

@@ -17,7 +17,7 @@ use app\common\services\PaginationService;
 use app\models\ApiLoot;
 use app\models\ApiSearchLogs;
 use app\models\forms\ApiForm;
-use yii\web\HttpException;
+use yii\base\InvalidConfigException;
 use yii\web\ServerErrorHttpException;
 use yii\db\Exception;
 use Yii;
@@ -104,7 +104,7 @@ final class ApiController extends AdvancedController
      *
      * @param string $url - строка с Url адресом
      * @return mixed
-     * @throws HttpException
+     * @throws InvalidConfigException
      */
     public function actionItem(string $url)
     {
@@ -117,8 +117,12 @@ final class ApiController extends AdvancedController
             /** Инициализируем API */
             $api = new ApiService();
 
-            /** Обновляем данные о предмете через API */
-            $api->renewItemData($item);
+            /** Обновляем данные о предмете через API, если не получится */
+            if ($api->renewItemData($item) === false) {
+
+                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
+                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+            }
 
             /** Ренденирг данных */
             return $this->render(self::ACTION_ITEM, ['item' => $item]);
@@ -142,7 +146,7 @@ final class ApiController extends AdvancedController
         if (Yii::$app->request->isAjax) {
 
             /** Возвращаем JSON закодированную подсказку по поиску актуального лута */
-            return JsondataService::getSearchItem($q);
+            return JsondataService::getSearchApiLogItem($q);
         }
 
         /** Если сюда пытаются зайти прямым запросом - выкидываем 404 ошибку */
