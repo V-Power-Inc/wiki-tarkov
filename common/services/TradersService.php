@@ -51,6 +51,8 @@ final class TradersService
                 return 'eger-quests';
             case 'Смотритель':
                 return 'seeker-quests';
+            case 'Реф':
+                return 'ref-quests';
         }
 
         /** Если в switch не попали - пишем error, так мы узнаем что есть новый торговец и при этом не вылетит ошибка */

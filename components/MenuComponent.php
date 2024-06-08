@@ -109,6 +109,7 @@ final class MenuComponent
                             <li><a href="/traders/baraholshik">Барахольщик</a></li>
                             <li><a href="/traders/eger">Егерь</a></li>
                             <li><a href="/quests-of-traders/seeker-quests">Квесты Смотрителя</a></li>
+                            <li><a href="/quests-of-traders/ref-quests">Квесты Рефа</a></li>
                                 <li role="separator" class="divider"></li>
                             <li><a href="/quests-of-traders">Смотреть всех торговцев</a></li>
                           </ul>
