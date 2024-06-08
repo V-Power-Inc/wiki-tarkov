@@ -161,6 +161,7 @@ final class ImageService
             'Барахольщик' => '/img/torgovcy/baraholshik-quests/baraholshik-full.jpg',
             'Егерь' => '/img/torgovcy/eger.jpeg',
             'Смотритель' => '/img/torgovcy/seeker_full.jpg',
+            'Реф' => '/img/torgovcy/small/ref.jpg'
         ];
 
         /** Если не нашли нужное изображение торговца по ключу */
