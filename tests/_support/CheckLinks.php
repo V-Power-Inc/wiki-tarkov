@@ -54,6 +54,7 @@ final class CheckLinks
         $I->seeLink('Барахольщик', '/traders/baraholshik');
         $I->seeLink('Егерь', '/traders/eger');
         $I->seeLink('Квесты Смотрителя', '/quests-of-traders/seeker-quests');
+        $I->seeLink('Квесты Рефа', '/quests-of-traders/ref-quests');
         $I->seeLink('Смотреть всех торговцев', '/quests-of-traders');
         $I->seeLink('Физические умения', '/skills/physical');
         $I->seeLink('Ментальные умения', '/skills/mental');
