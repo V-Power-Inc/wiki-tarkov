@@ -63,6 +63,7 @@ class MenuUrlsTest extends Unit
             "/quests-of-traders/eger-quests",
             "/quests-of-traders/mehanic-quests",
             "/quests-of-traders/seeker-quests",
+            "/quests-of-traders/ref-quests",
             "/traders/prapor",
             "/traders/terapevt",
             "/traders/lyjnic",
