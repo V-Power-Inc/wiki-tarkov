@@ -22,7 +22,8 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - name: action-docker-compose
+    - uses: actions/checkout@v4
+    - name: run docker-compose
       uses: sudo-bot/action-docker-compose@latest
     - name: Tests (Build & Applying migrations & Unit/Functional tests)
       shell: bash
