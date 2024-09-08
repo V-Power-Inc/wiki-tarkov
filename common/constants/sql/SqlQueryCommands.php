@@ -8,8 +8,7 @@
 
 namespace app\common\constants\sql;
 
-use app\models\Bosses;
-use app\models\Skills;
+use app\models\{Bosses, Skills};
 
 /**
  * Класс для определения в константах различных SQL запросов

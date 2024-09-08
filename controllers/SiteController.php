@@ -7,18 +7,11 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\PaginationService;
 use app\common\services\redis\RedisVariationsConfig;
 use app\components\CookieComponent;
-use app\models\Doorkeys;
-use app\models\News;
-use app\models\Articles;
-use app\models\Questions;
-use app\models\Currencies;
-use app\models\Patrons;
-use yii\helpers\Json;
+use app\models\{Doorkeys, Articles, Questions, Currencies, Patrons, News};
 use app\common\controllers\AdvancedController;
-use app\common\services\KeysService;
-use app\common\services\JsondataService;
+use app\common\services\{KeysService, JsondataService};
+use yii\helpers\Json;
 use Yii;
-use yii\web\HttpException;
 
 /**
  * Основной контроллер сайта (Изначально существующий)

@@ -3,8 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Doorkeys;
-use app\models\DoorkeysSearch;
+use app\models\{Doorkeys, DoorkeysSearch};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\common\interfaces\CrudInterface;

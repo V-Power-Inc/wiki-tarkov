@@ -13,8 +13,7 @@ use app\common\exceptions\http\controllers\app\TraderControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\ApiService;
 use app\common\services\redis\RedisVariationsConfig;
-use app\models\Barters;
-use app\models\Traders;
+use app\models\{Barters, Traders};
 use yii\web\HttpException;
 use Yii;
 

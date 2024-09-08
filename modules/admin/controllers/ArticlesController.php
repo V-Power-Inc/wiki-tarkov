@@ -3,8 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Articles;
-use app\models\ArticlesSearch;
+use app\models\{Articles, ArticlesSearch};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\common\interfaces\CrudInterface;

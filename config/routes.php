@@ -1,16 +1,18 @@
 <?php
 /** Отдельный файл routes - сюда для удобства были вынесены все маршруты */
 
-use app\controllers\SiteController;
-use app\controllers\SkillsController;
-use app\controllers\ClanController;
-use app\controllers\LootController;
-use app\controllers\ItemController;
-use app\controllers\MapsController;
-use app\controllers\TraderController;
-use app\controllers\BossesController;
-use app\controllers\ApiController;
-use app\controllers\FeedbackController;
+use app\controllers\{
+    SiteController,
+    SkillsController,
+    ClanController,
+    LootController,
+    ItemController,
+    MapsController,
+    TraderController,
+    BossesController,
+    ApiController,
+    FeedbackController
+};
 
 use app\modules\admin\controllers\DefaultController;
 
