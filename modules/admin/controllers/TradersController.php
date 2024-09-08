@@ -3,8 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Traders;
-use app\models\TradersSearch;
+use app\models\{Traders, TradersSearch};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\common\interfaces\CrudInterface;

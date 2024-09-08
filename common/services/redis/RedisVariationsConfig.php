@@ -9,8 +9,8 @@
 namespace app\common\services\redis;
 
 use app\components\CookieComponent;
-use Yii;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Класс в котором прописаны конфиги вариаций для сброса кеша

@@ -3,9 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Category;
-use app\models\CategorySearch;
-use app\models\Items;
+use app\models\{Category, CategorySearch, Items};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;

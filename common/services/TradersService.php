@@ -8,8 +8,7 @@
 
 namespace app\common\services;
 
-use app\models\Items;
-use app\models\Traders;
+use app\models\{Items, Traders};
 use yii\db\ActiveRecord;
 use Yii;
 

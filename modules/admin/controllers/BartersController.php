@@ -3,8 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Barters;
-use app\models\BartersSearch;
+use app\models\{Barters, BartersSearch};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\common\interfaces\CrudInterface;
