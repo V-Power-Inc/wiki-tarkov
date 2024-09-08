@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
+    - name: Install_Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install docker-compose -y
     - name: Tests (Build & Applying migrations & Unit/Functional tests)
       shell: bash
       env:
@@ -58,18 +62,15 @@ jobs:
           echo ENVIRONMENT=dev >> .env
 
           echo "Билдим контейнеры через docker-compose"
-
           docker-compose build
 
           echo "Поднимаем все контейнеры через docker-compose"
           docker-compose up -d
 
           echo "Обновляем зависимости composer"
-
           docker-compose exec -T app composer install --no-interaction
 
           echo "Даем больше прав юзеру MySQL для создания триггеров"
-
           docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
             CREATE DATABASE test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
@@ -77,17 +78,13 @@ jobs:
             GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
 
           echo "Накатываем миграции на dev_eft"
-
           docker-compose exec -T app php yii migrate --interactive=0
 
           echo "Накатываем миграции на test_migrations_db"
-
           docker-compose exec -T app php yii migrate --db db_test --interactive=0;
 
           echo "Сбрасываем кеши - на всякий случай"
-
           docker-compose exec -T redis redis-cli flushall
 
           echo "Functional и Unit тестирование"
-
           docker-compose exec -T app vendor/bin/codecept run
