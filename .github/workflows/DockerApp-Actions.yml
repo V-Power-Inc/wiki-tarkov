@@ -23,10 +23,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: Install Docker Compose
+    - name: Install docker-compose
       run: |
-        sudo apt-get update
-        sudo apt-get install docker-compose -y
+        curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
     - name: Tests (Build & Applying migrations & Unit/Functional tests)
       shell: bash
       env:
