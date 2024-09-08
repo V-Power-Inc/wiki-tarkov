@@ -22,12 +22,9 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - name: Install docker-compose
-      run: sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - name: Set permissions for Docker
-      run: sudo chmod +x /usr/local/bin/docker-compose
+    - name: action-docker-compose
+      uses: sudo-bot/action-docker-compose@latest
     - name: Tests (Build & Applying migrations & Unit/Functional tests)
-      uses: actions/checkout@v3
       shell: bash
       env:
         DB_NAME: ${{ secrets.DB_NAME }}
