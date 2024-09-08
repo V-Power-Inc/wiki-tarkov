@@ -22,8 +22,8 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
-    - name: Install_Docker
+    - uses: actions/checkout@v4
+    - name: Install Docker
       run: |
         sudo apt-get update
         sudo apt-get install docker-compose -y
