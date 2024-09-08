@@ -22,15 +22,8 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install Docker Compose
-      run: |
-        curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
-        docker-compose version  # проверяем успешность установки
     - name: Tests (Build & Applying migrations & Unit/Functional tests)
+      uses: actions/checkout@v3
       shell: bash
       env:
         DB_NAME: ${{ secrets.DB_NAME }}
@@ -65,18 +58,15 @@ jobs:
           echo ENVIRONMENT=dev >> .env
 
           echo "Билдим контейнеры через docker-compose"
-
           docker-compose build
 
           echo "Поднимаем все контейнеры через docker-compose"
           docker-compose up -d
 
           echo "Обновляем зависимости composer"
-
           docker-compose exec -T app composer install --no-interaction
 
           echo "Даем больше прав юзеру MySQL для создания триггеров"
-
           docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
             CREATE DATABASE test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
@@ -84,17 +74,13 @@ jobs:
             GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
 
           echo "Накатываем миграции на dev_eft"
-
           docker-compose exec -T app php yii migrate --interactive=0
 
           echo "Накатываем миграции на test_migrations_db"
-
           docker-compose exec -T app php yii migrate --db db_test --interactive=0;
 
           echo "Сбрасываем кеши - на всякий случай"
-
           docker-compose exec -T redis redis-cli flushall
 
           echo "Functional и Unit тестирование"
-
           docker-compose exec -T app vendor/bin/codecept run
