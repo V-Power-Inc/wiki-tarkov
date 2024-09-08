@@ -10,7 +10,7 @@
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-815-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-87%25-success)
-![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
+![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-1-red)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 
 
