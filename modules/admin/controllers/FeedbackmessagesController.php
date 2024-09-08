@@ -4,8 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\common\controllers\AdminController;
 use app\common\interfaces\CrudInterface;
-use app\models\FeedbackMessages;
-use app\models\FeedbackMessagesSearch;
+use app\models\{FeedbackMessages, FeedbackMessagesSearch};
 use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

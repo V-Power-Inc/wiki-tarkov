@@ -9,8 +9,7 @@
 namespace app\common\services;
 
 use app\common\constants\log\ErrorDesc;
-use yii\base\InvalidConfigException;
-use yii\base\ErrorException;
+use yii\base\{InvalidConfigException, ErrorException};
 use Yii;
 
 /**

@@ -8,13 +8,8 @@
 
 namespace app\common\services;
 
-use app\models\ApiSearchLogs;
-use app\models\Clans;
-use app\models\Doorkeys;
-use app\models\Items;
+use app\models\{ApiSearchLogs, Clans, Doorkeys, Items, Category, Bosses};
 use yii\helpers\Json;
-use app\models\Category;
-use app\models\Bosses;
 use yii\db\Exception;
 
 /**

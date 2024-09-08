@@ -8,10 +8,7 @@
 
 namespace app\components;
 
-use app\models\Doorkeys;
-use app\models\News;
-use app\models\Articles;
-use app\models\Traders;
+use app\models\{Doorkeys, News, Articles, Traders};
 use yii\web\UrlRuleInterface;
 use yii\base\BaseObject;
 use yii\web\UrlManager;

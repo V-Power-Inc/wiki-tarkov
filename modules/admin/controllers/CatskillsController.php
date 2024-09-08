@@ -3,9 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Catskills;
-use app\models\Skills;
-use app\models\CatskillsSearch;
+use app\models\{Catskills, Skills, CatskillsSearch};
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;

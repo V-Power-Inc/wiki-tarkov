@@ -8,9 +8,7 @@
 
 namespace app\common\services;
 
-use yii\db\DataReader;
-use yii\db\Exception;
-use yii\db\Query;
+use yii\db\{DataReader, Exception, Query};
 
 /**
  * Сервис для генерации SQL комманд через createCommand Yii
