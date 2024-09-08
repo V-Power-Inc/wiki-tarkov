@@ -12,8 +12,7 @@ use app\common\exceptions\http\controllers\app\SkillsControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\redis\RedisVariationsConfig;
-use app\models\Catskills;
-use app\models\Skills;
+use app\models\{Catskills, Skills};
 use yii;
 
 /**

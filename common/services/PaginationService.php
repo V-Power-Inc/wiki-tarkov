@@ -9,8 +9,7 @@
 namespace app\common\services;
 
 use yii\data\Pagination;
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use yii\db\{ActiveQuery, ActiveRecord};
 use Yii;
 
 /**

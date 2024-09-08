@@ -3,8 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Maps;
-use app\models\MapsSearch;
+use app\models\{Maps, MapsSearch};
 use app\common\controllers\AdminController;
 use app\common\interfaces\CrudInterface;
 use yii\web\NotFoundHttpException;

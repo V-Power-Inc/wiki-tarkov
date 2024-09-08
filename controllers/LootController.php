@@ -12,14 +12,11 @@ namespace app\controllers;
 use app\common\controllers\AdvancedController;
 use app\common\exceptions\http\controllers\app\LootControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
-use app\common\services\JsondataService;
 use app\common\services\redis\RedisVariationsConfig;
-use app\common\services\TradersService;
-use yii;
-use app\models\Category;
-use app\models\Items;
-use app\models\Traders;
+use app\common\services\{TradersService, JsondataService};
+use app\models\{Category, Items, Traders};
 use app\common\services\PaginationService;
+use Yii;
 
 /**
  * Class LootController
