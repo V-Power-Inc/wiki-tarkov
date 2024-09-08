@@ -63,7 +63,7 @@ jobs:
           echo ENVIRONMENT=dev >> .env
 
           echo "Билдим контейнеры через docker-compose"
-          docker-compose build
+          # docker-compose build
 
           echo "Поднимаем все контейнеры через docker-compose"
           docker-compose up -d
