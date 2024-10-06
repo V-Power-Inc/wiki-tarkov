@@ -72,6 +72,8 @@ final class ImageService
         /** Массив с ключами виде названий боссов и значениями изображений в виде названия */
         $array = [
             'Death Knight' => '/img/bosses/death-knight.jpg',
+            'Knight' => '/img/bosses/death-knight.jpg',
+            'Партизан' => '/img/bosses/partisan.jpg',
             'Сектант Жрец' => '/img/bosses/cultist-priest.jpg',
             'Решала' => '/img/bosses/reshala.jpg',
             'Килла' => '/img/bosses/killa.jpg',
