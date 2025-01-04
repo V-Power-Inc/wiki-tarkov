@@ -438,6 +438,11 @@ final class ApiService implements ApiInterface
                 /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
+				
+				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS']))) {
+					/** continue */
+                    continue;
+				}
 
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {
