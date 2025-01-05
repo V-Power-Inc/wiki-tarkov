@@ -69,7 +69,7 @@ final class ApiController extends AdvancedController
                 $items = $api->processSearchItem($form_model);
 
                 /** Если $items не пустой - тогда логируем запрос с флагом */
-                if ($items) {
+                if (!empty($items)) {
 
                     /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
                     $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
@@ -113,6 +113,7 @@ final class ApiController extends AdvancedController
         if ($item) {
 
             /** Инициализируем API */
+            // TODO: Вернуть после рефактора
 //            $api = new ApiService();
 //
 //            /** Обновляем данные о предмете через API, если не получится */

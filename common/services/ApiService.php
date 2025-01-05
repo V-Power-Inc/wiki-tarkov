@@ -17,6 +17,7 @@ use app\components\CookieComponent;
 use app\models\{ApiLoot, ApiSearchLogs, Bosses, Tasks};
 use app\models\forms\ApiForm;
 use yii\base\{InvalidArgumentException, InvalidConfigException, ErrorException};
+use yii\db\Exception;
 use yii\db\StaleObjectException;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -185,7 +186,7 @@ final class ApiService implements ApiInterface
      *
      * @param array $data - массив с данными о боссах
      * @return void
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|Exception
      */
     private function saveData(array $data): void
     {
@@ -221,6 +222,7 @@ final class ApiService implements ApiInterface
      * Метод проверяет актуальность данных и если они устарели - помечает их на удаление
      *
      * @return void
+     * @throws Exception
      */
     private function setOldBosses(): void
     {
@@ -283,6 +285,7 @@ final class ApiService implements ApiInterface
     public function getTasks(string $url)
     {
         /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
+        // TODO: Раскомментить после рефактора
 //        if ($this->isOldTasks() | $this->isEmptyTasks()) {
 //
 //            /** Удаляем устаревшие записи о квестах */
@@ -325,52 +328,61 @@ final class ApiService implements ApiInterface
      * - Предмета нет в базе но есть в API
      * - Есть предмет в базе
      *
+     * UPD 05-01-2025 - Не получаем новые предметы на время рефактора
+     *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
-     * @return mixed
+     * @return null|array
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
      * @throws InvalidConfigException
      */
-    public function processSearchItem(ApiForm $model)
+    public function processSearchItem(ApiForm $model): ?array
     {
-        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
-        if (ApiLoot::findItemsByName($model->item_name)) {
-
-            /** Сперва удалим существующие записи */
-            $this->removeItemsByQuery($model->item_name);
-
-            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-            if ($this->createNewItems($model)) {
-
-                /** Возвращаем в контроллер набор данных, который искали ранее */
-                return ApiLoot::findItemsByName($model->item_name);
-            }
-
-            /** Возвращаем False в контроллер, если в API нет данных */
-            return false;
+        if (!empty($items = ApiLoot::findItemsByName($model->item_name))) {
+            return $items;
+        } else {
+            return null;
         }
 
-        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
-        if (!ApiLoot::findItemsByName($model->item_name)) {
-
-            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-            if ($this->createNewItems($model)) {
-
-                /** Возвращаем в контроллер набор данных, который искали ранее */
-                return ApiLoot::findItemsByName($model->item_name);
-            }
-
-            /** Возвращаем False в контроллер, если в API нет данных */
-            return false;
-        }
-
-        /** Логируем в БД ошибку */
-        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
-
-        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
-        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
+        // TODO: Вернуть к прежнему виду после рефактора
+//        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
+//        if (ApiLoot::findItemsByName($model->item_name)) {
+//
+//            /** Сперва удалим существующие записи */
+//            $this->removeItemsByQuery($model->item_name);
+//
+//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+//            if ($this->createNewItems($model)) {
+//
+//                /** Возвращаем в контроллер набор данных, который искали ранее */
+//                return ApiLoot::findItemsByName($model->item_name);
+//            }
+//
+//            /** Возвращаем False в контроллер, если в API нет данных */
+//            return false;
+//        }
+//
+//        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
+//        if (!ApiLoot::findItemsByName($model->item_name)) {
+//
+//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+//            if ($this->createNewItems($model)) {
+//
+//                /** Возвращаем в контроллер набор данных, который искали ранее */
+//                return ApiLoot::findItemsByName($model->item_name);
+//            }
+//
+//            /** Возвращаем False в контроллер, если в API нет данных */
+//            return false;
+//        }
+//
+//        /** Логируем в БД ошибку */
+//        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+//
+//        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
+//        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
     }
 
     /**
