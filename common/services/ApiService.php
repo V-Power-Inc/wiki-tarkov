@@ -233,9 +233,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +2 month'));
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +1 month'));
 
-            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -554,7 +554,7 @@ final class ApiService implements ApiInterface
             /** Дата устаревания записи */
             $date = date('Y-m-d H:i:s', strtotime($task->date_create . ' +1 month'));
 
-            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
