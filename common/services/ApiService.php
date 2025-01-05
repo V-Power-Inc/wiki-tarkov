@@ -274,8 +274,6 @@ final class ApiService implements ApiInterface
      * - Если квестов в БД нет или устарели, удалим их
      * - Если квесты есть и нет устаревших, возвращаем их из базы по урлу торговца
      *
-     * UPD 05-01-2025 - Обновление данных отключено на время рефакторинга
-     *
      * @param string $url - URL до квестов торговцев
      * @return mixed
      * @throws StaleObjectException
@@ -285,26 +283,25 @@ final class ApiService implements ApiInterface
     public function getTasks(string $url)
     {
         /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
-        // TODO: Раскомментить после рефактора
-//        if ($this->isOldTasks() | $this->isEmptyTasks()) {
-//
-//            /** Удаляем устаревшие записи о квестах */
-//            $this->removeOldTasks();
-//
-//            /** Сетапим запрос для API на получение информации о квестах */
-//            $this->setTasksQuery();
-//
-//            /** Переменная для получения данных о квестах через API */
-//            $data = $this->getApiData();
-//
-//            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
-//            $this->createTasks($data);
-//
-//        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
-//
-//            /** Помечаем устаревшие квесты */
-//            $this->setOldTasks();
-//        }
+        if ($this->isOldTasks() | $this->isEmptyTasks()) {
+
+            /** Удаляем устаревшие записи о квестах */
+            $this->removeOldTasks();
+
+            /** Сетапим запрос для API на получение информации о квестах */
+            $this->setTasksQuery();
+
+            /** Переменная для получения данных о квестах через API */
+            $data = $this->getApiData();
+
+            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
+            $this->createTasks($data);
+
+        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
+
+            /** Помечаем устаревшие квесты */
+            $this->setOldTasks();
+        }
 
         /** Получаем данные о квестах из таблицы Tasks */
         $result = new TasksResult(Tasks::getTasksData($url));
@@ -332,57 +329,50 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
-     * @return null|array
+     * @return array|false
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
      * @throws InvalidConfigException
      */
-    public function processSearchItem(ApiForm $model): ?array
+    public function processSearchItem(ApiForm $model)
     {
-        if (!empty($items = ApiLoot::findItemsByName($model->item_name))) {
-            return $items;
-        } else {
-            return null;
+        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
+        if (ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Сперва удалим существующие записи */
+            $this->removeItemsByQuery($model->item_name);
+
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+            if ($this->createNewItems($model)) {
+
+                /** Возвращаем в контроллер набор данных, который искали ранее */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем False в контроллер, если в API нет данных */
+            return false;
         }
 
-        // TODO: Вернуть к прежнему виду после рефактора
-//        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
-//        if (ApiLoot::findItemsByName($model->item_name)) {
-//
-//            /** Сперва удалим существующие записи */
-//            $this->removeItemsByQuery($model->item_name);
-//
-//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-//            if ($this->createNewItems($model)) {
-//
-//                /** Возвращаем в контроллер набор данных, который искали ранее */
-//                return ApiLoot::findItemsByName($model->item_name);
-//            }
-//
-//            /** Возвращаем False в контроллер, если в API нет данных */
-//            return false;
-//        }
-//
-//        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
-//        if (!ApiLoot::findItemsByName($model->item_name)) {
-//
-//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-//            if ($this->createNewItems($model)) {
-//
-//                /** Возвращаем в контроллер набор данных, который искали ранее */
-//                return ApiLoot::findItemsByName($model->item_name);
-//            }
-//
-//            /** Возвращаем False в контроллер, если в API нет данных */
-//            return false;
-//        }
-//
-//        /** Логируем в БД ошибку */
-//        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
-//
-//        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
-//        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
+        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
+        if (!ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+            if ($this->createNewItems($model)) {
+
+                /** Возвращаем в контроллер набор данных, который искали ранее */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем False в контроллер, если в API нет данных */
+            return false;
+        }
+
+        /** Логируем в БД ошибку */
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+
+        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
+        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
     }
 
     /**
@@ -440,11 +430,6 @@ final class ApiService implements ApiInterface
                 /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
-
-                /** Исключение обновлений по определенным урлам todo - В будущем убрать, после полноценного рефакторинга */
-				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
-                    continue;
-				}
 
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {

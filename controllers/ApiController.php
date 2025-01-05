@@ -113,15 +113,14 @@ final class ApiController extends AdvancedController
         if ($item) {
 
             /** Инициализируем API */
-            // TODO: Вернуть после рефактора
-//            $api = new ApiService();
-//
-//            /** Обновляем данные о предмете через API, если не получится */
-//            if ($api->renewItemData($item) === false) {
-//
-//                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
-//                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
-//            }
+            $api = new ApiService();
+
+            /** Обновляем данные о предмете через API, если не получится */
+            if ($api->renewItemData($item) === false) {
+
+                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
+                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+            }
 
             /** Ренденирг данных */
             return $this->render(self::ACTION_ITEM, ['item' => $item]);
