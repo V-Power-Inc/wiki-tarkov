@@ -3,8 +3,9 @@
 use app\models\News;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
@@ -37,11 +38,11 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, News::ATTR_SHORTDESC)->textarea(['rows' => 3]) ?>
 
     <?php  echo $form->field($model, News::ATTR_CONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
-    <?= $form->field($model, News::ATTR_DATE_CREATE)->widget(\yii\jui\DatePicker::class, [
+    <?= $form->field($model, News::ATTR_DATE_CREATE)->widget(DatePicker::class, [
         'language' => 'ru',
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 use app\modules\admin\controllers\ArticlesController;
 use app\models\Articles;
 
@@ -40,7 +40,7 @@ use app\models\Articles;
     <?= $form->field($model, Articles::ATTR_SHORTDESC)->textarea(['rows' => 3]) ?>
 
     <?php  echo $form->field($model, Articles::ATTR_CONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 

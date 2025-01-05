@@ -17,21 +17,6 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'controllerMap' => [
-        'elfinder' => [
-            'class' => 'mihaildev\elfinder\Controller',
-            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
-            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
-            'roots' => [
-                [
-                    'baseUrl'=>'@web',
-                    'basePath'=>'@webroot',
-                    'path' => 'img/upload',
-                    'name' => 'Upload'
-                ],
-            ]
-        ]
-    ],
 
     'components' => [
         'request' => [

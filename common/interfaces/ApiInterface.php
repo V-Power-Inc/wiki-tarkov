@@ -37,7 +37,7 @@ interface ApiInterface
      * @param ApiForm $model - Объект поисковой формы Api
      * @return mixed
      */
-    function proccessSearchItem(ApiForm $model);
+    function processSearchItem(ApiForm $model);
 
     /**
      * Метод для получения квестов торговцев, в качестве параметра используется URL адрес квестов этого приложения
