@@ -478,6 +478,7 @@ final class ApiService implements ApiInterface
      * @param ApiForm $model - объект модели ApiForm
      * @param int $flag - флаг, для проверки - вернулись ли данные по запросу или нет
      * @return bool
+     * @throws Exception
      */
     public function setSearchLog(ApiForm $model, int $flag = 0): bool
     {
