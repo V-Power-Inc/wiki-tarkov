@@ -272,6 +272,8 @@ final class ApiService implements ApiInterface
      * - Если квестов в БД нет или устарели, удалим их
      * - Если квесты есть и нет устаревших, возвращаем их из базы по урлу торговца
      *
+     * UPD 05-01-2025 - Обновление данных отключено на время рефакторинга
+     *
      * @param string $url - URL до квестов торговцев
      * @return mixed
      * @throws StaleObjectException
@@ -281,25 +283,25 @@ final class ApiService implements ApiInterface
     public function getTasks(string $url)
     {
         /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
-        if ($this->isOldTasks() | $this->isEmptyTasks()) {
-
-            /** Удаляем устаревшие записи о квестах */
-            $this->removeOldTasks();
-
-            /** Сетапим запрос для API на получение информации о квестах */
-            $this->setTasksQuery();
-
-            /** Переменная для получения данных о квестах через API */
-            $data = $this->getApiData();
-
-            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
-            $this->createTasks($data);
-
-        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
-
-            /** Помечаем устаревшие квесты */
-            $this->setOldTasks();
-        }
+//        if ($this->isOldTasks() | $this->isEmptyTasks()) {
+//
+//            /** Удаляем устаревшие записи о квестах */
+//            $this->removeOldTasks();
+//
+//            /** Сетапим запрос для API на получение информации о квестах */
+//            $this->setTasksQuery();
+//
+//            /** Переменная для получения данных о квестах через API */
+//            $data = $this->getApiData();
+//
+//            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
+//            $this->createTasks($data);
+//
+//        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
+//
+//            /** Помечаем устаревшие квесты */
+//            $this->setOldTasks();
+//        }
 
         /** Получаем данные о квестах из таблицы Tasks */
         $result = new TasksResult(Tasks::getTasksData($url));
