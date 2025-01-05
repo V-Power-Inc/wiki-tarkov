@@ -1,11 +1,12 @@
 
-<img alt="Repo logo" src="https://camo.githubusercontent.com/c68c0488b6cb27b838a9e666ba4bd561fda38a657e45a7f416aa91d2af9b799c/68747470733a2f2f77696b692d7461726b6f762e72752f696d672f75706c6f61642f69636f6e2d3132382d3132382e706e67" align="right">
+<img alt="Repo logo" src="https://wiki-tarkov.ru/img/upload/icon-128-128.png" align="right">
 
 # Wiki Tarkov Project 💻
 
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
-![Site status](https://img.shields.io/badge/site%20status-disabled-red)
-![Stable Version](https://img.shields.io/badge/version-v7.4.1-brightgreen)
+[![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
+![Site status](https://img.shields.io/badge/site%20status-works-success)
+![Stable Version](https://img.shields.io/badge/version-v7.3.41-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-815-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-87%25-success)
@@ -14,11 +15,11 @@
 
 
 ## Описание 💡
-Проект Wiki Tarkov - это версия базы знаний по игре Escape From Tarkov. Разрабатывался с 10 октября 2017г., претерпел множество изменений на пути своего становления. В августе 2022г. был проведен глобальный рефакторинг проекта.
+Проект Wiki Tarkov - это версия базы знаний по игре Escape From Tarkov. Разрабатывался с 10 октября 2017г., претерпел множество изменений на пути своего становления. В августе 2022г. был проведен глобальный рефакторинг проекта. В настоящий момент пример проекта можно увидеть на домене: https://wiki-tarkov.ru
 
 Проект реализован на фреймворке Yii2, в качестве веб-сервера используется Nginx. База данных на MariaDb. Реализованы конвейеры CI/CD и автодеплой в master ветку GitHub или Bitbucket (По усмотрению, в текущей версии настроено на GitHub). В проекте также присутствует docker инструкция для развертывания в том числе на локальном устройстве.
 
-Проект приносил прибыль с помощью показов рекламы, полученной от РСЯ (Рекламная сеть Яндекса) - произведена интеграция с AdFox.
+Проект приносит прибыль с помощью показов рекламы, полученной от РСЯ (Рекламная сеть Яндекса) - произведена интеграция с AdFox.
 
 Проект включает в себя следующие модули:
 
