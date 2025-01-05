@@ -4,7 +4,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 use app\models\Maps;
 
 /* @var $this yii\web\View */

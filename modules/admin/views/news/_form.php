@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
