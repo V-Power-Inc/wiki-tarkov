@@ -152,7 +152,7 @@ final class ApiController extends AdvancedController
     }
 
     /**
-     * Метод возвращает JSON с графиками состояния цен на предмет в прошлых сделках
+     * Метод возвращает JSON с графиками состояния цен на предмет в прошлых сделках, вызывается из вьюхи предмета API
      *
      * @param string $id - id предмета из API tarkov.dev
      * @return string

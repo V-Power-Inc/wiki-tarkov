@@ -429,7 +429,7 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение обновлений по определенным урлам */
+                /** Исключение обновлений по определенным урлам @todo - В будущем убрать, после полноценного рефакторинга */
 				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
                     continue;
 				}
@@ -613,6 +613,7 @@ final class ApiService implements ApiInterface
     /**
      * @param string $id - id предмета из API tarkov.dev
      * @return string
+     * @throws InvalidConfigException
      */
     public function getGraphsById(string $id): string
     {
