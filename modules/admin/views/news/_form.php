@@ -3,6 +3,7 @@
 use app\models\News;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 
@@ -41,7 +42,7 @@ use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужн
     ]);
     ?>
 
-    <?= $form->field($model, News::ATTR_DATE_CREATE)->widget(\yii\jui\DatePicker::class, [
+    <?= $form->field($model, News::ATTR_DATE_CREATE)->widget(DatePicker::class, [
         'language' => 'ru',
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
