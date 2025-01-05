@@ -275,12 +275,12 @@ final class ApiService implements ApiInterface
      * - Если квесты есть и нет устаревших, возвращаем их из базы по урлу торговца
      *
      * @param string $url - URL до квестов торговцев
-     * @return mixed
+     * @return array
      * @throws StaleObjectException
      * @throws HttpException
      * @throws \Throwable
      */
-    public function getTasks(string $url)
+    public function getTasks(string $url): array
     {
         /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
         if ($this->isOldTasks() | $this->isEmptyTasks()) {
@@ -575,9 +575,10 @@ final class ApiService implements ApiInterface
      * Сохраняем в базу данных все квесты, полученные из API
      *
      * @param array $data - массив с данными обо всех квестах из API
-     * @return bool
+     * @return void
+     * @throws InvalidConfigException
      */
-    private function createTasks(array $data): bool
+    private function createTasks(array $data): void
     {
         /** В цикле проходим каждый квест из массив, полученного от API */
         foreach ($data[Api::ATTR_DATA][Api::ATTR_TASKS] as $task) {
@@ -586,15 +587,8 @@ final class ApiService implements ApiInterface
             $model = new TaskModel($task);
 
             /** Сохраняем данные в БД (tasks) */
-            if (!$model->save()) {
-
-                /** Если данные не сохранились - вернем false */
-                return false;
-            }
+            $model->save();
         }
-
-        /** Возвращаем bool результат если все ок */
-        return true;
     }
 
     /**
