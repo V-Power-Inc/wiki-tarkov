@@ -6,7 +6,6 @@ RUN apt update && apt install -y \
         mcrypt \
         libxpm-dev \
         libvpx-dev \
-        libpq-dev \
         libicu-dev \
         zlib1g-dev \
         libpng-dev \
@@ -39,5 +38,5 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install selected extensions and other stuff
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install apt-utils libxml2-dev gnupg apt-transport-https \
+    && apt-get -y --no-install-recommends install apt-utils \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
