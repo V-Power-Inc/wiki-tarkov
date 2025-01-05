@@ -1,5 +1,6 @@
 name: Deploy on Prod
 
+# todo: Disable before merge
 # Автодеплой на PROD - Только ветка Master, только при удачных мержах
 on:
   pull_request:
