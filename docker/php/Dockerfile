@@ -6,8 +6,6 @@ RUN apt update && apt install -y \
         mcrypt \
         libxpm-dev \
         libvpx-dev \
-        libldap2-dev \
-        unixodbc-dev \
         libpq-dev \
         libicu-dev \
         zlib1g-dev \
@@ -22,8 +20,6 @@ RUN apt update && apt install -y \
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN pecl install mcrypt-1.0.4 && docker-php-ext-enable mcrypt
-
 # Install required extensions
 # RUN docker-php-ext-configure mysql
 RUN docker-php-ext-install pdo pdo_mysql
@@ -31,8 +27,6 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install bcmath
-
-RUN echo "sendmail_path=/usr/sbin/sendmail -t -i" >> /usr/local/etc/php/conf.d/sendmail.ini
 
 RUN set -eux; \
 	docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp;\
