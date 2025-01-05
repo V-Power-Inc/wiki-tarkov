@@ -412,6 +412,7 @@ final class ApiService implements ApiInterface
      * @param ApiForm $model - объект ApiForm
      * @return bool
      * @throws InvalidConfigException
+     * @throws Exception
      */
     private function createNewItems(ApiForm $model): bool
     {
@@ -522,11 +523,11 @@ final class ApiService implements ApiInterface
     /**
      * Метод удаляет все квесты - возвращает bool результат
      *
-     * @return bool
+     * @return void
      * @throws StaleObjectException
      * @throws \Throwable
      */
-    private function removeOldTasks(): bool
+    private function removeOldTasks(): void
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $tasks = Tasks::find()->all();
@@ -535,17 +536,14 @@ final class ApiService implements ApiInterface
         foreach ($tasks as $task) {
             $task->delete();
         }
-
-        /** Возвращаем true - если удаление боссов прошло успешно */
-        return true;
     }
 
     /**
      * Метод проставляющий квестам дату устаревания - возвращает bool результат
-     *
-     * @return bool
+     * @return void
+     * @throws Exception
      */
-    private function setOldTasks(): bool
+    private function setOldTasks(): void
     {
         /** Задаем переменную с выборкой квестов, которые еще актуальны */
         $tasks = Tasks::findAll([Tasks::ATTR_OLD => Tasks::FALSE]);
@@ -566,9 +564,6 @@ final class ApiService implements ApiInterface
                 $task->save();
             }
         }
-
-        /** Возвращаем true если все прошло успешно */
-        return true;
     }
 
     /**
