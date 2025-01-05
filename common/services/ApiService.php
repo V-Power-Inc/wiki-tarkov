@@ -424,13 +424,13 @@ final class ApiService implements ApiInterface
     private function createNewItems(ApiForm $model): bool
     {
         /** Переменная с запросом для получения данных по луту из API */
-        $ApiItems = $this->getNewItems($model);
+        $apiItems = $this->getNewItems($model);
 
         /** Если предметы в API нашлись */
-        if ($ApiItems !== false) {
+        if ($apiItems !== false) {
 
             /** В цикле проходим весь массив из API и сохраняем в БД новые данные */
-            foreach ($ApiItems[Api::ATTR_DATA][Api::ATTR_ITEMS] as $data) {
+            foreach ($apiItems[Api::ATTR_DATA][Api::ATTR_ITEMS] as $data) {
 
                 /** Создаем новый объект AR класса ApiLoot */
                 $newItem = new ApiLoot();
@@ -438,9 +438,9 @@ final class ApiService implements ApiInterface
                 /** Присваиваем необходимые атрибуты - в названии предмета удаляем пробелы по бокам */
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
-				
-				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS']))) {
-					/** continue */
+
+                /** Исключение по определенным урлам */
+				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
                     continue;
 				}
 
