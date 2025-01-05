@@ -4,7 +4,7 @@ use app\models\Skills;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 use app\models\Catskills;
 use yii\helpers\ArrayHelper;
 
@@ -37,7 +37,7 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, Skills::ATTR_SHORT_DESC)->textarea(['rows' => 3]) ?>
 
     <?php  echo $form->field($model, Skills::ATTR_CONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
