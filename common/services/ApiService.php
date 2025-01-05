@@ -431,6 +431,11 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
+                /** Исключение обновлений по определенным урлам */
+                if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
+                    continue;
+                }
+
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {
                     /** Пробуем закодировать строку в JSON  */
