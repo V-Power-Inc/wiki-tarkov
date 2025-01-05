@@ -66,7 +66,7 @@ final class ApiController extends AdvancedController
                 $api = new ApiService();
 
                 /** Присваиваем переменной результат работы APIшки */
-                $items = $api->proccessSearchItem($form_model);
+                $items = $api->processSearchItem($form_model);
 
                 /** Если $items не пустой - тогда логируем запрос с флагом */
                 if ($items) {

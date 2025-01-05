@@ -134,9 +134,9 @@ final class ApiService implements ApiInterface
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
-     * @return bool
+     * @return void
      */
-    private function removeOldBosses(): bool
+    private function removeOldBosses(): void
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $bosses = Bosses::find()->all();
@@ -145,9 +145,6 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
             $boss->delete();
         }
-
-        /** Возвращаем true - если удаление боссов прошло успешно */
-        return true;
     }
 
     /**
@@ -187,10 +184,10 @@ final class ApiService implements ApiInterface
      * Метод сохраняет данные в таблицу Bosses
      *
      * @param array $data - массив с данными о боссах
-     * @return bool
+     * @return void
      * @throws InvalidConfigException
      */
-    private function saveData(array $data): bool
+    private function saveData(array $data): void
     {
         /** Проходим в цикле все полученные карты */
         foreach ($data[Api::ATTR_DATA][Api::ATTR_MAPS] as $map) {
@@ -210,9 +207,6 @@ final class ApiService implements ApiInterface
 
                 /** Логируем что API вернул кривые данные */
                 LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
-
-                /** Возвращаем false - Не удалось сохранить новые данные */
-                return false;
             }
 
             /** Передаем название карты в генератор Url */
@@ -221,17 +215,14 @@ final class ApiService implements ApiInterface
             /** Сохраняем новый объект данных о боссе */
             $model->save();
         }
-
-        /** Возвращаем true - если сохранение прошло удачно */
-        return true;
     }
 
     /**
      * Метод проверяет актуальность данных и если они устарели - помечает их на удаление
      *
-     * @return bool
+     * @return void
      */
-    private function setOldBosses(): bool
+    private function setOldBosses(): void
     {
         /** Задаем переменную с выборкой боссов, которые еще актуальны */
         $bosses = Bosses::findAll([Bosses::ATTR_OLD => Bosses::FALSE]);
@@ -240,9 +231,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +1 month'));
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +2 month'));
 
-            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -252,9 +243,6 @@ final class ApiService implements ApiInterface
                 $boss->save();
             }
         }
-
-        /** Возвращаем true если все прошло успешно */
-        return true;
     }
 
     /**
@@ -343,7 +331,7 @@ final class ApiService implements ApiInterface
      * @throws \Throwable in case delete failed.
      * @throws InvalidConfigException
      */
-    public function proccessSearchItem(ApiForm $model)
+    public function processSearchItem(ApiForm $model)
     {
         /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
         if (ApiLoot::findItemsByName($model->item_name)) {
@@ -439,7 +427,7 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение по определенным урлам */
+                /** Исключение обновлений по определенным урлам */
 				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
                     continue;
 				}
@@ -502,7 +490,7 @@ final class ApiService implements ApiInterface
      */
     private function isEmptyTasks(): bool
     {
-        return empty(Tasks::find()->all()) ? true : false;
+        return empty(Tasks::find()->all());
     }
 
     /**
