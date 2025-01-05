@@ -84,7 +84,7 @@ AppAsset::register($this);
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 <p class="marks">Все права на Escape from Tarkov принадлежат Battlestate Games Limited <br> <a href="https://www.escapefromtarkov.com">Официальный сайт разработчиков</a></p>
 
-                <p class="github-repo marks">Проект wiki-tarkov имеет открытый исходный код. Код доступен на <a href="https://github.com/V-Power-Inc/wiki-tarkov" target="_blank" onclick="ym(47100633,'reachGoal','github_link')"><b>GitHub</b></a></p>
+<!--                <p class="github-repo marks">Проект wiki-tarkov имеет открытый исходный код. Код доступен на <a href="https://github.com/V-Power-Inc/wiki-tarkov" target="_blank" onclick="ym(47100633,'reachGoal','github_link')"><b>GitHub</b></a></p>-->
             </div>
 
             <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
@@ -93,7 +93,7 @@ AppAsset::register($this);
                 <div class="icons-soc">
                     <a href="https://discord.gg/K4R239u" target="_blank"><img alt="V-Power сервер Discord" src="/img/soc/discord-soc.jpg"></a>
                     <a href="https://vk.com/vector_power" target="_blank"><img alt="V-Power сообщество Вконтакте" src="/img/soc/vk-user.jpg"></a>
-                    <a href="https://github.com/V-Power-Inc/wiki-tarkov" target="_blank" onclick="ym(47100633,'reachGoal','github_link')"><img alt="GitHub репозиторий" src="/img/soc/github.png"></a>
+<!--                    <a href="https://github.com/V-Power-Inc/wiki-tarkov" target="_blank" onclick="ym(47100633,'reachGoal','github_link')"><img alt="GitHub репозиторий" src="/img/soc/github.png"></a>-->
                 </div>
 
                 <p class="contact-info">Контактный Email: <a href="mailto:tarkov-wiki@ya.ru">tarkov-wiki@ya.ru</a></p>
