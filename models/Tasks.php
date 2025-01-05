@@ -115,12 +115,12 @@ class Tasks extends ActiveRecord
     /**
      * Метод возвращает все AR объекты квестов для конкретного торговца
      *
-     * @param string $url - URL адрес до квестов босса
-     * @return mixed
+     * @param string $url - URL адрес до квестов торговца
+     * @return array
      */
     public static function getTasksData(string $url): array
     {
-        return Tasks::findAll([Tasks::ATTR_URL => $url]) ?? false;
+        return Tasks::findAll([Tasks::ATTR_URL => $url]);
     }
 
     /**

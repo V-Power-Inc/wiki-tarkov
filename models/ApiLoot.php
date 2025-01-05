@@ -94,7 +94,7 @@ class ApiLoot extends ActiveRecord
      * @param string $name - имя предмета
      * @return ApiLoot[]
      */
-    public static function findItemsByName(string $name)
+    public static function findItemsByName(string $name): array
     {
         return ApiLoot::find()
             ->select([ApiLoot::ATTR_JSON, ApiLoot::ATTR_URL])

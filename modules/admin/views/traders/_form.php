@@ -4,7 +4,7 @@ use app\models\Traders;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Traders */
@@ -52,12 +52,12 @@ $this->registerJsFile('js/preview-traders.js', ['depends' => [\yii\web\JqueryAss
     <br>
 
     <?php  echo $form->field($model, Traders::ATTR_CONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '200']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full', 'height' => '200']),
     ]);
     ?>
 
     <?php  echo $form->field($model, Traders::ATTR_FULLCONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
     

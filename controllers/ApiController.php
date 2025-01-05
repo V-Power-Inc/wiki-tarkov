@@ -66,10 +66,10 @@ final class ApiController extends AdvancedController
                 $api = new ApiService();
 
                 /** Присваиваем переменной результат работы APIшки */
-                $items = $api->proccessSearchItem($form_model);
+                $items = $api->processSearchItem($form_model);
 
                 /** Если $items не пустой - тогда логируем запрос с флагом */
-                if ($items) {
+                if (!empty($items)) {
 
                     /** Логируем поисковый запрос пользователя в таблицу логов с флагом найденных предметов */
                     $api->setSearchLog($form_model, ApiSearchLogs::TRUE);
@@ -98,6 +98,7 @@ final class ApiController extends AdvancedController
 
     /**
      * Экшен для рендеринга страницы с детальной информацией о предмете
+     * UPD 05.01.2025 - новые предметы не прилетают в API в связи с рефакторингом
      *
      * @param string $url - строка с Url адресом
      * @return mixed
@@ -112,14 +113,15 @@ final class ApiController extends AdvancedController
         if ($item) {
 
             /** Инициализируем API */
-            $api = new ApiService();
-
-            /** Обновляем данные о предмете через API, если не получится */
-            if ($api->renewItemData($item) === false) {
-
-                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
-                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
-            }
+            // TODO: Вернуть после рефактора
+//            $api = new ApiService();
+//
+//            /** Обновляем данные о предмете через API, если не получится */
+//            if ($api->renewItemData($item) === false) {
+//
+//                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
+//                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+//            }
 
             /** Ренденирг данных */
             return $this->render(self::ACTION_ITEM, ['item' => $item]);
@@ -151,7 +153,7 @@ final class ApiController extends AdvancedController
     }
 
     /**
-     * Метод возвращает JSON с графиками состояния цен на предмет в прошлых сделках
+     * Метод возвращает JSON с графиками состояния цен на предмет в прошлых сделках, вызывается из вьюхи предмета API
      *
      * @param string $id - id предмета из API tarkov.dev
      * @return string

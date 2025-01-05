@@ -6,7 +6,7 @@ use yii\web\JqueryAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Barters */
@@ -29,7 +29,7 @@ $this->registerJsFile('js/preview-barters.js', ['depends' => [JqueryAsset::class
     <?= $form->field($model, Barters::ATTR_TRADER_GROUP)->dropDownList(Traders::getTradersList(false)) ?>
 
     <?php  echo $form->field($model, Barters::ATTR_CONTENT)->widget(CKEditor::class,[
-        'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
+        // 'editorOptions' => ElFinder::ckeditorOptions(['elfinder', 'path' => '/'],['preset' => 'full']),
     ]);
     ?>
 
