@@ -1,6 +1,5 @@
 name: Deploy on Prod
 
-# todo: Disable before merge
 # Автодеплой на PROD - Только ветка Master, только при удачных мержах
 on:
   pull_request:
@@ -20,6 +19,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SSH_USER: ${{secrets.SSH_USER}}
       run: |
-        echo "Cancelled"
-        echo "Deploy on PROD disabled for now"
-        echo "Here it can be configured"
+        install -m 600 -D /dev/null /home/runner/.ssh/id_ed25519
+        echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_ed25519
+        ssh-keyscan wiki-tarkov.ru >> /home/runner/.ssh/known_hosts
+        ssh -i /home/runner/.ssh/id_ed25519 "$SSH_USER"@wiki-tarkov.ru 'cd /var/www/wiki-tarkov/html && git pull origin-github master'
