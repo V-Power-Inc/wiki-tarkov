@@ -429,7 +429,7 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение обновлений по определенным урлам @todo - В будущем убрать, после полноценного рефакторинга */
+                /** Исключение обновлений по определенным урлам todo - В будущем убрать, после полноценного рефакторинга */
 				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
                     continue;
 				}
