@@ -14,6 +14,7 @@ use app\controllers\MapsController;
 use Codeception\Test\Unit;
 use ReflectionException;
 use ReflectionClass;
+use yii\base\Action;
 use yii\base\InvalidConfigException;
 use Yii;
 use yii\web\Controller;
@@ -79,7 +80,7 @@ class MenuTest extends Unit
             ->getMock();
 
         /** Устанавливаем свойство экшена */
-        $controllerMock->action->id = MapsController::ACTION_LOCATIONS;
+        $controllerMock->action = new Action(MapsController::ACTION_LOCATIONS, $controllerMock);
 
         /** Сетапим финальный мок в переменную */
         $this->controller = $controllerMock;
