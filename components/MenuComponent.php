@@ -173,7 +173,7 @@ final class MenuComponent
     private static function getActiveNav()
     {
         /** Получаем id (название) экшена, где сейчас находимся */
-        $activeAction = Yii::$app->controller->action;
+        $activeAction = Yii::$app->controller->action->id;
 
         /** В свиче смотрим - какой экшен, чтобы засетапить active класс активному элементу меню */
         switch ($activeAction) {
