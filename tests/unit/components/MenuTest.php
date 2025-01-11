@@ -79,7 +79,7 @@ class MenuTest extends Unit
             ->getMock();
 
         /** Устанавливаем свойство экшена */
-        $controllerMock->action = MapsController::ACTION_LOCATIONS;
+        $controllerMock->action->id = MapsController::ACTION_LOCATIONS;
 
         /** Сетапим финальный мок в переменную */
         $this->controller = $controllerMock;
@@ -92,6 +92,7 @@ class MenuTest extends Unit
      * Публичный метод, который дергаем чтобы зарендерить меню
      *
      * @return void
+     * @throws InvalidConfigException
      */
     public function testShowMenu()
     {
@@ -103,7 +104,7 @@ class MenuTest extends Unit
      * Приватный метод, который определяет по наличию кукиса, какой HTML вернуть
      *
      * @return void
-     * @throws ReflectionException
+     * @throws ReflectionException|InvalidConfigException
      */
     public function testThemeToggler()
     {
