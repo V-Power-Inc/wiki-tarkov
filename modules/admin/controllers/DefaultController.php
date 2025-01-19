@@ -27,8 +27,11 @@ final class DefaultController extends AdminController
         return $this->render(self::ACTION_INDEX);
     }
 
-    /** Рендер страницы авторизации **/
-    public function actionLogin()
+    /**
+     * Рендер страницы авторизации
+     * @return string
+     */
+    public function actionLogin(): string
     {
         /** Если пользователь авторизован */
         if(!Yii::$app->user->isGuest){
