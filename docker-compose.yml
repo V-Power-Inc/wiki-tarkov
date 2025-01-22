@@ -39,6 +39,8 @@ services:
     ports:
       - 3306:3306
     volumes:
+      # Это нужно битбакету - раньше было mariadb:/var/lib/mysql (Пайплайны битбакета нуждаются в этих настройках)
+      # ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
       - mariadb:/var/lib/mysql
     environment:
       - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
@@ -56,6 +58,8 @@ services:
       - redis:/data
 
 volumes:
+  # Это нужно битбакету - раньше было cache:/data (Пайплайны битбакета нуждаются в этих настройках)
+  # ${BITBUCKET_CLONE_DIR:-static}:/data
   mariadb:
   redis:
   cache:
