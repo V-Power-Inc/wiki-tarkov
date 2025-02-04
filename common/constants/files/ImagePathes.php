@@ -17,17 +17,17 @@ namespace app\common\constants\files;
 final class ImagePathes extends FilePathes
 {
     /** @var string - Константа, путь до основных админских изображений */
-    public const PATH_MAIN_ADMIN_FILES = 'img/admin/resized/';
+    public const PATH_MAIN_ADMIN_FILES = parent::IMG_BASE_PATH . 'admin/resized/';
 
     /** @var string - Константа, путь до изображений превьющек кланов */
-    public const PATH_FOR_CLANS_FILES = 'img/admin/resized/clans/';
+    public const PATH_FOR_CLANS_FILES = parent::IMG_BASE_PATH . 'admin/resized/clans/';
 
     /** @var string - Константа, путь до изображений ключей от дверей */
-    public const PATH_FOR_DOORKEYS_FILES = 'img/admin/doorkeys/';
+    public const PATH_FOR_DOORKEYS_FILES = parent::IMG_BASE_PATH . 'admin/doorkeys/';
 
     /** @var string - Константа, путь до иконок интерактивных карт локаций */
-    public const PATH_FOR_LOCATIONS_FILES = 'img/admin/maps/';
+    public const PATH_FOR_LOCATIONS_FILES = parent::IMG_BASE_PATH . 'admin/maps/';
 
     /** @var string - Константа, путь до иконок превьюшек новостей */
-    public const PATH_FOR_NEWS_FILES = 'img/admin/news/';
+    public const PATH_FOR_NEWS_FILES = parent::IMG_BASE_PATH . 'admin/news/';
 }

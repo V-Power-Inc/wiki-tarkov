@@ -6,7 +6,6 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 use app\modules\admin\controllers\ArticlesController;
 use app\models\Articles;
 

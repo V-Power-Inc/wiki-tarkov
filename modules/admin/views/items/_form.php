@@ -4,7 +4,6 @@ use app\models\Items;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder; // TODO: Это Deprecated пакет, нужна альтернатива
 use yii\helpers\ArrayHelper;
 use app\models\Category;
 

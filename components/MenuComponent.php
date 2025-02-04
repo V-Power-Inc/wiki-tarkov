@@ -46,6 +46,7 @@ final class MenuComponent
      * Получаем основные пункты меню и возвращаем полностью готовое меню в виде строки
      *
      * @return string
+     * @throws InvalidConfigException
      */
     public static function showMenu(): string
     {
@@ -170,10 +171,10 @@ final class MenuComponent
      *
      * @return void
      */
-    private static function getActiveNav()
+    private static function getActiveNav(): void
     {
         /** Получаем id (название) экшена, где сейчас находимся */
-        $activeAction = Yii::$app->controller->action;
+        $activeAction = Yii::$app->controller->action->id;
 
         /** В свиче смотрим - какой экшен, чтобы засетапить active класс активному элементу меню */
         switch ($activeAction) {
@@ -234,7 +235,7 @@ final class MenuComponent
      * @return string|null
      * @throws InvalidConfigException
      */
-    private static function checkActiveTabByUrlArray(array $url_array)
+    private static function checkActiveTabByUrlArray(array $url_array): ?string
     {
         /** Переменная для return'a */
         $result = null;
@@ -257,7 +258,7 @@ final class MenuComponent
      * @return void
      * @throws InvalidConfigException
      */
-    private static function getActiveNavByUrlArray()
+    private static function getActiveNavByUrlArray(): void
     {
         /** Получаем активность меню для раздела - интерактивные карты локаций */
         self::$intermaps = self::checkActiveTabByUrlArray(MenuUrlsComponent::getMapsUrlArray());
