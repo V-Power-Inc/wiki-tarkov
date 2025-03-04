@@ -111,16 +111,15 @@ final class ApiController extends AdvancedController
 
         /** Пробуем найти, если нашли - обновление данных и рендеринг вьюхи */
         if ($item) {
-            // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
             /** Инициализируем API */
-//            $api = new ApiService();
-//
-//            /** Обновляем данные о предмете через API, если не получится */
-//            if ($api->renewItemData($item) === false) {
-//
-//                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
-//                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
-//            }
+            $api = new ApiService();
+
+            /** Обновляем данные о предмете через API, если не получится */
+            if ($api->renewItemData($item) === false) {
+
+                /** Если не смогли получить предмет из API - Исключительный случай, редирект на страницу списка предметов */
+                return $this->redirect('/items', ResponseStatusInterface::REDIRECT_TEMPORARILY_CODE);
+            }
 
             /** Ренденирг данных */
             return $this->render(self::ACTION_ITEM, ['item' => $item]);
