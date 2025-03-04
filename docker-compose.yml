@@ -39,7 +39,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      # Это нужно битбакету - раньше было mariadb:/var/lib/mysql
+      # Это нужно битбакету - раньше было mariadb:/var/lib/mysql (Пайплайны битбакета нуждаются в этих настройках)
       # ${BITBUCKET_CLONE_DIR:-static}:/var/lib/mysql
       - mariadb:/var/lib/mysql
     environment:
@@ -55,11 +55,11 @@ services:
     ports:
       - 6379:6379
     volumes:
-      # Это нужно битбакету - раньше было cache:/data
-      # ${BITBUCKET_CLONE_DIR:-static}:/data
       - redis:/data
 
 volumes:
+  # Это нужно битбакету - раньше было cache:/data (Пайплайны битбакета нуждаются в этих настройках)
+  # ${BITBUCKET_CLONE_DIR:-static}:/data
   mariadb:
   redis:
   cache:

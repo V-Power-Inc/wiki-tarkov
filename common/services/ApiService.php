@@ -233,9 +233,9 @@ final class ApiService implements ApiInterface
         foreach ($bosses as $boss) {
 
             /** Дата устаревания записи */
-            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +2 month'));
+            $date = date('Y-m-d H:i:s', strtotime($boss->date_create . ' +1 month'));
 
-            /** Если дата записи +2 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -274,18 +274,16 @@ final class ApiService implements ApiInterface
      * - Если квестов в БД нет или устарели, удалим их
      * - Если квесты есть и нет устаревших, возвращаем их из базы по урлу торговца
      *
-     * UPD 05-01-2025 - Обновление данных отключено на время рефакторинга
-     *
      * @param string $url - URL до квестов торговцев
-     * @return mixed
+     * @return array
      * @throws StaleObjectException
      * @throws HttpException
      * @throws \Throwable
      */
-    public function getTasks(string $url)
+    public function getTasks(string $url): array
     {
-        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
-        // TODO: Раскомментить после рефактора
+        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
+//        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
 //        if ($this->isOldTasks() | $this->isEmptyTasks()) {
 //
 //            /** Удаляем устаревшие записи о квестах */
@@ -332,7 +330,7 @@ final class ApiService implements ApiInterface
      *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
-     * @return null|array
+     * @return array|false
      * @throws StaleObjectException if [[optimisticLock|optimistic locking]] is enabled and the data
      * being deleted is outdated.
      * @throws \Throwable in case delete failed.
@@ -340,49 +338,49 @@ final class ApiService implements ApiInterface
      */
     public function processSearchItem(ApiForm $model): ?array
     {
+        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
         if (!empty($items = ApiLoot::findItemsByName($model->item_name))) {
             return $items;
         } else {
             return null;
         }
 
-        // TODO: Вернуть к прежнему виду после рефактора
-//        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
-//        if (ApiLoot::findItemsByName($model->item_name)) {
-//
-//            /** Сперва удалим существующие записи */
-//            $this->removeItemsByQuery($model->item_name);
-//
-//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-//            if ($this->createNewItems($model)) {
-//
-//                /** Возвращаем в контроллер набор данных, который искали ранее */
-//                return ApiLoot::findItemsByName($model->item_name);
-//            }
-//
-//            /** Возвращаем False в контроллер, если в API нет данных */
-//            return false;
-//        }
-//
-//        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
-//        if (!ApiLoot::findItemsByName($model->item_name)) {
-//
-//            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-//            if ($this->createNewItems($model)) {
-//
-//                /** Возвращаем в контроллер набор данных, который искали ранее */
-//                return ApiLoot::findItemsByName($model->item_name);
-//            }
-//
-//            /** Возвращаем False в контроллер, если в API нет данных */
-//            return false;
-//        }
-//
-//        /** Логируем в БД ошибку */
-//        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
-//
-//        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
-//        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
+        /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
+        if (ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Сперва удалим существующие записи */
+            $this->removeItemsByQuery($model->item_name);
+
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+            if ($this->createNewItems($model)) {
+
+                /** Возвращаем в контроллер набор данных, который искали ранее */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем False в контроллер, если в API нет данных */
+            return false;
+        }
+
+        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
+        if (!ApiLoot::findItemsByName($model->item_name)) {
+
+            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+            if ($this->createNewItems($model)) {
+
+                /** Возвращаем в контроллер набор данных, который искали ранее */
+                return ApiLoot::findItemsByName($model->item_name);
+            }
+
+            /** Возвращаем False в контроллер, если в API нет данных */
+            return false;
+        }
+
+        /** Логируем в БД ошибку */
+        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+
+        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
+        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
     }
 
     /**
@@ -422,6 +420,7 @@ final class ApiService implements ApiInterface
      * @param ApiForm $model - объект ApiForm
      * @return bool
      * @throws InvalidConfigException
+     * @throws Exception
      */
     private function createNewItems(ApiForm $model): bool
     {
@@ -441,10 +440,10 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение обновлений по определенным урлам todo - В будущем убрать, после полноценного рефакторинга */
-				if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
+                /** Исключение обновлений по определенным урлам */
+                if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
                     continue;
-				}
+                }
 
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {
@@ -532,11 +531,11 @@ final class ApiService implements ApiInterface
     /**
      * Метод удаляет все квесты - возвращает bool результат
      *
-     * @return bool
+     * @return void
      * @throws StaleObjectException
      * @throws \Throwable
      */
-    private function removeOldTasks(): bool
+    private function removeOldTasks(): void
     {
         /** Задаем SQL запрос переменной - ищем устаревшие записи */
         $tasks = Tasks::find()->all();
@@ -545,17 +544,14 @@ final class ApiService implements ApiInterface
         foreach ($tasks as $task) {
             $task->delete();
         }
-
-        /** Возвращаем true - если удаление боссов прошло успешно */
-        return true;
     }
 
     /**
      * Метод проставляющий квестам дату устаревания - возвращает bool результат
-     *
-     * @return bool
+     * @return void
+     * @throws Exception
      */
-    private function setOldTasks(): bool
+    private function setOldTasks(): void
     {
         /** Задаем переменную с выборкой квестов, которые еще актуальны */
         $tasks = Tasks::findAll([Tasks::ATTR_OLD => Tasks::FALSE]);
@@ -566,7 +562,7 @@ final class ApiService implements ApiInterface
             /** Дата устаревания записи */
             $date = date('Y-m-d H:i:s', strtotime($task->date_create . ' +1 month'));
 
-            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
@@ -576,18 +572,16 @@ final class ApiService implements ApiInterface
                 $task->save();
             }
         }
-
-        /** Возвращаем true если все прошло успешно */
-        return true;
     }
 
     /**
      * Сохраняем в базу данных все квесты, полученные из API
      *
      * @param array $data - массив с данными обо всех квестах из API
-     * @return bool
+     * @return void
+     * @throws InvalidConfigException
      */
-    private function createTasks(array $data): bool
+    private function createTasks(array $data): void
     {
         /** В цикле проходим каждый квест из массив, полученного от API */
         foreach ($data[Api::ATTR_DATA][Api::ATTR_TASKS] as $task) {
@@ -596,15 +590,8 @@ final class ApiService implements ApiInterface
             $model = new TaskModel($task);
 
             /** Сохраняем данные в БД (tasks) */
-            if (!$model->save()) {
-
-                /** Если данные не сохранились - вернем false */
-                return false;
-            }
+            $model->save();
         }
-
-        /** Возвращаем bool результат если все ок */
-        return true;
     }
 
     /**
