@@ -155,7 +155,7 @@ final class ApiController extends AdvancedController
      *
      * @param string $id - id предмета из API tarkov.dev
      * @return string
-     * @throws ApiControllerHttpException
+     * @throws ApiControllerHttpException|InvalidConfigException
      */
     public function actionGetGraphs(string $id): string
     {
