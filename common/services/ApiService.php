@@ -282,26 +282,27 @@ final class ApiService implements ApiInterface
      */
     public function getTasks(string $url): array
     {
-        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
-        if ($this->isOldTasks() | $this->isEmptyTasks()) {
-
-            /** Удаляем устаревшие записи о квестах */
-            $this->removeOldTasks();
-
-            /** Сетапим запрос для API на получение информации о квестах */
-            $this->setTasksQuery();
-
-            /** Переменная для получения данных о квестах через API */
-            $data = $this->getApiData();
-
-            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
-            $this->createTasks($data);
-
-        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
-
-            /** Помечаем устаревшие квесты */
-            $this->setOldTasks();
-        }
+        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
+//        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
+//        if ($this->isOldTasks() | $this->isEmptyTasks()) {
+//
+//            /** Удаляем устаревшие записи о квестах */
+//            $this->removeOldTasks();
+//
+//            /** Сетапим запрос для API на получение информации о квестах */
+//            $this->setTasksQuery();
+//
+//            /** Переменная для получения данных о квестах через API */
+//            $data = $this->getApiData();
+//
+//            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
+//            $this->createTasks($data);
+//
+//        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
+//
+//            /** Помечаем устаревшие квесты */
+//            $this->setOldTasks();
+//        }
 
         /** Получаем данные о квестах из таблицы Tasks */
         $result = new TasksResult(Tasks::getTasksData($url));
@@ -335,8 +336,15 @@ final class ApiService implements ApiInterface
      * @throws \Throwable in case delete failed.
      * @throws InvalidConfigException
      */
-    public function processSearchItem(ApiForm $model)
+    public function processSearchItem(ApiForm $model): ?array
     {
+        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
+        if (!empty($items = ApiLoot::findItemsByName($model->item_name))) {
+            return $items;
+        } else {
+            return null;
+        }
+
         /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
         if (ApiLoot::findItemsByName($model->item_name)) {
 
