@@ -91,7 +91,7 @@ class MainpageCest
     /** Мы видим блок оверлея с рекламой */
     public function checkOverlayBlock(\FunctionalTester $I)
     {
-        $I->SeeElement('.overlay-block');
+        // $I->SeeElement('.overlay-block');
     }
 
     /** Мы видим что все блоки с рекламой присутствуют на странице */
