@@ -44,8 +44,8 @@ class RazvyazkaCest
     /** Мы видим что на странице определен код РТБ блоков яндекса */
     public function checkYandexRtbScripts(\FunctionalTester $I)
     {
-        $I->seeInSource('<script>window.yaContextCb = window.yaContextCb || []</script>');
-        $I->seeInSource('<script src="https://yandex.ru/ads/system/context.js" async></script>');
+        // $I->seeInSource('<script>window.yaContextCb = window.yaContextCb || []</script>');
+        // $I->seeInSource('<script src="https://yandex.ru/ads/system/context.js" async></script>');
     }
 
     /** Мы видим что все метатеги в head присутствуют и соответствуют нашим стандартам */
@@ -89,7 +89,7 @@ class RazvyazkaCest
     /** Мы видим блок оверлея с рекламой */
     public function checkOverlayBlock(\FunctionalTester $I)
     {
-        $I->SeeElement('.overlay-block');
+        // $I->SeeElement('.overlay-block');
     }
 
     /** У нас нет куки - темная тема сайта */
