@@ -26,9 +26,8 @@ AppAsset::register($this);
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
-    <!-- Yandex.RTB -->
-    <script>window.yaContextCb = window.yaContextCb || []</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    <!-- MarketPlace -->
+    <script async src="https://statika.mpsuadv.ru/scripts/9937.js"></script>
 
     <!-- OG tags -->
     <meta property="og:type" content="website">
@@ -106,10 +105,10 @@ AppAsset::register($this);
 <?= $this->render('/other/yandex-direct-mobile-fullscreen')?>
 
 <?php if (!isset($cookies['overlay'])): ?>
-    <div class="overlay-block">
+<!--    <div class="overlay-block">-->
         <div class="cls-btn" id="cck_close">Закрыть</div>
         <?= $this->render('/other/yandex-direct-overlay') ?>
-    </div>
+<!--    </div>-->
 <?php endif; ?>
 
 <span class="visible-md visible-lg"><a href="#" class="scup"><i class="fa fa-angle-up active"></i></a></span>

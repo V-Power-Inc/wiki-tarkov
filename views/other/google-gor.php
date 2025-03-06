@@ -8,5 +8,5 @@
  */
 ?>
 <div class="margins-vertical-20">
-    <!-- NEW ADS BLOCKS -->
+    <div id="mp_custom_13081"></div> <script>window.mpsuStart = window.mpsuStart || [], window.mpsuStart.push(13081);</script>
 </div>

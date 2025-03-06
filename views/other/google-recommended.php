@@ -13,6 +13,6 @@
 ?>
 <div class="col-sm-12">
     <div class="margins-vertical-20 d-block">
-        <!-- NEW ADS BLOCKS -->
+        <div id="mp_custom_13082"></div> <script>window.mpsuStart = window.mpsuStart || [], window.mpsuStart.push(13082);</script>
     </div>
 </div>
