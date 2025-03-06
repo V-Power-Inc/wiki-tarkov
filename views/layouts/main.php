@@ -27,7 +27,7 @@ AppAsset::register($this);
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
     <!-- MarketPlace -->
-    <script async src="https://statika.mpsuadv.ru/scripts/9937.js"></script>
+    <script async src="https://statika.mpsuadv.ru/scripts/9936.js"></script>
 
     <!-- OG tags -->
     <meta property="og:type" content="website">
