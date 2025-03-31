@@ -25,5 +25,4 @@
                 })
             })
         </script>
-    <!-- NEW ADS BLOCKS -->
 </div>
