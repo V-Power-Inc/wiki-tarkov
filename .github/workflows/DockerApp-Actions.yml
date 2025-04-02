@@ -22,69 +22,107 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Install Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install docker-compose -y
-    - name: Tests (Build & Applying migrations & Unit/Functional tests)
-      shell: bash
-      env:
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        REDIS_HOST: ${{ secrets.REDIS_HOST }}
-        DB_DSN: ${{ secrets.DB_DSN }}
-        DB_TEST_DSN: ${{ secrets.DB_TEST_DSN }}
-        DB_TEST_CHARSET: ${{ secrets.DB_TEST_CHARSET }}
-        DB_CHARSET: ${{ secrets.DB_CHARSET }}
-        DOMAIN: ${{ secrets.DOMAIN }}
-        DOMAIN_PROTOCOL: ${{ secrets.DOMAIN_PROTOCOL }}
-        DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
-        DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
-        DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
-      run: |
-          echo "Экспоритруем переменные зашитые в GitHub для развертки"
-          echo DB_NAME="$DB_NAME" > .env
-          echo DB_USER="$DB_USER" >> .env
-          echo DB_PASSWORD="$DB_PASSWORD" >> .env
-          echo REDIS_HOST="$REDIS_HOST" >> .env
-          echo DB_DSN="$DB_DSN" >> .env
-          echo DB_TEST_DSN="$DB_TEST_DSN" >> .env
-          echo DB_TEST_CHARSET="$DB_TEST_CHARSET" >> .env
-          echo DB_CHARSET="$DB_CHARSET" >> .env
-          echo DOMAIN="$DOMAIN" >> .env
-          echo DOMAIN_PROTOCOL="$DOMAIN_PROTOCOL" >> .env
-          echo DB_TEST_NAME="$DB_TEST_NAME" >> .env
-          echo DB_TEST_USER="$DB_TEST_USER" >> .env
-          echo DB_TEST_PASSWORD="$DB_TEST_PASSWORD" >> .env
-          echo DEBUG_STATUS=true >> .env
-          echo ENVIRONMENT=dev >> .env
+      - uses: actions/checkout@v4
+      
+      # Настройка Docker и кеширования
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
-          echo "Билдим контейнеры через docker-compose"
-          docker-compose build
+      - name: Install Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose -y
 
-          echo "Поднимаем все контейнеры через docker-compose"
-          docker-compose up -d
+      # Кеширование Composer
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor/
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
-          echo "Обновляем зависимости composer"
-          docker-compose exec -T app composer install --no-interaction
+      # Настройка переменных окружения
+      - name: Set up environment variables
+        env:
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          DB_DSN: ${{ secrets.DB_DSN }}
+          DB_TEST_DSN: ${{ secrets.DB_TEST_DSN }}
+          DB_TEST_CHARSET: ${{ secrets.DB_TEST_CHARSET }}
+          DB_CHARSET: ${{ secrets.DB_CHARSET }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          DOMAIN_PROTOCOL: ${{ secrets.DOMAIN_PROTOCOL }}
+          DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
+          DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
+          DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
+        run: |
+          cat << EOF > .env
+          DB_NAME="$DB_NAME"
+          DB_USER="$DB_USER"
+          DB_PASSWORD="$DB_PASSWORD"
+          REDIS_HOST="$REDIS_HOST"
+          DB_DSN="$DB_DSN"
+          DB_TEST_DSN="$DB_TEST_DSN"
+          DB_TEST_CHARSET="$DB_TEST_CHARSET"
+          DB_CHARSET="$DB_CHARSET"
+          DOMAIN="$DOMAIN"
+          DOMAIN_PROTOCOL="$DOMAIN_PROTOCOL"
+          DB_TEST_NAME="$DB_TEST_NAME"
+          DB_TEST_USER="$DB_TEST_USER"
+          DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
+          DEBUG_STATUS=true
+          ENVIRONMENT=dev
+          EOF
 
-          echo "Даем больше прав юзеру MySQL для создания триггеров"
-          docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
-            CREATE DATABASE test_migrations_db;
+      # Сборка и запуск контейнеров
+      - name: Build containers
+        run: docker-compose build --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Start containers
+        run: docker-compose up -d
+
+      # Установка зависимостей
+      - name: Install Composer dependencies
+        run: docker-compose exec -T app composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      # Настройка базы данных
+      - name: Configure database
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "
+            CREATE DATABASE IF NOT EXISTS test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
 
-          echo "Накатываем миграции на dev_eft"
+      # Применение миграций
+      - name: Run migrations
+        run: |
           docker-compose exec -T app php yii migrate --interactive=0
+          docker-compose exec -T app php yii migrate --db db_test --interactive=0
 
-          echo "Накатываем миграции на test_migrations_db"
-          docker-compose exec -T app php yii migrate --db db_test --interactive=0;
+      # Очистка кеша
+      - name: Clear Redis cache
+        run: docker-compose exec -T redis redis-cli flushall
 
-          echo "Сбрасываем кеши - на всякий случай"
-          docker-compose exec -T redis redis-cli flushall
+      # Запуск тестов
+      - name: Run tests
+        run: docker-compose exec -T app vendor/bin/codecept run
 
-          echo "Functional и Unit тестирование"
-          docker-compose exec -T app vendor/bin/codecept run
+      # Сохранение кеша
+      - name: Save Docker cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
