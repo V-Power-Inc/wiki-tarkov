@@ -9,17 +9,23 @@ namespace app\common\services;
  */
 abstract class AbstractItemsApiService implements CommonServiceInterface
 {
+    /**
+     * Заглушка для API предметов с невалидным урлом
+     * @param string $itemUrl - url предмета
+     * @param string $finalString - заглушка img
+     * @return string
+     */
     public static function setupImageWithCheckingUrl(string $itemUrl, string $finalString): string
     {
         return (in_array($itemUrl, explode(',', $_ENV['PROBLEM_URLS'])) === true)
-            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png'
+            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch64.png'
             : $finalString;
     }
 
     public static function setupImageWithCheckingName(string $itemName, string $finalString): string
     {
-        return (in_array($itemName, explode(',', $_ENV['PROBLEM_NAMES'])) === true)
-            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png'
+        return (in_array(str_replace(' ', '', $itemName), explode(',', $_ENV['PROBLEM_NAMES'])) === true)
+            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch64.png'
             : $finalString;
     }
 

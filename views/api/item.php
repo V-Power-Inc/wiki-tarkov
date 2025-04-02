@@ -65,8 +65,8 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $_ENV['DOMAIN_PROTOCOL']
             <!-- Image block -->
             <div class="col-xs-3">
 
-                <a class="image-link" title="<?= $item->name ?>" href="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>">
-                    <img class="detail-item-image image-link" src="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>" alt="<?= $item->name ?>">
+                <a class="image-link" title="<?= $item->name ?>" href="<?= AbstractItemsApiService::setupImageWithCheckingName($item->name, $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK]) ?>">
+                    <img class="detail-item-image image-link" src="<?= AbstractItemsApiService::setupImageWithCheckingName($item->name, $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK]) ?>" alt="<?= $item->name ?>">
                 </a>
 
             </div>
