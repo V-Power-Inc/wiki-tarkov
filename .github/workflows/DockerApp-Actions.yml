@@ -85,9 +85,22 @@ jobs:
           ENVIRONMENT=dev
           EOF
 
+      # Проверка состояния кеша перед сборкой
+      - name: Check Docker cache before build
+        run: |
+          echo "Checking Docker cache state..."
+          ls -la /tmp/.buildx-cache || echo "Cache directory is empty"
+          echo "Cache size: $(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')"
+
       # Сборка и запуск контейнеров
       - name: Build containers
-        run: docker-compose build --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new
+        run: |
+          echo "Starting Docker build with cache..."
+          DOCKER_BUILDKIT=1 docker-compose build \
+            --cache-from type=local,src=/tmp/.buildx-cache \
+            --cache-to type=local,dest=/tmp/.buildx-cache-new \
+            --progress=plain
+          echo "Build completed"
 
       - name: Start containers
         run: docker-compose up -d
@@ -101,7 +114,18 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "
+          echo "Waiting for MySQL to be ready..."
+          for i in {1..30}; do
+            if docker exec tarkov_db mysqladmin ping -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --silent; then
+              echo "MySQL is ready!"
+              break
+            fi
+            echo "Waiting for MySQL to be ready... attempt $i/30"
+            sleep 2
+          done
+
+          echo "Configuring database..."
+          docker exec -t tarkov_db mysql -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --execute "
             CREATE DATABASE IF NOT EXISTS test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
@@ -124,8 +148,12 @@ jobs:
       # Сохранение кеша докера
       - name: Save Docker cache
         run: |
+          echo "Saving Docker cache..."
           mkdir -p /tmp/.buildx-cache-new
           if [ -d "/tmp/.buildx-cache" ]; then
+            echo "Removing old cache..."
             rm -rf /tmp/.buildx-cache
           fi
+          echo "Moving new cache..."
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          echo "New cache size: $(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')"
