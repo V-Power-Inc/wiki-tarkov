@@ -83,6 +83,8 @@ jobs:
           DB_TEST_NAME="$DB_TEST_NAME"
           DB_TEST_USER="$DB_TEST_USER"
           DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
+          PROBLEM_URLS="$PROBLEM_URLS"
+          PROBLEM_NAMES="$PROBLEM_NAMES"
           DEBUG_STATUS=true
           ENVIRONMENT=dev
           EOF
