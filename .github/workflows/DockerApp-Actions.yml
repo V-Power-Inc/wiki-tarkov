@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      # Настройка переменных окружения
+      # Настройка переменных окружения + пара заглушек для ENV
       - name: Set up environment variables
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
@@ -66,6 +66,8 @@ jobs:
           DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
           DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
           DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
+          PROBLEM_URLS: test1,test2,test
+          PROBLEM_NAMES: test_value
         run: |
           cat << EOF > .env
           DB_NAME="$DB_NAME"
