@@ -350,6 +350,8 @@ final class SiteController extends AdvancedController
             return CookieComponent::NAME_LIGHT_THEME;
         }
 
+        Yii::info('СТраница не найден', 'handled-notfound');
+
         /** Эксепшн, для тех кто пытается сюда без AJAX попасть */
         throw new SiteControllerHttpException(ResponseStatusInterface::NOT_FOUND_CODE ,'Такая страница не существует');
     }
