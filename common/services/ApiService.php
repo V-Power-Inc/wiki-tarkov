@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\constants\api\Api;
+use app\common\constants\api\ItemAttributes;
 use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\{ApiInterface, ResponseStatusInterface};
 use app\common\models\tasks\db\TaskModel;
@@ -32,7 +33,7 @@ use Yii;
  * Class ApiService
  * @package app\common\services
  */
-final class ApiService implements ApiInterface
+final class ApiService extends AbstractItemsApiService implements ApiInterface
 {
     /** @var array - Атрибут с заголовками запроса */
     private array $headers = ['Content-Type: application/json'];
@@ -430,17 +431,19 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение обновлений по определенным урлам */
-                if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
-                    continue;
-                }
-
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {
+
+                    /** На проблемных урлах сетапим заглушку */
+                    if ($this->isTroubleUrl($newItem->url)) {
+                        $data[ItemAttributes::ATTR_ICON_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png';
+                        $data[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png';
+                    }
+
                     /** Пробуем закодировать строку в JSON  */
                     $newItem->json = Json::encode($data);
 
-                } catch (InvalidArgumentException|ErrorException $e) {
+                } catch (InvalidArgumentException $e) {
 
                     /** Логируем что API вернул кривые данные */
                     LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);

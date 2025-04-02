@@ -18,7 +18,7 @@ use Yii;
  * Class TradersService
  * @package app\common\services
  */
-final class TradersService
+final class TradersService implements CommonServiceInterface
 {
     /**
      * По имени торговца, подставляем нужный урл до квестов торговца (Немного хардкода, куда уж без него)

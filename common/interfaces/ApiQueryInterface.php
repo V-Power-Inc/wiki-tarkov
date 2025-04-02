@@ -8,6 +8,8 @@
 
 namespace app\common\interfaces;
 
+use app\common\services\CommonServiceInterface;
+
 /** Интерфейс класса API Query */
-interface ApiQueryInterface
+interface ApiQueryInterface extends CommonServiceInterface
 {}

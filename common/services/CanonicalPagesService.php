@@ -21,7 +21,7 @@ use Yii;
  * Class CanonicalPagesService
  * @package app\common\services
  */
-final class CanonicalPagesService
+final class CanonicalPagesService implements CommonServiceInterface
 {
     /**
      * Метод сравнивает запрашиваемый route со своей каноничной версией, если они не совпадают - редиректнет 301 запросом на каноникал урл

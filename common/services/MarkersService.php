@@ -17,7 +17,7 @@ use yii\helpers\Json;
  * Class MarkersService
  * @package app\common\services
  */
-final class MarkersService
+final class MarkersService implements CommonServiceInterface
 {
     /**
      * Метод вытаскивает маркеры, по переданному значению названия карты

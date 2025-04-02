@@ -8,6 +8,7 @@
 
 namespace app\common\services\files;
 
+use app\common\services\CommonServiceInterface;
 use yii\base\Model;
 
 /**
@@ -16,7 +17,7 @@ use yii\base\Model;
  * Class FilesService
  * @package app\common\services\files
  */
-abstract class FilesService
+abstract class FilesService implements CommonServiceInterface
 {
     /**
      * Метод должен реализовывать загрузку изображения на сервер и возвращать объект модели, которая ранее
