@@ -121,8 +121,11 @@ jobs:
       - name: Run tests
         run: docker-compose exec -T app vendor/bin/codecept run
 
-      # Сохранение кеша
+      # Сохранение кеша докера
       - name: Save Docker cache
         run: |
-          rm -rf /tmp/.buildx-cache
+          mkdir -p /tmp/.buildx-cache-new
+          if [ -d "/tmp/.buildx-cache" ]; then
+            rm -rf /tmp/.buildx-cache
+          fi
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
