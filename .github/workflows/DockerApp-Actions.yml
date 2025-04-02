@@ -68,7 +68,7 @@ jobs:
           docker-compose up -d
 
           echo "Обновляем зависимости composer"
-          docker-compose exec -T app composer install --no-interaction
+          docker-compose exec -T app composer install --no-interaction --ignore-platform-reqs
 
           echo "Даем больше прав юзеру MySQL для создания триггеров"
           docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
