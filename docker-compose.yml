@@ -15,8 +15,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - app
 
   app:
     container_name: tarkov_app
@@ -26,7 +24,6 @@ services:
       - ./docker/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - .:/var/www/wiki-tarkov/html
     depends_on:
-      - web
       - db
     working_dir: /var/www/wiki-tarkov/html
     environment:
