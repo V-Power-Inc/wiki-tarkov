@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-${{ hashFiles('docker/php/Dockerfile') }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -88,19 +88,19 @@ jobs:
       # Проверка состояния кеша перед сборкой
       - name: Check Docker cache before build
         run: |
-          echo -e "\033[1;34mChecking Docker cache state...\033[0m"
-          ls -la /tmp/.buildx-cache || echo -e "\033[1;33mCache directory is empty\033[0m"
-          echo -e "\033[1;34mCache size: \033[1;32m$(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"
+          echo -e "\033[1;34m🔍 Checking Docker cache state...\033[0m"
+          ls -la /tmp/.buildx-cache || echo -e "\033[1;33m⚠️ Cache directory is empty\033[0m"
+          echo -e "\033[1;34m📊 Cache size: \033[1;32m$(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"
 
       # Сборка и запуск контейнеров
       - name: Build containers
         run: |
-          echo -e "\033[1;34mStarting Docker build with cache...\033[0m"
+          echo -e "\033[1;34m🏗️ Starting Docker build with cache...\033[0m"
           DOCKER_BUILDKIT=1 docker-compose build \
             --cache-from type=local,src=/tmp/.buildx-cache \
             --cache-to type=local,dest=/tmp/.buildx-cache-new \
             --progress=plain
-          echo -e "\033[1;32mBuild completed\033[0m"
+          echo -e "\033[1;32m✅ Build completed\033[0m"
 
       - name: Start containers
         run: docker-compose up -d
@@ -114,17 +114,17 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          echo -e "\033[1;34mWaiting for MySQL to be ready...\033[0m"
+          echo -e "\033[1;34m⏳ Waiting for MySQL to be ready...\033[0m"
           for i in {1..30}; do
             if docker exec tarkov_db mysqladmin ping -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --silent; then
-              echo -e "\033[1;32mMySQL is ready!\033[0m"
+              echo -e "\033[1;32m✅ MySQL is ready!\033[0m"
               break
             fi
-            echo -e "\033[1;33mWaiting for MySQL to be ready... attempt $i/30\033[0m"
+            echo -e "\033[1;33m⏳ Waiting for MySQL to be ready... attempt $i/30\033[0m"
             sleep 2
           done
 
-          echo -e "\033[1;34mConfiguring database...\033[0m"
+          echo -e "\033[1;34m⚙️ Configuring database...\033[0m"
           docker exec -t tarkov_db mysql -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --execute "
             CREATE DATABASE IF NOT EXISTS test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
@@ -134,34 +134,34 @@ jobs:
       # Применение миграций
       - name: Run migrations
         run: |
-          echo -e "\033[1;34mRunning migrations...\033[0m"
+          echo -e "\033[1;34m🔄 Running migrations...\033[0m"
           docker-compose exec -T app php yii migrate --interactive=0
           docker-compose exec -T app php yii migrate --db db_test --interactive=0
-          echo -e "\033[1;32mMigrations completed\033[0m"
+          echo -e "\033[1;32m✅ Migrations completed\033[0m"
 
       # Очистка кеша
       - name: Clear Redis cache
         run: |
-          echo -e "\033[1;34mClearing Redis cache...\033[0m"
+          echo -e "\033[1;34m🧹 Clearing Redis cache...\033[0m"
           docker-compose exec -T redis redis-cli flushall
-          echo -e "\033[1;32mRedis cache cleared\033[0m"
+          echo -e "\033[1;32m✅ Redis cache cleared\033[0m"
 
       # Запуск тестов
       - name: Run tests
         run: |
-          echo -e "\033[1;34mRunning tests...\033[0m"
+          echo -e "\033[1;34m🔬 Running tests...\033[0m"
           docker-compose exec -T app vendor/bin/codecept run
-          echo -e "\033[1;32mTests completed\033[0m"
+          echo -e "\033[1;32m✅ Tests completed\033[0m"
 
       # Сохранение кеша докера
       - name: Save Docker cache
         run: |
-          echo -e "\033[1;34mSaving Docker cache...\033[0m"
+          echo -e "\033[1;34m💾 Saving Docker cache...\033[0m"
           mkdir -p /tmp/.buildx-cache-new
           if [ -d "/tmp/.buildx-cache" ]; then
-            echo -e "\033[1;33mRemoving old cache...\033[0m"
+            echo -e "\033[1;33m🗑️ Removing old cache...\033[0m"
             rm -rf /tmp/.buildx-cache
           fi
-          echo -e "\033[1;34mMoving new cache...\033[0m"
+          echo -e "\033[1;34m📦 Moving new cache...\033[0m"
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-          echo -e "\033[1;32mNew cache size: $(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"
+          echo -e "\033[1;32m📊 New cache size: $(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"
