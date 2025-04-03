@@ -60,7 +60,10 @@ $config = [
                     // Write the context information (the default is true):
                     'context' => true,
                     // Additional options for `Sentry\init`:
-                    'clientOptions' => ['release' => 'wiki-tarkov@8.1.3'],
+                    'clientOptions' => [
+                        'release' => 'wiki-tarkov@' . $_ENV['RELEASE'] ?? '1.0.0',
+                        'environment' => $_ENV['ENVIRONMENT'] ?? 'dev',
+                    ],
                     // Except trivial errors
                     'except' => [
                         'yii\web\HttpException:404',
