@@ -48,6 +48,7 @@ AppAsset::register($this);
 </head>
 
 <body>
+<!-- TODO: Реализация AI консультанта на сайт -->
 <?php $this->beginBody() ?>
 
 
