@@ -14,6 +14,7 @@ use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\services\LogService;
 use app\common\services\TradersService;
+use app\common\traits\FormNameTrait;
 use app\models\Tasks;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
@@ -30,6 +31,8 @@ use Yii;
  */
 final class TaskModel extends Model
 {
+    use FormNameTrait;
+
     /** @var string - Название квеста */
     public $quest;
     private const ATTR_QUEST = 'quest';
@@ -103,16 +106,6 @@ final class TaskModel extends Model
         }
 
         parent::__construct($config);
-    }
-
-    /**
-     * Вместо имени формы - возвращаем пустую строку
-     *
-     * @return string
-     */
-    public function formName(): string
-    {
-        return '';
     }
 
     /**
