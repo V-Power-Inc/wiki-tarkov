@@ -60,7 +60,15 @@ $config = [
                     // Write the context information (the default is true):
                     'context' => true,
                     // Additional options for `Sentry\init`:
-                    // 'clientOptions' => ['release' => 'my-project-name@2.3.12']
+                    'clientOptions' => [
+                        'release' => 'wiki-tarkov@' . $_ENV['RELEASE'] ?? '1.0.0',
+                        'environment' => $_ENV['ENVIRONMENT'] ?? 'dev',
+                    ],
+                    // Except trivial errors
+                    'except' => [
+                        'yii\web\HttpException:404',
+                        'yii\web\HttpException:403',
+                    ],
                 ],
             ],
         ],
@@ -74,8 +82,8 @@ $config = [
         'reCaptcha' => [
             'name' => 'reCaptcha',
             'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
-            'siteKey' => '6LcN1DUUAAAAAP5NlB9Xh2k6Bjhjd9TGD10XhMA5',
-            'secret' => '6LcN1DUUAAAAAEBtk-iF1wqtdPOx5eo3-uzljni_',
+            'siteKey' => $_ENV['RECAPCHASITEKEY'],
+            'secret' => $_ENV['RECAPCHAKEY'],
         ],
     ],
 
