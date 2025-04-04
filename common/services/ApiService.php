@@ -436,8 +436,8 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
 
                     /** На проблемных урлах сетапим заглушку */
                     if ($this->isTroubleUrl($newItem->url)) {
-                        $data[ItemAttributes::ATTR_ICON_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png';
-                        $data[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch.png';
+                        $data[ItemAttributes::ATTR_ICON_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch55.png'; # declined
+                        $data[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch55.png'; # declined
                     }
 
                     /** Пробуем закодировать строку в JSON  */

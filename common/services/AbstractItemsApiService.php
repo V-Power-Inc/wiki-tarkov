@@ -18,14 +18,14 @@ abstract class AbstractItemsApiService implements CommonServiceInterface
     public static function setupImageWithCheckingUrl(string $itemUrl, string $finalString): string
     {
         return (in_array($itemUrl, explode(',', $_ENV['PROBLEM_URLS'])) === true)
-            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch64.png'
+            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch6455.png' # declined
             : $finalString;
     }
 
     public static function setupImageWithCheckingName(string $itemName, string $finalString): string
     {
         return (in_array(str_replace(' ', '', $itemName), explode(',', $_ENV['PROBLEM_NAMES'])) === true)
-            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch64.png'
+            ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch6455.png' # declined
             : $finalString;
     }
 
