@@ -7,8 +7,7 @@
  */
 
 use yii\web\JqueryAsset;
-use app\common\services\ImageService;
-use app\common\services\TranslateService;
+use app\common\services\{ImageService, AbstractItemsApiService, TranslateService};
 use app\common\models\tasks\TaskItem;
 
 /* @var TaskItem[] $tasks - Массив объектов с квестами конкретного торговца */
@@ -108,7 +107,7 @@ $this->registerMetaTag([
                                         <div class="barter-items-count">
 
                                         <?php foreach($task->neededKeys->_items as $item_key): ?>
-                                            <img class="items-for-trade" src="<?= $item_key->iconLink ?>" title="<?= $item_key->name ?>" alt="<?= $item_key->name ?>">
+                                            <img class="items-for-trade" src="<?= AbstractItemsApiService::setupImageWithCheckingName($item_key->name, $item_key->iconLink) ?>" title="<?= $item_key->name ?>" alt="<?= $item_key->name ?>">
                                         <?php endforeach; ?>
 
                                         </div>
@@ -151,7 +150,7 @@ $this->registerMetaTag([
                                         <div class="barter-items-count">
 
                                             <?php foreach($task->startRewards->_items as $startReward): ?>
-                                                <span class="count-for-barter"> <b><?= $startReward->count ?>x</b></span> <img class="items-for-trade" src="<?= $startReward->iconLink ?>" title="<?= $startReward->name ?>" alt="<?= $startReward->name ?>">
+                                                <span class="count-for-barter"> <b><?= $startReward->count ?>x</b></span> <img class="items-for-trade" src="<?= AbstractItemsApiService::setupImageWithCheckingName($startReward->name, $startReward->iconLink) ?>" title="<?= $startReward->name ?>" alt="<?= $startReward->name ?>">
                                             <?php endforeach; ?>
 
                                         </div>
@@ -169,7 +168,7 @@ $this->registerMetaTag([
                                         <div class="barter-items-count">
 
                                             <?php foreach($task->finishRewards->_items as $finishReward): ?>
-                                                <span class="count-for-barter"> <b><?= $finishReward->count ?>x</b></span> <img class="items-for-trade" src="<?= $finishReward->iconLink ?>" title="<?= $finishReward->name ?>" alt="<?= $finishReward->name ?>">
+                                                <span class="count-for-barter"> <b><?= $finishReward->count ?>x</b></span> <img class="items-for-trade" src="<?= AbstractItemsApiService::setupImageWithCheckingName($finishReward->name, $finishReward->iconLink) ?>" title="<?= $finishReward->name ?>" alt="<?= $finishReward->name ?>">
                                             <?php endforeach; ?>
 
                                         </div>

@@ -21,7 +21,7 @@ namespace app\common\services;
  * Class BossesService
  * @package app\common\services
  */
-final class BossesService
+final class BossesService extends AbstractItemsApiService
 {
     /**
      * Метод хранит ключи в виде названий боссов и значения в виде количества здоровья босса

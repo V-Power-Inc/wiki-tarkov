@@ -13,7 +13,7 @@
  */
 
 use app\common\constants\api\ItemAttributes;
-use app\common\services\ImageService;
+use app\common\services\{AbstractItemsApiService, ImageService};
 use app\models\ApiLoot;
 use app\models\forms\ApiForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
@@ -144,7 +144,7 @@ $this->registerMetaTag([
                         <!-- Image -->
                         <div class="col-sm-2">
                             <a href="/item/<?= $item->url ?>.html">
-                                <img class="item-page-image" src="<?= $item->json[ItemAttributes::ATTR_ICON_LINK] ?>" alt="<?= $item->json[ItemAttributes::ATTR_ITEM_NAME] ?>">
+                                <img class="item-page-image" src="<?= AbstractItemsApiService::setupImageWithCheckingName($item->json[ItemAttributes::ATTR_ITEM_NAME], $item->json[ItemAttributes::ATTR_ICON_LINK]) ?>" alt="<?= $item->json[ItemAttributes::ATTR_ITEM_NAME] ?>">
                             </a>
                         </div>
 

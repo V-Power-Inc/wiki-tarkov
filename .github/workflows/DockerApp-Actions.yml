@@ -23,11 +23,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      
+
       # Настройка Docker и кеширования
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
+
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      # Настройка переменных окружения
+      # Настройка переменных окружения + пара заглушек для ENV
       - name: Set up environment variables
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
@@ -66,6 +66,8 @@ jobs:
           DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
           DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
           DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
+          PROBLEM_URLS: test1,test2,test
+          PROBLEM_NAMES: test_value
         run: |
           cat << EOF > .env
           DB_NAME="$DB_NAME"
@@ -81,6 +83,8 @@ jobs:
           DB_TEST_NAME="$DB_TEST_NAME"
           DB_TEST_USER="$DB_TEST_USER"
           DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
+          PROBLEM_URLS="$PROBLEM_URLS"
+          PROBLEM_NAMES="$PROBLEM_NAMES"
           DEBUG_STATUS=true
           ENVIRONMENT=dev
           EOF
@@ -107,7 +111,7 @@ jobs:
 
       # Установка зависимостей
       - name: Install Composer dependencies
-        run: docker-compose exec -T app composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: docker-compose exec -T app composer install --no-interaction --ignore-platform-reqs --prefer-dist --optimize-autoloader
 
       # Настройка базы данных
       - name: Configure database

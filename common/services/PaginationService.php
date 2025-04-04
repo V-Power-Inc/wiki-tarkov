@@ -19,7 +19,7 @@ use Yii;
  * Class PaginationService
  * @package app\common\services
  */
-final class PaginationService
+final class PaginationService implements CommonServiceInterface
 {
     /** @var string - Константа, название атрибута даты создания записи у большинства AR моделей */
     private const ATTR_DATE_CREATE = 'date_create';

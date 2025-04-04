@@ -18,7 +18,7 @@ use Yii;
  * Class ArrayService
  * @package app\common\services
  */
-final class ArrayService
+final class ArrayService implements CommonServiceInterface
 {
     /**
      * Метод вычисляет итоговое количество отряда у босса из многомерного вложенного массива

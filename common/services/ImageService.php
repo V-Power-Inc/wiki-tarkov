@@ -19,7 +19,7 @@ use yii\base\InvalidConfigException;
  * Class ImageService
  * @package app\common\services
  */
-final class ImageService
+final class ImageService extends AbstractItemsApiService
 {
     /**
      * Массив с ключами в виде названия карт и значений изображения, которое для них используется

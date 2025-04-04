@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\constants\api\Api;
+use app\common\constants\api\ItemAttributes;
 use app\common\constants\log\ErrorDesc;
 use app\common\interfaces\{ApiInterface, ResponseStatusInterface};
 use app\common\models\tasks\db\TaskModel;
@@ -32,7 +33,7 @@ use Yii;
  * Class ApiService
  * @package app\common\services
  */
-final class ApiService implements ApiInterface
+final class ApiService extends AbstractItemsApiService implements ApiInterface
 {
     /** @var array - Атрибут с заголовками запроса */
     private array $headers = ['Content-Type: application/json'];
@@ -282,27 +283,26 @@ final class ApiService implements ApiInterface
      */
     public function getTasks(string $url): array
     {
-        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
-//        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
-//        if ($this->isOldTasks() | $this->isEmptyTasks()) {
-//
-//            /** Удаляем устаревшие записи о квестах */
-//            $this->removeOldTasks();
-//
-//            /** Сетапим запрос для API на получение информации о квестах */
-//            $this->setTasksQuery();
-//
-//            /** Переменная для получения данных о квестах через API */
-//            $data = $this->getApiData();
-//
-//            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
-//            $this->createTasks($data);
-//
-//        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
-//
-//            /** Помечаем устаревшие квесты */
-//            $this->setOldTasks();
-//        }
+        /** Проверяем, если записи о квестах устарели или их нет - проводим следующие операции */
+        if ($this->isOldTasks() | $this->isEmptyTasks()) {
+
+            /** Удаляем устаревшие записи о квестах */
+            $this->removeOldTasks();
+
+            /** Сетапим запрос для API на получение информации о квестах */
+            $this->setTasksQuery();
+
+            /** Переменная для получения данных о квестах через API */
+            $data = $this->getApiData();
+
+            /** Отправляем массив с данными о квестах в метод, который сохранит их в БД */
+            $this->createTasks($data);
+
+        } else if (!$this->isEmptyTasks()) { /** Если таблица с квестами не пуста - помечаем устаревшие записи */
+
+            /** Помечаем устаревшие квесты */
+            $this->setOldTasks();
+        }
 
         /** Получаем данные о квестах из таблицы Tasks */
         $result = new TasksResult(Tasks::getTasksData($url));
@@ -326,8 +326,6 @@ final class ApiService implements ApiInterface
      * - Предмета нет в базе но есть в API
      * - Есть предмет в базе
      *
-     * UPD 05-01-2025 - Не получаем новые предметы на время рефактора
-     *
      * @param ApiForm $model - поисковый запрос на получение предмета
      *
      * @return array|false
@@ -336,15 +334,8 @@ final class ApiService implements ApiInterface
      * @throws \Throwable in case delete failed.
      * @throws InvalidConfigException
      */
-    public function processSearchItem(ApiForm $model): ?array
+    public function processSearchItem(ApiForm $model)
     {
-        // TODO: Вернуться к этому в конце года (Сентябрь, ноябрь)
-        if (!empty($items = ApiLoot::findItemsByName($model->item_name))) {
-            return $items;
-        } else {
-            return null;
-        }
-
         /** Проверка - если в БД у нас есть эта запись, тогда должны спарсить и обновить */
         if (ApiLoot::findItemsByName($model->item_name)) {
 
@@ -440,17 +431,19 @@ final class ApiService implements ApiInterface
                 $newItem->name = trim($data[Api::ATTR_ITEM_NAME]);
                 $newItem->url = $data[Api::ATTR_NORMALIZED_ITEM_NAME];
 
-                /** Исключение обновлений по определенным урлам */
-                if (in_array($newItem->url, explode(',', $_ENV['RESTRICTED_URLS'])) === true) {
-                    continue;
-                }
-
                 /** Через try пробуем в атрибут закодировать JSON */
                 try {
+
+                    /** На проблемных урлах сетапим заглушку */
+                    if ($this->isTroubleUrl($newItem->url)) {
+                        $data[ItemAttributes::ATTR_ICON_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch55.png'; # declined
+                        $data[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] = $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch55.png'; # declined
+                    }
+
                     /** Пробуем закодировать строку в JSON  */
                     $newItem->json = Json::encode($data);
 
-                } catch (InvalidArgumentException|ErrorException $e) {
+                } catch (InvalidArgumentException $e) {
 
                     /** Логируем что API вернул кривые данные */
                     LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
