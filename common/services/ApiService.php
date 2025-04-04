@@ -555,7 +555,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
             /** Дата устаревания записи */
             $date = date('Y-m-d H:i:s', strtotime($task->date_create . ' +1 month'));
 
-            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
