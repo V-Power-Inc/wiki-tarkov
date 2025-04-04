@@ -19,6 +19,16 @@ jobs:
             ~/.npm
             ~/.composer
             ~/.yarn
+            ~/.docker
           key: ${{ github.repository }}-${{ github.event.pull_request.head.ref }}
+          restore-keys: |
+          fail-on-cache-miss: false
+      
+      - name: Clear Docker Buildx Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.docker/buildx
+          key: ${{ runner.os }}-buildx-${{ hashFiles('docker/php/Dockerfile') }}
           restore-keys: |
           fail-on-cache-miss: false
