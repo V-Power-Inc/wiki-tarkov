@@ -56,6 +56,7 @@ final class MenuUrlsComponent
             "/quests-of-traders/mehanic-quests",
             "/quests-of-traders/seeker-quests",
             "/quests-of-traders/ref-quests",
+            "/quests-of-traders/btr-quests",
             "/traders/prapor",
             "/traders/terapevt",
             "/traders/lyjnic",

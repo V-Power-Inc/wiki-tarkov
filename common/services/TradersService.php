@@ -52,6 +52,8 @@ final class TradersService implements CommonServiceInterface
                 return 'seeker-quests';
             case 'Реф':
                 return 'ref-quests';
+            case 'Водитель БТР';
+                return 'btr-quests';
         }
 
         /** Если в switch не попали - пишем error, так мы узнаем что есть новый торговец и при этом не вылетит ошибка */

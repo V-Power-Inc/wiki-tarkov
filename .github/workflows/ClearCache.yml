@@ -1,62 +1,27 @@
-name: Clear All Caches
-
+name: Cleanup caches by a branch
 on:
   pull_request:
-    types: [closed]
-    branches:
-      - master
-      - dev
-  push:
-    branches:
-      - master
-      - dev
+    types:
+      - closed
 
 jobs:
-  clear-cache:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Clear all caches
+      - name: Cleanup
         run: |
-          echo -e "\033[1;34m🧹 Clearing all caches...\033[0m"
-          
-          # Очистка Docker кешей
-          rm -rf ~/.docker
-          rm -rf /tmp/.buildx-cache
-          rm -rf /tmp/.buildx-cache-new
-          
-          # Очистка Composer кеша
-          rm -rf vendor/
-          rm -rf ~/.composer/cache
-          
-          # Очистка npm кеша
-          rm -rf ~/.npm
-          
-          # Очистка yarn кеша
-          rm -rf ~/.yarn
-          
-          # Очистка общих кешей
-          rm -rf ~/.cache
-          
-          # Очистка кешей GitHub Actions
-          rm -rf .github/workflows/cache
-          
-          echo -e "\033[1;32m✅ All caches cleared\033[0m"
+          echo "Fetching list of cache key"
+          cacheKeysForPR=$(gh cache list --ref $BRANCH --limit 100 --json id --jq '.[].id')
 
-      - name: Clear GitHub Actions Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache
-            ~/.npm
-            ~/.composer
-            ~/.yarn
-            ~/.docker
-            /tmp/.buildx-cache
-            /tmp/.buildx-cache-new
-            vendor/
-            .github/workflows/cache
-          key: ${{ github.repository }}-${{ github.event.pull_request.head.ref || github.ref }}
-          restore-keys: |
-          fail-on-cache-miss: false
+          ## Setting this to not fail the workflow while deleting cache keys.
+          set +e
+          echo "Deleting caches..."
+          for cacheKey in $cacheKeysForPR
+          do
+              gh cache delete $cacheKey
+          done
+          echo "Done"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: refs/pull/${{ github.event.pull_request.number }}/merge
