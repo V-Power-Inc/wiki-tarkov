@@ -128,7 +128,8 @@ final class ImageService extends AbstractItemsApiService
             'Егерь' => '/img/admin/resized/EGER150922040216.jpg',
             'Смотритель' => '/img/torgovcy/small/light_keeper.jpg',
             'Барахолка' => '/img/baraholka.jpg',
-            'Реф' => '/img/torgovcy/small/ref.jpg'
+            'Реф' => '/img/torgovcy/small/ref.jpg',
+            'Водитель БТР' => '/img/torgovcy/small/btr_small.png'
         ];
 
         /** Если не нашли нужное изображение торговца по ключу */
@@ -164,7 +165,8 @@ final class ImageService extends AbstractItemsApiService
             'Барахольщик' => '/img/torgovcy/baraholshik-quests/baraholshik-full.jpg',
             'Егерь' => '/img/torgovcy/eger.jpeg',
             'Смотритель' => '/img/torgovcy/seeker_full.jpg',
-            'Реф' => '/img/torgovcy/small/ref.jpg'
+            'Реф' => '/img/torgovcy/small/ref.jpg',
+            'Водитель БТР' => '/img/torgovcy/small/btr_small.png'
         ];
 
         /** Если не нашли нужное изображение торговца по ключу */
