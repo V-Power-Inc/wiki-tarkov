@@ -61,6 +61,8 @@ final class TranslateService implements CommonServiceInterface
                 return 'epicenter';
             case 'Эпицентр 21+':
                 return 'epicenter-21';
+            case 'Лабиринт': # Ивентовая карта от 27 марта 2025г. - возможно будет удалена
+                return 'labyrinth';
         }
 
         /** Логируем что пришла новая карта */

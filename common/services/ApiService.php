@@ -205,7 +205,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
                 /** Пробуем закодировать строку в JSON  */
                 $model->bosses = Json::encode($map[Api::ATTR_BOSSES]);
 
-            } catch (InvalidArgumentException|ErrorException $e) {
+            } catch (InvalidArgumentException $e) {
 
                 /** Логируем что API вернул кривые данные */
                 LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
@@ -555,7 +555,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
             /** Дата устаревания записи */
             $date = date('Y-m-d H:i:s', strtotime($task->date_create . ' +1 month'));
 
-            /** Если дата записи +1 месяц - меньше текущего времени - запись должна быть помечена на удаление */
+            /** Если дата записи +1 месяца - меньше текущего времени - запись должна быть помечена на удаление */
             if ($date < date("Y-m-d H:i:s",time())) {
 
                 /** Устанавливаем флаг старой записи */
