@@ -12,7 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clear GitHub Actions Cache
-        uses: actions/cache/delete@v3
+        uses: actions/cache@v3
         with:
+          path: |
+            ~/.cache
+            ~/.npm
+            ~/.composer
+            ~/.yarn
           key: ${{ github.repository }}-${{ github.event.pull_request.head.ref }}
+          restore-keys: |
           fail-on-cache-miss: false
