@@ -93,7 +93,7 @@ final class TaskModel extends Model
                 /** Сетапим URL до квестов конкретного торговца */
                 $this->url = TradersService::takeApiTasksUrl($task[self::TRADER]['name']);
 
-            } catch (InvalidArgumentException|ErrorException $e) {
+            } catch (InvalidArgumentException $e) {
 
                 /** Сетапим null для Json - чтобы не прошел валидацию на сохранение */
                 $this->json = null;

@@ -22,69 +22,150 @@ jobs:
   Tests:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Install Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install docker-compose -y
-    - name: Tests (Build & Applying migrations & Unit/Functional tests)
-      shell: bash
-      env:
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        REDIS_HOST: ${{ secrets.REDIS_HOST }}
-        DB_DSN: ${{ secrets.DB_DSN }}
-        DB_TEST_DSN: ${{ secrets.DB_TEST_DSN }}
-        DB_TEST_CHARSET: ${{ secrets.DB_TEST_CHARSET }}
-        DB_CHARSET: ${{ secrets.DB_CHARSET }}
-        DOMAIN: ${{ secrets.DOMAIN }}
-        DOMAIN_PROTOCOL: ${{ secrets.DOMAIN_PROTOCOL }}
-        DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
-        DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
-        DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
-      run: |
-          echo "Экспоритруем переменные зашитые в GitHub для развертки"
-          echo DB_NAME="$DB_NAME" > .env
-          echo DB_USER="$DB_USER" >> .env
-          echo DB_PASSWORD="$DB_PASSWORD" >> .env
-          echo REDIS_HOST="$REDIS_HOST" >> .env
-          echo DB_DSN="$DB_DSN" >> .env
-          echo DB_TEST_DSN="$DB_TEST_DSN" >> .env
-          echo DB_TEST_CHARSET="$DB_TEST_CHARSET" >> .env
-          echo DB_CHARSET="$DB_CHARSET" >> .env
-          echo DOMAIN="$DOMAIN" >> .env
-          echo DOMAIN_PROTOCOL="$DOMAIN_PROTOCOL" >> .env
-          echo DB_TEST_NAME="$DB_TEST_NAME" >> .env
-          echo DB_TEST_USER="$DB_TEST_USER" >> .env
-          echo DB_TEST_PASSWORD="$DB_TEST_PASSWORD" >> .env
-          echo DEBUG_STATUS=true >> .env
-          echo ENVIRONMENT=dev >> .env
+      - uses: actions/checkout@v4
 
-          echo "Билдим контейнеры через docker-compose"
-          docker-compose build
+      # Настройка Docker и кеширования
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-          echo "Поднимаем все контейнеры через docker-compose"
-          docker-compose up -d
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ hashFiles('docker/php/Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
-          echo "Обновляем зависимости composer"
-          docker-compose exec -T app composer install --no-interaction
+      - name: Install Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose -y
 
-          echo "Даем больше прав юзеру MySQL для создания триггеров"
-          docker exec -t tarkov_db mysql -u root -p"$DB_PASSWORD" --execute "use dev_eft;
-            CREATE DATABASE test_migrations_db;
+      # Кеширование Composer
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor/
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # Настройка переменных окружения + пара заглушек для ENV
+      - name: Set up environment variables
+        env:
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          DB_DSN: ${{ secrets.DB_DSN }}
+          DB_TEST_DSN: ${{ secrets.DB_TEST_DSN }}
+          DB_TEST_CHARSET: ${{ secrets.DB_TEST_CHARSET }}
+          DB_CHARSET: ${{ secrets.DB_CHARSET }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          DOMAIN_PROTOCOL: ${{ secrets.DOMAIN_PROTOCOL }}
+          DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
+          DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
+          DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
+          PROBLEM_URLS: test1,test2,test
+          PROBLEM_NAMES: test_value
+        run: |
+          cat << EOF > .env
+          DB_NAME="$DB_NAME"
+          DB_USER="$DB_USER"
+          DB_PASSWORD="$DB_PASSWORD"
+          REDIS_HOST="$REDIS_HOST"
+          DB_DSN="$DB_DSN"
+          DB_TEST_DSN="$DB_TEST_DSN"
+          DB_TEST_CHARSET="$DB_TEST_CHARSET"
+          DB_CHARSET="$DB_CHARSET"
+          DOMAIN="$DOMAIN"
+          DOMAIN_PROTOCOL="$DOMAIN_PROTOCOL"
+          DB_TEST_NAME="$DB_TEST_NAME"
+          DB_TEST_USER="$DB_TEST_USER"
+          DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
+          PROBLEM_URLS="$PROBLEM_URLS"
+          PROBLEM_NAMES="$PROBLEM_NAMES"
+          DEBUG_STATUS=true
+          ENVIRONMENT=dev
+          EOF
+
+      # Проверка состояния кеша перед сборкой
+      - name: Check Docker cache before build
+        run: |
+          echo -e "\033[1;34m🔍 Checking Docker cache state...\033[0m"
+          ls -la /tmp/.buildx-cache || echo -e "\033[1;33m⚠️ Cache directory is empty\033[0m"
+          echo -e "\033[1;34m📊 Cache size: \033[1;32m$(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"
+
+      # Сборка и запуск контейнеров
+      - name: Build containers
+        run: |
+          echo -e "\033[1;34m🏗️ Starting Docker build with cache...\033[0m"
+          DOCKER_BUILDKIT=1 docker-compose build \
+            --cache-from type=local,src=/tmp/.buildx-cache \
+            --cache-to type=local,dest=/tmp/.buildx-cache-new \
+            --progress=plain
+          echo -e "\033[1;32m✅ Build completed\033[0m"
+
+      - name: Start containers
+        run: docker-compose up -d
+
+      # Установка зависимостей
+      - name: Install Composer dependencies
+        run: docker-compose exec -T app composer install --no-interaction --ignore-platform-reqs --prefer-dist --optimize-autoloader
+
+      # Настройка базы данных
+      - name: Configure database
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          echo -e "\033[1;34m⏳ Waiting for MySQL to be ready...\033[0m"
+          for i in {1..30}; do
+            if docker exec tarkov_db mysqladmin ping -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --silent; then
+              echo -e "\033[1;32m✅ MySQL is ready!\033[0m"
+              break
+            fi
+            echo -e "\033[1;33m⏳ Waiting for MySQL to be ready... attempt $i/30\033[0m"
+            sleep 2
+          done
+
+          echo -e "\033[1;34m⚙️ Configuring database...\033[0m"
+          docker exec -t tarkov_db mysql -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --execute "
+            CREATE DATABASE IF NOT EXISTS test_migrations_db;
             GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
             GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
 
-          echo "Накатываем миграции на dev_eft"
+      # Применение миграций
+      - name: Run migrations
+        run: |
+          echo -e "\033[1;34m🔄 Running migrations...\033[0m"
           docker-compose exec -T app php yii migrate --interactive=0
+          docker-compose exec -T app php yii migrate --db db_test --interactive=0
+          echo -e "\033[1;32m✅ Migrations completed\033[0m"
 
-          echo "Накатываем миграции на test_migrations_db"
-          docker-compose exec -T app php yii migrate --db db_test --interactive=0;
-
-          echo "Сбрасываем кеши - на всякий случай"
+      # Очистка кеша
+      - name: Clear Redis cache
+        run: |
+          echo -e "\033[1;34m🧹 Clearing Redis cache...\033[0m"
           docker-compose exec -T redis redis-cli flushall
+          echo -e "\033[1;32m✅ Redis cache cleared\033[0m"
 
-          echo "Functional и Unit тестирование"
+      # Запуск тестов
+      - name: Run tests
+        run: |
+          echo -e "\033[1;34m🔬 Running tests...\033[0m"
           docker-compose exec -T app vendor/bin/codecept run
+          echo -e "\033[1;32m✅ Tests completed\033[0m"
+
+      # Сохранение кеша докера
+      - name: Save Docker cache
+        run: |
+          echo -e "\033[1;34m💾 Saving Docker cache...\033[0m"
+          mkdir -p /tmp/.buildx-cache-new
+          if [ -d "/tmp/.buildx-cache" ]; then
+            echo -e "\033[1;33m🗑️ Removing old cache...\033[0m"
+            rm -rf /tmp/.buildx-cache
+          fi
+          echo -e "\033[1;34m📦 Moving new cache...\033[0m"
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          echo -e "\033[1;32m📊 New cache size: $(du -sh /tmp/.buildx-cache 2>/dev/null || echo '0')\033[0m"

@@ -13,7 +13,7 @@
 
 use app\models\ApiLoot;
 use app\common\constants\api\ItemAttributes;
-use app\common\services\HighChartsService;
+use app\common\services\{HighChartsService, AbstractItemsApiService};
 use yii\helpers\Json;
 use yii\web\JqueryAsset;
 use yii\web\JsExpression;
@@ -65,8 +65,8 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $_ENV['DOMAIN_PROTOCOL']
             <!-- Image block -->
             <div class="col-xs-3">
 
-                <a class="image-link" title="<?= $item->name ?>" href="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>">
-                    <img class="detail-item-image image-link" src="<?= $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK] ?>" alt="<?= $item->name ?>">
+                <a class="image-link" title="<?= $item->name ?>" href="<?= AbstractItemsApiService::setupImageWithCheckingName($item->name, $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK]) ?>">
+                    <img class="detail-item-image image-link" src="<?= AbstractItemsApiService::setupImageWithCheckingName($item->name, $item->json[ItemAttributes::ATTR_INSPECT_IMAGE_LINK]) ?>" alt="<?= $item->name ?>">
                 </a>
 
             </div>
@@ -148,7 +148,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $_ENV['DOMAIN_PROTOCOL']
                             <?php foreach($barter[ItemAttributes::ATTR_REQUIRED_ITEMS] as $req_item): ?>
 
                                 <div class="barter-items-count">
-                                    <span class="count-for-barter"> <b><?= $req_item[ItemAttributes::ATTR_COUNT] ?>x</b></span> <img class="items-for-trade" src="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ICON_LINK] ?>" title="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>" alt="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>">
+                                    <span class="count-for-barter"> <b><?= $req_item[ItemAttributes::ATTR_COUNT] ?>x</b></span> <img class="items-for-trade" src="<?= AbstractItemsApiService::setupImageWithCheckingUrl($item->url, $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ICON_LINK]) ?>" title="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>" alt="<?= $req_item[ItemAttributes::ATTR_ITEM][ItemAttributes::ATTR_ITEM_NAME] ?>">
                                 </div>
 
                             <?php endforeach; ?>

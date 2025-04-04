@@ -20,7 +20,7 @@ use yii\base\InvalidConfigException;
  * Class TranslateService
  * @package app\common\services
  */
-final class TranslateService
+final class TranslateService implements CommonServiceInterface
 {
     /** @var string - Константа пустой строки */
     private const EMPTY_STRING = '';

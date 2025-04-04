@@ -6,7 +6,7 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
-![Stable Version](https://img.shields.io/badge/version-v7.5.1-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v8.1.3-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-815-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-87%25-success)
@@ -164,6 +164,10 @@ Snyk в настоящий момент применяет 2 теста для �
 
 Таким образом, если мы загрузим нежелательный пакет через composer, мы узнаем это заблаговременно, т.к. тест Snyk не будет пройден, что сразу завершит конвейеры Snyk.
 
+## GitGuardian 🚦
+
+Чтобы не пропускать чувствительные данные в репозиторий, интеграция была осуществлена через внешний канал, в репозитории ничего не требуется делать. Можно подключить напрямую к репозиторию GitHub.
+
 ## Развертывание проекта через docker-compose up 🚀
 
 Перед тем как локально развертывать проект, вам необходимо установить docker и docker-compose, на личном устройстве также можно использовать Docker Desktop.
@@ -178,6 +182,9 @@ Snyk в настоящий момент применяет 2 теста для �
     git clone https://github.com/V-Power-Inc/wiki-tarkov.git
 
 Создаем в корне проекта файл .env и заполняем его например вот так (На скриншоте обязательные переменные):
+
+    # Release version
+    RELEASE=8.1.3
 
     # Environment
     ENVIRONMENT=dev
@@ -213,9 +220,12 @@ Snyk в настоящий момент применяет 2 теста для �
     
     # DSN for log
     SENTRY_DSN=https://log-url.ru
-    
-    # Restriced urls that should be excepted
-    RESTRICTED_URLS=test1,test2,test
+
+    # Problem item urls that should be excepted - API (trim value whitespaces)
+    PROBLEM_URLS=test1,test2,test
+
+    # Problem item names that should be excepted - API (trim value whitespaces)
+    PROBLEM_NAMES=test1,test2,test
     
 Домен и протокол можно указать и свои, это для продакшена. Мы все равно будем на localhost, когда проект будет развернут через Docker.
 

@@ -18,7 +18,7 @@ use Yii;
  * Class KeysService
  * @package app\common\services
  */
-final class KeysService
+final class KeysService implements CommonServiceInterface
 {
     /**
      * Получаем отсортированные ключи и в зависимости от полученного значения

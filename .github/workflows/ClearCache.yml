@@ -1,18 +1,62 @@
-name: Clear Cache on Merge
+name: Clear All Caches
 
 on:
   pull_request:
     types: [closed]
     branches:
-      - dev
       - master
+      - dev
+  push:
+    branches:
+      - master
+      - dev
 
 jobs:
   clear-cache:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Clear all caches
+        run: |
+          echo -e "\033[1;34m🧹 Clearing all caches...\033[0m"
+          
+          # Очистка Docker кешей
+          rm -rf ~/.docker
+          rm -rf /tmp/.buildx-cache
+          rm -rf /tmp/.buildx-cache-new
+          
+          # Очистка Composer кеша
+          rm -rf vendor/
+          rm -rf ~/.composer/cache
+          
+          # Очистка npm кеша
+          rm -rf ~/.npm
+          
+          # Очистка yarn кеша
+          rm -rf ~/.yarn
+          
+          # Очистка общих кешей
+          rm -rf ~/.cache
+          
+          # Очистка кешей GitHub Actions
+          rm -rf .github/workflows/cache
+          
+          echo -e "\033[1;32m✅ All caches cleared\033[0m"
+
       - name: Clear GitHub Actions Cache
-        uses: actions/cache/delete@v3
+        uses: actions/cache@v4
         with:
-          key: ${{ github.repository }}-${{ github.event.pull_request.head.ref }}
-          fail-on-cache-miss: false 
+          path: |
+            ~/.cache
+            ~/.npm
+            ~/.composer
+            ~/.yarn
+            ~/.docker
+            /tmp/.buildx-cache
+            /tmp/.buildx-cache-new
+            vendor/
+            .github/workflows/cache
+          key: ${{ github.repository }}-${{ github.event.pull_request.head.ref || github.ref }}
+          restore-keys: |
+          fail-on-cache-miss: false

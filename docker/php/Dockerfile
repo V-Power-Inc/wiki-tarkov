@@ -1,42 +1,19 @@
 FROM php:7.4.28-fpm
 
-# Установка основных модулей PHP
+# Установка необходимых системных библиотек
 RUN apt update && apt install -y \
-        libmcrypt-dev \
-        mcrypt \
-        libxpm-dev \
-        libvpx-dev \
         libicu-dev \
         zlib1g-dev \
-        libpng-dev \
-        libonig-dev \
-        libzip-dev \
-        libwebp-dev\
-        libjpeg62-turbo-dev\
-        libfreetype6-dev\
-        sendmail
+        libzip-dev
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+# Установка Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install required extensions
-# RUN docker-php-ext-configure mysql
+# Установка необходимых расширений PHP
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
-RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install bcmath
 
-RUN set -eux; \
-	docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp;\
-    docker-php-ext-install -j "$(nproc)" \
-    		gd
-
-ENV ACCEPT_EULA=Y
-# Fix debconf warnings upon build
-ARG DEBIAN_FRONTEND=noninteractive
-
-# Install selected extensions and other stuff
-RUN apt-get update \
-    && apt-get -y --no-install-recommends install apt-utils \
-    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+# Очистка кэша apt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*

@@ -17,7 +17,7 @@ use app\models\ErrorLog;
  * Class LogService
  * @package app\common\services
  */
-final class LogService
+final class LogService implements CommonServiceInterface
 {
     /**
      * Метод создает новую запись об ошибках на сайте и сохраняет ее в таблицу логов ошибок
