@@ -18,7 +18,7 @@ use yii\db\Exception;
  * Class JsondataService
  * @package app\common\services
  */
-final class JsondataService
+final class JsondataService implements CommonServiceInterface
 {
     /** @var string - Ключ массива результирующих значений для массива данных */
     private const ATTR_VALUE = 'value';

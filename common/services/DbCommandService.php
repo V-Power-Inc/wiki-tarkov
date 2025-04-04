@@ -16,7 +16,7 @@ use yii\db\{DataReader, Exception, Query};
  * Class DbCommandService
  * @package app\common\services
  */
-final class DbCommandService
+final class DbCommandService implements CommonServiceInterface
 {
     /**
      * Метод формирует команду из объекта Query - в данном случае для выборки всех записей соответсвующих запросу

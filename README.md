@@ -220,9 +220,12 @@ Snyk в настоящий момент применяет 2 теста для �
     
     # DSN for log
     SENTRY_DSN=https://log-url.ru
-    
-    # Restriced urls that should be excepted
-    RESTRICTED_URLS=test1,test2,test
+
+    # Problem item urls that should be excepted - API (trim value whitespaces)
+    PROBLEM_URLS=test1,test2,test
+
+    # Problem item names that should be excepted - API (trim value whitespaces)
+    PROBLEM_NAMES=test1,test2,test
     
 Домен и протокол можно указать и свои, это для продакшена. Мы все равно будем на localhost, когда проект будет развернут через Docker.
 
