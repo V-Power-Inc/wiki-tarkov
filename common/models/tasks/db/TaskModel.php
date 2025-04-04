@@ -15,7 +15,6 @@ use app\common\helpers\validators\IntegerValidator;
 use app\common\services\LogService;
 use app\common\services\TradersService;
 use app\models\Tasks;
-use yii\base\ErrorException;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 use yii\base\Model;

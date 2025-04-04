@@ -15,6 +15,7 @@ use app\common\controllers\AdvancedController;
 use app\common\services\{ApiService, ArrayService};
 use app\common\services\redis\RedisVariationsConfig;
 use app\models\Bosses;
+use yii\base\InvalidConfigException;
 use yii\db\StaleObjectException;
 use Yii;
 
@@ -38,6 +39,7 @@ final class BossesController extends AdvancedController
      * Кеш на 7 дней (Если дата создания записей изменится - кеш сбросится досрочно
      *
      * @return array|array[]
+     * @throws InvalidConfigException
      */
     public function behaviors(): array
     {
