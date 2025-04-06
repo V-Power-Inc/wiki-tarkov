@@ -90,7 +90,10 @@ final class ImageService extends AbstractItemsApiService
             'Кабан' => '/img/bosses/kaban.jpg',
             'Кабан (снайпер)' => '/img/bosses/kaban_sniper.jpg',
             'Santa Claus' => '/img/bosses/gifter.jpg',
-            'Колонтай' => '/img/bosses/collontay.jpg'
+            'Колонтай' => '/img/bosses/collontay.jpg',
+            'Shadow of Tagilla' => '/img/qsch.png', # Заглушка на этих боссов - ивентовые
+            'Vengeful Killa' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
+            'Shadow of Tagilla Disciple' => '/img/qsch.png'  # Заглушка на этих боссов - ивентовые
         ];
 
         /** Если не нашли изображение подходящего босса */
