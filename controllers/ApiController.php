@@ -84,13 +84,12 @@ final class ApiController extends AdvancedController
                     /** Сетапим флэш сообщение о том что на найдены предметы по указанному критерию */
                     CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Данные по вашему запросу не были найдены.</b></p>");
 
-                    /** Логируем в БД и Sentry эту проблему */
+                    /** Логируем в БД (В Sentry не пишем - ибо это часто бывает) */
                     LogService::saveErrorData(
                         Yii::$app->request->getUrl(),
                         ErrorDesc::TYPE_EMPTY_API_SEARCH,
                         ErrorDesc::DESC_EMPTY_API_SEARCH,
-                        ResponseStatusInterface::OK_CODE,
-                        true
+                        ResponseStatusInterface::OK_CODE
                     );
 
                     /** Рендерим вьюху с дефолтным набором данных и пагинацией */
