@@ -8,10 +8,11 @@
 
 namespace app\controllers;
 
+use app\common\constants\log\ErrorDesc;
 use app\common\exceptions\http\controllers\app\ApiControllerHttpException;
 use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
-use app\common\services\{ApiService, JsondataService, PaginationService};
+use app\common\services\{ApiService, JsondataService, LogService, PaginationService};
 use app\models\{ApiLoot, ApiSearchLogs};
 use app\components\CookieComponent;
 use app\models\forms\ApiForm;
@@ -82,6 +83,15 @@ final class ApiController extends AdvancedController
 
                     /** Сетапим флэш сообщение о том что на найдены предметы по указанному критерию */
                     CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Данные по вашему запросу не были найдены.</b></p>");
+
+                    /** Логируем в БД и Sentry эту проблему */
+                    LogService::saveErrorData(
+                        Yii::$app->request->getUrl(),
+                        ErrorDesc::TYPE_EMPTY_API_SEARCH,
+                        ErrorDesc::DESC_EMPTY_API_SEARCH,
+                        ResponseStatusInterface::OK_CODE,
+                        true
+                    );
 
                     /** Рендерим вьюху с дефолтным набором данных и пагинацией */
                     return $this->defaultRender();
