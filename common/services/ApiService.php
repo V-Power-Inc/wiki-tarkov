@@ -155,7 +155,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
      * @param bool $encoded - указание, раскодировать из JSON или нет, по умолчанию да
      * @return mixed
      * @throws HttpException
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|Exception
      */
     private function getApiData(bool $encoded = true)
     {
@@ -172,7 +172,14 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
         if ($data === false) {
 
             /** Логируем в БД ошибку получения данных на этом этапе */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_API, ErrorDesc::DESC_ERROR_API);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_ERROR_API,
+                ErrorDesc::DESC_ERROR_API,
+            ResponseStatusInterface::SERVER_ERROR_CODE,
+            true,
+            true
+            );
 
             /** Выкидываем 404 с указанием что API не вернул данных */
             throw new HttpException(ResponseStatusInterface::NOT_FOUND_CODE, 'API не вернул данные, попробуйте зайти позже');
@@ -208,7 +215,14 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
             } catch (InvalidArgumentException $e) {
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(
+                    Yii::$app->request->getUrl(),
+                    ErrorDesc::TYPE_ERROR_JSON_ENCODE_API,
+                    ErrorDesc::DESC_ERROR_JSON_ENCODE_API,
+                ResponseStatusInterface::SERVER_ERROR_CODE,
+                true,
+                true
+                );
             }
 
             /** Передаем название карты в генератор Url */
@@ -368,7 +382,14 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
         }
 
         /** Логируем в БД ошибку */
-        LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_SERVER_API_ERROR, ErrorDesc::DESC_SERVER_API_ERROR);
+        LogService::saveErrorData(
+            Yii::$app->request->getUrl(),
+            ErrorDesc::TYPE_SERVER_API_ERROR,
+            ErrorDesc::DESC_SERVER_API_ERROR,
+            ResponseStatusInterface::SERVER_ERROR_CODE,
+            true,
+            true
+        );
 
         /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
         throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
@@ -446,7 +467,14 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
                 } catch (InvalidArgumentException $e) {
 
                     /** Логируем что API вернул кривые данные */
-                    LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                    LogService::saveErrorData(
+                        Yii::$app->request->getUrl(),
+                        ErrorDesc::TYPE_ERROR_JSON_ENCODE_API,
+                        ErrorDesc::DESC_ERROR_JSON_ENCODE_API,
+                    ResponseStatusInterface::SERVER_ERROR_CODE,
+                    true,
+                    true
+                    );
 
                     /** Возвращаем false - Не удалось сохранить новые данные */
                     return false;

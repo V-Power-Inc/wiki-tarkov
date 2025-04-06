@@ -26,7 +26,7 @@ final class ImageService extends AbstractItemsApiService
      *
      * @param string $map_name - Название карты
      * @return string
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public static function mapImages(string $map_name): string
     {
@@ -51,7 +51,13 @@ final class ImageService extends AbstractItemsApiService
         if (empty($array[$map_name])) {
 
             /** Логируем что пришла новая карта */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_MAP, ErrorDesc::DESC_NEW_API_MAP . $map_name, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_NEW_API_MAP,
+                ErrorDesc::DESC_NEW_API_MAP . $map_name,
+                ResponseStatusInterface::OK_CODE,
+            true
+            );
 
             /** Возвращаем заглушку */
             return '/img/qsch.png';
@@ -66,7 +72,7 @@ final class ImageService extends AbstractItemsApiService
      *
      * @param string $boss - Название босса
      * @return string
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public static function bossImages(string $boss): string
     {
@@ -90,14 +96,23 @@ final class ImageService extends AbstractItemsApiService
             'Кабан' => '/img/bosses/kaban.jpg',
             'Кабан (снайпер)' => '/img/bosses/kaban_sniper.jpg',
             'Santa Claus' => '/img/bosses/gifter.jpg',
-            'Колонтай' => '/img/bosses/collontay.jpg'
+            'Колонтай' => '/img/bosses/collontay.jpg',
+            'Shadow of Tagilla' => '/img/qsch.png', # Заглушка на этих боссов - ивентовые
+            'Vengeful Killa' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
+            'Shadow of Tagilla Disciple' => '/img/qsch.png'  # Заглушка на этих боссов - ивентовые
         ];
 
         /** Если не нашли изображение подходящего босса */
         if (empty($array[$boss])) {
 
             /** Логируем что есть необработанный босс */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_BOSS, ErrorDesc::DESC_NEW_API_BOSS . $boss, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_NEW_API_BOSS,
+                ErrorDesc::DESC_NEW_API_BOSS . $boss,
+                ResponseStatusInterface::OK_CODE,
+            true
+            );
 
             /** Возвращаем изображение заглушку */
             return '/img/qsch.png';
@@ -112,7 +127,7 @@ final class ImageService extends AbstractItemsApiService
      *
      * @param string $trader - имя торговца
      * @return string
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public static function traderImages(string $trader): string
     {
@@ -136,7 +151,13 @@ final class ImageService extends AbstractItemsApiService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_NEW_API_TRADER,
+                ErrorDesc::DESC_NEW_API_TRADER . $trader,
+                ResponseStatusInterface::OK_CODE,
+                true
+            );
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';
@@ -151,7 +172,7 @@ final class ImageService extends AbstractItemsApiService
      *
      * @param string $trader - имя торговца
      * @return string
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public static function questsTraderImages(string $trader): string
     {
@@ -173,7 +194,13 @@ final class ImageService extends AbstractItemsApiService
         if (empty($array[$trader])) {
 
             /** Логируем что есть необработанный торговец */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_NEW_API_TRADER, ErrorDesc::DESC_NEW_API_TRADER . $trader, ResponseStatusInterface::OK_CODE);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_NEW_API_TRADER,
+                ErrorDesc::DESC_NEW_API_TRADER . $trader,
+                ResponseStatusInterface::OK_CODE,
+            true
+            );
 
             /** Выводим изображение заглушку */
             return '/img/qsch.png';

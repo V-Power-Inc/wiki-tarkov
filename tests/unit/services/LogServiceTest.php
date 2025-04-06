@@ -8,6 +8,7 @@ use app\models\ErrorLog;
 use Codeception\Test\Unit;
 use tests\_support\FixturesCollection;
 use UnitTester;
+use yii\db\Exception;
 
 /**
  * Тестируем сервис по сохранению лога ошибок в БД
@@ -35,6 +36,8 @@ class LogServiceTest extends Unit
      * Тестирование метода по сохранению ошибок в БД
      *
      * @return void
+     *
+     * @throws Exception
      */
     public function testSaveErrorData()
     {
@@ -45,7 +48,7 @@ class LogServiceTest extends Unit
         $errorCode = ResponseStatusInterface::SERVER_ERROR_CODE;
 
         /** Дергаем тестируемый метод */
-        $result = LogService::saveErrorData($url, $type, $description, $errorCode);
+        $result = LogService::saveErrorData($url, $type, $description, $errorCode, false, false);
 
         /** Проверяем, что метод вернул true (т.е. данные успешно сохранены) */
         $this->assertTrue($result);
