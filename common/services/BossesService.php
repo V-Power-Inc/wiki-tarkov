@@ -49,7 +49,10 @@ final class BossesService extends AbstractItemsApiService
             'Кабан (снайпер)' => 710,
             'Santa Claus' => 1040,
             'Колонтай' => 1055,
-            'Партизан' => 950
+            'Партизан' => 950,
+            'Shadow of Tagilla' => 1305,
+            'Vengeful Killa' => 960,
+            'Shadow of Tagilla Disciple' => 1220,
         ];
     }
 

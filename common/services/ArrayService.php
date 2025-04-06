@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\constants\log\ErrorDesc;
+use app\common\interfaces\ResponseStatusInterface;
 use yii\base\{InvalidConfigException, ErrorException};
 use Yii;
 
@@ -25,7 +26,7 @@ final class ArrayService implements CommonServiceInterface
      *
      * @param array $detachment - вложенный массив с количеством свиты босса
      * @return int
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public static function getAmountEscorts(array $detachment): int
     {
@@ -42,10 +43,17 @@ final class ArrayService implements CommonServiceInterface
                     }
                 }
             }
-        } catch (ErrorException $e) { /** Если со структурой массива что-то не так */
+        } catch (\Exception $e) { /** Если со структурой массива что-то не так */
 
             /** Логируем в таблицу проблему - свита не распарсилась */
-            LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_ARRAY_BOSSES_PEOPLE, ErrorDesc::DESC_ERROR_ARRAY_BOSSES_PEOPLE);
+            LogService::saveErrorData(
+                Yii::$app->request->getUrl(),
+                ErrorDesc::TYPE_ERROR_ARRAY_BOSSES_PEOPLE,
+                ErrorDesc::DESC_ERROR_ARRAY_BOSSES_PEOPLE,
+            ResponseStatusInterface::SERVER_ERROR_CODE,
+            true,
+            true
+            );
         }
 
         /** Возвращаем результат в виде числа */
