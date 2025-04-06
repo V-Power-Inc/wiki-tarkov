@@ -13,6 +13,7 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\{ApiService, JsondataService, PaginationService};
 use app\models\{ApiLoot, ApiSearchLogs};
+use app\components\CookieComponent;
 use app\models\forms\ApiForm;
 use yii\base\InvalidConfigException;
 use yii\web\ServerErrorHttpException;
@@ -78,6 +79,12 @@ final class ApiController extends AdvancedController
 
                     /** Если $items пустой - устанавливаем логирование запроса без флага */
                     $api->setSearchLog($form_model);
+
+                    /** Сетапим флэш сообщение о том что на найдены предметы по указанному критерию */
+                    CookieComponent::setMessages("<p class='alert alert-danger size-16 margin-top-20' id='alert-clans'><b>Данные по вашему запросу не были найдены.</b></p>");
+
+                    /** Рендерим вьюху с дефолтным набором данных и пагинацией */
+                    return $this->defaultRender();
                 }
             }
         } else {
