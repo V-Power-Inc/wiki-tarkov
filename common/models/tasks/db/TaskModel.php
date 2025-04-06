@@ -12,6 +12,7 @@ use app\common\constants\log\ErrorDesc;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\StringValidator;
 use app\common\helpers\validators\IntegerValidator;
+use app\common\interfaces\ResponseStatusInterface;
 use app\common\services\LogService;
 use app\common\services\TradersService;
 use app\common\traits\FormNameTrait;
@@ -71,7 +72,7 @@ final class TaskModel extends Model
      * TaskModel constructor.
      * @param array $config
      * @param array|null $task - данные с информацией о квесте (task массив)
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\yii\db\Exception
      */
     public function __construct(array $task = null, array $config = [])
     {
@@ -101,7 +102,13 @@ final class TaskModel extends Model
                 $this->json = null;
 
                 /** Логируем что API вернул кривые данные */
-                LogService::saveErrorData(Yii::$app->request->getUrl(), ErrorDesc::TYPE_ERROR_JSON_ENCODE_API, ErrorDesc::DESC_ERROR_JSON_ENCODE_API);
+                LogService::saveErrorData(
+                    Yii::$app->request->getUrl(),
+                    ErrorDesc::TYPE_ERROR_JSON_ENCODE_API,
+                    ErrorDesc::DESC_ERROR_JSON_ENCODE_API,
+                    ResponseStatusInterface::SERVER_ERROR_CODE,
+                    true,
+                    true);
             }
         }
 
