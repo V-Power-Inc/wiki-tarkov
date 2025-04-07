@@ -35,6 +35,7 @@ final class MapsController extends AdvancedController
     public const ACTION_LIGHTHOUSE        = 'lighthouse';
     public const ACTION_STREETS_OF_TARKOV = 'streets-of-tarkov';
     public const ACTION_EPICENTER         = 'epicenter';
+    public const ACTION_LABYRINTH         = 'labyrinth';
     public const ACTION_GET_MARKERS       = 'get-markers';
 
     /** @var string - GET параметр локации */
@@ -206,5 +207,15 @@ final class MapsController extends AdvancedController
     {
         /** Рендерим вьюху с картой */
         return $this->render('epicenter');
+    }
+
+    /**
+     * Рендер страницы с картой Лабиринт - TODO - Доделать
+     *
+     * @return string
+     */
+    public function actionLabyrinth(): string
+    {
+        return $this->render('labyrinth');
     }
 }
