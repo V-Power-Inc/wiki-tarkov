@@ -95,7 +95,7 @@ class MapsCest
     public function checkMapsMiniatures(\FunctionalTester $I)
     {
         $I->seeElement('.maps__small');
-        $I->seeNumberOfElements('.maps__small', 10);
+        $I->seeNumberOfElements('.maps__small', 11);
     }
 
     /** Проверяем корректность ссылок на детальные страницы интерактивных карт */
