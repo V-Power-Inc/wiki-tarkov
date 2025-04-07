@@ -210,12 +210,12 @@ final class MapsController extends AdvancedController
     }
 
     /**
-     * Рендер страницы с картой Лабиринт - TODO - Доделать
+     * Рендер страницы с картой Лабиринт
      *
      * @return string
      */
     public function actionLabyrinth(): string
     {
-        return $this->render('labyrinth');
+        return $this->render('labyrinth-location');
     }
 }

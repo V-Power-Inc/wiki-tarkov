@@ -135,6 +135,7 @@ final class MenuComponent
                             <li><a href="/maps/lighthouse-location#2/74.0/65.2">Маяк</a></li>
                             <li><a href="/maps/streets-of-tarkov-location#2/59.2/34.3">Улицы Таркова</a></li>
                             <li><a href="/maps/epicenter#2/48.7/-24.8">Эпицентр</a></li>
+                            <li><a href="/maps/labyrinth-location#2/60.8/-86.0">Лабиринт</a></li>
                                 <li role="separator" class="divider"></li>
                             <li><a href="/maps">Смотреть список доступных карт</a></li>
                           </ul>
