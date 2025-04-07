@@ -8,8 +8,8 @@
 ![Site status](https://img.shields.io/badge/site%20status-works-success)
 ![Stable Version](https://img.shields.io/badge/version-v8.1.4-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
-![Tests Count](https://img.shields.io/badge/tests%20count-815-informational)
-![Tests Code Coverage](https://img.shields.io/badge/coverage-87%25-success)
+![Tests Count](https://img.shields.io/badge/tests%20count-832-informational)
+![Tests Code Coverage](https://img.shields.io/badge/coverage-89%25-success)
 ![Vulnerabilities Snyk Bitbucket](https://img.shields.io/badge/vulnerabilities-0-success)
 ![Discord Online](https://img.shields.io/discord/405924890328432652?label=Discord&logo=Discord&color=informational)
 

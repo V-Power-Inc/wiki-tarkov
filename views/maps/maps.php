@@ -146,6 +146,15 @@ CanonicalPagesService::redirectToCanonical(Url::canonical(), Yii::$app->request-
                 <a class="btn btn-default main-link" href="/maps/epicenter#2/61.9/-58.2">Перейти к карте Эпицентр</a>
             </div>
 
+            <!-- Карта Лабиринта -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center margin-top-15">
+                <h2 class="text-center map-heading">Карта Лабиринта</h2>
+                <a href="/maps/labyrinth-location#2/60.8/-86.0"><img class="maps__small" src="/img/maps/labyrinth-loc.png" title="Карта Лабиринт" alt="Карта Лабиринт"></a>
+                <br>
+                <br>
+                <a class="btn btn-default main-link" href="/maps/labyrinth-location#2/60.8/-86.0">Перейти к карте Лабиринт</a>
+            </div>
+
         </div>
 
     </div>

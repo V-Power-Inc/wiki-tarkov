@@ -35,6 +35,7 @@ return [
     'maps/rezerv-location' => MapsController::routeId(MapsController::ACTION_REZERV),
     'maps/lighthouse-location' => MapsController::routeId(MapsController::ACTION_LIGHTHOUSE),
     'maps/streets-of-tarkov-location' => MapsController::routeId(MapsController::ACTION_STREETS_OF_TARKOV),
+    'maps/labyrinth-location' => MapsController::routeId(MapsController::ACTION_LABYRINTH),
     'quests-of-traders' => TraderController::routeId(TraderController::ACTION_QUESTS),
     'quests-of-traders/<url:[\w_\/-]+>' => TraderController::routeId(TraderController::ACTION_QUESTS_DETAIL),
     'currencies' => SiteController::routeId(SiteController::ACTION_CURRENCIES),
