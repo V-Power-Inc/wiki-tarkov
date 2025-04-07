@@ -9,6 +9,7 @@
 namespace app\common\services;
 
 use app\common\interfaces\ResponseStatusInterface;
+use yii\base\InvalidRouteException;
 use yii\console\Response as ConsoleResponse;
 use yii\web\Response as Response;
 use Yii;
@@ -31,6 +32,7 @@ final class CanonicalPagesService implements CommonServiceInterface
      * @param string $requested_url - Url что запрашивал пользователь
      *
      * @return ConsoleResponse|Response|bool
+     * @throws InvalidRouteException
      */
     public static function redirectToCanonical(string $canonical_url, string $requested_url)
     {

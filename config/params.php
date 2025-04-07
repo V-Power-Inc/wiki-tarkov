@@ -38,7 +38,8 @@ return [
         '/maps/rezerv-location',
         '/maps/lighthouse-location',
         '/maps/streets-of-tarkov-location',
-        '/maps/epicenter'
+        '/maps/epicenter',
+        '/maps/labyrinth-location'
     ],
     'cacheTime' => [
         'one_minute' => 60,
