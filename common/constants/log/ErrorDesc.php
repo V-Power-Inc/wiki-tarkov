@@ -67,6 +67,9 @@ final class ErrorDesc
     /** @var string - Константа, описание ошибки - Невалидный JSON из API */
     public const TYPE_ERROR_JSON_ENCODE_API = 'Не смогли закодировать в JSON данные из API';
 
+    /** @var string - Константа, когда URL предмета в API был изменен */
+    public const TYPE_ERROR_WHILE_UPDATE_API_ITEM = 'Не был обновлен API предмета. Предмет был деактивирован.';
+
     /** @var string - Константа, описание ошибки - Невалидный JSON из API */
     public const DESC_ERROR_JSON_ENCODE_API = 'При получении новых предметов, не удалось их форматнуть в JSON для сохранения в БД';
 
@@ -81,4 +84,7 @@ final class ErrorDesc
 
     /** @var string - Константа, описание ошибки - новый лут по новому пользовательскому запросу не был подгружен */
     public const DESC_EMPTY_API_SEARCH = 'При поиске лута пользователем - не были возвращены новые результаты. Новый лут не найден - флаг 0 для поискового запроса';
+
+    /** @var string - Константа, описание ошибки URL предмета в API был изменен */
+    public const DESC_ERROR_WHILE_UPDATE_API_ITEM = 'URL предмета в API изменился, предмет не был обновлен.';
 }
