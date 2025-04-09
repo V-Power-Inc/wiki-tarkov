@@ -16,6 +16,7 @@ use app\common\services\{ApiService, JsondataService, LogService, PaginationServ
 use app\models\{ApiLoot, ApiSearchLogs};
 use app\components\CookieComponent;
 use app\models\forms\ApiForm;
+use yii\base\ErrorException;
 use yii\base\InvalidConfigException;
 use yii\web\ServerErrorHttpException;
 use yii\db\Exception;
@@ -118,7 +119,7 @@ final class ApiController extends AdvancedController
      *
      * @param string $url - строка с Url адресом
      * @return mixed
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|ErrorException|\Exception
      */
     public function actionItem(string $url)
     {
@@ -127,6 +128,7 @@ final class ApiController extends AdvancedController
 
         /** Пробуем найти, если нашли - обновление данных и рендеринг вьюхи */
         if ($item) {
+
             /** Инициализируем API */
             $api = new ApiService();
 
