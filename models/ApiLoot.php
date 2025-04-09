@@ -2,14 +2,18 @@
 
 namespace app\models;
 
+use app\common\constants\log\ErrorDesc;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\IntegerValidator;
 use app\common\helpers\validators\SafeValidator;
 use app\common\helpers\validators\StringValidator;
+use app\common\interfaces\ResponseStatusInterface;
 use app\models\queries\ApiLootQuery;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Exception;
 use yii\helpers\Json;
+use Yii;
 
 /**
  * AR модель для работы с API, через которое на сайте актуализируется база лута
@@ -119,15 +123,18 @@ class ApiLoot extends ActiveRecord
     }
 
     /**
-     * Метод ищет запись по Url адресу и возвращает AR объект ApiLoot или null
+     * Метод ищет активную запись по Url адресу и возвращает AR объект ApiLoot или null
      * если не был найден объект
      *
      * @param string $url
-     * @return ApiLoot|null
+     * @return mixed
      */
     public static function findItemByUrl(string $url)
     {
-        return ApiLoot::findOne([ApiLoot::ATTR_URL => $url]);
+        return ApiLoot::find()
+            ->andWhere([ApiLoot::ATTR_URL => $url])
+            ->andWhere([ApiLoot::ATTR_ACTIVE => ApiLoot::TRUE])
+            ->one();
     }
 
     /**
@@ -135,9 +142,34 @@ class ApiLoot extends ActiveRecord
      *
      * @param array $api_data - массив с данными о предмете из API
      * @return bool
+     * @throws Exception
      */
     public function updateData(array $api_data): bool
     {
+        /** Если из API мы не получили название предмета - значит URL поменялся */
+        if (empty($api_data['data']['item']['name'])) {
+
+            /** Логируем это событие */
+            Yii::warning([
+                'msg' => ErrorDesc::DESC_ERROR_WHILE_UPDATE_API_ITEM,
+                'err_type' => ErrorDesc::TYPE_ERROR_WHILE_UPDATE_API_ITEM,
+                'err_code_from_log' => ResponseStatusInterface::OK_CODE,
+                'source_data' => Json::encode($api_data),
+                'tags' => [
+                    'LogService' => 'Called from PROD',
+                ]
+            ], 'app_catched_messages');
+
+            /** Сетапим флаг что предмет неактивный */
+            $this->active = self::FALSE;
+
+            /** Сохраняем */
+            $this->save();
+
+            /** Возвращаем false т.к. предмет был деактивирован */
+            return false;
+        }
+
         /** Сетапим данные AR модели */
         $this->json = Json::encode($api_data['data']['item']);
         $this->name = $api_data['data']['item']['name'];
