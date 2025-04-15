@@ -103,9 +103,9 @@ final class ApiSearchLogs extends ActiveRecord
         /** Выбираем нужные данные с кешируемым запросом */
         $query->select(self::ATTR_WORDS)
             ->from(self::tableName())
-            ->where(new Expression(
-                '`'.self::ATTR_WORDS .'` LIKE "%' . $title . '%"',
-                [':query' => $query]
+            ->andWhere(new Expression(
+                '`' . self::ATTR_WORDS . '` LIKE :title',
+                [':title' => '%' . addcslashes($title, '"%_\\') . '%']
             ))
             ->andWhere([self::ATTR_FLAG => self::TRUE])
             ->groupBy(self::ATTR_WORDS)
