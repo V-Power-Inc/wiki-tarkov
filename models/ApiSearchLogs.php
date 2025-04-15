@@ -104,7 +104,7 @@ final class ApiSearchLogs extends ActiveRecord
         $query->select(self::ATTR_WORDS)
             ->from(self::tableName())
             ->where(new Expression(
-                self::ATTR_WORDS .' LIKE "%' . $title . '%"',
+                '`'.self::ATTR_WORDS .'` LIKE "%' . $title . '%"',
                 [':query' => $query]
             ))
             ->andWhere([self::ATTR_FLAG => self::TRUE])
