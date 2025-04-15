@@ -673,7 +673,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
      *
      * @param ApiLoot $item - AR объект, лут из API справочника
      * @return bool
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|\Exception
      */
     public function renewItemData(ApiLoot $item): bool
     {
