@@ -8,6 +8,7 @@ use app\common\helpers\validators\SafeValidator;
 use app\models\queries\ApiSearchLogsQuery;
 use yii\db\ActiveRecord;
 use yii\db\Query;
+use yii\db\Expression;
 use Yii;
 
 /**
@@ -102,7 +103,10 @@ final class ApiSearchLogs extends ActiveRecord
         /** Выбираем нужные данные с кешируемым запросом */
         $query->select(self::ATTR_WORDS)
             ->from(self::tableName())
-            ->where(self::ATTR_WORDS .' LIKE "%' . $title . '%"')
+            ->where(new Expression(
+                self::ATTR_WORDS .' LIKE "%' . $title . '%"',
+                [':query' => $query]
+            ))
             ->andWhere([self::ATTR_FLAG => self::TRUE])
             ->groupBy(self::ATTR_WORDS)
             ->orderBy(self::ATTR_DATE_CREATE)
