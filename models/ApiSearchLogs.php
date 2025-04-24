@@ -30,8 +30,8 @@ final class ApiSearchLogs extends ActiveRecord
     public const ATTR_FLAG         = 'flag';
 
     /** Константы для проверки Bool значений */
-    const TRUE = 1;
-    const FALSE = 0;
+    public const TRUE = 1;
+    public const FALSE = 0;
 
     /**
      * {@inheritdoc}
