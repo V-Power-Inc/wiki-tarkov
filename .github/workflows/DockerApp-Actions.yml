@@ -17,6 +17,8 @@ jobs:
         uses: snyk/actions/php@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
 
   # Собираем проект и прогоняем тестами
   Tests:
