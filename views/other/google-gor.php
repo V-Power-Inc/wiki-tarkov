@@ -4,10 +4,10 @@
  * User: comp
  * Date: 21.04.2018
  * Time: 7:59
- * Горизонтальная реклама в верхней части сайта - отключен 7 мая 2025г.
+ * Горизонтальная реклама в верхней части сайта - возвращен 14 октября 2025г.
  */
 ?>
-<!-- <div class="margins-vertical-20">
+<div class="margins-vertical-20">
         <div id="adfox_167904794144141963"></div>
         <script>
             window.yaContextCb.push(()=>{
@@ -21,4 +21,4 @@
                 })
             })
         </script>
-</div> -->
+</div>
