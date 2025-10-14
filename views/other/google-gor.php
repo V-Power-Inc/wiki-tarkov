@@ -8,17 +8,17 @@
  */
 ?>
 <div class="margins-vertical-20">
-        <div id="adfox_167904794144141963"></div>
-        <script>
-            window.yaContextCb.push(()=>{
-                Ya.adfoxCode.create({
-                    ownerId: 700342,
-                    containerId: 'adfox_167904794144141963',
-                    params: {
-                        p1: 'cxqpo',
-                        p2: 'idoa'
-                    }
-                })
+    <div id="adfox_176045507628688078"></div>
+    <script>
+        window.yaContextCb.push(()=>{
+            Ya.adfoxCode.create({
+                ownerId: 700342,
+                containerId: 'adfox_176045507628688078',
+                params: {
+                    p1: 'cxqpo',
+                    p2: 'idoa'
+                }
             })
-        </script>
+        })
+    </script>
 </div>
