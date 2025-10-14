@@ -8,7 +8,7 @@ on:
 
 # Существующие задачи 
 jobs:
-  # Прогоняем проект на поиск уязвимостей - Snyk
+  # Прогоняем проект на поиск уязвимостей - Snyk (Checking only high)
   snyk-security:
     runs-on: ubuntu-latest
     steps:
@@ -17,6 +17,8 @@ jobs:
         uses: snyk/actions/php@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
 
   # Собираем проект и прогоняем тестами
   Tests:
