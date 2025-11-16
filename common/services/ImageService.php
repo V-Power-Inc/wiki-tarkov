@@ -99,7 +99,8 @@ final class ImageService extends AbstractItemsApiService
             'Колонтай' => '/img/bosses/collontay.jpg',
             'Shadow of Tagilla' => '/img/qsch.png', # Заглушка на этих боссов - ивентовые
             'Vengeful Killa' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
-            'Shadow of Tagilla Disciple' => '/img/qsch.png'  # Заглушка на этих боссов - ивентовые
+            'Shadow of Tagilla Disciple' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
+            'Harbinger' => '/img/qsch.png'
         ];
 
         /** Если не нашли изображение подходящего босса */
