@@ -94,7 +94,10 @@ class Bosses extends ActiveRecord
      */
     public static function getBossData(string $map_url): string
     {
-        return Bosses::find()->select(Bosses::ATTR_BOSSES)->where([Bosses::ATTR_URL => $map_url])->scalar();
+        return Bosses::find()
+            ->select(Bosses::ATTR_BOSSES)
+            ->where([Bosses::ATTR_URL => $map_url])
+            ->scalar();
     }
 
     /**
@@ -102,9 +105,12 @@ class Bosses extends ActiveRecord
      *
      * @return Bosses[]
      */
-    public static function getMapData()
+    public static function getMapData(): array
     {
-        return Bosses::find()->select([Bosses::ATTR_MAP, Bosses::ATTR_URL])->all();
+        return Bosses::find()
+            ->select([Bosses::ATTR_MAP, Bosses::ATTR_URL])
+            ->andWhere(['!=', Bosses::ATTR_URL, ''])
+            ->all();
     }
 
     /**
@@ -115,7 +121,10 @@ class Bosses extends ActiveRecord
      */
     public static function findMapTitleByUrl(string $url): ActiveRecord
     {
-        return Bosses::find()->select(Bosses::ATTR_MAP)->where([Bosses::ATTR_URL => $url])->one();
+        return Bosses::find()
+            ->select(Bosses::ATTR_MAP)
+            ->where([Bosses::ATTR_URL => $url])
+            ->one();
     }
 
     /**

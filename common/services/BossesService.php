@@ -48,11 +48,14 @@ final class BossesService extends AbstractItemsApiService
             'Кабан' => 1300,
             'Кабан (снайпер)' => 710,
             'Santa Claus' => 1040,
+            'Дед Мороз' => 1040,
             'Колонтай' => 1055,
             'Партизан' => 950,
             'Shadow of Tagilla' => 1305,
             'Vengeful Killa' => 960,
             'Shadow of Tagilla Disciple' => 1220,
+            'AF' => 675,
+            'Black Div.' => 790
         ];
     }
 
@@ -91,7 +94,7 @@ final class BossesService extends AbstractItemsApiService
     public static function checkBossName(string $boss_name): string
     {
         /** Если у босса имя gifter или Santa Claus */
-        if (($boss_name == 'gifter' || $boss_name == 'Santa Claus')) {
+        if (($boss_name == 'gifter' || $boss_name == 'Santa Claus' || $boss_name == 'Дед Мороз')) {
 
             /** Переводим на русский */
             $boss_name = 'Санта Клаус';
