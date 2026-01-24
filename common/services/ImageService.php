@@ -23,6 +23,7 @@ final class ImageService extends AbstractItemsApiService
 {
     /**
      * Массив с ключами в виде названия карт и значений изображения, которое для них используется
+     * Используется для рендера информации о картах боссов
      *
      * @param string $map_name - Название карты
      * @return string
@@ -44,7 +45,9 @@ final class ImageService extends AbstractItemsApiService
             'Улицы Таркова' => '/img/maps/streets-of-tarkov.jpg',
             'Эпицентр' => '/img/maps/epicenter.png',
             'Эпицентр 21+' => '/img/maps/epicenter.png',
-            'Лабиринт' => '/img/maps/labyrinth_small.png' # Ивентовая карта от 27 марта 2025г. - возможно будет удалена
+            'Лабиринт' => '/img/maps/labyrinth_small.png', # Ивентовая карта от 27 марта 2025г. - возможно будет удалена
+            'Terminal' => '/img/maps/terminal.PNG',
+            'Ground Zero Обучение' => '/img/maps/ground_zero.PNG'
         ];
 
         /** Если такой локации у нас нет */
@@ -99,7 +102,11 @@ final class ImageService extends AbstractItemsApiService
             'Колонтай' => '/img/bosses/collontay.jpg',
             'Shadow of Tagilla' => '/img/qsch.png', # Заглушка на этих боссов - ивентовые
             'Vengeful Killa' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
-            'Shadow of Tagilla Disciple' => '/img/qsch.png'  # Заглушка на этих боссов - ивентовые
+            'Shadow of Tagilla Disciple' => '/img/qsch.png',  # Заглушка на этих боссов - ивентовые
+            'Harbinger' => '/img/qsch.png',
+            'AF' => '/img/bosses/af_boss.png',
+            'Дед Мороз' => '/img/bosses/gifter.jpg',
+            'Black Div.' => '/img/blackdiv_boss.PNG'
         ];
 
         /** Если не нашли изображение подходящего босса */
