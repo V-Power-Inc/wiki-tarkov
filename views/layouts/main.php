@@ -26,10 +26,6 @@ AppAsset::register($this);
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
 
-    <!-- Yandex.RTB -->
-    <script>window.yaContextCb = window.yaContextCb || []</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
-
     <!-- OG tags -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="База знаний Escape from Tarkov">
