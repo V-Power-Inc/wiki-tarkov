@@ -10,7 +10,7 @@ namespace app\common\services;
 abstract class AbstractItemsApiService implements CommonServiceInterface
 {
     /**
-     * Заглушка для API предметов с невалидным урлом
+     * Заглушка для API предметов с невалидным урлом (Проблемные предметы из API)
      * @param string $itemUrl - url предмета
      * @param string $finalString - заглушка img
      * @return string
@@ -22,11 +22,27 @@ abstract class AbstractItemsApiService implements CommonServiceInterface
             : $finalString;
     }
 
+    /**
+     * Заглушка для API предметов с невалидным названием (Проблемные предметы из API)
+     * @param string $itemName - название предмета
+     * @param string $finalString - заглушка img
+     * @return string
+     */
     public static function setupImageWithCheckingName(string $itemName, string $finalString): string
     {
         return (in_array(str_replace(' ', '', $itemName), explode(',', $_ENV['PROBLEM_NAMES'])) === true)
             ? $_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN'] . '/img/qsch6455.png' # declined
             : $finalString;
+    }
+
+    /**
+     * Метод возвращает название категории или базовую строку заглушку, если название категории не получено
+     * @param string|null $categoryName
+     * @return string
+     */
+    public static function getCategoryName(?string $categoryName): string
+    {
+        return is_string($categoryName) ? $categoryName : 'Не определена';
     }
 
     /**
