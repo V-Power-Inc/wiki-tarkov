@@ -109,7 +109,7 @@ final class ApiController extends AdvancedController
         /** Рендер страницы со списком предметов - стандартный, без пагинации */
         return $this->render(self::ACTION_LIST, [
             'form_model' => $form_model,
-            'items' => $items
+            'items' => $items ?? []
         ]);
     }
 
