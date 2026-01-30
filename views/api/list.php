@@ -150,7 +150,7 @@ $this->registerMetaTag([
 
                         <!-- Attributes -->
                         <div class="col-sm-10">
-                            <p class="item-page-text">Категория: <b><?= $item->json[ItemAttributes::ATTR_CATEGORY][ItemAttributes::ATTR_CATEGORY_NAME] ?></b></p>
+                            <p class="item-page-text">Категория: <b><?= AbstractItemsApiService::getCategoryName($item->json[ItemAttributes::ATTR_CATEGORY][ItemAttributes::ATTR_CATEGORY_NAME]) ?></b></p>
                             <p class="item-page-text">Вес: <b><?= $item->json[ItemAttributes::ATTR_ITEM_WEIGHT] ?> кг.</b></p>
 
                             <div class="item-block-variables">
