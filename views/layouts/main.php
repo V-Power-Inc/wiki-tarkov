@@ -104,7 +104,7 @@ AppAsset::register($this);
 <?php if (!isset($cookies['overlay'])): ?>
 <!--    <div class="overlay-block">-->
 <!--        <div class="cls-btn" id="cck_close">Закрыть</div>-->
-    <?= $this->render('/other/yandex-direct-overlay') ?>
+<!-- Here was code of overlay -->
 <!--    </div>-->
 <?php endif; ?>
 
