@@ -25,7 +25,6 @@ AppAsset::register($this);
     <link rel="icon" href="<?=$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN']?>/favicon.png" type="image/png">
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
-    <script src="https://pl28633050.effectivegatecpm.com/de/aa/35/deaa35d5e986232cb28b7a629ea124b0.js"></script>
 
     <!-- OG tags -->
     <meta property="og:type" content="website">
@@ -103,10 +102,10 @@ AppAsset::register($this);
 <!-- Here was mobile render fullscreen code -->
 
 <?php if (!isset($cookies['overlay'])): ?>
-<!--    <div class="overlay-block">-->
-<!--        <div class="cls-btn" id="cck_close">Закрыть</div>-->
+    <div class="overlay-block">
+        <div class="cls-btn" id="cck_close">Закрыть</div>
     <?= $this->render('/other/yandex-direct-overlay') ?>
-<!--    </div>-->
+    </div>
 <?php endif; ?>
 
 <span class="visible-md visible-lg"><a href="#" class="scup"><i class="fa fa-angle-up active"></i></a></span>
