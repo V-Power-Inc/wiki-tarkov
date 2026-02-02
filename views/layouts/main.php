@@ -103,10 +103,10 @@ AppAsset::register($this);
 <!-- Here was mobile render fullscreen code -->
 
 <?php if (!isset($cookies['overlay'])): ?>
-<!--    <div class="overlay-block">-->
-<!--        <div class="cls-btn" id="cck_close">Закрыть</div>-->
+    <div class="overlay-block">
+        <div class="cls-btn" id="cck_close">Закрыть</div>
     <?= $this->render('/other/yandex-direct-overlay') ?>
-<!--    </div>-->
+    </div>
 <?php endif; ?>
 
 <span class="visible-md visible-lg"><a href="#" class="scup"><i class="fa fa-angle-up active"></i></a></span>
