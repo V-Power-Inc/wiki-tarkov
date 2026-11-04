@@ -1,19 +1,17 @@
-FROM php:7.4.28-fpm
+FROM php:8.4.27-fpm
 
-# Установка необходимых системных библиотек
-RUN apt update && apt install -y \
+# Системные библиотеки для расширений + очистка apt в том же слое
+RUN apt-get update && apt-get install -y --no-install-recommends \
         libicu-dev \
         zlib1g-dev \
-        libzip-dev
+        libzip-dev \
+        unzip \
+    && docker-php-ext-install -j"$(nproc)" pdo_mysql intl zip bcmath \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-# Установка Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Composer из официального образа
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
-# Установка необходимых расширений PHP
-RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-install intl
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install bcmath
-
-# Очистка кэша apt
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+# Временная мера против CVE-2026-115560 (ещё не исправлена в релизах)
+RUN echo "session.upload_progress.enabled = 0" > /usr/local/etc/php/conf.d/zz-security.ini
