@@ -37,10 +37,10 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 
-# ignore images - that uploaded through Elfinder
+# ignore images - that uploaded through Elfinder - убрать, если хочется в репу сохранять файлы из админки, пока не актуально
 web/img/upload
 
-# ignore images - that uploaded as preview
+# ignore images - that uploaded as preview - убрать, если хочется в репу сохранять файлы из админки, пока не актуально
 web/img/admin
 
 # Ignore well known

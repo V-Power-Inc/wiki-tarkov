@@ -104,7 +104,7 @@ class Login extends Model
     public function validatePassword($attribute, $params)
     {
         /** Если при валидации модели нет ошибок */
-        if (!$this->hasErrors()){
+        if (!$this->hasErrors()) {
 
             /** Ищем в БД пользователя с таким логином */
             $user = Admins::findOne([Admins::ATTR_USER => $this->email]);
@@ -114,10 +114,13 @@ class Login extends Model
 
                /** Возвращаем во вьюху сообщение с ошибкой */
                $this->addError($attribute, 'Логин или пароль, введены не верно');
+
+               /** Дальше проверять нечего - пользователя может не быть ($user === null) */
+               return;
             }
 
-            /** Если посетитель был забанен */
-            if ($user->banned === Admins::ATTR_BANNED_TRUE) {
+            /** Если посетитель был забанен (int - т.к. драйвер БД может вернуть строку "1") */
+            if ((int)$user->banned === Admins::ATTR_BANNED_TRUE) {
 
                 /** Выводим сообщение об этом */
                 $this->addError($attribute, 'Пользователь деактивирован');

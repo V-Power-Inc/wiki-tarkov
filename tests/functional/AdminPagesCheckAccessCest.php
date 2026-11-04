@@ -50,7 +50,7 @@ class AdminPagesCheckAccessCest
         foreach ($this->getUrlList() as $url) {
 
             /** Заходим на страницу URL'a */
-            $I->amOnRoute($url);
+            $I->amOnRoute('/' . $url);
 
             /** Проверка что мы на странице логина и не видим штуки из интерфейса залогинненого пользователя */
             $this->expectCantSeeAdminPages($I);
@@ -67,7 +67,7 @@ class AdminPagesCheckAccessCest
         foreach ($this->getUrlList() as $url) {
 
             /** Заходим на страницу URL'a */
-            $I->amOnRoute($url);
+            $I->amOnRoute('/' . $url); // Абсолютный маршрут, иначе Yii склеит его с текущим модулем (admin/admin/...)
 
             /** Проверка что мы на странице внутри админки и можем видеть то содержимое, которое видит только админ */
             $this->canSeeAdminMenuInLogginedInterface($I);

@@ -32,12 +32,12 @@ class DbCommandServiceTest extends Unit
     {
         /** Подготавливаем мок объекта Query */
         $query = $this->getMockBuilder(Query::class)
-            ->setMethods(['createCommand'])
+            ->onlyMethods(['createCommand'])
             ->getMock();
 
         /** Подготавливаем мок объекта Command */
         $command = $this->getMockBuilder(Command::class)
-            ->setMethods(['queryAll'])
+            ->onlyMethods(['queryAll'])
             ->disableOriginalConstructor()
             ->getMock();
 

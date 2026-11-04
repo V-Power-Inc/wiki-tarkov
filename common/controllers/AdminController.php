@@ -48,7 +48,7 @@ class AdminController extends Controller
     public function beforeAction($action)
     {
         /** Если пользователь авторизовался но является забаненым */
-        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->banned === Admins::ATTR_BANNED_TRUE) {
+        if (!Yii::$app->user->isGuest && (int) Yii::$app->user->identity->banned === Admins::ATTR_BANNED_TRUE) {
 
             /** Сразу его разлогиниваем */
             return $this->redirect(AdminController::LOGOUT_URL);
