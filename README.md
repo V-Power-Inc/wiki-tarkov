@@ -6,7 +6,7 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-disabled-red)
-![Stable Version](https://img.shields.io/badge/version-v8.5.1-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v9.1.1-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-832-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-89%25-success)
@@ -214,9 +214,9 @@ Snyk в настоящий момент применяет 2 теста для �
     DOMAIN_PROTOCOL=http://
     DOMAIN=localhost
 
-    # Recapcha things (Без рекапчи не будет авторизация в админку/отправка форм с сайта, можно отключить проверку в AR моделях)
-    RECAPCHAKEY=your_custom_secret_key
-    RECAPCHASITEKEY=your_site_key
+    # Recapcha things (Здесь тестовая капча, работает и на локалхосте)
+    RECAPCHAKEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+    RECAPCHASITEKEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
     
     # DSN for log
     SENTRY_DSN=https://log-url.ru

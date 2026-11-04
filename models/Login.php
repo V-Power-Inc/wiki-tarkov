@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\BooleanValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\ReCaptchaValidator;
+use yii\base\Exception;
 use yii\base\Model;
 use Yii;
 
@@ -100,6 +101,7 @@ class Login extends Model
      * Собственная функкция валидации пользователя
      * @param $attribute
      * @param $params
+     * @throws Exception
      */
     public function validatePassword($attribute, $params)
     {
@@ -110,7 +112,7 @@ class Login extends Model
             $user = Admins::findOne([Admins::ATTR_USER => $this->email]);
 
             /** Если не нашли такого пользователя или у него неправильный пароль */
-            if (!$user || ($user->password !== sha1($this->password))){
+            if (!$user || !$user->validatePassword((string) $this->password)) {
 
                /** Возвращаем во вьюху сообщение с ошибкой */
                $this->addError($attribute, 'Логин или пароль, введены не верно');
@@ -124,6 +126,14 @@ class Login extends Model
 
                 /** Выводим сообщение об этом */
                 $this->addError($attribute, 'Пользователь деактивирован');
+
+                return;
+            }
+
+            /** Пароль верный, но хеш в старом формате sha1 - тихо перезаписываем на bcrypt */
+            if ($user->isLegacyPasswordHash()) {
+                $user->setPassword((string) $this->password);
+                $user->updateAttributes([Admins::ATTR_PASSWORD]);
             }
         }
     }

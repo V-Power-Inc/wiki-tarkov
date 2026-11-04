@@ -85,10 +85,10 @@ class AdminsTest extends \Codeception\Test\Unit
     protected function _validateStringAttributes($model)
     {
         /** Список атрибутов на валидацию - длина 45 символов */
-        $list_fourty_five = [Admins::ATTR_USER, Admins::ATTR_PASSWORD];
-        
-        /** Список атрибутов на валидацию - длина 255 символов */
-        $list_main = [Admins::ATTR_NAME, Admins::ATTR_CAPTCHA];
+        $list_fourty_five = [Admins::ATTR_USER];
+
+        /** Список атрибутов на валидацию - длина 255 символов (пароль - хеш bcrypt, поэтому 255) */
+        $list_main = [Admins::ATTR_NAME, Admins::ATTR_CAPTCHA, Admins::ATTR_PASSWORD];
 
         /** Переменная с пустой строкой */
         $too_long_string = '';
@@ -201,5 +201,69 @@ class AdminsTest extends \Codeception\Test\Unit
 
         /** Ожидаем получить из фикстур - 1 записи */
         $this->assertTrue(count($list) == 1);
+    }
+
+    /** Новый пароль хешируется bcrypt и проверяется */
+    public function testSetAndValidatePassword()
+    {
+        $item = new Admins();
+        $item->setPassword('secret-pass-1');
+
+        /** В атрибуте хеш, а не пароль */
+        $this->assertStringStartsWith('$2y$', $item->password);
+        $this->assertFalse($item->isLegacyPasswordHash());
+
+        $this->assertTrue($item->validatePassword('secret-pass-1'));
+        $this->assertFalse($item->validatePassword('wrong-pass'));
+        $this->assertFalse($item->validatePassword(''));
+    }
+
+    /** Старые sha1-хеши продолжают работать (обратная совместимость) */
+    public function testLegacySha1Password()
+    {
+        $item = new Admins();
+        $item->password = sha1('old-pass');
+
+        $this->assertTrue($item->isLegacyPasswordHash());
+        $this->assertTrue($item->validatePassword('old-pass'));
+        $this->assertFalse($item->validatePassword('wrong-pass'));
+    }
+
+    /** В сценарии создания из админки новый пароль обязателен и не короче минимума */
+    public function testNewPasswordRulesOnCreate()
+    {
+        $item = new Admins(['scenario' => Admins::SCENARIO_CREATE]);
+
+        $item->newPassword = null;
+        $this->assertFalse($item->validate(Admins::ATTR_NEW_PASSWORD), 'Пароль обязателен при создании');
+
+        $item->newPassword = str_repeat('a', Admins::PASSWORD_MIN_LENGTH - 1);
+        $this->assertFalse($item->validate(Admins::ATTR_NEW_PASSWORD), 'Слишком короткий пароль');
+
+        $item->newPassword = str_repeat('a', Admins::PASSWORD_MIN_LENGTH);
+        $this->assertTrue($item->validate(Admins::ATTR_NEW_PASSWORD));
+
+        /** Хеш напрямую из формы не принимается */
+        $this->assertFalse($item->isAttributeSafe(Admins::ATTR_PASSWORD));
+    }
+
+    /** При создании через форму админки пароль сохраняется в БД только в виде хеша */
+    public function testCreateFromAdminFormHashesPassword()
+    {
+        $item = new Admins(['scenario' => Admins::SCENARIO_CREATE]);
+        $item->setAttributes([
+            Admins::ATTR_USER => 'new_admin',
+            Admins::ATTR_NAME => 'Новый админ',
+            Admins::ATTR_NEW_PASSWORD => 'secret-pass-2',
+        ]);
+
+        $this->assertTrue($item->save(), 'Ожидалось true - объект не сохранился: ' . json_encode($item->errors, JSON_UNESCAPED_UNICODE));
+
+        $saved = Admins::findOne([Admins::ATTR_USER => 'new_admin']);
+        $this->assertNotSame('secret-pass-2', $saved->password);
+        $this->assertTrue($saved->validatePassword('secret-pass-2'));
+
+        /** Не забанен - в БД хранится как NULL */
+        $this->assertNull($saved->banned);
     }
 }

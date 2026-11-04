@@ -24,6 +24,7 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\QuestionsController;
 use app\modules\admin\controllers\SkillsController;
 use app\modules\admin\controllers\TradersController;
+use app\modules\admin\controllers\AdminsController;
 use tests\_support\FixturesCollection;
 
 /**
@@ -179,7 +180,8 @@ class AdminPagesCheckAccessCest
             QuestionsController::routeId(CrudInterface::ACTION_INDEX),
             SkillsController::routeId(CrudInterface::ACTION_INDEX),
             TradersController::routeId(CrudInterface::ACTION_INDEX),
-            FeedbackmessagesController::routeId(CrudInterface::ACTION_INDEX)
+            FeedbackmessagesController::routeId(CrudInterface::ACTION_INDEX),
+            AdminsController::routeId(CrudInterface::ACTION_INDEX)
         ];
     }
 }
