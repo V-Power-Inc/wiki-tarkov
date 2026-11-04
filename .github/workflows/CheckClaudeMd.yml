@@ -1,0 +1,34 @@
+# Проверка, что в корне проекта есть инструкции для Claude Code (CLAUDE.md) - отдельный чек в PR
+name: Check CLAUDE.md
+
+on:
+  pull_request:
+    branches:
+      - "master"
+      - "dev"
+
+jobs:
+  claude-md:
+    name: CLAUDE.md exists
+    runs-on: ubuntu-latest
+    steps:
+      # Забираем только нужный файл - полный checkout не нужен
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: CLAUDE.md
+          sparse-checkout-cone-mode: false
+
+      # Имя проверяется с учетом регистра: Claude Code читает именно CLAUDE.md
+      - name: Check CLAUDE.md in project root
+        run: |
+          if [ ! -f CLAUDE.md ]; then
+            echo "::error file=CLAUDE.md::В корне проекта нет файла CLAUDE.md (имя чувствительно к регистру)"
+            exit 1
+          fi
+
+          if [ ! -s CLAUDE.md ]; then
+            echo "::error file=CLAUDE.md::Файл CLAUDE.md пустой"
+            exit 1
+          fi
+
+          echo -e "\033[1;32m✅ CLAUDE.md найден - отлично ИИ в деле ($(wc -l < CLAUDE.md) строк)\033[0m"
