@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(vendor/bin/codecept run*)",
+      "Bash(php vendor/bin/codecept run*)",
+      "Bash(docker-compose exec -T app vendor/bin/codecept run*)",
+      "Bash(php -l *)",
+      "Bash(composer validate*)",
+      "Bash(composer show*)"
+    ],
+    "ask": [
+      "Bash(git commit*)",
+      "Bash(git merge*)",
+      "Bash(git rebase*)",
+      "Bash(git checkout*)",
+      "Bash(git reset*)",
+      "Bash(composer require*)",
+      "Bash(composer update*)",
+      "Bash(composer remove*)",
+      "Bash(php yii migrate*)",
+      "Bash(docker-compose exec -T app php yii migrate*)",
+      "Bash(docker-compose*)",
+      "Edit(./migrations/**)",
+      "Edit(./composer.json)",
+      "Edit(./.github/**)",
+      "Edit(./bitbucket-pipelines.yml)",
+      "Edit(./docker/**)",
+      "Edit(./docker-compose.yml)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(php yii migrate/down*)",
+      "Bash(php yii migrate/fresh*)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Read(./.env)",
+      "Read(./.env.*.local)",
+      "Read(./sql_dump.sql)",
+      "Read(./docker/nginx/log/**)",
+      "Edit(./.env)",
+      "Edit(./vendor/**)",
+      "Edit(./composer.lock)",
+      "Edit(./runtime/**)",
+      "Edit(./web/img/upload/**)",
+      "Edit(./web/img/admin/**)"
+    ]
+  }
+}

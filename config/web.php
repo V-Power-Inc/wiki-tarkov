@@ -1,5 +1,7 @@
 <?php
 
+use yii\log\FileTarget;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -61,7 +63,7 @@ $config = [
                     'context' => true,
                     // Additional options for `Sentry\init`:
                     'clientOptions' => [
-                        'release' => 'wiki-tarkov@' . $_ENV['RELEASE'] ?? '1.0.0',
+                        'release' => 'wiki-tarkov@' . ($_ENV['RELEASE'] ?? '1.0.0'),
                         'environment' => $_ENV['ENVIRONMENT'] ?? 'dev',
                     ],
                     // Except trivial errors
@@ -70,6 +72,10 @@ $config = [
                         'yii\web\HttpException:403',
                     ],
                 ],
+                [
+                    'class' => FileTarget::class,
+                    'levels' => ['error', 'warning'],
+                ]
             ],
         ],
         'db' => $db,

@@ -14,6 +14,7 @@ use app\modules\admin\controllers\ArticlesController;
 use app\modules\admin\controllers\CurrenciesController;
 use app\modules\admin\controllers\FeedbackmessagesController;
 use app\modules\admin\controllers\MapsController;
+use app\modules\admin\controllers\AdminsController;
 
 use yii\helpers\Url;
 
@@ -48,6 +49,7 @@ $this->title = 'Админка '. $_ENV['DOMAIN'];
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-top-30">
     <ul class="nav nav-pills nav-stacked">
         <h2 class="text-center">Дополнительно</h2>
+        <li><a href="<?= Url::to(AdminsController::getUrlRoute(AdminsController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Администраторы</a></li>
         <li><a href="<?= Url::to(ClansController::getUrlRoute(ClansController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Заявки кланов</a></li>
         <li><a href="<?= Url::to(BartersController::getUrlRoute(BartersController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Бартеры торговцев</a></li>
         <li><a href="<?= Url::to(QuestionsController::getUrlRoute(QuestionsController::ACTION_INDEX)) ?>" class="admin-tabs w-100-important">Часто задаваемые вопросы</a></li>

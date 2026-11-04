@@ -45,7 +45,7 @@ class CanonicalPagesServiceTest extends Unit
 
         /** Создаем мок для Response */
         $responseMock = $this->getMockBuilder(Response::class)
-            ->setMethods(['redirect'])
+            ->onlyMethods(['redirect'])
             ->getMock();
 
         /** Ожидаем вызов метода redirect с каноническим URL и кодом 301 */

@@ -18,6 +18,7 @@ use yii\base\Action;
 use yii\base\InvalidConfigException;
 use Yii;
 use yii\web\Controller;
+use yii\web\Cookie;
 use yii\web\CookieCollection;
 use yii\web\Request;
 
@@ -46,26 +47,20 @@ class MenuTest extends Unit
      */
     protected function _before()
     {
-        /** Создаем заглушку для объекта $cookies */
-        $this->cookies = $this->getMockBuilder(CookieCollection::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        /** Устанавливаем поведение заглушки */
-        $this->cookies->expects($this->any())
-            ->method('getValue')
-            ->with([CookieComponent::NAME_DARK_THEME])
-            ->willReturn(true);
+        /** Настоящая коллекция кук (по умолчанию с кукой тёмной темы) - мокать простой контейнер незачем */
+        $this->cookies = $this->makeCookies(true);
 
         /** Создаем заглушку для объекта $request */
         $this->request = $this->getMockBuilder(Request::class)
+            // Только эти методы: магический __get() должен остаться настоящим, иначе ->cookies вернёт null
+            ->onlyMethods(['getCookies', 'getUrl'])
             ->disableOriginalConstructor()
             ->getMock();
 
         /** Устанавливаем поведение заглушки */
         $this->request->expects($this->any())
             ->method('getCookies')
-            ->willReturn($this->cookies);
+            ->willReturnCallback(fn() => $this->cookies); // Через колбэк, чтобы тест мог подменить коллекцию
 
         $this->request->expects($this->any())
             ->method('getUrl')
@@ -105,34 +100,36 @@ class MenuTest extends Unit
      * Приватный метод, который определяет по наличию кукиса, какой HTML вернуть
      *
      * @return void
-     * @throws ReflectionException|InvalidConfigException
+     * @throws ReflectionException
      */
     public function testThemeToggler()
     {
-        $reflection = new ReflectionClass(MenuComponent::class);
-        $method = $reflection->getMethod('themeToggler');
+        $method = (new ReflectionClass(MenuComponent::class))->getMethod('themeToggler');
         $method->setAccessible(true);
-        $toggler = $method->invoke(null);
 
-        /** Проверяем что с наличие кукиса вернет строку */
-        $this->assertIsString($toggler);
+        /** Кука тёмной темы есть - показываем иконку "включить светлую тему" */
+        $this->cookies = $this->makeCookies(true);
+        $this->assertStringContainsString('fa-sun-o', $method->invoke(null));
 
-        /** Устанавливаем поведение заглушки */
-        $this->cookies->expects($this->any())
-            ->method('getValue')
-            ->with([])
-            ->willReturn(true);
+        /** Куки нет - показываем иконку "включить тёмную тему" */
+        $this->cookies = $this->makeCookies(false);
+        $this->assertStringContainsString('fa-moon-o', $method->invoke(null));
+    }
 
-        /** Устанавливаем поведение заглушки */
-        $this->request->expects($this->any())
-            ->method('getCookies')
-            ->willReturn($this->cookies);
+    /**
+     * Создаёт коллекцию кук с кукой тёмной темы или без неё
+     *
+     * @param bool $withDarkTheme
+     * @return CookieCollection
+     */
+    private function makeCookies(bool $withDarkTheme): CookieCollection
+    {
+        $cookies = [];
+        if ($withDarkTheme) {
+            $cookies[CookieComponent::NAME_DARK_THEME] = new Cookie(['name' => CookieComponent::NAME_DARK_THEME, 'value' => 1]);
+        }
 
-        /** Создаем заглушку для объекта Request */
-        Yii::$app->set('request', $this->request);
-
-        /** Проверяем что с без наличия кукиса вернет строку */
-        $this->assertIsString($toggler);
+        return new CookieCollection($cookies, ['readOnly' => true]);
     }
 
     /**

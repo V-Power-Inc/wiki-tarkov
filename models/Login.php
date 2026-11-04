@@ -5,6 +5,7 @@ namespace app\models;
 use app\common\helpers\validators\BooleanValidator;
 use app\common\helpers\validators\RequiredValidator;
 use app\common\helpers\validators\ReCaptchaValidator;
+use yii\base\Exception;
 use yii\base\Model;
 use Yii;
 
@@ -100,27 +101,39 @@ class Login extends Model
      * Собственная функкция валидации пользователя
      * @param $attribute
      * @param $params
+     * @throws Exception
      */
     public function validatePassword($attribute, $params)
     {
         /** Если при валидации модели нет ошибок */
-        if (!$this->hasErrors()){
+        if (!$this->hasErrors()) {
 
             /** Ищем в БД пользователя с таким логином */
             $user = Admins::findOne([Admins::ATTR_USER => $this->email]);
 
             /** Если не нашли такого пользователя или у него неправильный пароль */
-            if (!$user || ($user->password !== sha1($this->password))){
+            if (!$user || !$user->validatePassword((string) $this->password)) {
 
                /** Возвращаем во вьюху сообщение с ошибкой */
                $this->addError($attribute, 'Логин или пароль, введены не верно');
+
+               /** Дальше проверять нечего - пользователя может не быть ($user === null) */
+               return;
             }
 
-            /** Если посетитель был забанен */
-            if ($user->banned === Admins::ATTR_BANNED_TRUE) {
+            /** Если посетитель был забанен (int - т.к. драйвер БД может вернуть строку "1") */
+            if ((int)$user->banned === Admins::ATTR_BANNED_TRUE) {
 
                 /** Выводим сообщение об этом */
                 $this->addError($attribute, 'Пользователь деактивирован');
+
+                return;
+            }
+
+            /** Пароль верный, но хеш в старом формате sha1 - тихо перезаписываем на bcrypt */
+            if ($user->isLegacyPasswordHash()) {
+                $user->setPassword((string) $this->password);
+                $user->updateAttributes([Admins::ATTR_PASSWORD]);
             }
         }
     }

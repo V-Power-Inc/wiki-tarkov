@@ -24,6 +24,7 @@ use app\modules\admin\controllers\NewsController;
 use app\modules\admin\controllers\QuestionsController;
 use app\modules\admin\controllers\SkillsController;
 use app\modules\admin\controllers\TradersController;
+use app\modules\admin\controllers\AdminsController;
 use tests\_support\FixturesCollection;
 
 /**
@@ -50,7 +51,7 @@ class AdminPagesCheckAccessCest
         foreach ($this->getUrlList() as $url) {
 
             /** Заходим на страницу URL'a */
-            $I->amOnRoute($url);
+            $I->amOnRoute('/' . $url);
 
             /** Проверка что мы на странице логина и не видим штуки из интерфейса залогинненого пользователя */
             $this->expectCantSeeAdminPages($I);
@@ -67,7 +68,7 @@ class AdminPagesCheckAccessCest
         foreach ($this->getUrlList() as $url) {
 
             /** Заходим на страницу URL'a */
-            $I->amOnRoute($url);
+            $I->amOnRoute('/' . $url); // Абсолютный маршрут, иначе Yii склеит его с текущим модулем (admin/admin/...)
 
             /** Проверка что мы на странице внутри админки и можем видеть то содержимое, которое видит только админ */
             $this->canSeeAdminMenuInLogginedInterface($I);
@@ -179,7 +180,8 @@ class AdminPagesCheckAccessCest
             QuestionsController::routeId(CrudInterface::ACTION_INDEX),
             SkillsController::routeId(CrudInterface::ACTION_INDEX),
             TradersController::routeId(CrudInterface::ACTION_INDEX),
-            FeedbackmessagesController::routeId(CrudInterface::ACTION_INDEX)
+            FeedbackmessagesController::routeId(CrudInterface::ACTION_INDEX),
+            AdminsController::routeId(CrudInterface::ACTION_INDEX)
         ];
     }
 }

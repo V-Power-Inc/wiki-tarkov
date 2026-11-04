@@ -3,6 +3,8 @@
 namespace app\models;
 
 use app\models\queries\AdminsQuery;
+use yii\base\Exception;
+use yii\base\InvalidArgumentException;
 use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
 use yii\web\IdentityInterface;
@@ -29,6 +31,7 @@ use app\common\helpers\validators\SafeValidator;
  * @property string $name        - Имя пользователя
  * @property string $date_end    - Дата окончания прав учетной записи
  * @property string $bann_reason - Причина блокировки
+ * @property string|null $newPassword - Новый пароль в открытом виде (только из формы в админке, в БД не хранится)
  */
 class Admins extends ActiveRecord implements IdentityInterface
 {
@@ -55,6 +58,20 @@ class Admins extends ActiveRecord implements IdentityInterface
     public const ATTR_BANNED_TRUE = 1;
     public const ATTR_BANNED_FALSE = 0;
 
+    /** Виртуальный атрибут - новый пароль в открытом виде, хешируется в beforeSave() */
+    public const ATTR_NEW_PASSWORD = 'newPassword';
+
+    /** Сценарии формы в админке - в них хеш пароля напрямую не принимается, только newPassword */
+    public const SCENARIO_CREATE = 'create';
+    public const SCENARIO_UPDATE = 'update';
+
+    /** Ограничения длины пароля (72 - предел bcrypt, дальше символы игнорируются) */
+    public const PASSWORD_MIN_LENGTH = 8;
+    public const PASSWORD_MAX_LENGTH = 72;
+
+    /** @var string|null - Новый пароль из формы в админке */
+    public $newPassword;
+
     /**
      * Имя таблицы в БД
      *
@@ -79,8 +96,19 @@ class Admins extends ActiveRecord implements IdentityInterface
             [static::ATTR_USER, UniqueValidator::class, UniqueValidator::ATTR_MESSAGE => 'Логин пользователя должен быть уникальным.'],
             [static::ATTR_USER, StringValidator::class, StringValidator::ATTR_MAX => 45],
 
-            [static::ATTR_PASSWORD, RequiredValidator::class],
-            [static::ATTR_PASSWORD, StringValidator::class, StringValidator::ATTR_MAX => 45],
+            /** Хеш пароля - задается напрямую только вне формы админки (миграции, тесты, консоль) */
+            [static::ATTR_PASSWORD, RequiredValidator::class, 'except' => [static::SCENARIO_CREATE, static::SCENARIO_UPDATE]],
+            [static::ATTR_PASSWORD, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH, 'except' => [static::SCENARIO_CREATE, static::SCENARIO_UPDATE]],
+
+            /** Новый пароль из формы: обязателен при создании, при редактировании - пусто значит не менять */
+            [static::ATTR_NEW_PASSWORD, RequiredValidator::class, RequiredValidator::ATTR_ON => static::SCENARIO_CREATE],
+            [
+                static::ATTR_NEW_PASSWORD,
+                StringValidator::class,
+                StringValidator::ATTR_MIN => static::PASSWORD_MIN_LENGTH,
+                StringValidator::ATTR_MAX => static::PASSWORD_MAX_LENGTH,
+                StringValidator::ATTR_ON => [static::SCENARIO_CREATE, static::SCENARIO_UPDATE]
+            ],
 
             [static::ATTR_NAME, StringValidator::class, StringValidator::ATTR_MAX => StringValidator::VARCHAR_LENGTH],
             [static::ATTR_NAME, SafeValidator::class],
@@ -118,28 +146,96 @@ class Admins extends ActiveRecord implements IdentityInterface
             static::ATTR_DATE_END => 'Дата окончания учетной записи',
             static::ATTR_NAME => 'Имя пользователя учетной записи',
             static::ATTR_BANNED => 'Забанен',
-            static::ATTR_BANN_REASON => 'Причина блокировки'
+            static::ATTR_BANN_REASON => 'Причина блокировки',
+            static::ATTR_NEW_PASSWORD => 'Новый пароль'
         ];
     }
 
     /**
-     * Валидируем пароль
+     * Проверяем пароль: новые хеши (bcrypt) через Yii security, старые sha1 - для обратной совместимости
      *
-     * @param $password
+     * @param string $password - Пароль в открытом виде
      * @return bool
      */
-    public function validatePassword($password): bool
+    public function validatePassword(string $password): bool
     {
-        return $this->password == md5($password);
+        /** Старый формат - sha1 без соли (сравнение через hash_equals - защита от атак по времени) */
+        if ($this->isLegacyPasswordHash()) {
+            return hash_equals((string) $this->password, sha1($password));
+        }
+
+        try {
+            /** Новый формат - bcrypt */
+            return Yii::$app->security->validatePassword($password, (string) $this->password);
+        } catch (InvalidArgumentException $e) {
+
+            /** Пустой пароль или битый хеш в БД - считаем что пароль неверный */
+            return false;
+        }
+    }
+
+    /**
+     * Хранится ли пароль в старом формате (sha1 - 40 hex символов)
+     *
+     * @return bool
+     */
+    public function isLegacyPasswordHash(): bool
+    {
+        return (bool) preg_match('/^[a-f0-9]{40}$/i', (string) $this->password);
+    }
+
+    /**
+     * Сетапим новый пароль - в атрибут записывается только хеш
+     *
+     * @param string $password - Пароль в открытом виде
+     * @return void
+     * @throws Exception
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * Перед сохранением: хешируем новый пароль из формы и приводим поля формы к формату БД
+     *
+     * @param bool $insert
+     * @return bool
+     * @throws Exception
+     */
+    public function beforeSave($insert): bool
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        /** Если в форме ввели новый пароль - хешируем его */
+        if ($this->newPassword !== null && $this->newPassword !== '') {
+            $this->setPassword($this->newPassword);
+        }
+
+        /** Поля, которые приходят из формы админки */
+        if (in_array($this->scenario, [static::SCENARIO_CREATE, static::SCENARIO_UPDATE], true)) {
+
+            /** В БД "не забанен" хранится как NULL (см. unbannedUsers()), а чекбокс присылает 0 */
+            $this->banned = $this->banned ? static::ATTR_BANNED_TRUE : null;
+        }
+
+        /** Колонка captcha - NOT NULL без значения по умолчанию, рудимент */
+        if ($insert && $this->captcha === null) {
+            $this->captcha = '';
+        }
+
+        return true;
     }
 
     /**
      * Находим identity по id параметру
      *
      * @param int|string $id
-     * @return BaseActiveRecord
+     * @return static|null - null, если пользователь не найден (например, удален, а сессия осталась)
      */
-    public static function findIdentity($id): BaseActiveRecord
+    public static function findIdentity($id): ?self
     {
         return static::findOne($id);
     }
