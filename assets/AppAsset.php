@@ -18,18 +18,18 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css?v=6.8.12',
+        'css/site.css?v=7.0.0',
         'css/owl-css/owl.carousel.css',
         'css/owl-css/owl.theme.default.min.css',
         'css/font-awesome/font-awesome.min.css',
         'css/popup/magnific-popup.css',
-        ['css/custom.css?v=6.8.12', 'id' => 'custom_site_styles'],
+        ['css/custom.css?v=7.0.0', 'id' => 'custom_site_styles'],
     ];
     public $js = [
         'js/bootstrap-js/bootstrap.min.js',
         'js/popup/magnific-popup.js',
         'js/jquery.cookie.js',
-        'js/main.js'
+        'js/main.js?v=7.0.0'
     ];
     public $depends = [
         'yii\web\YiiAsset',
