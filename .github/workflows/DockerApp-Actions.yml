@@ -6,15 +6,22 @@ on:
       - "master"
       - "dev"
 
-# Существующие задачи 
+# Только чтение
+permissions:
+  contents: read
+
 jobs:
   # Прогоняем проект на поиск уязвимостей - Snyk (Checking only high)
   snyk-security:
+    # Запускаем Snyk только для веток из основного репозитория
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/php@master
+        uses: snyk/actions/php@9adf32b1121593767fc3c057af55b55db032dc04 # v1.0.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
@@ -25,6 +32,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Не сохраняем токен в .git/config
+          persist-credentials: false
 
       # Настройка Docker и кеширования
       - name: Set up Docker Buildx
@@ -87,6 +97,7 @@ jobs:
           DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
           PROBLEM_URLS="$PROBLEM_URLS"
           PROBLEM_NAMES="$PROBLEM_NAMES"
+          COOKIE_VALIDATION_KEY="$(openssl rand -hex 32)"
           DEBUG_STATUS=true
           ENVIRONMENT=dev
           EOF

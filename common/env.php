@@ -31,6 +31,7 @@ $dotenv->required([
     'DB_TEST_CHARSET',
     'DOMAIN_PROTOCOL',
     'DOMAIN',
-    'REDIS_HOST'
+    'REDIS_HOST',
+    'COOKIE_VALIDATION_KEY'
 ]);
 ?>
