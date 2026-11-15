@@ -62,7 +62,8 @@ interface CrudInterface
      * Описание метода, удаляющего объекты по параметру
      * @param int $id - id параметр
      * @return mixed
-     * @throws
+     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable in case delete failed.
      */
     public function actionDelete(int $id);
 }

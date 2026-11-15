@@ -8,11 +8,15 @@
 
 namespace app\models\queries;
 
+use app\models\Catskills;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use yii\db\Connection;
 
 /**
  * Индивидуальный класс ActiveQuery для AR модели
+ *
+ * @template T of Catskills|array = Catskills
+ * @extends ActiveQuery<T>
  *
  * Class CatskillsQuery
  * @package app\models\queries
@@ -21,8 +25,8 @@ final class CatskillsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord[]
+     * @param Connection|null $db
+     * @return T[]
      */
     public function all($db = null)
     {
@@ -32,8 +36,8 @@ final class CatskillsQuery extends ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord|null
+     * @param Connection|null $db
+     * @return T|null
      */
     public function one($db = null)
     {

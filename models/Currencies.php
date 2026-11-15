@@ -71,7 +71,7 @@ class Currencies extends ActiveRecord
     /**
      * Получаем курсы всех активных валют
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveValutes(): array
     {

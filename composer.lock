@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1a12d93c349386907c3fcc65d18a0ed",
+    "content-hash": "09ce6bc3f2fe1cf026cf0a2e24885bc5",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -4814,6 +4814,84 @@
             "published-time": "2026-02-06T15:22:45+00:00"
         },
         {
+            "name": "mspirkov/yii2-phpstan",
+            "version": "0.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mspirkov/yii2-phpstan.git",
+                "reference": "40dd2195a56ed11bc0243f86a647d9d3a96a8008"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mspirkov/yii2-phpstan/zipball/40dd2195a56ed11bc0243f86a647d9d3a96a8008",
+                "reference": "40dd2195a56ed11bc0243f86a647d9d3a96a8008",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "phpstan/phpstan": "^2.2",
+                "yiisoft/yii2": "^2.0.53"
+            },
+            "replace": {
+                "mspirkov/yii2-phpstan-rules": "self.version"
+            },
+            "require-dev": {
+                "ergebnis/phpstan-rules": "^2.13",
+                "friendsofphp/php-cs-fixer": "^3.89",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.37",
+                "mspirkov/yii2-db": "^0.3",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
+                "rector/rector": "^2.2",
+                "shipmonk/phpstan-rules": "^4.2",
+                "spaze/phpstan-disallowed-calls": "^4.7",
+                "yiisoft/yii2-mongodb": "^3.0",
+                "yiisoft/yii2-redis": "^2.1"
+            },
+            "suggest": {
+                "mspirkov/yii2-rector": "for automatic refactoring of Yii2 projects"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSpirkov\\Yii2\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maksim Sprikov",
+                    "email": "spirkov.2001@mail.ru"
+                }
+            ],
+            "description": "PHPStan rules and type extensions for projects using the Yii2 framework",
+            "keywords": [
+                "PHPStan",
+                "code analyse",
+                "code analysis",
+                "static analysis",
+                "yii",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/mspirkov/yii2-phpstan/issues",
+                "source": "https://github.com/mspirkov/yii2-phpstan/tree/0.17.0"
+            },
+            "time": "2026-10-30T18:14:52+00:00",
+            "published-time": "2026-10-30T18:18:22+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.14.0",
             "source": {
@@ -5093,6 +5171,71 @@
             },
             "time": "2020-09-18T13:47:07+00:00",
             "published-time": "2020-09-18T13:47:39+00:00"
+        },
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.3.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/645a1bd6bead15fc1b8474137467961d0fa30a79",
+                "reference": "645a1bd6bead15fc1b8474137467961d0fa30a79",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-11-03T12:14:22+00:00",
+            "published-time": "2026-11-03T12:14:36+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

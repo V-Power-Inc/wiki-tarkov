@@ -75,7 +75,7 @@ final class CookieComponent
      * Метод устанавливает пользовательские сообщения SetFlash по параметру строки
      *
      * @param string $messageText - сообщение, которое будет отображено во вьюхе (Может быть html кодом)
-     * @return void
+     * @return bool
      */
     public static function setMessages(string $messageText): bool
     {

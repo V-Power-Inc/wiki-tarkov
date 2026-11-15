@@ -88,7 +88,7 @@ final class ClansSearch extends Clans
     /**
      * Получаем число - количество заявок на регистрацию кланов, поданных сегодня
      *
-     * @return bool|int|string|null
+     * @return int|string|null
      */
     public static function getTodayTicketsCount()
     {

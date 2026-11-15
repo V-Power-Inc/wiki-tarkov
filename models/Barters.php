@@ -93,7 +93,7 @@ class Barters extends ActiveRecord
      * Получаем бартеры для торговца по названию торговца title
      *
      * @param string $title
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeBartersByTitle(string $title): array
     {

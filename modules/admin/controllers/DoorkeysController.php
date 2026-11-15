@@ -111,7 +111,8 @@ final class DoorkeysController extends AdminController implements CrudInterface
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id - id параметр
      * @return mixed
-     * @throws
+     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable in case delete failed.
      */
     public function actionDelete(int $id)
     {

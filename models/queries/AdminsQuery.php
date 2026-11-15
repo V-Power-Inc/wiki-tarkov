@@ -10,10 +10,13 @@ namespace app\models\queries;
 
 use app\models\Admins;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use yii\db\Connection;
 
 /**
  * Индивидуальный класс ActiveQuery для AR модели
+ *
+ * @template T of Admins|array = Admins
+ * @extends ActiveQuery<T>
  *
  * Class AdminsQuery
  * @package app\models\queries
@@ -22,8 +25,8 @@ final class AdminsQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord[]
+     * @param Connection|null $db
+     * @return T[]
      */
     public function all($db = null)
     {
@@ -33,8 +36,8 @@ final class AdminsQuery extends ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord|null
+     * @param Connection|null $db
+     * @return T|null
      */
     public function one($db = null)
     {
@@ -45,7 +48,7 @@ final class AdminsQuery extends ActiveQuery
     /**
      * Метод для выбора пользователей, которые не являются забаненными
      *
-     * @return AdminsQuery
+     * @return $this
      */
     public function notBanned(): AdminsQuery
     {
