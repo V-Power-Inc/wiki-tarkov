@@ -56,6 +56,14 @@ jobs:
   # Собираем проект и прогоняем тестами
   Tests:
     runs-on: ubuntu-22.04
+    # Одноразовые значения только для CI 
+    env:
+      CI_DB_NAME: dev_eft
+      CI_DB_TEST_NAME: test_migrations_db
+      CI_DB_USER: prod_user
+      CI_DB_PASSWORD: ci_password
+      CI_DB_HOST: db
+      CI_REDIS_HOST: redis
     steps:
       - uses: actions/checkout@v4
         with:
@@ -88,41 +96,25 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
-      # Настройка переменных окружения + пара заглушек для ENV
+      # Формируем .env для CI из одноразовых значений задачи (см. env у задачи Tests) + пара заглушек
       - name: Set up environment variables
-        env:
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          REDIS_HOST: ${{ secrets.REDIS_HOST }}
-          DB_DSN: ${{ secrets.DB_DSN }}
-          DB_TEST_DSN: ${{ secrets.DB_TEST_DSN }}
-          DB_TEST_CHARSET: ${{ secrets.DB_TEST_CHARSET }}
-          DB_CHARSET: ${{ secrets.DB_CHARSET }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-          DOMAIN_PROTOCOL: ${{ secrets.DOMAIN_PROTOCOL }}
-          DB_TEST_NAME: ${{ secrets.DB_TEST_NAME }}
-          DB_TEST_USER: ${{ secrets.DB_TEST_USER }}
-          DB_TEST_PASSWORD: ${{ secrets.DB_TEST_PASSWORD }}
-          PROBLEM_URLS: test1,test2,test
-          PROBLEM_NAMES: test_value
         run: |
           cat << EOF > .env
-          DB_NAME="$DB_NAME"
-          DB_USER="$DB_USER"
-          DB_PASSWORD="$DB_PASSWORD"
-          REDIS_HOST="$REDIS_HOST"
-          DB_DSN="$DB_DSN"
-          DB_TEST_DSN="$DB_TEST_DSN"
-          DB_TEST_CHARSET="$DB_TEST_CHARSET"
-          DB_CHARSET="$DB_CHARSET"
-          DOMAIN="$DOMAIN"
-          DOMAIN_PROTOCOL="$DOMAIN_PROTOCOL"
-          DB_TEST_NAME="$DB_TEST_NAME"
-          DB_TEST_USER="$DB_TEST_USER"
-          DB_TEST_PASSWORD="$DB_TEST_PASSWORD"
-          PROBLEM_URLS="$PROBLEM_URLS"
-          PROBLEM_NAMES="$PROBLEM_NAMES"
+          DB_NAME="$CI_DB_NAME"
+          DB_USER="$CI_DB_USER"
+          DB_PASSWORD="$CI_DB_PASSWORD"
+          DB_DSN="mysql:host=$CI_DB_HOST;dbname=$CI_DB_NAME"
+          DB_CHARSET=utf8
+          DB_TEST_NAME="$CI_DB_TEST_NAME"
+          DB_TEST_USER="$CI_DB_USER"
+          DB_TEST_PASSWORD="$CI_DB_PASSWORD"
+          DB_TEST_DSN="mysql:host=$CI_DB_HOST;dbname=$CI_DB_TEST_NAME"
+          DB_TEST_CHARSET=utf8
+          REDIS_HOST="$CI_REDIS_HOST"
+          DOMAIN=localhost
+          DOMAIN_PROTOCOL=http://
+          PROBLEM_URLS=test1,test2,test
+          PROBLEM_NAMES=test_value
           COOKIE_VALIDATION_KEY="$(openssl rand -hex 32)"
           DEBUG_STATUS=true
           ENVIRONMENT=dev
@@ -154,25 +146,32 @@ jobs:
 
       # Настройка базы данных
       - name: Configure database
-        env:
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
           echo -e "\033[1;34m⏳ Waiting for MySQL to be ready...\033[0m"
+          ready=0
           for i in {1..30}; do
-            if docker exec tarkov_db mysqladmin ping -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --silent; then
+            if docker exec tarkov_db mysqladmin ping -h"localhost" -P"3306" -u"root" -p"$CI_DB_PASSWORD" --silent; then
               echo -e "\033[1;32m✅ MySQL is ready!\033[0m"
+              ready=1
               break
             fi
             echo -e "\033[1;33m⏳ Waiting for MySQL to be ready... attempt $i/30\033[0m"
             sleep 2
           done
 
+          # Если БД так и не поднялась - сразу падаем с понятной ошибкой и логом контейнера
+          if [ "$ready" -ne 1 ]; then
+            echo "::error::MariaDB не запустилась за 60 секунд"
+            docker logs tarkov_db --tail 50
+            exit 1
+          fi
+
           echo -e "\033[1;34m⚙️ Configuring database...\033[0m"
-          docker exec -t tarkov_db mysql -h"localhost" -P"3306" -u"root" -p"$DB_PASSWORD" --execute "
-            CREATE DATABASE IF NOT EXISTS test_migrations_db;
-            GRANT SUPER ON *.* to 'prod_user'@'%' WITH GRANT OPTION;
-            GRANT ALL PRIVILEGES ON dev_eft.* to 'prod_user'@'%' WITH GRANT OPTION;
-            GRANT ALL PRIVILEGES ON test_migrations_db.* to 'prod_user'@'%' WITH GRANT OPTION;"
+          docker exec tarkov_db mysql -h"localhost" -P"3306" -u"root" -p"$CI_DB_PASSWORD" --execute "
+            CREATE DATABASE IF NOT EXISTS $CI_DB_TEST_NAME;
+            GRANT SUPER ON *.* to '$CI_DB_USER'@'%' WITH GRANT OPTION;
+            GRANT ALL PRIVILEGES ON $CI_DB_NAME.* to '$CI_DB_USER'@'%' WITH GRANT OPTION;
+            GRANT ALL PRIVILEGES ON $CI_DB_TEST_NAME.* to '$CI_DB_USER'@'%' WITH GRANT OPTION;"
 
       # Применение миграций
       - name: Run migrations
