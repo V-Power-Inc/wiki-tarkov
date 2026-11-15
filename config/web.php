@@ -22,8 +22,9 @@ $config = [
 
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '1hBkrFZrVWrw8sN25lzsC_f99y1waHDa',
+            // Ключ подписи cookie - только из .env (старый ключ лежал в репозитории и считается скомпрометированным).
+            // Если переменная не задана - Yii сам выбросит InvalidConfigException, работать с пустым ключом нельзя
+            'cookieValidationKey' => $_ENV['COOKIE_VALIDATION_KEY'] ?? '',
         ],
         'assetManager' => [
             'linkAssets' => true
