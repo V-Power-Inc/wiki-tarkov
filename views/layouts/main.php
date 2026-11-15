@@ -22,6 +22,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#121412">
     <link rel="icon" href="<?=$_ENV['DOMAIN_PROTOCOL'] . $_ENV['DOMAIN']?>/favicon.png" type="image/png">
     <meta name="yandex-verification" content="114a7ff38e4fe597" />
     <meta name="verification" content="2899618770bb593c65f207fbe992fc" />
@@ -38,11 +39,14 @@ AppAsset::register($this);
 
     <!-- Check styles, which enabled by user -->
     <?php if (isset($cookies[CookieComponent::NAME_DARK_THEME])): ?>
-        <link id="dark_theme" href="/css/dark-theme.css?v=6.8.12" rel="stylesheet">
+        <link id="dark_theme" href="/css/dark-theme.css?v=7.1.0" rel="stylesheet">
     <?php endif; ?>
 
     <!-- Вынесено сюда из за возможностей менять цветовую тему -->
-    <link href="/css/media-queryes.css?v=6.8.12" rel="stylesheet">
+    <link href="/css/media-queryes.css?v=7.0.0" rel="stylesheet">
+
+    <!-- Новое оформление сайта: подключается последним, чтобы переопределять старые стили -->
+    <link href="/css/theme.css?v=7.1.2" rel="stylesheet">
 
 </head>
 
@@ -78,12 +82,30 @@ AppAsset::register($this);
     <div class="container nobackground">
         <div class="row">
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <a class="footer-brand" href="/">
+                    <img src="/img/logo.png" alt="Логотип EFT">
+                    <span>База знаний <b>Escape from Tarkov</b></span>
+                </a>
+
                 <p class="marks">Все права на Escape from Tarkov принадлежат Battlestate Games Limited <br> <a href="https://www.escapefromtarkov.com">Официальный сайт разработчиков</a></p>
 
                 <p class="github-repo marks">Проект wiki-tarkov имеет открытый исходный код. Код доступен на <a href="https://github.com/V-Power-Inc/wiki-tarkov" target="_blank" onclick="ym(47100633,'reachGoal','github_link')"><b>GitHub</b></a></p>
             </div>
 
-            <div class="col-lg-4 col-lg-offset-3 col-md-offset-3 col-md-4 col-sm-12 col-xs-12">
+            <!-- Быстрая навигация по основным разделам -->
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <p class="footer-title">Разделы</p>
+                <ul class="footer-links">
+                    <li><a href="/maps">Карты локаций</a></li>
+                    <li><a href="/quests-of-traders">Торговцы и квесты</a></li>
+                    <li><a href="/keys">Справочник ключей</a></li>
+                    <li><a href="/loot">Справочник лута</a></li>
+                    <li><a href="/skills">Умения персонажа</a></li>
+                    <li><a href="/news">Новости</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <p class="copyright text-center">© 2017-<?= date("Y") ?>&nbsp;<span class="organization_footer_title">V-Power</span></p>
 
                 <div class="icons-soc">
