@@ -10,7 +10,8 @@ use yii\web\JqueryAsset;
 use app\models\Traders;
 use app\models\Barters;
 
-/* @var Traders $trader - AR объект торговца */
+/** @var yii\web\View $this */
+/** @var Traders $trader - AR объект торговца */
 
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/questions.js', ['depends' => [JqueryAsset::class]]);

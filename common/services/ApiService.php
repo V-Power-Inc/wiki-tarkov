@@ -367,32 +367,16 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
             return false;
         }
 
-        /** Проверка - если в БД у нас нет похожих записей, тогда должны спарсить и создать */
-        if (!ApiLoot::findItemsByName($model->item_name)) {
+        /** В БД у нас нет похожих записей - парсим и создаем */
+        /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
+        if ($this->createNewItems($model)) {
 
-            /** Если нам удалось создать новые предметы, возвращаем их в контроллер */
-            if ($this->createNewItems($model)) {
-
-                /** Возвращаем в контроллер набор данных, который искали ранее */
-                return ApiLoot::findItemsByName($model->item_name);
-            }
-
-            /** Возвращаем False в контроллер, если в API нет данных */
-            return false;
+            /** Возвращаем в контроллер набор данных, который искали ранее */
+            return ApiLoot::findItemsByName($model->item_name);
         }
 
-        /** Логируем в БД ошибку */
-        LogService::saveErrorData(
-            Yii::$app->request->getUrl(),
-            ErrorDesc::TYPE_SERVER_API_ERROR,
-            ErrorDesc::DESC_SERVER_API_ERROR,
-            ResponseStatusInterface::SERVER_ERROR_CODE,
-            true,
-            true
-        );
-
-        /** Эксепшн на случай непредвиденных обстоятельств (Мы не должны сюда попадать, т.к. должны по идее остаться в одном из кейсов выше) */
-        throw new HttpException(ResponseStatusInterface::SERVER_ERROR_CODE, 'Server error code');
+        /** Возвращаем False в контроллер, если в API нет данных */
+        return false;
     }
 
     /**

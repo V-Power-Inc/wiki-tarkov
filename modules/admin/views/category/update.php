@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Category */
+/** @var yii\web\View $this */
+/** @var app\models\Category $model */
 
 $this->title = 'Обновить категорию: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

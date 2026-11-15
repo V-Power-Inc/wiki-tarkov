@@ -9,7 +9,7 @@
  *
  * @var ApiForm $form_model - Объект формы для загрузки поискового запроса
  * @var ApiLoot[] $items - массив AR объектов ApiLoot
- * @var Pagination $pagination - объект пагинации
+ * @var Pagination|null $pagination - объект пагинации
  */
 
 use app\common\constants\api\ItemAttributes;
@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
 use kartik\typeahead\Typeahead;
+
+/** @var yii\web\View $this */
 
 $this->title = 'Справочник лута в Escape from Tarkov';
 

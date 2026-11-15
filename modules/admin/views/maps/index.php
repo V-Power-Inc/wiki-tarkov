@@ -5,9 +5,9 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use app\models\Maps;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\MapsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\MapsSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Маркеры интерактивных карт';
 $this->params['breadcrumbs'][] = $this->title;

@@ -19,7 +19,7 @@ use Yii;
  * @property string $title
  * @property string $preview
  * @property string $content
- * @property string $urltoquets
+ * @property string|null $urltoquets
  * @property string $button_quests
  * @property string $button_detail
  * @property string $bg_style

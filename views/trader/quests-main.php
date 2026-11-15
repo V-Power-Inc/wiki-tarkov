@@ -8,7 +8,8 @@
 
 use app\models\Traders;
 
-/* @var Traders[] $traders - массив объектов трейдеров */
+/** @var yii\web\View $this */
+/** @var Traders[] $traders - массив объектов трейдеров */
 
 $this->title = 'Торговцы в Escape from Tarkov - описания торговцев и разбор квестов';
 

@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Articles */
+/** @var yii\web\View $this */
+/** @var app\models\Articles $model */
 
 $this->title = 'Создать новую полезную статью';
 $this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];

@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Barters */
+/** @var yii\web\View $this */
+/** @var app\models\Barters $model */
 
 $this->title = 'Обновить бартер: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Barters', 'url' => ['index']];

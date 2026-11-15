@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Doorkeys */
+/** @var yii\web\View $this */
+/** @var app\models\Doorkeys $model */
 
 $this->title = 'Создать новый ключ';
 $this->params['breadcrumbs'][] = ['label' => 'Doorkeys', 'url' => ['index']];

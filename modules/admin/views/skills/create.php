@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Skills */
+/** @var yii\web\View $this */
+/** @var app\models\Skills $model */
 
 $this->title = 'Create Skills';
 $this->params['breadcrumbs'][] = ['label' => 'Skills', 'url' => ['index']];

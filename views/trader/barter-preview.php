@@ -9,6 +9,8 @@
 use yii\web\JqueryAsset;
 use app\models\Barters;
 
+/** @var yii\web\View $this */
+
 /**
  * @var Barters $barter - AR объект бартера
  * @var int $id - id бартера торговца

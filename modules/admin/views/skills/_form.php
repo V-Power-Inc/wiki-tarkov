@@ -7,9 +7,9 @@ use mihaildev\ckeditor\CKEditor;
 use app\models\Catskills;
 use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Skills */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\Skills $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="skills-form">

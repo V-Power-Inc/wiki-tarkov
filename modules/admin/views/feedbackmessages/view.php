@@ -5,8 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\FeedbackMessages */
+/** @var yii\web\View $this */
+/** @var app\models\FeedbackMessages $model */
 
 $this->title = 'Заявка № ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Feedback Messages', 'url' => ['index']];

@@ -34,7 +34,6 @@ final class ObjectivesItem
      *
      * ObjectivesItem constructor.
      * @param array $objectives
-     * @return mixed
      */
     public function __construct(?array $objectives = null)
     {
@@ -59,9 +58,6 @@ final class ObjectivesItem
                 /** Добавдяем новый объект в массив объектов задач */
                 $this->_items[] = $model;
             }
-
-            /** Возращаем массив объектов задачи */
-            return $this->_items;
         }
     }
 }

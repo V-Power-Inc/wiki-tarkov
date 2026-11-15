@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use himiklab\yii2\recaptcha\ReCaptcha2;
 
+/** @var yii\web\View $this */
+/** @var app\models\Login $model - модель формы авторизации */
+
 $this->title = 'Авторизация';
 
 $this->registerCssFile("css/particles.css", ['depends' => ['app\assets\AppAsset']]);

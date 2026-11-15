@@ -7,13 +7,15 @@
  */
 
 /**
- * @var $dollar Currencies - AR объект доллара
- * @var $euro Currencies - AR объект евро
- * @var $bitkoin Currencies - AR объект биткоина
+ * @var Currencies|null $dollar - AR объект доллара
+ * @var Currencies|null $euro - AR объект евро
+ * @var Currencies|null $bitkoin - AR объект биткоина
  */
 
 use yii\web\JqueryAsset;
 use app\models\Currencies;
+
+/** @var yii\web\View $this */
 
 $this->title = 'Курс валют в Escape from Tarkov';
 $this->registerMetaTag([

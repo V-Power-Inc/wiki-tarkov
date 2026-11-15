@@ -15,7 +15,9 @@ use yii\web\JsExpression;
 use app\models\Category;
 use app\models\Items;
 
-/* @var Category $cat - AR объект категории справочника лута */
+/** @var yii\web\View $this */
+/** @var yii\data\Pagination $pagination - объект пагинации */
+/** @var Category $cat - AR объект категории справочника лута */
 
 $this->title = "Escape from Tarkov: " . $cat[Category::ATTR_TITLE];
 
@@ -174,7 +176,7 @@ $this->registerJsFile('js/fix-img-blocks.js', ['depends' => [JqueryAsset::class]
                                 'firstPageLabel' => 'первая',
                                 'lastPageLabel' => 'последняя',
                                 'prevPageLabel' => '&laquo;',
-                                'prevPageLabel' => '&laquo;',
+                                'nextPageLabel' => '&raquo;',
                             ]);
                             ?>
                         </div>

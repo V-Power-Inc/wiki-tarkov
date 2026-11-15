@@ -12,6 +12,8 @@ use app\common\services\CanonicalPagesService;
 use yii\helpers\Url;
 use yii\web\JqueryAsset;
 
+/** @var yii\web\View $this */
+
 $this->registerCssFile("js/leaflet/leaflet.css", ['depends' => ['app\assets\AppAsset']]);
 $this->registerJsFile('js/leaflet/leaflet.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/map_hash.js', ['depends' => [JqueryAsset::class]]);

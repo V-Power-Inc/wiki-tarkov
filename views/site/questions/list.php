@@ -11,7 +11,8 @@ use yii\web\JqueryAsset;
 use yii\widgets\LinkPager;
 use yii\data\Pagination;
 
-/* @var Pagination $pagination - объекта класса пагинации */
+/** @var yii\web\View $this */
+/** @var Pagination $pagination - объекта класса пагинации */
 
 $this->title = 'Escape from Tarkov: Часто задаваемые вопросы';
 $this->registerMetaTag([

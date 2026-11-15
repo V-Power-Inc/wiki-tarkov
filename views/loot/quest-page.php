@@ -12,6 +12,8 @@ use app\components\LeftmenuWidget;
 use yii\bootstrap\ActiveForm;
 use app\models\Items;
 
+/** @var yii\web\View $this */
+/** @var Items[] $allquestitems - массив квестовых предметов (если поиск не выполнялся) */
 /** @var Items $form_model - AR объект Items, форма в данном случае */
 
 $this->title = 'Квестовые предметы Escape from Tarkov';

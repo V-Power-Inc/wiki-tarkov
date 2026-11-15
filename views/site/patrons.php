@@ -8,10 +8,12 @@
 
 /** Вьюха с таблицей патронов Escape from Tarkov
  *
- * @var array $partons - Массив данных из AR Patrons в виде массива
+ * @var array $patrons - Массив данных из AR Patrons в виде массива
  */
 
 use app\models\Patrons;
+
+/** @var yii\web\View $this */
 
 $this->title = "Таблица патронов Escape from Tarkov";
 

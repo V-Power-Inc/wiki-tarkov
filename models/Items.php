@@ -35,7 +35,7 @@ use Yii;
  * @property string|string[] $trader_group
  * @property string $search_words
  * @property string $module_weapon
- * @property string $creator
+ * @property string|null $creator
  *
  * @property Category $parentcat
  * @property Category $maintcat

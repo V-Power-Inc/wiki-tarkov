@@ -9,7 +9,8 @@
 use app\models\Skills;
 use yii\web\JqueryAsset;
 
-/* @var Skills $item - объект справочника лута */
+/** @var yii\web\View $this */
+/** @var Skills $item - объект справочника лута */
 
 /** Преобразуем title в нижний регистр **/
 $lowertitle = mb_strtolower($item->title);

@@ -4,9 +4,9 @@ use app\models\Doorkeys;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\DoorkeysSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\DoorkeysSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Справочник ключей';
 $this->params['breadcrumbs'][] = $this->title;

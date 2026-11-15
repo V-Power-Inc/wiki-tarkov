@@ -6,8 +6,8 @@
  * Time: 14:26
  */
 
-/* @var $this \yii\web\View */
-/* @var $content string */
+/** @var \yii\web\View $this */
+/** @var string $content */
 
 use app\assets\AdminAsset;
 use yii\helpers\Url;

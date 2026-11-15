@@ -4,9 +4,9 @@ use app\models\Currencies;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Currencies */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\Currencies $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="currencies-form">

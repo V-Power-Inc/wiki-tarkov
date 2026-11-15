@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Questions */
+/** @var yii\web\View $this */
+/** @var app\models\Questions $model */
 
 $this->title = 'Создание нового вопроса и ответа';
 $this->params['breadcrumbs'][] = ['label' => 'Questions', 'url' => ['index']];

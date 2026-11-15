@@ -5,9 +5,9 @@ use yii\grid\GridView;
 use app\models\Category;
 use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\CategorySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\CategorySearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Список категорий справочника лута';
 $this->params['breadcrumbs'][] = $this->title;

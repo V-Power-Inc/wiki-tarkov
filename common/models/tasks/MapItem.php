@@ -16,7 +16,7 @@ namespace app\common\models\tasks;
  */
 final class MapItem
 {
-    /** @var string - Название карты */
+    /** @var string|null - Название карты (null, если локация не указана) */
     public $name;
 
     /**
@@ -33,8 +33,5 @@ final class MapItem
             /** Сетапим название карты */
             $this->name = $map['name'];
         }
-
-        /** Возвращаем результат - объект текущей модели */
-        return $this;
     }
 }

@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Catskills */
+/** @var yii\web\View $this */
+/** @var app\models\Catskills $model */
 
 $this->title = 'Создать новую категорию скила';
 $this->params['breadcrumbs'][] = ['label' => 'Catskills', 'url' => ['index']];

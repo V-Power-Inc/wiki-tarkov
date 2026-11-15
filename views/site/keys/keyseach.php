@@ -8,6 +8,8 @@
 use yii\bootstrap\ActiveForm;
 use app\models\Doorkeys;
 
+/** @var yii\web\View $this */
+
 $this->title = 'Справочник ключей Escape from Tarkov. Ключи от дверей в Таркове';
 $this->registerMetaTag([
     'name' => 'description',

@@ -7,9 +7,9 @@
  *
  * Вьюха с детальной информацией о боссах, которые присутствуют на конкретной карте
  *
- * @var $this yii\web\View
- * @var $map_title app\models\Bosses - Название текущей карты
- * @var $boss array - Массив с информацией о боссах на конкретной карте (Фактически раскодированный Json)
+ * @var yii\web\View $this
+ * @var app\models\Bosses $map_title - Название текущей карты
+ * @var array $boss - Массив с информацией о боссах на конкретной карте (Фактически раскодированный Json)
  */
 
 use app\controllers\BossesController;
