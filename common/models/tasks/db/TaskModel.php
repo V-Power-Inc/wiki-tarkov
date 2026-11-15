@@ -46,7 +46,7 @@ final class TaskModel extends Model
     public $trader_icon;
     private const ATTR_TRADER_ICON = 'trader_icon';
 
-    /** @var string - Строка с JSON данными о квесте (Содержит в себе полный набор данных) */
+    /** @var string|null - Строка с JSON данными о квесте (Содержит в себе полный набор данных) */
     public $json;
     private const ATTR_JSON = 'json';
 
@@ -74,7 +74,7 @@ final class TaskModel extends Model
      * @param array|null $task - данные с информацией о квесте (task массив)
      * @throws InvalidConfigException|\yii\db\Exception
      */
-    public function __construct(array $task = null, array $config = [])
+    public function __construct(?array $task = null, array $config = [])
     {
         /** Если массив с данными о квесте прилетел */
         if (!empty($task)) {

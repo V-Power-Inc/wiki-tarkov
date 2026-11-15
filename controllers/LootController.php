@@ -148,7 +148,7 @@ final class LootController extends AdvancedController
      * @throws LootControllerHttpException
      * @throws yii\db\Exception
      */
-    public function actionLootjson(string $q = null): string
+    public function actionLootjson(?string $q = null): string
     {
         /** Если запрос о луте прилетел через AJAX */
         if (Yii::$app->request->isAjax) {

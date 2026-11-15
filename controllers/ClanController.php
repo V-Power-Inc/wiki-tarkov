@@ -184,7 +184,7 @@ final class ClanController extends AdvancedController
      * @throws ClanControllerHttpException
      * @throws Exception
      */
-    public function actionClansearch(string $q = null): string
+    public function actionClansearch(?string $q = null): string
     {
         /** Если запрос пришел через AJAX */
         if (Yii::$app->request->isAjax) {

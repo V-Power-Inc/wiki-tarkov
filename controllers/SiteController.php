@@ -29,7 +29,6 @@ final class SiteController extends AdvancedController
     public const ACTION_NEWS                   = 'news';
     public const ACTION_NEWSDETAIL             = 'newsdetail';
     public const ACTION_ARTICLES               = 'articles';
-    public const ACTION_ARTICLESARTICLESDETAIL = 'articlesdetail';
     public const ACTION_QUESTIONS              = 'questions';
     public const ACTION_KEYSJSON               = 'keysjson';
     public const ACTION_CURRENCIES             = 'currencies';
@@ -61,7 +60,6 @@ final class SiteController extends AdvancedController
                     self::ACTION_NEWS,
                     self::ACTION_NEWSDETAIL,
                     self::ACTION_ARTICLES,
-                    self::ACTION_ARTICLESARTICLESDETAIL,
                     self::ACTION_QUESTIONS,
                     self::ACTION_CURRENCIES
                 ],
@@ -122,7 +120,7 @@ final class SiteController extends AdvancedController
      *
      * @param $id - параметр url ключа
      * @return string
-     * @throws \
+     * @throws SiteControllerHttpException
      */
     public function actionDoorkeysdetail($id): string
     {
@@ -161,7 +159,7 @@ final class SiteController extends AdvancedController
      *
      * @param $id - параметр url новости
      * @return string
-     * @throws SiteControllerHttpException(
+     * @throws SiteControllerHttpException
      */
     public function actionNewsdetail($id): string
     {
@@ -294,7 +292,7 @@ final class SiteController extends AdvancedController
      * Этот метод вешает куку overlay - которая скрывает рекламный блок overlay на всех страницах
      * сайта на 6 часов (Попадаем сюда с помощью Ajax при клике на кнопку "Закрыть" рекламного блока)
      *
-     * @return mixed
+     * @return bool
      * @throws SiteControllerHttpException - Если без AJAX пытаются сюда лезть прямым запросом
      */
     public function actionCloseOverlay(): bool

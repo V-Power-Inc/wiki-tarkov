@@ -5,11 +5,19 @@ on:
     types: [opened]
   pull_request:
     types: [opened]
+
+# По-умолчанию - бесправный токен
+permissions: {}
+
 jobs:
   run:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
-      - uses: wow-actions/auto-assign@v1
+      # Сторонний экшен закреплен на SHA коммита (тег v1.1.0 - на него сейчас указывает v1)
+      - uses: wow-actions/auto-assign@707ec486377e28a595619469e26b375d8746b330 # v1.1.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_FILE: .github/auto-assign.yml

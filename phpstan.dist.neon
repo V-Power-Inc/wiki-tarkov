@@ -1,0 +1,80 @@
+includes:
+    - vendor/mspirkov/yii2-phpstan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+
+    paths:
+        - assets
+        - commands
+        - common
+        - components
+        - config
+        - controllers
+        - mail
+        - migrations
+        - models
+        - modules
+        # TODO: включить анализ вьюшек отдельно (там много ошибок, которые связаны с некорректными `@var` аннотациями)
+        # - views
+        - widgets
+
+    excludePaths:
+        # TODO: включить анализ вьюшек отдельно (там много ошибок, которые связаны с некорректными `@var` аннотациями)
+        - modules/admin/views
+
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+
+    ignoreErrors:
+        # TODO: удалить после обновления Yii2 до версии 2.0.56
+        -
+            identifier: mspirkovYii2.baseObjectInstantiationValidation
+            message: '#^Object option "(sort|pagination)" for yii\\data\\\w+DataProvider must be .+, array.* given\.$#'
+
+    mspirkovYii2:
+        enableAllRules: false
+        enableValidationRules: true
+        applicationConfigs:
+            -
+                paths:
+                    - commands
+                    - migrations
+                files:
+                    - config/console.php
+            -
+                paths:
+                    - assets
+                    - common
+                    - components
+                    - controllers
+                    - mail
+                    - models
+                    - modules
+                    - views
+                    - widgets
+                files:
+                    - config/web.php
+        yiiAppTypes:
+            -
+                paths:
+                    - commands
+                    - migrations
+                type: yii\console\Application
+                nullable: false
+            -
+                paths:
+                    - assets
+                    - common
+                    - components
+                    - controllers
+                    - mail
+                    - models
+                    - modules
+                    - views
+                    - widgets
+                type: yii\web\Application<app\models\Admins>
+                nullable: false
+        aliases:
+            '@app': .
