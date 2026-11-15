@@ -8,7 +8,7 @@
 
 namespace app\common\services;
 
-use yii\db\{DataReader, Exception, Query};
+use yii\db\{Exception, Query};
 
 /**
  * Сервис для генерации SQL комманд через createCommand Yii
@@ -23,7 +23,7 @@ final class DbCommandService implements CommonServiceInterface
      *
      * @param Query $query - Объект DB Query
      *
-     * @return array|DataReader
+     * @return array<array<string, mixed>>
      * @throws Exception
      */
     public static function createCommandQueryAll(Query $query)

@@ -41,7 +41,7 @@ final class TaskRequirementsItem
      * TaskRequirementsItem constructor.
      * @param array $tasks
      */
-    public function __construct(array $tasks = null)
+    public function __construct(?array $tasks = null)
     {
         /** Если массив с данными о задачах - не пуст */
         if (!empty($tasks)) {

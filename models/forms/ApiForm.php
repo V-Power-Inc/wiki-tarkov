@@ -26,7 +26,7 @@ final class ApiForm extends Model
     public $item_name;
     public const ATTR_ITEM_NAME = 'item_name';
 
-    /** @var string - Переменная для рекапчи false */
+    /** @var string|false - Переменная для рекапчи false */
     public $recaptcha = false;
     public const ATTR_RECAPTCHA = 'recaptcha';
 

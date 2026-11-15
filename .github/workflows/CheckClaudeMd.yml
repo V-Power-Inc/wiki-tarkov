@@ -7,16 +7,22 @@ on:
       - "master"
       - "dev"
 
+# Безопасность: токен GITHUB_TOKEN только на чтение
+permissions:
+  contents: read
+
 jobs:
   claude-md:
     name: CLAUDE.md exists
     runs-on: ubuntu-latest
     steps:
-      # Забираем только нужный файл - полный checkout не нужен
+      # Забираем только нужный файл
       - uses: actions/checkout@v4
         with:
           sparse-checkout: CLAUDE.md
           sparse-checkout-cone-mode: false
+          # Не сохраняем токен в .git/config
+          persist-credentials: false
 
       # Имя проверяется с учетом регистра: Claude Code читает именно CLAUDE.md
       - name: Check CLAUDE.md in project root

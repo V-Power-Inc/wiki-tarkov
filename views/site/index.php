@@ -1,10 +1,8 @@
 <?php
 
-use yii\web\JqueryAsset;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-$this->registerJsFile('js/owl-init.js', ['depends' => [JqueryAsset::class]]);
-$this->registerJsFile('js/owl-js/owl.carousel.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'База знаний Escape from Tarkov. Карты локаций, ключи от дверей, разбор квестов торговцев';
 
 $this->registerMetaTag([
@@ -16,134 +14,145 @@ $this->registerMetaTag([
     'name' => 'keywords',
     'content' => 'Интерактивные карты локаций Escape from Tarkov, квесты Escape from Tarkov, Ключи Escape from Tarkov.',
 ]);
+
+/** Основные разделы сайта для сетки карточек на главной странице */
+$sections = [
+    [
+        'title' => 'Задачи у торговцев',
+        'url' => '/quests-of-traders',
+        'image' => '/img/mainpage/traders.png',
+        'icon' => 'fa-users',
+        'text' => 'Все доступные квесты торговцев: описания, рекомендации по прохождению и неочевидные нюансы, о которых стоит знать заранее.',
+        'link' => 'К квестам торговцев',
+    ],
+    [
+        'title' => 'Ключи от дверей',
+        'url' => '/keys',
+        'image' => '/img/mainpage/keys.png',
+        'icon' => 'fa-key',
+        'text' => 'Где найти нужный ключ, как выглядят открываемые им двери и что ждёт вас внутри запертых помещений.',
+        'link' => 'К справочнику ключей',
+    ],
+    [
+        'title' => 'Карты локаций',
+        'url' => '/maps',
+        'image' => '/img/mainpage/maps.png',
+        'icon' => 'fa-map',
+        'text' => 'Интерактивные карты с выходами, ключами, спавнами и квестовыми точками. Незаменимый инструмент перед каждым рейдом.',
+        'link' => 'К интерактивным картам',
+    ],
+    [
+        'title' => 'Справочник лута',
+        'url' => '/loot',
+        'image' => '/img/mainpage/mainloot.png',
+        'icon' => 'fa-cube',
+        'text' => 'Вся информация о предметах Таркова: от бесполезного хлама до оружия, модулей и экипировки.',
+        'link' => 'К справочнику лута',
+    ],
+    [
+        'title' => 'Справочник умений',
+        'url' => '/skills',
+        'image' => '/img/mainpage/skills.png',
+        'icon' => 'fa-line-chart',
+        'text' => 'Умения персонажа, доступные к прокачке, и их влияние на выживаемость. Цифры — из официальных материалов разработчиков.',
+        'link' => 'К справочнику умений',
+    ],
+    [
+        'title' => 'Квестовый лут',
+        'url' => '/loot/quest-loot',
+        'image' => '/img/mainpage/questloot.png',
+        'icon' => 'fa-flag',
+        'text' => 'Какие предметы обязательно сохранить для квестов, а какие можно смело продавать торговцам.',
+        'link' => 'К квестовым предметам',
+    ],
+];
+
+/** Быстрые ссылки на интерактивные карты локаций */
+$maps = [
+    'Завод' => '/maps/zavod-location#3/68.97/-8.00',
+    'Таможня' => '/maps/tamojnya-location#4/80.40/-75.98',
+    'Лес' => '/maps/forest-location#3/72.50/-9.58',
+    'Берег' => '/maps/bereg-location#3/60.93/-10.81',
+    'Развязка' => '/maps/razvyazka-location#3/75.32/-44.38',
+    'Лаборатория' => '/maps/terragroup-laboratory-location#2/41.0/-1.2',
+    'Резерв' => '/maps/rezerv-location#2/64.6/41.0',
+    'Маяк' => '/maps/lighthouse-location#2/74.0/65.2',
+    'Улицы Таркова' => '/maps/streets-of-tarkov-location#2/59.2/34.3',
+    'Эпицентр' => '/maps/epicenter#2/48.7/-24.8',
+    'Лабиринт' => '/maps/labyrinth-location#2/60.8/-86.0',
+];
 ?>
 
-<div class="owl-carousel owl-theme">
+<!-- Главный баннер -->
+<section class="home-hero">
+    <div class="container">
+        <div class="home-hero__content">
+            <span class="home-hero__eyebrow"><i class="fa fa-crosshairs"></i> Справочник выживания</span>
 
-    <div class="owl-item">
-        <img src="/img/slider/eft-2.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
-    </div>
+            <h1 class="home-hero__title">База знаний <span>Escape from Tarkov</span></h1>
 
-    <div class="owl-item">
-        <img src="/img/slider/eft-1.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
-    </div>
-    
-    <div class="owl-item">
-        <img src="/img/slider/eft-3.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
-    </div>
+            <p class="home-hero__lead">Квесты торговцев, ключи от дверей, интерактивные карты и справочник лута — всё, что нужно, чтобы вернуться из рейда живым.</p>
 
-    <div class="owl-item">
-        <img src="/img/slider/eft-4.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
-    </div>
-
-    <div class="owl-item">
-        <img src="/img/slider/eft-5.jpg" alt="Escape from Tarkov: Игровые скриншоты" title="Escape from Tarkov: Игровые скриншоты">
-    </div>
-    
-</div>
-
-<div class="container padding-top-0">
-    <div class="site-index">
-    
-        <div class="jumbotron jumbotron-main">
-            <h1 class="margin-top-10" style="font-size: 28px;">База знаний Escape from Tarkov</h1>
-    
-            <p class="lead">Здесь вы найдете информацию о важных аспектах внутриигрового процесса игры Escape from Tarkov. На сайте вы можете найти информацию о квестах торговцев, ключах от дверей и найти рекомендации по прохождению рейдов.</p>
-    
-            <p><a class="btn btn-lg btn-success main-inter-link mobile-display-none" href="/maps">Перейти к интерактивным картам Escape from Tarkov</a></p>
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
-            <!-- Empty space -->
-        </div>
-    
-        <div class="body-content">
-    
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Задачи у торговцев</h2>
-
-                    <a href="/quests-of-traders">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/traders.png" alt="Задачи у торговцев" title="Задачи у торговцев">
-                    </a>
-
-                    <p class="size-16">В этом разделе вы можете найти информацию о всех доступных квестах торговцев в Escape from Tarkov. Здесь собраны рекомендации по прохождению квестов, описания квестов, а также важные нюансы, которые являются неочевидными в процессе прохождения квестов Escape from Tarkov.</p>
-    
-                    <p><a class="btn btn-default main-link" href="/quests-of-traders">Перейти в раздел квестов EFT</a></p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Ключи от дверей</h2>
-
-                    <a href="/keys">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/keys.png" alt="Ключи от дверей" title="Ключи от дверей">
-                    </a>
-    
-                    <p class="size-16">В данном разделе - вы сможете найти информацию о любом ключе открывающим двери и помещения в Escape from Tarkov. Вы сможете увидеть где можно найти тот или иной ключ, как выглядят открываемые двери а также увидеть что находится внутри открытых вами помещений.</p>
-
-                    <p><a class="btn btn-default main-link" href="/keys">Перейти в раздел ключей EFT</a></p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Карты локаций</h2>
-
-                    <a href="/maps">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/maps.png" alt="Карты локаций" title="Карты локаций">
-                    </a>
-    
-                    <p class="size-16">Здесь вы сможете воспользоваться интерактивными картами локаций Escape from Tarkov - воспользоваться поиском ключей, посмотреть как выглядят карты локаций, сделать пометки по прохождению рейда. Очень полезный инструмент, который пригодится всем игрокам Escape from Tarkov.</p>
-    
-                    <p><a class="btn btn-default main-link" href="/maps">Перейти к интерактивным картам EFT</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Справочник лута</h2>
-
-                    <a href="/loot">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/mainloot.png" alt="Справочник лута" title="Справочник лута">
-                    </a>
-
-                    <p class="size-16">В этом разделе - вы найдете всю информацию по любому луту из Escape from Tarkov. Тут есть все от бесполезного хлама, до раздела со всем доступным оружием в игре и модулями, а также полная информация по любой экипировке доступной в Таркове.</p>
-
-                    <p><a class="btn btn-default main-link" href="/loot">Перейти в справочник лута EFT</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Справочник умений</h2>
-
-                    <a href="/skills">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/skills.png" alt="Справочник умений" title="Справочник умений">
-                    </a>
-
-                    <p class="size-16">В этом разделе - вы найдете всю доступную информацию об умениях персонажа, которые доступны к прокачке. Здесь можно узнать какие умения влияют на вашу выживаемость в мире Таркова. Информация и цифры взяты с официальных документов разработчиков.</p>
-
-                    <p><a class="btn btn-default main-link" href="/skills">Перейти в справочник умений EFT</a></p>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <h2>Квестовый лут</h2>
-
-                    <a href="/loot/quest-loot">
-                        <img class="preview-mainpage-desc" src="/img/mainpage/questloot.png" alt="Квестовый лут" title="Квестовый лут">
-                    </a>
-
-                    <p class="size-16">В этом разделе - вы узнаете какой лут обязательно стоит сохранить, т.к. в Таркове есть квесты - необходимо знать какой лут вам пригодится, а какой можно продать - именно тут вы узнаете какие предметы являются квестовыми в Таркове.</p>
-
-                    <p><a class="btn btn-default main-link" href="/loot/quest-loot">Перейти к квестовым предметам EFT</a></p>
-                </div>
-
+            <div class="home-hero__actions">
+                <a class="home-btn home-btn--primary" href="/maps"><i class="fa fa-map"></i> Перейти к интерактивным картам Escape from Tarkov</a>
+                <a class="home-btn home-btn--ghost" href="/quests-of-traders"><i class="fa fa-users"></i> Квесты торговцев</a>
             </div>
 
-            <div class="margin-top-20">
-                    
-                <div class="row margin-top-20">
-                    
-                    <!-- Dop. content block -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-adb">
-                        <!-- Empty space -->
+            <div class="home-hero__stats">
+                <div class="home-hero__stat"><b><?= count($maps) ?></b><span>интерактивных карт</span></div>
+                <div class="home-hero__stat"><b>8</b><span>торговцев с квестами</span></div>
+                <div class="home-hero__stat"><b>2017</b><span>работаем с этого года</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Место под рекламный блок -->
+<div class="no-adb"></div>
+
+<!-- Основные разделы -->
+<section class="home-section">
+    <div class="container">
+        <div class="home-section__head">
+            <h2>Разделы базы знаний</h2>
+            <p>Здесь собрана информация о важных аспектах внутриигрового процесса — выберите, с чего начать.</p>
+        </div>
+
+        <div class="home-grid">
+            <?php foreach ($sections as $section): ?>
+                <a class="home-card" href="<?= Html::encode($section['url']) ?>">
+                    <div class="home-card__media-wrap">
+                        <div class="home-card__media">
+                            <img src="<?= Html::encode($section['image']) ?>" alt="<?= Html::encode($section['title']) ?>" loading="lazy">
+                        </div>
+                        <span class="home-card__icon"><i class="fa <?= Html::encode($section['icon']) ?>"></i></span>
                     </div>
-
-                </div>
-            </div>
-            
+                    <div class="home-card__body">
+                        <h3 class="home-card__title"><?= Html::encode($section['title']) ?></h3>
+                        <p class="home-card__text"><?= Html::encode($section['text']) ?></p>
+                        <span class="home-card__more"><?= Html::encode($section['link']) ?> <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Место под дополнительный рекламный блок -->
+<div class="no-adb"></div>
+
+<!-- Быстрый переход к картам локаций -->
+<section class="home-maps">
+    <div class="container">
+        <div class="home-section__head">
+            <h2>Быстрый переход к картам</h2>
+            <p>Откройте интерактивную карту нужной локации в один клик.</p>
+        </div>
+
+        <div class="home-chips">
+            <?php foreach ($maps as $name => $url): ?>
+                <a class="home-chip" href="<?= Html::encode($url) ?>"><i class="fa fa-map-marker"></i> <?= Html::encode($name) ?></a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

@@ -4,9 +4,15 @@ on:
     types:
       - closed
 
+# Безопасность: по умолчанию у токена нет никаких прав
+permissions: {}
+
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    # Удаление кеша требует только actions: write
+    permissions:
+      actions: write
     steps:
       - name: Cleanup
         run: |

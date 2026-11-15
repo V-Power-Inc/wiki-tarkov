@@ -190,7 +190,7 @@ class Traders extends ActiveRecord
      * Ищем активного торговца по параметру url
      *
      * @param string $url - url параметр (строка)
-     * @return ActiveRecord
+     * @return Traders|null
      */
     public static function takeTraderByUrl(string $url): ? ActiveRecord
     {

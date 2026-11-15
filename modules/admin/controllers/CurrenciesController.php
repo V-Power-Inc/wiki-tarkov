@@ -48,7 +48,7 @@ final class CurrenciesController extends AdminController implements CrudInterfac
     /**
      * Displays a single Currencies model.
      * @param integer $id
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id): string
@@ -101,7 +101,8 @@ final class CurrenciesController extends AdminController implements CrudInterfac
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id - id параметр
      * @return mixed
-     * @throws
+     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable in case delete failed.
      */
     public function actionDelete(int $id)
     {

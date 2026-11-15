@@ -112,7 +112,7 @@ class Category extends ActiveRecord
     /**
      * Получаем все категории которые активны
      *
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public function getMainCategories() {
 
@@ -128,7 +128,7 @@ class Category extends ActiveRecord
      *
      * @param int $id - ID категории
      *
-     * @return array|ActiveRecord|null
+     * @return Category|null
      */
     public static function getCategoryById(int $id)
     {
@@ -141,7 +141,7 @@ class Category extends ActiveRecord
     /**
      * Получаем массив всех дочерних категорий, включенных и выключенных
      *
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public function getChildCategories() {
 
@@ -187,7 +187,7 @@ class Category extends ActiveRecord
      * Получаем одну активную категорию по параметру - URL
      *
      * @param string $url
-     * @return array|ActiveRecord|null
+     * @return Category|null
      */
     public static function getActiveCategoryByUrl(string $url)
     {

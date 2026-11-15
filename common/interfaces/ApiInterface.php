@@ -28,7 +28,7 @@ interface ApiInterface
      * @param string|null $map_name - имя локации
      * @return mixed
      */
-    function getBosses(string $map_name = null);
+    function getBosses(?string $map_name = null);
 
     /**
      * Метод для получения предметов из API по поисковому запросу из специальной формы

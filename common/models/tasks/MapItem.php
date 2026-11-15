@@ -25,7 +25,7 @@ final class MapItem
      * MapItem constructor.
      * @param array $map
      */
-    public function __construct(array $map = null)
+    public function __construct(?array $map = null)
     {
         /** Если массив с данными о картах не пуст */
         if (!empty($map)) {

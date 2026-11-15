@@ -22,10 +22,10 @@ use app\common\helpers\validators\SafeValidator;
  * This is the model class for table "admins".
  *
  * @property int $id             - id Primary Key
- * @property int $banned         - Флаг бана пользователя
+ * @property int|null $banned    - Флаг бана пользователя
  * @property string $user        - Логин пользователя, в переводе назван почтой
  * @property string $password    - Пароль пользователя
- * @property string $captcha     - Гугл капча
+ * @property string|null $captcha - Гугл капча
  * @property int $remember_me    - Флаг запомнить меня
  * @property string $role        - Роль пользователя
  * @property string $name        - Имя пользователя

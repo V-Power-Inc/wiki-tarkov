@@ -32,10 +32,10 @@ class Login extends Model
     public $rememberMe;
     public const ATTR_REMEMBER_ME = 'rememberMe';
 
-    /** @var Admins - Объект пользователя */
+    /** @var Admins|null|false - Объект пользователя */
     private $_user = false;
 
-    /** @var string - Атрибут модели - капча */
+    /** @var string|false - Атрибут модели - капча */
     public $reCaptcha = false;
     public const ATTR_RECAPTCHA = 'reCaptcha';
 

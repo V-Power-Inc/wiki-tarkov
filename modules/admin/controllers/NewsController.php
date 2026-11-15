@@ -65,7 +65,7 @@ final class NewsController extends AdminController implements CrudInterface
      * UPD 04_03_2024г. - Функционал полностью убран из проекта (Смотреть историю коммитов)
      *
      * @return mixed
-     * @throws
+     * @throws \Throwable in case insert failed.
      */
     public function actionCreate()
     {
@@ -116,7 +116,8 @@ final class NewsController extends AdminController implements CrudInterface
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id - id параметр
      * @return mixed
-     * @throws
+     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable in case delete failed.
      */
     public function actionDelete(int $id)
     {

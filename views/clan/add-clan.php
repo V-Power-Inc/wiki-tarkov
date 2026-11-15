@@ -61,10 +61,13 @@ $this->registerMetaTag([
                     <?= $form->field($model, ClansForm::ATTR_DATE_UPDATE)->hiddenInput(['value' => date("Y-m-d H:i:s",time())])->label('') ?>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <button class="btn btn-primary" id="upl-clan-logo" type="button">Загрузить логотип</button>
-                    <button type="submit" class="btn btn-success mbl-margin-btn">Зарегистрировать клан</button>
-                    <a class="btn btn-info sc-margin-sc-btn" href="/clans">Вернуться к списку кланов</a>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!-- Панель действий формы: кнопки в одну строку, на мобильных — столбиком -->
+                    <div class="form-actions">
+                        <button class="btn btn-default btn-icon" id="upl-clan-logo" type="button"><i class="fa fa-upload"></i> Загрузить логотип</button>
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fa fa-check"></i> Зарегистрировать клан</button>
+                        <a class="btn btn-link btn-icon form-actions__back" href="/clans"><i class="fa fa-arrow-left"></i> Вернуться к списку кланов</a>
+                    </div>
                     <?= $form->field($model, ClansForm::FILE)->fileInput(['class' => 'vs-none'])->label('') ?>
                 </div>
 

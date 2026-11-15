@@ -32,7 +32,7 @@ use Yii;
  * @property string $keywords
  * @property integer $parentcat_id
  * @property integer $quest_item
- * @property string $trader_group
+ * @property string|string[] $trader_group
  * @property string $search_words
  * @property string $module_weapon
  * @property string $creator

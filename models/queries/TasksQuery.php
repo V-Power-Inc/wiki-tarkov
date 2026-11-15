@@ -8,11 +8,15 @@
 
 namespace app\models\queries;
 
+use app\models\Tasks;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use yii\db\Connection;
 
 /**
  * Индивидуальный класс ActiveQuery для AR модели
+ *
+ * @template T of Tasks|array = Tasks
+ * @extends ActiveQuery<T>
  *
  * Class TasksQuery
  * @package app\models\queries
@@ -21,8 +25,8 @@ final class TasksQuery extends ActiveQuery
 {
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord[]
+     * @param Connection|null $db
+     * @return T[]
      */
     public function all($db = null)
     {
@@ -32,8 +36,8 @@ final class TasksQuery extends ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @param null $db
-     * @return array|ActiveRecord|null
+     * @param Connection|null $db
+     * @return T|null
      */
     public function one($db = null)
     {
