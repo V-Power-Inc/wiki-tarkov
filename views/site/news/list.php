@@ -10,6 +10,8 @@ use yii\data\Pagination;
 use yii\widgets\LinkPager;
 use app\models\News;
 
+/** @var yii\web\View $this */
+
 /**
  * @var News[] $news - массив AR объектов класса новостей
  * @var Pagination $pagination - объект пагинации

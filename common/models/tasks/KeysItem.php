@@ -59,9 +59,6 @@ final class KeysItem
                     $this->_items[] = $model;
                 }
             }
-
-            /** Возвращаем массив объектов с информацией о ключах */
-            return $this->_items;
         }
     }
 }

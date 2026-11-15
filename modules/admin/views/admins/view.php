@@ -4,8 +4,8 @@ use app\models\Admins;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Admins */
+/** @var yii\web\View $this */
+/** @var app\models\Admins $model */
 
 $this->title = 'Администратор: ' . $model->user;
 $this->params['breadcrumbs'][] = ['label' => 'Администраторы', 'url' => ['index']];

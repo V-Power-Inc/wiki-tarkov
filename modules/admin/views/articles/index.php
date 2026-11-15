@@ -7,9 +7,9 @@ use app\models\Articles;
 use app\modules\admin\controllers\DefaultController;
 use app\modules\admin\controllers\ArticlesController;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticlesSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\ArticlesSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Список полезных статей';
 $this->params['breadcrumbs'][] = $this->title;

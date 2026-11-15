@@ -9,6 +9,9 @@
 use app\models\News;
 use yii\web\JqueryAsset;
 
+/** @var yii\web\View $this */
+/** @var News $model - AR объект новости */
+
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->registerJsFile('js/spoiler-script.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model[News::ATTR_TITLE];

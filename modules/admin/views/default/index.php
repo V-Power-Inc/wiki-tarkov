@@ -18,6 +18,8 @@ use app\modules\admin\controllers\AdminsController;
 
 use yii\helpers\Url;
 
+/** @var yii\web\View $this */
+
 $this->title = 'Админка '. $_ENV['DOMAIN'];
 
 /** Вьюха главной страницы админки - сюда попадаем после успешной авторизации */

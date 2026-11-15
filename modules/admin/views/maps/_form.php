@@ -6,9 +6,9 @@ use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
 use app\models\Maps;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Maps */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\Maps $model */
+/** @var yii\widgets\ActiveForm $form */
 
 $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>

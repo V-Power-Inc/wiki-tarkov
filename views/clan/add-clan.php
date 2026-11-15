@@ -9,6 +9,9 @@
 use app\common\models\forms\ClansForm;
 use yii\widgets\ActiveForm;
 
+/** @var yii\web\View $this */
+/** @var ClansForm $model - модель формы регистрации клана */
+
 $this->title = "Escape from Tarkov: Зарегистрировать новый клан";
 
 $this->registerMetaTag([

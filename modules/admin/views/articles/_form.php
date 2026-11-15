@@ -9,9 +9,9 @@ use mihaildev\ckeditor\CKEditor;
 use app\modules\admin\controllers\ArticlesController;
 use app\models\Articles;
 
-/* @var $this View - Объект View */
-/* @var $model Articles - Объект AR - Полезная статья */
-/* @var $form ActiveForm - Объект ActiveForm */
+/** @var View $this - Объект View */
+/** @var Articles $model - Объект AR - Полезная статья */
+/** @var ActiveForm $form - Объект ActiveForm */
 ?>
 <div class="articles-form">
 

@@ -16,13 +16,8 @@ parameters:
         - migrations
         - models
         - modules
-        # TODO: включить анализ вьюшек отдельно (там много ошибок, которые связаны с некорректными `@var` аннотациями)
-        # - views
+        - views
         - widgets
-
-    excludePaths:
-        # TODO: включить анализ вьюшек отдельно (там много ошибок, которые связаны с некорректными `@var` аннотациями)
-        - modules/admin/views
 
     bootstrapFiles:
         - phpstan-bootstrap.php

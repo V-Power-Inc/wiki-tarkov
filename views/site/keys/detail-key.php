@@ -9,6 +9,9 @@
 use app\models\Doorkeys;
 use yii\web\JqueryAsset;
 
+/** @var yii\web\View $this */
+/** @var Doorkeys $model - AR объект ключа */
+
 $this->title = 'Escape from Tarkov: ' .$model[Doorkeys::ATTR_NAME];
 $this->registerMetaTag([
     'name' => 'description',

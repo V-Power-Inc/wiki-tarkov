@@ -146,7 +146,7 @@ class Category extends ActiveRecord
     public function getChildCategories() {
 
         /** Выбираем все дочерние категории из базы */
-        $Childcategories = Category::find()->andWhere(static::ATTR_PARENT_CATEGORY !== null)->indexBy(static::ATTR_ID)->asArray()->all();
+        $Childcategories = Category::find()->andWhere(['not', [static::ATTR_PARENT_CATEGORY => null]])->indexBy(static::ATTR_ID)->asArray()->all();
 
         /** Возвращаем AR объекты в виде массивов с дочерними категориями */
         return $Childcategories;

@@ -6,9 +6,9 @@ use yii\jui\DatePicker;
 
 use app\models\FeedbackMessages;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\FeedbackMessagesSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\FeedbackMessagesSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Обратная связь с сайта';
 $this->params['breadcrumbs'][] = $this->title;

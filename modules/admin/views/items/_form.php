@@ -7,9 +7,9 @@ use mihaildev\ckeditor\CKEditor;
 use yii\helpers\ArrayHelper;
 use app\models\Category;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Items */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var app\models\Items $model */
+/** @var yii\widgets\ActiveForm $form */
 
 $this->registerJsFile('js/adminscript.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('js/preview.js', ['depends' => [\yii\web\JqueryAsset::class]]);

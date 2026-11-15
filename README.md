@@ -6,7 +6,7 @@
 [![GitHub Actions](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml/badge.svg)](https://github.com/PC-Principal/wiki-tarkov/actions/workflows/DockerApp-Actions.yml)
 [![Deploy on Prod](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml/badge.svg)](https://github.com/V-Power-Inc/wiki-tarkov/actions/workflows/DeployProd.yml)
 ![Site status](https://img.shields.io/badge/site%20status-disabled-red)
-![Stable Version](https://img.shields.io/badge/version-v9.1.2-brightgreen)
+![Stable Version](https://img.shields.io/badge/version-v9.1.6-brightgreen)
 ![Stable branch](https://img.shields.io/badge/Stable%20branch-master-success)
 ![Tests Count](https://img.shields.io/badge/tests%20count-804-informational)
 ![Tests Code Coverage](https://img.shields.io/badge/coverage-89%25-success)
@@ -39,6 +39,7 @@
 - API для получения дополнительной информации о луте (Стоимость, трейды, кто выдает и тому подобное)
 - Логирование поисковых запросов пользователей к Api (Включая записи о рекапче)
 - Сервис логирования ошибок в БД
+- Интеграция с PHPStan Yii2 от автора [@mspirkov](https://github.com/mspirkov)
 
 ## Yii2 basic reworked  ⭐
 В процессе разработки использовалась Yii2 basic, однако под нужды проекта она была доработана, в связи с чем в проекте появились некоторые нюансы.

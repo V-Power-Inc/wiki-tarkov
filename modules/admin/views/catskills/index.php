@@ -4,9 +4,9 @@ use app\models\Catskills;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\CatskillsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\CatskillsSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Категории скилов';
 $this->params['breadcrumbs'][] = $this->title;

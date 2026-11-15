@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Admins */
+/** @var yii\web\View $this */
+/** @var app\models\Admins $model */
 
 $this->title = 'Создать администратора';
 $this->params['breadcrumbs'][] = ['label' => 'Администраторы', 'url' => ['index']];

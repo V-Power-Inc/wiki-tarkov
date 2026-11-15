@@ -40,7 +40,6 @@ final class PaginationService implements CommonServiceInterface
      * @param ActiveQuery $query - базовый запрос на получение данных
      * @param int $pageSize - количество элементов на странице
      * @param bool $cache - Флаг кеша, по умолчанию активен
-     * @return $this
      */
     public function __construct(ActiveQuery $query, int $pageSize = self::defaultPageSize, bool $cache = true)
     {
@@ -63,8 +62,5 @@ final class PaginationService implements CommonServiceInterface
                 ->limit($this->paginator->limit)
                 ->all();
         }
-
-        /** Возвращаем экземпляр текущего класса */
-        return $this;
     }
 }

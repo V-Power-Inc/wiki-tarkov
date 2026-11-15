@@ -9,6 +9,9 @@
 use app\models\Articles;
 use yii\web\JqueryAsset;
 
+/** @var yii\web\View $this */
+/** @var Articles $model - AR объект полезной статьи */
+
 $this->registerJsFile('js/news.js', ['depends' => [JqueryAsset::class]]);
 $this->title = 'Escape from Tarkov: ' .$model['title'];
 $this->registerMetaTag([

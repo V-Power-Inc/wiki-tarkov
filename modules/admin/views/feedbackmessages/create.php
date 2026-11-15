@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\FeedbackMessages */
+/** @var yii\web\View $this */
+/** @var app\models\FeedbackMessages $model */
 
 $this->title = 'Create Feedback Messages';
 $this->params['breadcrumbs'][] = ['label' => 'Feedback Messages', 'url' => ['index']];

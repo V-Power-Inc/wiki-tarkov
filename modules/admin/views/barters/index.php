@@ -5,9 +5,9 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use app\models\Barters;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\BartersSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\BartersSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Список бартеров торговцев по уровням';
 $this->params['breadcrumbs'][] = $this->title;

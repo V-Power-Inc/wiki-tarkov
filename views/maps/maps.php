@@ -9,6 +9,8 @@
 use app\common\services\CanonicalPagesService;
 use yii\helpers\Url;
 
+/** @var yii\web\View $this */
+
 $this->title = 'Карты локаций Escape from Tarkov - интерактивные карты с просмотром ключей от помещений';
 
 $this->registerMetaTag([

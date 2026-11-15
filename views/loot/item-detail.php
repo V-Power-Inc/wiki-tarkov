@@ -13,7 +13,8 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use app\models\Items;
 
-/* @var Items $item - AR объект предмета справочника лута */
+/** @var yii\web\View $this */
+/** @var Items $item - AR объект предмета справочника лута */
 
 $this->title = "Escape from Tarkov: $item->title";
 

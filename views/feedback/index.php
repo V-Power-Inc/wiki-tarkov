@@ -15,6 +15,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+/** @var yii\web\View $this */
+/** @var FeedbackForm $model - модель формы обратной связи */
+
 $this->title = "Форма обратной связи";
 
 $this->registerMetaTag([

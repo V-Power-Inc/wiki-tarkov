@@ -14,6 +14,8 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use app\models\Items;
 
+/** @var yii\web\View $this */
+/** @var yii\data\Pagination $pagination - объект пагинации */
 /** @var Items[] $items - массив AR объектов справочника лута */
 
 $this->title = "Справочник лута Escape from Tarkov. База внутриигровых предметов.";

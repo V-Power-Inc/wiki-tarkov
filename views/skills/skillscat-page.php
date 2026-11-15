@@ -7,27 +7,28 @@
  */
 
 use yii\web\JqueryAsset;
-use app\models\CatSkills;
+use app\models\Catskills;
 use app\models\Skills;
 
-/* @var CatSkills $cat - объект категории справочника умений */
+/** @var yii\web\View $this */
+/** @var Catskills $cat - объект категории справочника умений */
 
-$this->title = "Escape from Tarkov: " . $cat[CatSkills::ATTR_TITLE];
+$this->title = "Escape from Tarkov: " . $cat[Catskills::ATTR_TITLE];
 
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => $cat[CatSkills::ATTR_DESCRIPTION],
+    'content' => $cat[Catskills::ATTR_DESCRIPTION],
 ]);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => $cat[CatSkills::ATTR_KEYWORDS],
+    'content' => $cat[Catskills::ATTR_KEYWORDS],
 ]);
 
 /******** OpenGraph теги ************/
 
 $this->registerMetaTag([
     'property' => 'og:title',
-    'content' => $cat[CatSkills::ATTR_TITLE],
+    'content' => $cat[Catskills::ATTR_TITLE],
 ]);
 
 $this->registerMetaTag([
@@ -37,7 +38,7 @@ $this->registerMetaTag([
 
 $this->registerMetaTag([
     'property' => 'og:description',
-    'content' => $cat[CatSkills::ATTR_DESCRIPTION],
+    'content' => $cat[Catskills::ATTR_DESCRIPTION],
 ]);
 
 $this->registerJsFile('js/accordeon/vertical_menu.js', ['depends' => [JqueryAsset::class]]);
@@ -61,7 +62,7 @@ $this->registerJsFile('js/lootscripts/mainloot.js', ['depends' => [JqueryAsset::
                 <p class="text-right"><a class="btn btn-default main-link" href="/skills">Вернуться в справочник умений</a></p>
             </div>
             
-            <?php if(empty($items) || is_null($items)) : ?>
+            <?php if(empty($items)) : ?>
                 <!-- Нет лута -->
                 <div class="col-lg-12">
                     <p class="alert alert-danger size-16">В данный момент в разделе нет доступных умений.</p>

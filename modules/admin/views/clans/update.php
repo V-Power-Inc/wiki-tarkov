@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Clans */
+/** @var yii\web\View $this */
+/** @var app\models\Clans $model */
 
 $this->title = 'Обновить запись: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Clans', 'url' => ['index']];

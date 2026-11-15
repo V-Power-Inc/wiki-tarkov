@@ -6,9 +6,9 @@ use app\models\Skills;
 use app\models\Catskills;
 use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\SkillsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\SkillsSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Список пассивных умений';
 $this->params['breadcrumbs'][] = $this->title;

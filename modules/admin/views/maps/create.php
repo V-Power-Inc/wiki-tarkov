@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Maps */
+/** @var yii\web\View $this */
+/** @var app\models\Maps $model */
 
 $this->title = 'Создать новый маркер для интерактивной карты';
 $this->params['breadcrumbs'][] = ['label' => 'Maps', 'url' => ['index']];

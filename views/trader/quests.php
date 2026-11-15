@@ -10,7 +10,8 @@ use yii\web\JqueryAsset;
 use app\common\services\{ImageService, AbstractItemsApiService, TranslateService};
 use app\common\models\tasks\TaskItem;
 
-/* @var TaskItem[] $tasks - Массив объектов с квестами конкретного торговца */
+/** @var yii\web\View $this */
+/** @var TaskItem[] $tasks - Массив объектов с квестами конкретного торговца */
 
 /** Сетапим переменной имя торговца для текущей страницы */
 $trader_name = $tasks[0]->trader->name;

@@ -9,6 +9,8 @@
 use yii\bootstrap\ActiveForm;
 use app\models\Doorkeys;
 
+/** @var yii\web\View $this */
+
 $this->title = 'Справочник ключей Escape from Tarkov. Ключи от дверей в Таркове';
 $this->registerMetaTag([
     'name' => 'description',
@@ -20,13 +22,13 @@ $this->registerMetaTag([
 ]);
 
 /**
- * @var $form_model Doorkeys
- * @var $terralab Doorkeys - ключи от дверей для локации лаборатория TerraGroup
- * @var $tamojnya Doorkeys - ключи от дверей для локации лаборатория Таможня
- * @var $zavod Doorkeys - ключи от дверей для локации лаборатория Завод
- * @var $forest Doorkeys - ключи от дверей для локации лаборатория Лес
- * @var $bereg Doorkeys - ключи от дверей для локации лаборатория Берег
- * @var $razvyazka Doorkeys - ключи от дверей для локации лаборатория Развязка
+ * @var Doorkeys $form_model
+ * @var Doorkeys $terralab - ключи от дверей для локации лаборатория TerraGroup
+ * @var Doorkeys $tamojnya - ключи от дверей для локации лаборатория Таможня
+ * @var Doorkeys $zavod - ключи от дверей для локации лаборатория Завод
+ * @var Doorkeys $forest - ключи от дверей для локации лаборатория Лес
+ * @var Doorkeys $bereg - ключи от дверей для локации лаборатория Берег
+ * @var Doorkeys $razvyazka - ключи от дверей для локации лаборатория Развязка
  */
 ?>
 <div class="container">

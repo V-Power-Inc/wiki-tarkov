@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Currencies */
+/** @var yii\web\View $this */
+/** @var app\models\Currencies $model */
 
 $this->title = 'Обновить валюту: ' .$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Currencies', 'url' => ['index']];

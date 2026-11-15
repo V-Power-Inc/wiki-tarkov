@@ -240,9 +240,16 @@ class Admins extends ActiveRecord implements IdentityInterface
         return static::findOne($id);
     }
 
+    /**
+     * Вход по access-токену не используется - всегда null
+     *
+     * @param mixed $token
+     * @param mixed $type
+     * @return static|null
+     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        //return static::findOne(['access_token' => $token]);
+        return null;
     }
 
     /**
@@ -255,14 +262,25 @@ class Admins extends ActiveRecord implements IdentityInterface
         return $this->id;
     }
 
+    /**
+     * Ключ авторизации (authKey) у админов не хранится - вход по cookie недоступен
+     *
+     * @return string|null
+     */
     public function getAuthKey()
     {
-        //return $this->authKey;
+        return null;
     }
 
+    /**
+     * Так как authKey не хранится - любой ключ считаем невалидным
+     *
+     * @param string $authKey
+     * @return bool
+     */
     public function validateAuthKey($authKey)
     {
-        //return $this->authKey === $authKey;
+        return false;
     }
 
     /**

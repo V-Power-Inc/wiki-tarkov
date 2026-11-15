@@ -7,9 +7,9 @@ use app\models\Category;
 use yii\helpers\ArrayHelper;
 use app\models\Items;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\ItemsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var app\models\ItemsSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Список предметов справочника лута';
 $this->params['breadcrumbs'][] = $this->title;

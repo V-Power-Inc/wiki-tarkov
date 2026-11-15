@@ -39,8 +39,5 @@ final class TraderItem
             /** Сетапим изображение торговца */
             $this->imageLink = $trader['imageLink'];
         }
-
-        /** Возвращаем массив объектов торговцев - текущей модели */
-        return $this;
     }
 }
