@@ -35,7 +35,7 @@ final class ClansForm extends Model
     public $description;
     public const ATTR_DESCRIPTION = 'description';
 
-    /** @var string - Превьюшка клана */
+    /** @var string|null - Превьюшка клана */
     public $preview;
     public const ATTR_PREVIEW = 'preview';
 
@@ -51,7 +51,7 @@ final class ClansForm extends Model
     public $file;
     public const FILE = 'file';
 
-    /** @var string $reCaptcha - Переменная для рекапчи false */
+    /** @var string|false $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
     public const RECAPTCHA = 'reCaptcha';
 

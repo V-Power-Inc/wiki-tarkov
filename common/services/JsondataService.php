@@ -35,7 +35,7 @@ final class JsondataService implements CommonServiceInterface
      *
      * @throws Exception
      */
-    public static function getKeysJson(string $q = null): string
+    public static function getKeysJson(?string $q = null): string
     {
         /** Выбираем всех подходящие под запрос данные */
         $data = DbCommandService::createCommandQueryAll(Doorkeys::getKeysForSelectSearch($q));
@@ -69,7 +69,7 @@ final class JsondataService implements CommonServiceInterface
      *
      * @throws Exception
      */
-    public static function getLootJson(string $q = null): string
+    public static function getLootJson(?string $q = null): string
     {
         /** Выбираем всех подходящие под запрос данные */
         $data = DbCommandService::createCommandQueryAll(Items::getItemsForSelectSearch($q));
@@ -107,7 +107,7 @@ final class JsondataService implements CommonServiceInterface
      *
      * @throws Exception
      */
-    public static function getSearchApiLogItem(string $q = null): string
+    public static function getSearchApiLogItem(?string $q = null): string
     {
         /** Выбираем всех подходящие под запрос данные */
         $data = DbCommandService::createCommandQueryAll(ApiSearchLogs::getSearchWordsForSelectSearch($q));
@@ -136,7 +136,7 @@ final class JsondataService implements CommonServiceInterface
      * @return string
      * @throws Exception
      */
-    public static function getClansList(string $q = null): string
+    public static function getClansList(?string $q = null): string
     {
         /** Выбираем всех подходящие под запрос данные */
         $data = DbCommandService::createCommandQueryAll(Clans::getClansForSelectSearch($q));

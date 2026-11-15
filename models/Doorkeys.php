@@ -19,7 +19,7 @@ use app\common\helpers\validators\StringValidator;
  *
  * @property integer $id
  * @property string $name
- * @property string $mapgroup
+ * @property string|string[] $mapgroup
  * @property string $content
  * @property integer $active
  * @property string $date_create
@@ -207,7 +207,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Завода
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveZavodKeys()
     {
@@ -223,7 +223,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Леса
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveForestKeys()
     {
@@ -239,7 +239,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Берега
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveBeregKeys()
     {
@@ -255,7 +255,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Таможни
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveTamojnyaKeys()
     {
@@ -271,7 +271,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Развязки
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveRazvyazkaKeys()
     {
@@ -287,7 +287,7 @@ class Doorkeys extends ActiveRecord
     /**
      * Получаем 20 активных ключей от Лаборатории
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveLaboratoryKeys()
     {

@@ -27,8 +27,6 @@ use yii\db\ActiveRecord;
  * @property string $content
  * @property string $short_desc
  * @property string $date_update
- *
- * @property CatSkills $category0
  */
 class Skills extends ActiveRecord
 {
@@ -168,7 +166,7 @@ class Skills extends ActiveRecord
      * фильтрация на enabled реализована во вьюхе
      *
      * @param int $id
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeSkillByCategoryId(int $id)
     {

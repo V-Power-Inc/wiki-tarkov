@@ -13,7 +13,7 @@ use app\common\interfaces\ResponseStatusInterface;
 use app\common\controllers\AdvancedController;
 use app\common\services\redis\RedisVariationsConfig;
 use app\models\{Catskills, Skills};
-use yii;
+use Yii;
 
 /**
  * Class SkillsController

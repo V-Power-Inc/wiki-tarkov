@@ -27,7 +27,7 @@ final class FeedbackForm extends Model
     public $content;
     public const ATTR_CONTENT = 'content';
 
-    /** @var string $reCaptcha - Переменная для рекапчи false */
+    /** @var string|false $reCaptcha - Переменная для рекапчи false */
     public $reCaptcha = false;
     public const RECAPTCHA = 'reCaptcha';
 

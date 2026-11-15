@@ -36,7 +36,7 @@ final class ObjectivesItem
      * @param array $objectives
      * @return mixed
      */
-    public function __construct(array $objectives = null)
+    public function __construct(?array $objectives = null)
     {
         /** Если массив с целями задачи не пуст */
         if (!empty($objectives)) {

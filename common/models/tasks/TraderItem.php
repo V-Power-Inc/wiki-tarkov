@@ -28,7 +28,7 @@ final class TraderItem
      * TraderItem constructor.
      * @param array $trader
      */
-    public function __construct(array $trader = null)
+    public function __construct(?array $trader = null)
     {
         /** Если массив с данными о торговце не пустой */
         if (!empty($trader)) {

@@ -71,7 +71,7 @@ final class ApiService extends AbstractItemsApiService implements ApiInterface
      * @throws \Throwable in case delete failed.
      * @return mixed
      */
-    public function getBosses(string $map_name = null)
+    public function getBosses(?string $map_name = null)
     {
         /** Проверяем, если записи о боссах устарели - проводим следующие операции */
         if ($this->isOldBosses() | $this->isEmptyBosses()) {

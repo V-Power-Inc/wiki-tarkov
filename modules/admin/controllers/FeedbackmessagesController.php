@@ -36,7 +36,7 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
 
     /**
      * Lists all FeedbackMessages models.
-     * @return mixed
+     * @return string
      * @throws InvalidConfigException
      */
     public function actionIndex(): string
@@ -53,7 +53,7 @@ final class FeedbackmessagesController extends AdminController implements CrudIn
     /**
      * Displays a single FeedbackMessages model.
      * @param integer $id
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id): string

@@ -35,7 +35,7 @@ final class KeysItem
      * KeysItem constructor.
      * @param array $keys
      */
-    public function __construct(array $keys = null)
+    public function __construct(?array $keys = null)
     {
         /** Если массив с ключами - не пустой */
         if (!empty($keys)) {

@@ -146,7 +146,7 @@ final class MapsController extends AdminController implements CrudInterface
      *
      * @param int $id - ID записи из БД
      *
-     * @return Maps|null
+     * @return Maps
      */
     protected function findModel(int $id)
     {

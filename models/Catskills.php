@@ -138,7 +138,7 @@ class Catskills extends ActiveRecord
     /**
      * Возвращаем все активные категории навыков
      *
-     * @return array|ActiveRecord[]
+     * @return array<array<string, mixed>>
      */
     public static function takeActiveCatSkills()
     {
@@ -153,7 +153,7 @@ class Catskills extends ActiveRecord
      * Получаем активную категорию умений по url адресу
      *
      * @param string $name - url адрес
-     * @return array|ActiveRecord|null
+     * @return Catskills|null
      */
     public static function takeActiveCategoryByUrl(string $name)
     {
